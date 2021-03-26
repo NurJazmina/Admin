@@ -1,0 +1,28 @@
+<?php
+$GoNGetzSmartSchoolFrontEndConnectionString="mongodb://admin:TempPassword@database.gongetz.com/GoNGetzSmartSchool?authSource=admin";
+$GoNGetzSmartSchoolFrontEnd = new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
+
+$filter = [Null];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzSmartSchoolFrontEnd->executeQuery('GoNGetzSmartSchool.Schools',$query);
+$counter = 0;
+
+foreach ($cursor as $document){
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $id = ($document->_id);
+  $bulk->update(['_id' => $id], ['$set' => ['SchoolsCountry' => 'MALAYSIA']]);
+  //$bulk->update(['_id' => $id], ['$set' => ['SchoolsStatus' => 'UNACTIVE']]);
+  //$bulk->update(['_id' => $id], ['$unset' => ['none'=>'']]);
+
+  $manager = new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result = $manager->executeBulkWrite('GoNGetzSmartSchool.Schools', $bulk, $writeConcern);
+  
+  echo $counter . '<br> '; // extra spaces
+  // keeps it flowing to the browser�
+  flush();
+  // 50000 microseconds keeps things flowing in safari, IE, firefox, etc
+  usleep(50000);
+  $counter = $counter + 1;
+  }
+?>

@@ -1,0 +1,120 @@
+/*default start*/
+html {
+	/*font-family: 'Noto Sans JP', sans-serif;*/
+  font-family: 'Open Sans Condensed', sans-serif;
+	font-size:12px;
+}
+body {
+  margin: 0;
+  /*font-family: var(--bs-font-sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;*/
+  background-color: #fff;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x)/ -2);
+    margin-left: calc(var(--bs-gutter-x)/ -2);
+}
+
+  div {
+    display: block;
+}
+
+.box {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+/*default end*/
+/*home start*/
+.section{
+  background-color: white;
+  text-align: center;
+  color:#404040;
+}
+.section-1-container{
+  background-color: white;
+  text-align: center;
+  color:#404040;
+}
+.umpevents {
+    margin: 0px 10px 20px 10px;
+    background: #f6f6f6;
+    height: 95px;
+    border: 1px solid #eaeaea;
+}
+.eventtitle {
+    color: #15a195;
+    padding: 10px;
+    padding-left : 50px;
+    margin: 0px 10px 10px 10px;
+}
+.eventdate {
+    float: left;
+    padding: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+.eventdate-day {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #15a195;
+}
+.eventdate-month {
+    font-size: 0.9em;
+    color: #15a195;
+}
+a {
+    color: #333333;
+    text-decoration: none;
+    outline: none;
+}
+.block-content {
+    text-align: left;
+}
+.news-panel-date {
+    color: #15a195;
+    text-align: left;
+}
+.news-panel {
+    margin: 0px 10px 10px 10px;
+    height: 82px;
+}
+/*home end*/
+/*table start*/
+table th {
+   text-align: center;
+}
+.table {
+  text-align: center;
+  width: 50%;
+  max-width: 100%;
+  margin: auto;
+}
+/*table end/*
