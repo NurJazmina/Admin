@@ -1,6 +1,4 @@
-<br>
-<br>
-<form name="DeleteclassFormSubmit" action="index.php?page=classroomlist" method="post">
+<br><br><form name="DeleteclassFormSubmit" action="index.php?page=classroomlist" method="post">
   <div class="modal fade" id="DeleteclassModal" tabindex="-1" aria-labelledby="DeleteclassModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

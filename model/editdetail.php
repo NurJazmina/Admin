@@ -9,26 +9,20 @@ if (isset($_POST['EditDetailFormSubmit']))
   $varConsumerAddress = $_POST['txtConsumerAddress'];
   $varConsumerEmail = $_POST['txtConsumerEmail'];
   $varconsumerid = $_POST['txtconsumerid'];
-  
-  $GoNGetzSmartSchoolFrontEndConnectionString="mongodb://admin:TempPassword@124.217.235.244:27017/gngoffice?authSource=admin";
-  $GoNGetzSmartSchoolFrontEnd= new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varconsumerid)],
                 ['$set' => ['ConsumerFName'=>$varConsumerFName, 'ConsumerLName'=>$varConsumerLName,  'ConsumerIDType'=>$varConsumerIDType, 'ConsumerIDNo'=>$varConsumerIDNo, 'ConsumerPhone'=>$varConsumerPhone,'ConsumerAddress'=>$varConsumerAddress, 'ConsumerEmail'=>$varConsumerEmail]],
                 ['upsert' => TRUE]
                );
- 
-  $GoNGetzSmartSchoolFrontEnd= new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try 
   {
-    $result = $GoNGetzSmartSchoolFrontEnd->executeBulkWrite('GoNGetz.Consumer', $bulk, $writeConcern);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetz.Consumer', $bulk, $writeConcern);
   } 
   catch (MongoDB\Driver\Exception\BulkWriteException $e) 
   {
     $result = $e->getWriteResult();
-
     $_SESSION["loggeduser_schoolName"] = $varschoolname;
     // Check if the write concern could not be fulfilled
     if ($writeConcernError = $result->getWriteConcernError()) 
@@ -40,7 +34,6 @@ if (isset($_POST['EditDetailFormSubmit']))
             var_export($writeConcernError->getInfo(), true)
         );
     }
-
     // Check if any write operations did not complete at all
     foreach ($result->getWriteErrors() as $writeError) 
     {
@@ -56,12 +49,8 @@ if (isset($_POST['EditDetailFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-
-
 printf("nMatched: %d\n", $result->getMatchedCount());
 printf("Updated  %d document(s)\n", $result->getModifiedCount());
 header ('location: ../index.php?page=aboutme');
-
 }
-
 ?>

@@ -20,7 +20,6 @@ if (isset($_POST['EditStaffFormSubmit']))
   }
 }
 ?>
-<body>
 <br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submiteditstaff" name="submiteditstaff" action="index.php?page=stafflist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
