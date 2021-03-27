@@ -1,4 +1,5 @@
 <!--Add timetable-->
+testing
 <?php
 if (isset($_POST['submitaddtimetable']))
 {
