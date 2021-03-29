@@ -378,7 +378,6 @@ if (isset($_POST['UpdateParentFormSubmit']))
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th colspan="2">password</th>
                   <th scope="col">Phone</th>
                   <th scope="col">ID Type</th>
                   <th scope="col">IC No</th>
@@ -393,10 +392,6 @@ if (isset($_POST['UpdateParentFormSubmit']))
               <?php
                 foreach ($cursor as $document)
                 {
-                  //encode password randomly
-                  //$options = ['cost' => 4,];
-                  //$varConsumerPassword = password_hash($var, PASSWORD_DEFAULT, $options);
-
                   $count = 0;
                   $parentid = strval($document->_id);
                   $ConsumerID = strval($document->ConsumerID);
@@ -419,8 +414,6 @@ if (isset($_POST['UpdateParentFormSubmit']))
                     ?>
                     <tr>
                     <td><a href="index.php?page=parentdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a></td>
-                    <td><?php print_r($ConsumerPassword);?></td>
-                    <td><?php echo "password: " . $password_hash . "<br>"; ?></td>
                     <td><?php print_r($ConsumerPhone);?></td>
                     <td><?php print_r($ConsumerIDType);?></td>
                     <td><?php print_r($ConsumerIDNoParent);?></td>
