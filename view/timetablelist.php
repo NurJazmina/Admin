@@ -273,13 +273,13 @@ else
         <div class="btn-group sort-btn">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
           <ul class="dropdown-menu">
-            <li><a href="index.php?page=timetablelist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
-            <li><a href="index.php?page=timetablelist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 1</a></li>
-            <li><a href="index.php?page=timetablelist&level=<?php echo "2"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 2</a></li>
-            <li><a href="index.php?page=timetablelist&level=<?php echo "3"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 3</a></li>
-            <li><a href="index.php?page=timetablelist&level=<?php echo "4"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 4</a></li>
-            <li><a href="index.php?page=timetablelist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 5</a></li>
-            <li><a href="index.php?page=timetablelist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 1</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "2"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 2</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "3"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 3</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "4"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 4</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 5</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
           </ul>
         </div>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
@@ -293,13 +293,13 @@ else
                   <th colspan="3">Start</th>
                   <th colspan="3">End</th>
                   <th rowspan="2">Timetable Status</th>
-                  <th rowspan="2" >Update</th>
+                  <th rowspan="2">Update</th>
                 </tr>
                 <tr>
-                  <th colspan="2">Time</th>
-                  <th>Date</th>
-                  <th colspan="2">Time</th>
-                  <th>Date</th>
+                  <th colspan="2">Date</th>
+                  <th>Time</th>
+                  <th colspan="2">Date</th>
+                  <th>Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -331,7 +331,7 @@ else
                   {
                     ?>
                     <tr>
-                      <td><?php print_r($document4->ConsumerFName); ?></td>
+                      <td><a href="index.php?page=staffdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($document4->ConsumerFName); ?></a></td>
                     <?php
                   }
                   }
@@ -344,7 +344,7 @@ else
                   {
                     $classroomid = $document5->_id;
                     ?>
-                    <td><?php print_r($document5->ClassCategory); echo"  "; print_r($document5->ClassName); ?></td>
+                    <td><a href="index.php?page=classdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($document5->ClassCategory); echo"  "; print_r($document5->ClassName); ?></a></td>
                     <?php
                   }
                   $filter4 = ['Schools_id' => $_SESSION["loggeduser_schoolID"], 'Class_id'=>$Classroom_id];

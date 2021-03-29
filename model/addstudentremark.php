@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include '../connections/db.php';
 if (isset($_POST['AddStudentRemarkFormSubmit'])) {
   
   session_start();
@@ -9,18 +14,13 @@ if (isset($_POST['AddStudentRemarkFormSubmit'])) {
   $varconsumerremarkactive = "ACTIVE";
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
   $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  
-  $GoNGetzSmartSchoolFrontEndConnectionString="mongodb://admin:TempPassword@124.217.235.244:27017/gngoffice?authSource=admin";
-  $GoNGetzFrontEnd = new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert(['Consumer_id'=>$varconsumersid,'ConsumerRemarksDetails'=>$vartxtconsumerremark,'ConsumerRemarksStaff_id'=>$varstaffid ,'school_id'=>$varschoolid,'ConsumerRemarksDate'=>$varconsumerremarkdate, 'ConsumerRemarksStatus'=>$varconsumerremarkactive]);
-  
-  $GoNGetzFrontEnd = new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
   try 
   {
-    $result = $GoNGetzFrontEnd->executeBulkWrite('GoNGetzSmartSchool.StudentRemarks', $bulk, $writeConcern);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.StudentRemarks', $bulk, $writeConcern);
   } 
   catch (MongoDB\Driver\Exception\BulkWriteException $e) 
   {

@@ -15,11 +15,18 @@ if (isset($_POST['AddStaffRemarkFormSubmit'])) {
   $varconsumerremarkactive = "ACTIVE";
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-  $bulk->insert(['Consumer_id'=>$varconsumersid,'ConsumerRemarksDetails'=>$vartxtconsumerremark,'ConsumerRemarksStaff_id'=>$varstaffid , 'school_id'=>$varschoolid , 'ConsumerRemarksDate'=>$varconsumerremarkdate, 'ConsumerRemarksStatus'=>$varconsumerremarkactive]);
+  $bulk->insert([
+    'Consumer_id'=>$varconsumersid,
+    'ConsumerRemarksDetails'=>$vartxtconsumerremark,
+    'ConsumerRemarksStaff_id'=>$varstaffid,
+    'school_id'=>$varschoolid,
+    'ConsumerRemarksDate'=>$varconsumerremarkdate,
+    'ConsumerRemarksStatus'=>$varconsumerremarkactive]);
+
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
-    $result =$GoNGetzDatabase-->executeBulkWrite('GoNGetzSmartSchool.StaffRemarks', $bulk, $writeConcern);
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.StaffRemarks', $bulk, $writeConcern);
   }
   catch (MongoDB\Driver\Exception\BulkWriteException $e)
   {

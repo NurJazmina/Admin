@@ -46,7 +46,6 @@ if (isset($_POST['AddStudentFormSubmit']))
         if ($consumeridChild==$Consumer_id)
         {
 ?>
-<body>
 <br><br><br><br><div class="alert alert-danger" role="alert">
 <h2 style="text-align: center;">DUPLICATE ID NUMBER</h2>
 <form id="EditParentFormSubmit" name="EditParentFormSubmit" action="index.php?page=editparent" method="post">
@@ -64,7 +63,6 @@ if (isset($_POST['AddStudentFormSubmit']))
   </div>
 </form>
 </div>
-</body>
 <?php
 }
 else
@@ -74,9 +72,7 @@ else
   $ConsumerFName = strval($document->ConsumerFName);
   $ConsumerIDNo = strval($document->ConsumerIDNo);
 ?>
-<body>
-<br><br><br><br>
-<h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
+<br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submitaddstudent" name="submitaddstudent" action="index.php?page=studentlist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">
@@ -170,7 +166,6 @@ else
       </div>
   </div>
 </form>
-</body>
 <?php
 if ($count == $end) break;
 }
@@ -178,9 +173,7 @@ if ($count == $end) break;
 else
 {
 ?>
-<body>
-<br><br><br><br>
-<div class="alert alert-danger" role="alert">
+<br><br><br><br><div class="alert alert-danger" role="alert">
 <h2 style="text-align: center;">AUTHORIZED PERSONNEL ONLY</h2>
 <form id="submitstudent" name="submitstudent" action="index.php?page=studentlist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -214,7 +207,6 @@ else
   </div>
 </form>
 </div>
-</body>
 <?php
 }
 }

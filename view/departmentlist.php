@@ -133,12 +133,7 @@ if (isset($_POST['DeleteDepartmentFormSubmit']))
 //printf("Deleted  %d document(s)\n", $result->getModifiedCount());
 }
 ?>
-
-<body>
-<div class="myDiv" style="color:#696969;text-align:center">
-      <br><br><br><h1>Departments</h1>
-</div>
-<br>
+<div class="myDiv" style="color:#696969;text-align:center"><br><br><br><h1>Departments</h1></div><br>
 <table class="table table-bordered">
   <thead class="table-light">
   </thead>
@@ -184,8 +179,6 @@ if (isset($_POST['DeleteDepartmentFormSubmit']))
     </tr>
   </tbody>
 </table>
-  </body>
-</html>
 <?php include ('view/modal-adddepartment.php'); ?>
 <?php include ('view/modal-editdepartment.php'); ?>
 <?php include ('view/modal-deletedepartment.php'); ?>
