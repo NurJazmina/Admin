@@ -48,7 +48,7 @@ $_SESSION["totalparent"] = $totalparent;
 
 <div class="col" style="color:#404040; text-align:center;">
 	<div class="row">
-    <h1><br>Dashboard</h1>
+    <h1><br>Dashboard testing</h1>
   </div>
 </div>
 <br>

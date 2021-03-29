@@ -512,6 +512,7 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                             <option value="MYTENTERA">MyTentera</option>
                             <option value="KAD POLIS">Kad Polis</option>
                             <option value="MYPR">MyPR</option>
+                            <option value="MYKAS">MYKAS</option>
                             <option value="PASSPORT">Passport</option>
                           </select>
                         </div>
@@ -641,6 +642,7 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                               <option value="MYTENTERA">MyTentera</option>
                               <option value="KAD POLIS">Kad Polis</option>
                               <option value="MYPR">MyPR</option>
+                              <option value="MYKAS">MYKAS</option>
                               <option value="PASSPORT">Passport</option>
                             </select>
                           </div>
@@ -826,6 +828,7 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                 <option value="MYTENTERA">MyTentera</option>
                                 <option value="KAD POLIS">Kad Polis</option>
                                 <option value="MYPR">MyPR</option>
+                                <option value="MYKAS">MYKAS</option>
                                 <option value="PASSPORT">Passport</option>
                               </select>
                             </div>
@@ -927,6 +930,7 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                 <option value="MYTENTERA">MyTentera</option>
                                 <option value="KAD POLIS">Kad Polis</option>
                                 <option value="MYPR">MyPR</option>
+                                <option value="MYKAS">MYKAS</option>
                                 <option value="PASSPORT">Passport</option>
                               </select>
                             </div>
@@ -1014,6 +1018,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype2"]; ?>"><?php echo $_SESSION["childdocumenttype2"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1042,6 +1048,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype3"]; ?>"><?php echo $_SESSION["childdocumenttype3"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1070,6 +1078,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype4"]; ?>"><?php echo $_SESSION["childdocumenttype4"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1098,6 +1108,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype5"]; ?>"><?php echo $_SESSION["childdocumenttype5"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1126,6 +1138,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype6"]; ?>"><?php echo $_SESSION["childdocumenttype6"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1154,6 +1168,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype7"]; ?>"><?php echo $_SESSION["childdocumenttype7"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1182,6 +1198,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype8"]; ?>"><?php echo $_SESSION["childdocumenttype8"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1210,6 +1228,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype9"]; ?>"><?php echo $_SESSION["childdocumenttype9"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
@@ -1238,6 +1258,8 @@ if (isset($_GET["step"]) && !empty($_GET["step"])) {
                                   <option value="<?php echo $_SESSION["childdocumenttype10"]; ?>"><?php echo $_SESSION["childdocumenttype10"]; ?></option>
                                   <option value="MYKID">MyKid</option>
                                   <option selected value="MYKAD">MyKad</option>
+                                  <option value="MYPR">MyPR</option>
+                                  <option value="MYKAS">MYKAS</option>
                                   <option value="PASSPORT">Passport</option>
                                 </select>
                               </div>
