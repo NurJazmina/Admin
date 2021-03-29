@@ -25,6 +25,9 @@ body {
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+    margin: 0 auto; 
+    float: none; 
+    margin-bottom: 10px;
 }
 .row {
     --bs-gutter-x: 1.5rem;

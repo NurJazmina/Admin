@@ -5,9 +5,10 @@ error_reporting(E_ALL);
 
 include '../connections/db.php';
 
-if (isset($_POST['AddStaffRemarkFormSubmit'])) {
+if (isset($_POST['AddStaffRemarkChildFormSubmit'])) {
   session_start();
   $varconsumersid = $_POST['txtconsumerid'];
+  $varremarkid = $_POST['txtremarkid'];
   $vartxtconsumerremark = $_POST['txtconsumerRemark'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
@@ -16,7 +17,7 @@ if (isset($_POST['AddStaffRemarkFormSubmit'])) {
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
-    'SubStaffRemarks'=>'0',
+    'SubStaffRemarks'=>$varremarkid,
     'Consumer_id'=>$varconsumersid,
     'ConsumerRemarksDetails'=>$vartxtconsumerremark,
     'ConsumerRemarksStaff_id'=>$varstaffid,
