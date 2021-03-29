@@ -59,12 +59,20 @@
               </tbody>
             </table>
           </div>
+          /**
+          * @todo Display current month attendance for staff
+          * @body It also have a button to export current month attendance as excel by using &_GET["attendance"] = "staffdetails"
+          */
         </div>
         <div class="col-sm-12 col-lg-6">
         <div class="row">
           <div class="col-12 col-lg-12">
             <div class="card">
               <div class="card-header">
+              /**
+              * @todo Display staff's remark with child remark and form
+              * @body As our discussion
+              */
                 <strong>Remarks</strong>
               </div>
               <div class="card-body">

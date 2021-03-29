@@ -364,6 +364,10 @@
               <div class="col-12 col-lg-12">
                 <div class="card">
                   <div class="card-header">
+                  /**
+                  * @todo Display current day attendance for class
+                  * @body It also have a button to export current month attendance as excel by using &_GET["attendance"] = "classdetails"
+                  */
                     <strong>Attendance</strong>
                   </div>
                   <div class="card-body">

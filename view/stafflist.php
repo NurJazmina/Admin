@@ -259,6 +259,10 @@ if (isset($_POST['UpdateStaffFormSubmit']))
         <form name="searchstaff" class="form-inline" action="index.php?page=stafflist" method="post">
           <div class="col-12 col-sm-6 col-lg-6 text-right">
             <div class="form-group row">
+            /**
+            * @todo Add staff's export attendance as excel
+            * @body Create a button here redirect user to exportstaffattendance.php
+            */
               <button type="button" style="width:25%"; class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
               <input type="text" style="width:50%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
               <button type="submit" style="width:25%";  name="searchstaff" class="btn btn-secondary">Search</button>
@@ -386,6 +390,10 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                         </tr>
                         </table>
                         <br>
+                        /**
+                        * @todo Undefined variable: constudentid in /var/www/html/smartschool.gongetz.com/view/stafflist.php on line 397
+                        * @body Fix it
+                        */
                         <a href="index.php?page=attendancestudent&id=<?php echo $constudentid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
                         </td>
                         </table>
