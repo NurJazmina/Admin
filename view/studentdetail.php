@@ -161,6 +161,10 @@
             <div class="col-12 col-lg-12">
               <div class="card">
                 <div class="card-header">
+                /**
+                * @todo Display student's remark with child remark and form
+                * @body As our discussion
+                */
                   <strong>Remarks</strong>
                 </div>
                 <div class="card-body">
@@ -425,6 +429,10 @@
   <div class="col-12 col-lg-12">
     <div class="card">
         <div class="card-header">
+        /**
+        * @todo Display current month attendance for student
+        * @body It also have a button to export current month attendance as excel by using &_GET["attendance"] = "studentdetails"
+        */
          <strong>Attendance</strong>
         </div>
         <div class="card-body">
