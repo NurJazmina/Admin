@@ -1,55 +1,9 @@
-/*default start*/
-html {
-	/*font-family: 'Noto Sans JP', sans-serif;*/
-  font-family: 'Open Sans Condensed', sans-serif;
-	font-size:12px;
+/*navbar start*/
+.site-header a
+{
+  color:#FFFFFF;
 }
-body {
-  margin: 0;
-  /*font-family: var(--bs-font-sans-serif);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;*/
-  background-color: #fff;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
-}
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-    margin: 0 auto; 
-    float: none; 
-    margin-bottom: 10px;
-}
-.row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(var(--bs-gutter-y) * -1);
-    margin-right: calc(var(--bs-gutter-x)/ -2);
-    margin-left: calc(var(--bs-gutter-x)/ -2);
-}
-
-  div {
-    display: block;
-}
-
-.box {
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-}
-/*default end*/
+/*navbar start*/
 /*home start*/
 .section{
   background-color: white;
@@ -110,14 +64,5 @@ a {
     height: 82px;
 }
 /*home end*/
-/*table start*/
-table th {
-   text-align: center;
-}
-.table {
-  text-align: center;
-  width: 50%;
-  max-width: 100%;
-  margin: auto;
-}
-/*table end/*
+
+

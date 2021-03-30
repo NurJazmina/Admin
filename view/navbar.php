@@ -1,19 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-  <style>
-  .site-header
-{
-  background-color:#31a0a4;
-  color:#FFFFFF;
-}
-    .site-header a
-{
-  color:#FFFFFF;
-}
-
-  </style>
-<header class="site-header">
+<header style ="background-color:#31a0a4; color:#FFFFFF;"; class="site-header">
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <img class="logo-header" src="image/logo.png" width="50" height="50" alt="logo-header"> <a class="navbar-brand" href="#">SMART SCHOOL</a>

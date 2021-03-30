@@ -11,11 +11,18 @@ if (isset($_POST['AddStudentRemarkFormSubmit'])) {
   $varconsumersid = $_POST['txtconsumerid'];
   $vartxtconsumerremark = $_POST['txtconsumerRemark'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varconsumerremarkactive = "ACTIVE";
+
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
   $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-  $bulk->insert(['Consumer_id'=>$varconsumersid,'ConsumerRemarksDetails'=>$vartxtconsumerremark,'ConsumerRemarksStaff_id'=>$varstaffid ,'school_id'=>$varschoolid,'ConsumerRemarksDate'=>$varconsumerremarkdate, 'ConsumerRemarksStatus'=>$varconsumerremarkactive]);
+  $bulk->insert([
+    'SubRemarks'=>'0',
+    'Consumer_id'=>$varconsumersid,
+    'ConsumerRemarksDetails'=>$vartxtconsumerremark,
+    'ConsumerRemarksStaff_id'=>$varstaffid,
+    'school_id'=>$varschoolid,
+    'ConsumerRemarksDate'=>$varconsumerremarkdate,
+    'ConsumerRemarksStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
   try 
@@ -53,6 +60,6 @@ if (isset($_POST['AddStudentRemarkFormSubmit'])) {
 
 printf("Inserted %d document(s)\n", $result->getInsertedCount());
 printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=studentdetail&id=' . $varconsumersid);
+header ('location: ../index.php?page=studentdetail&id=' . $varconsumersid);
 }
 ?>

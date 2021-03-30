@@ -13,17 +13,24 @@ if (isset($_POST['AddStaffRemarkChildFormSubmit'])) {
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
   $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $varconsumerremarkactive = "ACTIVE";
+
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($varremarkid)];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+  foreach ($cursor as $document)
+  {
+    $varClassRemarksStatus = ($document->ClassRemarksStatus);
+  }
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
-    'SubStaffRemarks'=>$varremarkid,
+    'SubRemarks'=>$varremarkid,
     'Consumer_id'=>$varconsumersid,
     'ConsumerRemarksDetails'=>$vartxtconsumerremark,
     'ConsumerRemarksStaff_id'=>$varstaffid,
     'school_id'=>$varschoolid,
     'ConsumerRemarksDate'=>$varconsumerremarkdate,
-    'ConsumerRemarksStatus'=>$varconsumerremarkactive]);
+    'ConsumerRemarksStatus'=>$varClassRemarksStatus]);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
