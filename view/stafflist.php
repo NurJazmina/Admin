@@ -386,7 +386,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                         </tr>
                         </table>
                         <br>
-                        <a href="index.php?page=attendancestudent&id=<?php echo $constudentid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
+                        <a href="index.php?page=attendancestudent&id=<?php echo $varconsumerid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
                         </td>
                         </table>
                         </td>
