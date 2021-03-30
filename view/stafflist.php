@@ -403,7 +403,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                           $departmentid = strval($document->_id);
                           $DepartmentName = strval($document->DepartmentName);
                           ?>
-                          <a href="index.php?page=departmentdetail&name=<?php echo $DepartmentName; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($DepartmentName); ?></a>
+                          <a href="index.php?page=departmentdetail&id=<?php echo $departmentid ; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($DepartmentName); ?></a>
                           <?php
                         }
                         if ($ClassID !== "")

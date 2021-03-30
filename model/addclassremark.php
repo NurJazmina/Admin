@@ -1,14 +1,26 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include '../connections/db.php';
 if (isset($_POST['AddClassRemarkFormSubmit'])) {
 
   session_start();
-  $varconsumersid = $_POST['txtconsumerid'];
-  $vartxtconsumerremark = $_POST['txtconsumerRemark'];
+  $varclassid = $_POST['txtclassid'];
+  $varclassremark = $_POST['txtclassRemark'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
   $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-  $bulk->insert(['Class_id'=>$varconsumersid,'ClassRemarksDetails'=>$vartxtconsumerremark,'ClassRemarksStaff_id'=>$varstaffid ,'school_id'=>$varschoolid, 'ClassRemarksDate'=>$varconsumerremarkdate, 'ClassRemarksStatus'=>'ACTIVE']);
+  $bulk->insert([
+    'SubRemarks'=>'0',
+    'Class_id'=>$varclassid,
+    'ClassRemarksDetails'=>$varclassremark,
+    'ClassRemarksStaff_id'=>$varstaffid,
+    'school_id'=>$varschoolid,
+    'ClassRemarksDate'=>$varconsumerremarkdate,
+    'ClassRemarksStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
   try
@@ -44,6 +56,6 @@ if (isset($_POST['AddClassRemarkFormSubmit'])) {
 
 printf("Inserted %d document(s)\n", $result->getInsertedCount());
 printf("Updated  %d document(s)\n", $result->getModifiedCount());
-header ('location: ../index.php?page=classdetail&id=' . $varconsumersid);
+header ('location: ../index.php?page=classdetail&id=' . $varclassid);
 }
 ?>
