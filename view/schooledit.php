@@ -67,7 +67,7 @@ foreach ($cursor as $document)
   <br><h1 style="color:#404040;">About Us</h1>
 </div>
 <br>
-  <table class="table table-bordered">
+  <table class="table table-bordered table-sm">
     <thead class="table-light">
     </thead>
     <tbody>
