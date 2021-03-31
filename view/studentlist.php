@@ -382,10 +382,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
         <form name="searchstudent" class="form-inline" action="index.php?page=studentlist" method="post">
           <div class="col-12 col-sm-6 col-lg-6 text-right">
             <div class="form-group row">
-            /**
-            * @todo Add student's export attendance as excel
-            * @body Create a button here redirect user to exportstudentattendance.php
-            */
+              <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
               <button type="button" style="width:25%"; class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#recheckaddstudent">Add</button>
               <input type="text" style="width:50%"; class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
               <button type="submit" style="width:25%"; name="searchstudent" class="btn btn-secondary" >Search</button>
@@ -448,6 +445,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                   $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
                   foreach ($cursor1 as $document1)
                   {
+                    $consumerid = $document1->_id;
                     $ConsumerFName = $document1->ConsumerFName;
                     $ConsumerLName = $document1->ConsumerLName;
                     $ConsumerIDType = $document1->ConsumerIDType;
@@ -517,11 +515,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                       </tr>
                       </table>
                       <br>
-                      /**
-                      * @todo Undefined variable: constudentid in /var/www/html/smartschool.gongetz.com/view/studentlist.php on line 516
-                      * @body Fix it
-                      */
-                      <a href="index.php?page=attendancestudent&id=<?php echo $constudentid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
+                      <a href="index.php?page=attendancestudent&id=<?php echo $consumerid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
                       </td>
                       </table>
                       </td>

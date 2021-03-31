@@ -161,10 +161,6 @@
             <div class="col-12 col-lg-12">
               <div class="card">
                 <div class="card-header">
-                /**
-                * @todo Display student's remark with child remark and form
-                * @body As our discussion
-                */
                   <strong>Remarks</strong>
                 </div>
                 <div class="card-body">
@@ -520,117 +516,73 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-12 col-lg-6">
-  <div class="row">
-  <div class="col-12 col-lg-12">
-    <div class="card">
-        <div class="card-header">
-        /**
-        * @todo Display current month attendance for student
-        * @body It also have a button to export current month attendance as excel by using &_GET["attendance"] = "studentdetails"
-        */
-         <strong>Attendance</strong>
-        </div>
-        <div class="card-body">
-        <!--tab by attendance -->
-        <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th colspan="2">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-        <td>
-        <table>
-        <?php
-        $Cards_id='';
-          $attendancehold = '';
-        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
-        foreach ($cursor as $document)
-        {
-          $consumerid = strval($document->_id);
-          $filter1 = ['Consumer_id'=>$consumerid];
-          $query1 = new MongoDB\Driver\Query($filter1);
-          $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
-          foreach ($cursor1 as $document1)
-          {
-            $Cards_id = strval($document1->Cards_id);
-          }
-        }
-
-        $varcount = 0;
-        $filterA = ['CardID'=>$Cards_id];
-        //$optionA = ['sort' => ['_id' =>1]];
-        $queryA = new MongoDB\Driver\Query($filterA);
-        $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-        foreach ($cursorA as $documentA)
-        {
-          $AttendanceDate = new MongoDB\BSON\UTCDateTime(strval($documentA->AttendanceDate));
-          $attendance = $AttendanceDate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-          $attendancehold = date_format($attendance,"d/m/Y");
-
-          $filterA = ['CardID'=>$Cards_id,'AttendanceDate'=> $AttendanceDate];
-          //$optionA = ['sort' => ['_id' =>1]];
-          $queryA = new MongoDB\Driver\Query($filterA);
-          $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-          foreach ($cursorA as $documentA)
-          {
-            $AttendanceDate = new MongoDB\BSON\UTCDateTime(strval($documentA->AttendanceDate));
-            $attendance = $AttendanceDate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-            $attendancetoday = date_format($attendance,"d/m/Y");
-
-            //value is odd=out
-            if ($varcount % 2)
-            {
-            do
-            {
-            ?>
-            <td style="text-align:right;">OUT</td>
-            <td><i class="fas fa-arrow-circle-right"></i></td>
-            <td><?php echo date_format($attendance,"H:i"); ?></td>
-            <td></td>
-            </tr>
+  <div class="col-12 col-sm-12 col-lg-6">
+    <table class="table table-bordered ">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">ATTENDANCE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td>  
+          <table id="attendance" >
             <?php
-            $varcount = $varcount + 1;
-            }
-            while ($varcount <='0');
-            }
-            //value is even=in
-            else
+            $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+            $date = $vardate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            $varcount = 0; 
+            $filterA = ['CardID'=>'1000000000000000'];
+            $queryA = new MongoDB\Driver\Query($filterA);
+            $cursorA =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+            foreach ($cursorA as $documentA)
             {
-              do
+              $AttendanceDate = new MongoDB\BSON\UTCDateTime(strval($documentA->AttendanceDate));
+              $attendance = $AttendanceDate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+              $today = date_format($date,"d/m/Y");
+              $attendancetoday = date_format($attendance,"d/m/Y");
+              //value is odd=out
+              if ($varcount % 2) 
               {
+                do 
+                {
+                ?>
+                <td style="text-align:right;">OUT</td>
+                <td><i class="fas fa-arrow-circle-right"></i></td>
+                <td><?php echo date_format($attendance,"H:i"); ?></td>
+                <td></td>         
+                <td><?php echo date_format($attendance,"d/m/Y"); ?></td>
+                </tr>
+                <?php
+                $varcount = $varcount + 1;
+                }
+              while ($varcount <='0'); 
+              } 
+              //value is even=in
+              else 
+              {                  
+                do 
+                {
+                ?>
+                <tr>
+                <td style="text-align:right;">IN</td>
+                <td><i class="fas fa-arrow-circle-right"></i></td>
+                <td><?php echo date_format($attendance,"H:i"); ?></td>
+                <td>|</td>
+                <?php
+                $varcount = $varcount + 1;
+                }
+                while ($varcount <='0'); 
+              }
+            }
             ?>
-            <tr>
-            <td>
-              <?php echo $attendancehold; ?>
-            </td>
             </tr>
-            <tr>
-            <td style="text-align:right;">IN</td>
-            <td><i class="fas fa-arrow-circle-right"></i></td>
-            <td><?php echo date_format($attendance,"H:i"); ?></td>
-            <td>|</td>
-            <?php
-            $varcount = $varcount + 1;
-            }
-            while ($varcount <='0');
-            }
-          }
-        }
-      ?>
-      </tr>
-    </table>
+          </table>
+          <br><br><button style="font-size:15px" type="button" class="btn btn-success"><a href="index.php?page=exportstudentattendance&id=<?php echo $_SESSION["studentremarkid"]; ?>" style="color:#FFFFFF; text-decoration: none;">EXPORT TO XLS</a></button>
+          <br>
         </td>
-        </tbody>
-        </table>
-        <!-- end tab -->
-      </div>
+      </tbody>
+    </table>
     </div>
+  </div>
   </div>
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>

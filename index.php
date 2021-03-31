@@ -29,6 +29,10 @@ error_reporting(E_ALL);
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    
+    <!-- EXPORT-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
     <title>Smart School</title>
   </head>
 
@@ -82,6 +86,9 @@ error_reporting(E_ALL);
             }
             elseif ($_GET["page"] == "attendance"){
               include 'view/attendance.php';
+            }
+            elseif ($_GET["page"] == "exportstaffattendance"){
+              include 'view/exportstaffattendance.php';
             }
 
 
