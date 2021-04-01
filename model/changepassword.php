@@ -1,5 +1,10 @@
 <? ob_start(); ?>
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include '../connections/db.php';
 if (isset($_POST['ChangePasswordFormSubmit'])) {
   $options = ['cost' => 4,];
   $varstaffpassword = password_hash($_POST['txtPassword'], PASSWORD_DEFAULT, $options);
@@ -13,11 +18,9 @@ if (isset($_POST['ChangePasswordFormSubmit'])) {
     ['multi' => false, 'upsert' => false]
   );
   
-  $GoNGetzSmartSchoolFrontEndConnectionString="mongodb://admin:TempPassword@124.217.235.244:27017/gngoffice?authSource=admin";
-  $GoNGetzSmartSchoolFrontEnd= new MongoDB\Driver\Manager($GoNGetzSmartSchoolFrontEndConnectionString);
   
    try {
-    $result = $GoNGetzSmartSchoolFrontEnd->executeBulkWrite('GoNGetz.Consumer',$bulk);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetz.Consumer',$bulk);
   } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
     $result = $e->getWriteResult();
 
@@ -42,11 +45,7 @@ if (isset($_POST['ChangePasswordFormSubmit'])) {
   printf("Other error: %s\n", $e->getMessage());
   exit;
 }
-
-
-  
 header ('location: ../index.php?page=home&action=passwordchanged&id='.$_POST['txtid'].'&pass='.$varstaffpassword);
-
 }
 ?>
 <? ob_flush(); ?>

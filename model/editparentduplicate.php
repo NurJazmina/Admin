@@ -1,42 +1,34 @@
 <?php  
-
   $varConsumerIDNo = $_GET['txtConsumerIDNo'];
   $varConsumerIDNoChild = $_GET['txtConsumerIDNoChild'];
-    
   $filter = ['ConsumerIDNo'=>$varConsumerIDNoChild];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzBackEnd->executeQuery('GoNGetz.Consumer',$query);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
   foreach ($cursor as $document) 
   {
     $_idchild = strval($document->_id);
     $ConsumerFNameChild = $document->ConsumerFName;
     $ConsumerLNameChild = $document->ConsumerLName;
-    
     $filter0 = ['Consumer_id'=>$_idchild];
     $query0 = new MongoDB\Driver\Query($filter0);
-    $cursor0 = $GoNGetzBackEnd->executeQuery('GoNGetzSmartSchool.Students',$query0);
-
+    $cursor0 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query0);
     foreach ($cursor0 as $document0) 
     {
       $studentid = strval($document0->_id);
     }
   }  
-  
   $filter1 = ['ConsumerIDNo'=>$varConsumerIDNo];
   $query1 = new MongoDB\Driver\Query($filter1);
-  $cursor1 = $GoNGetzBackEnd->executeQuery('GoNGetz.Consumer',$query1);
-
+  $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
   foreach ($cursor1 as $document1) 
   {
     $_idparent = strval($document1->_id);
     $ConsumerFName = $document1->ConsumerFName;
     $ConsumerLName = $document1->ConsumerLName;
-    
     $filter2 = ['ConsumerID'=>$_idparent];
     $query2 = new MongoDB\Driver\Query($filter2);
-    $cursor2 = $GoNGetzBackEnd->executeQuery('GoNGetzSmartSchool.Parents',$query2);
-
+    $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query2);
     foreach ($cursor2 as $document2) 
     {
       $parentid = strval($document2->_id);
@@ -44,21 +36,7 @@
   }  
           
 ?>
-<html>
-  
-<head>
- <style>
-h2 {text-align: center;}
-</style>
-  
-<style type="text/css">
-   input {font-weight:bold;}
-</style>
-</head>
-  
-<body>
-<br><br><br><br>
-<h2>PLEASE CONFIRM BEFORE PROCEED</h2>
+<br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submiteditparent" name="submiteditparent" action="index.php?page=parentlist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">

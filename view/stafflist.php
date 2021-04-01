@@ -290,7 +290,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
           </ul>
         </div>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
-            <table id="example" class="table table-bordered dt-responsive nowrap" width="100%" cellspacing="0" style= "text-align: center;">
+            <table id="example" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -390,11 +390,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                         </tr>
                         </table>
                         <br>
-                        /**
-                        * @todo Undefined variable: constudentid in /var/www/html/smartschool.gongetz.com/view/stafflist.php on line 397
-                        * @body Fix it
-                        */
-                        <a href="index.php?page=attendancestudent&id=<?php echo $constudentid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
+                        <a href="index.php?page=attendancestudent&id=<?php echo $varconsumerid; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">More >></a>
                         </td>
                         </table>
                         </td>
@@ -411,7 +407,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                           $departmentid = strval($document->_id);
                           $DepartmentName = strval($document->DepartmentName);
                           ?>
-                          <a href="index.php?page=departmentdetail&name=<?php echo $DepartmentName; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($DepartmentName); ?></a>
+                          <a href="index.php?page=departmentdetail&id=<?php echo $departmentid ; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($DepartmentName); ?></a>
                           <?php
                         }
                         if ($ClassID !== "")
