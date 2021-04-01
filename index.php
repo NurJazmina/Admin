@@ -90,6 +90,9 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "exportstaffattendance"){
               include 'view/exportstaffattendance.php';
             }
+            elseif ($_GET["page"] == "exportstudentattendance"){
+              include 'view/exportstudentattendance.php';
+            }
 
 
             //view list
