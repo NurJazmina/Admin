@@ -446,6 +446,10 @@ if (isset($_POST['UpdateParentFormSubmit']))
                         $ConsumerIDNo = $document2->ConsumerIDNo;
                         $ConsumerEmail = $document2->ConsumerEmail;
                         $ConsumerPhone = $document2->ConsumerPhone;
+                        /**
+                        * @todo Link child name to student detail
+                        * @body Link it
+                        */
                         echo $ConsumerFName2." ".$ConsumerLName2;
                         echo "<br>";
                       }
