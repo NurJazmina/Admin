@@ -35,6 +35,13 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $ConsumerLName = ($document->ConsumerLName);
         $ConsumerIDNo = ($document->ConsumerIDNo);
         $consumerid = strval($document->_id);
+
+        $varnow = date("d-m-Y");
+        /**
+        * @todo Red for blank
+        * @body Buatkan kalau tak ada data, background barisan penama warna #FF0000. Sama juga dengan student dan class room
+        */
+
         ?>
         <tr>
             <td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
