@@ -200,8 +200,6 @@ else
   </div>
 </form>
 </div>
-</body>
-</html>
 <?php
 }
 }
