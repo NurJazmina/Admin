@@ -2,18 +2,11 @@
 if (!isset($_GET['id']) && empty($_GET['id']))
 {
     ?>
+    <div class="table-responsive">
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
-
-        <div class="row">
-        <div class="col-md-4 section-1-box wow fadeInUp"></div>
-        <div class="col-md-4 section-1-box wow fadeInUp">
-        <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstaffattendance&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
-        </div>
-        <div class="col-md-4 section-1-box wow fadeInUp"></div>
-        </div>
-        <br>
+        <div class="table-responsive" style="text-align: center;">
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
             <tr>
@@ -59,9 +52,9 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $Cards_id = strval($document1->Cards_id);
         }
 
-        $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
+        $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
         $varcount = 0;
-        $filterA = ['CardID'=>$Cards_id, 'AttendanceDate' => ['$gte' => $today]];
+        $filterA = ['CardID'=>$Cards_id, 'AttendanceDate' => ['$gte' => $to_date]];
         $queryA = new MongoDB\Driver\Query($filterA);
         $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
         $varcounting = 0;
@@ -92,8 +85,12 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 ?>
 </tbody>
 </table>
+<button type="button" class="btn btn-success"><a href="index.php?page=exportstaffattendance&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+</div>
 </div>
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
+</div>
+</div>
 <?php
 if (!isset($_GET['attendance']) && empty($_GET['attendance']))
 {
@@ -127,18 +124,13 @@ else
       $ConsumerIDNo = ($document->ConsumerIDNo);
     }
     ?>
+    <div class="table-responsive">
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
 
-        <div class="row">
-        <div class="col-md-4 section-1-box wow fadeInUp"></div>
-        <div class="col-md-4 section-1-box wow fadeInUp">
+        <div class="table-responsive" style="text-align: center;">
         <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstaffattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
-        </div>
-        <div class="col-md-4 section-1-box wow fadeInUp"></div>
-        </div>
-        <br>
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
             <tr>
@@ -225,7 +217,10 @@ else
    </tbody>
    </table>
    </div>
+   </div>
    <div class="col-md-1 section-1-box wow fadeInUp"></div>
+   </div>
+   </div>
 <?php
 if (!isset($_GET['attendance']) && empty($_GET['attendance']))
 {
