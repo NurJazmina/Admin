@@ -38,7 +38,6 @@ if (isset($_POST['AddStaffFormSubmit']))
         $ConsumerFName = strval($document->ConsumerFName);
         $ConsumerIDNo = strval($document->ConsumerIDNo);
 ?>
-<body>
 <br><br><br><br><h2 style="text-align: center;" >PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submitaddstaff" name="submitaddstaff" action="index.php?page=stafflist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -127,7 +126,6 @@ if (isset($_POST['AddStaffFormSubmit']))
       </div>
   </div>
 </form>
-</body>
 <?php
 if ($count == $end) break;
 }
@@ -135,9 +133,7 @@ if ($count == $end) break;
 else
 {
 ?>
-<body>
-<br><br><br><br>
-<div class="alert alert-danger" role="alert">
+<br><br><br><br><div class="alert alert-danger" role="alert">
 <h2 style="text-align: center;">AUTHORIZED PERSONNEL ONLY</h2>
 <form id="submitstaff" name="submitstaff" action="index.php?page=stafflist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -166,7 +162,6 @@ else
   </div>
   </form>
   </div>
-</body>
 <?php
     }
   }

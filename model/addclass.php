@@ -9,7 +9,7 @@ if (isset($_POST['AddclassFormSubmit']))
   $consumerid = new \MongoDB\BSON\ObjectId($varconsumerid);
   $filter = ['_id'=>$consumerid];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzBackEnd->executeQuery('GoNGetz.Consumer',$query);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   
   foreach ($cursor as $document) 
   { 
@@ -19,7 +19,7 @@ if (isset($_POST['AddclassFormSubmit']))
 
       $filter2 = ['SchoolID'=>$varschoolID, 'ConsumerID'=> $IDcon, 'StaffLevel'=>'0'];
       $query2 = new MongoDB\Driver\Query($filter2);
-      $cursor2 = $GoNGetzBackEnd->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+      $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
       
       $count = 0;
       $end = 1;
@@ -33,21 +33,7 @@ if (isset($_POST['AddclassFormSubmit']))
         //$Staffdepartment = strval($document2->Staffdepartment);
     
 ?>
-<html>
-  
-<head>
- <style>
-h2 {text-align: center;}
-</style>
-  
-<style type="text/css">
-   input {font-weight:bold;}
-</style>
-</head>
-  
-<body>
-<br><br><br><br>
-<h2>PLEASE CONFIRM BEFORE PROCEED</h2>
+<br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submitaddclass" name="submitaddclass" action="index.php?page=classroomlist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">
@@ -91,8 +77,6 @@ h2 {text-align: center;}
       </div>
   </div>
 </form> 
-</body>
-</html>
 <?php
             if ($count == $end) break;    
       }
@@ -100,22 +84,7 @@ h2 {text-align: center;}
         if ($ConsumerGroup_id !== '601b4cfd97728c027c01f187' || $StaffLevel == '1' )
     {
       ?>
-<html>
-  
-<head>
- <style>
-h2 {text-align: center;}
-</style>
-  
-<style type="text/css">
-   input {font-weight:bold;}
-</style>
-</head>
-  
-<body>
-<br><br><br><br>
-<div class="alert alert-danger" role="alert">
-<h2>AUTHORIZED PERSONNEL ONLY</h2>
+<br><br><br><br><div class="alert alert-danger" role="alert"><h2 style="text-align: center;">AUTHORIZED PERSONNEL ONLY</h2>
 <form id="submitstaff" name="submitstaff" action="index.php?page=classroomlist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">
@@ -143,8 +112,6 @@ h2 {text-align: center;}
   </div>
   </form> 
   </div>
-</body>
-</html>
 <?php
     }
 

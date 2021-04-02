@@ -1,5 +1,5 @@
 <br><br><form name="UpdateclassRemarkFormSubmit" action="model/updateclassremark.php" method="post">
-  <div class="modal fade" id="Updateclassremark" tabindex="-1" aria-labelledby="UpdateclassModalLabel" aria-hidden="true">
+  <div class="modal fade" id="UpdateClassremark" tabindex="-1" aria-labelledby="UpdateclassModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">

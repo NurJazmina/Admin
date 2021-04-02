@@ -3,7 +3,6 @@ $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'1'];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
 $totalstaff = 0;
-
 foreach ($cursor as $document)
 {
   $totalstaff = $totalstaff + 1;
@@ -16,7 +15,6 @@ $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
 $totalteacher= 0;
-
 foreach ($cursor as $document)
 {
   $totalteacher= $totalteacher + 1;
@@ -29,7 +27,6 @@ $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 $totalstudent = 0;
-
 foreach ($cursor as $document)
 {
  $varStudentsSchoolId = strval($document->Schools_id);
@@ -43,7 +40,6 @@ $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
 $totalparent = 0;
-
 foreach ($cursor as $document)
 {
  $ParentID = array($document->ParentID);
@@ -56,7 +52,6 @@ $_SESSION["totalparent"] = $totalparent;
 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_schoolID"])];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Schools',$query);
-
 foreach ($cursor as $document)
 {
  $SchoolsPhoneNo =($document->SchoolsPhoneNo);
@@ -67,7 +62,7 @@ foreach ($cursor as $document)
   <br><h1 style="color:#404040;">About Us</h1>
 </div>
 <br>
-  <table class="table table-bordered">
+  <table class="table table-bordered table-sm">
     <thead class="table-light">
     </thead>
     <tbody>

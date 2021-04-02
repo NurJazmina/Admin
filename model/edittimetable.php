@@ -5,20 +5,7 @@ if (isset($_POST['EditTimetableFormSubmit']))
   $vartimetableid = $_POST['txttimetableid'];
              
 ?>
-<html>
-<head>
- <style>
-h2 {text-align: center;}
-</style>
-  
-<style type="text/css">
-   input {font-weight:bold;}
-</style>
-</head>
-  
-<body>
-<br><br><br><br>
-<h2>PLEASE CONFIRM BEFORE PROCEED</h2>
+<br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submitedittimetable" name="submitedittimetable" action="index.php?page=timetablelist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">
@@ -33,17 +20,14 @@ h2 {text-align: center;}
               <?php
               $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
               $query1 = new MongoDB\Driver\Query($filter1);
-              $cursor1 = $GoNGetzBackEnd->executeQuery('GoNGetzSmartSchool.Staff',$query1);
+              $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
               foreach ($cursor1 as $document1)
               {
                 $ConsumerID = strval($document1->ConsumerID);  
                 $consumerid = new \MongoDB\BSON\ObjectId($ConsumerID); 
-                
-
                 $filter2 = ['_id'=>$consumerid];
                 $query2 = new MongoDB\Driver\Query($filter2);   
-                $cursor2 = $GoNGetzBackEnd->executeQuery('GoNGetz.Consumer',$query2);
-
+                $cursor2 =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query2);
                 foreach ($cursor2 as $document2)
                 {
                   $ConsumerFName = strval($document2->ConsumerFName);
@@ -65,8 +49,7 @@ h2 {text-align: center;}
               <?php
               $filter3 = ['School_id' =>$_SESSION["loggeduser_schoolID"]];
               $query3 = new MongoDB\Driver\Query($filter3);
-              $cursor3 = $GoNGetzSmartSchoolFrontEnd->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query3);
-
+              $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query3);
               foreach ($cursor3 as $document3)   
               {
                 ?>
@@ -84,7 +67,7 @@ h2 {text-align: center;}
                 <?php
                 $filter4 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varcategory];
                 $query4 = new MongoDB\Driver\Query($filter4);
-                $cursor4 = $GoNGetzBackEnd->executeQuery('GoNGetzSmartSchool.Classrooms',$query4);
+                $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query4);
                 foreach ($cursor4 as $document4)
                 {
                 ?>
@@ -108,7 +91,6 @@ h2 {text-align: center;}
               <input type="datetime-local" id="staticStaffNo" name="txtTimetableStart">
             </div>
           </div>
-          
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Timetable End</label>
             <div class="col-sm-10">
@@ -134,8 +116,6 @@ h2 {text-align: center;}
   </div>
 </form> 
 </div>
-</body>
-</html>
 <?php
     }
 

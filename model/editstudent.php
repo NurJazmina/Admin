@@ -20,7 +20,6 @@ if (isset($_POST['EditStudentFormSubmit']))
   }
 }
 ?>
-<body>
 <br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submiteditstudent" name="submiteditstudent" action="index.php?page=studentlist" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">

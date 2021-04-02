@@ -374,7 +374,7 @@ if (isset($_POST['UpdateParentFormSubmit']))
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0" style= "text-align: center;">
+            <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -408,6 +408,9 @@ if (isset($_POST['UpdateParentFormSubmit']))
                     $ConsumerIDNoParent = $document1->ConsumerIDNo;
                     $ConsumerEmail = $document1->ConsumerEmail;
                     $ConsumerPhone = $document1->ConsumerPhone;
+                    $ConsumerPassword = $document1->ConsumerPassword;
+                    $options = ['cost' => 4,];
+                    $password_hash = password_verify("zaq12wsx", $ConsumerPassword);
                     ?>
                     <tr>
                     <td><a href="index.php?page=parentdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a></td>
@@ -446,6 +449,10 @@ if (isset($_POST['UpdateParentFormSubmit']))
                         $ConsumerIDNo = $document2->ConsumerIDNo;
                         $ConsumerEmail = $document2->ConsumerEmail;
                         $ConsumerPhone = $document2->ConsumerPhone;
+                        /**
+                        * @todo Link child name to student detail
+                        * @body Link it
+                        */
                         echo $ConsumerFName2." ".$ConsumerLName2;
                         echo "<br>";
                       }
