@@ -26,7 +26,6 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12 col-sm-12 col-lg-6">
-            <div class="table-responsive">
               <table class="table table-bordered">
               <tbody>
                 <tr>
@@ -58,22 +57,13 @@
                    <td><?php echo $ConsumerStatus; ?></td>
                 </tr>
               </tbody>
-            </table>
+              </table>
           </div>
-          /**
-          * @todo Display current month attendance for staff
-          * @body It also have a button to export current month attendance as excel by using &_GET["attendance"] = "staffdetails"
-          */
-        </div>
         <div class="col-sm-12 col-lg-6">
         <div class="row">
           <div class="col-12 col-lg-12">
             <div class="card">
               <div class="card-header">
-              /**
-              * @todo Display staff's remark with child remark and form
-              * @body As our discussion
-              */
                 <strong>Remarks</strong>
               </div>
               <div class="card-body">
@@ -430,7 +420,74 @@
       </div>
     </div>
   </div>
-</div>
+<div class="col-12 col-sm-12 col-lg-6">
+          <table class="table table-bordered ">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">ATTENDANCE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>  
+                <table id="attendance" >
+                  <?php
+                  $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                  $date = $vardate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                  $varcount = 0; 
+                  $filterA = ['CardID'=>'1000000000000000'];
+                  $queryA = new MongoDB\Driver\Query($filterA);
+                  $cursorA =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+                  foreach ($cursorA as $documentA)
+                  {
+                    $AttendanceDate = new MongoDB\BSON\UTCDateTime(strval($documentA->AttendanceDate));
+                    $attendance = $AttendanceDate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                    $today = date_format($date,"d/m/Y");
+                    $attendancetoday = date_format($attendance,"d/m/Y");
+                    //value is odd=out
+                    if ($varcount % 2) 
+                    {
+                      do 
+                      {
+                      ?>
+                      <td style="text-align:right;">OUT</td>
+                      <td><i class="fas fa-arrow-circle-right"></i></td>
+                      <td><?php echo date_format($attendance,"H:i"); ?></td>
+                      <td></td>         
+                      <td><?php echo date_format($attendance,"d/m/Y"); ?></td>
+                      </tr>
+                      <?php
+                      $varcount = $varcount + 1;
+                      }
+                    while ($varcount <='0'); 
+                    } 
+                    //value is even=in
+                    else 
+                    {                  
+                      do 
+                      {
+                      ?>
+                      <tr>
+                      <td style="text-align:right;">IN</td>
+                      <td><i class="fas fa-arrow-circle-right"></i></td>
+                      <td><?php echo date_format($attendance,"H:i"); ?></td>
+                      <td>|</td>
+                      <?php
+                      $varcount = $varcount + 1;
+                      }
+                      while ($varcount <='0'); 
+                    }
+                  }
+                  ?>
+                  </tr>
+                </table>
+                <br><br><button style="font-size:15px" type="button" class="btn btn-success"><a href="index.php?page=exportstaffattendance&id=<?php echo $_SESSION["staffremarkid"]; ?>" style="color:#FFFFFF; text-decoration: none;">EXPORT TO XLS</a></button>
+                <br>
+              </td>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        </div>
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 </div>
