@@ -1,8 +1,18 @@
+
+  /**
+ * @todo Wrong implementation of header.
+ * @body Header bukan untuk display, tetapi untuk run background html structure. So gantikan header di bawah dengan div.
+ */
+
 <header style ="background-color:#31a0a4; color:#FFFFFF;"; class="site-header">
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <img class="logo-header" src="image/logo.png" width="50" height="50" alt="logo-header"> <a class="navbar-brand" href="#">SMART SCHOOL</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    /**
+ * @todo Missing mobile menu icon.
+ * @body Cuba kecilkan web browser dan icon untuk buka menu hilang. Baikinya.
+ */
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
