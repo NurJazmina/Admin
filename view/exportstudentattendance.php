@@ -3,20 +3,29 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 {
     ?>
     <div class="row">
-    <div class="col-md-2 section-1-box wow fadeInUp"></div>
-    <div class="col-md-8 section-1-box wow fadeInUp"><br><br><br>
+    <div class="col-md-1 section-1-box wow fadeInUp"></div>
+    <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
+
+        <div class="row">
+        <div class="col-md-4 section-1-box wow fadeInUp"></div>
+        <div class="col-md-4 section-1-box wow fadeInUp">
+        <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+        </div>
+        <div class="col-md-4 section-1-box wow fadeInUp"></div>
+        </div>
+        <br>
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
             <tr>
-            <th scope="col" style="color:#696969; text-align:center">Staff ID</th>
-            <th scope="col" style="color:#696969; text-align:center">Staff Name</th>
+            <th scope="col" style="color:#696969; text-align:center">Student ID</th>
+            <th scope="col" style="color:#696969; text-align:center">Student Name</th>
             <th scope="col" style="color:#696969; text-align:center">Date</th>
             <th scope="col" style="color:#696969; text-align:center">IN | OUT</th>
             </tr>
         </thead>
         <tbody>
         <?php
-        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+        $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
         foreach ($cursor as $document)
@@ -28,7 +37,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
         foreach ($cursor as $document)
         {
-        $_SESSION["staffremarkid"] = strval($document->_id);
+        $_SESSION["studentremarkid"] = strval($document->_id);
         $ConsumerFName = ($document->ConsumerFName);
         $ConsumerLName = ($document->ConsumerLName);
         $ConsumerIDNo = ($document->ConsumerIDNo);
@@ -36,11 +45,12 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $varnow = date("d-m-Y");
         ?>
         <tr>
-            <td><?php echo $ConsumerIDNo; ?></td>
-            <td><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-            <td><?php echo $varnow."<br>"; ?></td>
-            <td>
+            <td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
+            <td style="text-align:center"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+            <td style="text-align:center"><?php echo $varnow."<br>"; ?></td>
+            <td style="text-align:center">
         <?php
+        $Cards_id ='';
         $filter1 = ['Consumer_id'=>$consumerid];
         $query1 = new MongoDB\Driver\Query($filter1);
         $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
@@ -70,7 +80,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
         $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
         if ($datecapture!=$AttendanceDate) {
-        echo $displayinout . date_format($AttendanceDate,"h:i:sa");
+        echo $displayinout . date_format($AttendanceDate,"H:i:sa");
         }
         }
         ?>
@@ -83,17 +93,26 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 </tbody>
 </table>
 </div>
-<div class="col-md-2 section-1-box wow fadeInUp"></div>
-<script>
-  
- $(document).ready(function () {
-    $("#attendance").table2excel({
-        filename: "attendancestaff.xls"
-    });
- });
-  
-</script>
+<div class="col-md-1 section-1-box wow fadeInUp"></div>
 <?php
+if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+{
+
+}
+else
+{
+$attendance = ($_GET['attendance']);
+?>
+<script>
+  $(document).ready(function () {
+     $("#attendance").table2excel({
+         filename: "attendancestudent.xls"
+     });
+  });
+   
+ </script>
+<?php
+}
 }
 else
 {
@@ -102,95 +121,128 @@ else
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
     foreach ($cursor as $document){
-      $_SESSION["staffremarkid"] = strval($document->_id);
+      $_SESSION["studentremarkid"] = strval($document->_id);
       $ConsumerFName = ($document->ConsumerFName);
       $ConsumerLName = ($document->ConsumerLName);
       $ConsumerIDNo = ($document->ConsumerIDNo);
     }
     ?>
     <div class="row">
-    <div class="col-md-3 section-1-box wow fadeInUp"></div>
-    <div class="col-md-6 section-1-box wow fadeInUp"><br><br><br>
+    <div class="col-md-1 section-1-box wow fadeInUp"></div>
+    <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
+
+        <div class="row">
+        <div class="col-md-4 section-1-box wow fadeInUp"></div>
+        <div class="col-md-4 section-1-box wow fadeInUp">
+        <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+        </div>
+        <div class="col-md-4 section-1-box wow fadeInUp"></div>
+        </div>
+        <br>
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
             <tr>
-            <th scope="col" style="color:#696969; text-align:center">Staff ID</th>
-            <th scope="col" style="color:#696969; text-align:center">Staff Name</th>
+            <th scope="col" style="color:#696969; text-align:center">Student ID</th>
+            <th scope="col" style="color:#696969; text-align:center">Student Name</th>
             <th scope="col" style="color:#696969; text-align:center">Date</th>
             <th scope="col" style="color:#696969; text-align:center">IN | OUT</th>
             </tr>
         </thead>
         <tbody>
-            <td><?php echo $ConsumerIDNo; ?></td>
-            <td><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-            <td><?php  ?></td>
-            <td>  
-            <table>
-                <?php
-                $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                $date = $vardate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                $varcount = 0; 
-                $filterA = ['CardID'=>'1000000000000000'];
-                $queryA = new MongoDB\Driver\Query($filterA);
-                $cursorA =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-                foreach ($cursorA as $documentA)
-                {
-                $AttendanceDate = new MongoDB\BSON\UTCDateTime(strval($documentA->AttendanceDate));
-                $attendance = $AttendanceDate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                $today = date_format($date,"d/m/Y");
-                $attendancetoday = date_format($attendance,"d/m/Y");
-                ?>
-                <?php
-                //value is odd=out
-                if ($varcount % 2) 
-                {
-                    do 
-                    {
-                    ?>
-                    <td style="text-align:right;">OUT</td>
-                    <td><i class="fas fa-arrow-circle-right"></i></td>
-                    <td><?php echo date_format($attendance,"H:i"); ?></td>    
-                    <td><?php echo date_format($attendance,"d/m/Y"); ?></td>
-                    </tr>
-                    <?php
-                    $varcount = $varcount + 1;
-                    }
-                while ($varcount <='0'); 
-                } 
-                //value is even=in
-                else 
-                {                  
-                    do 
-                    {
-                    ?>
-                    <tr>
-                    <td style="text-align:right;">IN</td>
-                    <td><i class="fas fa-arrow-circle-right"></i></td>
-                    <td><?php echo date_format($attendance,"H:i"); ?></td>
-                    <td>|</td>
-                    <?php
-                    $varcount = $varcount + 1;
-                    }
-                    while ($varcount <='0'); 
-                }
-                }
-                ?>
-                </tr>
-            </table>
-            <br>
-            </td>
-        </tbody>
-        </table>
-    </div>
-    <div class="col-md-3 section-1-box wow fadeInUp"></div>
-    </div>
+        <tr>
+            <td style="text-align:center"><?php echo "<br>".$ConsumerIDNo; ?></td>
+            <td style="text-align:center"><?php echo "<br>".$ConsumerFName." ".$ConsumerLName; ?></td>
+            <td style="text-align:center">
+        <?php
+        $Cards_id='';
+        $filter1 = ['Consumer_id'=>$_GET['id']];
+        $query1 = new MongoDB\Driver\Query($filter1);
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
+        foreach ($cursor1 as $document1)
+        {
+        $Cards_id = strval($document1->Cards_id);
+        }
+        /*
+        check date
+        $convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        echo "<br>to_date: ".$to_date."<br>";
+        echo "from_date: ".$from_date."<br>";
+        $display = date_format($convert,"d/m/Y");
+        echo $display;
+        */
+        $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+        $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
+
+        $filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+        $query2 = new MongoDB\Driver\Query($filter2);
+        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
+        $varcounting = 0;
+        
+        foreach ($cursor2 as $document2)
+        {
+          $AttendanceDate = ($document2->AttendanceDate);
+          $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+          $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+          $varcounting = $varcounting +1;
+          if ($varcounting % 2)
+          {
+          } 
+          else 
+          {
+            echo "<br>".date_format($AttendanceDate,"d-m-Y");
+          }
+        }
+        ?>
+        </td>
+        <td style="text-align:center">
+        <?php
+        $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+        $queryA = new MongoDB\Driver\Query($filterA);
+        $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+        $varcounting = 0;
+        
+        foreach ($cursorA as $documentA)
+        {
+        $varcounting = $varcounting +1;
+        if ($varcounting % 2){
+            $displayinout = "<br>In: ";
+        } else {
+            $displayinout = " | Out: ";
+        }
+        $AttendanceDate = ($documentA->AttendanceDate);
+        if (!isset($datecapture) && empty($datecapture)) {
+            $datecapture = $AttendanceDate;
+        }
+        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+        $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        if ($datecapture!=$AttendanceDate) {
+        echo $displayinout .date_format($AttendanceDate,"H:i:sa");
+        }
+        }
+        ?>
+        </td>
+        </tr>
+   </tbody>
+   </table>
+   </div>
+   <div class="col-md-1 section-1-box wow fadeInUp"></div>
+<?php
+if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+{
+
+}
+else
+{
+$attendance = ($_GET['attendance']);
+?>
 <script>
   $(document).ready(function () {
      $("#attendance").table2excel({
-         filename: "attendancestaff.xls"
+         filename: "attendancestudent.xls"
      });
   });
    
  </script>
 <?php
+}
 }
