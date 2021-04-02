@@ -438,22 +438,21 @@ if (isset($_POST['UpdateParentFormSubmit']))
                     {
                       $Consumer_id = strval($document3->Consumer_id);
                       $consumeridstudent = new \MongoDB\BSON\ObjectId($Consumer_id);
-                      $filter2 = ['_id'=>$consumeridstudent];
-                      $query2 = new MongoDB\Driver\Query($filter2);
-                      $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query2);
-                      foreach ($cursor2 as $document2)
+                      $filter4 = ['_id'=>$consumeridstudent];
+                      $query4 = new MongoDB\Driver\Query($filter4);
+                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query4);
+                      foreach ($cursor4 as $document4)
                       {
-                        $ConsumerFName2 = $document2->ConsumerFName;
-                        $ConsumerLName2 = $document2->ConsumerLName;
-                        $ConsumerIDType = $document2->ConsumerIDType;
-                        $ConsumerIDNo = $document2->ConsumerIDNo;
-                        $ConsumerEmail = $document2->ConsumerEmail;
-                        $ConsumerPhone = $document2->ConsumerPhone;
-                        /**
-                        * @todo Link child name to student detail
-                        * @body Link it
-                        */
-                        echo $ConsumerFName2." ".$ConsumerLName2;
+                        $studentid = $document4->_id;
+                        $studentFName = $document4->ConsumerFName;
+                        $studentLName = $document4->ConsumerLName;
+                        ?>
+                        <a href="index.php?page=studentdetail&id=<?php echo $studentid; ?>" style="color:#076d79; text-decoration: none;">
+                        <?php
+                        echo $studentFName." ".$studentLName;
+                        ?>
+                        </a>
+                        <?php
                         echo "<br>";
                       }
                     }

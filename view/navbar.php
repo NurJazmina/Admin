@@ -3,11 +3,7 @@
   <div class="container-fluid">
     <img class="logo-header" src="image/logo.png" width="50" height="50" alt="logo-header"> <a class="navbar-brand" href="#">SMART SCHOOL</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    /**
- * @todo Missing mobile menu icon.
- * @body Cuba kecilkan web browser dan icon untuk buka menu hilang. Baikinya.
- */
-      <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon";><i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
