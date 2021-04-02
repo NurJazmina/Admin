@@ -16,10 +16,10 @@ if (isset($_POST['AddStaffRemarkChildFormSubmit'])) {
 
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($varremarkid)];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.StaffRemarks',$query);
   foreach ($cursor as $document)
   {
-    $varClassRemarksStatus = ($document->ClassRemarksStatus);
+    $ConsumerRemarksStatus = ($document->ConsumerRemarksStatus);
   }
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
@@ -30,7 +30,7 @@ if (isset($_POST['AddStaffRemarkChildFormSubmit'])) {
     'ConsumerRemarksStaff_id'=>$varstaffid,
     'school_id'=>$varschoolid,
     'ConsumerRemarksDate'=>$varconsumerremarkdate,
-    'ConsumerRemarksStatus'=>$varClassRemarksStatus]);
+    'ConsumerRemarksStatus'=>$ConsumerRemarksStatus]);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
