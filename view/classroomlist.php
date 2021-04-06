@@ -270,6 +270,7 @@ else
                   <th scope="col">Teacher</th>
                   <th scope="col">Class name</th>
                   <th scope="col">Total Student</th>
+                  <th scope="col">Attendance</th>
                   <th scope="col">Update</th>
                 </tr>
               </thead>
@@ -316,6 +317,7 @@ else
                   }
                   ?>
                   <td><?php echo $totalstudent; ?></td>
+                  <td><button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportclassattendance&id=<?php echo $idclass; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button></td>
                   <td>
                   <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?php echo $idclass; ?>">
                     <i class="fa fa-edit" style="font-size:15px"></i>
@@ -428,6 +430,7 @@ else
                     </div>
                     <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -446,6 +449,7 @@ else
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                     </div>
                   </div>
                      <!-- End tab -->
@@ -519,6 +523,7 @@ else
                     </div>
                       <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -537,6 +542,7 @@ else
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                       </div>
                      </div>
                     <?php

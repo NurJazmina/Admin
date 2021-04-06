@@ -455,6 +455,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                     ?>
                     <tr>
                       <td><a href="index.php?page=studentdetail&id=<?php echo $Consumer_id; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
+                      <div class="table-responsive">
                       <table class="table table-striped table-sm" width="100%" cellspacing="0" style= "text-align: center;">
                       <td>
                       <table>
@@ -518,6 +519,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                       <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button>
                       </td>
                       </table>
+                      </div>
                       </td>
                       <td><?php print_r($ConsumerIDType);?></td>
                       <td><?php print_r($ConsumerIDNo);?></td>
