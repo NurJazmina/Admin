@@ -62,6 +62,7 @@ foreach ($cursor as $document)
   <br><h1 style="color:#404040;">About Us</h1>
 </div>
 <br>
+<div class="table-responsive">
   <table class="table table-bordered table-sm">
     <thead class="table-light">
     </thead>
@@ -92,6 +93,7 @@ foreach ($cursor as $document)
       </tr>
     </tbody>
   </table>
+</div>
 <?php include ('view/modal-editschool.php'); ?>
 <script>
   var EditSchoolModal = document.getElementById('EditSchoolModal')

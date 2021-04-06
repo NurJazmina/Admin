@@ -134,7 +134,8 @@ if (isset($_POST['DeleteDepartmentFormSubmit']))
 }
 ?>
 <div class="myDiv" style="color:#696969;text-align:center"><br><br><br><h1>Departments</h1></div><br>
-<table class="table table-bordered">
+<div class="table-responsive">
+<table class="table table-bordered table-sm">
   <thead class="table-light">
   </thead>
   <tbody>
@@ -179,6 +180,7 @@ if (isset($_POST['DeleteDepartmentFormSubmit']))
     </tr>
   </tbody>
 </table>
+</div
 <?php include ('view/modal-adddepartment.php'); ?>
 <?php include ('view/modal-editdepartment.php'); ?>
 <?php include ('view/modal-deletedepartment.php'); ?>

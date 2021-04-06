@@ -162,7 +162,8 @@ else
             <th scope="col" style="color:#696969; text-align:center">Student ID</th>
             <th scope="col" style="color:#696969; text-align:center">Student Name</th>
             <th scope="col" style="color:#696969; text-align:center">Date</th>
-            <th scope="col" style="color:#696969; text-align:center">IN | OUT</th>
+            <th scope="col" style="color:#696969; text-align:center">IN</th>
+            <th scope="col" style="color:#696969; text-align:center">OUT</th>
             </tr>
         </thead>
         <tbody>

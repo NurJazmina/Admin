@@ -59,7 +59,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
         ?>
         <td style="text-align:center"><?php echo $varnow."<br>"; ?></td>
-        <td style="text-align:center">
+        <td style="text-align:center ">
         <?php
 
         $varcounting = 0;
@@ -139,7 +139,6 @@ $attendance = ($_GET['attendance']);
          filename: "attendancestaff.xls"
      });
   });
-   
  </script>
 <?php
 }
@@ -172,7 +171,7 @@ else
             </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr class="zero">
             <td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
             <td style="text-align:center"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
             <td style="text-align:center">
@@ -297,3 +296,4 @@ $attendance = ($_GET['attendance']);
 <?php
 }
 }
+?>

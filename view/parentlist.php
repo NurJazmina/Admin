@@ -581,6 +581,7 @@ if (isset($_POST['UpdateParentFormSubmit']))
                    </div>
                    <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -599,6 +600,7 @@ if (isset($_POST['UpdateParentFormSubmit']))
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                       </div>
                   </div>
                     <div class="tab-pane fade" id="v-pills-department" role="tabpanel" aria-labelledby="v-pills-department-tab">...</div>

@@ -585,7 +585,7 @@ else
         </div>
         <div class="card-body">
           <div class="table-responsive" style="width:100%; margin:0 auto;">
-            <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0" style="text-align: center;">
+            <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style="text-align: center;">
               <thead>
                 <tr>
                   <th rowspan="2">Teacher</th>

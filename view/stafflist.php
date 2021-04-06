@@ -329,6 +329,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                   ?>
                   <tr bgcolor='white'>
                     <td><a href="index.php?page=staffdetail&id=<?php echo $varconsumerid; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
+                    <div class="table-responsive">
                     <table class="table table-striped table-sm" width="100%" cellspacing="0" style= "text-align: center;">
                     <td>
                     <table>
@@ -390,6 +391,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                         <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button>
                         </td>
                         </table>
+                        </div>
                         </td>
                         <td><?php print_r($ConsumerIDNo);?></td>
                         <td><?php print_r($ConsumerAddress); ?></td>
@@ -558,6 +560,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                               </div>
                                 <div class="box">
                                   <strong>Remarks</strong>
+                                  <div class="table-responsive">
                                   <table class="table table-striped table-sm">
                                     <thead>
                                       <tr>
@@ -576,6 +579,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                                       </tr>
                                     </tbody>
                                   </table>
+                                  </div>
                                 </div>
                                </div>
                               <!--end tab -->
@@ -649,6 +653,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                               </div>
                                 <div class="box">
                                   <strong>Remarks</strong>
+                                  <div class="table-responsive">
                                   <table class="table table-striped table-sm">
                                     <thead>
                                       <tr>
@@ -667,6 +672,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                                       </tr>
                                     </tbody>
                                   </table>
+                                  </div>
                                 </div>
                                </div>
                               <?php

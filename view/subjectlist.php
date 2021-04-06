@@ -131,12 +131,12 @@ if (isset($_POST['DeleteSubjectFormSubmit']))
   printf("Deleted  %d document(s)\n", $result->getModifiedCount());
 }
 ?>
-<body>
 <div class="myDiv" style="color:#696969;text-align:center">
 <br><br><br><h1>Subjects</h1>
 </div>
 <br>
-<table class="table table-bordered">
+<div class="table-responsive">
+<table class="table table-bordered table-sm">
   <thead class="table-light">
   </thead>
   <tbody>
@@ -181,7 +181,7 @@ if (isset($_POST['DeleteSubjectFormSubmit']))
     </tr>
   </tbody>
 </table>
-</body>
+</div>
 <?php include ('view/modal-addsubject.php'); ?>
 <?php include ('view/modal-editsubject.php'); ?>
 <?php include ('view/modal-deletesubject.php'); ?>

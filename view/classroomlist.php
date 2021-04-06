@@ -430,6 +430,7 @@ else
                     </div>
                     <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -448,6 +449,7 @@ else
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                     </div>
                   </div>
                      <!-- End tab -->
@@ -521,6 +523,7 @@ else
                     </div>
                       <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -539,6 +542,7 @@ else
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                       </div>
                      </div>
                     <?php
