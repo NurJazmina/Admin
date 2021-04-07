@@ -36,7 +36,9 @@ error_reporting(E_ALL);
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
     <!-- TinyMCE js -->
-    <script src="https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    
+
     <title>Smart School</title>
   </head>
 
@@ -56,14 +58,10 @@ error_reporting(E_ALL);
           <?php
           if(!isset($_SESSION["loggeduser_schoolID"]) && empty($_SESSION["loggeduser_schoolID"]))
           {
-          ?>
-                <?php include 'view/login.php'; ?>
-          <?php
+            include 'view/login.php'; 
           }
           else
           {
-          ?>
-            <?php
             if (!isset($_GET['page']) || empty($_GET['page'])){
               include 'view/home.php';
             }
@@ -79,18 +77,19 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "schooledit"){
               include 'view/schooledit.php';
             }
+            elseif ($_GET["page"] == "newslist"){
+              include 'view/newslist.php';
+            }
+            elseif ($_GET["page"] == "addnews"){
+              include 'view/addnews.php';
+            }
             elseif ($_GET["page"] == "departmentlist"){
               include 'view/departmentlist.php';
             }
             elseif ($_GET["page"] == "subjectlist"){
               include 'view/subjectlist.php';
             }
-            elseif ($_GET["page"] == "attendancestudent"){
-              include 'view/attendancestudent.php';
-            }
-            elseif ($_GET["page"] == "attendance"){
-              include 'view/attendance.php';
-            }
+
             elseif ($_GET["page"] == "exportstaffattendance"){
               include 'view/exportstaffattendance.php';
             }
@@ -238,8 +237,6 @@ error_reporting(E_ALL);
               include 'view/modal-deletesubject.php';
             }
 
-            ?>
-          <?php
           }
         ?>
       </div>
