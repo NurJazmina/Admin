@@ -17,22 +17,28 @@ error_reporting(E_ALL);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
+    <!-- LOCAL -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="resources/default.css">
+   
+    <!-- HOSTED ONLINE -->
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
-    <link rel="stylesheet" href="css/default.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
-    
-    <!-- EXPORT-->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- Bootstrap jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <!-- TinyMCE js -->
+    <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    
+
     <title>Smart School</title>
   </head>
 
@@ -52,14 +58,10 @@ error_reporting(E_ALL);
           <?php
           if(!isset($_SESSION["loggeduser_schoolID"]) && empty($_SESSION["loggeduser_schoolID"]))
           {
-          ?>
-                <?php include 'view/login.php'; ?>
-          <?php
+            include 'view/login.php'; 
           }
           else
           {
-          ?>
-            <?php
             if (!isset($_GET['page']) || empty($_GET['page'])){
               include 'view/home.php';
             }
@@ -75,23 +77,27 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "schooledit"){
               include 'view/schooledit.php';
             }
+            elseif ($_GET["page"] == "newslist"){
+              include 'view/newslist.php';
+            }
+            elseif ($_GET["page"] == "addnews"){
+              include 'view/addnews.php';
+            }
             elseif ($_GET["page"] == "departmentlist"){
               include 'view/departmentlist.php';
             }
             elseif ($_GET["page"] == "subjectlist"){
               include 'view/subjectlist.php';
             }
-            elseif ($_GET["page"] == "attendancestudent"){
-              include 'view/attendancestudent.php';
-            }
-            elseif ($_GET["page"] == "attendance"){
-              include 'view/attendance.php';
-            }
+
             elseif ($_GET["page"] == "exportstaffattendance"){
               include 'view/exportstaffattendance.php';
             }
             elseif ($_GET["page"] == "exportstudentattendance"){
               include 'view/exportstudentattendance.php';
+            }
+            elseif ($_GET["page"] == "exportclassattendance"){
+              include 'view/exportclassattendance.php';
             }
 
 
@@ -231,12 +237,12 @@ error_reporting(E_ALL);
               include 'view/modal-deletesubject.php';
             }
 
-            ?>
-          <?php
           }
         ?>
       </div>
     </div>
-
+    <!-- LOCAL -->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="resources/default.js"></script>
   </body>
   </html>

@@ -240,5 +240,5 @@
     </div>
     <!-- end tab -->
 </div>
-
+<?php include ('view/modal-editdetail.php'); ?>
 

@@ -1,4 +1,4 @@
-<div style ="background-color:#31a0a4; color:#FFFFFF;"; class="site-header">
+<div style ="background-color:#31a0a4; color:#FFFFFF;" class="site-header">
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <img class="logo-header" src="image/logo.png" width="50" height="50" alt="logo-header"> <a class="navbar-brand" href="#">SMART SCHOOL</a>
@@ -14,6 +14,13 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">School</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li ><a class="dropdown-item" href="index.php?page=schooledit" style="color:#076d79;">School Edit</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li ><a class="dropdown-item" href="index.php?page=newslist" style="color:#076d79;">News List</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=addnews" style="color:#076d79;">Add News</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

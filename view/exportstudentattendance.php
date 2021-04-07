@@ -1,11 +1,11 @@
 <?php
+//avoid put any gap in this page.Error behaviour due to gap.
 if (!isset($_GET['id']) && empty($_GET['id']))
 {
     ?>
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
-
         <div class="table-responsive" style="text-align: center;">
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
@@ -25,7 +25,6 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         foreach ($cursor as $document)
         {
         $Consumer_id = strval($document->Consumer_id);
-
         $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -53,16 +52,13 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         $varnow = date("d-m-Y");
         $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
         ?>
-        <td style="text-align:center"><?php echo $varnow."<br>"; ?></td>
-        <td style="text-align:center">
-        <?php
-
+        <td><?php echo $varnow."<br>"; ?></td>
+        <td><?php
         $varcounting = 0;
         $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
         $optionA = ['sort' => ['_id' => 1]];
         $queryA = new MongoDB\Driver\Query($filterA,$optionA);
         $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-        
         foreach ($cursorA as $documentA)
         {
             $AttendanceDate = ($documentA->AttendanceDate);
@@ -78,12 +74,8 @@ if (!isset($_GET['id']) && empty($_GET['id']))
         {
         }
         }
-
-        ?>
-        </td>
-        <td style="text-align:center">
-        <?php
-
+        ?></td>
+        <td><?php
         $varcounting = 0;
         $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
         $optionA = ['sort' => ['_id' => 1]];
@@ -95,7 +87,6 @@ if (!isset($_GET['id']) && empty($_GET['id']))
             $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
             $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
             $varcounting = $varcounting +1;
-
         if ($varcounting % 2)
         {
         } 
@@ -104,9 +95,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
             echo date_format($AttendanceDate,"H:i:s")."<br>";
         }
         }
-
-        ?>
-        </td>
+        ?></td>
         </tr>
         <?php
         }
@@ -137,6 +126,17 @@ $attendance = ($_GET['attendance']);
  </script>
 <?php
 }
+?>
+<script type="text/javascript">
+var rows = document.querySelectorAll('tr');
+
+[...rows].forEach((r) => {
+if (r.querySelectorAll('td:empty').length > 0) {
+r.classList.add('highlight');
+}
+})
+</script>
+<?php
 }
 else
 {
@@ -154,7 +154,6 @@ else
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
-
         <div class="table-responsive" style="text-align: center;">
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
@@ -167,11 +166,10 @@ else
             </tr>
         </thead>
         <tbody>
-        <tr>
-            <td style="text-align:center"><?php echo "<br>".$ConsumerIDNo; ?></td>
-            <td style="text-align:center"><?php echo "<br>".$ConsumerFName." ".$ConsumerLName; ?></td>
-            <td style="text-align:center">
-        <?php
+        <tr style="text-align:center">
+            <td><?php echo $ConsumerIDNo; ?></td>
+            <td><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+            <td><?php
         $Cards_id='';
         $filter1 = ['Consumer_id'=>$_GET['id']];
         $query1 = new MongoDB\Driver\Query($filter1);
@@ -190,12 +188,10 @@ else
         */
         $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
         $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
-
         $filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
         $query2 = new MongoDB\Driver\Query($filter2);
         $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
         $varcounting = 0;
-        
         foreach ($cursor2 as $document2)
         {
           $AttendanceDate = ($document2->AttendanceDate);
@@ -207,19 +203,16 @@ else
           } 
           else 
           {
-            echo "<br>".date_format($AttendanceDate,"d-m-Y");
+            echo date_format($AttendanceDate,"d-m-Y")."<br>";
           }
         }
-        ?>
-        </td>
-        <td style="text-align:center">
-        <?php
+        ?></td>
+        <td><?php
         $varcounting = 0;
         $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
         $optionA = ['sort' => ['_id' => 1]];
         $queryA = new MongoDB\Driver\Query($filterA,$optionA);
         $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-        
         foreach ($cursorA as $documentA)
         {
             $AttendanceDate = ($documentA->AttendanceDate);
@@ -235,23 +228,19 @@ else
         {
         }
         }
-        ?>
-        </td>
-        <td style="text-align:center">
-        <?php
+        ?></td>
+        <td><?php
         $varcounting = 0;
         $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
         $optionA = ['sort' => ['_id' => 1]];
         $queryA = new MongoDB\Driver\Query($filterA,$optionA);
         $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-        
         foreach ($cursorA as $documentA)
         {
             $AttendanceDate = ($documentA->AttendanceDate);
             $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
             $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
             $varcounting = $varcounting +1;
-
         if ($varcounting % 2)
         {
         } 
@@ -262,8 +251,7 @@ else
         ?>
         <?php
         }
-        ?>
-        </td>
+        ?></td>
         </tr>
    </tbody>
    </table>
@@ -290,4 +278,15 @@ $attendance = ($_GET['attendance']);
  </script>
 <?php
 }
+?>
+<script type="text/javascript">
+var rows = document.querySelectorAll('tr');
+
+[...rows].forEach((r) => {
+if (r.querySelectorAll('td:empty').length > 0) {
+r.classList.add('highlight');
+}
+})
+</script>
+<?php
 }
