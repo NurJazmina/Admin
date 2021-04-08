@@ -77,12 +77,6 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "schooledit"){
               include 'view/schooledit.php';
             }
-            elseif ($_GET["page"] == "newslist"){
-              include 'view/newslist.php';
-            }
-            elseif ($_GET["page"] == "addnews"){
-              include 'view/addnews.php';
-            }
             elseif ($_GET["page"] == "departmentlist"){
               include 'view/departmentlist.php';
             }
@@ -129,6 +123,18 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "timetablelist")
             {
               include 'view/timetablelist.php';
+            }
+
+            elseif ($_GET["page"] == "news")
+            {
+              include 'view/news.php';
+            }
+            elseif ($_GET["page"] == "newsdetail")
+            {
+              include 'view/newsdetail.php';
+            }
+            elseif ($_GET["page"] == "viewaddnews"){
+              include 'view/addnews.php';
             }
 
             //view detail
@@ -178,6 +184,9 @@ error_reporting(E_ALL);
             }
             elseif ($_GET["page"] == "addtimetable"){
               include 'model/addtimetable.php';
+            }
+            elseif ($_GET["page"] == "addnews"){
+              include 'model/addnews.php';
             }
 
             //modal add

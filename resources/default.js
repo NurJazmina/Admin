@@ -16,6 +16,7 @@ tinymce.init({
 });
 
 
+
 //edit detail view/aboutme
 var EditDetailModal = document.getElementById('#EditDetailModal')
 EditDetailModal.addEventListener('show.bs.modal', function (event) {

@@ -98,54 +98,75 @@
         <div class="block-content">
           <div class="views-row">
             <div class="views-field views-field-nothing">
-              <span class="field-content">
-                <div class="news-panel">
-                  <div class="news-panel-title"><a href="#" target="_blank">Three Writers Earn Scholastic Gold Key Awards</a></div>
-                  <span class="news-panel-date">Friday, 26 Feb 2021</span>
-                </div>
-              </span>
+<?php
+$filter = ['school_id'=> $_SESSION["loggeduser_schoolID"],'SchoolNewsStatus'=>'ACTIVE'];
+$option = ['sort' => ['_id' => -1],'limit'=>10];
+$query = new MongoDB\Driver\Query($filter, $option);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+
+foreach ($cursor as $document)
+{
+  $Newsid = strval($document->_id);
+  $SchoolNewsStaff_id = ($document->SchoolNewsStaff_id);
+  $schoolNewsTitle = ($document->schoolNewsTitle);
+  $schoolNewsDetails = ($document->schoolNewsDetails);
+  $SchoolNewsDate = ($document->SchoolNewsDate);
+  $SchoolNewsStatus = ($document->SchoolNewsStatus);
+
+  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+    $varstaffid = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+    $filter1 = ['_id' => $varstaffid];
+    $query1 = new MongoDB\Driver\Query($filter1);
+    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+    foreach ($cursor1 as $document1)
+    {
+      $consumerid = strval($document1->_id);
+      $ConsumerFName = ($document1->ConsumerFName);
+      $ConsumerLName = ($document1->ConsumerLName);
+
+      $filter2 = ['ConsumerID'=>$consumerid];
+      $query2 = new MongoDB\Driver\Query($filter2);
+      $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+      foreach ($cursor2 as $document2)
+      {
+          $Staffdepartment = ($document2->Staffdepartment);
+          $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+          $filter3 = ['_id'=>$departmentid];
+          $query3 = new MongoDB\Driver\Query($filter3);
+          $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+          foreach ($cursor3 as $document3)
+          {
+              $DepartmentName = ($document3->DepartmentName);
+          }
+      }
+    }
+    ?>
+    <span class="field-content">
+      <div class="news-panel">
+        <div class="news-panel-title"><a href="index.php?page=newsdetail&id=<?php echo $Newsid; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a><small ><?php echo " By : ".$ConsumerFName." ".$ConsumerLName;?></small></div>
+        <span class="claimedRight" maxlength="100"><?php echo $schoolNewsDetails; ?></span><br>
+        <span class="news-panel-date"><?php echo date_format($datetime,"D, M Y"); ?></span>
+      </div>
+    </span>
+    <script>
+        //Limit characters displayed in span
+        $(document).ready(function(){
+        $('.claimedRight').each(function (f) {
+
+            var newstr = $(this).text().substring(0,100);
+            $(this).text(newstr);
+
+            });
+        })
+        </script>
+<?php
+}
+?>
             </div>
           </div>
-        <div class="views-row">
-        <div class="views-field views-field-nothing">
-          <span class="field-content">
-            <div class="news-panel">
-              <div class="news-panel-title"><a href="#" target="_blank">students advised to comply with SOP to return to campus</a></div>
-              <span class="news-panel-date">Friday, 26 Feb 2021</span>
-            </div>
-          </span>
-        </div>
-      </div>
-      <div class="views-row">
-        <div class="views-field views-field-nothing">
-          <span class="field-content">
-            <div class="news-panel">
-              <div class="news-panel-title"><a href="#" target="_blank">50 of the Best Private Schools in Malaysia</a></div>
-              <span class="news-panel-date">Friday, 26 Feb 2021</span>
-            </div>
-          </span>
-        </div>
-      </div>
-      <div class="views-row">
-        <div class="views-field views-field-nothing">
-          <span class="field-content">
-            <div class="news-panel">
-              <div class="news-panel-title"><a href="#" target="_blank">School should always be a highly civilised place</a></div>
-              <span class="news-panel-date">Friday, 26 Feb 2021</span>
-            </div>
-          </span>
-        </div>
-      </div>
-      <div class="views-row">
-        <div class="views-field views-field-nothing">
-          <span class="field-content">
-            <div class="news-panel">
-              <div class="news-panel-title"><a href="#" target="_blank">Academy Students Contribute to Sunport Art</a></div>
-              <span class="news-panel-date">Thursday, 18 Feb 2021</span>
-            </div>
-          </span>
-        </div>
-      </div>
       <footer>
         <div class="text-center"><a href="#" target="_blank" class="button btn btn-info">See more News</a></div>
       </footer>

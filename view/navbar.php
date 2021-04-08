@@ -19,8 +19,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li ><a class="dropdown-item" href="index.php?page=newslist" style="color:#076d79;">News List</a></li>
-            <li ><a class="dropdown-item" href="index.php?page=addnews" style="color:#076d79;">Add News</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=news" style="color:#076d79;">News List</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=viewaddnews" style="color:#076d79;">Add News</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
