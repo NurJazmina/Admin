@@ -1,7 +1,6 @@
 <?php
   if (isset($_POST['LoginFormSubmit']))
   {
-
     $filter = ['ConsumerIDNo' => $_POST["txtID"]];
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
@@ -11,10 +10,8 @@
    use foreach() to iterate over all the document */
     foreach ($cursor as $document)
     {
-
       //ConsumerPassword using password_hash method
       $password_hash = ($document->ConsumerPassword);
-
       //convert password using password_verify
       if (password_verify($_POST["txtPassword"], $password_hash))
       {

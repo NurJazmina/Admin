@@ -14,10 +14,11 @@
       <tr> 
         <td><strong><font style="font-family: Arial; font-size: 13px;">Access Type</font></strong></td>
         <td>
-        <input type="checkbox" class="radio" name="access" value="SCHOOL1"><label for="txtstaff">Staff</label>
+        <input type="checkbox" class="radio" name="access" value="SCHOOL1"><label  for="txtstaff">Staff</label>
         <input type="checkbox" class="radio" name="access" value="SCHOOL0"><label for="txtteacher">Teacher</label>
         <input type="checkbox" class="radio" name="access" value="VIP"><label for="txtparent">Parent</label>
-        <input type="checkbox" class="radio" name="access" value=""><label for="txtpublic">Public</label>
+        <input type="checkbox" class="radio" name="access" value="PUBLIC" checked><label for="txtpublic">Public</label>
+        <p id="text" style="display:none">Checkbox is CHECKED!</p>
         </td>
       </tr>
       <tr> 

@@ -3,33 +3,68 @@
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
 <?php
-$filter = ['school_id'=> $_SESSION["loggeduser_schoolID"],'SchoolNewsStatus'=>'ACTIVE'];
-$option = ['sort' => ['_id' => -1],'limit'=>10];
-$query = new MongoDB\Driver\Query($filter, $option);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
 
-foreach ($cursor as $document)
+$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+$filter2 = ['_id' => $groupid];
+$query2 = new MongoDB\Driver\Query($filter2);
+$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
+foreach ($cursor2 as $document2)
 {
-    $Newsid = strval($document->_id);
-    $SchoolNewsStaff_id = ($document->SchoolNewsStaff_id);
-    $schoolNewsTitle = ($document->schoolNewsTitle);
-    $schoolNewsDetails = ($document->schoolNewsDetails);
-    $SchoolNewsDate = ($document->SchoolNewsDate);
-    $SchoolNewsStatus = ($document->SchoolNewsStatus);
-    $SchoolNewsAccess = ($document->SchoolNewsAccess);
+    $ConsumerGroupName = strval($document2->ConsumerGroupName);
+}
 
-    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
-    $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$filter2 = ['SchoolNewsStatus'=>'ACTIVE'];
+$query2 = new MongoDB\Driver\Query($filter2);
+$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
+foreach ($cursor2 as $document2)
+{
+    $SchoolNewsAccess = ($document2->SchoolNewsAccess);
 
-    $varstaffid = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
-    $filter1 = ['_id' => $varstaffid];
+if ($SchoolNewsAccess=='SCHOOL0'||$SchoolNewsAccess=='SCHOOL1'||$SchoolNewsAccess=='VIP')
+{
+  $filter2 = ['SchoolNewsAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
+  $query2 = new MongoDB\Driver\Query($filter2);
+  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
+  foreach ($cursor2 as $document2)
+  {
+    $Newsid = strval($document2->_id);
+    $SchoolNewsStaff_id = ($document2->SchoolNewsStaff_id);
+    $schoolNewsTitle = ($document2->schoolNewsTitle);
+    $schoolNewsDetails = ($document2->schoolNewsDetails);
+    $SchoolNewsDate = ($document2->SchoolNewsDate);
+    $SchoolNewsStatus = ($document2->SchoolNewsStatus);
+    $SchoolNewsAccess = ($document2->SchoolNewsAccess);
+    echo $SchoolNewsAccess;
+
+    $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+    $filter1 = ['_id' => $id];
     $query1 = new MongoDB\Driver\Query($filter1);
     $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
     foreach ($cursor1 as $document1)
     {
-    $ConsumerFName = ($document1->ConsumerFName);
-    $ConsumerLName = ($document1->ConsumerLName);
+        $consumerid = strval($document1->_id);
+        $ConsumerFName = ($document1->ConsumerFName);
+        $ConsumerLName = ($document1->ConsumerLName);
+        $filter2 = ['ConsumerID'=>$consumerid];
+        $query2 = new MongoDB\Driver\Query($filter2);
+        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+        foreach ($cursor2 as $document2)
+        {
+            $Staffdepartment = ($document2->Staffdepartment);
+            $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+            $filter3 = ['_id'=>$departmentid];
+            $query3 = new MongoDB\Driver\Query($filter3);
+            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+            foreach ($cursor3 as $document3)
+            {
+                $DepartmentName = ($document3->DepartmentName);
+            }
+        }
     }
+
+    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+    $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
     <div class="card">
       <div class="card-header">
@@ -43,6 +78,57 @@ foreach ($cursor as $document)
             </table>
         </div>
       </div>
+      <div class="card-footer">
+        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+      </div>
+    </div><br>
+    <script>
+        //Limit characters displayed in span
+        $(document).ready(function(){
+        $('.claimedRight').each(function (f) {
+            var newstr = $(this).text().substring(0,100);
+            $(this).text(newstr);
+  
+            });
+        })
+        </script>
+  <?php
+  }
+}
+else
+{
+  $filter2 = [NULL];
+  $query2 = new MongoDB\Driver\Query($filter2);
+  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
+  foreach ($cursor2 as $document2)
+  {
+    $Newsid = strval($document2->_id);
+    $SchoolNewsStaff_id = ($document2->SchoolNewsStaff_id);
+    $schoolNewsTitle = ($document2->schoolNewsTitle);
+    $schoolNewsDetails = ($document2->schoolNewsDetails);
+    $SchoolNewsDate = ($document2->SchoolNewsDate);
+    $SchoolNewsStatus = ($document2->SchoolNewsStatus);
+    $SchoolNewsAccess = ($document2->SchoolNewsAccess);
+
+    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+    $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  }
+  ?>
+    <div class="card">
+      <div class="card-header">
+        <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive-sm">
+            <table class="table">
+            <span class="claimedRight" maxlength="100"><?php echo $schoolNewsDetails; ?></span><br>
+            <span class="news-panel-date"><?php echo date_format($datetime,"D, M Y"); ?></span>
+            </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+      </div>
     </div><br>
     <script>
         //Limit characters displayed in span
@@ -55,6 +141,7 @@ foreach ($cursor as $document)
         })
         </script>
 <?php
+}
 }
 ?>
   </div>

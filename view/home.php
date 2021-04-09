@@ -90,89 +90,304 @@
 <div class="section-2-container section-container section-container-gray-bg">
   <div class="container">
     <div class="row">
-      <div class="col section-2 section-description wow fadeIn"></div>
-    </div>
-    <div class="row">
-    	<div class="col-md-6 section-2-box wow fadeInLeft">
+    	<div class="col-md-12 section-2-box wow fadeInLeft">
         <h3>Latest News</h3>
         <div class="block-content">
           <div class="views-row">
             <div class="views-field views-field-nothing">
-<?php
-$filter = ['school_id'=> $_SESSION["loggeduser_schoolID"],'SchoolNewsStatus'=>'ACTIVE'];
-$option = ['sort' => ['_id' => -1],'limit'=>10];
-$query = new MongoDB\Driver\Query($filter, $option);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
-
-foreach ($cursor as $document)
+            <?php
+$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+$filter2 = ['_id' => $groupid];
+$query2 = new MongoDB\Driver\Query($filter2);
+$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
+foreach ($cursor2 as $document2)
 {
-  $Newsid = strval($document->_id);
-  $SchoolNewsStaff_id = ($document->SchoolNewsStaff_id);
-  $schoolNewsTitle = ($document->schoolNewsTitle);
-  $schoolNewsDetails = ($document->schoolNewsDetails);
-  $SchoolNewsDate = ($document->SchoolNewsDate);
-  $SchoolNewsStatus = ($document->SchoolNewsStatus);
+    $ConsumerGroupName = strval($document2->ConsumerGroupName);
+}
 
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$filter2 = ['SchoolNewsStatus'=>'ACTIVE'];
+$query2 = new MongoDB\Driver\Query($filter2);
+$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
+foreach ($cursor2 as $document2)
+{
+    $SchoolNewsAccess = ($document2->SchoolNewsAccess);
 
-    $varstaffid = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
-    $filter1 = ['_id' => $varstaffid];
-    $query1 = new MongoDB\Driver\Query($filter1);
-    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-    foreach ($cursor1 as $document1)
+    if ($SchoolNewsAccess=='SCHOOL0')
     {
-      $consumerid = strval($document1->_id);
-      $ConsumerFName = ($document1->ConsumerFName);
-      $ConsumerLName = ($document1->ConsumerLName);
-
-      $filter2 = ['ConsumerID'=>$consumerid];
-      $query2 = new MongoDB\Driver\Query($filter2);
-      $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-      foreach ($cursor2 as $document2)
+      $filterA = ['SchoolNewsAccess'=>'SCHOOL0'];
+      $queryA = new MongoDB\Driver\Query($filterA);
+      $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
+      foreach ($cursorA as $documentA)
       {
-          $Staffdepartment = ($document2->Staffdepartment);
-          $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-
-          $filter3 = ['_id'=>$departmentid];
-          $query3 = new MongoDB\Driver\Query($filter3);
-          $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-          foreach ($cursor3 as $document3)
-          {
-              $DepartmentName = ($document3->DepartmentName);
-          }
+        $Newsid = strval($documentA->_id);
+        $SchoolNewsStaff_id = ($documentA->SchoolNewsStaff_id);
+        $schoolNewsTitle = ($documentA->schoolNewsTitle);
+        $schoolNewsDetails = ($documentA->schoolNewsDetails);
+        $SchoolNewsDate = ($documentA->SchoolNewsDate);
+        $SchoolNewsStatus = ($documentA->SchoolNewsStatus);
+        $Access = ($documentA->SchoolNewsAccess);
+    
+        $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+        $filter1 = ['_id' => $id];
+        $query1 = new MongoDB\Driver\Query($filter1);
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+        foreach ($cursor1 as $document1)
+        {
+            $consumerid = strval($document1->_id);
+            $ConsumerFName = ($document1->ConsumerFName);
+            $ConsumerLName = ($document1->ConsumerLName);
+            $filter2 = ['ConsumerID'=>$consumerid];
+            $query2 = new MongoDB\Driver\Query($filter2);
+            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+            foreach ($cursor2 as $document2)
+            {
+                $Staffdepartment = ($document2->Staffdepartment);
+                $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+    
+                $filter3 = ['_id'=>$departmentid];
+                $query3 = new MongoDB\Driver\Query($filter3);
+                $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+                foreach ($cursor3 as $document3)
+                {
+                    $DepartmentName = ($document3->DepartmentName);
+                }
+            }
+        }
+        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        ?>
+        <div class="card">
+          <div class="card-header">
+            <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive-sm">
+                <div class="text4 eventdate">
+                  <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+                  <br>
+                  <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+                </div>
+                <div class="eventtitle">
+                <table class="table table-striped table-sm">
+                <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+                </table>
+                </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+          </div>
+        </div><br>
+    <?php
+    
       }
     }
-    ?>
-    <span class="field-content">
-      <div class="news-panel">
-        <div class="news-panel-title"><a href="index.php?page=newsdetail&id=<?php echo $Newsid; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a><small ><?php echo " By : ".$ConsumerFName." ".$ConsumerLName;?></small></div>
-        <span class="claimedRight" maxlength="100"><?php echo $schoolNewsDetails; ?></span><br>
-        <span class="news-panel-date"><?php echo date_format($datetime,"D, M Y"); ?></span>
+    elseif ($SchoolNewsAccess=='SCHOOL1')
+    {
+      $filterB = ['SchoolNewsAccess'=>'SCHOOL1'];
+      $queryB = new MongoDB\Driver\Query($filterB);
+      $cursorB = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryB);
+      foreach ($cursorB as $documentB)
+      {
+        $Newsid = strval($documentB->_id);
+        $SchoolNewsStaff_id = ($documentB->SchoolNewsStaff_id);
+        $schoolNewsTitle = ($documentB->schoolNewsTitle);
+        $schoolNewsDetails = ($documentB->schoolNewsDetails);
+        $SchoolNewsDate = ($documentB->SchoolNewsDate);
+        $SchoolNewsStatus = ($documentB->SchoolNewsStatus);
+        $Access = ($documentB->SchoolNewsAccess);
+        //echo $Access;
+    
+        $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+        $filter1 = ['_id' => $id];
+        $query1 = new MongoDB\Driver\Query($filter1);
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+        foreach ($cursor1 as $document1)
+        {
+            $consumerid = strval($document1->_id);
+            $ConsumerFName = ($document1->ConsumerFName);
+            $ConsumerLName = ($document1->ConsumerLName);
+            $filter2 = ['ConsumerID'=>$consumerid];
+            $query2 = new MongoDB\Driver\Query($filter2);
+            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+            foreach ($cursor2 as $document2)
+            {
+                $Staffdepartment = ($document2->Staffdepartment);
+                $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+    
+                $filter3 = ['_id'=>$departmentid];
+                $query3 = new MongoDB\Driver\Query($filter3);
+                $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+                foreach ($cursor3 as $document3)
+                {
+                    $DepartmentName = ($document3->DepartmentName);
+                }
+            }
+        }
+    
+        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        ?>
+        <div class="card">
+          <div class="card-header">
+            <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive-sm">
+                <div class="text4 eventdate">
+                  <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+                  <br>
+                  <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+                </div>
+                <div class="eventtitle">
+                <table class="table table-striped table-sm">
+                <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+                </table>
+                </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+          </div>
+        </div><br>
+    <?php
+    
+      }
+    }
+    elseif ($SchoolNewsAccess=='VIP')
+    {
+      $filterC = ['SchoolNewsAccess'=>'VIP'];
+      $queryC = new MongoDB\Driver\Query($filterC);
+      $cursorC = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryC);
+      foreach ($cursorC as $documentC)
+      {
+        $Newsid = strval($documentC->_id);
+        $SchoolNewsStaff_id = ($documentC->SchoolNewsStaff_id);
+        $schoolNewsTitle = ($documentC->schoolNewsTitle);
+        $schoolNewsDetails = ($documentC->schoolNewsDetails);
+        $SchoolNewsDate = ($documentC->SchoolNewsDate);
+        $SchoolNewsStatus = ($documentC->SchoolNewsStatus);
+        $Access = ($documentC->SchoolNewsAccess);
+    
+        $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+        $filter1 = ['_id' => $id];
+        $query1 = new MongoDB\Driver\Query($filter1);
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+        foreach ($cursor1 as $document1)
+        {
+            $consumerid = strval($document1->_id);
+            $ConsumerFName = ($document1->ConsumerFName);
+            $ConsumerLName = ($document1->ConsumerLName);
+            $filter2 = ['ConsumerID'=>$consumerid];
+            $query2 = new MongoDB\Driver\Query($filter2);
+            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+            foreach ($cursor2 as $document2)
+            {
+                $Staffdepartment = ($document2->Staffdepartment);
+                $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+    
+                $filter3 = ['_id'=>$departmentid];
+                $query3 = new MongoDB\Driver\Query($filter3);
+                $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+                foreach ($cursor3 as $document3)
+                {
+                    $DepartmentName = ($document3->DepartmentName);
+                }
+            }
+        }
+    
+        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        ?>
+        <div class="card">
+          <div class="card-header">
+            <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive-sm">
+                <div class="text4 eventdate">
+                  <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+                  <br>
+                  <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+                </div>
+                <div class="eventtitle">
+                <table class="table table-striped table-sm">
+                <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+                </table>
+                </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+          </div>
+        </div><br>
+    <?php
+    
+      }
+    }
+else
+{
+  $filter2 = [NULL];
+  $query2 = new MongoDB\Driver\Query($filter2);
+  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
+  foreach ($cursor2 as $document2)
+  {
+    $Newsid = strval($document2->_id);
+    $SchoolNewsStaff_id = ($document2->SchoolNewsStaff_id);
+    $schoolNewsTitle = ($document2->schoolNewsTitle);
+    $schoolNewsDetails = ($document2->schoolNewsDetails);
+    $SchoolNewsDate = ($document2->SchoolNewsDate);
+    $SchoolNewsStatus = ($document2->SchoolNewsStatus);
+    $SchoolNewsAccess = ($document2->SchoolNewsAccess);
+
+    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+    $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  }
+  ?>
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive-sm">
+            <div class="text4 eventdate">
+              <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+              <br>
+              <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+            </div>
+            <div class="eventtitle">
+            <table class="table table-striped table-sm">
+            <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong><br>
+            <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+            </table>
+            </div>
+        </div>
       </div>
-    </span>
-    <script>
-        //Limit characters displayed in span
-        $(document).ready(function(){
-        $('.claimedRight').each(function (f) {
+      <div class="card-footer">
+        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+      </div>
+    </div><br>
+<?php
+}
+?>
+<script>
+//Limit characters displayed in span
+$(document).ready(function(){
+$('.claimedRight').each(function (f) {
+    var newstr = $(this).text().substring(0,100);
+    $(this).text(newstr);
 
-            var newstr = $(this).text().substring(0,100);
-            $(this).text(newstr);
-
-            });
-        })
-        </script>
+    });
+})
+</script>
 <?php
 }
 ?>
             </div>
           </div>
       <footer>
-        <div class="text-center"><a href="#" target="_blank" class="button btn btn-info">See more News</a></div>
+        <div class="text-center"><a href="index.php?page=news" target="_blank" class="button btn btn-info">See more News</a></div><br><br>
       </footer>
     </div>
   </div>
-  <div class="col-md-6 section-2-box wow fadeInLeft">
+  <div class="col-md-12 section-2-box wow fadeInLeft">
     <div class="column">
       <div class="block-title-wrap clearfix">
         <div class="block-title-content">
@@ -195,7 +410,7 @@ foreach ($cursor as $document)
           </span>
         </div>
         <footer>
-          <div class="text-center"><a href="#" target="_blank" class="button btn btn-info">See more Events</a></div>
+          <div class="text-center"><a href="#" target="_blank" class="button btn btn-info">See more Events</a></div><br><br>
         </footer>
       </div>
     </div>

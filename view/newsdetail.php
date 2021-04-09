@@ -10,7 +10,7 @@ foreach ($cursor as $document)
     $schoolNewsTitle = ($document->schoolNewsTitle);
     $schoolNewsDetails = ($document->schoolNewsDetails);
     $SchoolNewsDate = ($document->SchoolNewsDate);
-    $SchoolNewssStatus = ($document->SchoolNewssStatus);
+    $SchoolNewsStatus = ($document->SchoolNewsStatus);
 
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
