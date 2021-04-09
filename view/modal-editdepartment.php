@@ -1,4 +1,4 @@
-<form id="EditDepartmentFormSubmit"  name="EditDepartmentFormSubmit" action="index.php?page=departmentlist" method="post">
+<form id="EditDepartmentFormSubmit"  name="EditDepartmentFormSubmit" action="model/departmentlist.php" method="post">
   <div class="modal fade" id="EditDepartmentModal" tabindex="-1" aria-labelledby="EditDepartmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

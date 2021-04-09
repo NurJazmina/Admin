@@ -112,7 +112,10 @@ error_reporting(E_ALL);
             {
               include 'view/timetablelist.php';
             }
-
+            elseif ($_GET["page"] == "a")
+            {
+              include 'model/departmentlist.php';
+            }
 
             elseif ($_GET["page"] == "exportstaffattendance"){
               include 'view/exportstaffattendance.php';
@@ -168,7 +171,6 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "addtimetable"){
               include 'model/addtimetable.php';
             }
-
 
             //modal add
             elseif ($_GET["page"] == "modal-changepassword"){

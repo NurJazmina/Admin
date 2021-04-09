@@ -8,7 +8,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="schoolid">
+          <input type="text" class="form-control" name="schoolid">
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">School Phone</label>
             <div class="col-sm-10">
