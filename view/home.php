@@ -106,7 +106,8 @@ foreach ($cursor2 as $document2)
 }
 
 $filter2 = ['SchoolNewsStatus'=>'ACTIVE'];
-$query2 = new MongoDB\Driver\Query($filter2);
+$option2 = ['limit'=>10,'sort' => ['_id' => -1]];
+$query2 = new MongoDB\Driver\Query($filter2,$option2);
 $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
 foreach ($cursor2 as $document2)
 {
@@ -327,24 +328,53 @@ foreach ($cursor2 as $document2)
     }
 else
 {
-  $filter2 = [NULL];
-  $query2 = new MongoDB\Driver\Query($filter2);
-  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query2);
-  foreach ($cursor2 as $document2)
+  $filterC = ['SchoolNewsAccess'=>'PUBLIC'];
+  $queryC = new MongoDB\Driver\Query($filterC);
+  $cursorC = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryC);
+  foreach ($cursorC as $documentC)
   {
-    $Newsid = strval($document2->_id);
-    $SchoolNewsStaff_id = ($document2->SchoolNewsStaff_id);
-    $schoolNewsTitle = ($document2->schoolNewsTitle);
-    $schoolNewsDetails = ($document2->schoolNewsDetails);
-    $SchoolNewsDate = ($document2->SchoolNewsDate);
-    $SchoolNewsStatus = ($document2->SchoolNewsStatus);
-    $SchoolNewsAccess = ($document2->SchoolNewsAccess);
+    $Newsid = strval($documentC->_id);
+    $SchoolNewsStaff_id = ($documentC->SchoolNewsStaff_id);
+    $schoolNewsTitle = ($documentC->schoolNewsTitle);
+    $schoolNewsDetails = ($documentC->schoolNewsDetails);
+    $SchoolNewsDate = ($documentC->SchoolNewsDate);
+    $SchoolNewsStatus = ($documentC->SchoolNewsStatus);
+    $Access = ($documentC->SchoolNewsAccess);
+
+    $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+    $filter1 = ['_id' => $id];
+    $query1 = new MongoDB\Driver\Query($filter1);
+    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+    foreach ($cursor1 as $document1)
+    {
+        $consumerid = strval($document1->_id);
+        $ConsumerFName = ($document1->ConsumerFName);
+        $ConsumerLName = ($document1->ConsumerLName);
+        $filter2 = ['ConsumerID'=>$consumerid];
+        $query2 = new MongoDB\Driver\Query($filter2);
+        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+        foreach ($cursor2 as $document2)
+        {
+            $Staffdepartment = ($document2->Staffdepartment);
+            $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+            $filter3 = ['_id'=>$departmentid];
+            $query3 = new MongoDB\Driver\Query($filter3);
+            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+            foreach ($cursor3 as $document3)
+            {
+                $DepartmentName = ($document3->DepartmentName);
+            }
+        }
+    }
 
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  }
-  ?>
+    ?>
     <div class="card">
+      <div class="card-header">
+        <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+      </div>
       <div class="card-body">
         <div class="table-responsive-sm">
             <div class="text4 eventdate">
@@ -354,7 +384,6 @@ else
             </div>
             <div class="eventtitle">
             <table class="table table-striped table-sm">
-            <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong><br>
             <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
             </table>
             </div>
@@ -365,13 +394,14 @@ else
       </div>
     </div><br>
 <?php
+  }
 }
 ?>
 <script>
 //Limit characters displayed in span
 $(document).ready(function(){
 $('.claimedRight').each(function (f) {
-    var newstr = $(this).text().substring(0,100);
+    var newstr = $(this).text().substring(0,100)+'.......';
     $(this).text(newstr);
 
     });

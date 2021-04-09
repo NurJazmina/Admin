@@ -14,7 +14,8 @@ foreach ($cursor2 as $document2)
 }
 
 $filter1 = ['SchoolNewsStatus'=>'ACTIVE'];
-$query1 = new MongoDB\Driver\Query($filter1);
+$option1 = ['sort' => ['_id' => -1]];
+$query1 = new MongoDB\Driver\Query($filter1,$option1);
 $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query1);
 foreach ($cursor1 as $document1)
 {
@@ -217,33 +218,65 @@ elseif ($SchoolNewsAccess=='VIP')
 }
 else
 {
-  $filterD = [NULL];
-  $queryD = new MongoDB\Driver\Query($filterD);
-  $cursorD = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryD);
-  foreach ($cursorD as $documentD)
+  $filterC = ['SchoolNewsAccess'=>'PUBLIC'];
+  $queryC = new MongoDB\Driver\Query($filterC);
+  $cursorC = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryC);
+  foreach ($cursorC as $documentC)
   {
-    $Newsid = strval($documentD->_id);
-    $SchoolNewsStaff_id = ($documentD->SchoolNewsStaff_id);
-    $schoolNewsTitle = ($documentD->schoolNewsTitle);
-    $schoolNewsDetails = ($documentD->schoolNewsDetails);
-    $SchoolNewsDate = ($documentD->SchoolNewsDate);
-    $SchoolNewsStatus = ($documentD->SchoolNewsStatus);
-    $SchoolNewsAccess = ($documentD->SchoolNewsAccess);
+    $Newsid = strval($documentC->_id);
+    $SchoolNewsStaff_id = ($documentC->SchoolNewsStaff_id);
+    $schoolNewsTitle = ($documentC->schoolNewsTitle);
+    $schoolNewsDetails = ($documentC->schoolNewsDetails);
+    $SchoolNewsDate = ($documentC->SchoolNewsDate);
+    $SchoolNewsStatus = ($documentC->SchoolNewsStatus);
+    $Access = ($documentC->SchoolNewsAccess);
+
+    $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+    $filter1 = ['_id' => $id];
+    $query1 = new MongoDB\Driver\Query($filter1);
+    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+    foreach ($cursor1 as $document1)
+    {
+        $consumerid = strval($document1->_id);
+        $ConsumerFName = ($document1->ConsumerFName);
+        $ConsumerLName = ($document1->ConsumerLName);
+        $filter2 = ['ConsumerID'=>$consumerid];
+        $query2 = new MongoDB\Driver\Query($filter2);
+        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+        foreach ($cursor2 as $document2)
+        {
+            $Staffdepartment = ($document2->Staffdepartment);
+            $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+            $filter3 = ['_id'=>$departmentid];
+            $query3 = new MongoDB\Driver\Query($filter3);
+            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+            foreach ($cursor3 as $document3)
+            {
+                $DepartmentName = ($document3->DepartmentName);
+            }
+        }
+    }
 
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  }
-  ?>
+    ?>
     <div class="card">
       <div class="card-header">
         <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
       </div>
       <div class="card-body">
         <div class="table-responsive-sm">
-            <table class="table table-sm">
-            <span class="claimedRight" maxlength="100"><?php echo $schoolNewsDetails; ?></span><br>
-            <span class="news-panel-date"><?php echo date_format($datetime,"D, M Y"); ?></span>
+            <div class="text4 eventdate">
+              <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+              <br>
+              <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+            </div>
+            <div class="eventtitle">
+            <table class="table table-striped table-sm">
+            <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
             </table>
+            </div>
         </div>
       </div>
       <div class="card-footer">
@@ -251,13 +284,14 @@ else
       </div>
     </div><br>
 <?php
+  }
 }
 ?>
 <script>
     //Limit characters displayed in span
     $(document).ready(function(){
     $('.claimedRight').each(function (f) {
-        var newstr = $(this).text().substring(0,100);
+        var newstr = $(this).text().substring(0,100)+'.......';
         $(this).text(newstr);
 
         });
