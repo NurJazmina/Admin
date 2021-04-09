@@ -65,8 +65,6 @@ error_reporting(E_ALL);
             if (!isset($_GET['page']) || empty($_GET['page'])){
               include 'view/home.php';
             }
-
-            //view random
             elseif ($_GET["page"] == "home"){
               include 'view/home.php';
             }
@@ -77,54 +75,6 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "schooledit"){
               include 'view/schooledit.php';
             }
-            elseif ($_GET["page"] == "departmentlist"){
-              include 'view/departmentlist.php';
-            }
-            elseif ($_GET["page"] == "subjectlist"){
-              include 'view/subjectlist.php';
-            }
-
-            elseif ($_GET["page"] == "exportstaffattendance"){
-              include 'view/exportstaffattendance.php';
-            }
-            elseif ($_GET["page"] == "exportstudentattendance"){
-              include 'view/exportstudentattendance.php';
-            }
-            elseif ($_GET["page"] == "exportclassattendance"){
-              include 'view/exportclassattendance.php';
-            }
-
-
-            //view list
-            elseif ($_GET["page"] == "stafflist")
-            {
-              include 'view/stafflist.php';
-            }
-            elseif ($_GET["page"] == "studentlist")
-            {
-              include 'view/studentlist.php';
-            }
-            elseif ($_GET["page"] == "newstudentlist")
-            {
-              include 'view/newstudentlist.php';
-            }
-            elseif ($_GET["page"] == "parentlist")
-            {
-              include 'view/parentlist.php';
-            }
-            elseif ($_GET["page"] == "newparentlist")
-            {
-              include 'view/newparentlist.php';
-            }
-            elseif ($_GET["page"] == "classroomlist")
-            {
-              include 'view/classroomlist.php';
-            }
-            elseif ($_GET["page"] == "timetablelist")
-            {
-              include 'view/timetablelist.php';
-            }
-
             elseif ($_GET["page"] == "news")
             {
               include 'view/news.php';
@@ -136,6 +86,43 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "viewaddnews"){
               include 'view/addnews.php';
             }
+            elseif ($_GET["page"] == "departmentlist"){
+              include 'view/departmentlist.php';
+            }
+            elseif ($_GET["page"] == "subjectlist"){
+              include 'view/subjectlist.php';
+            }
+            elseif ($_GET["page"] == "stafflist")
+            {
+              include 'view/stafflist.php';
+            }
+            elseif ($_GET["page"] == "studentlist")
+            {
+              include 'view/studentlist.php';
+            }
+            elseif ($_GET["page"] == "parentlist")
+            {
+              include 'view/parentlist.php';
+            }
+            elseif ($_GET["page"] == "classroomlist")
+            {
+              include 'view/classroomlist.php';
+            }
+            elseif ($_GET["page"] == "timetablelist")
+            {
+              include 'view/timetablelist.php';
+            }
+
+
+            elseif ($_GET["page"] == "exportstaffattendance"){
+              include 'view/exportstaffattendance.php';
+            }
+            elseif ($_GET["page"] == "exportstudentattendance"){
+              include 'view/exportstudentattendance.php';
+            }
+            elseif ($_GET["page"] == "exportclassattendance"){
+              include 'view/exportclassattendance.php';
+            }
 
             //view detail
             elseif ($_GET["page"] == "staffdetail")
@@ -145,10 +132,6 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "studentdetail")
             {
               include 'view/studentdetail.php';
-            }
-            elseif ($_GET["page"] == "newstudentdetail")
-            {
-              include 'view/newstudentdetail.php';
             }
             elseif ($_GET["page"] == "parentdetail")
             {
@@ -185,9 +168,7 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "addtimetable"){
               include 'model/addtimetable.php';
             }
-            elseif ($_GET["page"] == "addnews"){
-              include 'model/addnews.php';
-            }
+
 
             //modal add
             elseif ($_GET["page"] == "modal-changepassword"){
@@ -219,17 +200,14 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "editstudent"){
               include 'model/editstudent.php';
             }
-            elseif ($_GET["page"] == "editclass"){
-              include 'model/editclass.php';
+            elseif ($_GET["page"] == "editparent"){
+              include 'model/editparent.php';
             }
             elseif ($_GET["page"] == "editclass"){
               include 'model/editclass.php';
             }
             elseif ($_GET["page"] == "edittimetable"){
               include 'model/edittimetable.php';
-            }
-            elseif ($_GET["page"] == "editparent"){
-              include 'model/editparent.php';
             }
             elseif ($_GET["page"] == "editparentduplicate"){
               include 'model/editparentduplicate.php';

@@ -1,9 +1,13 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+include '../connections/db.php';
 if (isset($_POST['EditSchoolFormSubmit']))
 {
   session_start();
   $varSchoolsPhoneNo = $_POST['txtSchoolsPhoneNo'];
-  $varschoolid = $_POST['schoolid'];
+  $varschoolid = $_SESSION["loggeduser_schoolID"];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varschoolid)],
                 ['$set' => ['SchoolsPhoneNo'=>$varSchoolsPhoneNo]],

@@ -1,4 +1,4 @@
-<form action="index.php?page=addnews" method="post" name="AddNews"><br><br>
+<form action="model/addnews.php" method="post" name="AddNews"><br><br>
 <div class="table-responsive" style="width:100%; margin:0 auto;">
   <table class="table table-bordered dt-responsive nowrap table-sm table-success" cellpadding="1" cellspacing="0" style="font-family: Arial; color:#505050; font-size: 15px;">
     <tbody>
@@ -36,10 +36,4 @@
     </tbody>
   </table>
 </div>
-<script>
-$('input[type="checkbox"]').on('change', function() {
-   $(this).siblings('input[type="checkbox"]').prop('checked', false);
-});
-</script>
 </form>
-
