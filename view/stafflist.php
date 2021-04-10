@@ -727,9 +727,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
   var modalBodyInput = recheckaddstaff.querySelector('.modal-body input')
   modalBodyInput.value = recipient
   })
-</script>
 
-<script>
   var recheckeditstaff = document.getElementById('recheckeditstaff')
   recheckeditstaff.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
@@ -744,8 +742,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
   var modalBodyInput = recheckeditstaff.querySelector('.modal-body input')
   modalBodyInput.value = recipient
   })
-</script>
-<script>
+
   var UpdateStaffModal = document.getElementById('UpdateStaffModal')
   UpdateStaffModal.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
@@ -760,8 +757,6 @@ if (isset($_POST['UpdateStaffFormSubmit']))
   var modalBodyInput = UpdateStaffModal.querySelector('.modal-body input')
   modalBodyInput.value = recipient
   })
-</script>
-<script>
   
  $(document).ready(function () {
     $("#staffattendance").table2excel({

@@ -1,7 +1,7 @@
 <?php $consumerid = $_SESSION["loggeduser_id"]; ?>
 <br>
 <br>
-<form name="EditDetailFormSubmit" action="model/editdetail.php" method="post">
+<form name="EditDetailFormSubmit" action="model/updateaboutme.php" method="post">
   <div class="modal fade" id="EditDetailModal" tabindex="-1" aria-labelledby="EditDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -10,7 +10,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="schoolid">
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">First Name</label>
             <div class="col-sm-10">
@@ -62,7 +61,6 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input type="hidden" id="staticStaffNo" name="txtconsumerid" value="<?=$consumerid?>">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-secondary" name="EditDetailFormSubmit">Save changes</button>
         </div>

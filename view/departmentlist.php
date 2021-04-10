@@ -45,7 +45,51 @@
     </tr>
   </tbody>
 </table>
-</div
-<?php include ('view/modal-adddepartment.php'); ?>
-<?php include ('view/modal-editdepartment.php'); ?>
-<?php include ('view/modal-deletedepartment.php'); ?>
+</div>
+<?php include ('view/modal-departmentlist.php'); ?>
+<script>
+var AddDepartmentModal = document.getElementById('AddDepartmentModal')
+AddDepartmentModal.addEventListener('show.bs.modal', function (event) {
+// Button that triggered the modal
+var button = event.relatedTarget
+// Extract info from data-bs-* attributes
+var recipient = button.getAttribute('data-bs-whatever')
+// If necessary, you could initiate an AJAX request here
+// and then do the updating in a callback.
+//
+// Update the modal's content.
+var modalTitle = AddDepartmentModal.querySelector('.modal-title')
+var modalBodyInput = AddDepartmentModal.querySelector('.modal-body input')
+modalBodyInput.value = recipient
+})
+
+var EditDepartmentModal = document.getElementById('EditDepartmentModal')
+EditDepartmentModal.addEventListener('show.bs.modal', function (event) {
+// Button that triggered the modal
+var button = event.relatedTarget
+// Extract info from data-bs-* attributes
+var recipient = button.getAttribute('data-bs-whatever')
+// If necessary, you could initiate an AJAX request here
+// and then do the updating in a callback.
+//
+// Update the modal's content.
+var modalTitle = EditDepartmentModal.querySelector('.modal-title')
+var modalBodyInput = EditDepartmentModal.querySelector('.modal-body input')
+modalBodyInput.value = recipient
+})
+
+var DeleteDepartmentModal = document.getElementById('DeleteDepartmentModal')
+DeleteDepartmentModal.addEventListener('show.bs.modal', function (event) {
+// Button that triggered the modal
+var button = event.relatedTarget
+// Extract info from data-bs-* attributes
+var recipient = button.getAttribute('data-bs-whatever')
+// If necessary, you could initiate an AJAX request here
+// and then do the updating in a callback.
+//
+// Update the modal's content.
+var modalTitle = DeleteDepartmentModal.querySelector('.modal-title')
+var modalBodyInput = DeleteDepartmentModal.querySelector('.modal-body input')
+modalBodyInput.value = recipient
+})
+</script>

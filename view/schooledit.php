@@ -36,4 +36,4 @@
     </tbody>
   </table>
 </div>
-<?php include ('view/modal-editschool.php'); ?>
+<?php include ('view/modal-schooledit.php'); ?>

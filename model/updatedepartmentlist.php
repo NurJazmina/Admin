@@ -2,7 +2,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include '../connections/db.php';
+include '/var/www/html/smartschool.gongetz.com/connections/db.php';
+
 if (isset($_POST['AddDepartmentFormSubmit']))
 {
   session_start();
@@ -46,6 +47,7 @@ if (isset($_POST['AddDepartmentFormSubmit']))
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
   header ('location: ../index.php?page=departmentlist');
 }
+
 
 if (isset($_POST['EditDepartmentFormSubmit']))
 {

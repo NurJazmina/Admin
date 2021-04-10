@@ -2,19 +2,18 @@
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
-<?php
-$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-$filter2 = ['_id' => $groupid];
-$query2 = new MongoDB\Driver\Query($filter2);
-$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
-foreach ($cursor2 as $document2)
-{
-    $ConsumerGroupName = strval($document2->ConsumerGroupName);
-}
-
+  <?php
+  $groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+  $filter2 = ['_id' => $groupid];
+  $query2 = new MongoDB\Driver\Query($filter2);
+  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
+  foreach ($cursor2 as $document2)
+  {
+      $ConsumerGroupName = strval($document2->ConsumerGroupName);
+  }
   $filterA = ['SchoolNewsAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
-  $queryA = new MongoDB\Driver\Query($filterA);
+  $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
   foreach ($cursorA as $documentA)
   {
@@ -81,7 +80,7 @@ foreach ($cursor2 as $document2)
   }
   $filterA = ['SchoolNewsAccess'=>'PUBLIC'];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
-  $queryA = new MongoDB\Driver\Query($filterA);
+  $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
   foreach ($cursorA as $documentA)
   {

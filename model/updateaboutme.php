@@ -1,6 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+include '/var/www/html/smartschool.gongetz.com/connections/db.php';
+
 if (isset($_POST['EditDetailFormSubmit'])) 
 {
+  session_start();
   $varConsumerFName = $_POST['txtConsumerFName'];
   $varConsumerLName = $_POST['txtConsumerLName'];
   $varConsumerIDType = $_POST['txtConsumerIDType'];
@@ -8,7 +14,7 @@ if (isset($_POST['EditDetailFormSubmit']))
   $varConsumerPhone = $_POST['txtConsumerPhone'];
   $varConsumerAddress = $_POST['txtConsumerAddress'];
   $varConsumerEmail = $_POST['txtConsumerEmail'];
-  $varconsumerid = $_POST['txtconsumerid'];
+  $varconsumerid = $_SESSION["loggeduser_id"];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varconsumerid)],
                 ['$set' => ['ConsumerFName'=>$varConsumerFName, 'ConsumerLName'=>$varConsumerLName,  'ConsumerIDType'=>$varConsumerIDType, 'ConsumerIDNo'=>$varConsumerIDNo, 'ConsumerPhone'=>$varConsumerPhone,'ConsumerAddress'=>$varConsumerAddress, 'ConsumerEmail'=>$varConsumerEmail]],

@@ -112,11 +112,8 @@ error_reporting(E_ALL);
             {
               include 'view/timetablelist.php';
             }
-            elseif ($_GET["page"] == "a")
-            {
-              include 'model/departmentlist.php';
-            }
 
+            
             elseif ($_GET["page"] == "exportstaffattendance"){
               include 'view/exportstaffattendance.php';
             }
@@ -188,9 +185,7 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "modal-addclass"){
               include 'view/modal-addclass.php';
             }
-            elseif ($_GET["page"] == "modal-adddepartment"){
-              include 'view/modal-adddepartment.php';
-            }
+
             elseif ($_GET["page"] == "modal-addsubject"){
               include 'view/modal-addsubject.php';
             }

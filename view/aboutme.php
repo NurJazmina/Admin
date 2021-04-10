@@ -94,98 +94,98 @@
                     <td style="text-align:center"><?php echo "<br>".$ConsumerIDNo; ?></td>
                     <td style="text-align:center"><?php echo "<br>".$ConsumerFName." ".$ConsumerLName; ?></td>
                     <td style="text-align:center">
-                <?php
-                $Cards_id='';
-                $filter1 = ['Consumer_id'=>$_SESSION["loggeduser_id"]];
-                $query1 = new MongoDB\Driver\Query($filter1);
-                $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
-                foreach ($cursor1 as $document1)
-                {
-                $Cards_id = strval($document1->Cards_id);
-                }
-                /*
-                check date
-                $convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                echo "<br>to_date: ".$to_date."<br>";
-                echo "from_date: ".$from_date."<br>";
-                $display = date_format($convert,"d/m/Y");
-                echo $display;
-                */
-                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
+                    <?php
+                    $Cards_id='';
+                    $filter1 = ['Consumer_id'=>$_SESSION["loggeduser_id"]];
+                    $query1 = new MongoDB\Driver\Query($filter1);
+                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
+                    foreach ($cursor1 as $document1)
+                    {
+                    $Cards_id = strval($document1->Cards_id);
+                    }
+                    /*
+                    check date
+                    $convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                    echo "<br>to_date: ".$to_date."<br>";
+                    echo "from_date: ".$from_date."<br>";
+                    $display = date_format($convert,"d/m/Y");
+                    echo $display;
+                    */
+                    $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
 
-                $filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                $query2 = new MongoDB\Driver\Query($filter2);
-                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
-                $varcounting = 0;
-                
-                foreach ($cursor2 as $document2)
-                {
-                  $AttendanceDate = ($document2->AttendanceDate);
-                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                  $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $varcounting = $varcounting +1;
-                  if ($varcounting % 2)
-                  {
-                  } 
-                  else 
-                  {
-                    echo "<br>".date_format($AttendanceDate,"d-m-Y");
-                  }
-                }
-                ?>
-                </td>
-                <td style="text-align:center">
-                <?php
-                $varcounting = 0;
-                $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                $optionA = ['sort' => ['_id' => 1]];
-                $queryA = new MongoDB\Driver\Query($filterA,$optionA);
-                $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-                
-                foreach ($cursorA as $documentA)
-                {
-                    $AttendanceDate = ($documentA->AttendanceDate);
-                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                    $varcounting = $varcounting +1;
+                    $filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                    $query2 = new MongoDB\Driver\Query($filter2);
+                    $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
+                    $varcounting = 0;
+                    
+                    foreach ($cursor2 as $document2)
+                    {
+                      $AttendanceDate = ($document2->AttendanceDate);
+                      $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+                      $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                      $varcounting = $varcounting +1;
+                      if ($varcounting % 2)
+                      {
+                      } 
+                      else 
+                      {
+                        echo "<br>".date_format($AttendanceDate,"d-m-Y");
+                      }
+                    }
+                    ?>
+                    </td>
+                    <td style="text-align:center">
+                    <?php
+                    $varcounting = 0;
+                    $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                    $optionA = ['sort' => ['_id' => 1]];
+                    $queryA = new MongoDB\Driver\Query($filterA,$optionA);
+                    $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+                    
+                    foreach ($cursorA as $documentA)
+                    {
+                        $AttendanceDate = ($documentA->AttendanceDate);
+                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+                        $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                        $varcounting = $varcounting +1;
 
-                if ($varcounting % 2)
-                {
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";
-                } 
-                else
-                {
-                }
-                }
-                ?>
-                </td>
-                <td style="text-align:center">
-                <?php
-                $varcounting = 0;
-                $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                $optionA = ['sort' => ['_id' => 1]];
-                $queryA = new MongoDB\Driver\Query($filterA,$optionA);
-                $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-                
-                foreach ($cursorA as $documentA)
-                {
-                    $AttendanceDate = ($documentA->AttendanceDate);
-                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                    $varcounting = $varcounting +1;
+                    if ($varcounting % 2)
+                    {
+                        echo date_format($AttendanceDate,"H:i:s")."<br>";
+                    } 
+                    else
+                    {
+                    }
+                    }
+                    ?>
+                    </td>
+                    <td style="text-align:center">
+                    <?php
+                    $varcounting = 0;
+                    $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                    $optionA = ['sort' => ['_id' => 1]];
+                    $queryA = new MongoDB\Driver\Query($filterA,$optionA);
+                    $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+                    
+                    foreach ($cursorA as $documentA)
+                    {
+                        $AttendanceDate = ($documentA->AttendanceDate);
+                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+                        $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                        $varcounting = $varcounting +1;
 
-                if ($varcounting % 2)
-                {
-                } 
-                else
-                {
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";
-                }
-                ?>
-                <?php
-                }
-                ?>
+                    if ($varcounting % 2)
+                    {
+                    } 
+                    else
+                    {
+                        echo date_format($AttendanceDate,"H:i:s")."<br>";
+                    }
+                    ?>
+                    <?php
+                    }
+                    ?>
                 </td>
                 </tr>
           </tbody>
@@ -240,5 +240,19 @@
     </div>
     <!-- end tab -->
 </div>
-<?php include ('view/modal-editdetail.php'); ?>
-
+<?php include ('view/modal-aboutme.php'); ?>
+<script>
+var EditDetailModal = document.getElementById('EditDetailModal')
+EditDetailModal.addEventListener('show.bs.modal', function (event) {
+// Button that triggered the modal
+var button = event.relatedTarget
+// Extract info from data-bs-* attributes
+var recipient = button.getAttribute('data-bs-whatever')
+// If necessary, you could initiate an AJAX request here
+// and then do the updating in a callback.
+//
+// Update the modal's content.
+var modalTitle = EditDetailModal.querySelector('.modal-title')
+var modalBodyInput = EditDetailModal.querySelector('.modal-body input')
+modalBodyInput.value = recipient})
+</script>
