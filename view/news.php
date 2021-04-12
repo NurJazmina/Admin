@@ -1,3 +1,4 @@
+<?php include ('model/news.php'); ?>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Latest News</h1></div><br>
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
@@ -146,16 +147,6 @@
     <?php
   }
 ?>
-<script>
-    //Limit characters displayed in span
-    $(document).ready(function(){
-    $('.claimedRight').each(function (f) {
-        var newstr = $(this).text().substring(0,100)+'....';
-        $(this).text(newstr);
-
-        });
-    })
-</script>
   </div>
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>

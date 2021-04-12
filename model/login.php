@@ -67,4 +67,4 @@
     }
   }
 ?>
-<?php include ('model/editschool.php'); ?>
+<?php include ('model/updateschooledit.php'); ?>

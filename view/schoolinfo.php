@@ -1,4 +1,4 @@
-<?php include ('model/schooledit.php'); ?>
+<?php include ('model/schoolinfo.php'); ?>
 <br><br>
 <div class="myDiv" style="color:#404040;text-align:center">
   <br><h1 style="color:#404040;">About Us</h1>
@@ -28,7 +28,7 @@
       <tr>
         <th scope="row">Update</th>
         <td>
-          <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditSchoolModal" data-bs-whatever="<?php echo $varStudentsSchoolId; ?>">
+          <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
            <i class="fa fa-edit" style="font-size:20px"></i>
           </button>
         </td>
@@ -36,4 +36,4 @@
     </tbody>
   </table>
 </div>
-<?php include ('view/modal-schooledit.php'); ?>
+<?php include ('view/modal-schoolinfo.php'); ?>

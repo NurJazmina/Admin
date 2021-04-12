@@ -1,4 +1,4 @@
-<form id="AddDepartmentFormSubmit" name="AddDepartmentFormSubmit" action="model/updatedepartmentlist.php" method="post">
+<form id="AddDepartmentFormSubmit" name="AddDepartmentFormSubmit" action="index.php?page=departmentlist" method="post">
   <div class="modal fade" id="AddDepartmentModal" tabindex="-1" aria-labelledby="AddDepartmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -23,7 +23,7 @@
 </div>
 </form>
 
-<form id="EditDepartmentFormSubmit"  name="EditDepartmentFormSubmit" action="model/updatedepartmentlist.php" method="post">
+<form id="EditDepartmentFormSubmit"  name="EditDepartmentFormSubmit" action="index.php?page=departmentlist" method="post">
   <div class="modal fade" id="EditDepartmentModal" tabindex="-1" aria-labelledby="EditDepartmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -48,7 +48,7 @@
 </div>
 </form>
 
-<form id="DeleteDepartmentFormSubmit"  name="DeleteDepartmentFormSubmit" action="model/updatedepartmentlist.php" method="post">
+<form id="DeleteDepartmentFormSubmit"  name="DeleteDepartmentFormSubmit" action="index.php?page=departmentlist" method="post">
   <div class="modal fade" id="DeleteDepartmentModal" tabindex="-1" aria-labelledby="DeleteDepartmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

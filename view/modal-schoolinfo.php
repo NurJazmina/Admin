@@ -1,5 +1,5 @@
 <?php $schoolname = $_SESSION["loggeduser_schoolName"]; ?><br><br>
-<form name="EditSchoolFormSubmit" action="model/updateschooledit.php" method="post">
+<form name="EditSchoolFormSubmit" action="index.php?page=schoolinfo" method="post">
   <div class="modal fade" id="EditSchoolModal" tabindex="-1" aria-labelledby="EditSchoolModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

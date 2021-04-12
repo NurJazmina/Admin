@@ -1,12 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-include '/var/www/html/smartschool.gongetz.com/connections/db.php';
-
+//Add school department
 if (isset($_POST['AddDepartmentFormSubmit']))
 {
-  session_start();
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $vardepartment = $_POST['txtdepartment'];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
@@ -45,13 +40,11 @@ if (isset($_POST['AddDepartmentFormSubmit']))
   }
   printf("Matched: %d\n", $result->getMatchedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=departmentlist');
 }
 
-
+//Edit school department
 if (isset($_POST['EditDepartmentFormSubmit']))
 {
-  session_start();
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $vardepartmentid = $_POST['txtdepartmentid'];
   $vardepartmentname = $_POST['txtdepartmentname'];
@@ -93,13 +86,11 @@ if (isset($_POST['EditDepartmentFormSubmit']))
   }
   printf("Matched: %d\n", $result->getMatchedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=departmentlist');
 }
 
-
+//Delete school department
 if (isset($_POST['DeleteDepartmentFormSubmit']))
 {
-  session_start();
   $vardepartmentid = $_POST['txtdepartmentid'];
   $bulk = new MongoDB\Driver\BulkWrite;
   $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($vardepartmentid)], ['limit' => 1]);
@@ -137,5 +128,4 @@ if (isset($_POST['DeleteDepartmentFormSubmit']))
   }
   printf("Matched: %d\n", $result->getMatchedCount());
   printf("Deleted  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=departmentlist');
 }

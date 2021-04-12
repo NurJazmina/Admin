@@ -21,6 +21,7 @@ error_reporting(E_ALL);
     <!-- LOCAL -->
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="resources/default.css">
+    
    
     <!-- HOSTED ONLINE -->
     <!-- Bootstrap CSS -->
@@ -72,8 +73,11 @@ error_reporting(E_ALL);
             {
               include 'view/aboutme.php';
             }
-            elseif ($_GET["page"] == "schooledit"){
-              include 'view/schooledit.php';
+            elseif ($_GET["page"] == "modal-changepassword"){
+              include 'view/modal-changepassword.php';
+            }
+            elseif ($_GET["page"] == "schoolinfo"){
+              include 'view/schoolinfo.php';
             }
             elseif ($_GET["page"] == "news")
             {
@@ -83,8 +87,8 @@ error_reporting(E_ALL);
             {
               include 'view/newsdetail.php';
             }
-            elseif ($_GET["page"] == "viewaddnews"){
-              include 'view/addnews.php';
+            elseif ($_GET["page"] == "modalnews"){
+              include 'view/modal-news.php';
             }
             elseif ($_GET["page"] == "departmentlist"){
               include 'view/departmentlist.php';
@@ -112,6 +116,29 @@ error_reporting(E_ALL);
             {
               include 'view/timetablelist.php';
             }
+
+            //recheck
+            elseif ($_GET["page"] == "recheckstafflist")
+            {
+              include 'view/modal-recheckstafflist.php';
+            }
+            elseif ($_GET["page"] == "recheckstudentlist")
+            {
+              include 'view/modal-recheckstudentlist.php';
+            }
+            elseif ($_GET["page"] == "recheckparentlist")
+            {
+              include 'view/modal-recheckparentlist.php';
+            }
+            elseif ($_GET["page"] == "recheckclassroomlist")
+            {
+              include 'view/modal-recheckclassroomlist.php';
+            }
+            elseif ($_GET["page"] == "rechecktimetablelist")
+            {
+              include 'view/modal-rechecktimetablelist.php';
+            }
+
 
             
             elseif ($_GET["page"] == "exportstaffattendance"){
@@ -153,80 +180,19 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "logout"){
               include 'model/logout.php';
             }
-            elseif ($_GET["page"] == "addstaff"){
-              include 'model/addstaff.php';
-            }
-            elseif ($_GET["page"] == "addstudent"){
-              include 'model/addstudent.php';
-            }
-            elseif ($_GET["page"] == "addparent"){
-              include 'model/addparent.php';
-            }
-            elseif ($_GET["page"] == "addclass"){
-              include 'model/addclass.php';
-            }
-            elseif ($_GET["page"] == "addtimetable"){
-              include 'model/addtimetable.php';
-            }
 
-            //modal add
-            elseif ($_GET["page"] == "modal-changepassword"){
-              include 'view/modal-changepassword.php';
-            }
-            elseif ($_GET["page"] == "modal-addstaff"){
-              include 'view/modal-addstaff.php';
-            }
-            elseif ($_GET["page"] == "modal-addstudent"){
-              include 'view/modal-addstudent.php';
-            }
-            elseif ($_GET["page"] == "modal-addparent"){
-              include 'view/modal-addparent.php';
-            }
-            elseif ($_GET["page"] == "modal-addclass"){
-              include 'view/modal-addclass.php';
-            }
-
-            elseif ($_GET["page"] == "modal-addsubject"){
-              include 'view/modal-addsubject.php';
-            }
-
-            //model edit
-            elseif ($_GET["page"] == "editstaff"){
-              include 'model/editstaff.php';
-            }
-            elseif ($_GET["page"] == "editstudent"){
-              include 'model/editstudent.php';
-            }
-            elseif ($_GET["page"] == "editparent"){
-              include 'model/editparent.php';
-            }
-            elseif ($_GET["page"] == "editclass"){
-              include 'model/editclass.php';
-            }
-            elseif ($_GET["page"] == "edittimetable"){
-              include 'model/edittimetable.php';
-            }
             elseif ($_GET["page"] == "editparentduplicate"){
               include 'model/editparentduplicate.php';
             }
 
-            //modal delete
-            elseif ($_GET["page"] == "modal-deletestaff"){
-              include 'view/modal-deletestaff.php';
-            }
-            elseif ($_GET["page"] == "modal-deletedepartment"){
-              include 'view/modal-deletedepartment.php';
-            }
-            elseif ($_GET["page"] == "modal-deletesubject"){
-              include 'view/modal-deletesubject.php';
-            }
 
           }
         ?>
       </div>
     </div>
     <!-- LOCAL -->
-    <!-- JavaScript -->
-    <script type="text/javascript" src="resources/default.js"></script>
+    <!-- JavaScript  
+    <script src="..\resources\default.js"></script> -->
+    <?php include 'resources/default.php'; ?>
   </body>
   </html>

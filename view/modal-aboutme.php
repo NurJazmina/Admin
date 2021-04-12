@@ -10,6 +10,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <input type="hidden" id="staticStaffNo">
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">First Name</label>
             <div class="col-sm-10">

@@ -1,11 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-include '/var/www/html/smartschool.gongetz.com/connections/db.php';
-
 if (isset($_POST['AddNews'])) {
-  session_start();
+
   $varaccess = $_POST['access'];
   $vartitle = $_POST['txttitle'];
   $vardetail = $_POST['txtdetail'];
@@ -55,6 +50,5 @@ if (isset($_POST['AddNews'])) {
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=news');
 }
 
