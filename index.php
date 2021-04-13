@@ -13,36 +13,36 @@ error_reporting(E_ALL);
 <!-- live chat end-->
 <html lang="en">
 
+  <!--begin::Head-->
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <title>Smart School</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <!-- LOCAL -->
+    <!--begin::Page Style(used by this page)-->
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="resources/default.css">
-    
-   
-    <!-- HOSTED ONLINE -->
-    <!-- Bootstrap CSS -->
+    <!--end::Page Style(used by this page)-->
+
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <!-- begin::Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- end::Bootstrap CSS -->
+    <!--begin::Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <!-- Bootstrap jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
-    <!-- TinyMCE js -->
-    <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
-    
+    <!--end::Fonts-->
+    <!--end::Global Theme Bundle(used by all pages)-->
 
-    <title>Smart School</title>
   </head>
+  <!--end::Head-->
 
+  <!--begin::Body-->
   <body>
     <!--#include file="components/sha256.asp" -->
     <?php
@@ -92,6 +92,17 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "newsdetail")
             {
               include 'view/newsdetail.php';
+            }
+            elseif ($_GET["page"] == "modalevent"){
+              include 'view/modal-event.php';
+            }
+            elseif ($_GET["page"] == "event")
+            {
+              include 'view/event.php';
+            }
+            elseif ($_GET["page"] == "eventdetail")
+            {
+              include 'view/eventdetail.php';
             }
             elseif ($_GET["page"] == "modalnews"){
               include 'view/modal-news.php';
@@ -183,9 +194,18 @@ error_reporting(E_ALL);
         ?>
       </div>
     </div>
-    <!-- LOCAL -->
-    <!-- JavaScript  
-    <script src="..\resources\default.js"></script> -->
+
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <!--end::Global Theme Bundle(used by all pages)-->
+    
+    <!--begin::Page Scripts(used by this page)-->
     <?php include 'resources/default.php'; ?>
+    <!--end::Page Scripts(used by this page)-->
+
   </body>
-  </html>
+  <!--end::Body-->
+</html>

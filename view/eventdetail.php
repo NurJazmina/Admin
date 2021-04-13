@@ -60,23 +60,23 @@ foreach ($cursor as $document)
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" style="background-color:#31a0a4">
         <div class="table-responsive-sm">
             <table class="table">
             <div class="event-meta-wrap">
-            <div class="row event-duration">
-                <div class="col-md-4 event-date"><h6 class="event-meta-tile">Date</h6><?php echo date_format($datetimeStart,"d M Y")." "; ?>to<?php echo " ".date_format($datetimeEnd,"d M Y"); ?></div>
+            <div class="row event-duration" style="color:#FFFFFF">
+              <div class="col-md-4 event-date"><h6 class="event-meta-tile">Date</h6><?php echo date_format($datetimeStart,"d M Y")." "; ?>to<?php echo " ".date_format($datetimeEnd,"d M Y"); ?></div>
                 <div class="col-md-3 event-time"><h6 class="event-meta-tile">Time</h6><?php echo date_format($datetimeStart,"H:i"); ?></div>
                 <div class="col-md-5 event-venue-wrap">
                 <h6 class="event-meta-tile">Venue</h6>
                 <span><?php echo $schoolEventVenue; ?></span>
                 <div class="event-location">
-                <span><?php echo $schoolEventLocation; ?></span>
+                <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$schoolEventLocation; ?></span>
                 </div>
+                </div>
+              </div>
             </div>
             </div>
-            </div>
-          </div>
             </table>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <?php $consumerid = $_SESSION["loggeduser_id"]; ?>
 <br>
 <br>
-<form name="EditDetailFormSubmit" action="model/updateaboutme.php" method="post">
+<form name="EditDetailFormSubmit" action="index.php?page=aboutme" method="post">
   <div class="modal fade" id="EditDetailModal" tabindex="-1" aria-labelledby="EditDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

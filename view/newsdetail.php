@@ -64,8 +64,8 @@ foreach ($cursor as $document)
         </div>
       </div>
       <div class="card-header">
-        <strong><span class="by"><?php echo "By : ".$ConsumerFName." ".$ConsumerLName.", ".$DepartmentName; ?></span></a></strong><br>
-        <strong><span class="news-panel-date"><?php echo date_format($datetime,"D, M Y"); ?></span></a></strong>
+        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+        <small><?php echo date_format($datetime,"D, M Y"); ?></small>
       </div>
     </div>
     </div>
