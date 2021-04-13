@@ -148,7 +148,7 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                   <div class="tab-content" id="v-pills-tabContent">
                     <!--Tab by all class -->
                     <div class="tab-pane fade show active" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
@@ -330,7 +330,7 @@
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
                   </div>
                 </div>
-                <div class="col-3" style="border-left: solid 1px #eee;">
+                <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active btn-secondary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Class</a>
                     <?php

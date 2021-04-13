@@ -76,6 +76,12 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "modal-changepassword"){
               include 'view/modal-changepassword.php';
             }
+            elseif ($_GET["page"] == "changepassword"){
+              include 'model/changepassword.php';
+            }
+            elseif ($_GET["page"] == "logout"){
+              include 'model/logout.php';
+            }
             elseif ($_GET["page"] == "schoolinfo"){
               include 'view/schoolinfo.php';
             }
@@ -116,7 +122,6 @@ error_reporting(E_ALL);
             {
               include 'view/timetablelist.php';
             }
-
             //recheck
             elseif ($_GET["page"] == "recheckstafflist")
             {
@@ -138,9 +143,7 @@ error_reporting(E_ALL);
             {
               include 'view/modal-rechecktimetablelist.php';
             }
-
-
-            
+            //export
             elseif ($_GET["page"] == "exportstaffattendance"){
               include 'view/exportstaffattendance.php';
             }
@@ -150,7 +153,6 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "exportclassattendance"){
               include 'view/exportclassattendance.php';
             }
-
             //view detail
             elseif ($_GET["page"] == "staffdetail")
             {
@@ -172,15 +174,6 @@ error_reporting(E_ALL);
             {
               include 'view/departmentdetail.php';
             }
-
-            //model add
-            elseif ($_GET["page"] == "changepassword"){
-              include 'model/changepassword.php';
-            }
-            elseif ($_GET["page"] == "logout"){
-              include 'model/logout.php';
-            }
-
             elseif ($_GET["page"] == "editparentduplicate"){
               include 'model/editparentduplicate.php';
             }

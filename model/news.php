@@ -52,3 +52,12 @@ if (isset($_POST['AddNews'])) {
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
+$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+$filter2 = ['_id' => $groupid];
+$query2 = new MongoDB\Driver\Query($filter2);
+$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
+foreach ($cursor2 as $document2)
+{
+    $ConsumerGroupName = strval($document2->ConsumerGroupName);
+}
+

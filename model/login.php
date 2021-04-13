@@ -6,8 +6,8 @@
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
 
-   /* $cursor now contains an object that wraps around the document set.
-   use foreach() to iterate over all the document */
+    /* $cursor now contains an object that wraps around the document set.
+    use foreach() to iterate over all the document */
     foreach ($cursor as $document)
     {
       //ConsumerPassword using password_hash method
@@ -67,4 +67,3 @@
     }
   }
 ?>
-<?php include ('model/updateschooledit.php'); ?>

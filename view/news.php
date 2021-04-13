@@ -4,14 +4,6 @@
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
   <?php
-  $groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-  $filter2 = ['_id' => $groupid];
-  $query2 = new MongoDB\Driver\Query($filter2);
-  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
-  foreach ($cursor2 as $document2)
-  {
-      $ConsumerGroupName = strval($document2->ConsumerGroupName);
-  }
   $filterA = ['SchoolNewsAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
@@ -25,32 +17,31 @@
     $SchoolNewsDate = ($documentA->SchoolNewsDate);
     $SchoolNewsStatus = ($documentA->SchoolNewsStatus);
     $Access = ($documentA->SchoolNewsAccess);
-
+    
     $id = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
     $filter1 = ['_id' => $id];
     $query1 = new MongoDB\Driver\Query($filter1);
     $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
     foreach ($cursor1 as $document1)
     {
-        $consumerid = strval($document1->_id);
-        $ConsumerFName = ($document1->ConsumerFName);
-        $ConsumerLName = ($document1->ConsumerLName);
-        $filter2 = ['ConsumerID'=>$consumerid];
-        $query2 = new MongoDB\Driver\Query($filter2);
-        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-        foreach ($cursor2 as $document2)
+      $consumerid = strval($document1->_id);
+      $ConsumerFName = ($document1->ConsumerFName);
+      $ConsumerLName = ($document1->ConsumerLName);
+      $filter2 = ['ConsumerID'=>$consumerid];
+      $query2 = new MongoDB\Driver\Query($filter2);
+      $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+      foreach ($cursor2 as $document2)
+      {
+        $Staffdepartment = ($document2->Staffdepartment);
+        $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+        $filter3 = ['_id'=>$departmentid];
+        $query3 = new MongoDB\Driver\Query($filter3);
+        $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+        foreach ($cursor3 as $document3)
         {
-            $Staffdepartment = ($document2->Staffdepartment);
-            $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-
-            $filter3 = ['_id'=>$departmentid];
-            $query3 = new MongoDB\Driver\Query($filter3);
-            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-            foreach ($cursor3 as $document3)
-            {
-                $DepartmentName = ($document3->DepartmentName);
-            }
+            $DepartmentName = ($document3->DepartmentName);
         }
+      }
     }
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -144,9 +135,9 @@
   <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
 </div>
 </div><br>
-    <?php
+  <?php
   }
-?>
+  ?>
   </div>
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>

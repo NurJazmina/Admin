@@ -1,5 +1,12 @@
 <?php
 //avoid put any gap in this page.Error behaviour due to gap.
+?>
+<style>
+.highlight td {
+background:red;
+}
+</style>
+<?php
 if (!isset($_GET['id']) && empty($_GET['id']))
 {
 }

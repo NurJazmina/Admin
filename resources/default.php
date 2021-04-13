@@ -395,10 +395,46 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
   }
   ?>
   <?php
-  if ($_GET['page']=="") {
+  if ($_GET['page']=="exportstaffattendance") {
     ?>
-    <script>
-    
+    <script type="text/javascript">
+    var rows = document.querySelectorAll('tr');
+
+    [...rows].forEach((r) => {
+    if (r.querySelectorAll('td:empty').length > 0) {
+    r.classList.add('highlight');
+    }
+    })
+    </script>
+    <?php
+  }
+  ?>
+  <?php
+  if ($_GET['page']=="exportstudentattendance") {
+    ?>
+    <script type="text/javascript">
+    var rows = document.querySelectorAll('tr');
+
+    [...rows].forEach((r) => {
+    if (r.querySelectorAll('td:empty').length > 0) {
+    r.classList.add('highlight');
+    }
+    })
+    </script>
+    <?php
+  }
+  ?>
+  <?php
+  if ($_GET['page']=="exportclassattendance") {
+    ?>
+    <script type="text/javascript">
+    var rows = document.querySelectorAll('tr');
+
+    [...rows].forEach((r) => {
+    if (r.querySelectorAll('td:empty').length > 0) {
+    r.classList.add('highlight');
+    }
+    })
     </script>
     <?php
   }

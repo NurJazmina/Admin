@@ -260,9 +260,8 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                   <div class="tab-content" id="v-pills-tabContent">
-                  
                     <!--Tab by all class -->
                     <div class="tab-pane fade show active" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
                       <div class="box">
@@ -443,7 +442,7 @@
                     <!-- End tab -->
                   </div>
                 </div>
-                <div class="col-3" style="border-left: solid 1px #eee;">
+                <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active btn-secondary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Students</a>
                     <?php
@@ -459,7 +458,7 @@
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
                     ?>
-                    <a class="nav-link btn-secondary" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory; echo "  "; echo $ClassName;?></a>
+                    <a class="nav-link btn-secondary" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
                     <?php
                     }
                     ?>
