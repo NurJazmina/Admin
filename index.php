@@ -205,6 +205,7 @@ error_reporting(E_ALL);
     <!--begin::Page Scripts(used by this page)-->
     <?php include 'resources/default.php'; ?>
     <!--end::Page Scripts(used by this page)-->
+    <script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
 
   </body>
   <!--end::Body-->
