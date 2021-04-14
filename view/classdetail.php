@@ -637,19 +637,3 @@ foreach ($cursor as $document)
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 <?php include ('view/modal-updateclassremark.php'); ?>
-<script>
-  var UpdateClassremark = document.getElementById('UpdateClassremark')
-  UpdateClassremark.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = UpdateClassremark.querySelector('.modal-title')
-  var modalBodyInput = UpdateClassremark.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>

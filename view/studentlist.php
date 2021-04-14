@@ -1,382 +1,11 @@
-<!--Add student-->
-<?php
-if (isset($_POST['submitaddstudent']))
-{
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $varConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $varstudentclass = $_POST['txtstudentclass'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNoChild];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
-  //add student
-  foreach ($cursor as $document)
-  {
-  $studentID = strval($document->_id);
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['Consumer_id'=>$studentID,'Schools_id'=> $varschoolID,'Class_id'=>$varstudentclass,'StudentsStatus'=>"ACTIVE"]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Students', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-
-  }
-  //add parent
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
-  $varParentRegDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document)
-  {
-  $parentID = strval($document->_id);
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ConsumerID'=>$parentID,'Schools_id'=> $varschoolID,'ParentStatus'=> "ACTIVE",'ParentAddDate'=>$varParentRegDate]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Parents', $bulk, $writeConcern);
-  }
-
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  }
-
-  //add relation
-  $varrelation = $_POST['txtrelation'];
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
-  $varConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document)
-  {
-  $Parentid = strval($document->_id);
-  $filter1 = ['ConsumerID'=>$Parentid];
-  $query1 = new MongoDB\Driver\Query($filter1);
-  $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query1);
-  foreach ($cursor1 as $document1)
-  {
-  $parentid = strval($document1->_id);
-  }
-  }
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNoChild];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document)
-  {
-  $childid = strval($document->_id);
-  $filter1 = ['Consumer_id'=>$childid];
-  $query1 = new MongoDB\Driver\Query($filter1);
-  $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query1);
-  foreach ($cursor1 as $document1)
-  {
-  $studentid = strval($document1->_id);
-  }
-  }
-  $bulk1 = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk1->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$varrelation,'Schools_id'=>$varschoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ParentStudentRel', $bulk1, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-
-}
-?>
-
-<!--Edit student-->
-<?php
-if (isset($_POST['submiteditstudent']))
-{
-  $studentclass= $_POST['txtstudentclass'];
-  $studentid= $_POST['studentid'];
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update( ['_id' => new \MongoDB\BSON\ObjectID($studentid)],
-                ['$set' => ['Class_id'=>$studentclass]],
-                ['upsert' => TRUE]
-               );
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Students', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-}
-?>
-
-<!-- De/activate Student-->
-<?php
-if (isset($_POST['UpdateStudentFormSubmit']))
-{
-  $varstudentid = $_POST['txtstudentid'];
-  $varStudentStatus = $_POST['txtStudentStatus'];
-  $varConsumerRemarksDetails = $_POST['txtConsumerRemarksDetails'];
-
-  $filter = ['_id'=>new \MongoDB\BSON\ObjectID($varstudentid)];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-  foreach ($cursor as $document)
-  {
-    $consumerid = strval($document->Consumer_id);
-  }
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varstudentid)],
-                ['$set' => ['StudentsStatus'=>$varStudentStatus]],
-                ['upsert' => TRUE]
-               );
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Students', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-        $writeConcernError->getMessage(),
-        $writeConcernError->getCode(),
-        var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-        $writeError->getIndex(),
-        $writeError->getMessage(),
-        $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-  $bulk->insert([
-    'Consumer_id'=>$consumerid,
-    'ConsumerRemarksDetails'=>$varConsumerRemarksDetails,
-    'ConsumerRemarksStaff_id'=>$varstaffid,
-    'school_id'=>$varschoolid,
-    'ConsumerRemarksDate'=>$varconsumerremarkdate,
-    'ConsumerRemarksStatus'=>'ACTIVE']);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.StudentRemarks', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError) {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Deactivate %d document(s)\n", $result->getModifiedCount());
-}
-?>
-
-<!-- list student -->
-<?php
-  if (isset($_GET['paging']) && !empty($_GET['paging']))
-  {
-    $datapaging = ($_GET['paging']*50);
-    $pagingprevious = $_GET['paging']-1;
-    $pagingnext = $_GET['paging']+1;
-  } else
-  {
-    $datapaging = 0;
-  }
-  if (!isset($_POST['searchstudent']) && empty($_POST['searchstudent']))
-  {
-    if (!isset($_GET['level']) && empty($_GET['level']))
-    {
-    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-    }
-    else
-    {
-    $sort = ($_GET['level']);
-    $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],
-              'ClassCategory'=>$sort
-              ];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-    foreach ($cursor as $document)
-    {
-    $classid = strval($document->_id);
-    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'Class_id'=>$classid];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-    }
-    }
-  }
-  else
-  {
-    $IDnumber = ($_POST['IDnumber']);
-    $filter = [NULL];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-    foreach ($cursor as $document)
-    {
-      $idx = strval($document->_id);
-      $ConsumerIDNox = strval($document->ConsumerIDNo);
-      $ConsumerFNamex = strval($document->ConsumerFName);
-
-      if ($ConsumerIDNox==$IDnumber || $ConsumerFNamex==$IDnumber)
-      {
-        $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"],'Consumer_id'=>$idx];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-      }
-    }
-  }
-?>
+<?php include ('model/studentlist.php'); ?>
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">
       <br><h1 style="color:#404040;">Student List</h1>
     </div>
   </div>
-  <div class="col-12 col-sm-12 col-sm-6">
+  <div class="col-12 col-sm-12 col-sm-12">
      <div class="card">
       <div class="card-body">
         <form name="searchstudent" class="form-inline" action="index.php?page=studentlist" method="post">
@@ -401,7 +30,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
         </div>
         <div class="card-body">
         <!-- sorting -->
-        <div class="btn-group sort-btn">
+        <div class="btn-group sort-btn" style="width:10%";>
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=studentlist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
@@ -413,7 +42,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
             <li class="dropdown-item"><a href="index.php?page=studentlist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
           </ul>
         </div>
-          <div class="table-responsive">
+          <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
                 <tr>
@@ -576,7 +205,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                       </td>
                       <td><?php if(($StudentsStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                       <td>
-                        <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
+                        <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                         </button>
                       </td>
@@ -631,7 +260,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                   <div class="tab-content" id="v-pills-tabContent">
                     <!--Tab by all class -->
                     <div class="tab-pane fade show active" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
@@ -692,6 +321,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                     </div>
                     <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -710,6 +340,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                     </div>
                   </div>
                   <!-- End tab -->
@@ -725,7 +356,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                     $ClassCategory = strval($document->ClassCategory);
                     $ClassName = strval($document->ClassName);
                    ?>
-                    <div class="tab-pane fade" id="v-pills-<?php echo $ClassName; echo $ClassCategory;?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $ClassName; echo $ClassCategory;?>-tab">
+                    <div class="tab-pane fade" id="v-pills-<?php echo $classid;?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $classid;?>-tab">
                       <div class="box" >
                         <strong>Total</strong>
                         <div class="table-responsive">
@@ -783,6 +414,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                     </div>
                       <div class="box">
                         <strong>Remarks</strong>
+                        <div class="table-responsive">
                         <table class="table table-striped table-sm">
                           <thead>
                             <tr>
@@ -801,16 +433,16 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                             </tr>
                           </tbody>
                         </table>
+                        </div>
                       </div>
                      </div>
                     <?php
                     }
                     ?>
                     <!-- End tab -->
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
                   </div>
                 </div>
-                <div class="col-3" style="border-left: solid 1px #eee;">
+                <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active btn-secondary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Students</a>
                     <?php
@@ -826,7 +458,7 @@ if (isset($_POST['UpdateStudentFormSubmit']))
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
                     ?>
-                    <a class="nav-link btn-secondary" id="v-pills-<?php echo $ClassName; echo $ClassCategory;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $ClassName; echo $ClassCategory;?>" role="tab" aria-controls="v-pills-<?php echo $ClassName; echo $ClassCategory;?>" aria-selected="false"><?php echo $ClassCategory; echo "  "; echo $ClassName;?></a>
+                    <a class="nav-link btn-secondary" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
                     <?php
                     }
                     ?>
@@ -839,54 +471,4 @@ if (isset($_POST['UpdateStudentFormSubmit']))
       </div>
      </div>
    </div>
-<?php include ('view/modal-addstudent.php'); ?>
-<?php include ('view/modal-editstudent.php'); ?>
-<?php include ('view/modal-updatestudent.php'); ?>
-<script>
-  var recheckaddstudent = document.getElementById('recheckaddstudent')
-  recheckaddstudent.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = recheckaddstudent.querySelector('.modal-title')
-  var modalBodyInput = recheckaddstudent.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>
-<script>
-  var recheckeditstudent = document.getElementById('recheckeditstudent')
-  recheckeditstudent.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = recheckeditstudent.querySelector('.modal-title')
-  var modalBodyInput = recheckeditstudent.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>
-<script>
-  var UpdateStudentModal = document.getElementById('UpdateStudentModal')
-  UpdateStudentModal.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = UpdateStudentModal.querySelector('.modal-title')
-  var modalBodyInput = UpdateStudentModal.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>
+<?php include ('view/modal-studentlist.php'); ?>

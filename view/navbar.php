@@ -8,19 +8,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php"><i class="fas fa-home" style="font-size:15px"></i> Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php?page=home"><i class="fas fa-home" style="font-size:15px"></i> Home</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">School</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li ><a class="dropdown-item" href="index.php?page=schooledit" style="color:#076d79;">School Edit</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=schoolinfo" style="color:#076d79;">School Info</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li ><a class="dropdown-item" href="index.php?page=newslist" style="color:#076d79;">News List</a></li>
-            <li ><a class="dropdown-item" href="index.php?page=addnews" style="color:#076d79;">Add News</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=news" style="color:#076d79;">News List</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=modalnews" style="color:#076d79;">Add News</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Event</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li ><a class="dropdown-item" href="index.php?page=event" style="color:#076d79;">Event List</a></li>
+            <li ><a class="dropdown-item" href="index.php?page=modalevent" style="color:#076d79;">Add Event</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -74,6 +81,9 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="index.php?page=timetablelist" style="color:#076d79;">Timetable List</a></li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php?page=forum">Forum</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

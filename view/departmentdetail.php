@@ -440,19 +440,3 @@ foreach ($cursor as $document)
 </div>
 </div>
 <?php include ('view/modal-updatedepartmentremark.php'); ?>
-<script>
-  var Updatedepartmentremark = document.getElementById('Updatedepartmentremark')
-  Updatedepartmentremark.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = Updatedepartmentremark.querySelector('.modal-title')
-  var modalBodyInput = Updatedepartmentremark.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>

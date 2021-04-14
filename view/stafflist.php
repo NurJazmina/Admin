@@ -1,252 +1,4 @@
-<!--Add school staff-->
-<?php
-if (isset($_POST['submitaddstaff']))
-{
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
-  $varStaffdepartment = strval($_SESSION["departmentid"]);
-  $varDepartmentName = strval($_SESSION["DepartmentName"]);
-  $varStaffstatus = $_POST['txtStaffstatus'];
-  $varteacherclass = $_POST['txtteacherclass'];
-
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document)
-  {
-  $ID = strval($document->_id);
-  $ConsumerFName = strval($document->ConsumerFName);
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  if ($varDepartmentName !== "TEACHER")
-  {
-    $bulk->insert([
-      'ConsumerID'=>$ID,
-      'SchoolID'=> $varschoolID,
-      'ClassID'=> "",
-      'StaffLevel'=>"1",
-      'Staffdepartment'=> $varStaffdepartment,
-      'StaffStatus'=>$varStaffstatus]);
-  }
-  else
-  {
-    $bulk->insert([
-      'ConsumerID'=>$ID,
-      'SchoolID'=> $varschoolID,
-      'ClassID'=> $varteacherclass,
-      'StaffLevel'=>"0",
-      'Staffdepartment'=> $varStaffdepartment,
-      'StaffStatus'=>$varStaffstatus]);
-  }
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  }
-}
-?>
-
-<!--Edit school staff-->
-<?php
-if (isset($_POST['submiteditstaff']))
-{
-  $Teacherclass = $_POST['txtteacherclass'];
-  $Classcategory = $_POST['txtClasscategory'];
-  $Teacherid= $_POST['teacherid'];
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['ConsumerID'=> $Teacherid],
-                ['$set' => ['ClassID'=>$Teacherclass]],
-                ['upsert' => TRUE]
-               );
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-
-  try
-  {
-    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-printf("Matched: %d\n", $result->getMatchedCount());
-printf("Updated  %d document(s)\n", $result->getModifiedCount());
-}
-?>
-
-<!--De/activate school staff-->
-<?php
-if (isset($_POST['UpdateStaffFormSubmit']))
-{
-  $varstaffid = $_POST['txtstaffid'];
-  $varStaffStatus = $_POST['txtStaffStatus'];
-  $varConsumerRemarksDetails = $_POST['txtConsumerRemarksDetails'];
-
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['ConsumerID'=>$varstaffid],
-                ['$set' => ['StaffStatus'=>$varStaffStatus]],
-                ['upsert' => TRUE]
-               );
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
-
-  $varstaffremark = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-
-  $bulk1 = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-  $bulk1->insert([
-    'Consumer_id'=>$varstaffid,
-    'ConsumerRemarksDetails'=>$varConsumerRemarksDetails,
-    'ConsumerRemarksStaff_id'=>$varstaffremark,
-    'school_id'=>$varschoolid,
-    'ConsumerRemarksDate'=>$varconsumerremarkdate,
-    'ConsumerRemarksStatus'=>'ACTIVE']);
-
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.StaffRemarks', $bulk1, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Update %d document(s)\n", $result->getModifiedCount());
-}
-?>
-
-<!--List staff -->
-<?php
-  if (isset($_GET['paging']) && !empty($_GET['paging']))
-  {
-    $datapaging = ($_GET['paging']*50);
-    $pagingprevious = $_GET['paging']-1;
-    $pagingnext = $_GET['paging']+1;
-  }
-  else
-  {
-    $datapaging = 0;
-  }
-  if (!isset($_POST['searchstaff']) && empty($_POST['searchstaff']))
-  {
-    //sorting by category
-    if (!isset($_GET['level']) && empty($_GET['level']))
-    {
-    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-    }
-    else
-    {
-    $sort = ($_GET['level']);
-    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],
-              'StaffLevel'=>$sort
-              ];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-    }
-  }
-  else
-  {
-    //search using name/id number
-    $IDnumber = ($_POST['IDnumber']);
-    $filter = [NULL];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
-    foreach ($cursor as $document)
-    {
-      $idx = strval($document->_id);
-      $ConsumerIDNox = strval($document->ConsumerIDNo);
-      $ConsumerFNamex = strval($document->ConsumerFName);
-
-      if ($ConsumerIDNox==$IDnumber || $ConsumerFNamex==$IDnumber)
-      {
-        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ConsumerID'=>$idx];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-
-      }
-    }
-  }
-?>
+<?php include ('model/stafflist.php'); ?>
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">
@@ -304,6 +56,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
               <?php
               foreach ($cursor as $document)
               {
+               $StaffLevel = strval($document->StaffLevel);
                $Staffdepartment = strval($document->Staffdepartment);
                $iddepartment = new \MongoDB\BSON\ObjectId($Staffdepartment);
 
@@ -409,24 +162,41 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                           <a href="index.php?page=departmentdetail&id=<?php echo $departmentid ; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($DepartmentName); ?></a>
                           <?php
                         }
-                        if ($ClassID !== "")
-                        {
-                          $idclass = new \MongoDB\BSON\ObjectId($ClassID);
-                          $filter2 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], '_id'=>$idclass];
-                          $query2 = new MongoDB\Driver\Query($filter2);
-                          $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query2);
+                          if ($ClassID !== "")
+                          {
+                            $idclass = new \MongoDB\BSON\ObjectId($ClassID);
+                            $filter2 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], '_id'=>$idclass];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query2);
 
-                        foreach ($cursor2 as $document2)
-                        {
-                          ?>
-                          </td>
-                          <td>
-                            <?php print_r($document2->ClassName);?>
-                          </td>
-                          <?php
+                          foreach ($cursor2 as $document2)
+                          {
+                            if ($StaffLevel == "0")
+                            {
+                            ?>
+                            </td>
+                            <td>
+                              <?php print_r($document2->ClassName);?>
+                            </td>
+                            <td>
+                              <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                                <i class="fa fa-edit" style="font-size:15px"></i>
+                              </button>
+                            </td>
+                            <?php
+                            }
+                            else
+                            {
+                              ?>
+                              <td></td>
+                              <td></td>
+                              <?php
+                            }
                           }
                           }
                           else
+                          {
+                            if ($StaffLevel == "0")
                             {
                             ?>
                             <td></td>
@@ -437,10 +207,18 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                             </td>
                             <?php
                             }
+                            else
+                            {
+                              ?>
+                              <td></td>
+                              <td></td>
+                              <?php
+                            }
+                          }
                             ?>
                             <td><?php if(($StaffStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                             <td>
-                            <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                            <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                             </button>
                             </td>
@@ -498,6 +276,7 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                         <div class="row">
                           <div class="col-9">
                             <div class="tab-content" id="v-pills-tabContent">
+                            
                               <!--tab all department -->
                               <div class="tab-pane fade show active" id="v-pills-staff" role="tabpanel" aria-labelledby="v-pills-staff-tab">
                                 <div class="box" >
@@ -709,64 +488,4 @@ if (isset($_POST['UpdateStaffFormSubmit']))
                </div>
              </div>
             </div>
-<?php include ('view/modal-addstaff.php'); ?>
-<?php include ('view/modal-editstaff.php'); ?>
-<?php include ('view/modal-updatestaff.php'); ?>
-<script>
-  var recheckaddstaff = document.getElementById('recheckaddstaff')
-  recheckaddstaff.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = recheckaddstaff.querySelector('.modal-title')
-  var modalBodyInput = recheckaddstaff.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>
-
-<script>
-  var recheckeditstaff = document.getElementById('recheckeditstaff')
-  recheckeditstaff.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = recheckeditstaff.querySelector('.modal-title')
-  var modalBodyInput = recheckeditstaff.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>
-<script>
-  var UpdateStaffModal = document.getElementById('UpdateStaffModal')
-  UpdateStaffModal.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = UpdateStaffModal.querySelector('.modal-title')
-  var modalBodyInput = UpdateStaffModal.querySelector('.modal-body input')
-  modalBodyInput.value = recipient
-  })
-</script>
-<script>
-  
- $(document).ready(function () {
-    $("#staffattendance").table2excel({
-        filename: "Staffattendance.xls"
-    });
- });
-  
-</script>
+<?php include ('view/modal-stafflist.php'); 
