@@ -57,6 +57,23 @@ error_reporting(E_ALL);
         <?php include 'view/modal-changepassword.php'; ?>
         <?php include 'view/alert.php'; ?>
           <?php
+          /**forum can be access without need to login */
+          if ($_GET["page"] == "forum"){
+            include 'view/forum.php';
+          }
+          if ($_GET["page"] == "forumschoolforumgeneral"){
+            include 'view/forumschoolforumgeneral.php';
+          }
+          if ($_GET["page"] == "schoolforumproposal"){
+            include 'view/index.php?page=schoolforumproposal.php';
+          }
+          if ($_GET["page"] == "schoolforumshortnews"){
+            include 'view/index.php?page=schoolforumshortnews.php';
+          }
+          /**
+            * @todo Tambah untuk forum public
+            * @body Rujuk view/forum.php.
+            */
           if(!isset($_SESSION["loggeduser_schoolID"]) && empty($_SESSION["loggeduser_schoolID"]))
           {
             include 'view/login.php'; 
@@ -188,8 +205,6 @@ error_reporting(E_ALL);
             elseif ($_GET["page"] == "editparentduplicate"){
               include 'model/editparentduplicate.php';
             }
-
-
           }
         ?>
       </div>

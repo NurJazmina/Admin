@@ -82,6 +82,9 @@
             <li><a class="dropdown-item" href="index.php?page=timetablelist" style="color:#076d79;">Timetable List</a></li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php?page=forum">Forum</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profile <?php echo $_SESSION["loggeduser_consumerFName"]; ?>
