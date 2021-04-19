@@ -64,4 +64,100 @@ a {
     height: 82px;
 }
 /*home end*/
+/*schoolforum start*/
+.button--tag.button-large, .topics--large .button--tag {
+
+    font-size: 15px;
+    padding: 4px 15px;
+}
+.button--tag.-inverted, .topics--inverted .button--tag {
+    border-color: #fff;
+    color: #fff;
+    background-color: transparent;
+}
+.button--tag {
+    border-radius: 30px;
+    line-height: 1.1em;
+    border: 1px solid #5cb767;
+}
+
+.spacing-right {
+    margin-right: 10px;
+}
+
+.discussion-title {
+    font-size: 22px;
+    line-height: 1.25em;
+    word-wrap: break-word;
+    font-weight: 600;
+}
+
+.card__footer {
+    padding: 5px 5px 5px;
+}
+
+
+.img-round-sm {
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+}
+
+.img-round-small {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+
+/*schoolforum end*/
+/*schoolforumdetail start*/
+.button--tag.button-large, .topics--large .button--tag {
+
+    font-size: 15px;
+    padding: 4px 15px;
+}
+.button--tag.-inverted, .topics--inverted .button--tag {
+    border-color: #fff;
+    color: #fff;
+    background-color: transparent;
+}
+.button--tag {
+    border-radius: 30px;
+    line-height: 1.1em;
+    border: 1px solid #5cb767;
+}
+
+.spacing-right {
+    margin-right: 10px;
+}
+
+.spacing-left {
+    margin-left: 10px;
+}
+
+
+.discussion-title {
+    font-size: 22px;
+    line-height: 1.25em;
+    word-wrap: break-word;
+    font-weight: 600;
+}
+
+.card__footer {
+    padding: 5px 5px 5px;
+}
+
+
+.img-round-sm {
+    border-radius: 10%;
+    height: 40px;
+    width: 40px;
+}
+
+.img-round-small {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+/*schoolforumdetail end*/
 

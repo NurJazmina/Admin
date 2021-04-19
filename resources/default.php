@@ -542,6 +542,36 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
       }
       ?>
       <?php
+      if ($_GET['page']=="schoolforum") {
+        ?>
+        <script>
+        //Limit characters displayed in span
+        $(document).ready(function(){
+        $('.claimedRight').each(function (f) {
+            var newstr = $(this).text().substring(0,100)+'....';
+            $(this).text(newstr);
+
+            });
+        })
+        </script>
+        <?php
+      }
+      ?>
+      <?php
+      if ($_GET['page']=="publicforum") {
+        ?>
+        <script>
+        //Limit characters displayed in span
+        $(document).ready(function(){
+        $('.claimedRight').each(function (f) {
+            var newstr = $(this).text().substring(0,100)+'....';
+            $(this).text(newstr);
+
+            });
+        })
+        </script>
+        <?php
+      }
   
 }
 ?>
