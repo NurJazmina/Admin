@@ -62,6 +62,8 @@
               </table>
             </div>
           </div>
+
+        <!-- Remark -->
         <div class="col-sm">
          <div class="row">
           <div class="col-12 col-lg-12">
@@ -421,6 +423,9 @@
           </div>
         </div>
         </div>
+
+
+        <!-- attendance -->
         <div class="w-100"></div>
         <div class="col-sm">
         <div class="row">

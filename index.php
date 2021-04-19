@@ -58,17 +58,17 @@ error_reporting(E_ALL);
         <?php include 'view/alert.php'; ?>
           <?php
           /**forum can be access without need to login */
-          if ($_GET["page"] == "forum"){
-            include 'view/forum.php';
+          if ($_GET["page"] == "forums"){
+            include 'view/forums.php';
           }
-          if ($_GET["page"] == "forumschoolforumgeneral"){
-            include 'view/forumschoolforumgeneral.php';
+          elseif ($_GET["page"] == "schoolforum"){
+            include 'view/schoolforum.php';
           }
-          if ($_GET["page"] == "schoolforumproposal"){
-            include 'view/index.php?page=schoolforumproposal.php';
+          elseif ($_GET["page"] == "publicforum"){
+            include 'view/publicforum.php';
           }
-          if ($_GET["page"] == "schoolforumshortnews"){
-            include 'view/index.php?page=schoolforumshortnews.php';
+          elseif ($_GET["page"] == "modalforums"){
+            include 'view/modal-forums.php';
           }
           /**
             * @todo Tambah untuk forum public
@@ -150,6 +150,7 @@ error_reporting(E_ALL);
             {
               include 'view/timetablelist.php';
             }
+
             //recheck
             elseif ($_GET["page"] == "recheckstafflist")
             {
@@ -202,8 +203,15 @@ error_reporting(E_ALL);
             {
               include 'view/departmentdetail.php';
             }
+            elseif ($_GET["page"] == "schoolforumdetail")
+            {
+              include 'view/schoolforumdetail.php';
+            }
             elseif ($_GET["page"] == "editparentduplicate"){
               include 'model/editparentduplicate.php';
+            }
+            elseif ($_GET["page"] == "mira3"){
+              include 'view/mira3.php';
             }
           }
         ?>
@@ -221,7 +229,6 @@ error_reporting(E_ALL);
     <?php include 'resources/default.php'; ?>
     <!--end::Page Scripts(used by this page)-->
     <script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
-
   </body>
   <!--end::Body-->
 </html>
