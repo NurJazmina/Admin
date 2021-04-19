@@ -66,7 +66,7 @@ $topic = ($_GET['topic']);
             </div><br>
             <div class="card">
                 <div class="card-body">
-                    <div class="spacing-right">
+                    <div class="spacing-right" style="padding: 0;">
                         <span style="color:#687a86;">Channel Topics</span><br><br>
                         <div class="spacing-right">
                         <a href="index.php?page=schoolforum&forum=1&topic=general">
@@ -95,7 +95,6 @@ $topic = ($_GET['topic']);
                 <div class="spacing-right">
                 <strong>Channel Topic : </strong><span class="button--tag -inverted button-large"><?php echo $_GET['topic']; ?></span>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div><br>
         <?php
