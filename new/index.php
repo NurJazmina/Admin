@@ -102,6 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<?php include 'view/alert.php'; ?>
 										<?php include 'view/modal-changepassword.php'; ?>
 										<?php include 'controller/page.php'; ?>
+										
 									</div>
 								</div>
 							</div>

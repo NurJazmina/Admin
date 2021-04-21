@@ -1,3 +1,21 @@
+<?php include ('model/aboutme.php'); ?>
+<?php
+  $id = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_id"]);
+  $filter = ['_id'=>$id];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  foreach ($cursor as $document){
+    $_SESSION["staffremarkid"] = strval($document->_id);
+    $ConsumerFName = ($document->ConsumerFName);
+    $ConsumerLName = ($document->ConsumerLName);
+    $ConsumerIDType = ($document->ConsumerIDType);
+    $ConsumerIDNo = ($document->ConsumerIDNo);
+    $ConsumerEmail = ($document->ConsumerEmail);
+    $ConsumerPhone = ($document->ConsumerPhone);
+    $ConsumerAddress = ($document->ConsumerAddress);
+    $ConsumerStatus = ($document->ConsumerStatus);
+  }
+?>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Personal Info</h1></div><br>
 <div class="row">
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
