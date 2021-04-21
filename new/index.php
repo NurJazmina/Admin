@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<?php
+// Start the session
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+<?php include 'connections/db.php';?>
+<?php require 'vendor/autoload.php'; ?>
+<!-- live chat start-->
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="688d97be-cab6-4cc7-9458-e78b5df8cba4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!-- live chat end-->
+
 <!--
 Template Name: Metronic - Bootstrap 4 HTML, React, Angular 11 & VueJS Admin Dashboard Theme
 Author: KeenThemes
@@ -17,7 +30,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<head>
 		<base href="">
 		<meta charset="utf-8" />
-		<title>Metronic Live preview | Keenthemes</title>
+		<title>Smart School</title>
 		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -26,6 +39,12 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
 		<!--end::Fonts-->
+
+		<!-- begin::Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+		<!-- end::Bootstrap CSS -->
 
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -55,10 +74,59 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-mobile-fixed subheader-enabled subheader-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable footer-fixed page-loading">
 
 		<!--[html-partial:include:{"file":"partials/_page-loader.html"}]/-->
+<<<<<<< HEAD
 		<?php include '_page-loader.html'; ?>
 		<!--[html-partial:include:{"file":"layout.html"}]/-->
 		<?php include 'layout.php'; ?>
 		
+=======
+		
+        <div class="page">
+            <?php if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) {
+			    ?>
+				<!--begin::Main-->
+				<?php include 'view/partials/_header-mobile.html'; ?>
+				<div class="d-flex flex-column flex-root">
+					<!--begin::Page-->
+					<div class="d-flex flex-row flex-column-fluid page">
+						<?php include 'view/partials/_aside.html'; ?>
+						<!--begin::Wrapper-->
+						<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+							<?php include 'view/partials/_header.html'; ?>
+							<!--begin::Content-->
+							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+							<?php include 'view/partials/_subheader/subheader-v1.html'; ?>
+							<!--Content area here-->
+								<div class="content content-fixed">
+									<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
+										<?php include 'view/alert.php'; ?>
+										<?php include 'view/modal-changepassword.php'; ?>
+										<?php include 'controller/page.php'; ?>
+									</div>
+								</div>
+							</div>
+							<!--end::Content-->
+							<?php include 'view/partials/_footer.html'; ?>
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Page-->
+				</div>
+				<!--end::Main-->
+
+                <?php
+		    } else {
+			    ?>
+            <div class="container-fluid">
+			    <div class="row" style="height:100vh;">
+				<?php include 'view/login.php'; ?>
+			    </div>
+            </div>
+			    <?php
+		    }
+		    ?>
+        </div>
+>>>>>>> c20456909e69b51f187ba600cf34b62c6fe046ab
 		<script>
 			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 		</script>
@@ -131,6 +199,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+		<script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
 
 		<!--end::Global Theme Bundle-->
 
@@ -141,6 +213,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
+		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
+		<?php include 'resources/default.php'; ?>
 
 		<!--end::Page Scripts-->
 	</body>
