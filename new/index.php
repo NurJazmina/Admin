@@ -55,8 +55,10 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-mobile-fixed subheader-enabled subheader-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable footer-fixed page-loading">
 
 		<!--[html-partial:include:{"file":"partials/_page-loader.html"}]/-->
-		<?php include 'layout.php'; ?>
+		<?php include '_page-loader.html'; ?>
 		<!--[html-partial:include:{"file":"layout.html"}]/-->
+		<?php include 'layout.php'; ?>
+		
 		<script>
 			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 		</script>
@@ -122,7 +124,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				"font-family": "Poppins"
 			};
 		</script>
-
+		
 		<!--end::Global Config-->
 
 		<!--begin::Global Theme Bundle(used by all pages)-->
