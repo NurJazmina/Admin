@@ -74,12 +74,6 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-mobile-fixed subheader-enabled subheader-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable footer-fixed page-loading">
 
 		<!--[html-partial:include:{"file":"partials/_page-loader.html"}]/-->
-<<<<<<< HEAD
-		<?php include '_page-loader.html'; ?>
-		<!--[html-partial:include:{"file":"layout.html"}]/-->
-		<?php include 'layout.php'; ?>
-		
-=======
 		
         <div class="page">
             <?php if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) {
