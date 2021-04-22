@@ -62,7 +62,7 @@
 				</div>
 			</div>
 			<div id="kt_quick_user" class="offcanvas offcanvas-right p-10 offcanvas-on">
-				<?php include 'view/user.php'; ?>
+				<?php include 'view/pages/user.php'; ?>
 			</div>
 
 			<!--end::User-->

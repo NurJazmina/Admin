@@ -86,15 +86,15 @@ License: You must have a valid license purchased only from themeforest(the above
 						<?php include 'view/partials/_aside.html'; ?>
 						<!--begin::Wrapper-->
 						<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-							<?php //include 'view/_header.php'; ?>
+							<?php include 'view/pages/_header.php'; ?>
 							<!--begin::Content-->
 							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 							<?php include 'view/partials/_subheader/subheader-v1.html'; ?>
 							<!--Content area here-->
 								<div class="content content-fixed">
 									<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
-										<?php include 'view/alert.php'; ?>
-										<?php include 'view/modal-changepassword.php'; ?>
+										<?php include 'view/pages/alert.php'; ?>
+										<?php include 'view/pages/modal-changepassword.php'; ?>
 										<?php include 'controller/page.php'; ?>
 										
 									</div>

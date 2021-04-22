@@ -10,10 +10,10 @@
     <?php
     } else {
         if (!isset($_GET['page']) || empty($_GET['page'])){
-            include 'view/dashboard.php';
+            include 'view/pages/dashboard.php';
         }
         else {
-            include 'view/'.$_GET['page'].'.php';
+            include 'view/pages/'.$_GET['page'].'.php';
         }
     }
 ?>
