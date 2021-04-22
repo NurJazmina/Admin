@@ -4,6 +4,7 @@
 <style>
 .highlight td {
 background:red;
+color:#ffffff;
 }
 </style>
 <?php
@@ -17,7 +18,7 @@ else
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
         <div class="table-responsive">
-        <table id="attendance" class="table table-bordered" style="color:#ffffff; text-align: center;">
+        <table id="attendance" class="table table-bordered" style="text-align: center;">
         <thead class="table-light">
             <tr>
             <th scope="col" style="color:#696969; text-align:center">Student ID</th>

@@ -105,8 +105,8 @@
                             </div>
                         </div>
                         <!--end::User-->
-                        <!--begin::Contact-->
-                        <div class="py-9">
+                        <!--begin::Contact-->                        
+						<div class="py-9">
 						    <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">ID Type:</span>
 								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerIDType"]; ?></a>
