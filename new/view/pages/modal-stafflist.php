@@ -1,4 +1,4 @@
-<form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=recheckstafflist" method="post">
+<form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div class="modal fade" id="recheckaddstaff" tabindex="-1" aria-labelledby="AddStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -71,7 +71,7 @@
     SelecttxtStaffdepartment();
 </script>
 
-<br><br><form id="EditStaffFormSubmit"  name="EditStaffFormSubmit" action="index.php?page=recheckstafflist" method="post">
+<br><br><form id="EditStaffFormSubmit"  name="EditStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div class="modal fade" id="recheckeditstaff" tabindex="-1" aria-labelledby="EditStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

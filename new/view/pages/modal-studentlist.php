@@ -1,4 +1,4 @@
-<form id="AddStudentFormSubmit" name="AddStudentFormSubmit" action="index.php?page=recheckstudentlist" method="post">
+<form id="AddStudentFormSubmit" name="AddStudentFormSubmit" action="index.php?page=modal-recheckstudentlist" method="post">
   <div class="modal fade" id="recheckaddstudent" tabindex="-1" aria-labelledby="AddStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -42,7 +42,7 @@
   </div>
 </form>
 
-<br><br><form id="EditStudentFormSubmit" name="EditStudentFormSubmit" action="index.php?page=recheckstudentlist" method="post">
+<br><br><form id="EditStudentFormSubmit" name="EditStudentFormSubmit" action="index.php?page=modal-recheckstudentlist" method="post">
   <div class="modal fade" id="recheckeditstudent" tabindex="-1" aria-labelledby="EditStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
