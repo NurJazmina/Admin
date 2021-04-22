@@ -182,10 +182,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-size-lg">Change Passwort</span>
-                                    <span class="navi-label">
-                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                    </span>
+                                    <span class="navi-text font-size-lg">Change Password</span>
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
@@ -226,6 +223,9 @@
                                         </span>
                                     </span>
                                     <span class="navi-text">Department Info</span>
+                                    <span class="navi-label">
+                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                    </span>
                                 </a>
                             </div>
                         </div>

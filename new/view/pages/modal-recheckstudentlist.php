@@ -48,7 +48,7 @@ if (isset($_POST['AddStudentFormSubmit']))
         ?>
         <br><br><br><br><div class="alert alert-danger" role="alert">
         <h2 style="text-align: center;">DUPLICATE ID NUMBER</h2>
-        <form id="EditParentFormSubmit" name="EditParentFormSubmit" action="index.php?page=recheckparentlist" method="post">
+        <form id="EditParentFormSubmit" name="EditParentFormSubmit" action="index.php?page=modal-recheckparentlist" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header"></div>

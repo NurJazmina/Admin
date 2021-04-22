@@ -50,5 +50,5 @@
   </tbody>
 </table>
 </div>
-<?php include ('view/modal-subjectlist.php'); ?>
+<?php include ('view/pages/modal-subjectlist.php'); ?>
 

@@ -270,7 +270,7 @@
 						</div>
 						<div class="card-body">
 							<div class="row">
-							<div class="col-sm">
+							   <div class="col-sm">
 								<div class="table-responsive">
 								<table class="table table-bordered">
 								<thead class="table-light">

@@ -348,7 +348,7 @@
 								</div>
 								<div class="col-sm">
 								<div class="row">
-									<div class="col-12 col-lg-12">
+									<div class="col-12 col-lg-6">
 									<div class="card">
 										<div class="card-header">
 										<strong>Remarks</strong>
@@ -703,7 +703,6 @@
 									</div>
 								</div>
 								</div>
-							</div>
 							<div class="w-100"></div>
 							<div class="col-sm">
 							<div class="row">
@@ -862,8 +861,8 @@
 						<!--begin::Header-->
 						<div class="card-header py-3">
 							<div class="card-title align-items-start flex-column">
-								<h3 class="card-label font-weight-bolder text-dark">Your Classroom</h3>
-								<span class="text-muted font-weight-bold font-size-sm mt-1"><?php echo $ClassName; ?></span>
+								<h3 class="card-label font-weight-bolder text-dark">Nothing to display</h3>
+								<span class="text-muted font-weight-bold font-size-sm mt-1"></span>
 							</div>
 						</div>
 						<!--end::Header-->
