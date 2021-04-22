@@ -74,6 +74,12 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-mobile-fixed subheader-enabled subheader-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable footer-fixed page-loading">
 
 		<!--[html-partial:include:{"file":"partials/_page-loader.html"}]/-->
+<<<<<<< HEAD
+		<?php include '_page-loader.html'; ?>
+		<!--[html-partial:include:{"file":"layout.html"}]/-->
+		<?php include 'layout.php'; ?>
+		
+=======
 		
         <div class="page">
             <?php if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) {
@@ -96,6 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<?php include 'view/alert.php'; ?>
 										<?php include 'view/modal-changepassword.php'; ?>
 										<?php include 'controller/page.php'; ?>
+										
 									</div>
 								</div>
 							</div>
@@ -120,6 +127,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		    }
 		    ?>
         </div>
+>>>>>>> c20456909e69b51f187ba600cf34b62c6fe046ab
 		<script>
 			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 		</script>
@@ -185,7 +193,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				"font-family": "Poppins"
 			};
 		</script>
-
+		
 		<!--end::Global Config-->
 
 		<!--begin::Global Theme Bundle(used by all pages)-->
