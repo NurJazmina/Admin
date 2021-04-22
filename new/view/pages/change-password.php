@@ -182,10 +182,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-size-lg">Change Passwort</span>
-                                    <span class="navi-label">
-                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                    </span>
+                                    <span class="navi-text font-size-lg">Change Password</span>
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
@@ -226,6 +223,9 @@
                                         </span>
                                     </span>
                                     <span class="navi-text">Department Info</span>
+                                    <span class="navi-label">
+                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                    </span>
                                 </a>
                             </div>
                         </div>
@@ -246,14 +246,10 @@
 							<h3 class="card-label font-weight-bolder text-dark">Change Password</h3>
 							<span class="text-muted font-weight-bold font-size-sm mt-1">Change your account password</span>
 						</div>
-						<div class="card-toolbar">
-							<button type="reset" class="btn btn-success mr-2">Save Changes</button>
-							<button type="reset" class="btn btn-secondary">Cancel</button>
-						</div>
 					</div>
 					<!--end::Header-->
 					<!--begin::Form-->
-					<form class="form">
+					<form class="form" name="ChangePasswordFormSubmit" action="model/change-password.php" method="post">
 						<div class="card-body">
 							<!--begin::Alert-->
 							<div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
@@ -283,24 +279,22 @@
 							</div>
 							<!--end::Alert-->
 							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label text-alert">Current Password</label>
-								<div class="col-lg-9 col-xl-6">
-									<input type="password" class="form-control form-control-lg form-control-solid mb-2" value="" placeholder="Current password" />
-									<a href="#" class="text-sm font-weight-bold">Forgot password ?</a>
-								</div>
-							</div>
-							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label text-alert">New Password</label>
 								<div class="col-lg-9 col-xl-6">
-									<input type="password" class="form-control form-control-lg form-control-solid" value="" placeholder="New password" />
+									<input name="password" id="password" type="password" onkeyup='check();' class="form-control form-control-lg form-control-solid" placeholder="New password" />
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label text-alert">Verify Password</label>
 								<div class="col-lg-9 col-xl-6">
-									<input type="password" class="form-control form-control-lg form-control-solid" value="" placeholder="Verify password" />
-								</div>
+									<input type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' class="form-control form-control-lg form-control-solid" placeholder="Verify password" />
+                                    <span id='message'></span>
+                                </div>
 							</div>
+                            <div class="card-toolbar" style="text-align:right;">
+                                <button type="submit" class="btn btn-success mr-2" name="ChangePasswordFormSubmit">Save Changes</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
 						</div>
 					</form>
 					<!--end::Form-->

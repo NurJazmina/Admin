@@ -69,8 +69,7 @@
          $_SESSION["loggeduser_StaffLevel"] = ($document1->StaffLevel);
          $_SESSION["loggeduser_ConsumerID"] = ($document1->ConsumerID);
          $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);
-
-
+         $_SESSION["loggeduser_Staffdepartment"] = strval($document1->Staffdepartment);
        }
        else
        {

@@ -47,4 +47,4 @@
   </tbody>
 </table>
 </div>
-<?php include ('view/modal-departmentlist.php'); ?>
+<?php include ('view/pages/modal-departmentlist.php'); ?>

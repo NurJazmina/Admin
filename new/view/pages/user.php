@@ -1,4 +1,4 @@
-<?php include ('model/aboutme.php'); ?>
+
 	<!--begin::Header-->
 	<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5" kt-hidden-height="40" style="">
 		<h3 class="font-weight-bold m-0">User Profile
@@ -38,7 +38,7 @@
 							<span class="navi-text text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerEmail"]; ?></span>
 						</span>
 					</a>
-					<a href="index.php?page=home"  data-bs-toggle="modal" data-bs-target="#ChangePasswordModal" class="menu-link menu-toggle">
+					<a href="index.php?page=change-password" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
 
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->

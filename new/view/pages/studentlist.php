@@ -471,4 +471,4 @@
       </div>
      </div>
    </div>
-<?php include ('view/modal-studentlist.php'); ?>
+<?php include ('view/pages/modal-studentlist.php'); ?>

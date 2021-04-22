@@ -1,4 +1,4 @@
-
+<?php include 'model/personal-information.php'; ?>
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->
@@ -183,10 +183,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-size-lg">Change Passwort</span>
-                                    <span class="navi-label">
-                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                    </span>
+                                    <span class="navi-text font-size-lg">Change Password</span>
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
@@ -227,6 +224,9 @@
                                         </span>
                                     </span>
                                     <span class="navi-text">Department Info</span>
+                                    <span class="navi-label">
+                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                    </span>
                                 </a>
                             </div>
                         </div>
@@ -245,16 +245,13 @@
 					<div class="card-header py-3">
 						<div class="card-title align-items-start flex-column">
 							<h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-							<span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal informaiton</span>
-						</div>
-						<div class="card-toolbar">
-							<button type="reset" class="btn btn-success mr-2">Save Changes</button>
-							<button type="reset" class="btn btn-secondary">Cancel</button>
+							<span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal information</span>
 						</div>
 					</div>
 					<!--end::Header-->
 					<!--begin::Form-->
-					<form class="form">
+					<form class="form" id="EditPersonalInformation"  name="EditPersonalInformation" action="index.php?page=personal-information" method="post">
+                    <div id="editpersonalinformation" tabindex="-1" aria-labelledby="EditStaffModalLabel" aria-hidden="true">
 						<!--begin::Body-->
 						<div class="card-body">
 							<div class="row">
@@ -286,20 +283,13 @@
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
 								<div class="col-lg-9 col-xl-6">
-									<input class="form-control form-control-lg form-control-solid" type="text" value="Nick" />
+									<input class="form-control form-control-lg form-control-solid" type="text" name="txtConsumerFName" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" />
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
 								<div class="col-lg-9 col-xl-6">
-									<input class="form-control form-control-lg form-control-solid" type="text" value="Bold" />
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Company Name</label>
-								<div class="col-lg-9 col-xl-6">
-									<input class="form-control form-control-lg form-control-solid" type="text" value="Loop Inc." />
-									<span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
+									<input class="form-control form-control-lg form-control-solid" type="text" name="txtConsumerLName" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" />
 								</div>
 							</div>
 							<div class="row">
@@ -317,9 +307,8 @@
 												<i class="la la-phone"></i>
 											</span>
 										</div>
-										<input type="text" class="form-control form-control-lg form-control-solid" value="+35278953712" placeholder="Phone" />
+										<input type="text" class="form-control form-control-lg form-control-solid" name="txtConsumerPhone" placeholder="0123456789" />
 									</div>
-									<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -331,21 +320,47 @@
 												<i class="la la-at"></i>
 											</span>
 										</div>
-										<input type="text" class="form-control form-control-lg form-control-solid" value="nick.bold@loop.com" placeholder="Email" />
+										<input type="text" class="form-control form-control-lg form-control-solid" name="txtConsumerEmail" placeholder="Email" />
+									</div>
+                                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">Address</label>
+								<div class="col-lg-9 col-xl-6">
+									<div class="input-group input-group-lg input-group-solid">
+										<input type="text" class="form-control form-control-lg form-control-solid" name="txtConsumerAddress" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" />
 									</div>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Company Site</label>
+								<label class="col-xl-3 col-lg-3 col-form-label">Poscode</label>
 								<div class="col-lg-9 col-xl-6">
 									<div class="input-group input-group-lg input-group-solid">
-										<input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="loop" />
-										<div class="input-group-append">
-											<span class="input-group-text">.com</span>
-										</div>
+										<input type="text" class="form-control form-control-lg form-control-solid" name="txtConsumerPostcode" />
 									</div>
 								</div>
 							</div>
+							<div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">City</label>
+								<div class="col-lg-9 col-xl-6">
+									<div class="input-group input-group-lg input-group-solid">
+										<input type="text" class="form-control form-control-lg form-control-solid" name="txtConsumerCity" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">State</label>
+								<div class="col-lg-9 col-xl-6">
+									<div class="input-group input-group-lg input-group-solid">
+										<input type="text" class="form-control form-control-lg form-control-solid" name="txtConsumerState" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);"/>
+									</div>
+								</div>
+							</div>
+                            <div class="card-toolbar" style="text-align:right;">
+                                <button type="submit" class="btn btn-success mr-2" name="EditPersonalInformation" id="EditPersonalInformation" >Save Changes</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
 						</div>
 						<!--end::Body-->
 					</form>

@@ -105,8 +105,8 @@
                             </div>
                         </div>
                         <!--end::User-->
-                        <!--begin::Contact-->                        
-						<div class="py-9">
+                        <!--begin::Contact-->
+                        <div class="py-9">
 						    <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">ID Type:</span>
 								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerIDType"]; ?></a>
@@ -183,10 +183,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-size-lg">Change Passwort</span>
-                                    <span class="navi-label">
-                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                    </span>
+                                    <span class="navi-text font-size-lg">Change Password</span>
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
@@ -227,6 +224,9 @@
                                         </span>
                                     </span>
                                     <span class="navi-text">Department Info</span>
+                                    <span class="navi-label">
+                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                    </span>
                                 </a>
                             </div>
                         </div>
@@ -239,316 +239,638 @@
 			<!--end::Aside-->
 			<!--begin::Content-->
 			<div class="flex-row-fluid ml-lg-8">
+				<?php
+			if ($_SESSION["loggeduser_StaffLevel"] == '0')
+			{ 
+					$id = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ClassID"]);
+					$filter = ['_id'=>$id];
+					$query = new MongoDB\Driver\Query($filter);
+					$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+				  foreach ($cursor as $document)
+				  {
+					$ClassName = ($document->ClassName);
+				  }
+				?>
 				<!--begin::Card-->
 				<div class="card card-custom">
 					<!--begin::Header-->
 					<div class="card-header py-3">
 						<div class="card-title align-items-start flex-column">
-							<h3 class="card-label font-weight-bolder text-dark">Account Information</h3>
-							<span class="text-muted font-weight-bold font-size-sm mt-1">Change your account settings</span>
-						</div>
-						<div class="card-toolbar">
-							<button type="reset" class="btn btn-success mr-2">Save Changes</button>
-							<button type="reset" class="btn btn-secondary">Cancel</button>
+							<h3 class="card-label font-weight-bolder text-dark">Your Classroom</h3>
+							<span class="text-muted font-weight-bold font-size-sm mt-1"><?php echo $ClassName; ?></span>
 						</div>
 					</div>
 					<!--end::Header-->
-					<!--begin::Form-->
-					<form class="form">
-						<div class="card-body">
-							<!--begin::Heading-->
+					<div class="row" >
+						<div class="col-md-1 section-1-box wow fadeInUp"></div>
+						<div class="col-md-10 section-1-box wow fadeInUp">
+						<br><br>
+						<div class="card">
+							<div class="card-header">
+							<strong>Details</strong>
+							</div>
+							<div class="card-body">
 							<div class="row">
-								<label class="col-xl-3"></label>
-								<div class="col-lg-9 col-xl-6">
-									<h5 class="font-weight-bold mb-6">Account:</h5>
+								<div class="col-sm">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+									<thead class="table-light">
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row" class="table-secondary">Class Name</th>
+										<td class="table-secondary"><?php echo $ClassName; ?></td>
+									</tr>
+									<?php
+									$filter1= ['ClassID' => $_SESSION["loggeduser_ClassID"]];
+									$query1= new MongoDB\Driver\Query($filter1);
+									$cursor1= $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
+									foreach ($cursor1 as $document1)
+									{
+										$ConsumerID = ($document1->ConsumerID);
+										$idstaff = new \MongoDB\BSON\ObjectId($ConsumerID);
+										$filter2 = ['_id'=>$idstaff];
+										$query2 = new MongoDB\Driver\Query($filter2);
+										$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query2);
+										foreach ($cursor2 as $document2)
+										{
+										$ConsumerFName = ($document2->ConsumerFName);
+										$ConsumerPhone = ($document2->ConsumerPhone);
+										}
+									}
+									?>
+									<tr>
+										<th scope="row">Teacher</th>
+										<td><?php  echo $ConsumerFName; ?></td>
+									</tr>
+									<tr>
+										<th scope="row">Teacher Phone Number</th>
+										<td><?php echo $ConsumerPhone; ?></td>
+									</tr>
+									<tr>
+										<th scope="row">Student Names</th>
+										<td>
+										<?php
+										$filter3= ['Schools_id' => $_SESSION["loggeduser_schoolID"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
+										$query3= new MongoDB\Driver\Query($filter3);
+										$cursor3= $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query3);
+										$totalstudent = 0;
+										foreach ($cursor3 as $document3)
+										{
+											$totalstudent = $totalstudent+ 1;
+											$Consumer_id = ($document3->Consumer_id);
+											$idstudent = new \MongoDB\BSON\ObjectId($Consumer_id);
+											$filter4 = ['_id'=>$idstudent];
+											$query4 = new MongoDB\Driver\Query($filter4);
+											$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query4);
+											foreach ($cursor4 as $document4)
+											{
+											$_SESSION["studentclassid"] = strval($document4->_id);
+											$Consumer_id = ($document4->_id);
+											$ConsumerFName = ($document4->ConsumerFName);
+											$ConsumerLName = ($document4->ConsumerLName);
+											?>
+											<a href="index.php?page=studentdetail&id=<?php echo $Consumer_id; ?>" style="color:#076d79; text-decoration: none;">
+											<?php
+											echo $ConsumerFName." ".$ConsumerLName."<br>";
+											}
+										}
+										?>
+										</a></td>
+										</tr>
+										<tr>
+										<th scope="row">Number of Student</th>
+										<td><?php echo $totalstudent; ?></td>
+									</tr>
+									</tbody>
+									</table>
 								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Username</label>
-								<div class="col-lg-9 col-xl-6">
-									<div class="spinner spinner-sm spinner-success spinner-right">
-										<input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
-									</div>
 								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
-								<div class="col-lg-9 col-xl-6">
-									<div class="input-group input-group-lg input-group-solid">
-										<div class="input-group-prepend">
-											<span class="input-group-text">
-												<i class="la la-at"></i>
-											</span>
+								<div class="col-sm">
+								<div class="row">
+									<div class="col-12 col-lg-12">
+									<div class="card">
+										<div class="card-header">
+										<strong>Remarks</strong>
 										</div>
-										<input type="text" class="form-control form-control-lg form-control-solid" value="nick.watson@loop.com" placeholder="Email" />
+										<div class="card-body">
+										<div class="row">
+											<div class="col-12">
+											<div class="tab-content" id="v-pills-tabContent">
+												<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+												<div class="box">
+													<form name="AddClassRemarkFormSubmit" action="model/addclassremark.php" method="POST">
+													<div class="row">
+													<div class="col">
+														<textarea class="form-control" name="txtclassRemark" rows="3"></textarea>
+														<div class="row">
+														<div class="col text-right">
+															<input type="hidden" value="<?php echo $_SESSION["loggeduser_ClassID"]; ?>" name="txtclassid">
+															<button type="submit" class="btn btn-primary" name="AddClassRemarkFormSubmit">Add remark</button>
+														</div>
+														</div>
+														</div>
+													</div>
+												</form>
+												</div>
+												<div class="box">
+													<strong></strong>
+													<br>
+													<ul class="nav nav-tabs" id="myTab" role="tablist">
+													<li class="nav-item" role="presentation">
+														<a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Active</a>
+													</li>
+													<li class="nav-item" role="presentation">
+														<a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
+													</li>
+													<li class="nav-item" role="presentation">
+														<a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+													</li>
+													</ul>
+													<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
+													<div class="table-responsive">
+													<table class="table table-striped table-sm ">
+														<thead>
+														<tr>
+															<th>Date</th>
+															<th>Details</th>
+															<th>Staff</th>
+														</tr>
+														</thead>
+													</table>
+													<?php
+													$filter2 = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'SubRemarks'=>'0','ClassRemarksStatus'=>'ACTIVE'];
+													$option2 = ['sort' => ['_id' => -1],'limit'=>10];
+													$query2 = new MongoDB\Driver\Query($filter2, $option2);
+													$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query2);
+
+													foreach ($cursor2 as $document2)
+													{
+														$_SESSION["classparent"] = strval($document2->_id);
+														$remarkid1 = strval($document2->_id);
+														$remark1 = ($document2->ClassRemarksDetails);
+														$remarkdate1 = ($document2->ClassRemarksDate);
+														$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
+														$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+														$remarkstaffid1 = ($document2->ClassRemarksStaff_id);
+														?>
+														<div class="accordion accordion-flush" id="accordionFlushExample">
+														<div class="accordion-item" >
+															<h6 class="accordion-header" id="flush-headingOne">
+															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+															<tbody>
+																<tr>
+																<td><?php print_r($datetime1->format('r')); ?></td>
+																<td>
+																<?php
+																$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+																$query1 = new MongoDB\Driver\Query($filter1);
+																$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+																foreach ($cursor1 as $document1)
+																{
+																$ConsumerFName = ($document1->ConsumerFName);
+																echo $ConsumerFName;
+																?>
+																</td>
+																<td><?php echo $remark1;?></td>
+																</tr>
+																</tbody>
+															</button>
+															</h6>
+															<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+															<?php 
+															$filter4 = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'SubRemarks'=>$_SESSION["classparent"],'ClassRemarksStatus'=>'ACTIVE'];
+															$option4 = ['sort' => ['_id' => -1],'limit'=>10];
+															$query4 = new MongoDB\Driver\Query($filter4, $option4);
+															$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query4);
+															foreach ($cursor4 as $document4)
+															{
+															$remarkid2 = strval($document4->_id);
+															$remark2 = ($document4->ClassRemarksDetails);
+															$remarkdate2 = ($document4->ClassRemarksDate);
+															$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
+															$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+															$remarkstaffid2 = ($document4->ClassRemarksStaff_id);
+															?>
+															<div class="accordion-body">
+															<tbody>
+																<tr>
+																<td><?php print_r($datetime2->format('r')); ?></td>
+																<td>
+																	<?php echo $remark2;?>
+																</td>
+																</tr>
+																</tbody>
+															</div>
+															<?php
+															}
+															?>
+															<form name="AddClassRemarkChildFormSubmit" action="model/addclassremarkchild.php" method="POST">
+															<div class="row">
+																<div class="col">
+																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																<div class="row">
+																	<div class="col text-right">
+																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
+																	<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
+																	<button type="submit" class="btn btn-primary" name="AddClassRemarkChildFormSubmit">Add remark</button>
+																	</div>
+																</div>
+																</div>
+															</div>
+															</form>
+															<button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+															</div>
+															</div>
+														</div>
+													<?php
+													}
+													}
+													?>
+													</div>
+												</div>
+												<div class="tab-pane fade show pending" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+													<div class="table-responsive">
+													<table class="table table-striped table-sm ">
+														<thead>
+														<tr>
+															<th>Date</th>
+															<th>Details</th>
+															<th>Staff</th>
+														</tr>
+														</thead>
+													</table>
+													<?php
+													$filter2 = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'SubRemarks'=>'0','ClassRemarksStatus'=>'PENDING'];
+													$option2 = ['sort' => ['_id' => -1],'limit'=>10];
+													$query2 = new MongoDB\Driver\Query($filter2, $option2);
+													$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query2);
+
+													foreach ($cursor2 as $document2)
+													{
+														$_SESSION["classparent"] = strval($document2->_id);
+														$remarkid1 = strval($document2->_id);
+														$remark1 = ($document2->ClassRemarksDetails);
+														$remarkdate1 = ($document2->ClassRemarksDate);
+														$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
+														$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+														$remarkstaffid1 = ($document2->ClassRemarksStaff_id);
+														?>
+														<div class="accordion accordion-flush" id="accordionFlushExample">
+														<div class="accordion-item" >
+															<h6 class="accordion-header" id="flush-headingOne">
+															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+															<tbody>
+																<tr>
+																<td><?php print_r($datetime1->format('r')); ?></td>
+																<td>
+																<?php
+																$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+																$query1 = new MongoDB\Driver\Query($filter1);
+																$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+																foreach ($cursor1 as $document1)
+																{
+																$ConsumerFName = ($document1->ConsumerFName);
+																echo $ConsumerFName;
+																?>
+																</td>
+																<td><?php echo $remark1;?></td>
+																</tr>
+																</tbody>
+															</button>
+															</h6>
+															<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+															<?php 
+															$filter4 = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'SubRemarks'=>$_SESSION["classparent"],'ClassRemarksStatus'=>'PENDING'];
+															$option4 = ['sort' => ['_id' => -1],'limit'=>10];
+															$query4 = new MongoDB\Driver\Query($filter4, $option4);
+															$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query4);
+															foreach ($cursor4 as $document4)
+															{
+															$remarkid2 = strval($document4->_id);
+															$remark2 = ($document4->ClassRemarksDetails);
+															$remarkdate2 = ($document4->ClassRemarksDate);
+															$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
+															$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+															$remarkstaffid2 = ($document4->ClassRemarksStaff_id);
+															?>
+															<div class="accordion-body">
+															<tbody>
+																<tr>
+																<td><?php print_r($datetime2->format('r')); ?></td>
+																<td>
+																	<?php echo $remark2;?>
+																</td>
+																</tr>
+																</tbody>
+															</div>
+															<?php
+															}
+															?>
+															<form name="AddClassRemarkChildFormSubmit" action="model/addclassremarkchild.php" method="POST">
+															<div class="row">
+																<div class="col">
+																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																<div class="row">
+																	<div class="col text-right">
+																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
+																	<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
+																	<button type="submit" class="btn btn-primary" name="AddClassRemarkChildFormSubmit">Add remark</button>
+																	</div>
+																</div>
+																</div>
+															</div>
+															</form>
+															<button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+															</div>
+															</div>
+														</div>
+													<?php
+													}
+													}
+													?>
+													</div>
+												</div>
+												<div class="tab-pane fade show completed" id="completed" role="tabpanel" aria-labelledby="comleted-tab">
+													<div class="table-responsive">
+													<table class="table table-striped table-sm ">
+														<thead>
+														<tr>
+															<th>Date</th>
+															<th>Details</th>
+															<th>Staff</th>
+														</tr>
+														</thead>
+													</table>
+													<?php
+													$filter2 = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'SubRemarks'=>'0','ClassRemarksStatus'=>'COMPLETED'];
+													$option2 = ['sort' => ['_id' => -1],'limit'=>10];
+													$query2 = new MongoDB\Driver\Query($filter2, $option2);
+													$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query2);
+
+													foreach ($cursor2 as $document2)
+													{
+														$_SESSION["classparent"] = strval($document2->_id);
+														$remarkid1 = strval($document2->_id);
+														$remark1 = ($document2->ClassRemarksDetails);
+														$remarkdate1 = ($document2->ClassRemarksDate);
+														$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
+														$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+														$remarkstaffid1 = ($document2->ClassRemarksStaff_id);
+														?>
+														<div class="accordion accordion-flush" id="accordionFlushExample">
+														<div class="accordion-item" >
+															<h6 class="accordion-header" id="flush-headingOne">
+															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+															<tbody>
+																<tr>
+																<td><?php print_r($datetime1->format('r')); ?></td>
+																<td>
+																<?php
+																$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+																$query1 = new MongoDB\Driver\Query($filter1);
+																$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+																foreach ($cursor1 as $document1)
+																{
+																$ConsumerFName = ($document1->ConsumerFName);
+																echo $ConsumerFName;
+																?>
+																</td>
+																<td><?php echo $remark1;?></td>
+																</tr>
+																</tbody>
+															</button>
+															</h6>
+															<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+															<?php 
+															$filter4 = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'SubRemarks'=>$_SESSION["classparent"],'ClassRemarksStatus'=>'COMPLETED'];
+															$option4 = ['sort' => ['_id' => -1],'limit'=>10];
+															$query4 = new MongoDB\Driver\Query($filter4, $option4);
+															$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query4);
+															foreach ($cursor4 as $document4)
+															{
+															$remarkid2 = strval($document4->_id);
+															$remark2 = ($document4->ClassRemarksDetails);
+															$remarkdate2 = ($document4->ClassRemarksDate);
+															$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
+															$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+															$remarkstaffid2 = ($document4->ClassRemarksStaff_id);
+															?>
+															<div class="accordion-body">
+															<tbody>
+																<tr>
+																<td><?php print_r($datetime2->format('r')); ?></td>
+																<td>
+																	<?php echo $remark2;?>
+																</td>
+																</tr>
+																</tbody>
+															</div>
+															<?php
+															}
+															?>
+															<form name="AddClassRemarkChildFormSubmit" action="model/addclassremarkchild.php" method="POST">
+															<div class="row">
+																<div class="col">
+																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																<div class="row">
+																	<div class="col text-right">
+																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
+																	<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
+																	<button type="submit" class="btn btn-primary" name="AddClassRemarkChildFormSubmit">Add remark</button>
+																	</div>
+																</div>
+																</div>
+															</div>
+															</form>
+															<button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+															</div>
+															</div>
+														</div>
+													<?php
+													}
+													}
+													?>
+													</div>
+												</div>
+												</div>
+											</div>
+											</div>
+										</div>
+										</div>
 									</div>
-									<span class="form-text text-muted">Email will not be publicly displayed.
-									<a href="#" class="font-weight-bold">Learn more</a>.</span>
-								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Language</label>
-								<div class="col-lg-9 col-xl-6">
-									<select class="form-control form-control-lg form-control-solid">
-										<option>Select Language...</option>
-										<option value="id">Bahasa Indonesia - Indonesian</option>
-										<option value="msa">Bahasa Melayu - Malay</option>
-										<option value="ca">Català - Catalan</option>
-										<option value="cs">Čeština - Czech</option>
-										<option value="da">Dansk - Danish</option>
-										<option value="de">Deutsch - German</option>
-										<option value="en" selected="selected">English</option>
-										<option value="en-gb">English UK - British English</option>
-										<option value="es">Español - Spanish</option>
-										<option value="eu">Euskara - Basque (beta)</option>
-										<option value="fil">Filipino</option>
-										<option value="fr">Français - French</option>
-										<option value="ga">Gaeilge - Irish (beta)</option>
-										<option value="gl">Galego - Galician (beta)</option>
-										<option value="hr">Hrvatski - Croatian</option>
-										<option value="it">Italiano - Italian</option>
-										<option value="hu">Magyar - Hungarian</option>
-										<option value="nl">Nederlands - Dutch</option>
-										<option value="no">Norsk - Norwegian</option>
-										<option value="pl">Polski - Polish</option>
-										<option value="pt">Português - Portuguese</option>
-										<option value="ro">Română - Romanian</option>
-										<option value="sk">Slovenčina - Slovak</option>
-										<option value="fi">Suomi - Finnish</option>
-										<option value="sv">Svenska - Swedish</option>
-										<option value="vi">Tiếng Việt - Vietnamese</option>
-										<option value="tr">Türkçe - Turkish</option>
-										<option value="el">Ελληνικά - Greek</option>
-										<option value="bg">Български език - Bulgarian</option>
-										<option value="ru">Русский - Russian</option>
-										<option value="sr">Српски - Serbian</option>
-										<option value="uk">Українська мова - Ukrainian</option>
-										<option value="he">עִבְרִית - Hebrew</option>
-										<option value="ur">اردو - Urdu (beta)</option>
-										<option value="ar">العربية - Arabic</option>
-										<option value="fa">فارسی - Persian</option>
-										<option value="mr">मराठी - Marathi</option>
-										<option value="hi">हिन्दी - Hindi</option>
-										<option value="bn">বাংলা - Bangla</option>
-										<option value="gu">ગુજરાતી - Gujarati</option>
-										<option value="ta">தமிழ் - Tamil</option>
-										<option value="kn">ಕನ್ನಡ - Kannada</option>
-										<option value="th">ภาษาไทย - Thai</option>
-										<option value="ko">한국어 - Korean</option>
-										<option value="ja">日本語 - Japanese</option>
-										<option value="zh-cn">简体中文 - Simplified Chinese</option>
-										<option value="zh-tw">繁體中文 - Traditional Chinese</option>
-									</select>
-								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Time Zone</label>
-								<div class="col-lg-9 col-xl-6">
-									<select class="form-control form-control-lg form-control-solid">
-										<option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
-										<option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
-										<option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
-										<option data-offset="-36000" value="Hawaii">(GMT-10:00) Hawaii</option>
-										<option data-offset="-28800" value="Alaska">(GMT-08:00) Alaska</option>
-										<option data-offset="-25200" value="Pacific Time (US &amp; Canada)">(GMT-07:00) Pacific Time (US &amp; Canada)</option>
-										<option data-offset="-25200" value="Tijuana">(GMT-07:00) Tijuana</option>
-										<option data-offset="-25200" value="Arizona">(GMT-07:00) Arizona</option>
-										<option data-offset="-21600" value="Mountain Time (US &amp; Canada)">(GMT-06:00) Mountain Time (US &amp; Canada)</option>
-										<option data-offset="-21600" value="Chihuahua">(GMT-06:00) Chihuahua</option>
-										<option data-offset="-21600" value="Mazatlan">(GMT-06:00) Mazatlan</option>
-										<option data-offset="-21600" value="Saskatchewan">(GMT-06:00) Saskatchewan</option>
-										<option data-offset="-21600" value="Central America">(GMT-06:00) Central America</option>
-										<option data-offset="-18000" value="Central Time (US &amp; Canada)">(GMT-05:00) Central Time (US &amp; Canada)</option>
-										<option data-offset="-18000" value="Guadalajara">(GMT-05:00) Guadalajara</option>
-										<option data-offset="-18000" value="Mexico City">(GMT-05:00) Mexico City</option>
-										<option data-offset="-18000" value="Monterrey">(GMT-05:00) Monterrey</option>
-										<option data-offset="-18000" value="Bogota">(GMT-05:00) Bogota</option>
-										<option data-offset="-18000" value="Lima">(GMT-05:00) Lima</option>
-										<option data-offset="-18000" value="Quito">(GMT-05:00) Quito</option>
-										<option data-offset="-14400" value="Eastern Time (US &amp; Canada)">(GMT-04:00) Eastern Time (US &amp; Canada)</option>
-										<option data-offset="-14400" value="Indiana (East)">(GMT-04:00) Indiana (East)</option>
-										<option data-offset="-14400" value="Caracas">(GMT-04:00) Caracas</option>
-										<option data-offset="-14400" value="La Paz">(GMT-04:00) La Paz</option>
-										<option data-offset="-14400" value="Georgetown">(GMT-04:00) Georgetown</option>
-										<option data-offset="-10800" value="Atlantic Time (Canada)">(GMT-03:00) Atlantic Time (Canada)</option>
-										<option data-offset="-10800" value="Santiago">(GMT-03:00) Santiago</option>
-										<option data-offset="-10800" value="Brasilia">(GMT-03:00) Brasilia</option>
-										<option data-offset="-10800" value="Buenos Aires">(GMT-03:00) Buenos Aires</option>
-										<option data-offset="-9000" value="Newfoundland">(GMT-02:30) Newfoundland</option>
-										<option data-offset="-7200" value="Greenland">(GMT-02:00) Greenland</option>
-										<option data-offset="-7200" value="Mid-Atlantic">(GMT-02:00) Mid-Atlantic</option>
-										<option data-offset="-3600" value="Cape Verde Is.">(GMT-01:00) Cape Verde Is.</option>
-										<option data-offset="0" value="Azores">(GMT) Azores</option>
-										<option data-offset="0" value="Monrovia">(GMT) Monrovia</option>
-										<option data-offset="0" value="UTC">(GMT) UTC</option>
-										<option data-offset="3600" value="Dublin">(GMT+01:00) Dublin</option>
-										<option data-offset="3600" value="Edinburgh">(GMT+01:00) Edinburgh</option>
-										<option data-offset="3600" value="Lisbon">(GMT+01:00) Lisbon</option>
-										<option data-offset="3600" value="London">(GMT+01:00) London</option>
-										<option data-offset="3600" value="Casablanca">(GMT+01:00) Casablanca</option>
-										<option data-offset="3600" value="West Central Africa">(GMT+01:00) West Central Africa</option>
-										<option data-offset="7200" value="Belgrade">(GMT+02:00) Belgrade</option>
-										<option data-offset="7200" value="Bratislava">(GMT+02:00) Bratislava</option>
-										<option data-offset="7200" value="Budapest">(GMT+02:00) Budapest</option>
-										<option data-offset="7200" value="Ljubljana">(GMT+02:00) Ljubljana</option>
-										<option data-offset="7200" value="Prague">(GMT+02:00) Prague</option>
-										<option data-offset="7200" value="Sarajevo">(GMT+02:00) Sarajevo</option>
-										<option data-offset="7200" value="Skopje">(GMT+02:00) Skopje</option>
-										<option data-offset="7200" value="Warsaw">(GMT+02:00) Warsaw</option>
-										<option data-offset="7200" value="Zagreb">(GMT+02:00) Zagreb</option>
-										<option data-offset="7200" value="Brussels">(GMT+02:00) Brussels</option>
-										<option data-offset="7200" value="Copenhagen">(GMT+02:00) Copenhagen</option>
-										<option data-offset="7200" value="Madrid">(GMT+02:00) Madrid</option>
-										<option data-offset="7200" value="Paris">(GMT+02:00) Paris</option>
-										<option data-offset="7200" value="Amsterdam">(GMT+02:00) Amsterdam</option>
-										<option data-offset="7200" value="Berlin">(GMT+02:00) Berlin</option>
-										<option data-offset="7200" value="Bern">(GMT+02:00) Bern</option>
-										<option data-offset="7200" value="Rome">(GMT+02:00) Rome</option>
-										<option data-offset="7200" value="Stockholm">(GMT+02:00) Stockholm</option>
-										<option data-offset="7200" value="Vienna">(GMT+02:00) Vienna</option>
-										<option data-offset="7200" value="Cairo">(GMT+02:00) Cairo</option>
-										<option data-offset="7200" value="Harare">(GMT+02:00) Harare</option>
-										<option data-offset="7200" value="Pretoria">(GMT+02:00) Pretoria</option>
-										<option data-offset="10800" value="Bucharest">(GMT+03:00) Bucharest</option>
-										<option data-offset="10800" value="Helsinki">(GMT+03:00) Helsinki</option>
-										<option data-offset="10800" value="Kiev">(GMT+03:00) Kiev</option>
-										<option data-offset="10800" value="Kyiv">(GMT+03:00) Kyiv</option>
-										<option data-offset="10800" value="Riga">(GMT+03:00) Riga</option>
-										<option data-offset="10800" value="Sofia">(GMT+03:00) Sofia</option>
-										<option data-offset="10800" value="Tallinn">(GMT+03:00) Tallinn</option>
-										<option data-offset="10800" value="Vilnius">(GMT+03:00) Vilnius</option>
-										<option data-offset="10800" value="Athens">(GMT+03:00) Athens</option>
-										<option data-offset="10800" value="Istanbul">(GMT+03:00) Istanbul</option>
-										<option data-offset="10800" value="Minsk">(GMT+03:00) Minsk</option>
-										<option data-offset="10800" value="Jerusalem">(GMT+03:00) Jerusalem</option>
-										<option data-offset="10800" value="Moscow">(GMT+03:00) Moscow</option>
-										<option data-offset="10800" value="St. Petersburg">(GMT+03:00) St. Petersburg</option>
-										<option data-offset="10800" value="Volgograd">(GMT+03:00) Volgograd</option>
-										<option data-offset="10800" value="Kuwait">(GMT+03:00) Kuwait</option>
-										<option data-offset="10800" value="Riyadh">(GMT+03:00) Riyadh</option>
-										<option data-offset="10800" value="Nairobi">(GMT+03:00) Nairobi</option>
-										<option data-offset="10800" value="Baghdad">(GMT+03:00) Baghdad</option>
-										<option data-offset="14400" value="Abu Dhabi">(GMT+04:00) Abu Dhabi</option>
-										<option data-offset="14400" value="Muscat">(GMT+04:00) Muscat</option>
-										<option data-offset="14400" value="Baku">(GMT+04:00) Baku</option>
-										<option data-offset="14400" value="Tbilisi">(GMT+04:00) Tbilisi</option>
-										<option data-offset="14400" value="Yerevan">(GMT+04:00) Yerevan</option>
-										<option data-offset="16200" value="Tehran">(GMT+04:30) Tehran</option>
-										<option data-offset="16200" value="Kabul">(GMT+04:30) Kabul</option>
-										<option data-offset="18000" value="Ekaterinburg">(GMT+05:00) Ekaterinburg</option>
-										<option data-offset="18000" value="Islamabad">(GMT+05:00) Islamabad</option>
-										<option data-offset="18000" value="Karachi">(GMT+05:00) Karachi</option>
-										<option data-offset="18000" value="Tashkent">(GMT+05:00) Tashkent</option>
-										<option data-offset="19800" value="Chennai">(GMT+05:30) Chennai</option>
-										<option data-offset="19800" value="Kolkata">(GMT+05:30) Kolkata</option>
-										<option data-offset="19800" value="Mumbai">(GMT+05:30) Mumbai</option>
-										<option data-offset="19800" value="New Delhi">(GMT+05:30) New Delhi</option>
-										<option data-offset="19800" value="Sri Jayawardenepura">(GMT+05:30) Sri Jayawardenepura</option>
-										<option data-offset="20700" value="Kathmandu">(GMT+05:45) Kathmandu</option>
-										<option data-offset="21600" value="Astana">(GMT+06:00) Astana</option>
-										<option data-offset="21600" value="Dhaka">(GMT+06:00) Dhaka</option>
-										<option data-offset="21600" value="Almaty">(GMT+06:00) Almaty</option>
-										<option data-offset="21600" value="Urumqi">(GMT+06:00) Urumqi</option>
-										<option data-offset="23400" value="Rangoon">(GMT+06:30) Rangoon</option>
-										<option data-offset="25200" value="Novosibirsk">(GMT+07:00) Novosibirsk</option>
-										<option data-offset="25200" value="Bangkok">(GMT+07:00) Bangkok</option>
-										<option data-offset="25200" value="Hanoi">(GMT+07:00) Hanoi</option>
-										<option data-offset="25200" value="Jakarta">(GMT+07:00) Jakarta</option>
-										<option data-offset="25200" value="Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
-										<option data-offset="28800" value="Beijing">(GMT+08:00) Beijing</option>
-										<option data-offset="28800" value="Chongqing">(GMT+08:00) Chongqing</option>
-										<option data-offset="28800" value="Hong Kong">(GMT+08:00) Hong Kong</option>
-										<option data-offset="28800" value="Kuala Lumpur">(GMT+08:00) Kuala Lumpur</option>
-										<option data-offset="28800" value="Singapore">(GMT+08:00) Singapore</option>
-										<option data-offset="28800" value="Taipei">(GMT+08:00) Taipei</option>
-										<option data-offset="28800" value="Perth">(GMT+08:00) Perth</option>
-										<option data-offset="28800" value="Irkutsk">(GMT+08:00) Irkutsk</option>
-										<option data-offset="28800" value="Ulaan Bataar">(GMT+08:00) Ulaan Bataar</option>
-										<option data-offset="32400" value="Seoul">(GMT+09:00) Seoul</option>
-										<option data-offset="32400" value="Osaka">(GMT+09:00) Osaka</option>
-										<option data-offset="32400" value="Sapporo">(GMT+09:00) Sapporo</option>
-										<option data-offset="32400" value="Tokyo">(GMT+09:00) Tokyo</option>
-										<option data-offset="32400" value="Yakutsk">(GMT+09:00) Yakutsk</option>
-										<option data-offset="34200" value="Darwin">(GMT+09:30) Darwin</option>
-										<option data-offset="34200" value="Adelaide">(GMT+09:30) Adelaide</option>
-										<option data-offset="36000" value="Canberra">(GMT+10:00) Canberra</option>
-										<option data-offset="36000" value="Melbourne">(GMT+10:00) Melbourne</option>
-										<option data-offset="36000" value="Sydney">(GMT+10:00) Sydney</option>
-										<option data-offset="36000" value="Brisbane">(GMT+10:00) Brisbane</option>
-										<option data-offset="36000" value="Hobart">(GMT+10:00) Hobart</option>
-										<option data-offset="36000" value="Vladivostok">(GMT+10:00) Vladivostok</option>
-										<option data-offset="36000" value="Guam">(GMT+10:00) Guam</option>
-										<option data-offset="36000" value="Port Moresby">(GMT+10:00) Port Moresby</option>
-										<option data-offset="36000" value="Solomon Is.">(GMT+10:00) Solomon Is.</option>
-										<option data-offset="39600" value="Magadan">(GMT+11:00) Magadan</option>
-										<option data-offset="39600" value="New Caledonia">(GMT+11:00) New Caledonia</option>
-										<option data-offset="43200" value="Fiji">(GMT+12:00) Fiji</option>
-										<option data-offset="43200" value="Kamchatka">(GMT+12:00) Kamchatka</option>
-										<option data-offset="43200" value="Marshall Is.">(GMT+12:00) Marshall Is.</option>
-										<option data-offset="43200" value="Auckland">(GMT+12:00) Auckland</option>
-										<option data-offset="43200" value="Wellington">(GMT+12:00) Wellington</option>
-										<option data-offset="46800" value="Nuku'alofa">(GMT+13:00) Nuku'alofa</option>
-									</select>
-								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row align-items-center">
-								<label class="col-xl-3 col-lg-3 col-form-label">Communication</label>
-								<div class="col-lg-9 col-xl-6">
-									<div class="checkbox-inline">
-										<label class="checkbox">
-										<input type="checkbox" checked="checked" />
-										<span></span>Email</label>
-										<label class="checkbox">
-										<input type="checkbox" checked="checked" />
-										<span></span>SMS</label>
-										<label class="checkbox">
-										<input type="checkbox" />
-										<span></span>Phone</label>
 									</div>
 								</div>
+								</div>
 							</div>
-							<!--begin::Form Group-->
-							<div class="separator separator-dashed my-5"></div>
-							<!--begin::Form Group-->
+							<div class="w-100"></div>
+							<div class="col-sm">
 							<div class="row">
-								<label class="col-xl-3"></label>
-								<div class="col-lg-9 col-xl-6">
-									<h5 class="font-weight-bold mb-6">Security:</h5>
-								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Login verification</label>
-								<div class="col-lg-9 col-xl-6">
-									<button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
-									<p class="form-text text-muted pt-2">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised.
-									<a href="#" class="font-weight-bold">Learn more</a>.</p>
-								</div>
-							</div>
-							<!--begin::Form Group-->
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Password reset verification</label>
-								<div class="col-lg-9 col-xl-6">
-									<div class="checkbox-inline">
-										<label class="checkbox m-0">
-										<input type="checkbox" />
-										<span></span>Require personal information to reset your password.</label>
+								<div class="col-12 col-lg-12">
+								<div class="card">
+									<div class="card-header">
+									<strong>Attendance</strong>
 									</div>
-									<p class="form-text text-muted py-2">For extra security, this requires you to confirm your email or phone number when you reset your password.
-									<a href="#" class="font-weight-boldk">Learn more</a>.</p>
-									<button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button>
+									<div class="card-body">
+									<div class="row">
+										<div class="col-sm-12">
+										<table id="attendance" class="table table-bordered ">
+										<thead class="table-light">
+											<tr>
+											<th scope="col" style="color:#696969; text-align:center">Student ID</th>
+											<th scope="col" style="color:#696969; text-align:center">Student Name</th>
+											<th scope="col" style="color:#696969; text-align:center">Date</th>
+											<th scope="col" style="color:#696969; text-align:center">IN</th>
+											<th scope="col" style="color:#696969; text-align:center">OUT</th>
+											</tr>
+										</thead>
+										<?php
+										$filter3= ['Schools_id' => $_SESSION["loggeduser_schoolID"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
+										$query3= new MongoDB\Driver\Query($filter3);
+										$cursor3= $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query3);
+										$totalstudent = 0;
+										foreach ($cursor3 as $document3)
+										{
+											$totalstudent = $totalstudent+ 1;
+											$Consumer_id = ($document3->Consumer_id);
+											$idstudent = new \MongoDB\BSON\ObjectId($Consumer_id);
+											$filter4 = ['_id'=>$idstudent];
+											$query4 = new MongoDB\Driver\Query($filter4);
+											$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query4);
+											foreach ($cursor4 as $document4)
+											{
+											$_SESSION["studentclassid"] = strval($document4->_id);
+											$Consumer_id = ($document4->_id);
+											$ConsumerFName = ($document4->ConsumerFName);
+											$ConsumerLName = ($document4->ConsumerLName);
+											$ConsumerIDNo = ($document4->ConsumerIDNo);
+											}
+										?>
+										<tbody>
+										<tr>
+											<td class="default"><?php echo $ConsumerIDNo; ?></td>
+											<td class="default"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+										<?php
+										$Cards_id ='';
+										$filter1 = ['Consumer_id'=>$Consumer_id];
+										$query1 = new MongoDB\Driver\Query($filter1);
+										$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
+										foreach ($cursor1 as $document1)
+										{
+										$Cards_id = strval($document1->Cards_id);
+										}
+										$varnow = date("d-m-Y");
+										$today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
+										?>
+										<td class="default"><?php echo $varnow."<br>"; ?></td>
+										<td class="default"><?php
+										$varcounting = 0;
+										$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+										$optionA = ['sort' => ['_id' => 1]];
+										$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+										$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+										foreach ($cursorA as $documentA)
+										{
+											$AttendanceDate = ($documentA->AttendanceDate);
+											$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+											$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+											$varcounting = $varcounting +1;
+										if ($varcounting % 2)
+										{
+										echo date_format($AttendanceDate,"H:i:s")."<br>";
+										} 
+										else
+										{
+										}
+										}
+										?></td>
+										<td class="default"><?php
+										$varcounting = 0;
+										$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+										$optionA = ['sort' => ['_id' => 1]];
+										$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+										$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+										foreach ($cursorA as $documentA)
+										{
+											$AttendanceDate = ($documentA->AttendanceDate);
+											$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+											$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+											$varcounting = $varcounting +1;
+
+										if ($varcounting % 2)
+										{
+											echo date_format($AttendanceDate,"H:i:s")."<br>";
+										} 
+										else
+										{
+										}
+										}
+										?></td>
+										<?php
+										}
+										?>
+										</tr>
+									</tbody>
+									</table>
+									<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=classdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+								<?php
+								if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+								{
+
+								}
+								else
+								{
+								$attendance = ($_GET['attendance']);
+								?>
+								<script>
+									$(document).ready(function () {
+									$("#attendance").table2excel({
+										filename: "attendanceclass.xls"
+									});
+									});
+									
+								</script>
+								<?php
+								}
+								?>
+								<script type="text/javascript">
+								var rows = document.querySelectorAll('tr');
+
+								[...rows].forEach((r) => {
+								if (r.querySelectorAll('td:empty').length > 0) {
+								r.classList.add('highlight');
+								}
+								})
+								</script>
 								</div>
+							</div>
 							</div>
 						</div>
-					</form>
+						</div>
+					</div>
 					<!--end::Form-->
 				</div>
 				<!--end::Card-->
+				<?php
+				} 
+				else
+				{
+					?>
+					<!--begin::Card-->
+					<div class="card card-custom">
+						<!--begin::Header-->
+						<div class="card-header py-3">
+							<div class="card-title align-items-start flex-column">
+								<h3 class="card-label font-weight-bolder text-dark">Your Classroom</h3>
+								<span class="text-muted font-weight-bold font-size-sm mt-1"><?php echo $ClassName; ?></span>
+							</div>
+						</div>
+						<!--end::Header-->
+				    </div>
+					<?php
+				}
+				?>
 			</div>
 			<!--end::Content-->
 		</div>
@@ -557,3 +879,4 @@
 	<!--end::Container-->
 </div>
 <!--end::Entry-->
+<?php include ('view/pages/modal-updateclassremark.php'); ?>

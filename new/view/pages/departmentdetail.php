@@ -707,7 +707,7 @@ color:#ffffff;
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 </div>
-<?php include ('view/modal-updatedepartmentremark.php'); ?>
+<?php include ('view/pages/modal-updatedepartmentremark.php'); ?>
 <?php
 }
 else

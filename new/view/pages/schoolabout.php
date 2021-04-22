@@ -92,4 +92,4 @@
 </div>
 <!--end::Mixed Widget 1-->
 </div>
-<?php include ('view/modal-schoolabout.php'); ?>
+<?php include ('view/pages/modal-schoolabout.php'); ?>

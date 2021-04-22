@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <?php include ('model/overview.php'); ?>
+=======
+>>>>>>> 8081c11a3ddd5822cc4442f462932eb399ec13fb
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->

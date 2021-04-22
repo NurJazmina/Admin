@@ -515,5 +515,5 @@ foreach ($cursor as $document)
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 </div>
-<?php include ('view/modal-updateparentremark.php'); ?>
+<?php include ('view/pages/modal-updateparentremark.php'); ?>
 
