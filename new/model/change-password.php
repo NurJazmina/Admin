@@ -7,9 +7,9 @@ error_reporting(E_ALL);
 include '../connections/db.php';
 if (isset($_POST['ChangePasswordFormSubmit'])) {
   $options = ['cost' => 4,];
-  $varstaffpassword = password_hash($_POST['txtPassword'], PASSWORD_DEFAULT, $options);
+  $varstaffpassword = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
   
-  $loggedinid = $_POST['txtid'];
+  $loggedinid = $_SESSION["loggeduser_id"];
   $id = new \MongoDB\BSON\ObjectId($loggedinid);
   $bulk = new MongoDB\Driver\BulkWrite;
   $bulk->update(
@@ -45,7 +45,7 @@ if (isset($_POST['ChangePasswordFormSubmit'])) {
   printf("Other error: %s\n", $e->getMessage());
   exit;
 }
-header ('location: ../index.php?page=home&action=passwordchanged&id='.$_POST['txtid'].'&pass='.$varstaffpassword);
+header ('location: ../index.php?page=change-password&pass='.$varstaffpassword);
 }
 ?>
 <? ob_flush(); ?>

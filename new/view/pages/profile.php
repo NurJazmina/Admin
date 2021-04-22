@@ -105,17 +105,25 @@
                         <!--end::User-->
                         <!--begin::Contact-->
                         <div class="py-9">
+						    <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="font-weight-bold mr-2">ID Type:</span>
+								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerIDType"]; ?></a>
+                            </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Email:</span>
                                 <a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerEmail"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Phone:</span>
-                                <span class="text-muted"><?php echo $_SESSION["loggeduser_consumerPhone"]; ?></span>
+								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerPhone"]; ?></a>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Location:</span>
-                                <span class="text-muted"><?php echo $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></span>
+								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="font-weight-bold mr-2">Status:</span>
+								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerStatus"]; ?></a>
                             </div>
                         </div>
                         <!--end::Contact-->
@@ -173,10 +181,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-size-lg">Change Passwort</span>
-                                    <span class="navi-label">
-                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                    </span>
+                                    <span class="navi-text font-size-lg">Change Password</span>
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
@@ -217,6 +222,9 @@
                                         </span>
                                     </span>
                                     <span class="navi-text">Department Info</span>
+                                    <span class="navi-label">
+                                        <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                    </span>
                                 </a>
                             </div>
                         </div>

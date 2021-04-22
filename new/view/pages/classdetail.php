@@ -45,7 +45,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                     <ul class="navi flex-column navi-hover py-2">
                         <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
                         <?php 
-                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],];
+                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
                         $options = ['sort' => ['ClassCategory' => 1]];
                         $query = new MongoDB\Driver\Query($filter,$options);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
@@ -769,7 +769,7 @@ else
                             <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
                             <?php 
                             $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
-                            $query = new MongoDB\Driver\Query($filter,$options);
+                            $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                             foreach ($cursor as $document)
                             {
