@@ -683,4 +683,4 @@
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 
-<?php include ('view/modal-updatestudentremark.php'); ?>
+<?php include ('view/pages/modal-updatestudentremark.php'); ?>

@@ -564,5 +564,5 @@ else
 <?php
 }
 ?>
-<?php include ('view/modal-timetablelist.php'); ?>
+<?php include ('view/pages/modal-timetablelist.php'); ?>
 

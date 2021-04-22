@@ -588,4 +588,4 @@
 </div>
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
-<?php include ('view/modal-updatestaffremark.php'); ?>
+<?php include ('view/pages/modal-updatestaffremark.php'); ?>

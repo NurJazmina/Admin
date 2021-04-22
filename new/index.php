@@ -121,7 +121,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		    }
 		    ?>
         </div>
->>>>>>> c20456909e69b51f187ba600cf34b62c6fe046ab
 		<script>
 			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 		</script>

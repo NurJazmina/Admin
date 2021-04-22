@@ -488,4 +488,4 @@
                </div>
              </div>
             </div>
-<?php include ('view/modal-stafflist.php'); 
+<?php include ('view/pages/modal-stafflist.php'); 

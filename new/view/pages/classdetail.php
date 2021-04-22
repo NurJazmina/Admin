@@ -735,7 +735,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
   </div>
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   </div>
-  <?php include ('view/modal-updateclassremark.php'); ?>
+  <?php include ('view/pages/modal-updateclassremark.php'); ?>
   <?php
 }
 else
