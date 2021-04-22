@@ -131,7 +131,7 @@
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="index.php?page=overview" class="navi-link py-4 active">
+                                <a href="index.php?page=overview" class="navi-link py-4">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -167,7 +167,7 @@
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
-                                <a href="index.php?page=change-password" class="navi-link py-4">
+                                <a href="index.php?page=change-password" class="navi-link py-4 active">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg-->
