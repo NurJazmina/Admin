@@ -86,7 +86,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<?php include 'view/partials/_aside.html'; ?>
 						<!--begin::Wrapper-->
 						<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-							<?php include 'view/pages/_header.php'; ?>
+							<?php //include 'view/pages/_header.php'; ?>
 							<!--begin::Content-->
 							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 							<?php include 'view/partials/_subheader/subheader-v1.html'; ?>
