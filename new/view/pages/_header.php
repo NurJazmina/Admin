@@ -77,4 +77,9 @@
 </div>
 
 <!--end::Header-->
+				<!-- begin::User Panel-->
+				<div id="kt_quick_user" class="offcanvas offcanvas-right p-10 offcanvas-on">
+				<?php include 'view/pages/user.php'; ?>
+			    </div>
+				<!-- end::User Panel-->
 

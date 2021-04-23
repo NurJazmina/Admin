@@ -10,15 +10,15 @@
 <div class="row" >
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-8 section-1-box wow fadeInUp">
+    <?php
+    if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
+    {
+    ?>
         <div class="card">
             <div class="card-header">
                 <strong>SCHOOL</strong>
             </div>
             <!--SCHOOL-->
-            <?php
-            if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
-            {
-            ?>
             <div class="card-body">
             <div class="table-responsive-sm" style="line-height: 100%;">
                 <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "1"; ?>&topic=<?php echo "general" ?>">General</a><br><br>
@@ -26,10 +26,11 @@
                 <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "3"; ?>&topic=<?php echo "short news / info" ?>">Short News / Info</a><br><br>
             </div>
             </div>
-            <?php
-            }
-            ?>
-        </div><br>
+        </div>
+    <?php
+    }
+    ?>
+        <br>
 
         <div class="card">
             <div class="card-header">
