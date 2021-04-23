@@ -11,7 +11,7 @@
 												<!--end::Symbol-->
 
 												<!--begin::Text-->
-												<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">Sean Stone</div>
+												<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></div>
 
 												<!--end::Text-->
 											</div>
@@ -24,7 +24,7 @@
 										<div class="navi navi-spacer-x-0 pt-5">
 
 											<!--begin::Item-->
-											<a href="custom/apps/user/profile-1/personal-information.html" class="navi-item px-8">
+											<a href="index.php?page=profile" class="navi-item px-8">
 												<div class="navi-link">
 													<div class="navi-icon mr-2">
 														<i class="flaticon2-calendar-3 text-success"></i>
