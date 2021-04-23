@@ -96,7 +96,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<?php include 'view/pages/_header.php'; ?>
 							<!--begin::Content-->
 							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-							<?php include 'view/partials/_subheader/subheader-v1.html'; ?>
+							<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 							<!--Content area here-->
 								<div class="content content-fixed">
 									<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
@@ -107,7 +107,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								</div>
 							</div>
 							<!--end::Content-->
-							<?php include 'view/partials/_footer.html'; ?>
+							<?php //include 'view/partials/_footer.html'; ?>
 						</div>
 						<!--end::Wrapper-->
 					</div>

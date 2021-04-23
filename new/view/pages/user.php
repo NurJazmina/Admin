@@ -88,8 +88,7 @@
 											<!--begin::Footer-->
 											<div class="navi-separator mt-3"></div>
 											<div class="navi-footer px-8 py-5">
-												<a href="custom/user/login-v2.html" target="_blank" class="btn btn-light-primary font-weight-bold">Sign Out</a>
-												<a href="custom/user/login-v2.html" target="_blank" class="btn btn-clean font-weight-bold">Upgrade Plan</a>
+												<a href="model/logout.php" class="btn btn-light-primary font-weight-bold">Sign Out</a>
 											</div>
 
 											<!--end::Footer-->
