@@ -15,6 +15,7 @@
 					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 					$query = $_SERVER['QUERY_STRING'];
 					//echo $query; // Outputs: Query String
+
 					?> 
 					<h5 class="text-dark font-weight-bold my-1 mr-5">Dashboard</h5>
 					<!--end::Page Title-->

@@ -1,24 +1,62 @@
 <?php include ('model/stafflist.php'); ?>
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+
+					<?php
+					$uri = $_SERVER['REQUEST_URI'];
+					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+					$query = $_SERVER['QUERY_STRING'];
+					//echo $query; // Outputs: Query String
+
+					?> 
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Stafflist</h5>
+					<!--end::Page Title-->
+					<!--begin::Breadcrumb-->
+					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+						<li class="breadcrumb-item text-muted">
+							<a href="index.php?<?php echo $query; ?>" class="text-muted">Stafflist</a>
+						</li>
+						<li class="breadcrumb-item text-muted">
+							<a href="index.php?<?php echo $query; ?>" class="text-muted">none</a>
+						</li>
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+        <div class="col-12 col-sm-12 col-sm-12">
+              <form name="searchstaff" class="form-inline" action="index.php?page=stafflist" method="post">
+                <div class="col-12 col-sm-12 col-lg-12 text-right">
+                  <div class="row">
+                    <button type="button" style="width:25%"; class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
+                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
+                    <input  type="text" style="width:35%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
+                    <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchstaff" >Search</button>
+                  </div>
+                </div>
+              </form>
+        </div>
+			</div>
+			<!--end::Toolbar-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">
       <br><h1 style="color:#404040;">Staff List</h1>
-    </div>
-  </div>
-  <div class="col-12 col-sm-12 col-sm-12">
-     <div class="card">
-      <div class="card-body">
-        <form name="searchstaff" class="form-inline" action="index.php?page=stafflist" method="post">
-          <div class="col-12 col-sm-12 col-lg-5 text-right">
-            <div class="row">
-              <button type="button" style="width:25%"; class="btn btn-info"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
-              <button type="button" style="width:20%"; class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
-              <input  type="text" style="width:35%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
-              <button type="submit" style="width:20%"; class="btn btn-secondary" name="searchstaff" >Search</button>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </div>
