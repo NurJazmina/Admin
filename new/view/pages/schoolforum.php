@@ -6,7 +6,7 @@ $topic = ($_GET['topic']);
 <style>
 .button--tag.button-large, .topics--large .button--tag {
 
-    font-size: 15px;
+    font-size: 12px;
     padding: 4px 15px;
 }
 .button--tag.-inverted, .topics--inverted .button--tag {
@@ -47,6 +47,31 @@ $topic = ($_GET['topic']);
     height: 20px;
     width: 20px;
 }
+
+.card__header {
+    position: relative;
+}
+
+.card__reason:first-child {
+    border-bottom: 1px solid #ebeef2;
+    padding-bottom: 10px;
+}
+
+.card__reason {
+    font-size: 15px;
+    line-height: 1.45em;
+    padding: 10px 30px 10px 10px;
+}
+.align--middle {
+    -ms-flex-align: center;
+    align-items: center;
+}
+.align {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
 </style>
 <br><br><br>
 <div class="row" >
@@ -58,10 +83,9 @@ $topic = ($_GET['topic']);
         
         <div class="col-md-8 section-1-box wow fadeInUp">
         <div class="column">
-            <div class="card-header" style="color: #5e9164; background-color: #8bcf93;  border-radius: 8px; ">
+            <div class="modal-header" style="color: #5e9164; background-color: #8bcf93;  border-radius: 8px; ">
                 <div class="spacing-right">
                         <a href="index.php?page=modalforums&forum=<?php echo $sort; ?>&topic=<?php echo $topic; ?>" style="color:#ffffff; text-decoration: none;"><strong>ADD FORUMS </strong></a>
-                        <span class="button--tag -inverted button-large"><?php echo $_GET['topic']; ?></span>
                 </div>
             </div><br>
             <div class="card">
@@ -93,7 +117,7 @@ $topic = ($_GET['topic']);
         <div style="color: #5e9164; background-color: #8bcf93;  border-radius: 8px; ">
             <div class="modal-header">
                 <div class="spacing-right">
-                <strong>Channel Topic : </strong><span class="button--tag -inverted button-large"><?php echo $_GET['topic']; ?></span>
+                <strong>Channel Topic : </strong><a href="index.php?page=forums" class="button--tag -inverted button-large" style="color:#ffffff;" >Forum</a>/<span class="button--tag -inverted button-large"><?php echo $_GET['topic']; ?></span>
                 </div>
             </div>
         </div><br>
@@ -157,17 +181,13 @@ $topic = ($_GET['topic']);
                 $ConsumerLName = ($document1->ConsumerLName);
                 ?>
                 <div class="card">
-                    <div class="card-header ">
-                        <div class="spacing-right">
-                          <div class="row">
-                          <div class="col-lg-12">
+                    <div class="card__header -feed">
+                          <div class="card__reason link-inner-gray-dark align align--middle">
                                 <img class="img-round-sm" src="//a.disquscdn.com/1617742046/images/noavatar92.png">
                                 <a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#2e9fff; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
-                                <a style="color:#687a86;">Started a discussion</a>
+                                <a style="color:#687a86;"> Started a discussion</a>
                                 <a style="color:#687a86;"><?php echo " . ".time_elapsed($nowtime-$oldtime)."\n"; ?></a>
                           </div>
-                          </div>
-                        </div>
                     </div>
                     <div class="card-body">
                         <div class="spacing-right">
@@ -249,60 +269,7 @@ $topic = ($_GET['topic']);
                 <strong>Details</strong>
             </div>
             <div class="card-body">
-                <div class="spacing-right">
-                <div class="padding-gutter">
-                    <div class="guidelines expanded" data-role="guidelines">
-                    <p class="spacing-bottom">The following are not allowed on SmartSchool:</p>
 
-                    <ol class="list-num spacing-bottom">
-                    <li>Targeted harassment or encouraging others</li>
-                    <li>Spam</li>
-                    <li>Impersonation</li>
-                    <li>Direct threat of harm</li>
-                    <li>Posting personally identifiable information</li>
-                    <li>Inappropriate profile content</li>
-                    </ol>
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <a class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Show guidelines
-                        </button>
-                        </a>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-
-                        <p><strong>Targeted harassment or encouraging others to do so</strong></p>
-                        <p class="spacing-bottom">The targeted and systematic harassment of people has no place on SmartSchool, nor do we tolerate communities dedicated to fostering harassing behavior.</p>
-
-                        <p><strong>Spam</strong></p>
-                        <p class="spacing-bottom">Examples include 1) comments posted in large quantities to promote a product or service, 2) the exact same comment posted repeatedly to disrupt a thread. 3) following users multiple times</p>
-
-                        <p><strong>Impersonation</strong></p>
-                        <p class="spacing-bottom">You may not impersonate others in a manner that does or is intended to mislead, confuse, or deceive others.</p>
-
-                        <p><strong>Direct threat of harm</strong></p>
-                        <p class="spacing-bottom">This covers active threats of harm directed towards a specific person or defined group of individuals. Contact local authorities if you feel a crime has been committed or is imminent.</p>
-
-                        <p><strong>Posting personally identifiable information</strong></p>
-                        <p class="spacing-bottom">Examples of protected information: credit card number, home/work address, phone number, email address, social security number. Real name isn't currently covered.</p>
-
-                        <p><strong>Inappropriate profile content</strong></p>
-                        <p class="spacing-bottom">Graphic media containing violence and pornographic content are not allowed. Profile content allowed by SmartSchool may not be allowed on all communitie, so report such profiles to the site moderator.</p>
-
-                        <p class="spacing-bottom">Read the <a href="#">Basic Rules</a>.</p>
-                        </div>
-
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    
-
-                    </div>
-                </div>
-            </div>
             </div>
         </div>  
 

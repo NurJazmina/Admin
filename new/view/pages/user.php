@@ -1,4 +1,4 @@
-
+<div id="kt_quick_user" class="offcanvas offcanvas-right p-10 offcanvas-on">
 	<!--begin::Header-->
 	<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5" kt-hidden-height="40" style="">
 		<h3 class="font-weight-bold m-0">User Profile
@@ -17,7 +17,7 @@
 				<i class="symbol-badge bg-success"></i>
 			</div>
 			<div class="d-flex flex-column">
-				<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
+				<a href="" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
 				<div class="text-muted mt-1"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
 				<div class="navi mt-2">
 					<a href="#" class="navi-item">
@@ -272,3 +272,4 @@
 		<!--end::Notifications-->
 	</div>
 	<!--end::Content-->
+	</div>

@@ -20,11 +20,11 @@
             {
             ?>
             <div class="card-body">
-            <div class="table-responsive-sm">
-                <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "1"; ?>&topic=<?php echo "general" ?>">General</a><br><br>
-                <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "2"; ?>&topic=<?php echo "proposal" ?>">Proposal</a><br><br>
-                <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "3"; ?>&topic=<?php echo "short news / info" ?>">Short News / Info</a><br><br>
-            </div>
+                <div class="table-responsive-sm" style="line-height: 80%;">
+                    <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "1"; ?>&topic=<?php echo "general" ?>">General</a><br><br>
+                    <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "2"; ?>&topic=<?php echo "proposal" ?>">Proposal</a><br><br>
+                    <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "3"; ?>&topic=<?php echo "short news / info" ?>">Short News / Info</a><br><br>
+                </div>
             </div>
             <?php
             }

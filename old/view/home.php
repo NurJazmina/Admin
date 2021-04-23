@@ -274,7 +274,8 @@
                 $SchoolEventStaff_id = ($documentA->SchoolEventStaff_id);
                 $schoolEventTitle = ($documentA->schoolEventTitle);
                 $schoolEventVenue = ($documentA->schoolEventVenue);
-                $SchoolEventDate = ($documentA->SchoolEventDate);
+                $SchoolEventDateStart = ($documentA->SchoolEventDateStart);
+                $SchoolEventDateEnd = ($documentA->SchoolEventDateEnd);
                 $SchoolEventStatus = ($documentA->SchoolEventStatus);
                 $Access = ($documentA->SchoolEventAccess);
             
@@ -304,8 +305,10 @@
                         }
                     }
                 }
-                $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDate));
-                $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
+                $datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateEnd));
+                $datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                 ?>
               <div class="card">
             <div class="card-header">

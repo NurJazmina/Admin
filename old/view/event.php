@@ -10,14 +10,14 @@
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
   foreach ($cursorA as $documentA)
   {
-    $eventid = strval($document->_id);
-    $SchoolEventStaff_id = ($document->SchoolEventStaff_id);
-    $schoolEventTitle = ($document->schoolEventTitle);
-    $schoolEventVenue = ($document->schoolEventVenue);
-    $schoolEventLocation = ($document->schoolEventLocation);
-    $SchoolEventDateStart = ($document->SchoolEventDateStart);
-    $SchoolEventDateEnd = ($document->SchoolEventDateEnd);
-    $SchoolEventStatus = ($document->SchoolEventStatus);
+    $eventid = strval($documentA->_id);
+    $SchoolEventStaff_id = ($documentA->SchoolEventStaff_id);
+    $schoolEventTitle = ($documentA->schoolEventTitle);
+    $schoolEventVenue = ($documentA->schoolEventVenue);
+    $schoolEventLocation = ($documentA->schoolEventLocation);
+    $SchoolEventDateStart = ($documentA->SchoolEventDateStart);
+    $SchoolEventDateEnd = ($documentA->SchoolEventDateEnd);
+    $SchoolEventStatus = ($documentA->SchoolEventStatus);
 
     $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
     $datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -52,7 +52,7 @@
     ?>
   <div class="card">
 <div class="card-header">
-  <strong><a href="index.php?page=eventdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolEventTitle; ?></a></strong>
+  <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" target="_blank"><?php echo $schoolEventTitle; ?></a></strong>
 </div>
 <div class="card-body">
   <div class="table-responsive-sm">
