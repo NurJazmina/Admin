@@ -39,6 +39,7 @@
           {
 
             $_SESSION["loggeduser_schoolID"] = strval($document1->SchoolID);
+            $_SESSION["Staffdepartment"] = strval($document1->Staffdepartment);
             $schoolid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_schoolID"]);
             $filter2 = ['_id'=>$schoolid];
             $query2 = new MongoDB\Driver\Query($filter2);
@@ -52,12 +53,23 @@
               $_SESSION["loggeduser_SchoolsEmail"] = ($document2->SchoolsEmail);
             }
             header ('location: index.php?page=dashboard&action=loginsuccesful');
+
+            $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["Staffdepartment"]);
+            $filter3 = ['_id'=>$departmentid];
+            $query3 = new MongoDB\Driver\Query($filter3);
+            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+   
+            foreach ($cursor3 as $document3)
+            {
+              $_SESSION["loggeduser_DepartmentName"] = strval($document3->DepartmentName);
+            }
+
           }
          $_SESSION["loggeduser_teacherid"] = ($document1->_id);
          $_SESSION["loggeduser_StaffLevel"] = ($document1->StaffLevel);
          $_SESSION["loggeduser_ConsumerID"] = ($document1->ConsumerID);
          $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);
-         $_SESSION["Staffdepartment"] = strval($document1->Staffdepartment);
+         $_SESSION["loggeduser_Staffdepartment"] = strval($document1->Staffdepartment);
        }
        else
        {

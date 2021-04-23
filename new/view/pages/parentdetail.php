@@ -1,102 +1,177 @@
 <?php
 $id = new \MongoDB\BSON\ObjectId($_GET['id']);
-$filter = ['_id'=>$id];
+$filter = ['_id' => $id];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
 foreach ($cursor as $document)
 {
-  $_SESSION["departmentremarkid"] = strval($document->_id);
-  $DepartmentName = ($document->DepartmentName);
-  $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$_SESSION["departmentremarkid"]];
-  $query1 = new MongoDB\Driver\Query($filter1);
-  $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
-  $totalstaff = 0;
-  foreach ($cursor1 as $document1)
-  {
-    $totalstaff = $totalstaff + 1;
-    $Staffdepartment = strval($document1->Staffdepartment);
-  }
+    $_SESSION["parentremarkid"] = strval($document->_id);
+    $consumerid = strval($document->_id);
+    $ConsumerFName = ($document->ConsumerFName);
+    $ConsumerLName = ($document->ConsumerLName);
+    $ConsumerIDType = ($document->ConsumerIDType);
+    $ConsumerIDNo = ($document->ConsumerIDNo);
+    $ConsumerEmail = ($document->ConsumerEmail);
+    $ConsumerPhone = ($document->ConsumerPhone);
+    $ConsumerAddress = ($document->ConsumerAddress);
+    $ConsumerStatus = ($document->ConsumerStatus);
+
+    $filter0 = ['ConsumerID'=>$consumerid];
+    $query0 = new MongoDB\Driver\Query($filter0);
+    $cursor0 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query0);
+    foreach ($cursor0 as $document0)
+    {
+      $parentid = strval($document0->_id);
+    }
 }
 ?>
-<div><br><br><br><h1 style="color:#696969; text-align:center">Department Info</h1></div><br>
-<div class="row" >
+<div><br><br><br><h1 style="color:#696969; text-align:center">Parent Personal Info</h1>
+<div class="row">
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
-    <div class="card">
-      <div class="card-header">
-        <strong>Details</strong>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-lg-6">
-            <div class="table-responsive">
+      <div class="card">
+        <div class="card-header">
+          <strong>Details</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-lg-6">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="table-light">
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="table-secondary">Name</th>
+                      <td class="table-secondary">
+                        <?php echo $ConsumerFName." ".$ConsumerLName;
+                        ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">ID Type</th>
+                      <td>
+                        <?php echo $ConsumerIDType; ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">ID Number</th>
+                      <td>
+                        <?php echo $ConsumerIDNo; ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Email</th>
+                      <td>
+                        <?php echo $ConsumerEmail; ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Phone Number</th>
+                      <td>
+                        <?php echo $ConsumerPhone; ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Address</th>
+                      <td>
+                        <?php echo $ConsumerAddress; ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Status</th>
+                      <td>
+                        <?php echo $ConsumerStatus; ?>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              <?php
+              $varcount = 1;
+              do
+              {
+              $filter1 = ['ParentID'=>$parentid];
+              $query1 = new MongoDB\Driver\Query($filter1);
+              $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query1);
+              foreach ($cursor1 as $document1)
+              {
+              $ParentStudentRelation = ($document1->ParentStudentRelation);
+              $StudentID = ($document1->StudentID);
+              $studentid = new \MongoDB\BSON\ObjectId($StudentID);
+              $filter2 = ['_id'=>$studentid];
+              $query2 = new MongoDB\Driver\Query($filter2);
+              $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query2);
+              foreach ($cursor2 as $document2)
+              {
+              $Consumer_id = strval($document2->Consumer_id);
+              $studentid = new \MongoDB\BSON\ObjectId($Consumer_id);
+              $filter3 = ['_id'=>$studentid];
+              $query3 = new MongoDB\Driver\Query($filter3);
+              $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query3);
+              foreach ($cursor3 as $document3)
+              {
+                $ParentFName = ($document3->ConsumerFName);
+                $ParentLName = ($document3->ConsumerLName);
+                $ParentIDNo = ($document3->ConsumerIDNo);
+                $ParentEmail = ($document3->ConsumerEmail);
+                $ParentPhone = ($document3->ConsumerPhone);
+              ?>
               <table class="table table-bordered">
               <thead class="table-light">
-              </thead>
               <tbody>
                 <tr>
-                  <th scope="row" class="table-secondary">Department</th>
-                  <td class="table-secondary"><?php echo $DepartmentName; ?> </td>
+                  <th scope="row" class="table-secondary">Relation</th>
+                  <td class="table-secondary">Child</td>
                 </tr>
                 <tr>
-                  <th scope="row">Staff List </th>
-                  <td>
-                  <?php
-                  $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'Staffdepartment'=>$_SESSION["departmentremarkid"]];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                  $totalstaff = 0;
-                  foreach ($cursor as $document)
-                  {
-                    $totalstaff = $totalstaff + 1;
-                    $ConsumerID = strval($document->ConsumerID);
-                    $id = new \MongoDB\BSON\ObjectId($ConsumerID);
-                    $filter1 = ['_id'=>$id];
-                    $query1 = new MongoDB\Driver\Query($filter1);
-                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                    foreach ($cursor1 as $document1)
-                    {
-                      $Consumer_id = ($document1->_id);
-                      $ConsumerFName = ($document1->ConsumerFName);
-                      ?>
-                      <a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#076d79; text-decoration: none;">
-                      <?php
-                      echo $ConsumerFName."<br>";
-                    }
-                  }
-                  ?>
-                </td>
+                  <th scope="row">Name</th>
+                  <td><?php echo $ParentFName; echo " "; echo $ParentLName; ?> </td>
                 </tr>
                 <tr>
-                  <th scope="row">Number of Staff</th>
-                  <td><?php echo $totalstaff; ?></td>
+                <th scope="row">ID Number</th>
+                <td><?php echo $ParentIDNo; ?></td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                <td><?php echo $ParentEmail; ?></td>
+                </tr>
+                <tr>
+                   <th scope="row">Phone Number</th>
+                    <td><?php echo $ParentPhone; ?></td>
                 </tr>
               </tbody>
-              </table>
+                </table>
+              <?php
+              }
+              }
+              }
+              $varcount = $varcount + 1;
+              }
+              while ($varcount <= 1);
+              ?>
+              </div>
             </div>
-          </div>
-          <div class="col-12 col-lg-6">
-            <div class="row">
-              <div class="col-12 col-lg-12">
-                <div class="card">
-                  <div class="card-header">
-                    <strong>Remarks</strong>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-12">
-                      <div class="tab-content" id="v-pills-tabContent">
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-12 col-lg-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <strong>Remarks</strong>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12">
+                        <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                           <div class="box">
-                            <form name="AddDepartmentRemarkFormSubmit" action="model/adddepartmentremark.php" method="POST">
+                            <form name="AddParentRemarkFormSubmit" action="model/addparentremark.php" method="POST">
                             <div class="row">
                               <div class="col">
-                                  <textarea class="form-control" name="txtdepartmentRemark" rows="3"></textarea>
+                                  <textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
                                   <div class="row">
                                     <div class="col text-right">
-                                      <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtdepartmentid">
-                                      <button type="submit" class="btn btn-primary" name="AddDepartmentRemarkFormSubmit">Add remark</button>
+                                      <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
+                                      <button type="submit" class="btn btn-primary" name="AddParentRemarkFormSubmit">Add remark</button>
                                     </div>
                                   </div>
                                 </div>
@@ -130,20 +205,20 @@ foreach ($cursor as $document)
                                   </thead>
                                 </table>
                                 <?php
-                                $filter2 = ['department_id'=>$_GET['id'],'SubRemarks'=>'0','departmentRemarksStatus'=>'ACTIVE'];
+                                $filter2 = ['Consumer_id'=>$_GET['id'],'SubRemarks'=>'0','ConsumerRemarksStatus'=>'ACTIVE'];
                                 $option2 = ['sort' => ['_id' => -1],'limit'=>10];
                                 $query2 = new MongoDB\Driver\Query($filter2, $option2);
-                                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
+                                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentRemarks',$query2);
 
                                 foreach ($cursor2 as $document2)
                                 {
-                                  $_SESSION["departmentparent"] = strval($document2->_id);
-                                  $remarkid1 = strval($document2->_id);
-                                  $remark1 = ($document2->departmentRemarksDetails);
-                                  $remarkdate1 = ($document2->departmentRemarksDate);
-                                  $utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
-                                  $datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                  $remarkstaffid1 = ($document2->departmentRemarksStaff_id);
+                                  $_SESSION["staffremarkidparent"] = strval($document2->_id);
+                                  $remarkid = strval($document2->_id);
+                                  $parentremark = ($document2->ConsumerRemarksDetails);
+                                  $consumerremarkdate = ($document2->ConsumerRemarksDate);
+                                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($consumerremarkdate));
+                                  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                  $parentremarkstaffid = ($document2->ConsumerRemarksStaff_id);
                                   ?>
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                     <div class="accordion-item" >
@@ -151,10 +226,11 @@ foreach ($cursor as $document)
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                         <tbody>
                                           <tr>
-                                          <td><?php print_r($datetime1->format('r')); ?></td>
+                                          <td><?php print_r($datetime->format('r')); ?></td>
                                           <td>
                                             <?php
-                                            $filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+                                            $varstaffid1 = new \MongoDB\BSON\ObjectId($parentremarkstaffid);
+                                            $filter1 = ['_id' => $varstaffid1];
                                             $query1 = new MongoDB\Driver\Query($filter1);
                                             $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
                                             foreach ($cursor1 as $document1)
@@ -163,32 +239,31 @@ foreach ($cursor as $document)
                                             echo $ConsumerFName;
                                             ?>
                                           </td>
-                                          <td><?php echo $remark1;?></td>
+                                          <td><?php echo $parentremark;?></td>
                                           </tr>
                                           </tbody>
                                         </button>
                                       </h6>
                                       <div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                       <?php 
-                                      $filter4 = ['department_id'=>$_GET['id'],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'ACTIVE'];
+                                      $filter4 = ['Consumer_id'=>$_GET['id'],'SubRemarks'=>$_SESSION["staffremarkidparent"],'ConsumerRemarksStatus'=>'ACTIVE'];
                                       $option4 = ['sort' => ['_id' => -1],'limit'=>10];
                                       $query4 = new MongoDB\Driver\Query($filter4, $option4);
-                                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+                                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentRemarks',$query4);
                                       foreach ($cursor4 as $document4)
                                       {
-                                        $remarkid2 = strval($document4->_id);
-                                        $remark2 = ($document4->departmentRemarksDetails);
-                                        $remarkdate2 = ($document4->departmentRemarksDate);
-                                        $utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
-                                        $datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                        $remarkstaffid2 = ($document4->departmentRemarksStaff_id);
+                                        $childremark = ($document4->ConsumerRemarksDetails);
+                                        $consumerremarkdate = (($document4->ConsumerRemarksDate));
+                                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($consumerremarkdate));
+                                        $date = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                        $childremarkstaffid = ($document4->ConsumerRemarksStaff_id);
                                         ?>
                                         <div class="accordion-body">
                                         <tbody>
                                           <tr>
-                                            <td><?php print_r($datetime2->format('r')); ?></td>
+                                            <td><?php print_r($date->format('r')); ?></td>
                                             <td>
-                                              <?php echo $remark2;?>
+                                              <?php echo $childremark;?>
                                             </td>
                                           </tr>
                                           </tbody>
@@ -196,21 +271,21 @@ foreach ($cursor as $document)
                                         <?php
                                         }
                                         ?>
-                                        <form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
+                                        <form name="AddParentRemarkChildFormSubmit" action="model/addparentremarkchild.php" method="POST">
                                         <div class="row">
                                           <div class="col">
                                             <textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
                                             <div class="row">
                                               <div class="col text-right">
                                                 <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
-                                                <input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
-                                                <button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+                                                <input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
+                                                <button type="submit" class="btn btn-primary" name="AddParentRemarkChildFormSubmit">Add remark</button>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                         </form>
-                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateParentremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;  ">update</button>
                                       </div>
                                       </div>
                                     </div>
@@ -232,20 +307,20 @@ foreach ($cursor as $document)
                                   </thead>
                                 </table>
                                 <?php
-                                $filter2 = ['department_id'=>$_GET['id'],'SubRemarks'=>'0','departmentRemarksStatus'=>'PENDING'];
+                                $filter2 = ['Consumer_id'=>$_GET['id'],'SubRemarks'=>'0','ConsumerRemarksStatus'=>'PENDING'];
                                 $option2 = ['sort' => ['_id' => -1],'limit'=>10];
                                 $query2 = new MongoDB\Driver\Query($filter2, $option2);
-                                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
+                                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentRemarks',$query2);
 
                                 foreach ($cursor2 as $document2)
                                 {
-                                  $_SESSION["departmentparent"] = strval($document2->_id);
-                                  $remarkid1 = strval($document2->_id);
-                                  $remark1 = ($document2->departmentRemarksDetails);
-                                  $remarkdate1 = ($document2->departmentRemarksDate);
-                                  $utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
-                                  $datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                  $remarkstaffid1 = ($document2->departmentRemarksStaff_id);
+                                  $_SESSION["staffremarkidparent"] = strval($document2->_id);
+                                  $remarkid = strval($document2->_id);
+                                  $parentremark = ($document2->ConsumerRemarksDetails);
+                                  $consumerremarkdate = ($document2->ConsumerRemarksDate);
+                                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($consumerremarkdate));
+                                  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                  $parentremarkstaffid = ($document2->ConsumerRemarksStaff_id);
                                   ?>
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                     <div class="accordion-item" >
@@ -253,10 +328,11 @@ foreach ($cursor as $document)
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                         <tbody>
                                           <tr>
-                                          <td><?php print_r($datetime1->format('r')); ?></td>
+                                          <td><?php print_r($datetime->format('r')); ?></td>
                                           <td>
                                             <?php
-                                            $filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+                                            $varstaffid1 = new \MongoDB\BSON\ObjectId($parentremarkstaffid);
+                                            $filter1 = ['_id' => $varstaffid1];
                                             $query1 = new MongoDB\Driver\Query($filter1);
                                             $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
                                             foreach ($cursor1 as $document1)
@@ -265,32 +341,31 @@ foreach ($cursor as $document)
                                             echo $ConsumerFName;
                                             ?>
                                           </td>
-                                          <td><?php echo $remark1;?></td>
+                                          <td><?php echo $parentremark;?></td>
                                           </tr>
                                           </tbody>
                                         </button>
                                       </h6>
-                                      <div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                       <?php 
-                                      $filter4 = ['department_id'=>$_GET['id'],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'PENDING'];
+                                      $filter4 = ['Consumer_id'=>$_GET['id'],'SubRemarks'=>$_SESSION["staffremarkidparent"],'ConsumerRemarksStatus'=>'PENDING'];
                                       $option4 = ['sort' => ['_id' => -1],'limit'=>10];
                                       $query4 = new MongoDB\Driver\Query($filter4, $option4);
-                                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+                                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentRemarks',$query4);
                                       foreach ($cursor4 as $document4)
                                       {
-                                        $remarkid2 = strval($document4->_id);
-                                        $remark2 = ($document4->departmentRemarksDetails);
-                                        $remarkdate2 = ($document4->departmentRemarksDate);
-                                        $utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
-                                        $datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                        $remarkstaffid2 = ($document4->departmentRemarksStaff_id);
+                                        $childremark = ($document4->ConsumerRemarksDetails);
+                                        $consumerremarkdate = (($document4->ConsumerRemarksDate));
+                                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($consumerremarkdate));
+                                        $date = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                        $childremarkstaffid = ($document4->ConsumerRemarksStaff_id);
                                         ?>
                                         <div class="accordion-body">
                                         <tbody>
                                           <tr>
-                                            <td><?php print_r($datetime2->format('r')); ?></td>
+                                            <td><?php print_r($date->format('r')); ?></td>
                                             <td>
-                                              <?php echo $remark2;?>
+                                              <?php echo $childremark;?>
                                             </td>
                                           </tr>
                                           </tbody>
@@ -298,7 +373,7 @@ foreach ($cursor as $document)
                                         <?php
                                         }
                                         ?>
-                                        <form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
+                                        <form name="AddParentRemarkChildFormSubmit" action="model/addparentremarkchild.php" method="POST">
                                         <div class="row">
                                           <div class="col">
                                             <textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
@@ -306,13 +381,13 @@ foreach ($cursor as $document)
                                               <div class="col text-right">
                                                 <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
                                                 <input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-                                                <button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+                                                <button type="submit" class="btn btn-primary" name="AddParentRemarkChildFormSubmit">Add remark</button>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                         </form>
-                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateParentremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;">update</button>
                                       </div>
                                       </div>
                                     </div>
@@ -334,20 +409,20 @@ foreach ($cursor as $document)
                                   </thead>
                                 </table>
                                 <?php
-                                $filter2 = ['department_id'=>$_GET['id'],'SubRemarks'=>'0','departmentRemarksStatus'=>'COMPLETED'];
+                                $filter2 = ['Consumer_id'=>$_GET['id'],'SubRemarks'=>'0','ConsumerRemarksStatus'=>'COMPLETED'];
                                 $option2 = ['sort' => ['_id' => -1],'limit'=>10];
                                 $query2 = new MongoDB\Driver\Query($filter2, $option2);
-                                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
+                                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentRemarks',$query2);
 
                                 foreach ($cursor2 as $document2)
                                 {
-                                  $_SESSION["departmentparent"] = strval($document2->_id);
-                                  $remarkid1 = strval($document2->_id);
-                                  $remark1 = ($document2->departmentRemarksDetails);
-                                  $remarkdate1 = ($document2->departmentRemarksDate);
-                                  $utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
-                                  $datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                  $remarkstaffid1 = ($document2->departmentRemarksStaff_id);
+                                  $_SESSION["staffremarkidparent"] = strval($document2->_id);
+                                  $remarkid = strval($document2->_id);
+                                  $parentremark = ($document2->ConsumerRemarksDetails);
+                                  $consumerremarkdate = ($document2->ConsumerRemarksDate);
+                                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($consumerremarkdate));
+                                  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                  $parentremarkstaffid = ($document2->ConsumerRemarksStaff_id);
                                   ?>
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                     <div class="accordion-item" >
@@ -355,10 +430,11 @@ foreach ($cursor as $document)
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                         <tbody>
                                           <tr>
-                                          <td><?php print_r($datetime1->format('r')); ?></td>
+                                          <td><?php print_r($datetime->format('r')); ?></td>
                                           <td>
                                             <?php
-                                            $filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+                                            $varstaffid1 = new \MongoDB\BSON\ObjectId($parentremarkstaffid);
+                                            $filter1 = ['_id' => $varstaffid1];
                                             $query1 = new MongoDB\Driver\Query($filter1);
                                             $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
                                             foreach ($cursor1 as $document1)
@@ -367,32 +443,31 @@ foreach ($cursor as $document)
                                             echo $ConsumerFName;
                                             ?>
                                           </td>
-                                          <td><?php echo $remark1;?></td>
+                                          <td><?php echo $parentremark;?></td>
                                           </tr>
                                           </tbody>
                                         </button>
                                       </h6>
-                                      <div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                       <?php 
-                                      $filter4 = ['department_id'=>$_GET['id'],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'COMPLETED'];
+                                      $filter4 = ['Consumer_id'=>$_GET['id'],'SubRemarks'=>$_SESSION["staffremarkidparent"],'ConsumerRemarksStatus'=>'COMPLETED'];
                                       $option4 = ['sort' => ['_id' => -1],'limit'=>10];
                                       $query4 = new MongoDB\Driver\Query($filter4, $option4);
-                                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+                                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentRemarks',$query4);
                                       foreach ($cursor4 as $document4)
                                       {
-                                        $remarkid2 = strval($document4->_id);
-                                        $remark2 = ($document4->departmentRemarksDetails);
-                                        $remarkdate2 = ($document4->departmentRemarksDate);
-                                        $utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
-                                        $datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                        $remarkstaffid2 = ($document4->departmentRemarksStaff_id);
+                                        $childremark = ($document4->ConsumerRemarksDetails);
+                                        $consumerremarkdate = (($document4->ConsumerRemarksDate));
+                                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($consumerremarkdate));
+                                        $date = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                        $childremarkstaffid = ($document4->ConsumerRemarksStaff_id);
                                         ?>
                                         <div class="accordion-body">
                                         <tbody>
                                           <tr>
-                                            <td><?php print_r($datetime2->format('r')); ?></td>
+                                            <td><?php print_r($date->format('r')); ?></td>
                                             <td>
-                                              <?php echo $remark2;?>
+                                              <?php echo $childremark;?>
                                             </td>
                                           </tr>
                                           </tbody>
@@ -400,7 +475,7 @@ foreach ($cursor as $document)
                                         <?php
                                         }
                                         ?>
-                                        <form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
+                                        <form name="AddParentRemarkChildFormSubmit" action="model/addparentremarkchild.php" method="POST">
                                         <div class="row">
                                           <div class="col">
                                             <textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
@@ -408,13 +483,13 @@ foreach ($cursor as $document)
                                               <div class="col text-right">
                                                 <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
                                                 <input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-                                                <button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+                                                <button type="submit" class="btn btn-primary" name="AddParentRemarkChildFormSubmit">Add remark</button>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                         </form>
-                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateParentremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;">update</button>
                                       </div>
                                       </div>
                                     </div>
@@ -425,6 +500,7 @@ foreach ($cursor as $document)
                               </div>
                             </div>
                           </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -439,4 +515,5 @@ foreach ($cursor as $document)
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 </div>
-<?php include ('view/modal-updatedepartmentremark.php'); ?>
+<?php include ('view/pages/modal-updateparentremark.php'); ?>
+
