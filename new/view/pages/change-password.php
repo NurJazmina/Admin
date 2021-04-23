@@ -292,6 +292,7 @@
                                 </div>
 							</div>
                             <div class="card-toolbar" style="text-align:right;">
+                                <input type="hidden" name="txtid" value="<?php echo $_SESSION["loggeduser_id"]; ?>">
                                 <button type="submit" class="btn btn-success mr-2" name="ChangePasswordFormSubmit">Save Changes</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>

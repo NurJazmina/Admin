@@ -9,7 +9,7 @@ if (isset($_POST['ChangePasswordFormSubmit'])) {
   $options = ['cost' => 4,];
   $varstaffpassword = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
   
-  $loggedinid = $_SESSION["loggeduser_id"];
+  $loggedinid = $_POST['txtid'];
   $id = new \MongoDB\BSON\ObjectId($loggedinid);
   $bulk = new MongoDB\Driver\BulkWrite;
   $bulk->update(
