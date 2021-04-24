@@ -9,26 +9,8 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-
-					<?php
-					$uri = $_SERVER['REQUEST_URI'];
-					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-					$query = $_SERVER['QUERY_STRING'];
-					//echo $query; // Outputs: Query String
-
-					?> 
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Stafflist</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Staff</h5>
 					<!--end::Page Title-->
-					<!--begin::Breadcrumb-->
-					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-						<li class="breadcrumb-item text-muted">
-							<a href="index.php?<?php echo $query; ?>" class="text-muted">Stafflist</a>
-						</li>
-						<li class="breadcrumb-item text-muted">
-							<a href="index.php?<?php echo $query; ?>" class="text-muted">none</a>
-						</li>
-					</ul>
-					<!--end::Breadcrumb-->
 				</div>
 				<!--end::Page Heading-->
 			</div>

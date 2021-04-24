@@ -1,3 +1,7 @@
+<?php
+$_SESSION["title"] = "Forums";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 <style>
 .topic {
     border-color: #fff;

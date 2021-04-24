@@ -18,18 +18,8 @@
 					//echo $query; // Outputs: Query String
 
 					?> 
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Stafflist</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Parent</h5>
 					<!--end::Page Title-->
-					<!--begin::Breadcrumb-->
-					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-						<li class="breadcrumb-item text-muted">
-							<a href="index.php?<?php echo $query; ?>" class="text-muted">Stafflist</a>
-						</li>
-						<li class="breadcrumb-item text-muted">
-							<a href="index.php?<?php echo $query; ?>" class="text-muted">none</a>
-						</li>
-					</ul>
-					<!--end::Breadcrumb-->
 				</div>
 				<!--end::Page Heading-->
 			</div>

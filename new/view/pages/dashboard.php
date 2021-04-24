@@ -1,3 +1,7 @@
+<?php
+$_SESSION["title"] = "Dashboard";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 <?php include ('model/home.php'); ?>
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">

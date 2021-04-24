@@ -1,4 +1,9 @@
 <?php
+$_SESSION["title"] = "Event";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
+<?php
 $id = new \MongoDB\BSON\ObjectId($_GET['id']);
 $filter = ['_id'=>$id];
 $query = new MongoDB\Driver\Query($filter);

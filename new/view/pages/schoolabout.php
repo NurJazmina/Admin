@@ -1,3 +1,7 @@
+<?php
+$_SESSION["title"] = "School";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 <?php include ('model/schoolabout.php'); ?>
 <div class="col-lg-12 col-xxl-12">
 <!--begin::Mixed Widget 1-->

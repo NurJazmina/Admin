@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "News";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <?php include ('model/news.php'); ?>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Latest News</h1></div><br>
 <div class="row" >
@@ -48,7 +53,7 @@
     ?>
   <div class="card">
 <div class="card-header">
-  <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+  <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" ><?php echo $schoolNewsTitle; ?></a></strong>
 </div>
 <div class="card-body">
   <div class="table-responsive-sm">

@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "Student";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <form id="AddStudentFormSubmit" name="AddStudentFormSubmit" action="index.php?page=modal-recheckstudentlist" method="post">
   <div  id="recheckaddstudent" tabindex="-1" aria-labelledby="AddStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">

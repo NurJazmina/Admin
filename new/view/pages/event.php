@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "Event";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <?php include ('model/event.php'); ?>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Upcoming Event</h1></div><br>
 <div class="row" >
@@ -52,7 +57,7 @@
     ?>
   <div class="card">
 <div class="card-header">
-  <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" target="_blank"><?php echo $schoolEventTitle; ?></a></strong>
+  <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" ><?php echo $schoolEventTitle; ?></a></strong>
 </div>
 <div class="card-body">
   <div class="table-responsive-sm">

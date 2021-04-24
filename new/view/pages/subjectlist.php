@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "Subject";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <?php include ('model/subjectlist.php'); ?>
 <div class="myDiv" style="color:#696969;text-align:center">
 <br><br><br><h1>Subjects</h1>

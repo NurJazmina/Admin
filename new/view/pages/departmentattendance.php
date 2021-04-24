@@ -1,4 +1,8 @@
 <?php
+$_SESSION["title"] = "Department";
+?>
+
+<?php
 //avoid put any gap in this page.Error behaviour due to gap.
 ?>
 <style>
@@ -24,18 +28,8 @@ background:red;
 					//echo $query; // Outputs: Query String
 
 					?> 
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Dashboard</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5"><?php echo $_SESSION["title"]; ?></h5>
 					<!--end::Page Title-->
-					<!--begin::Breadcrumb-->
-					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-						<li class="breadcrumb-item text-muted">
-							<a href="index.php?<?php echo $query; ?>" class="text-muted">Dashboard</a>
-						</li>
-						<li class="breadcrumb-item text-muted">
-							<a href="index.php?<?php echo $query; ?>" class="text-muted">none</a>
-						</li>
-					</ul>
-					<!--end::Breadcrumb-->
 				</div>
 				<!--end::Page Heading-->
 			</div>

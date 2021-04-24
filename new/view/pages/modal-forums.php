@@ -1,7 +1,12 @@
 <?php
-    $category = ($_GET['forum']);
-    $topic = ($_GET['topic']);
+    //$category = ($_GET['forum']);
+    //$topic = ($_GET['topic']);
 ?>
+<?php
+$_SESSION["title"] = "Forum";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <form action="index.php?page=schoolforum&forum=<?php echo $sort; ?>&topic=<?php echo $topic; ?>" method="post" name="AddForums"><br><br>
 <div class="table-responsive" style="width:100%; margin:0 auto;">
   <table class="table table-bordered dt-responsive nowrap table-sm table-success" cellpadding="1" cellspacing="0" style="font-family: Arial; color:#505050; font-size: 15px;">

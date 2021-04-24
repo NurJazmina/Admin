@@ -1,7 +1,11 @@
-<?php 
-include ('model/schoolforum.php'); 
+<?php
 $category = ($_GET['forum']);
 $topic = ($_GET['topic']);
+$_SESSION["title"] = "Public Forum: $topic ";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+<?php 
+include ('model/schoolforum.php'); 
 ?>
 <style>
 .button--tag.button-large, .topics--large .button--tag {

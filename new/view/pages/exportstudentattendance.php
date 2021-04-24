@@ -1,4 +1,8 @@
 <?php
+$_SESSION["title"] = "Student";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+<?php
 //avoid put any gap in this page.Error behaviour due to gap.
 ?>
 <style>

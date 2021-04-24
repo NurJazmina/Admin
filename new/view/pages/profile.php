@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "Profile";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container">

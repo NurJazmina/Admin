@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "Event";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <form action="index.php?page=event" method="post" name="AddNews"><br><br>
 <div class="table-responsive" style="width:100%; margin:0 auto;">
   <table class="table table-bordered dt-responsive nowrap table-sm table-success" cellpadding="1" cellspacing="0" style="font-family: Arial; color:#505050; font-size: 15px;">

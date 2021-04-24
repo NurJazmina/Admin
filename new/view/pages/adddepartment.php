@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "Department";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <form id="AddDepartmentFormSubmit" name="AddDepartmentFormSubmit" action="index.php?page=departmentlist" method="post">
   <div id="AddDepartmentModal" tabindex="-1" aria-labelledby="AddDepartmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">

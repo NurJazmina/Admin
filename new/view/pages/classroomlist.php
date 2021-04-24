@@ -1,23 +1,51 @@
 <?php include ('model/classroomlist.php'); ?>
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+
+					<?php
+					$uri = $_SERVER['REQUEST_URI'];
+					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+					$query = $_SERVER['QUERY_STRING'];
+					//echo $query; // Outputs: Query String
+
+					?> 
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Classroom</h5>
+					<!--end::Page Title-->
+				</div>
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+        <div class="col-12 col-sm-12 col-sm-12">
+              <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
+                <div class="col-12 col-sm-12 col-lg-12 text-right">
+                  <div class="row">
+                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
+                    <input  type="text" style="width:50%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
+                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchclass" >Search</button>
+                  </div>
+                </div>
+              </form>
+        </div>
+			</div>
+			<!--end::Toolbar-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">
       <br><h1 style="color:#404040;">Classroom List</h1>
-    </div>
-  </div>
-  <div class="col-12 col-sm-12 col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
-          <div class="col-12 col-sm-6 col-lg-6 text-right">
-            <div class="form-group row">
-              <button type="button" style="width:25%"; class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#recheckaddclass">Add</button>
-              <input type="text" style="width:50%";  class="form-control" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
-              <button type="submit" style="width:25%"; name="searchclass" class="btn btn-secondary">Search</button>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </div>
