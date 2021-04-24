@@ -46,10 +46,7 @@
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
-        <div class="row">
-          <div class="col-lg-4">    
-        
-        <div class="card card-custom card-strech">
+        <div class="card">
         <div class="card-header">
         <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
         </div>
