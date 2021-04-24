@@ -2,6 +2,12 @@
 <!--begin::Header-->
 <div id="kt_header" class="header header-fixed">
 
+<<<<<<< HEAD
+<!-- begin::User Panel-->
+                <!-- end::User Panel-->
+
+=======
+>>>>>>> e0bff8cd1c3c57c8a1f6afa44c86c60bb29078fa
 	<!--begin::Container-->
 	<div class="container-fluid d-flex align-items-stretch justify-content-between">
 		<div></div>
