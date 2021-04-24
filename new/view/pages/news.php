@@ -51,7 +51,6 @@ $_SESSION["title"] = "News";
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
-<<<<<<< HEAD
   <div class="card">
 <div class="card-header">
   <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" ><?php echo $schoolNewsTitle; ?></a></strong>
@@ -76,35 +75,6 @@ $_SESSION["title"] = "News";
 </div><br>
   <?php
   }
-=======
-        <div class="row">
-          <div class="col-lg-4">    
-        
-        <div class="card card-custom card-strech">
-        <div class="card-header">
-        <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
-        </div>
-        <div class="card-body">
-        <div class="table-responsive-sm">
-            <div class="text4 eventdate">
-                <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-                <br>
-                <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
-            </div>
-            <div class="eventtitle">
-            <table class="table table-striped table-sm">
-            <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
-            </table>
-            </div>
-        </div>
-        </div>
-        <div class="card-footer">
-        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-        </div>
-        </div><br>
-        <?php
-   }
->>>>>>> 50d0917667614ecc4b99b0434162416aed6cf35b
   $filterA = ['SchoolNewsAccess'=>'PUBLIC'];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
