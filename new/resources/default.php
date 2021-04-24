@@ -548,7 +548,7 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
         //Limit characters displayed in span
         $(document).ready(function(){
         $('.claimedRight').each(function (f) {
-            var newstr = $(this).text().substring(0,100)+'....';
+            var newstr = $(this).text().substring(0,200)+'....';
             $(this).text(newstr);
 
             });
