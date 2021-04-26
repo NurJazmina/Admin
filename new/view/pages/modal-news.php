@@ -23,7 +23,7 @@
         <td colspan="2"><strong>NEWS</strong><br><br>
         <textarea id="basic-example" name="txtdetail" ></textarea>
         </td>
-      </tr>
+      </tr> 
       <tr> 
         <td height="27" colspan="2"><div align="right"> 
             <button type="submit" class="btn btn-secondary" name="AddNews">Confirm</button>
