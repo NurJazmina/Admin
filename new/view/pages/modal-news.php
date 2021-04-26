@@ -14,10 +14,10 @@
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
                 <div class="col-lg-8">
                 <select class="form-control" id="staticStaffNo" name="access" required>
-                    <option>Public</option>
-                    <option>Staff</option>
-                    <option>Teacher</option>
-                    <option>Parents</option>
+                  <option value="PUBLIC">PUBLIC</option>
+                  <option value="SCHOOL1">STAFFS</option>
+                  <option value="SCHOOL0">TEACHERS</option>
+                  <option value="VIP">PARENTS</option>
                 </select>
                 </div>
         </div>
