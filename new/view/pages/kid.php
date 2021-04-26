@@ -1,4 +1,9 @@
-<form action="index.php?page=news" method="post" name="AddNews"><br><br>
+<?php
+$_SESSION["title"] = "Event";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
+<form action="index.php?page=event" method="post" name="AddNews"><br><br>
     <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
         <div class="card card-custom gutter-b">
         
@@ -13,20 +18,38 @@
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
                 <div class="col-lg-8">
-                <select class="form-control" id="staticStaffNo" name="access" required>
-                    <option>Public</option>
-                    <option>Staff</option>
-                    <option>Teacher</option>
-                    <option>Parents</option>
+                <select class="form-control" id="staticStaffNo" name="txtaccess" required>
+                  <option value="PUBLIC">PUBLIC</option>
+                  <option value="SCHOOL1">STAFFS</option>
+                  <option value="SCHOOL0">TEACHERS</option>
+                  <option value="VIP">PARENTS</option>
                 </select>
                 </div>
         </div>
-
-        <div>
-        <label><h5> NEWS </h5></label>
-            <textarea id="basic-example" name="txtdetail" ></textarea>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>VENUE</h5></label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventVenue">   
+                </div>
         </div>
-
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>LOCATION</h5></label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventLocation">
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>EVENT START</h5></label>
+                <div class="col-lg-8">
+                    <input type="datetime-local" id="staticStaffNo" name="txtSchoolEventDateStart">
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>EVENT END</h5></label>
+                <div class="col-lg-8">
+                    <input type="datetime-local" id="staticStaffNo" name="txtSchoolEventDateEnd">
+                </div>
+        </div>
         <div class="card-footer">
             <div class="row">
             <div class="col-lg-2"></div>

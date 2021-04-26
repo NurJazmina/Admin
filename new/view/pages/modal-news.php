@@ -1,3 +1,8 @@
+<?php
+$_SESSION["title"] = "News";
+?>
+<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+
 <form action="index.php?page=news" method="post" name="AddNews"><br><br>
     <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
         <div class="card card-custom gutter-b">
