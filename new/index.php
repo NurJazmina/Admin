@@ -92,7 +92,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="d-flex flex-column flex-root"> 
 					<!--begin::Page-->
 					<div class="d-flex flex-row flex-column-fluid page">
-						<?php include 'view/partials/_aside.html'; ?>
+						<?php include 'view/pages/_aside.php'; ?>
 						<!--begin::Wrapper-->
 						<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 							<?php include 'view/pages/_header.php'; ?>
