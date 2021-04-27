@@ -19,22 +19,22 @@ include ('model/schoolforum.php');
                     <div class="aside__wrap">
                         <ul class="tag-list">
                             <li data-action="switch-tab" data-tab="topic-general" class="active">
-                                <a href="index.php?page=schoolforum&forum=1&topic=general" class="button--tag">
+                                <a href="index.php?page=publicforum&forum=4&topic=general" class="button--tag">
                                 General
                                 </a>
                             </li>
                             <li data-action="switch-tab" data-tab="topic-proposal">
-                                <a href="index.php?page=publicforum&forum=2&topic=proposal" class="button--tag">
+                                <a href="index.php?page=publicforum&forum=5&topic=proposal" class="button--tag">
                                 Proposal
                                 </a>
                             </li>
                             <li data-action="switch-tab" data-tab="topic-shortnews">
-                                <a href="index.php?page=publicforum&forum=3&topic=short news / info" class="button--tag">
+                                <a href="index.php?page=publicforum&forum=6&topic=short news / info" class="button--tag">
                                 Short News
                                 </a>
                             </li>
                             <li data-action="switch-tab" data-tab="topic-info">
-                                <a href="index.php?page=publicforum&forum=3&topic=short news / info" class="button--tag">
+                                <a href="index.php?page=publicforum&forum=6&topic=short news / info" class="button--tag">
                                 Info
                                 </a>
                             </li>
@@ -63,9 +63,9 @@ include ('model/schoolforum.php');
                         </a>
                     </div>
                 </div>
-            <?php
+                <?php
 
-                function time_elapsed($date){
+            function time_elapsed($date){
                     $bit = array(
                         //' year'      => $date  / 31556926 % 12,
                         //' week'      => $date  / 604800 % 52,
@@ -79,15 +79,15 @@ include ('model/schoolforum.php');
                         if($v == 1)$ret[] = $v . $k;
                         }
                     array_splice($ret, count($ret)-1, 0, 'and');
-                    $ret[] = 'ago.';
+                    $ret[] = 'ago';
                 
                     return join(' ', $ret);
-                }
+            }
 
             $ConsumerFName3=" ";
             $ConsumerLName3=" ";
             $ForumDetails2=" ";
-            $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>'0','Forum'=>$category];
+            $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>$category];
             $option = ['sort' => ['_id' => -1]];
             $query = new MongoDB\Driver\Query($filter,$option);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
@@ -109,9 +109,9 @@ include ('model/schoolforum.php');
                 $nowtime = time();
                 $oldtime = strval($date);
 
-                $filter2 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid,'Forum'=>$category];
+                $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
                 $query2 = new MongoDB\Driver\Query($filter2);
-                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query2);
+                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
                 
                 $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
                 $filter1 = ['_id' => $consumerid];
@@ -168,15 +168,16 @@ include ('model/schoolforum.php');
 
                                             <div class="card__footer text-small" data-role="footer">
                                             <?php
+                                            $SchoolForumDetails = "";
                                             foreach ($cursor2 as $document2)
                                             {
                                             $total = $total + 1;
-                                            $Forumid2 = strval($document2->_id);
-                                            $ForumDetails2 = ($document2->ForumDetails);
-                                            $Consumer_id2 = ($document2->Consumer_id);
+                                            $Forum_id = strval($document2->Forum_id);
+                                            $SchoolForumDetails = ($document2->SchoolForumDetails);
+                                            $SchoolForumStaff_id = ($document2->SchoolForumStaff_id);
 
-                                                $consumerid2 = new \MongoDB\BSON\ObjectId($Consumer_id2);
-                                                $filter3 = ['_id' => $consumerid2];
+                                                $SchoolForumStaff_id = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id);
+                                                $filter3 = ['_id' => $SchoolForumStaff_id];
                                                 $query3 = new MongoDB\Driver\Query($filter3);
                                                 $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query3);
                                                 foreach ($cursor3 as $document3)
@@ -205,7 +206,9 @@ include ('model/schoolforum.php');
                                                         </div>
 
                                                         <div class="post-comment__content">
-                                                        <?php echo $ForumDetails2; ?>
+                                                            <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>">
+                                                                <?php echo $SchoolForumDetails; ?>
+                                                            </a>
                                                         </div>
                                                 </div>
                                             </div>

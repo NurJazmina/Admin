@@ -10,7 +10,6 @@ if (isset($_POST['AddForums'])) {
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
-    'ForumParentid'=>'0',
     'school_id'=>$varschoolid,
     'Consumer_id'=>$varstaffid,
     'Forum'=>$varforum,
@@ -55,27 +54,24 @@ if (isset($_POST['AddForums'])) {
 
 if (isset($_POST['AddForumsComment'])) {
 
-  $varForumParentid = $_POST['txtForumParentid'];
-  $varforum = $_POST['txtforum'];
-  $vardetail = $_POST['txtdetail'];
-  $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
+  $varForum_id = $_POST['txtForumid'];
+  $varSchoolForumDetails = $_POST['txtdetail'];
+  $varSchoolForumStaff_id = strval($_SESSION["loggeduser_id"]);
+  $varSchool_id = strval($_SESSION["loggeduser_schoolID"]);
   $varDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
-    'ForumParentid'=>$varForumParentid,
-    'school_id'=>$varschoolid,
-    'Consumer_id'=>$varstaffid,
-    'Forum'=>$varforum,
-    'ForumTitle'=>'',
-    'ForumDetails'=>$vardetail,
-    'ForumDate'=>$varDate,
-    'ForumStatus'=>'ACTIVE']);
+    'School_id'=>$varSchool_id,
+    'Forum_id'=>$varForum_id,
+    'ForumParent_id'=>'0',
+    'SchoolForumStaff_id'=>$varSchoolForumStaff_id,
+    'SchoolForumDetails'=>$varSchoolForumDetails,
+    'SchoolForumDate'=>$varDate]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolForum', $bulk, $writeConcern);
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolForumComment', $bulk, $writeConcern);
   }
   catch (MongoDB\Driver\Exception\BulkWriteException $e)
   {
@@ -110,27 +106,25 @@ if (isset($_POST['AddForumsComment'])) {
 
 if (isset($_POST['AddForumsCommentChild'])) {
 
-  $varForumParentid = $_POST['txtForumParentid'];
-  $varforum = $_POST['txtforum'];
-  $vardetail = $_POST['txtdetail'];
-  $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
+  $varForum_id = $_POST['txtForumid'];
+  $varForumParent_id = $_POST['txtForumParent_id'];
+  $varSchoolForumDetails = $_POST['txtdetail'];
+  $varSchoolForumStaff_id = strval($_SESSION["loggeduser_id"]);
+  $varSchool_id = strval($_SESSION["loggeduser_schoolID"]);
   $varDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
-    'ForumParentid'=>$varForumParentid,
-    'school_id'=>$varschoolid,
-    'Consumer_id'=>$varstaffid,
-    'Forum'=>$varforum,
-    'ForumTitle'=>'',
-    'ForumDetails'=>$vardetail,
-    'ForumDate'=>$varDate,
-    'ForumStatus'=>'ACTIVE']);
+    'School_id'=>$varSchool_id,
+    'Forum_id'=>$varForum_id,
+    'ForumParent_id'=>$varForumParent_id,
+    'SchoolForumStaff_id'=>$varSchoolForumStaff_id,
+    'SchoolForumDetails'=>$varSchoolForumDetails,
+    'SchoolForumDate'=>$varDate]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolForum', $bulk, $writeConcern);
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolForumComment', $bulk, $writeConcern);
   }
   catch (MongoDB\Driver\Exception\BulkWriteException $e)
   {
