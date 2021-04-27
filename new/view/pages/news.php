@@ -121,7 +121,7 @@ $_SESSION["title"] = "News";
     ?>
   <div class="card">
 <div class="card-header">
-  <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" target="_blank"><?php echo $schoolNewsTitle; ?></a></strong>
+  <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $schoolNewsTitle; ?></a></strong>
 </div>
 <div class="card-body">
   <div class="table-responsive-sm">

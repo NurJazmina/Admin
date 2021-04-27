@@ -10,11 +10,6 @@ $_SESSION["title"] = "School";
   <div class="card-header border-0 bg-danger py-5">
     <h3 class="card-title font-weight-bolder text-white">About us</h3>
     <div class="card-toolbar">
-      <div class="dropdown dropdown-inline">
-        <button type="button"  class="btn btn-light" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
-          <i class="fa fa-edit" style="font-size:20px"></i>
-        </button>
-      </div>
     </div>
   </div>
   <!--end::Header-->
@@ -54,6 +49,10 @@ $_SESSION["title"] = "School";
             <!--end::Svg Icon-->
           </span>
           <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?php print_r($SchoolsPhoneNo); ?></a>
+            <button type="button"  class="btn btn-light; right" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
+             <i class="fa fa-edit" style="font-size:15px"></i>
+            </button>
+          </div>
         </div>
       </div>
       <!--end::Row-->

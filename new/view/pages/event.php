@@ -134,7 +134,7 @@ $_SESSION["title"] = "Event";
     ?>
   <div class="card">
 <div class="card-header">
-<strong><a href="index.php?page=eventdetail&id=<?php echo $eventid ; ?>" target="_blank"><?php echo $schoolEventTitle; ?></a></strong><br><br>
+<strong><a href="index.php?page=eventdetail&id=<?php echo $eventid ; ?>"><?php echo $schoolEventTitle; ?></a></strong><br><br>
 </div>
 <div class="card-body">
   <div class="table-responsive-sm">

@@ -338,7 +338,9 @@ $_SESSION["title"] = "Profile";
 												<div class="row">
 												<div class="col">
 													<textarea class="form-control" name="txtdepartmentRemark" rows="3"></textarea>
+													<br>
 													<div class="row">
+														
 														<div class="col text-right">
 														<input type="hidden" value="<?php echo $_SESSION["loggeduser_Staffdepartment"]; ?>" name="txtdepartmentid">
 														<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkFormSubmit">Add remark</button>
