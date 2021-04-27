@@ -4,49 +4,61 @@ $_SESSION["title"] = "Event";
 <?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form action="index.php?page=event" method="post" name="AddNews"><br><br>
-<div class="table-responsive" style="width:100%; margin:0 auto;">
-  <table class="table table-bordered dt-responsive nowrap table-sm table-success" cellpadding="1" cellspacing="0" style="font-family: Arial; color:#505050; font-size: 15px;">
-    <tbody>
-      <tr> 
-        <td colspan="9"><strong>ADD RECORD</strong></td>
-      </tr>
-      <tr> 
-        <td height="27"><strong>TITLE</strong></td>
-        <td><input type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required></td>
-      </tr>
-      <tr> 
-        <td><strong>ACCESS TYPE</strong></td>
-        <td>
-        <select class="form-control" id="staticStaffNo" name="txtaccess" required>
-          <option value="PUBLIC">PUBLIC</option>
-          <option value="SCHOOL1">STAFF</option>
-          <option value="SCHOOL0">TEACHER</option>
-          <option value="VIP">PARENT</option>
-        </select>
-        </td>
-      </tr>
-      <tr>
-        <td><strong>VENUE</strong></td>
-        <td><input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventVenue"></td>
-      </tr>
-      <tr>
-        <td><strong>LOCATION</strong></td>
-        <td><input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventLocation"></td>
-      </tr>
-      <tr>
-        <td><strong>EVENT START</strong></td>
-        <td><input type="datetime-local" id="staticStaffNo" name="txtSchoolEventDateStart"></td>
-      </tr>
-      <tr>
-        <td><strong>EVENT END</strong></td>
-        <td><input type="datetime-local" id="staticStaffNo" name="txtSchoolEventDateEnd"></td>
-      </tr>
-        <td height="27" colspan="2"><div align="right"> 
-            <button type="submit" class="btn btn-secondary" name="AddNews">Confirm</button>
+    <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
+        <div class="card card-custom gutter-b">
+        
+        <div class="card-body">
+        
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
+                <div class="col-lg-8">
+                <select class="form-control" id="staticStaffNo" name="txtaccess" required>
+                  <option value="PUBLIC">PUBLIC</option>
+                  <option value="SCHOOL1">STAFFS</option>
+                  <option value="SCHOOL0">TEACHERS</option>
+                  <option value="VIP">PARENTS</option>
+                </select>
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>VENUE</h5></label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventVenue">   
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>LOCATION</h5></label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventLocation">
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>EVENT START</h5></label>
+                <div class="col-lg-8">
+                    <input type="datetime-local" id="staticStaffNo" name="txtSchoolEventDateStart">
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>EVENT END</h5></label>
+                <div class="col-lg-8">
+                    <input type="datetime-local" id="staticStaffNo" name="txtSchoolEventDateEnd">
+                </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+            <div class="col-lg-2"></div>
+        <div>
+            <button type="submit" class="btn btn-success" name="AddNews">Confirm</button>
             <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </div>
+
+        </div>  
+        </div>
+    </div>
 </form>
