@@ -83,8 +83,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--[html-partial:include:{"file":"partials/_page-loader.html"}]/-->
 		
         <div class="page">
-            <?php if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) {
-			    ?>
+            <?php 
+			if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) 
+			{
+			?>
 				<!--begin::Main-->
 				<?php include 'view/partials/_header-mobile.html'; ?>
 				<div class="d-flex flex-column flex-root"> 
@@ -102,7 +104,6 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
 										<?php include 'view/pages/alert.php'; ?>
 										<?php include 'controller/page.php'; ?>
-										
 									</div>
 								</div>
 							</div>
@@ -114,16 +115,17 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!--end::Page-->
 				</div>
 				<!--end::Main-->
-
-                <?php
-		    } else {
-			    ?>
+            <?php
+		    } 
+			else 
+			{
+			?>
             <div class="container-fluid">
 			    <div class="row" style="height:100vh;">
 				<?php include 'view/pages/login.php'; ?>
 			    </div>
             </div>
-			    <?php
+			<?php
 		    }
 		    ?>
         </div>
