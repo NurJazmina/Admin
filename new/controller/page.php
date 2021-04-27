@@ -10,7 +10,7 @@
         </div>
     <?php
     } 
-    else 
+    else
     {
         if (!isset($_GET['page']) || empty($_GET['page']))
         {
@@ -18,7 +18,17 @@
         }
         else 
         {
-            include 'view/pages/'.$_GET['page'].'.php';
+            //cannot solve, hold
+            if($_GET['page'] == $_GET['page'])
+            {
+                include 'view/pages/'.$_GET['page'].'.php';
+            }
+            else
+            {
+                include 'view/partials/custom_404.html';
+            }
         }
+
     }
+
 ?>

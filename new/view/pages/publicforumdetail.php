@@ -83,8 +83,6 @@ include ('model/schoolforum.php');
         </div><br><br>
         <?php
         $id = new \MongoDB\BSON\ObjectId($_GET['id']);
-        if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
-        {
             function time_elapsed($date){
                 $bit = array(
                     //' year'      => $date  / 31556926 % 12,
@@ -110,7 +108,7 @@ include ('model/schoolforum.php');
 
             foreach ($cursor as $document)
             {
-                $total =0;
+                $total = 0;
                 $Forumid = strval($document->_id);
                 $ForumTitle = ($document->ForumTitle);
                 $ForumDetails = ($document->ForumDetails);
@@ -125,9 +123,9 @@ include ('model/schoolforum.php');
                 $nowtime = time();
                 $oldtime = strval($date);
 
-                $filter2 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid,'Forum'=>$category];
+                $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
                 $query2 = new MongoDB\Driver\Query($filter2);
-                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query2);
+                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
                 
                 $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
                 $filter1 = ['_id' => $consumerid];
@@ -156,20 +154,20 @@ include ('model/schoolforum.php');
                         <?php
                         foreach ($cursor2 as $document2)
                         {
-                        $total = $total + 1;
-                        $Forumid2 = strval($document2->_id);
-                        $ForumDetails2 = ($document2->ForumDetails);
-                        $Consumer_id2 = ($document2->Consumer_id);
+                            $total = $total + 1;
+                            $Forum_id = strval($document2->Forum_id);
+                            $SchoolForumDetails = ($document2->SchoolForumDetails);
+                            $SchoolForumStaff_id = ($document2->SchoolForumStaff_id);
 
-                        $consumerid2 = new \MongoDB\BSON\ObjectId($Consumer_id2);
-                        $filter3 = ['_id' => $consumerid2];
-                        $query3 = new MongoDB\Driver\Query($filter3);
-                        $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query3);
-                        foreach ($cursor3 as $document3)
-                        {
-                        $ConsumerFName3 = ($document3->ConsumerFName);
-                        $ConsumerLName3 = ($document3->ConsumerLName);
-                        }
+                            $SchoolForumStaff_id = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id);
+                            $filter3 = ['_id' => $SchoolForumStaff_id];
+                            $query3 = new MongoDB\Driver\Query($filter3);
+                            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query3);
+                            foreach ($cursor3 as $document3)
+                            {
+                            $ConsumerFName3 = ($document3->ConsumerFName);
+                            $ConsumerLName3 = ($document3->ConsumerLName);
+                            }
                         }
                         ?>
                         <div class="row">
@@ -206,48 +204,48 @@ include ('model/schoolforum.php');
                             <a >Comments <?php echo " ".$total; ?></a>
                             </li>
                         </ul>
-                        <form action="index.php?page=schoolforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $id;?>" method="post" name="AddForumsComment">
-                            <div class="row">
-                                <textarea class="basic-example2" name="txtdetail" placeholder="Join, the discussion..." ></textarea>
-                                <div class="col-lg-12">
+                            <form action="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $id;?>" method="post" name="AddForumsComment">
                                 <div class="row">
-                                    <div class="col-lg-10">
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <input type="hidden"  name="txtforum" value="<?php echo  $category; ?>">
-                                        <input type="hidden"  name="txtForumParentid" value="<?php echo  $Forumid; ?>">
-                                        <button type="submit" class="btn btn-secondary" name="AddForumsComment">Post as <?php echo $ConsumerFName3;  ?></button>
-                                    </div>
+                                    <textarea class="basic-example2" name="txtdetail" placeholder="Join, the discussion..." ></textarea>
+                                    <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <input type="hidden"  name="txtforum" value="<?php echo  $category; ?>">
+                                            <input type="hidden"  name="txtForumParentid" value="<?php echo  $Forumid; ?>">
+                                            <button type="submit" class="btn btn-secondary" name="AddForumsComment">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form> 
+                            </form> 
                         <?php
                         //sorting by category
                         if (!isset($_GET['sort']) && empty($_GET['sort']))
                         {
-                            $filter4 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid,'Forum'=>$category];
+                            $filter4 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
                             $option4 = ['sort' => ['_id' => -1]];
                             $query4 = new MongoDB\Driver\Query($filter4,$option4);
-                            $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query4);
+                            $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query4);
                         }
                         else
                         {
-                            $filter4 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid,'Forum'=>$category];
+                            $filter4 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
                             $option4 = ['sort' => ['_id' => 1]];
                             $query4 = new MongoDB\Driver\Query($filter4,$option4);
-                            $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query4);
+                            $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query4);
                         }
 
                         foreach ($cursor4 as $document4)
                         {
-                        $total = $total + 1;
-                        $Forumid4 = strval($document4->_id);
-                        $ForumDetails4 = ($document4->ForumDetails);
-                        $Consumer_id4 = ($document4->Consumer_id);
+                            $id4 = strval($document4->_id);
+                            $Forum_id4 = strval($document4->Forum_id);
+                            $SchoolForumDetails4 = ($document4->SchoolForumDetails);
+                            $SchoolForumStaff_id4 = ($document4->SchoolForumStaff_id);
 
-                            $consumerid4 = new \MongoDB\BSON\ObjectId($Consumer_id4);
-                            $filter5 = ['_id' => $consumerid4];
+                            $SchoolForumStaff_id4 = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id4);
+                            $filter5 = ['_id' => $SchoolForumStaff_id4];
                             $query5 = new MongoDB\Driver\Query($filter5);
                             $cursor5 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query5);
                             foreach ($cursor5 as $document5)
@@ -259,36 +257,36 @@ include ('model/schoolforum.php');
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-heading<?php echo $Forumid4; ?>">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $Forumid4; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $Forumid4; ?>">
+                                <h2 class="accordion-header" id="flush-heading<?php echo $id4; ?>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $id4; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $id4; ?>">
                                         <div class="spacing-right">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <img class="img-round-sm block__item" src="https://c.disquscdn.com/uploads/users/383/2435/avatar92.jpg?1615629681" alt="avatar">
-                                                    <small href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Consumer_id4;?>" style="text-decoration: none;"><?php echo " ".$ConsumerFName5." ".$ConsumerLName5;?></small>
+                                                    <small style="text-decoration: none;"><?php echo " ".$ConsumerFName5." ".$ConsumerLName5;?></small>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="spacing-right">
-                                        <span style="color:#687a86;"><?php echo $ForumDetails4; ?></span>
+                                        <span style="color:#687a86;"><?php echo $SchoolForumDetails4; ?></span>
                                         </div>
                                     </button>
                                 </h2>
-                                <div id="flush-collapse<?php echo $Forumid4; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $Forumid4; ?>" data-bs-parent="#accordionFlushExample">
+                                <div id="flush-collapse<?php echo $id4; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $id4; ?>" data-bs-parent="#accordionFlushExample">
                                     <?php
-                                    $filter6 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid4,'Forum'=>$category];
-                                    $query6 = new MongoDB\Driver\Query($filter6);
-                                    $cursor6 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query6);
+                                    $filter6 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>$id4];
+                                    $option6 = ['sort' => ['_id' => 1]];
+                                    $query6 = new MongoDB\Driver\Query($filter6,$option6);
+                                    $cursor6 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query6);
 
                                     foreach ($cursor6 as $document6)
                                     {
-                                    $total = $total + 1;
-                                    $Forumid6 = strval($document6->_id);
-                                    $ForumDetails6 = ($document6->ForumDetails);
-                                    $Consumer_id6 = ($document6->Consumer_id);
+                                        $Forum_id6 = strval($document6->Forum_id);
+                                        $SchoolForumDetails6 = ($document6->SchoolForumDetails);
+                                        $SchoolForumStaff_id6 = ($document6->SchoolForumStaff_id);
 
-                                        $consumerid6 = new \MongoDB\BSON\ObjectId($Consumer_id6);
-                                        $filter7 = ['_id' => $consumerid6];
+                                        $SchoolForumStaff_id6 = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id6);
+                                        $filter7 = ['_id' => $SchoolForumStaff_id6];
                                         $query7 = new MongoDB\Driver\Query($filter5);
                                         $cursor7 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query7);
                                         foreach ($cursor7 as $document7)
@@ -304,8 +302,8 @@ include ('model/schoolforum.php');
                                                             </div>
                                                             <div class="col-lg-11">
                                                                 <img class="img-round-small" src="//a.disquscdn.com/1617742046/images/noavatar92.png">
-                                                                <small href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Consumer_id6;?>" style="text-decoration: none;"><?php echo " ".$ConsumerFName7." ".$ConsumerLName7;?></small>
-                                                                <span style="color:#687a86;"><?php echo $ForumDetails6; ?></span>
+                                                                <small style="text-decoration: none;"><?php echo " ".$ConsumerFName7." ".$ConsumerLName7;?></small>
+                                                                <span style="color:#687a86;"><?php echo $SchoolForumDetails6; ?></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -325,8 +323,8 @@ include ('model/schoolforum.php');
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <input type="hidden"  name="txtforum" value="<?php echo  $category; ?>">
-                                                                <input type="hidden"  name="txtForumParentid" value="<?php echo $Forumid4; ?>">
-                                                                <button type="submit" class="btn btn-secondary" name="AddForumsCommentChild">Post as <?php echo $ConsumerFName3;  ?></button>
+                                                                <input type="hidden"  name="txtForumParentid" value="<?php echo $Forum_id4; ?>">
+                                                                <button type="submit" class="btn btn-secondary" name="AddForumsCommentChild">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -347,17 +345,16 @@ include ('model/schoolforum.php');
             <?php
                 }
             }
-        }
         ?>
     </div>
 </div>
+
 <div class="col-lg-2">
 <div class="row">
     <div class="card-header">
         <strong>Latest Forum</strong><span class="button--tag -inverted button-large"><?php echo "testing"; ?></span>
     </div>
     <?php
-    $ForumDetails1 ="";
     $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>'0','Forum'=>$category];
     $option = ['sort' => ['_id' => 1]];
     $query = new MongoDB\Driver\Query($filter,$option);
@@ -365,6 +362,7 @@ include ('model/schoolforum.php');
 
     foreach ($cursor as $document)
     {
+        $ForumDetails1 ="";
         $total = 0;
         $Forumid = strval($document->_id);
         $ForumTitle = ($document->ForumTitle);
@@ -380,29 +378,28 @@ include ('model/schoolforum.php');
         $nowtime = time();
         $oldtime = strval($date);
 
-        $filter1 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid ,'Forum'=>$category];
+        $filter1 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
         $option1 = ['sort' => ['_id' => 1]];
         $query1 = new MongoDB\Driver\Query($filter1,$option1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query1);
-    
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query1);
+
         foreach ($cursor1 as $document1)
         {
             $total = $total + 1;
-            $Forumid1 = strval($document1->_id);
-            $ForumTitle1 = ($document1->ForumTitle);
-            $ForumDetails1 = ($document1->ForumDetails);
-            $ForumDate1 = ($document1->ForumDate);
-            $Consumer_id1 = ($document1->Consumer_id);
+            $Forum_id = strval($document1->Forum_id);
+            $SchoolForumDetails = ($document1->SchoolForumDetails);
+            $SchoolForumStaff_id = ($document1->SchoolForumStaff_id);
+            $SchoolForumDate = ($document1->SchoolForumDate);
 
-            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id1);
-            $filter1 = ['_id' => $consumerid];
-            $query1 = new MongoDB\Driver\Query($filter1);
-            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            $SchoolForumStaff_id = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id);
+            $filter2 = ['_id' => $SchoolForumStaff_id];
+            $query2 = new MongoDB\Driver\Query($filter2);
+            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query2);
     
-            foreach ($cursor1 as $document1)
+            foreach ($cursor2 as $document2)
             {
-            $ConsumerFName = ($document1->ConsumerFName);
-            $ConsumerLName = ($document1->ConsumerLName);
+            $ConsumerFName = ($document2->ConsumerFName);
+            $ConsumerLName = ($document2->ConsumerLName);
             }
         }
 
@@ -414,7 +411,7 @@ include ('model/schoolforum.php');
             <a style="font-size: 14px; font-weight: 600;" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" ><?php echo $ForumTitle; ?></a><br><br>
             </div>
             <div class="claimedRight">
-            <a style="" ><?php echo $ForumDetails; ?></a>
+            <a style="" ><?php echo $SchoolForumDetails; ?></a>
             </div>
         </div>
         <br>
@@ -445,20 +442,19 @@ include ('model/schoolforum.php');
             </div>
             <div class="row">
                 <div class="col" style="text-align:right;">
-                    <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid1;?>"><?php echo $ForumDetails1; ?></a>
+                    <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid1;?>"><?php echo $SchoolForumDetails; ?></a>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
+<br><br>
 
-    <br><br>
-    <div class="row">
+<div class="row">
     <div class="card-header">
         <strong>Active Forum</strong><span class="button--tag -inverted button-large"><?php echo "testing"; ?></span>
     </div>
     <?php
-    $ForumDetails1 ="";
     $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>'0','Forum'=>$category];
     $option = ['sort' => ['_id' => 1]];
     $query = new MongoDB\Driver\Query($filter,$option);
@@ -466,6 +462,7 @@ include ('model/schoolforum.php');
 
     foreach ($cursor as $document)
     {
+        $ForumDetails1 ="";
         $total = 0;
         $Forumid = strval($document->_id);
         $ForumTitle = ($document->ForumTitle);
@@ -481,29 +478,28 @@ include ('model/schoolforum.php');
         $nowtime = time();
         $oldtime = strval($date);
 
-        $filter1 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>$Forumid ,'Forum'=>$category];
+        $filter1 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
         $option1 = ['sort' => ['_id' => 1]];
         $query1 = new MongoDB\Driver\Query($filter1,$option1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query1);
-    
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query1);
+
         foreach ($cursor1 as $document1)
         {
             $total = $total + 1;
-            $Forumid1 = strval($document1->_id);
-            $ForumTitle1 = ($document1->ForumTitle);
-            $ForumDetails1 = ($document1->ForumDetails);
-            $ForumDate1 = ($document1->ForumDate);
-            $Consumer_id1 = ($document1->Consumer_id);
+            $Forum_id = strval($document1->Forum_id);
+            $SchoolForumDetails = ($document1->SchoolForumDetails);
+            $SchoolForumStaff_id = ($document1->SchoolForumStaff_id);
+            $SchoolForumDate = ($document1->SchoolForumDate);
 
-            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id1);
-            $filter1 = ['_id' => $consumerid];
-            $query1 = new MongoDB\Driver\Query($filter1);
-            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            $SchoolForumStaff_id = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id);
+            $filter2 = ['_id' => $SchoolForumStaff_id];
+            $query2 = new MongoDB\Driver\Query($filter2);
+            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query2);
     
-            foreach ($cursor1 as $document1)
+            foreach ($cursor2 as $document2)
             {
-            $ConsumerFName = ($document1->ConsumerFName);
-            $ConsumerLName = ($document1->ConsumerLName);
+            $ConsumerFName = ($document2->ConsumerFName);
+            $ConsumerLName = ($document2->ConsumerLName);
             }
         }
 
@@ -515,7 +511,7 @@ include ('model/schoolforum.php');
             <a style="font-size: 14px; font-weight: 600;" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" ><?php echo $ForumTitle; ?></a><br><br>
             </div>
             <div class="claimedRight">
-            <a style="" ><?php echo $ForumDetails; ?></a>
+            <a style="" ><?php echo $SchoolForumDetails; ?></a>
             </div>
         </div>
         <br>
@@ -546,12 +542,12 @@ include ('model/schoolforum.php');
             </div>
             <div class="row">
                 <div class="col" style="text-align:right;">
-                    <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid1;?>"><?php echo $ForumDetails1; ?></a>
+                    <a href="index.php?page=schoolforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid1;?>"><?php echo $SchoolForumDetails; ?></a>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
     </div>
 </div>
 <div class="col-lg-1">

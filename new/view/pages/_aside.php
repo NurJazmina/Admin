@@ -81,6 +81,12 @@
 													</span>
 												</a>
 											</li>
+											<?php
+											//filter by::Group::school
+											//available for staff/teacher
+											if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+											{
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=modal-news" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -89,6 +95,9 @@
 													<span class="menu-text">Add News</span>
 												</a>
 											</li>
+											<?php
+											}
+											?>
 										</ul>
 									</div>
 								</li>
@@ -128,6 +137,12 @@
 													</span>
 												</a>
 											</li>
+											<?php
+											//filter by::Group::school
+											//available for staff/teacher
+											if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+											{
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=modal-event" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -136,6 +151,9 @@
 													<span class="menu-text">Add Events</span>
 												</a>
 											</li>
+											<?php
+											}
+											?>
 										</ul>
 									</div>
 								</li>
@@ -239,6 +257,12 @@
 										</ul>
 									</div>
 								</li>
+								<?php
+								//filter by::Group::school
+								//available for staff/teacher
+								if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+								{
+								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
@@ -345,6 +369,9 @@
 										</ul>
 									</div>
 								</li>
+								<?php
+							    }
+								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
@@ -371,6 +398,12 @@
 													<span class="menu-text">classroom</span>
 												</span>
 											</li>
+											<?php
+											//filter by::Group::school
+											//available for staff/teacher
+											if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+											{
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=classroomlist" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -387,6 +420,9 @@
 													<span class="menu-text">Add Classroom</span>
 												</a>
 											</li>
+											<?php
+								            }
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=classdetail" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -453,6 +489,12 @@
 									<h4 class="menu-text">Directory</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
+								<?php
+								//filter by::Group::school
+								//available for staff/teacher
+								if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+								{
+								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
@@ -506,6 +548,9 @@
 										</ul>
 									</div>
 								</li>
+								<?php
+								}
+								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
@@ -540,6 +585,12 @@
 													<span class="menu-text">List Student</span>
 												</a>
 											</li>
+											<?php
+											//filter by::Group::school
+											//available for staff/teacher
+											if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+											{
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=addstudent" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -548,6 +599,9 @@
 													<span class="menu-text">Add Student</span>
 												</a>
 											</li>
+											<?php
+											}
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=exportstudentattendance" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -593,6 +647,12 @@
 													<span class="menu-text">List Parent</span>
 												</a>
 											</li>
+											<?php
+											//filter by::Group::school
+											//available for staff/teacher
+											if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+											{
+											?>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="index.php?page=addparent" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -601,6 +661,9 @@
 													<span class="menu-text">Add Parent</span>
 												</a>
 											</li>
+											<?php
+											}
+											?>
 										</ul>
 									</div>
 								</li>

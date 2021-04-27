@@ -294,7 +294,7 @@
                       </div>
                       <div class="card-body">
                         <div class="row">
-                          <div class="col-9">
+                          <div class="col-7">
                             <div class="tab-content" id="v-pills-tabContent">
                             
                               <!--tab all department -->
@@ -480,25 +480,25 @@
                               <!-- end tab -->
                             </div>
                           </div>
-                          <div class="col-3" style="border-left: solid 1px #eee;">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                              <a class="nav-link active btn-secondary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
-                              <?php
-                              $calc = 0;
-                              $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-                              foreach ($cursor as $document)
-                              {
-                                $calc = $calc + 1;
-                                $departmentid = strval($document->_id);
-                                $DepartmentName = strval($document->DepartmentName);
-                              ?>
-                              <a class="nav-link btn-secondary" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
-                              <?php
-                              }
-                              ?>
-                            </div>
+                          <div class="col-5" style="border-left: solid 1px #eee;">
+                                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active btn-secondary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
+                                    <?php
+                                    $calc = 0;
+                                    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                                    foreach ($cursor as $document)
+                                    {
+                                      $calc = $calc + 1;
+                                      $departmentid = strval($document->_id);
+                                      $DepartmentName = strval($document->DepartmentName);
+                                    ?>
+                                    <a class="nav-link btn-secondary" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
+                                    <?php
+                                    }
+                                    ?>
+                                  </div>
                           </div>
                         </div>
                       </div>
