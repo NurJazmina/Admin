@@ -58,9 +58,6 @@ include ('model/schoolforum.php');
                             <span class="button--tag -inverted button-large"><?php echo $_GET['topic']; ?></span>
                         </div>
 
-                        <a href="/home/channel/discussdisqus/" class="link-green-dark" title="Remove Filter">
-                        <span class="icon-cancel icon-tiny"></span>
-                        </a>
                     </div>
                 </div>
             <?php
@@ -80,7 +77,7 @@ include ('model/schoolforum.php');
                         if($v == 1)$ret[] = $v . $k;
                         }
                     array_splice($ret, count($ret)-1, 0, 'and');
-                    $ret[] = 'ago.';
+                    $ret[] = 'ago';
                 
                     return join(' ', $ret);
                }
@@ -144,7 +141,7 @@ include ('model/schoolforum.php');
                                                             </span>
                                                         </span>
                                                         started a discussion
-                                                        <time class="text-gray"><?php echo " . ".time_elapsed($nowtime-$oldtime)."\n"; ?></time>
+                                                        <time class="text-gray"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></time>
                                                         <span data-role="badges"></span>
                                                     </div>
                                                 </div>
@@ -197,14 +194,15 @@ include ('model/schoolforum.php');
                                             </div>
 
                                             <div class="card__additional">
-                                                <div class="card-comment-band" data-role="posts"><div><div class="post-comments__wrapper"><div class="post-comments">
+                                                <div class="card-comment-band" data-role="posts"><div>
+                                                <div class="post-comments__wrapper">
+                                                <div class="post-comments">
                                                         <div class="post-comments__reason">
                                                         <a href="/by/disqus_EAsrYwGXA9/" class="avatar" data-link-name="user_avatar">
                                                         <img src="https://c.disquscdn.com/uploads/forums/318/9088/avatar92.jpg?1428445417" alt="avatar">
                                                         </a>
                                                         <?php echo " ".$ConsumerFName3." ".$ConsumerLName3;?>
                                                         </div>
-
                                                         <div class="post-comment__content">
                                                         <?php echo $ForumDetails2; ?>
                                                         </div>
@@ -225,41 +223,9 @@ include ('model/schoolforum.php');
             </div>
 
             <aside class="layout__aside metadata-content" data-role="metadata">
-                <div class="metadata-wrapper">
-                    <div data-role="sign-up-module">
-                    </div>
-                    <div class="aside__wrap" data-role="leaders">
-                        <div data-view-type="tabbed" class="collapsed">
-                            <ul class="nav-tabs -small">
-                                <li data-tab="leaders" class="active">
-                                    <a href="#" >Active Forum</a>
-                                </li>
-                            </ul>
-                            <div data-role="leaders-content-area">
-                                <ul class="leader-list">
-                                    <li class="leader-list__item align align--middle">
-                                        <div class="spacing-right">
-                                            <span class="label--default">1</span>
-                                        </div>
 
-                                        <div class="avatar-sm__wrapper spacing-right-small">
-                                        <a href="/by/cali_queso/" class="avatar" data-link-name="user_avatar">
-                                        <img src="https://c.disquscdn.com/uploads/users/5769/1826/avatar92.jpg?1617228156" alt="">
-                                        </a>
-                                        </div>
-
-                                        <div>
-                                        <a href="/by/cali_queso/" class="name" data-link-name="user_name">Cali </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div data-role="footer" data-action="expand-module" class="aside__expand text-small">See More</div>
-                    </div>
-                </div>
-                <div data-role="create-channel-module"></div>
             </aside>
+            
         </div>
     </div>
 </div>

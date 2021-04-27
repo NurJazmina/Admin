@@ -143,7 +143,7 @@ include ('model/schoolforum.php');
                                                             </span>
                                                         </span>
                                                         started a discussion
-                                                        <time class="text-gray"><?php echo " . ".time_elapsed($nowtime-$oldtime)."\n"; ?></time>
+                                                        <time class="text-gray"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></time>
                                                         <span data-role="badges"></span>
                                                     </div>
                                                 </div>
@@ -155,7 +155,7 @@ include ('model/schoolforum.php');
                                             <div class="card__content -default">
                                                 <div class="card-content__body">
                                                     <h2 class="discussion-title" dir="auto">
-                                                        <a href="index.php?page=schoolforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" data-link-name="title" data-thread-id="8471888124" style="float: none; position: static;"><?php echo $ForumTitle; ?></a>
+                                                        <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" data-link-name="title" data-thread-id="8471888124" style="float: none; position: static;"><?php echo $ForumTitle; ?></a>
                                                     </h2>
 
                                                     <div class="card-content__summary hidden-md" style="">
@@ -187,7 +187,7 @@ include ('model/schoolforum.php');
                                             }
                                             ?>
                                                 <ul class="list--layout">
-                                                    <a class="button button-lnk spacing-right-small" href="index.php?page=schoolforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" data-link-name="view_discussion" data-thread-id="8434285354">
+                                                    <a class="button button-lnk spacing-right-small" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" data-link-name="view_discussion" data-thread-id="8434285354">
                                                     Comments 
                                                         <span class="label--count"><?php echo $total; ?></span>
                                                     </a>
@@ -223,40 +223,7 @@ include ('model/schoolforum.php');
             </div>
 
             <aside class="layout__aside metadata-content" data-role="metadata">
-                <div class="metadata-wrapper">
-                    <div data-role="sign-up-module">
-                    </div>
-                    <div class="aside__wrap" data-role="leaders">
-                        <div data-view-type="tabbed" class="collapsed">
-                            <ul class="nav-tabs -small">
-                                <li data-tab="leaders" class="active">
-                                    <a href="#" >Active Forum</a>
-                                </li>
-                            </ul>
-                            <div data-role="leaders-content-area">
-                                <ul class="leader-list">
-                                    <li class="leader-list__item align align--middle">
-                                        <div class="spacing-right">
-                                            <span class="label--default">1</span>
-                                        </div>
 
-                                        <div class="avatar-sm__wrapper spacing-right-small">
-                                        <a href="/by/cali_queso/" class="avatar" data-link-name="user_avatar">
-                                        <img src="https://c.disquscdn.com/uploads/users/5769/1826/avatar92.jpg?1617228156" alt="">
-                                        </a>
-                                        </div>
-
-                                        <div>
-                                        <a href="/by/cali_queso/" class="name" data-link-name="user_name">Cali </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div data-role="footer" data-action="expand-module" class="aside__expand text-small">See More</div>
-                    </div>
-                </div>
-                <div data-role="create-channel-module"></div>
             </aside>
         </div>
     </div>

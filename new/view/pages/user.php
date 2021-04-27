@@ -43,7 +43,8 @@
 
 	<!--end::Item-->
 
-	<!--begin::Item-->
+
+	<!--begin::Item
 	<a href="custom/apps/user/profile-3.html" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
@@ -56,9 +57,7 @@
 		</div>
 	</a>
 
-	<!--end::Item-->
 
-	<!--begin::Item-->
 	<a href="custom/apps/user/profile-2.html" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
@@ -71,9 +70,6 @@
 		</div>
 	</a>
 
-	<!--end::Item-->
-
-	<!--begin::Item-->
 	<a href="custom/apps/userprofile-1/overview.html" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
@@ -86,7 +82,7 @@
 		</div>
 	</a>
 
-	<!--end::Item-->
+--end::Item-->
 
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>

@@ -261,12 +261,14 @@ $_SESSION["title"] = "Profile";
                     <div id="editpersonalinformation" tabindex="-1" aria-labelledby="EditStaffModalLabel" aria-hidden="true">
 						<!--begin::Body-->
 						<div class="card-body">
+                           <!--
 							<div class="row">
 								<label class="col-xl-3"></label>
 								<div class="col-lg-9 col-xl-6">
 									<h5 class="font-weight-bold mb-6">Customer Info</h5>
 								</div>
 							</div>
+                            
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
 								<div class="col-lg-9 col-xl-6">
@@ -287,6 +289,7 @@ $_SESSION["title"] = "Profile";
 									<span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
 								</div>
 							</div>
+                        
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
 								<div class="col-lg-9 col-xl-6">
@@ -299,12 +302,14 @@ $_SESSION["title"] = "Profile";
 									<input class="form-control form-control-lg form-control-solid" type="text" name="txtConsumerLName" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" />
 								</div>
 							</div>
+                            
 							<div class="row">
 								<label class="col-xl-3"></label>
 								<div class="col-lg-9 col-xl-6">
 									<h5 class="font-weight-bold mt-10 mb-6">Contact Info</h5>
 								</div>
 							</div>
+                            -->
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">Contact Phone</label>
 								<div class="col-lg-9 col-xl-6">
@@ -318,6 +323,7 @@ $_SESSION["title"] = "Profile";
 									</div>
 								</div>
 							</div>
+                            
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
 								<div class="col-lg-9 col-xl-6">

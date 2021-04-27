@@ -256,6 +256,72 @@ $_SESSION["title"] = "Profile";
 					<!--begin::Form-->
 					<form class="form" name="ChangePasswordFormSubmit" action="model/change-password.php" method="post">
 						<div class="card-body">
+
+                            <?php  
+                            if (isset($_GET['password']) && !empty($_GET['password']))
+                            {
+                            ?>
+							<!--begin::success-->
+							<div class="alert alert-custom alert-light-info fade show mb-10" role="alert">
+								<div class="alert-icon">
+                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                        <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Shield-thunder.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"/>
+                                                <polygon fill="#000000" opacity="0.3" points="11.3333333 18 16 11.4 13.6666667 11.4 13.6666667 7 9 13.6 11.3333333 13.6"/>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+								</div>
+								<div class="alert-text font-weight-bold">Your password was successfully changed. Your password has been hashed to enhanced security.!</div>
+								<div class="alert-close">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">
+											<i class="ki ki-close"></i>
+										</span>
+									</button>
+								</div>
+							</div>
+							<!--end::success-->
+                            <?php 
+                            }
+                            elseif (isset($_GET['ERROR']) && !empty($_GET['ERROR']))
+                            {
+                            ?>
+                            <!--begin::Alert Password Not Matching-->
+							<div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+								<div class="alert-icon">
+									<span class="svg-icon svg-icon-3x svg-icon-danger">
+										<!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24" />
+												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+												<rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
+												<rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>
+								</div>
+								<div class="alert-text font-weight-bold">The password confirmation does not match!</div>
+								<div class="alert-close">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">
+											<i class="ki ki-close"></i>
+										</span>
+									</button>
+								</div>
+							</div>
+							<!--end::Alert Password Not Matching-->
+                            <?php  
+                            }
+                            else
+                            {
+                            ?>
 							<!--begin::Alert-->
 							<div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
 								<div class="alert-icon">
@@ -283,6 +349,9 @@ $_SESSION["title"] = "Profile";
 								</div>
 							</div>
 							<!--end::Alert-->
+                            <?php
+                            }
+                            ?>
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label text-alert">New Password</label>
 								<div class="col-lg-9 col-xl-6">
@@ -290,9 +359,9 @@ $_SESSION["title"] = "Profile";
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label text-alert">Verify Password</label>
+								<label class="col-xl-3 col-lg-3 col-form-label text-alert">Confirm Password</label>
 								<div class="col-lg-9 col-xl-6">
-									<input type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' class="form-control form-control-lg form-control-solid" placeholder="Verify password" />
+									<input type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' class="form-control form-control-lg form-control-solid" placeholder="Confirm password" />
                                     <span id='message'></span>
                                 </div>
 							</div>

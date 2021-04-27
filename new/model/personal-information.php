@@ -1,8 +1,6 @@
 <?php 
 if (isset($_POST['EditPersonalInformation'])){
 
-    $varConsumerFName = $_POST['txtConsumerFName'];
-    $varConsumerLName = $_POST['txtConsumerLName'];
     $varConsumerEmail = $_POST['txtConsumerEmail'];
     $varConsumerPhone = $_POST['txtConsumerPhone'];
     $varConsumerAddress = $_POST['txtConsumerAddress'];
@@ -13,8 +11,6 @@ if (isset($_POST['EditPersonalInformation'])){
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varconsumerid)],
                   ['$set' => [
-                  'ConsumerFName'=>$varConsumerFName,
-                  'ConsumerLName'=>$varConsumerLName,
                   'ConsumerEmail'=>$varConsumerEmail,
                   'ConsumerPhone'=>$varConsumerPhone,
                   'ConsumerAddress'=>$varConsumerAddress,

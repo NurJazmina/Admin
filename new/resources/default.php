@@ -1,22 +1,4 @@
-<script>
-/*tinyMCE for addnews--start*/
-tinymce.init({
-  selector: 'textarea#basic-example',
-  height: 500,
-  menubar: false,
-  plugins: [
-    'advlist autolink lists link image charmap print preview anchor',
-    'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table paste code help wordcount'
-  ],
-  toolbar: 'undo redo | formatselect | ' +
-  'bold italic backcolor | alignleft aligncenter ' +
-  'alignright alignjustify | bullist numlist outdent indent | ' +
-  'removeformat | help',
-  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-});
-/*tinyMCE for addnews*/
-</script>
+
 
 
 <?php
@@ -589,9 +571,75 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
         }
         </script>
         <?php
-      }
+        }
+        if ($_GET['page']=="schoolforumdetail") {
+          ?>
+          <script>
+          //Limit characters displayed in span
+          $(document).ready(function(){
+          $('.claimedRight').each(function (f) {
+              var newstr = $(this).text().substring(0,100)+'....';
+              $(this).text(newstr);
+
+              });
+          })
+          </script>
+          <?php
+        }
+        ?>
+        <?php
+        if ($_GET['page']=="publicforumdetail") {
+          ?>
+          <script>
+          //Limit characters displayed in span
+          $(document).ready(function(){
+          $('.claimedRight').each(function (f) {
+              var newstr = $(this).text().substring(0,100)+'....';
+              $(this).text(newstr);
+
+              });
+          })
+          </script>
+          <?php
+        }
+        ?>
+        <?php
   
 }
 ?>
+<script>
+/*begin::new/event*/
+tinymce.init({
+  selector: 'textarea#basic-example',
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+  toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+});
+/*end::new/event*/
 
+/*begin::new/event*/
+tinymce.init({
+  selector: '.basic-example2',
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+  toolbar: '' +
+  '' +
+  '' +
+  '',
+  content_style: 'body { height:10px font-family:Helvetica,Arial,sans-serif; font-size:14px}'
+});
+/*end::new/event*/
+</script>
 
