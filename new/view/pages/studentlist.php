@@ -23,9 +23,9 @@
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
                     <button type="button" style="width:25%"; class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
-                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" data-bs-toggle="modal" data-bs-target="#recheckaddstudent" >Add</button>
+                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstudent" >Add</button>
                     <input  type="text" style="width:35%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
-                    <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchstudent" >Search</button>
+                    <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent" >Search</button>
                   </div>
                 </div>
               </form>
