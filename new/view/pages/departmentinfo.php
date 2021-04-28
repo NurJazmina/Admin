@@ -3,6 +3,17 @@ $_SESSION["title"] = "Profile";
 ?>
 <?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
+<style>
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+</style>
+
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->
@@ -291,13 +302,8 @@ $_SESSION["title"] = "Profile";
 					<!--end::Header-->
 					<!--begin::Form-->
 					<div class="row" >
-					<div class="col-md-1 section-1-box wow fadeInUp"></div>
-					<div class="col-md-10 section-1-box wow fadeInUp">
-						<br><br>
-						<div class="card">
-						<div class="card-header">
-							<strong>Details</strong>
-						</div>
+					<div class="card-title">
+					<div class="col-md-12 section-1-box wow fadeInUp">
 						<div class="card-body">
 							<div class="row">
 							   <div class="col-sm">
@@ -366,7 +372,6 @@ $_SESSION["title"] = "Profile";
 													<textarea class="form-control" name="txtdepartmentRemark" rows="3"></textarea>
 													<br>
 													<div class="row">
-														
 														<div class="col text-right">
 														<input type="hidden" value="<?php echo $_SESSION["loggeduser_Staffdepartment"]; ?>" name="txtdepartmentid">
 														<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkFormSubmit">Add remark</button>
@@ -473,17 +478,19 @@ $_SESSION["title"] = "Profile";
 															<div class="row">
 															<div class="col">
 																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																<br>
 																<div class="row">
 																<div class="col text-right">
 																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
 																	<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
 																	<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																	<button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">Update</button>
+																	<br><br>
 																</div>
 																</div>
 															</div>
 															</div>
 															</form>
-															<button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
 														</div>
 														</div>
 														</div>
@@ -575,6 +582,7 @@ $_SESSION["title"] = "Profile";
 															<div class="row">
 															<div class="col">
 																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																<br>
 																<div class="row">
 																<div class="col text-right">
 																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
@@ -677,6 +685,7 @@ $_SESSION["title"] = "Profile";
 															<div class="row">
 															<div class="col">
 																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																<br>
 																<div class="row">
 																<div class="col text-right">
 																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
@@ -710,7 +719,7 @@ $_SESSION["title"] = "Profile";
 							</div>
 							<div class="w-100"></div>
 							<div class="col-sm">
-							<div class="row">
+							<div class="row py-5">
 								<div class="col-12 col-lg-12">
 								<div class="card">
 									<div class="card-header">
@@ -816,7 +825,7 @@ $_SESSION["title"] = "Profile";
 								?>
 								</tbody>
 									</table>
-									<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=departmentdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+									<button type="button" style="font-size:15px width:25%" class="btn btn-primary"><a href="index.php?page=departmentdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
 								<?php
 								if (!isset($_GET['attendance']) && empty($_GET['attendance']))
 								{

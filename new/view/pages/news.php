@@ -1,3 +1,10 @@
+<html>
+<style>
+  .float-right {
+    float: right;
+  }
+</style>
+
 <?php
 $_SESSION["title"] = "News";
 ?>
@@ -49,12 +56,6 @@ $_SESSION["title"] = "News";
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
-  
-  <style>
-    .eventdate-day {
-      font-size: 100px;
-    }
-  </style>
 
   <!--begin::staff-->
   <div class="col">
@@ -72,7 +73,7 @@ $_SESSION["title"] = "News";
       </div>
       <div class="eventtitle">
         <table class="table table-striped table-sm">
-          <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+          <span class="claimedRight" style="font-size:150%"><?php echo $schoolNewsDetails; ?></span><br>
         </table>
       </div>
     </div>
@@ -189,3 +190,9 @@ $_SESSION["title"] = "News";
   ?>
 </div>
 <!--filter::end::public-->
+
+<div class="float-right">
+ Testing 
+
+</div>
+</html>
