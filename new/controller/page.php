@@ -1,5 +1,6 @@
 
 <?php
+
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
     {
     ?>
@@ -15,19 +16,18 @@
         if (!isset($_GET['page']) || empty($_GET['page']))
         {
             include 'view/pages/dashboard.php';
-        }
+        } 
         else 
         {
-            //cannot solve, hold
-            if($_GET['page'] == $_GET['page'])
+            if (file_exists('view/pages/'. $_GET['page'] . ".php")) 
             {
-                include 'view/pages/'.$_GET['page'].'.php';
+                include 'view/pages/'. $_GET['page'] . ".php";
             }
-            else
+            else 
             {
-                include 'view/partials/custom_404.html';
+                include 'view/partials/error.html';
             }
-        }
+        }   
 
     }
 

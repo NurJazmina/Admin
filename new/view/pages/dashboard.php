@@ -508,7 +508,7 @@ $_SESSION["title"] = "Dashboard";
 									</div>
 									<!--end::Symbol-->
 									<!--begin::Description-->
-									<span class="text-muted font-weight-bold font-size-lg">What’s on your mind, Jerry?</span>
+									<span class="text-muted font-weight-bold font-size-lg">What’s on your mind, <?php echo $_SESSION["loggeduser_consumerFName"]; ?>?</span>
 									<!--end::Description-->
 								</div>
 								<!--end::Top-->
