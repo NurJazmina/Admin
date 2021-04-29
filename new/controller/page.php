@@ -1,5 +1,102 @@
-
 <?php
+    $staffallowedaccess = array("dashboard",
+                                "news",
+                                "event",
+                                "stafflist",
+                                "parentlist",
+                                "studentlist",
+                                "timetablelist",
+                                "classroomlist",
+                                "subjectlist",
+                                "departmentlist",
+                                "profile",
+                                "personal-information",
+                                "change-password",
+                                "departmentinfo",
+                                "schoolabout",
+                                "forums",
+                                "schoolforum",
+                                "publicforum",
+                                
+                                "modal-news",
+                                "modal-event",
+                                "modal-forums",
+                                "modal-recheckstafflist",
+                                "modal-recheckstudentlist",
+                                "modal-recheckparentlist",
+                                "modal-rechecktimetablelist",
+                                "modal-recheckclassroomlist",
+                             
+                                "eventdetail",
+                                "departmentdetail",
+                                "classdetail",
+                                "schoolforumdetail",
+                                "publicforumdetail",
+
+                                "addstaff",
+                                "addstudent",
+                                "addparent",
+                                "adddepartment",
+                                "addsubject",
+                                "addclass",
+
+                                "departmentattendance",
+                                "classattendance",
+                                "exportstaffattendance",
+                                "exportstudentattendance",
+                                "exportclassattendance",
+                                "testing",
+                               );
+
+    $teacherallowedaccess = array("dashboard",
+                                "news",
+                                "event",
+                                "stafflist",
+                                "parentlist",
+                                "studentlist",
+                                "timetablelist",
+                                //"classroomlist",
+                                //"subjectlist",
+                                //"departmentlist",
+                                "profile",
+                                "personal-information",
+                                "change-password",
+                                "departmentinfo",
+                                "classroominfo",
+                                "schoolabout",
+                                "forums",
+                                "schoolforum",
+                                "publicforum",
+                                
+                                //"modal-news",
+                                //"modal-event",
+                                "modal-forums",
+                                //"modal-recheckstafflist",
+                                //"modal-recheckstudentlist",
+                                //"modal-recheckparentlist",
+                                "modal-rechecktimetablelist",
+                                //"modal-recheckclassroomlist",
+                            
+                                "eventdetail",
+                                //"departmentdetail",
+                                //"classdetail",
+                                "schoolforumdetail",
+                                "publicforumdetail",
+
+                                //"addstaff",
+                                //"addstudent",
+                                //"addparent",
+                                //"adddepartment",
+                                //"addsubject",
+                                //"addclass",
+
+                                //"departmentattendance",
+                                //"classattendance",
+                                //"exportstaffattendance",
+                                //"exportstudentattendance",
+                                //"exportclassattendance",
+                                "testing",
+                                );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
     {
@@ -21,7 +118,23 @@
         {
             if (file_exists('view/pages/'. $_GET['page'] . ".php")) 
             {
-                include 'view/pages/'. $_GET['page'] . ".php";
+                if($_SESSION["loggeduser_StaffLevel"]=="1")
+                {
+                    if (in_array($_GET['page'], $staffallowedaccess)){
+                        include 'view/pages/'. $_GET['page'] . ".php";
+                    } else {
+                        include 'view/pages/unauthorized.php';
+                    }
+                    
+                }
+                elseif ($_SESSION["loggeduser_StaffLevel"]=="0")
+                {
+                    if (in_array($_GET['page'], $teacherallowedaccess)){
+                        include 'view/pages/'. $_GET['page'] . ".php";
+                    } else {
+                        include 'view/pages/unauthorized.php';
+                    }
+                }
             }
             else 
             {

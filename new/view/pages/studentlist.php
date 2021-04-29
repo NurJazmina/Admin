@@ -22,10 +22,24 @@
               <form name="searchstudent" class="form-inline" action="index.php?page=studentlist" method="post">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
+                  <?php 
+                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  {
+                  ?>
                     <button type="button" style="width:25%"; class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
                     <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstudent" >Add</button>
                     <input  type="text" style="width:35%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                     <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent" >Search</button>
+                  <?php
+                  } 
+                  else
+                  {
+                  ?>
+                    <input  type="text" style="width:75%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
+                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent" >Search</button>
+                  <?php
+                  }
+                  ?>
                   </div>
                 </div>
               </form>
@@ -165,7 +179,14 @@
                       </tr>
                       </table>
                       <br>
+                      <?php
+                      if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                      {
+                      ?>
                       <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button>
+                      <?php
+                      }
+                      ?>
                       </td>
                       </table>
                       </div>
@@ -219,15 +240,29 @@
                       </td>
                       <td><?php echo $ClassCategory." ".$ClassName; ?></td>
                       <td>
+                      <?php
+                      if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                      {
+                      ?>
                         <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fa fa-edit" style="font-size:15px"></i>
                         </button>
+                      <?php
+                      }
+                      ?>
                       </td>
                       <td><?php if(($StudentsStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                       <td>
+                      <?php
+                      if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                      {
+                      ?>
                         <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                         </button>
+                      <?php
+                      }
+                      ?>
                       </td>
                       </tr>
                       <?php

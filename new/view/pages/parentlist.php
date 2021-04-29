@@ -10,14 +10,6 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-
-					<?php
-					$uri = $_SERVER['REQUEST_URI'];
-					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-					$query = $_SERVER['QUERY_STRING'];
-					//echo $query; // Outputs: Query String
-
-					?> 
 					<h5 class="text-dark font-weight-bold my-1 mr-5">Parent</h5>
 					<!--end::Page Title-->
 				</div>
@@ -30,9 +22,23 @@
               <form name="searchparent" class="form-inline" action="index.php?page=parentlist" method="post">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
-                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
+                  <?php 
+                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  {
+                  ?>
+                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
                     <input  type="text" style="width:50%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                     <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchname" >Search</button>
+                  <?php
+                  } 
+                  else
+                  {
+                  ?>
+                    <input  type="text" style="width:75%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
+                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchname" >Search</button>
+                  <?php
+                  } 
+                  ?>
                   </div>
                 </div>
               </form>
@@ -147,12 +153,19 @@
                   <td><?php print_r($ParentStudentRelation);?></td>
                   <td><?php if(($ParentStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                   <td>
+                  <?php
+                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  {
+                  ?>
                     <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">
                       <i class="fa fa-edit" style="font-size:15px"></i>
                     </button>
                     <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusParentModal" data-bs-whatever="<?php echo $parentid; ?>">
                       <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                     </button>
+                  <?php
+                  }
+                  ?>
                   </td>
                 </tr>
                 <?php
@@ -297,4 +310,4 @@
       </div>
      </div>
     </div>
-<?php include ('view/modal-parentlist.php'); ?>
+<?php include ('view/pages/modal-parentlist.php'); ?>

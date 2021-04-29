@@ -21,10 +21,24 @@
               <form name="searchstaff" class="form-inline" action="index.php?page=stafflist" method="post">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
+                  <?php 
+                  if($_SESSION["loggeduser_StaffLevel"]=='0') 
+                  {
+                  ?>
                     <button type="button" style="width:25%"; class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
-                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
+                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
                     <input  type="text" style="width:35%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                     <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchstaff" >Search</button>
+                  <?php
+                  } 
+                  else
+                  {
+                  ?>
+                    <input  type="text" style="width:75%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
+                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchstaff" >Search</button>
+                  <?php
+                  }
+                  ?>
                   </div>
                 </div>
               </form>
@@ -162,7 +176,14 @@
                         </tr>
                         </table>
                         <br>
+                        <?php
+                        if($_SESSION["loggeduser_StaffLevel"]=='0') 
+                        {
+                        ?>
                         <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
+                        <?php
+                        }
+                        ?>
                         </td>
                         </table>
                         </div>
@@ -200,9 +221,16 @@
                               <?php print_r($document2->ClassName);?>
                             </td>
                             <td>
+                            <?php
+                            if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                            {
+                            ?>
                               <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fa fa-edit" style="font-size:15px"></i>
                               </button>
+                            <?php
+                            }
+                            ?>
                             </td>
                             <?php
                             }
@@ -222,9 +250,16 @@
                             ?>
                             <td></td>
                             <td>
+                            <?php
+                            if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                            {
+                            ?>
                               <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fa fa-edit" style="font-size:15px"></i>
                               </button>
+                            <?php
+                            }
+                            ?>
                             </td>
                             <?php
                             }
@@ -239,9 +274,16 @@
                             ?>
                             <td><?php if(($StaffStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                             <td>
+                            <?php
+                            if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                            {
+                            ?>
                             <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                             </button>
+                            <?php
+                            }
+                            ?>
                             </td>
                           </tr>
                           <?php
