@@ -2,38 +2,53 @@
 <style>
 
   .text4.eventdate {
-    font-size: 18px;
+    
     font-weight: bold;
     float: left;
-    width: 15%;
-    height: 100px;
-    border: 1px solid black;
+    width: 20%;
+    height: 140px;
+    padding-right:5px;
+  
  
   }
 
   .eventtitle {
-    font-size: 15px;
+    
     float: right;
-    width: 85%;
-    height: 100px;
-    border: 1px solid black;
+    width: 80%;
+    height: 140px;
+    
    
   }
 
+  /* small devices */
   @media only screen and (max-width: 600px) {
-  .card-body {background: red;}
+  .card-body {
+    font-size: 14px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .card-body {background: green;}
+  .card-body {
+    font-size: 14px;
+  }
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .card-body {background: blue;}
+  .card-body {
+    font-size: 15px;
+    }
 } 
-  }
+
+/* Medium devices (landscape tablets, 1024px and up) */
+@media only screen and (min-width: 1024px) {
+  .card-body {
+    font-size: 14px;
+    }
+} 
 
 </style>
 <body>
@@ -99,17 +114,17 @@ $_SESSION["title"] = "News";
       </div>
     </div>
     <div class="card-body">
-    <div class="table-responsive-sm">
+    
       <div class="text4 eventdate">
         <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
         <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
       </div>
       <div class="eventtitle">
         <table class="table table-striped table-sm">
-          <span class="claimedRight" style="font-size:150%"><?php echo $schoolNewsDetails; ?></span><br>
+          <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
         </table>
       </div>
-    </div>
+    
     </div>
     <div class="card-footer">
       <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
@@ -124,7 +139,7 @@ $_SESSION["title"] = "News";
       </div>
     </div>
     <div class="card-body">
-    <div class="table-responsive-sm">
+    
       <div class="text4 eventdate">
         <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
         <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
@@ -134,7 +149,7 @@ $_SESSION["title"] = "News";
           <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
         </table>
       </div>
-    </div>
+    
     </div>
     <div class="card-footer">
       <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
@@ -192,7 +207,7 @@ $_SESSION["title"] = "News";
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
-  <div class="col">
+  <div class="col-lg-4">
     <div class="card card-custom gutter-b">
     <div class="card-header">
       <div class="card-title">
@@ -200,17 +215,17 @@ $_SESSION["title"] = "News";
       </div>
     </div>
     <div class="card-body">
-    <div class="table-responsive-sm">
+    
       <div class="text4 eventdate">
         <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
         <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
       </div>
       <div class="eventtitle">
-      <table class="table table-striped table-sm">
+      
       <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
       </table>
       </div>
-    </div>
+    
     </div>
     <div class="card-footer">
       <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
