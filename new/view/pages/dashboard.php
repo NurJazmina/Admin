@@ -1473,7 +1473,7 @@ $_SESSION["title"] = "Dashboard";
 							<!--begin::Header-->
 							<div class="card-header border-0 pt-5">
 								<h3 class="card-title align-items-start flex-column">
-									<span class="card-label font-weight-bolder text-dark">Latest News</span>
+								<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Latest News</span>
 								</h3>
 								<div class="card-toolbar">
 									<ul class="nav nav-pills nav-pills-sm nav-dark-75">
@@ -1989,12 +1989,12 @@ $_SESSION["title"] = "Dashboard";
 							<!--begin::Header-->
 							<div class="card-header border-0 pt-5">
 								<h3 class="card-title align-items-start flex-column">
-									<span class="card-label font-weight-bold font-size-h4 text-dark-75">Accident Report</span>
+									<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Accident Report</span>
 									<span class="text-muted mt-3 font-weight-bold font-size-sm">Last week
 									<span class="text-primary font-weight-bolder">9 accidents</span></span>
 								</h3>
 								<div class="card-toolbar">
-									<ul class="nav nav-pills nav-pills-sm nav-dark">
+									<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 										<li class="nav-item ml-0">
 											<a class="nav-link py-2 px-4 font-weight-bolder font-size-sm" data-toggle="tab" href="#kt_tab_pane_7_1">Active Cases</a>
 										</li>
@@ -2047,8 +2047,8 @@ $_SESSION["title"] = "Dashboard";
 											<div class="form-group mb-6">
 												<textarea class="form-control border-0 form-control-solid pl-6 font-size-lg font-weight-bolder min-h-130px" name="memo" rows="4" placeholder="Accident Details" id="kt_forms_widget_7_2_input"></textarea>
 											</div>
-											<div>
-												<button class="btn btn-primary font-weight-bold">Send Report</button>
+											<div class="text-right">
+												<button class="btn btn-primary btn-block font-weight-bold">Send Report</button>
 											</div>
 										</form>
 										<!--end::Form-->
@@ -2064,12 +2064,12 @@ $_SESSION["title"] = "Dashboard";
 							<!--begin::Header-->
 							<div class="card-header border-0 pt-7">
 								<h3 class="card-title align-items-start flex-column">
-									<span class="card-label font-weight-bold font-size-h4 text-dark-75">Latest Accidents</span>
+									<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Latest Accidents</span>
 									<span class="text-muted mt-3 font-weight-bold font-size-sm">Last week
 									<span class="text-primary font-weight-bolder">9 accidents</span></span>
 								</h3>
 								<div class="card-toolbar">
-									<ul class="nav nav-pills nav-pills-sm nav-dark">
+									<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 										<li class="nav-item ml-0">
 											<a class="nav-link py-2 px-4 font-weight-bolder font-size-sm" data-toggle="tab" href="#kt_tab_pane_1_1">Year</a>
 										</li>

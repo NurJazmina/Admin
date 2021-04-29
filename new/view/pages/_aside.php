@@ -158,7 +158,7 @@
 									</div>
 								</li>
 								<br>
-								<li class="menu-item menu-item-active" aria-haspopup="true">
+								<li class="menu-item menu-item" aria-haspopup="true">
 									<a href="index.php?page=dashboard" class="menu-link">
 										<span class="svg-icon menu-icon">
 
