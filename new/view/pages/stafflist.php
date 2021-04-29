@@ -50,7 +50,7 @@
       </div>
       <div class="card-body" >
         <!-- sorting -->
-        <div class="btn-group sort-btn" style="width:10%";>
+        <div class="btn-group sort-btn" style="width:5%";>
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=stafflist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
@@ -58,6 +58,7 @@
             <li class="dropdown-item"><a href="index.php?page=stafflist&level=<?php echo "0"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">Teacher</a></li>
           </ul>
         </div>
+        <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="example" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
@@ -100,7 +101,7 @@
                   $ConsumerAddress = $document1->ConsumerAddress;
                   $ConsumerPhone = $document1->ConsumerPhone;
                   ?>
-                  <tr bgcolor='white'>
+                  <tr bgcolor="white">
                     <td><a href="index.php?page=staffdetail&id=<?php echo $varconsumerid; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
                     <div class="table-responsive">
                     <table class="table table-striped table-sm" width="100%" cellspacing="0" style= "text-align: center;">
@@ -161,7 +162,7 @@
                         </tr>
                         </table>
                         <br>
-                        <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button>
+                        <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
                         </td>
                         </table>
                         </div>
@@ -279,7 +280,7 @@
                           <?php
                           }
                           ?>
-                          <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                            <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
                         </div>
                     </div>
                   </div>

@@ -8,31 +8,33 @@ $_SESSION["title"] = "Forum";
 <?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form action="index.php?page=schoolforum&forum=<?php echo $sort; ?>&topic=<?php echo $topic; ?>" method="post" name="AddForums"><br><br>
-<div class="table-responsive" style="width:100%; margin:0 auto;">
-  <table class="table table-bordered dt-responsive nowrap table-sm table-success" cellpadding="1" cellspacing="0" style="font-family: Arial; color:#505050; font-size: 15px;">
-    <tbody>
-      <tr> 
-        <td colspan="9"><strong>ADD RECORD</strong></td>
-      </tr>
-      <tr> 
-        <td height="27"><strong>TITLE</strong></td>
-        <td>
-        <input type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
-        </td>
-      </tr>
-      <tr> 
-        <td colspan="2"><strong>FORUMS</strong><br><br>
-        <textarea id="basic-example" name="txtdetail" ></textarea>
-        </td>
-      </tr>
-      <tr> 
-        <td height="27" colspan="2"><div align="right"> 
+<div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
+<div class="card card-custom gutter-b">
+        
+        <div class="card-body">
+        
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
+                </div>
+        </div>
+        <div class="form-group row">
+        <div>
+        <label><h5> FORUM </h5></label>
+            <textarea id="basic-example" name="txtdetail" ></textarea>
+        </div>
+
+        <div class="card-footer">
+            <div class="row">
+            <div class="col-lg-2"></div>
+        <div class="text-right">
             <input type="hidden"  name="txtforum" value="<?php echo  $category; ?>">
-            <button type="submit" class="btn btn-secondary" name="AddForums">Confirm</button>
+            <button type="submit" class="btn btn-primary" name="AddForums">Confirm</button>
             <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </div>
+
+        </div>  
+        </div>
+    </div>
 </form>

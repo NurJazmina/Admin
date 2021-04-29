@@ -18,7 +18,7 @@ $_SESSION["title"] = "News";
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
                 <div class="col-lg-8">
-                <select class="form-control" id="staticStaffNo" name="access" required>
+                <select class="form-control" id="staticStaffNo" style="height: auto; width: 50%;" name="access" required>
                   <option value="PUBLIC">PUBLIC</option>
                   <option value="SCHOOL1">STAFFS</option>
                   <option value="SCHOOL0">TEACHERS</option>
@@ -35,8 +35,8 @@ $_SESSION["title"] = "News";
         <div class="card-footer">
             <div class="row">
             <div class="col-lg-2"></div>
-        <div>
-            <button type="submit" class="btn btn-success" name="AddNews">Confirm</button>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary" name="AddNews">Confirm</button>
             <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
 
