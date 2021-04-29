@@ -96,6 +96,7 @@ foreach ($cursor as $document)
                       <div class="col-lg-10">
                       </div>
                       <div class="col-lg-2">
+                      <br>
                           <button type="submit" class="btn btn-secondary" name="AddNewsComment">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
                       </div>
                       </div>

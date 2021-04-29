@@ -1,9 +1,42 @@
 <html>
 <style>
-  .float-right {
-    float: right;
+
+  .text4.eventdate {
+    font-size: 18px;
+    font-weight: bold;
+    float: left;
+    width: 15%;
+    height: 100px;
+    border: 1px solid black;
+ 
   }
+
+  .eventtitle {
+    font-size: 15px;
+    float: right;
+    width: 85%;
+    height: 100px;
+    border: 1px solid black;
+   
+  }
+
+  @media only screen and (max-width: 600px) {
+  .card-body {background: red;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .card-body {background: green;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .card-body {background: blue;}
+} 
+  }
+
 </style>
+<body>
 
 <?php
 $_SESSION["title"] = "News";
@@ -189,10 +222,6 @@ $_SESSION["title"] = "News";
   }
   ?>
 </div>
-<!--filter::end::public-->
-
-<div class="float-right">
- Testing 
-
-</div>
+</body>
 </html>
+<!--filter::end::public-->
