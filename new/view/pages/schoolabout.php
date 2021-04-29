@@ -48,11 +48,11 @@ $_SESSION["title"] = "School";
             </svg><!--end::Svg Icon--></span>
             <!--end::Svg Icon-->
           </span>
-          <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?php print_r($SchoolsPhoneNo); ?></a>
-            <button type="button"  class="btn btn-light; right" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
-             <i class="fa fa-edit" style="font-size:15px"></i>
+          <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?php print_r($SchoolsPhoneNo); ?>
+            <button type="button" style="vertical-align: inherit;" class="btn" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
+             <i class="fa fa-edit" style="vertical-align: inherit;"></i>
             </button>
-          </div>
+          </a>
         </div>
       </div>
       <!--end::Row-->

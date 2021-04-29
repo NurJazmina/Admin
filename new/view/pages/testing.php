@@ -1,8 +1,6 @@
 <?php
 include ('model/testing.php');
-
-
-$filter = ['school_id'=>'a'];
+$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.testing',$query);
 
@@ -47,10 +45,44 @@ foreach ($cursor as $document)
 <div class="row">
     <div class="col">
     <?php
-        for ($i=1; $i<=$vartotalparent; $i++)
+        for ($i=0; $i<$vartotalstaff; $i++)
         {
-            $varparent_id = $document->parent->{$i}->consumer_id;
-            $varparent_name = $document->parent->{$i}->consumerfname;
+            $varstaff_id = $document->staff[$i]->consumer_id;
+            $varstaff_name = $document->staff[$i]->consumerfname;
+            //echo $varstudent_id;
+            ?>
+                <div class="card-header">
+                    staff <?php echo $i; ?>
+                    <br>
+                    consumer id : <?php echo $varstaff_id; ?>
+                    <br>
+                    consumer name : <?php echo $varstaff_name; ?>
+                    <br><br>
+                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editstaff" data-bs-whatever="<?php echo $i; ?>">
+                        <i class="fa fa-edit"></i> Edit staff
+                    </button>
+                </div>
+            <?php
+        }
+    ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card-header">
+            Total Staff : <?php echo $vartotalstaff; ?>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col">
+    <?php
+        for ($i=0; $i<$vartotalparent; $i++)
+        {
+            $varparent_id = $document->parent[$i]->consumer_id;
+            $varparent_name = $document->parent[$i]->consumerfname;
             //echo $varstudent_id;
             ?>
                 <div class="card-header">
@@ -80,10 +112,10 @@ foreach ($cursor as $document)
 <div class="row">
     <div class="col">
     <?php
-        for ($i=1; $i<=$vartotalstudent; $i++)
+        for ($i=0; $i<$vartotalstudent; $i++)
         {
-            $varstudent_id = $document->student->{$i}->consumer_id;
-            $varstudent_name = $document->student->{$i}->consumerfname;
+            $varstudent_id = $document->student[$i]->consumer_id;
+            $varstudent_name = $document->student[$i]->consumerfname;
             //echo $varstudent_id;
             ?>
                 <div class="card-header">
@@ -93,7 +125,7 @@ foreach ($cursor as $document)
                     <br>
                     consumer name : <?php echo $varstudent_name; ?>
                     <br><br>
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editstudent" data-bs-whatever="<?php echo $varid; ?>">
+                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editstudent" data-bs-whatever="<?php echo $i; ?>">
                         <i class="fa fa-edit"></i> Edit student
                     </button>
                 </div>
@@ -110,38 +142,6 @@ foreach ($cursor as $document)
     </div>
 </div>
 <br>
-<div class="row">
-    <div class="col">
-    <?php
-        for ($i=1; $i<=$vartotalstaff; $i++)
-        {
-            $varstaff_id = $document->staff->{$i}->consumer_id;
-            $varstaff_name = $document->staff->{$i}->consumerfname;
-            //echo $varstudent_id;
-            ?>
-                <div class="card-header">
-                    staff <?php echo $i; ?>
-                    <br>
-                    consumer id : <?php echo $varstaff_id; ?>
-                    <br>
-                    consumer name : <?php echo $varstaff_name; ?>
-                    <br><br>
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editstaff" data-bs-whatever="<?php echo $varid; ?>">
-                        <i class="fa fa-edit"></i> Edit staff
-                    </button>
-                </div>
-            <?php
-        }
-    ?>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <div class="card-header">
-            Total Staff : <?php echo $vartotalstaff; ?>
-        </div>
-    </div>
-</div>
 
 <?php include ('view/pages/modal-testing.php'); ?>
 
