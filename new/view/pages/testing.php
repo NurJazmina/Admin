@@ -1,7 +1,5 @@
 <?php
 include ('model/testing.php');
-
-
 $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.testing',$query);
@@ -13,7 +11,6 @@ foreach ($cursor as $document)
     $vartotalparent = $document->totalparent;
     $vartotalstudent = $document->totalstudent;
     $vartotalstaff = $document->totalstaff;
-
 }
 ?>
 <br><br>
