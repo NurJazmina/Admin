@@ -228,16 +228,17 @@ if (isset($_POST['AddStudent']))
 //Edit Staff
 if (isset($_POST['EditStaff']))
 {
-      //$var_id = $_POST['txtid'];
-      $varobject = ($_POST['txtobject']);
+      $varschool_id =  strval($_SESSION["loggeduser_schoolID"]);
+      $varobject = intval($_POST['txtobject']);
       $varconsumer_id = $_POST['txtconsumer_id'];
       $varconsumerfname = $_POST['txtconsumerfname'];
 
       $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
       $bulk->update(
-                    ['_id' => new \MongoDB\BSON\ObjectID('608a18a2e50dba1fc8d82e45')],
+                    ['school_id' => $varschool_id],
                     ['$set' => 
-                      ['staff.0.consumer_id'=>$varconsumer_id],
+                      ['staff.'.$varobject.'.consumer_id'=>$varconsumer_id ,
+                      'staff.'.$varobject.'.consumerfname'=>$varconsumerfname],
                     ],
                     ['upsert' => TRUE]
                     );
@@ -283,17 +284,17 @@ if (isset($_POST['EditStaff']))
 //Edit Parent
 if (isset($_POST['EditParent']))
 {
-      //$var_id = $_POST['txtid'];
+      $varschool_id =  strval($_SESSION["loggeduser_schoolID"]);
       $varobject = $_POST['txtobject'];
       $varconsumer_id = $_POST['txtconsumer_id'];
       $varconsumerfname = $_POST['txtconsumerfname'];
 
       $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
       $bulk->update(
-                    ['_id' => new \MongoDB\BSON\ObjectID('608a18a2e50dba1fc8d82e45')],
+                    ['school_id' => $varschool_id],
                     ['$set' => 
-                      ['parent.$varobject.consumer_id'=>$varconsumer_id],
-                      ['parent.$varobject.consumer_id'=>$varconsumerfname],
+                      ['parent.'.$varobject.'.consumer_id'=>$varconsumer_id,
+                      'parent.'.$varobject.'.consumerfname'=>$varconsumerfname],
                     ],
                     ['upsert' => TRUE]
                     );
@@ -339,17 +340,17 @@ if (isset($_POST['EditParent']))
 //Edit Student
 if (isset($_POST['EditStudent']))
 {
-      //$var_id = $_POST['txtid'];
+      $varschool_id =  strval($_SESSION["loggeduser_schoolID"]);
       $varobject = $_POST['txtobject'];
       $varconsumer_id = $_POST['txtconsumer_id'];
       $varconsumerfname = $_POST['txtconsumerfname'];
 
       $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
       $bulk->update(
-                    ['_id' => new \MongoDB\BSON\ObjectID('608a18a2e50dba1fc8d82e45')],
+                    ['school_id' => $varschool_id],
                     ['$set' => 
-                      ['student.$varobject.consumer_id'=>$varconsumer_id],
-                      ['student.$varobject.consumer_id'=>$varconsumerfname],
+                      ['student.'.$varobject.'.consumer_id'=>$varconsumer_id,
+                       'student.'.$varobject.'.consumerfname'=>$varconsumerfname],
                     ],
                     ['upsert' => TRUE]
                     );

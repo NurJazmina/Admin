@@ -2,7 +2,7 @@
 include ('model/testing.php');
 
 
-$filter = ['school_id'=>'abc'];
+$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.testing',$query);
 
@@ -128,7 +128,7 @@ foreach ($cursor as $document)
                     <br>
                     consumer name : <?php echo $varstudent_name; ?>
                     <br><br>
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editstudent" data-bs-whatever="<?php echo $varid; ?>">
+                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editstudent" data-bs-whatever="<?php echo $i; ?>">
                         <i class="fa fa-edit"></i> Edit student
                     </button>
                 </div>

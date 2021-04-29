@@ -121,7 +121,7 @@
         </div>
         <div class="modal-body">
  
-          <input type="text" class="form-control" name="txtobject">
+          <input type="hidden" class="form-control" name="txtobject">
           <!--begin::consumer-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">consumer_id: </label>
@@ -158,7 +158,7 @@
         </div>
         <div class="modal-body">
 
-          <input type="text" class="form-control" name="txtobject">
+          <input type="hidden" class="form-control" name="txtobject">
           <!--begin::consumer-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">consumer_id: </label>
@@ -197,7 +197,7 @@
         </div>
         <div class="modal-body">
  
-          <input type="hidden" class="form-control" name="txtid">
+          <input type="hidden" class="form-control" name="txtobject">
           <!--begin::consumer-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">consumer_id: </label>
