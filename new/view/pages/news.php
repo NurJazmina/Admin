@@ -8,8 +8,6 @@
     width: 20%;
     height: 140px;
     padding-right:5px;
-  
- 
   }
 
   .eventtitle {
@@ -17,8 +15,6 @@
     float: right;
     width: 80%;
     height: 140px;
-    
-   
   }
 
   /* small devices */
@@ -49,10 +45,9 @@
     font-size: 14px;
     }
 } 
-
 </style>
-<body>
 
+<body>
 <?php
 $_SESSION["title"] = "News";
 ?>
@@ -106,55 +101,27 @@ $_SESSION["title"] = "News";
     ?>
 
   <!--begin::staff-->
-  <div class="col">
-  <div class="card card-custom gutter-b">
-    <div class="card-header">
-      <div class="card-title">
-      <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $schoolNewsTitle; ?></a></strong>
+  <div class="col-lg-4">
+      <div class="card card-custom gutter-b">
+          <div class="card-header">
+            <div class="card-title">
+              <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $schoolNewsTitle; ?></a></strong>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="text4 eventdate">
+              <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+              <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+            </div>
+            <div class="eventtitle">
+              <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+          </div>
       </div>
-    </div>
-    <div class="card-body">
-    
-      <div class="text4 eventdate">
-        <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-        <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
-      </div>
-      <div class="eventtitle">
-        <table class="table table-striped table-sm">
-          <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
-        </table>
-      </div>
-    
-    </div>
-    <div class="card-footer">
-      <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-    </div>
-  </div>
-
-  <div class="col">
-  <div class="card card-custom gutter-b">
-    <div class="card-header">
-      <div class="card-title">
-      <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>" ><?php echo $schoolNewsTitle; ?></a></strong>
-      </div>
-    </div>
-    <div class="card-body">
-    
-      <div class="text4 eventdate">
-        <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-        <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
-      </div>
-      <div class="eventtitle">
-        <table class="table table-striped table-sm">
-          <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
-        </table>
-      </div>
-    
-    </div>
-    <div class="card-footer">
-      <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-    </div>
-  </div>
   </div>
   <?php
   }
@@ -208,30 +175,26 @@ $_SESSION["title"] = "News";
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
   <div class="col-lg-4">
-    <div class="card card-custom gutter-b">
-    <div class="card-header">
-      <div class="card-title">
-      <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $schoolNewsTitle; ?></a></strong>
+      <div class="card card-custom gutter-b">
+          <div class="card-header">
+            <div class="card-title">
+              <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $schoolNewsTitle; ?></a></strong>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="text4 eventdate">
+              <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
+              <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+            </div>
+            <div class="eventtitle">
+              <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+          </div>
       </div>
-    </div>
-    <div class="card-body">
-    
-      <div class="text4 eventdate">
-        <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-        <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
-      </div>
-      <div class="eventtitle">
-      
-      <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
-      </table>
-      </div>
-    
-    </div>
-    <div class="card-footer">
-      <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-    </div>
-    <!--end::public-->
-  </div>
   </div>
   <?php
   }
