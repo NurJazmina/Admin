@@ -46,6 +46,7 @@
                                 "exportstudentattendance",
                                 "exportclassattendance",
                                 "testing",
+                                "mail",
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -96,6 +97,7 @@
                                 //"exportstudentattendance",
                                 //"exportclassattendance",
                                 //"testing",
+                                "mail"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
