@@ -1,1 +1,0 @@
-# smartschool.gongetz.com
