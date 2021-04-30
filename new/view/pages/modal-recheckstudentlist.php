@@ -220,7 +220,8 @@ if (isset($_POST['EditStudentFormSubmit']))
 {
   $varClasscategory = $_POST['txtClasscategory'];
   $varstudentid = strval($_POST['txtstudentid']);
-  $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'Consumer_id'=>$varstudentid];
+  $varstudentid = new \MongoDB\BSON\ObjectId($varstudentid);
+  $filter = ['_id'=>$varstudentid];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
   foreach ($cursor as $document)
@@ -246,7 +247,7 @@ if (isset($_POST['EditStudentFormSubmit']))
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Student Name</label>
             <div class="col-sm-10">
-              <input value="<?php echo $Consumer_id; ?>" disabled>
+              <input value="<?php echo $ConsumerFName; ?>" disabled>
             </div>
           </div>
           <div class="form-group row">
