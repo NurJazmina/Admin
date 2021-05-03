@@ -28,6 +28,7 @@
                                 "modal-recheckclassroomlist",
                              
                                 "eventdetail",
+                                "newsdetail",
                                 "departmentdetail",
                                 "classdetail",
                                 "schoolforumdetail",
@@ -47,6 +48,7 @@
                                 "exportclassattendance",
                                 "testing",
                                 "mail",
+                                "mira",
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -79,6 +81,7 @@
                                 //"modal-recheckclassroomlist",
                             
                                 "eventdetail",
+                                "newsdetail",
                                 //"departmentdetail",
                                 //"classdetail",
                                 "schoolforumdetail",

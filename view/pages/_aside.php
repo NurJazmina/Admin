@@ -209,6 +209,14 @@
 													<span class="menu-text">About</span>
 												</a>
 											</li>
+											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="index.php?page=mail" class="menu-link menu-toggle" data-target="#kt_inbox_compose">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Email Blaster</span>
+												</a>
+											</li>
 										</ul>
 									</div>
 								</li>

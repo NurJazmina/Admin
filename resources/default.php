@@ -611,6 +611,7 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
 /*begin::new/event*/
 tinymce.init({
   selector: 'textarea#basic-example',
+  height: 200,
   menubar: false,
   plugins: [
     'advlist autolink lists link image charmap print preview anchor',
@@ -624,6 +625,7 @@ tinymce.init({
   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
 });
 /*end::new/event*/
+
 
 /*begin::new/event*/
 tinymce.init({
@@ -642,4 +644,3 @@ tinymce.init({
 });
 /*end::new/event*/
 </script>
-

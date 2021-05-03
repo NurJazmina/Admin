@@ -1589,7 +1589,7 @@ $_SESSION["title"] = "Dashboard";
 												<!--end::Tbody-->
 											</table>
 											<footer>
-												<div class="text-center"><a href="index.php?page=news" target="_blank" class="button btn btn-info">See more News</a></div><br><br>
+												<div class="text-center"><a href="index.php?page=news" class="button btn btn-info">See more News</a></div><br><br>
 											</footer>
 										</div>
 										<!--end::Table-->
@@ -1685,7 +1685,7 @@ $_SESSION["title"] = "Dashboard";
 												<!--end::Tbody-->
 											</table>
 											<footer>
-												<div class="text-center"><a href="index.php?page=news" target="_blank" class="button btn btn-info">See more News</a></div><br><br>
+												<div class="text-center"><a href="index.php?page=news" class="button btn btn-info">See more News</a></div><br><br>
 											</footer>
 										</div>
 										<!--end::Table-->
@@ -1844,7 +1844,7 @@ $_SESSION["title"] = "Dashboard";
 												<!--end::Tbody-->
 											</table>
 											<footer>
-												<div class="text-center"><a href="index.php?page=event" target="_blank" class="button btn btn-info">See more Event</a></div><br><br>
+												<div class="text-center"><a href="index.php?page=event" class="button btn btn-info">See more Event</a></div><br><br>
 											</footer>
 										</div>
 										<!--end::Table-->
@@ -1952,7 +1952,7 @@ $_SESSION["title"] = "Dashboard";
 															<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
 														</td>
 														<td class="text-right pr-0">
-															<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" target="_blank" class="btn btn-icon btn-light btn-sm">
+															<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="btn btn-icon btn-light btn-sm">
 																<span class="svg-icon svg-icon-md svg-icon-success">
 																	<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -1974,7 +1974,7 @@ $_SESSION["title"] = "Dashboard";
 												<!--end::Tbody-->
 											</table>
 											<footer>
-												<div class="text-center"><a href="index.php?page=event" target="_blank" class="button btn btn-info">See more Event</a></div><br><br>
+												<div class="text-center"><a href="index.php?page=event" class="button btn btn-info">See more Event</a></div><br><br>
 											</footer>
 										</div>
 										<!--end::Table-->
