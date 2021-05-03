@@ -262,6 +262,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                   <div class="row">
                                   <div class="col">
                                     <textarea class="form-control" name="txtclassRemark" rows="3"></textarea>
+                                    <br>
                                     <div class="row">
                                       <div class="col text-right">
                                         <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
@@ -373,13 +374,16 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                                 <div class="col text-right">
                                                   <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
                                                   <input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
+                                                  <br>
                                                   <button type="submit" class="btn btn-primary" name="AddClassRemarkChildFormSubmit">Add remark</button>
+                                                  <button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">Update</button>
                                                 </div>
                                               </div>
+                                              <br>
                                             </div>
                                           </div>
                                           </form>
-                                          <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+                                          
                                         </div>
                                         </div>
                                       </div>
@@ -476,12 +480,14 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                                   <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
                                                   <input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
                                                   <button type="submit" class="btn btn-primary" name="AddClassRemarkChildFormSubmit">Add remark</button>
+                                                  <button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">Update</button>
                                                 </div>
                                               </div>
+                                              <br>
                                             </div>
                                           </div>
                                           </form>
-                                          <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+                                          
                                         </div>
                                         </div>
                                       </div>
@@ -578,12 +584,13 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                                   <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtclassid">
                                                   <input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
                                                   <button type="submit" class="btn btn-primary" name="AddClassRemarkChildFormSubmit">Add remark</button>
+                                                  <button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  "> Update</button>
                                                 </div>
                                               </div>
+                                              <br>
                                             </div>
                                           </div>
                                           </form>
-                                          <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateClassremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
                                         </div>
                                         </div>
                                       </div>
