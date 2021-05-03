@@ -213,7 +213,8 @@ include ('model/schoolforum.php');
                                     <div class="row">
                                         <div class="col-lg-10">
                                         </div>
-                                        <div class="col-lg-2">
+                                        <div class="text-right">
+                                        <br>
                                             <input type="hidden"  name="txtForumid" value="<?php echo $Forumid; ?>">
                                             <button type="submit" class="btn btn-secondary" name="AddForumsComment">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
                                         </div>
@@ -322,7 +323,8 @@ include ('model/schoolforum.php');
                                                         <div class="row">
                                                             <div class="col-lg-10">
                                                             </div>
-                                                            <div class="col-lg-2">
+                                                            <div class="text-right">
+                                                            <br>
                                                                 <input type="hidden"  name="txtForumid" value="<?php echo  $Forumid; ?>">
                                                                 <input type="hidden"  name="txtForumParent_id" value="<?php echo $id4; ?>">
                                                                 <button type="submit" class="btn btn-secondary" name="AddForumsCommentChild">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
