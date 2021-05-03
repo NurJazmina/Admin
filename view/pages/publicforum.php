@@ -8,6 +8,12 @@ include ('model/schoolforum.php');
 ?>
 <link rel="stylesheet" href="//c.disquscdn.com/next/96f5580/home/css/main.css">
 
+<style>
+    .container {
+        width: 150%;
+    }
+</style>
+
 <div class="section-contained">
     <div class="layout">
         <div class="layout__main-with-aside">
@@ -45,7 +51,7 @@ include ('model/schoolforum.php');
 
             <section class="layout__content feed-content">
                 <div data-role="content-area">
-                    <div>
+                    <div class="container">
                         <div class="alert alert--topics">
                         <div class="align align--between">
                         <div class="align align--wrap align--middle">

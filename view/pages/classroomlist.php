@@ -29,9 +29,9 @@
               <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
-                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
+                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
                     <input  type="text" style="width:50%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchclass" >Search</button>
+                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchclass" >Search</button>
                   </div>
                 </div>
               </form>
@@ -58,19 +58,20 @@
       <div class="card-body" >
         <!-- sorting -->
         <div class="btn-group sort-btn">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
+          <button class="btn btn-secondary dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-item"><a href="index.php?page=classroomlist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
-            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 1</a></li>
-            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "2"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 2</a></li>
-            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "3"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 3</a></li>
-            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "4"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 4</a></li>
-            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 5</a></li>
-            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist" tabindex="-1" data-type="alpha">All</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha">category 1</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "2"; ?>" tabindex="-1" data-type="alpha">category 2</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "3"; ?>" tabindex="-1" data-type="alpha">category 3</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "4"; ?>" tabindex="-1" data-type="alpha">category 4</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha">category 5</a></li>
+            <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha">category 6</a></li>
           </ul>
         </div>
+        <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
-            <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
+            <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
                 <tr>
                   <th scope="col">Teacher</th>
@@ -123,12 +124,12 @@
                   }
                   ?>
                   <td><?php echo $totalstudent; ?></td>
-                  <td><button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportclassattendance&id=<?php echo $idclass; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button></td>
+                  <td><button type="button" style="font-size:15px width:25%" class="btn btn-light btn-hover-secondary"><a href="index.php?page=exportclassattendance&id=<?php echo $idclass; ?>">more >></a></button></td>
                   <td>
-                  <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?php echo $idclass; ?>">
+                  <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?php echo $idclass; ?>">
                     <i class="fa fa-edit" style="font-size:15px"></i>
                   </button>
-                  <button style="font-size:10px" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteclassModal" data-bs-whatever="<?php echo $idclass; ?>">
+                  <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#DeleteclassModal" data-bs-whatever="<?php echo $idclass; ?>">
                     <i class="fas fa-trash" style="font-size:15px"></i>
                   </button>
                 </td>
@@ -183,7 +184,7 @@
                       <div class="box">
                         <strong>Total</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <tr>
                             <th>Total</th>
                             <td>
@@ -237,7 +238,7 @@
                     <div class="box">
                         <strong>Remarks</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <thead>
                             <tr>
                               <th>School</th>
@@ -360,7 +361,7 @@
                 </div>
                 <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active btn-secondary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Class</a>
+                    <a class="nav-link active btn-primary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Class</a>
                     <?php
                     $calc = 0;
                     $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
@@ -374,7 +375,7 @@
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
                     ?>
-                    <a class="nav-link btn-secondary" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php  echo $ClassCategory; echo "  "; echo $ClassName; ?></a>
+                    <a class="nav-link btn-light text-dark" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php  echo $ClassCategory; echo "  "; echo $ClassName; ?></a>
                     <?php
                     }
                     ?>

@@ -593,7 +593,7 @@ $_SESSION["title"] = "Profile";
 															</div>
 															</div>
 															</form>
-															<button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+															<button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
 														</div>
 														</div>
 														</div>
@@ -696,7 +696,7 @@ $_SESSION["title"] = "Profile";
 															</div>
 															</div>
 															</form>
-															<button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+															<button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
 														</div>
 														</div>
 														</div>

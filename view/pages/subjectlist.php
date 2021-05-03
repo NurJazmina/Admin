@@ -33,10 +33,10 @@ $_SESSION["title"] = "Subject";
     <th scope="row"><?php echo $calc; ?></th>
     <td><?php echo $SubjectName; ?></td>
     <td>
-      <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
+      <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#EditSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
         <i class="fa fa-edit" style="font-size:15px"></i>
       </button>
-      <button style="font-size:10px" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
+      <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#DeleteSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
         <i class="fas fa-trash" style="font-size:15px"></i>
       </button>
     </td>
@@ -47,7 +47,7 @@ $_SESSION["title"] = "Subject";
     <tr>
       <th scope="row">Add</th>
       <td colspan="2">
-        <button style="font-size:10px" type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddSubjectModal">
+        <button style="font-size:10px" type="button"  class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#AddSubjectModal">
          <i class="fas fa-plus" style="font-size:15px"></i>
         </button>
       </td>

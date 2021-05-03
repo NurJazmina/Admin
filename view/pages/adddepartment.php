@@ -21,7 +21,7 @@ $_SESSION["title"] = "Department";
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-secondary" name="AddDepartmentFormSubmit">Save changes</button>
+          <button type="submit" class="btn btn-primary" name="AddDepartmentFormSubmit">Save changes</button>
         </div>
     </div>
   </div>
