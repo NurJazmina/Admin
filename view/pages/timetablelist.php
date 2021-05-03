@@ -147,13 +147,13 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
         <div class="btn-group sort-btn">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-item"><a href="index.php?page=timetablelist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
-            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 1</a></li>
-            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "2"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 2</a></li>
-            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "3"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 3</a></li>
-            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "4"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 4</a></li>
-            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 5</a></li>
-            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist" tabindex="-1" data-type="alpha">All</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha">category 1</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "2"; ?>" tabindex="-1" data-type="alpha">category 2</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "3"; ?>" tabindex="-1" data-type="alpha">category 3</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "4"; ?>" tabindex="-1" data-type="alpha">category 4</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha">category 5</a></li>
+            <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha">category 6</a></li>
           </ul>
         </div>
         <br><br>

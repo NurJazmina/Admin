@@ -58,7 +58,7 @@
       <div class="card-body" >
         <!-- sorting -->
         <div class="btn-group sort-btn">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
+          <button class="btn btn-secondary dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=classroomlist" tabindex="-1" data-type="alpha">All</a></li>
             <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha">category 1</a></li>
@@ -184,7 +184,7 @@
                       <div class="box">
                         <strong>Total</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <tr>
                             <th>Total</th>
                             <td>
@@ -238,7 +238,7 @@
                     <div class="box">
                         <strong>Remarks</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <thead>
                             <tr>
                               <th>School</th>
