@@ -156,6 +156,7 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
             <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
           </ul>
         </div>
+        <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style="text-align: center;">
               <thead>
