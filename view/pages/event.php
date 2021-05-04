@@ -6,8 +6,8 @@ $_SESSION["title"] = "Event";
 <?php include ('model/event.php'); ?>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Upcoming Event</h1></div><br>
 <div class="row" >
-  <div class="col-md-1 section-1-box wow fadeInUp"></div>
-  <div class="col-md-10 section-1-box wow fadeInUp">
+  <div class="col-md-0 section-1-box wow fadeInUp"></div>
+  <div class="col-md-12 section-1-box wow fadeInUp">
   <?php
   $filterA = ['SchoolEventAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];

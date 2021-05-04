@@ -13,8 +13,8 @@ $_SESSION["title"] = "Forums";
 <div><br><br><br><h1 style="color:#696969; text-align:center">Forums</h1></div><br>
 
 <div class="row" >
-    <div class="col-md-1 section-1-box wow fadeInUp"></div>
-    <div class="col-md-8 section-1-box wow fadeInUp">
+    <div class="col-md-0 section-1-box wow fadeInUp"></div>
+    <div class="col-md-10 section-1-box wow fadeInUp">
     <?php
     if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
     {
