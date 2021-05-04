@@ -16,7 +16,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
     ?>
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
-    <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
+    <div class="col-md-12 section-1-box wow fadeInUp"><br><br><br>
         <div class="table-responsive">
         <table id="attendance" class="table table-bordered" style="text-align: center;">
         <thead class="table-light">
