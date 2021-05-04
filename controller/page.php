@@ -83,7 +83,8 @@
                                 "eventdetail",
                                 "newsdetail",
                                 //"departmentdetail",
-                                //"classdetail",
+                                "classdetail",
+                                "studentdetail",
                                 "schoolforumdetail",
                                 "publicforumdetail",
 
@@ -100,7 +101,8 @@
                                 //"exportstudentattendance",
                                 //"exportclassattendance",
                                 //"testing",
-                                "mail"
+                                "mail",
+                                "mira"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
