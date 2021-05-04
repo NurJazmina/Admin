@@ -111,7 +111,7 @@ $_SESSION["title"] = "News";
           <div class="card-body">
             <div class="text4 eventdate">
               <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-              <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+              <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span> 
             </div>
             <div class="eventtitle">
               <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>

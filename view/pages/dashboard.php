@@ -6,7 +6,7 @@ $_SESSION["title"] = "Dashboard";
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->
-	<div class="container">
+	<div class="flex-container">
 		<!--begin::Education-->
 		<div class="d-flex flex-column flex-md-row">
 			<!--begin::Aside-->

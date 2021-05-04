@@ -7,8 +7,7 @@ $_SESSION["title"] = "Staff";
 ?>
 <style>
 .highlight td {
-background:red;
-color:#ffffff;
+background:white;
 }
 </style>
 <?php

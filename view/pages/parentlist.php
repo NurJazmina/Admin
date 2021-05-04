@@ -63,8 +63,8 @@
           <strong>List</strong>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
+          <div class="table-responsive" style="width:100%; margin:0 auto;">
+            <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -157,10 +157,10 @@
                   if($_SESSION["loggeduser_StaffLevel"]=='1') 
                   {
                   ?>
-                    <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">
+                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">
                       <i class="fa fa-edit" style="font-size:15px"></i>
                     </button>
-                    <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusParentModal" data-bs-whatever="<?php echo $parentid; ?>">
+                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusParentModal" data-bs-whatever="<?php echo $parentid; ?>">
                       <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                     </button>
                   <?php
@@ -218,13 +218,13 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-9">
+                <div class="col-12">
                   <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-staff" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       <div class="box">
                         <strong>Total</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <tr>
                             <th>Total</th>
                             <td>
@@ -279,7 +279,7 @@
                    <div class="box">
                         <strong>Remarks</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <thead>
                             <tr>
                               <th>Category</th>
