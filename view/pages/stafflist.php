@@ -225,7 +225,7 @@
                             if($_SESSION["loggeduser_StaffLevel"]=='1') 
                             {
                             ?>
-                              <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fa fa-edit" style="font-size:15px"></i>
                               </button>
                             <?php
@@ -254,7 +254,7 @@
                             if($_SESSION["loggeduser_StaffLevel"]=='1') 
                             {
                             ?>
-                              <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fa fa-edit" style="font-size:15px"></i>
                               </button>
                             <?php
@@ -278,7 +278,7 @@
                             if($_SESSION["loggeduser_StaffLevel"]=='1') 
                             {
                             ?>
-                            <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                            <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
                                 <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                             </button>
                             <?php
@@ -345,7 +345,7 @@
                                 <div class="box" >
                                   <strong>Total</strong>
                                   <div class="table-responsive">
-                                  <table class="table table-striped table-sm">
+                                  <table class="table table-sm">
                                     <tr>
                                       <th>Total</th>
                                       <td>
@@ -403,7 +403,7 @@
                                 <div class="box">
                                   <strong>Remarks</strong>
                                   <div class="table-responsive">
-                                  <table class="table table-striped table-sm">
+                                  <table class="table table-sm">
                                     <thead>
                                       <tr>
                                         <th>Category</th>
@@ -439,7 +439,7 @@
                                 <div class="box" >
                                   <strong>Total</strong>
                                   <div class="table-responsive">
-                                  <table class="table table-striped table-sm">
+                                  <table class="table table-sm">
                                     <tr>
                                       <th>Total</th>
                                       <td>
@@ -496,7 +496,7 @@
                                 <div class="box">
                                   <strong>Remarks</strong>
                                   <div class="table-responsive">
-                                  <table class="table table-striped table-sm">
+                                  <table class="table table-sm">
                                     <thead>
                                       <tr>
                                         <th>Category</th>
@@ -525,7 +525,7 @@
                           </div>
                           <div class="col-5" style="border-left: solid 1px #eee;">
                                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active btn-secondary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
+                                    <a class="nav-link active btn-primary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
                                     <?php
                                     $calc = 0;
                                     $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
@@ -537,7 +537,7 @@
                                       $departmentid = strval($document->_id);
                                       $DepartmentName = strval($document->DepartmentName);
                                     ?>
-                                    <a class="nav-link btn-secondary" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
+                                    <a class="nav-link btn-light text-dark" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
                                     <?php
                                     }
                                     ?>

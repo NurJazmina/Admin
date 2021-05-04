@@ -52,7 +52,6 @@ $_SESSION["title"] = "Forums";
         </div><br>
     </div>
     <div class="col-md-2 section-1-box wow fadeInUp">
-    <br>
     <div class="card">
     <div class="card-header">
                 <strong>Details</strong>
