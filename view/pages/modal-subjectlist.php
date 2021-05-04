@@ -16,7 +16,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-secondary" name="AddSubjectFormSubmit">Save changes</button>
+          <button type="submit" class="btn btn-primary" name="AddSubjectFormSubmit">Save changes</button>
         </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-secondary" name="EditSubjectFormSubmit">Confirm</button>
+          <button type="submit" class="btn btn-primary" name="EditSubjectFormSubmit">Confirm</button>
         </div>
     </div>
   </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-secondary" name="DeleteSubjectFormSubmit">Confirm</button>
+          <button type="submit" class="btn btn-primary" name="DeleteSubjectFormSubmit">Confirm</button>
         </div>
     </div>
   </div>

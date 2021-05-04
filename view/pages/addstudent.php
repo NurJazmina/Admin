@@ -27,7 +27,7 @@ $_SESSION["title"] = "Student";
           <div class="form-group row">
             <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" >
+              <select class="form-control" id="sltStatus" name="txtClasscategory" style="height: auto; width: 70%">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -39,7 +39,7 @@ $_SESSION["title"] = "Student";
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-secondary" name="AddStudentFormSubmit">Re-Checking</button>
+          <button type="submit" class="btn btn-primary" name="AddStudentFormSubmit">Re-Checking</button>
         </div>
         </div>
       </div>

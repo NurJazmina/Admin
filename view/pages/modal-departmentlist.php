@@ -15,8 +15,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-light btn-hover-primary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-light btn-hover-primary" name="AddDepartmentFormSubmit">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="AddDepartmentFormSubmit">Save changes</button>
         </div>
     </div>
   </div>
@@ -40,8 +40,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button"  class="btn btn-light btn-hover-primary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-light btn-hover-primary" name="EditDepartmentFormSubmit">Confirm</button>
+          <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="EditDepartmentFormSubmit">Confirm</button>
         </div>
     </div>
   </div>
@@ -60,8 +60,8 @@
           <input type="hidden" class="form-control" name="txtdepartmentid">
         </div>
         <div class="modal-footer">
-          <button type="button"  class="btn btn-light btn-hover-primary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-light btn-hover-primary" name="DeleteDepartmentFormSubmit">Confirm</button>
+          <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="DeleteDepartmentFormSubmit">Confirm</button>
         </div>
     </div>
   </div>
