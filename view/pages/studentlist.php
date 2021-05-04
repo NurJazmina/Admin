@@ -76,6 +76,7 @@
             <li class="dropdown-item"><a href="index.php?page=studentlist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
           </ul>
         </div>
+        <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
               <thead>
@@ -119,7 +120,7 @@
                     <tr>
                       <td><a href="index.php?page=studentdetail&id=<?php echo $Consumer_id; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
                       <div class="table-responsive">
-                      <table class="table table-striped table-sm" width="100%" cellspacing="0" style= "text-align: center;">
+                      <table class="table table-striped table-sm" width="50%" cellspacing="0" style= "text-align: center;">
                       <td>
                       <table>
                       <tr>
@@ -183,7 +184,7 @@
                       if($_SESSION["loggeduser_StaffLevel"]=='1') 
                       {
                       ?>
-                      <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>" style="color:#FFFFFF; text-decoration: none;">more >></a></button>
+                      <button type="button" style="font-size:15px width:25%" class="btn btn-light btn-hover-secondary"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>">more >></a></button>
                       <?php
                       }
                       ?>
@@ -244,7 +245,7 @@
                       if($_SESSION["loggeduser_StaffLevel"]=='1') 
                       {
                       ?>
-                        <button style="font-size:10px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $studentid; ?>">
+                        <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fa fa-edit" style="font-size:15px"></i>
                         </button>
                       <?php
@@ -257,7 +258,7 @@
                       if($_SESSION["loggeduser_StaffLevel"]=='1') 
                       {
                       ?>
-                        <button style="font-size:10px" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
+                        <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                         </button>
                       <?php
@@ -322,7 +323,7 @@
                       <div class="box">
                         <strong>Total</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <tr>
                             <th>Total</th>
                             <td>
@@ -377,7 +378,7 @@
                     <div class="box">
                         <strong>Remarks</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <thead>
                             <tr>
                               <th>School</th>
@@ -415,7 +416,7 @@
                       <div class="box" >
                         <strong>Total</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <tr>
                             <th>Total</th>
                             <td>
@@ -470,7 +471,7 @@
                       <div class="box">
                         <strong>Remarks</strong>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-sm">
                           <thead>
                             <tr>
                               <th>Category</th>
@@ -499,7 +500,7 @@
                 </div>
                 <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active btn-secondary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Students</a>
+                    <a class="nav-link active btn-primary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Students</a>
                     <?php
                     $calc = 0;
                     $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
@@ -513,7 +514,7 @@
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
                     ?>
-                    <a class="nav-link btn-secondary" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
+                    <a class="nav-link btn-light text-dark" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
                     <?php
                     }
                     ?>

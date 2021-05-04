@@ -7,8 +7,7 @@ $_SESSION["title"] = "Student";
 ?>
 <style>
 .highlight td {
-background:red;
-color:#ffffff;
+background:white;
 }
 </style>
 <?php
