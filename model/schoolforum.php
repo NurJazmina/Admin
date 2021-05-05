@@ -55,6 +55,7 @@ if (isset($_POST['AddForums'])) {
 if (isset($_POST['AddForumsComment'])) {
 
   $varForum_id = $_POST['txtForumid'];
+  // sebelum insert awk remove dulu <p></p>. guna str_replace
   $varSchoolForumDetails = $_POST['txtdetail'];
   $varSchoolForumStaff_id = strval($_SESSION["loggeduser_id"]);
   $varSchool_id = strval($_SESSION["loggeduser_schoolID"]);

@@ -1,6 +1,3 @@
-
-
-
 <?php
 if (isset($_GET['page']) && !empty($_GET['page'])) {
   ?>
@@ -607,40 +604,4 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
   
 }
 ?>
-<script>
-/*begin::new/event*/
-tinymce.init({
-  selector: 'textarea#basic-example',
-  height: 200,
-  menubar: false,
-  plugins: [
-    'advlist autolink lists link image charmap print preview anchor',
-    'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table paste code help wordcount'
-  ],
-  toolbar: 'undo redo | formatselect | ' +
-  'bold italic backcolor | alignleft aligncenter ' +
-  'alignright alignjustify | bullist numlist outdent indent | ' +
-  'removeformat | help',
-  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-});
-/*end::new/event*/
 
-
-/*begin::new/event*/
-tinymce.init({
-  selector: '.basic-example2',
-  menubar: false,
-  plugins: [
-    'advlist autolink lists link image charmap print preview anchor',
-    'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table paste code help wordcount'
-  ],
-  toolbar: '' +
-  '' +
-  '' +
-  '',
-  content_style: 'body { height:10px font-family:Helvetica,Arial,sans-serif; font-size:14px}'
-});
-/*end::new/event*/
-</script>

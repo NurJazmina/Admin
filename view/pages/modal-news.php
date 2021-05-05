@@ -11,14 +11,14 @@ $_SESSION["title"] = "News";
         
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <input type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
                 </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
-                <div class="col-lg-8">
-                <select class="form-control" id="staticStaffNo" style="height: auto; width: 50%;" name="access" required>
+                <div class="col-lg-12">
+                <select class="form-control" id="staticStaffNo" style="height: auto;" name="access" required>
                   <option value="PUBLIC">PUBLIC</option>
                   <option value="SCHOOL1">STAFFS</option>
                   <option value="SCHOOL0">TEACHERS</option>
@@ -29,7 +29,7 @@ $_SESSION["title"] = "News";
 
         <div>
         <label><h5> NEWS </h5></label>
-            <textarea id="basic-example" name="txtdetail" ></textarea>
+            <textarea class="news" name="txtdetail" ></textarea>
         </div>
 
         <div class="card-footer">
@@ -44,3 +44,13 @@ $_SESSION["title"] = "News";
         </div>
     </div>
 </form>
+<script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+  selector: '.news',
+  menubar:false,
+  statusbar: false,
+  toolbar: false,
+  height:250,
+});
+</script>

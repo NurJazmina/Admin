@@ -2,10 +2,10 @@
 $category = ($_GET['forum']);
 $topic = ($_GET['topic']);
 $_SESSION["title"] = "Public Forum : $topic ";
-?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
-<?php 
+
+include 'view/partials/_subheader/subheader-v1.php';
 include ('model/schoolforum.php'); 
+
 ?>
 <style>
 .button--tag.button-large, .topics--large .button--tag {
@@ -32,7 +32,6 @@ include ('model/schoolforum.php');
     margin-left: 10px;
 }
 
-
 .discussion-title {
     font-size: 22px;
     line-height: 1.25em;
@@ -40,32 +39,10 @@ include ('model/schoolforum.php');
     font-weight: 600;
 }
 
-.card__footer {
-    padding: 5px 5px 5px;
-}
-
-
 .img-round-sm {
-    border-radius: 10%;
-    height: 40px;
-    width: 40px;
-}
-
-.img-round-small {
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-}
-
-.post-comments .avatar img {
-    width: 22px;
-    height: 22px;
-    display: block;
-}
-.avatar>img {
-    border-radius: 50%;
-    max-width: 50px;
-    max-height: 50px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
 }
 </style>
 
@@ -83,6 +60,8 @@ include ('model/schoolforum.php');
         </div><br><br>
         <?php
         $id = new \MongoDB\BSON\ObjectId($_GET['id']);
+        if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
+        {
             function time_elapsed($date){
                 $bit = array(
                     //' year'      => $date  / 31556926 % 12,
@@ -101,6 +80,8 @@ include ('model/schoolforum.php');
             
                 return join(' ', $ret);
             }
+            $nowtime = time();
+            
             $ConsumerFName3=" ";
             $filter = ['_id'=>$id];
             $query = new MongoDB\Driver\Query($filter);
@@ -108,7 +89,7 @@ include ('model/schoolforum.php');
 
             foreach ($cursor as $document)
             {
-                $total = 0;
+                $total =0;
                 $Forumid = strval($document->_id);
                 $ForumTitle = ($document->ForumTitle);
                 $ForumDetails = ($document->ForumDetails);
@@ -120,7 +101,6 @@ include ('model/schoolforum.php');
                 $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
                 $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
             
-                $nowtime = time();
                 $oldtime = strval($date);
 
                 $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
@@ -139,7 +119,7 @@ include ('model/schoolforum.php');
                 ?>
                 <strong class="discussion-title" style="font-size: 42px; color: #353a3d">General: <?php echo $ForumTitle; ?></strong><br><br>
                 <div class="spacing-right" >
-                    <img class="img-round-sm block__item" src="https://c.disquscdn.com/uploads/users/383/2435/avatar92.jpg?1615629681" alt="avatar">
+                    <img class="img-round-sm block__item" src="assets/media/svg/avatars/032-boy-13.svg" alt="avatar">
                     <a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#2e9fff; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
                     <a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a>
                 </div>
@@ -206,14 +186,14 @@ include ('model/schoolforum.php');
                         </ul>
                             <form action="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $id;?>" method="post" name="AddForumsComment">
                                 <div class="row">
-                                    <textarea class="basic-example2" name="txtdetail" placeholder="Join, the discussion..." ></textarea>
+                                    <textarea class="forum" name="txtdetail" placeholder="Join, the discussion..." ></textarea>
                                     <div class="col-lg-12">
                                     <div class="row">
                                         <div class="col-lg-10">
                                         </div>
-                                        <div class="col-lg-2">
-                                            <input type="hidden"  name="txtforum" value="<?php echo  $category; ?>">
-                                            <input type="hidden"  name="txtForumParentid" value="<?php echo  $Forumid; ?>">
+                                        <div class="text-right">
+                                        <br>
+                                            <input type="hidden"  name="txtForumid" value="<?php echo $Forumid; ?>">
                                             <button type="submit" class="btn btn-secondary" name="AddForumsComment">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
                                         </div>
                                         </div>
@@ -243,6 +223,14 @@ include ('model/schoolforum.php');
                             $Forum_id4 = strval($document4->Forum_id);
                             $SchoolForumDetails4 = ($document4->SchoolForumDetails);
                             $SchoolForumStaff_id4 = ($document4->SchoolForumStaff_id);
+                            $SchoolForumDate4 = ($document4->SchoolForumDate);
+
+                            $utcdatetime4 = new MongoDB\BSON\UTCDateTime(strval($SchoolForumDate4));
+                            $datetime4 = $utcdatetime4->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum4 = date_format($datetime4,"Y-m-d\TH:i:s");
+                            $date4 = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum4))->getTimestamp());
+
+                            $oldtime4 = strval($date4);
 
                             $SchoolForumStaff_id4 = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id4);
                             $filter5 = ['_id' => $SchoolForumStaff_id4];
@@ -259,20 +247,16 @@ include ('model/schoolforum.php');
                                 <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-heading<?php echo $id4; ?>">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $id4; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $id4; ?>">
-                                        <div class="spacing-right">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <img class="img-round-sm block__item" src="https://c.disquscdn.com/uploads/users/383/2435/avatar92.jpg?1615629681" alt="avatar">
-                                                    <small style="text-decoration: none;"><?php echo " ".$ConsumerFName5." ".$ConsumerLName5;?></small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="spacing-right">
-                                        <span style="color:#687a86;"><?php echo $SchoolForumDetails4; ?></span>
-                                        </div>
+                                            <div class="headline commentreply">
+                                                <img class="img-round-sm block__item" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
+                                                <a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#2e9fff; text-decoration: none;"><?php echo $ConsumerFName5." ".$ConsumerLName5;?></a>
+                                                <small><span style="color:#687a86;"><?php echo date_format($datetime4,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime4)." ) \n"; ?></span></small>
+                                                <div style="border-left: 1px solid #eee; color:#687a86; padding-left:10px; text-align:left;"><?php echo $SchoolForumDetails4; ?></div>
+                                            </div> 
                                     </button>
                                 </h2>
                                 <div id="flush-collapse<?php echo $id4; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $id4; ?>" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body commentline">
                                     <?php
                                     $filter6 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>$id4];
                                     $option6 = ['sort' => ['_id' => 1]];
@@ -284,6 +268,14 @@ include ('model/schoolforum.php');
                                         $Forum_id6 = strval($document6->Forum_id);
                                         $SchoolForumDetails6 = ($document6->SchoolForumDetails);
                                         $SchoolForumStaff_id6 = ($document6->SchoolForumStaff_id);
+                                        $SchoolForumDate6 = ($document6->SchoolForumDate);
+
+                                        $utcdatetime6 = new MongoDB\BSON\UTCDateTime(strval($SchoolForumDate6));
+                                        $datetime6 = $utcdatetime6->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                        $dateforum6 = date_format($datetime6,"Y-m-d\TH:i:s");
+                                        $date6 = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum6))->getTimestamp());
+
+                                        $oldtime6 = strval($date6);
 
                                         $SchoolForumStaff_id6 = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id6);
                                         $filter7 = ['_id' => $SchoolForumStaff_id6];
@@ -293,37 +285,29 @@ include ('model/schoolforum.php');
                                         {
                                         $ConsumerFName7 = ($document7->ConsumerFName);
                                         $ConsumerLName7 = ($document7->ConsumerLName);
-                                    ?>
-                                        <div class="card-body">
-                                            <div class="spacing-right">
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            <div class="col-lg-1">
-                                                            </div>
-                                                            <div class="col-lg-11">
-                                                                <img class="img-round-small" src="//a.disquscdn.com/1617742046/images/noavatar92.png">
-                                                                <small style="text-decoration: none;"><?php echo " ".$ConsumerFName7." ".$ConsumerLName7;?></small>
-                                                                <span style="color:#687a86;"><?php echo $SchoolForumDetails6; ?></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                        </div>
+                                        ?>
+                                            <div class="headline commentreply">
+                                                <img class="img-round-sm block__item" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
+                                                <a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#2e9fff; text-decoration: none;"><?php echo $ConsumerFName7." ".$ConsumerLName7;?></a>
+                                                <small><span style="color:#687a86;"><?php echo date_format($datetime6,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime6)." ) \n"; ?></span></small>
+                                                <div style="border-left: 1px solid #eee; padding-left:10px; margin-left: 10px;"><?php echo $SchoolForumDetails6; ?></div>
+                                            </div> 
                                         <?php
                                         }
                                     }
                                     ?>
-                                        <div class="card-body">
+                                        <div>
                                             <form name="AddForumsCommentChild" action="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $id;?>" method="post">
                                                 <div class="row">
-                                                    <textarea class="basic-example2" name="txtdetail" placeholder="Join, the discussion..."></textarea>
+                                                    <textarea class="forum" name="txtdetail" placeholder="Join, the discussion..."></textarea>
                                                     <div class="col-lg-12">
                                                         <div class="row">
                                                             <div class="col-lg-10">
                                                             </div>
-                                                            <div class="col-lg-2">
-                                                                <input type="hidden"  name="txtforum" value="<?php echo  $category; ?>">
-                                                                <input type="hidden"  name="txtForumParentid" value="<?php echo $Forum_id4; ?>">
+                                                            <div class="text-right">
+                                                            <br>
+                                                                <input type="hidden"  name="txtForumid" value="<?php echo  $Forumid; ?>">
+                                                                <input type="hidden"  name="txtForumParent_id" value="<?php echo $id4; ?>">
                                                                 <button type="submit" class="btn btn-secondary" name="AddForumsCommentChild">Post as <?php echo $_SESSION["loggeduser_consumerFName"];  ?></button>
                                                             </div>
                                                         </div>
@@ -331,6 +315,9 @@ include ('model/schoolforum.php');
                                                 </div>
                                             </form>
                                         </div>
+                                        </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -345,17 +332,18 @@ include ('model/schoolforum.php');
             <?php
                 }
             }
+        }
         ?>
     </div>
 </div>
 
-<div class="col-lg-2">
+<div class="col-lg-3">
 <div class="row">
     <div class="card-header">
         <strong>Latest Forum</strong><span class="button--tag -inverted button-large"><?php echo "testing"; ?></span>
     </div>
     <?php
-    $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>'0','Forum'=>$category];
+    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>'0','Forum'=>$category];
     $option = ['sort' => ['_id' => 1]];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
@@ -378,7 +366,7 @@ include ('model/schoolforum.php');
         $nowtime = time();
         $oldtime = strval($date);
 
-        $filter1 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+        $filter1 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
         $option1 = ['sort' => ['_id' => 1]];
         $query1 = new MongoDB\Driver\Query($filter1,$option1);
         $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query1);
@@ -390,165 +378,86 @@ include ('model/schoolforum.php');
             $SchoolForumDetails = ($document1->SchoolForumDetails);
             $SchoolForumStaff_id = ($document1->SchoolForumStaff_id);
             $SchoolForumDate = ($document1->SchoolForumDate);
-
-            $SchoolForumStaff_id = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id);
-            $filter2 = ['_id' => $SchoolForumStaff_id];
-            $query2 = new MongoDB\Driver\Query($filter2);
-            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query2);
-    
-            foreach ($cursor2 as $document2)
-            {
-            $ConsumerFName = ($document2->ConsumerFName);
-            $ConsumerLName = ($document2->ConsumerLName);
-            }
         }
 
-    }
-    ?>
-    <div class="card-body" style="background-color:#ffffff">
-        <div class="row">
-            <div class="row">
-            <a style="font-size: 14px; font-weight: 600;" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" ><?php echo $ForumTitle; ?></a><br><br>
-            </div>
-            <div class="claimedRight">
-            <a style="" ><?php echo $SchoolForumDetails; ?></a>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <a style="" class="button button-lnk spacing-right-small" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" data-link-name="view_discussion" data-thread-id="8434285354">
-            Comments 
-            <span class="label--count"><?php echo $total; ?></span>
-            </a>
-        </div>
-    </div>
-    <div class="card-footer" style="background-color:#f7f9fa">
-        <div class="card__additional">
-            <div class="row">
-                <div class="col">
-                    <div class="post-comments">
-                        <div class="post-comments__reason">
-                            <a href="" class="avatar" data-link-name="user_avatar"><img src="https://c.disquscdn.com/uploads/forums/318/9088/avatar92.jpg?1428445417" alt="avatar"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" style="text-align:right;">
-                    <a><?php echo $ConsumerFName.$ConsumerLName; ?></a>
-                </div>
-                <div class="col">
-                </div>
-                <div class="col">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" style="text-align:right;">
-                    <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid1;?>"><?php echo $SchoolForumDetails; ?></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<br><br>
+        $Consumer_id = new \MongoDB\BSON\ObjectId($Consumer_id);
+        $filter2 = ['_id' =>$Consumer_id];
+        $query2 = new MongoDB\Driver\Query($filter2);
+        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query2);
 
-<div class="row">
-    <div class="card-header">
-        <strong>Active Forum</strong><span class="button--tag -inverted button-large"><?php echo "testing"; ?></span>
-    </div>
-    <?php
-    $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumParentid'=>'0','Forum'=>$category];
-    $option = ['sort' => ['_id' => 1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
-
-    foreach ($cursor as $document)
-    {
-        $ForumDetails1 ="";
-        $total = 0;
-        $Forumid = strval($document->_id);
-        $ForumTitle = ($document->ForumTitle);
-        $ForumDetails = ($document->ForumDetails);
-        $ForumDate = ($document->ForumDate);
-        $Consumer_id = ($document->Consumer_id);
-
-        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
-        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-        $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-        $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
-    
-        $nowtime = time();
-        $oldtime = strval($date);
-
-        $filter1 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
-        $option1 = ['sort' => ['_id' => 1]];
-        $query1 = new MongoDB\Driver\Query($filter1,$option1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query1);
-
-        foreach ($cursor1 as $document1)
+        foreach ($cursor2 as $document2)
         {
-            $total = $total + 1;
-            $Forum_id = strval($document1->Forum_id);
-            $SchoolForumDetails = ($document1->SchoolForumDetails);
-            $SchoolForumStaff_id = ($document1->SchoolForumStaff_id);
-            $SchoolForumDate = ($document1->SchoolForumDate);
-
-            $SchoolForumStaff_id = new \MongoDB\BSON\ObjectId($SchoolForumStaff_id);
-            $filter2 = ['_id' => $SchoolForumStaff_id];
-            $query2 = new MongoDB\Driver\Query($filter2);
-            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query2);
-    
-            foreach ($cursor2 as $document2)
-            {
-            $ConsumerFName = ($document2->ConsumerFName);
-            $ConsumerLName = ($document2->ConsumerLName);
-            }
+        $ConsumerFName = ($document2->ConsumerFName);
         }
 
     }
     ?>
-    <div class="card-body" style="background-color:#ffffff">
-        <div class="row">
-            <div class="row">
-            <a style="font-size: 14px; font-weight: 600;" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" ><?php echo $ForumTitle; ?></a><br><br>
-            </div>
-            <div class="claimedRight">
-            <a style="" ><?php echo $SchoolForumDetails; ?></a>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <a style="" class="button button-lnk spacing-right-small" href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" data-link-name="view_discussion" data-thread-id="8434285354">
-            Comments 
-            <span class="label--count"><?php echo $total; ?></span>
-            </a>
-        </div>
-    </div>
-    <div class="card-footer" style="background-color:#f7f9fa">
-        <div class="card__additional">
-            <div class="row">
-                <div class="col">
-                    <div class="post-comments">
-                        <div class="post-comments__reason">
-                            <a href="" class="avatar" data-link-name="user_avatar"><img src="https://c.disquscdn.com/uploads/forums/318/9088/avatar92.jpg?1428445417" alt="avatar"></a>
-                        </div>
+
+    <!--begin::Card-->
+    <div class="card card-custom gutter-b card-stretch">
+        <!--begin::Body-->
+        <div class="card-body">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center">
+                <!--begin::Info-->
+                <div class="d-flex flex-column mr-auto">
+                    <!--begin: Title-->
+                    <div class="d-flex flex-column mr-auto">
+                        <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" class="text-dark text-hover-primary font-size-h4 font-weight-bolder mb-1"><?php echo $ForumTitle; ?></a>
+                        <span class="text-muted font-weight-bold">started a discussion
+                            <time class="text-gray"><?php echo date_format($datetime,"d/m/y"); ?></time>
+                        </span>
                     </div>
+                    <!--end::Title-->
                 </div>
-                <div class="col" style="text-align:right;">
-                    <a><?php echo $ConsumerFName.$ConsumerLName; ?></a>
-                </div>
-                <div class="col">
-                </div>
-                <div class="col">
+                <!--end::Info-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Description-->
+            <div class="mb-10 mt-5 font-weight-bold"><?php echo $ForumDetails; ?></div>
+            <!--end::Description-->
+            <!--begin::Data-->
+            <div class="d-flex mb-5">
+                <div class="d-flex align-items-center mr-7">
+                    <span class="font-weight-bold mr-4">posted by :</span>
+                    <span class="btn btn-light-primary btn-sm font-weight-bold btn-upper btn-text"><?php echo $ConsumerFName; ?></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col" style="text-align:right;">
-                    <a href="index.php?page=schoolforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid1;?>"><?php echo $SchoolForumDetails; ?></a>
+            <!--end::Data-->
+        </div>
+        <!--end::Body-->
+        <!--begin::Footer-->
+        <div class="card-footer d-flex align-items-center">
+            <div class="d-flex">
+                <div class="d-flex align-items-center mr-7">
+                    <span class="svg-icon svg-icon-gray-500">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group-chat.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000"></path>
+                                <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3"></path>
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <a href="index.php?page=publicforumdetail&forum=<?php echo $_GET['forum']; ?>&topic=<?php echo $_GET['topic'];?>&id=<?php echo $Forumid;?>" class="font-weight-bolder text-primary ml-2"><?php echo $total; ?> Comments</a>
                 </div>
             </div>
         </div>
+        <!--end::Footer-->
     </div>
+    <!--end:: Card-->
 </div>
-    </div>
-</div>
-<div class="col-lg-1">
-</div>
+
+									
+<script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+  selector: '.forum',
+  menubar:false,
+  statusbar: false,
+  toolbar: false,
+  height:100,
+});
+</script>

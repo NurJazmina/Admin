@@ -15,14 +15,14 @@ $_SESSION["title"] = "Forum";
         
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <input type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
                 </div>
         </div>
         <div class="form-group row">
         <div>
         <label><h5> FORUM </h5></label>
-            <textarea id="basic-example" name="txtdetail" ></textarea>
+            <textarea class="forum" name="txtdetail" ></textarea>
         </div>
 
         <div class="card-footer">
@@ -38,3 +38,13 @@ $_SESSION["title"] = "Forum";
         </div>
     </div>
 </form>
+<script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+  selector: '.forum',
+  menubar:false,
+  statusbar: false,
+  toolbar: false,
+  height:250,
+});
+</script>

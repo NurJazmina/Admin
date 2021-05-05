@@ -9,13 +9,10 @@ include ('model/schoolforum.php');
 <link rel="stylesheet" href="//c.disquscdn.com/next/96f5580/home/css/main.css">
 
 <style>
-
     .container {
         width: 150%; 
     }
-    
 </style>
-
 
 <div class="section-contained">
     <div class="layout">
@@ -140,7 +137,7 @@ include ('model/schoolforum.php');
 
                                                 <div class="card__reason link-inner-gray-dark align align--middle">
                                                     <a class="spacing-right align__item" href="/by/pogue972/" data-link-name="user_avatar">
-                                                    <img class="img-round-sm block__item" src="https://c.disquscdn.com/uploads/users/383/2435/avatar92.jpg?1615629681" alt="avatar">
+                                                        <img class="img-round-sm block__item" src="assets/media/svg/avatars/032-boy-13.svg" alt="avatar">
                                                     </a>
 
                                                     <div class="align__item">
@@ -209,7 +206,7 @@ include ('model/schoolforum.php');
                                                 <div class="post-comments">
                                                         <div class="post-comments__reason">
                                                         <a href="/by/disqus_EAsrYwGXA9/" class="avatar" data-link-name="user_avatar">
-                                                        <img src="https://c.disquscdn.com/uploads/forums/318/9088/avatar92.jpg?1428445417" alt="avatar">
+                                                            <img class="img-round-sm block__item" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
                                                         </a>
                                                         <?php echo " ".$ConsumerFName3." ".$ConsumerLName3;?>
                                                         </div>

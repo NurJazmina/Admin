@@ -63,6 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/brand/light.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/light.css" rel="stylesheet" type="text/css" />
+		<link href="resources/default.css" rel="stylesheet" type="text/css" />
 
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/logogongetz.png" />
@@ -210,7 +211,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-
+		
 		<!--end::Page Vendors-->
 
 		<!--begin::Page Scripts(used by this page)-->
