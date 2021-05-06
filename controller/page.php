@@ -1,6 +1,6 @@
 <?php
     $staffallowedaccess = array("dashboard",
-                                "news",
+                            
                                 "event",
                                 "stafflist",
                                 "parentlist",
