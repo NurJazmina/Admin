@@ -35,7 +35,7 @@ $_SESSION["title"] = "News";
             <div class="row">
             <div class="col-lg-2"></div>
         <div class="text-right">
-            <button type="submit" class="btn btn-primary" name="AddNews">Confirm</button>
+            <button type="submit" class="btn btn-success" name="AddNews">Confirm</button>
             <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
 
