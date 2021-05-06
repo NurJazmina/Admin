@@ -13,6 +13,8 @@
 
 body {
     background-color:#ffffff;
+    background-image: linear-gradient (120deg, #4f0088 0%, #000000 100%);
+    height: 100vh;
 }
 
 h1 {
@@ -38,6 +40,13 @@ h1 {
     margin: 0 auto;
     padding: 30px 100px 80px;
     box-shadow: 0 0 150px -20px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+}
+
+.fluidbox {
+
+    padding: 30px;
+    width: 100%;
     z-index: 3;
 }
 
@@ -81,19 +90,24 @@ b {
 </style>
 
 <br><br><br>
-<div class="abc">
-<p>> <span>ERROR CODE</span>: "<i>HTTP 403 Forbidden</i>"</p>
-<p>> <span>ERROR DESCRIPTION</span>: "<i>Access Denied. You Do Not Have The Permission To Access This Page On This Server</i>"</p>
-<p>> <span>ERROR POSSIBLY CAUSED BY</span>: [<b>You do not have permission to modify the following pages : Staff, Student, Parent, News, Event, Department, Subject and Class</b>...]</p>
 
-<p>> <span>REDIRECT TO OUR PAGE</span>: 
-[<a href="index.php?page=dashboard">Home Page</a>, 
-<a href="index.php?page=schoolabout">About Us</a>, ...]
-</p>
+<div class="card card-custom gutter-b">
+<div class="fluidbox">
+    <div class="col-lg-12">
+        <p>> <span>ERROR CODE</span>: "<i>HTTP 403 Forbidden</i>"</p>
+        <p>> <span>ERROR DESCRIPTION</span>: "<i>Access Denied. You Do Not Have The Permission To Access This Page On This Server</i>"</p>
+        <p>> <span>ERROR POSSIBLY CAUSED BY</span>: [<b>You do not have permission to modify the following pages : Staff, Student, Parent, News, Event, Department, Subject and Class</b>...]</p>
 
-<p>> 
-  <span>HAVE A NICE DAY  <?php echo $_SESSION["loggeduser_consumerFName"]; ?> :-)</span>
-</p>
+        <p>> <span>REDIRECT TO OUR PAGE</span>: 
+        [<a href="index.php?page=dashboard">Home Page</a>, 
+        <a href="index.php?page=schoolabout">About Us</a>, ...]
+        </p>
+
+        <p>> 
+        <span>HAVE A NICE DAY  <?php echo $_SESSION["loggeduser_consumerFName"]; ?> :-)</span>
+        </p>
+    </div>
+</div>
 </div>
 
 <script>
