@@ -90,7 +90,7 @@
                     <span class="btn btn-icon btn-sm btn-clean mr-2" id="kt_inbox_compose_attachments_select">
                         <i class="flaticon2-clip-symbol"></i>
                     </span>
-                    <button type="submit" class="btn btn-primary font-weight-bold px-6" name="Staffmail">Send</button>
+                    <button type="submit" class="btn btn-success font-weight-bold px-6" name="Staffmail">Send</button>
                 </div>
                 <!--end::Toolbar-->
             </div>
@@ -209,7 +209,7 @@
                 <!--end::Actions-->
                 <!--begin::Toolbar-->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary font-weight-bold px-6" name="Teachermail">Send</button>
+                    <button type="submit" class="btn btn-success font-weight-bold px-6" name="Teachermail">Send</button>
                 </div>
                 <!--end::Toolbar-->
             </div>

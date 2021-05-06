@@ -57,7 +57,7 @@ $_SESSION["title"] = "Staff";
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="AddStaffFormSubmit">Re-Checking</button>
+          <button type="submit" class="btn btn-success" name="AddStaffFormSubmit">Re-Checking</button>
         </div>
         </div>
       </div>

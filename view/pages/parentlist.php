@@ -37,7 +37,7 @@
                   if($_SESSION["loggeduser_StaffLevel"]=='1') 
                   {
                   ?>
-                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
+                    <button type="button" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
                     <div class="input-group input-group-sm input-group-solid" style="width:50%">
                       <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                       <div class="input-group-append">
@@ -57,7 +57,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchname">Search</button>
+                    <button type="submit" style="width:25%; " class="btn btn-success font-weight-bolder btn-sm"" name="searchname">Search</button>
                   <?php
                   } 
                   else
@@ -82,7 +82,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm"" name="searchname">Search</button>
+                    <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm"" name="searchname">Search</button>
                   <?php
                   } 
                   ?>

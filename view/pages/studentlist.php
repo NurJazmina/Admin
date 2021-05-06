@@ -37,8 +37,8 @@
                   if($_SESSION["loggeduser_StaffLevel"]=='1') 
                   {
                   ?>
-                    <button type="button" style="width:20%"; class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
-                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstudent" >Add</button>
+                    <button type="button" style="width:20%;" class="btn btn-warning font-weight-bolder btn-sm"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
+                    <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstudent" >Add</button>
                     <div class="input-group input-group-sm input-group-solid" style="width:40%">
                       <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                       <div class="input-group-append">
@@ -58,7 +58,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent">Search</button>
+                    <button type="submit" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstudent">Search</button>
                   <?php
                   } 
                   else
@@ -83,7 +83,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent">Search</button>
+                    <button type="submit" style="width:25%; color:#FFFFFF; background-color:#db61c6;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent">Search</button>
                   <?php
                   }
                   ?>

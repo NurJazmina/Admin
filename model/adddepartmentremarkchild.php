@@ -9,7 +9,6 @@ if (isset($_POST['AddDepartmentRemarkChildFormSubmit'])) {
   session_start();
   $id = strval ($_SESSION["departmentremarkid"] );
   $varremarkid = $_POST['txtremarkid'];
-  $varconsumersid = $_POST['txtconsumerid'];
   $vartxtconsumerremark = $_POST['txtconsumerRemark'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
@@ -25,12 +24,12 @@ if (isset($_POST['AddDepartmentRemarkChildFormSubmit'])) {
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'SubRemarks'=>$varremarkid,
-    'department_id'=>$varconsumersid,
+    'department_id'=>$id,
     'departmentRemarksDetails'=>$vartxtconsumerremark,
     'departmentRemarksStaff_id'=>$varstaffid,
     'school_id'=>$varschoolid,
     'departmentRemarksDate'=>$varconsumerremarkdate,
-    'departmentRemarksStatus'=>$varClassRemarksStatus]);
+    'departmentRemarksStatus'=>'ACTIVE']);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try

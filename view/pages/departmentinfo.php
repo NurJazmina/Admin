@@ -394,7 +394,6 @@ include 'view/partials/_subheader/subheader-v1.php';
 																			<br>
 																			<div class="row">
 																			<div class="col text-right">
-																				<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
 																				<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
 																				<button type="submit" class="btn btn-light-success font-weight-bold mr-2" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
 																				<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">Update</button>
@@ -497,15 +496,14 @@ include 'view/partials/_subheader/subheader-v1.php';
 																			<br>
 																			<div class="row">
 																			<div class="col text-right">
-																				<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
 																				<input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-																				<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																				<button type="submit" class="btn btn-light-success" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																				<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>">update</button>
 																			</div>
 																			</div>
 																		</div>
 																		</div>
 																		</form>
-																		<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
 																	</div>
 																	</div>
 																	</div>
@@ -600,15 +598,14 @@ include 'view/partials/_subheader/subheader-v1.php';
 																			<br>
 																			<div class="row">
 																			<div class="col text-right">
-																				<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
 																				<input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-																				<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																				<button type="submit" class="btn btn-light-success" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																				<button style="display:flex; float:right;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>">update</button>
 																			</div>
 																			</div>
 																		</div>
 																		</div>
 																		</form>
-																		<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
 																	</div>
 																	</div>
 																	</div>

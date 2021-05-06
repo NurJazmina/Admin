@@ -36,8 +36,8 @@
                   if($_SESSION["loggeduser_StaffLevel"]=='1') 
                   {
                   ?>
-                    <button type="button" style="width:20%"; class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
-                    <button type="button" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
+                    <button type="button" style="width:20%;" class="btn btn-warning font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
+                    <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
                     <div class="input-group input-group-sm input-group-solid" style="width:40%">
                       <input  type="text" style="";  id="kt_subheader_search_form"  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                       <div class="input-group-append">
@@ -57,7 +57,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:20%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstaff" >Search</button>
+                    <button type="submit" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstaff" >Search</button>
                   <?php
                   } 
                   else
@@ -82,7 +82,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchstaff" >Search</button>
+                    <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstaff" >Search</button>
                   <?php
                   }
                   ?>
@@ -571,24 +571,24 @@
                             </div>
                           </div>
                           <div class="col-5" style="border-left: solid 1px #eee;">
-                                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active btn-primary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
-                                    <?php
-                                    $calc = 0;
-                                    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
-                                    $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-                                    foreach ($cursor as $document)
-                                    {
-                                      $calc = $calc + 1;
-                                      $departmentid = strval($document->_id);
-                                      $DepartmentName = strval($document->DepartmentName);
-                                    ?>
-                                    <a class="nav-link btn-light text-dark" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
-                                    <?php
-                                    }
-                                    ?>
-                                  </div>
+                              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active btn-primary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
+                                <?php
+                                $calc = 0;
+                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                                foreach ($cursor as $document)
+                                {
+                                  $calc = $calc + 1;
+                                  $departmentid = strval($document->_id);
+                                  $DepartmentName = strval($document->DepartmentName);
+                                ?>
+                                <a class="nav-link btn-light text-dark" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
+                                <?php
+                                }
+                                ?>
+                              </div>
                           </div>
                         </div>
                       </div>

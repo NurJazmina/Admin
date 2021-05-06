@@ -30,8 +30,8 @@
 						$name = $_SESSION["loggeduser_consumerFName"];
 						$firstCharacter = $name[0];
 						?>
-						<span class="symbol symbol-lg-35 symbol-25 symbol-light-success" style="background-color:#439bb0;">
-							<span class="symbol-label font-size-h5 font-weight-bold" style="background-color:#db61c6; color:#ffffff;"><?php echo $firstCharacter; ?></span>
+						<span class="symbol symbol-lg-35 symbol-25 symbol-success">
+							<span class="symbol-label font-size-h5 font-weight-bold" style="color:#ffffff;"><?php echo $firstCharacter; ?></span>
 						</span>
 					</div>
 				</div>
