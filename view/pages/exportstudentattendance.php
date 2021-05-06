@@ -1,15 +1,48 @@
 <?php
 $_SESSION["title"] = "Student";
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 <?php
 //avoid put any gap in this page.Error behaviour due to gap.
 ?>
+
 <style>
 .highlight td {
 background:white;
 }
 </style>
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+
+					<?php
+					$uri = $_SERVER['REQUEST_URI'];
+					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+					$query = $_SERVER['QUERY_STRING'];
+					//echo $query; // Outputs: Query String
+
+					?> 
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Student</h5>
+					<!--end::Page Title-->
+				</div>
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+            <div class="card-toolbar" style="text-align:right;">
+            <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
 <?php
 if (!isset($_GET['id']) && empty($_GET['id']))
 {
@@ -114,10 +147,8 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 ?>
 </tbody>
 </table>
-<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
 </div>
 </div>
-<div class="col-md-1 section-1-box wow fadeInUp"></div>
 <?php
 if (!isset($_GET['attendance']) && empty($_GET['attendance']))
 {
@@ -164,7 +195,7 @@ else
     ?>
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
-    <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
+    <div class="col-md-12 section-1-box wow fadeInUp"><br><br><br>
         <div class="table-responsive" style="text-align: center;">
         <table id="attendance" class="table table-bordered ">
         <thead class="table-light">
@@ -266,10 +297,8 @@ else
         </tr>
    </tbody>
    </table>
-   <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
    </div>
    </div>
-   <div class="col-md-1 section-1-box wow fadeInUp"></div>
 <?php
 if (!isset($_GET['attendance']) && empty($_GET['attendance']))
 {
