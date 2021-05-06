@@ -1,163 +1,297 @@
-<html>
-        <head>
-          <meta name='viewport' content='width=device-width'>
-          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-          <title>Simple Transactional Email</title>
-          <style>
-          /* -------------------------------------
-              INLINED WITH htmlemail.io/inline
-          ------------------------------------- */
-          /* -------------------------------------
-              RESPONSIVE AND MOBILE FRIENDLY STYLES
-          ------------------------------------- */
-          @media only screen and (max-width: 620px) {
-            table[class=body] h1 {
-              font-size: 28px !important;
-              margin-bottom: 10px !important;
-            }
-            table[class=body] p,
-                  table[class=body] ul,
-                  table[class=body] ol,
-                  table[class=body] td,
-                  table[class=body] span,
-                  table[class=body] a {
-              font-size: 16px !important;
-            }
-            table[class=body] .wrapper,
-                  table[class=body] .article {
-              padding: 10px !important;
-            }
-            table[class=body] .content {
-              padding: 0 !important;
-            }
-            table[class=body] .container {
-              padding: 0 !important;
-              width: 100% !important;
-            }
-            table[class=body] .main {
-              border-left-width: 0 !important;
-              border-radius: 0 !important;
-              border-right-width: 0 !important;
-            }
-            table[class=body] .btn table {
-              width: 100% !important;
-            }
-            table[class=body] .btn a {
-              width: 100% !important;
-            }
-            table[class=body] .img-responsive {
-              height: auto !important;
-              max-width: 100% !important;
-              width: auto !important;
-            }
-          }
-
-          /* -------------------------------------
-              PRESERVE THESE STYLES IN THE HEAD
-          ------------------------------------- */
-          @media all {
-            .ExternalClass {
-              width: 100%;
-            }
-            .ExternalClass,
-                  .ExternalClass p,
-                  .ExternalClass span,
-                  .ExternalClass font,
-                  .ExternalClass td,
-                  .ExternalClass div {
-              line-height: 100%;
-            }
-            .apple-link a {
-              color: inherit !important;
-              font-family: inherit !important;
-              font-size: inherit !important;
-              font-weight: inherit !important;
-              line-height: inherit !important;
-              text-decoration: none !important;
-            }
-            #MessageViewBody a {
-              color: inherit;
-              text-decoration: none;
-              font-size: inherit;
-              font-family: inherit;
-              font-weight: inherit;
-              line-height: inherit;
-            }
-            .btn-primary table td:hover {
-              background-color: #34495e !important;
-            }
-            .btn-primary a:hover {
-              background-color: #34495e !important;
-              border-color: #34495e !important;
-            }
-          }
-          </style>
-        </head>
-        <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-          <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> ".$message.".. </span>
-          <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+<?php
+//avoid put any gap in this page.Error behaviour due to gap.
+?>
+<style>
+.highlight td {
+background:red;
+}
+</style>
+<?php
+if (!isset($_GET['id']) && empty($_GET['id']))
+{
+    ?>
+    <div class="row">
+    <div class="col-md-1 section-1-box wow fadeInUp"></div>
+    <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
+        <div class="table-responsive" style="text-align: center;">
+        <table id="attendance" class="table table-bordered ">
+        <thead class="table-light">
             <tr>
-              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-              <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-                <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
-
-                  <!-- START CENTERED WHITE CONTAINER -->
-                  <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
-
-                    <!-- START MAIN CONTENT AREA -->
-                    <tr>
-                      <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                          <tr>
-                            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> $message. </p>
-                              <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                                <tbody>
-                                  <tr>
-                                    <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                        <tbody>
-                                          <tr>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'>Thank you, $FromName .</p>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-
-                  <!-- END MAIN CONTENT AREA -->
-                  </table>
-
-                  <!-- START FOOTER -->
-                  <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                      <tr>
-                        <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                          <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                          <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                         <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <!-- END FOOTER -->
-
-                <!-- END CENTERED WHITE CONTAINER -->
-                </div>
-              </td>
-              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+            <th scope="col" style="color:#696969; text-align:center">Staff ID</th>
+            <th scope="col" style="color:#696969; text-align:center">Staff Name</th>
+            <th scope="col" style="color:#696969; text-align:center">Date</th>
+            <th scope="col" style="color:#696969; text-align:center">IN</th>
+            <th scope="col" style="color:#696969; text-align:center">OUT</th>
             </tr>
-          </table>
-        </body>
-      </html>
+        </thead>
+        <tbody>
+        <?php
+        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+        foreach ($cursor as $document)
+        {
+        $ConsumerID = strval($document->ConsumerID);
+
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+        foreach ($cursor as $document)
+        {
+        $_SESSION["staffremarkid"] = strval($document->_id);
+        $ConsumerFName = ($document->ConsumerFName);
+        $ConsumerLName = ($document->ConsumerLName);
+        $ConsumerIDNo = ($document->ConsumerIDNo);
+        $consumerid = strval($document->_id);
+        $varnow = date("d-m-Y");
+        ?>
+        <tr>
+            <td><?php echo $ConsumerIDNo; ?></td>
+            <td><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+        <?php
+        $Cards_id ='';
+        $filter1 = ['Consumer_id'=>$consumerid];
+        $query1 = new MongoDB\Driver\Query($filter1);
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
+        foreach ($cursor1 as $document1)
+        {
+        $Cards_id = strval($document1->Cards_id);
+        }
+        $varnow = date("d-m-Y");
+        $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
+        ?>
+        <td><?php echo $varnow."<br>"; ?></td>
+        <td><?php
+        $varcounting = 0;
+        $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+        $optionA = ['sort' => ['_id' => 1]];
+        $queryA = new MongoDB\Driver\Query($filterA,$optionA);
+        $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+        foreach ($cursorA as $documentA)
+        {
+            $AttendanceDate = ($documentA->AttendanceDate);
+            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+            $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            $varcounting = $varcounting +1;
+        if ($varcounting % 2)
+        {
+        echo date_format($AttendanceDate,"H:i:s")."<br>";
+        } 
+        else
+        {
+        }
+        }
+        ?></td>
+        <td><?php
+        $varcounting = 0;
+        $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+        $optionA = ['sort' => ['_id' => 1]];
+        $queryA = new MongoDB\Driver\Query($filterA,$optionA);
+        $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+        foreach ($cursorA as $documentA)
+        {
+            $AttendanceDate = ($documentA->AttendanceDate);
+            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+            $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            $varcounting = $varcounting +1;
+
+        if ($varcounting % 2)
+        {
+        } 
+        else
+        {
+            echo date_format($AttendanceDate,"H:i:s")."<br>";
+        }
+        }
+        ?></td>
+        </tr>
+        <?php
+        }
+    }
+?>
+</tbody>
+</table>
+<button type="button" class="btn btn-success"><a href="index.php?page=exportstaffattendance&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+</div>
+</div>
+<div class="col-md-1 section-1-box wow fadeInUp"></div>
+</div>
+<?php
+if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+{
+
+}
+else
+{
+$attendance = ($_GET['attendance']);
+?>
+<script>
+  $(document).ready(function () {
+     $("#attendance").table2excel({
+         filename: "attendancestaff.xls"
+     });
+  });
+ </script>
+<?php
+}
+?>
+<script type="text/javascript">
+var rows = document.querySelectorAll('tr');
+
+[...rows].forEach((r) => {
+if (r.querySelectorAll('td:empty').length > 0) {
+r.classList.add('highlight');
+}
+})
+</script>
+<?php
+}
+else
+{
+    $id = new \MongoDB\BSON\ObjectId($_GET['id']);
+    $filter = ['_id'=>$id];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+    foreach ($cursor as $document){
+      $_SESSION["staffremarkid"] = strval($document->_id);
+      $ConsumerFName = ($document->ConsumerFName);
+      $ConsumerLName = ($document->ConsumerLName);
+      $ConsumerIDNo = ($document->ConsumerIDNo);
+    }
+    ?>
+    <div class="row">
+    <div class="col-md-1 section-1-box wow fadeInUp"></div>
+    <div class="col-md-10 section-1-box wow fadeInUp"><br><br><br>
+        <div class="table-responsive" style="text-align: center;">
+        <table id="attendance" class="table table-bordered ">
+        <thead class="table-light">
+            <tr>
+            <th scope="col" style="color:#696969; text-align:center">Staff ID</th>
+            <th scope="col" style="color:#696969; text-align:center">Staff Name</th>
+            <th scope="col" style="color:#696969; text-align:center">Date</th>
+            <th scope="col" style="color:#696969; text-align:center">IN</th>
+            <th scope="col" style="color:#696969; text-align:center">OUT</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align:center">
+            <td><?php echo $ConsumerIDNo; ?></td>
+            <td><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+            <td><?php
+        $Cards_id='';
+        $filter1 = ['Consumer_id'=>$_GET['id']];
+        $query1 = new MongoDB\Driver\Query($filter1);
+        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
+        foreach ($cursor1 as $document1)
+        {
+        $Cards_id = strval($document1->Cards_id);
+        }
+        /*
+        check date
+        $convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        echo "<br>to_date: ".$to_date."<br>";
+        echo "from_date: ".$from_date."<br>";
+        $display = date_format($convert,"d/m/Y");
+        echo $display;
+        */
+        $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+        $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
+        $filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+        $query2 = new MongoDB\Driver\Query($filter2);
+        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
+        $varcounting = 0;
+        foreach ($cursor2 as $document2)
+        {
+          $AttendanceDate = ($document2->AttendanceDate);
+          $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+          $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+          $varcounting = $varcounting +1;
+          if ($varcounting % 2)
+          {
+          } 
+          else 
+          {
+            echo date_format($AttendanceDate,"d-m-Y")."<br>";
+          }
+        }
+        ?></td>
+        <td><?php
+        $varcounting = 0;
+        $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+        $optionA = ['sort' => ['_id' => 1]];
+        $queryA = new MongoDB\Driver\Query($filterA,$optionA);
+        $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+        foreach ($cursorA as $documentA)
+        {
+            $AttendanceDate = ($documentA->AttendanceDate);
+            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+            $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            $varcounting = $varcounting +1;
+        if ($varcounting % 2)
+        {echo date_format($AttendanceDate,"H:i:s")."<br>";} 
+        else
+        {}
+        }
+        ?></td>
+        <td><?php
+        $varcounting = 0;
+        $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+        $optionA = ['sort' => ['_id' => 1]];
+        $queryA = new MongoDB\Driver\Query($filterA,$optionA);
+        $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+        foreach ($cursorA as $documentA)
+        {
+            $AttendanceDate = ($documentA->AttendanceDate);
+            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+            $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            $varcounting = $varcounting +1;
+        if ($varcounting % 2)
+        {
+        } 
+        else
+        {
+        echo date_format($AttendanceDate,"H:i:s")."<br>";
+        }
+        ?>
+        <?php
+        }
+        ?></td>
+        </tr>
+   </tbody>
+   </table>
+   <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstaffattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+   </div>
+   </div>
+   <div class="col-md-1 section-1-box wow fadeInUp"></div>
+   </div>
+<?php
+if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+{
+}
+else
+{
+$attendance = ($_GET['attendance']);
+?>
+<script>
+  $(document).ready(function () {
+     $("#attendance").table2excel({
+         filename: "attendancestaff.xls"
+     });
+  });
+   
+ </script>
+<?php
+}
+?>
+<script type="text/javascript">
+var rows = document.querySelectorAll('tr');
+
+[...rows].forEach((r) => {
+if (r.querySelectorAll('td:empty').length > 0) {
+r.classList.add('highlight');
+}
+})
+</script>
+<?php
+}
+?>

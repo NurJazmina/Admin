@@ -1,9 +1,8 @@
-
 <!--begin::Header-->
 <div id="kt_header" class="header header-fixed">
 
-<!-- begin::User Panel-->
-                <!-- end::User Panel-->
+	<!-- begin::User Panel-->
+	<!-- end::User Panel-->
 
 	<!--begin::Container-->
 	<div class="container-fluid d-flex align-items-stretch justify-content-between">
@@ -11,20 +10,14 @@
 
 		<!--begin::Topbar-->
 		<div class="topbar">
-
 			<!--begin::Notifications-->
 			<div class="dropdown">
-
 				<!--begin::Toggle-->
-
 				<!--end::Toggle-->
 
 				<!--begin::Dropdown-->
-				
-
 				<!--end::Dropdown-->
 			</div>
-
 			<!--end::Notifications-->
 
 			<!--begin::User-->
@@ -37,13 +30,12 @@
 						$name = $_SESSION["loggeduser_consumerFName"];
 						$firstCharacter = $name[0];
 						?>
-						<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-							<span class="symbol-label font-size-h5 font-weight-bold"><?php echo $firstCharacter; ?></span>
+						<span class="symbol symbol-lg-35 symbol-25 symbol-light-success" style="background-color:#439bb0;">
+							<span class="symbol-label font-size-h5 font-weight-bold" style="background-color:#db61c6; color:#ffffff;"><?php echo $firstCharacter; ?></span>
 						</span>
 					</div>
 				</div>
 				<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg p-0">
-
 						<!--[html-partial:include:{"file":"partials/_extras/dropdown/notifications.html"}]/-->
 					<?php include 'view/pages/user.php'; ?>
 				</div>

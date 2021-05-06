@@ -27,6 +27,7 @@
                                 "modal-rechecktimetablelist",
                                 "modal-recheckclassroomlist",
                              
+                                "staffdetail",
                                 "eventdetail",
                                 "newsdetail",
                                 "departmentdetail",

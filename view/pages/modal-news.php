@@ -26,7 +26,6 @@ $_SESSION["title"] = "News";
                 </select>
                 </div>
         </div>
-
         <div>
         <label><h5> NEWS </h5></label>
             <textarea class="news" name="txtdetail" ></textarea>
