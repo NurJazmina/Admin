@@ -1,6 +1,6 @@
 
 <!--begin::Header-->
-<div class="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(assets/media/misc/bg-1.jpg)">
+<div class="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(assets/media/misc/bg-3.jpg)">
 	<div class="d-flex align-items-center mr-2">
 		<?php
 		$name = $_SESSION["loggeduser_consumerFName"];
@@ -86,8 +86,8 @@
 
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>
-	<div class="navi-footer px-8 py-5">
-		<a href="model/logout.php" class="btn btn-light-primary font-weight-bold">Sign Out</a>
+	<div class="navi-footer px-8 py-5" >
+		<a href="model/logout.php" class="btn btn-light-success font-weight-bold">Sign Out</a>
 	</div>
 
 	<!--end::Footer-->

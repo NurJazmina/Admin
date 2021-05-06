@@ -1,8 +1,7 @@
 <?php
 $_SESSION["title"] = "Profile";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
-
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container">
@@ -18,93 +17,22 @@ $_SESSION["title"] = "Profile";
                         <div class="d-flex justify-content-end">
                             <div class="dropdown dropdown-inline">
                                 <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ki ki-bold-more-hor"></i>
+                                
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                    <!--begin::Navigation-->
-                                    <ul class="navi navi-hover py-5">
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-drop"></i>
-                                                </span>
-                                                <span class="navi-text">New Group</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-list-3"></i>
-                                                </span>
-                                                <span class="navi-text">Contacts</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-rocket-1"></i>
-                                                </span>
-                                                <span class="navi-text">Groups</span>
-                                                <span class="navi-link-badge">
-                                                    <span class="label label-light-primary label-inline font-weight-bold">new</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-bell-2"></i>
-                                                </span>
-                                                <span class="navi-text">Calls</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-gear"></i>
-                                                </span>
-                                                <span class="navi-text">Settings</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-separator my-3"></li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-magnifier-tool"></i>
-                                                </span>
-                                                <span class="navi-text">Help</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-bell-2"></i>
-                                                </span>
-                                                <span class="navi-text">Privacy</span>
-                                                <span class="navi-link-badge">
-                                                    <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!--end::Navigation-->
+
                                 </div>
                             </div>
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::User-->
                         <div class="d-flex align-items-center">
-                            <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
-                                <i class="symbol-badge bg-success"></i>
-                            </div>
+                            <!-- <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
+                                 <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
+                            </div> -->
                             <div>
                                 <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
                                 <div class="text-muted"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
-                                <div class="mt-2">
-                                    <a href="#" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>
-                                    <a href="#" class="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Follow</a>
-                                </div>
                             </div>
                         </div>
                         <!--end::User-->
@@ -135,7 +63,7 @@ $_SESSION["title"] = "Profile";
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="index.php?page=profile" class="navi-link py-4 active">
+                                <a href="index.php?page=profile" class="navi-link py-4">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -251,7 +179,7 @@ $_SESSION["title"] = "Profile";
                                                 </span>
                                                 <span class="navi-text">Department Info</span>
                                                 <span class="navi-label">
-                                                    <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                                    <span class="label label-light-warning label-rounded font-weight-bold">5</span>
                                                 </span>
                                             </a>
                                         </div>
@@ -272,432 +200,10 @@ $_SESSION["title"] = "Profile";
                 <div class="row">
                     <div class="col-lg-6">
                         <!--begin::List Widget 14-->
-                        <div class="card card-custom card-stretch gutter-b">
-                            <!--begin::Header-->
-                            <div class="card-header border-0">
-                                <h3 class="card-title font-weight-bolder text-dark">Market Leaders</h3>
-                                <div class="card-toolbar">
-                                    <div class="dropdown dropdown-inline">
-                                        <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="ki ki-bold-more-ver"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                            <!--begin::Navigation-->
-                                            <ul class="navi navi-hover">
-                                                <li class="navi-header font-weight-bold py-4">
-                                                    <span class="font-size-lg">Choose Label:</span>
-                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="" data-bs-original-title="Click to learn more..." aria-label="Click to learn more..."></i>
-                                                </li>
-                                                <li class="navi-separator mb-3 opacity-70"></li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-separator mt-3 opacity-70"></li>
-                                                <li class="navi-footer py-4">
-                                                    <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
-                                                </li>
-                                            </ul>
-                                            <!--end::Navigation-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body pt-2">
-                                <!--begin::Item-->
-                                <div class="d-flex flex-wrap align-items-center mb-10">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                        <div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-17.jpg')"></div>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Title-->
-                                    <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Cup &amp; Green</a>
-                                        <span class="text-muted font-weight-bold font-size-sm my-1">Local, clean &amp; environmental</span>
-                                        <span class="text-muted font-weight-bold font-size-sm">Created by:
-                                        <span class="text-primary font-weight-bold">CoreAd</span></span>
-                                    </div>
-                                    <!--end::Title-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center py-lg-0 py-2">
-                                        <div class="d-flex flex-column text-right">
-                                            <span class="text-dark-75 font-weight-bolder font-size-h4">24,900</span>
-                                            <span class="text-muted font-size-sm font-weight-bolder">votes</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin: Item-->
-                                <div class="d-flex flex-wrap align-items-center mb-10">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                        <div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-10.jpg')"></div>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Title-->
-                                    <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Yellow Background</a>
-                                        <span class="text-muted font-weight-bold font-size-sm my-1">Strong abstract concept</span>
-                                        <span class="text-muted font-weight-bold font-size-sm">Created by:
-                                        <span class="text-primary font-weight-bold">KeenThemes</span></span>
-                                    </div>
-                                    <!--end::Title-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center py-lg-0 py-2">
-                                        <div class="d-flex flex-column text-right">
-                                            <span class="text-dark-75 font-weight-bolder font-size-h4">70,380</span>
-                                            <span class="text-muted font-weight-bolder font-size-sm">votes</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end: Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex flex-wrap align-items-center mb-10">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                        <div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-1.jpg')"></div>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Title-->
-                                    <div class="d-flex flex-column flex-grow-1 pr-3">
-                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Nike &amp; Blue</a>
-                                        <span class="text-muted font-weight-bold font-size-sm my-1">Footwear overalls</span>
-                                        <span class="text-muted font-weight-bold font-size-sm">Created by:
-                                        <span class="text-primary font-weight-bold">Invision Inc.</span></span>
-                                    </div>
-                                    <!--end::Title-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center py-lg-0 py-2">
-                                        <div class="d-flex flex-column text-right">
-                                            <span class="text-dark-75 font-size-h4 font-weight-bolder">7,200</span>
-                                            <span class="text-muted font-size-sm font-weight-bolder">votes</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex flex-wrap align-items-center mb-10">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                        <div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-9.jpg')"></div>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Title-->
-                                    <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Desserts platter</a>
-                                        <span class="text-muted font-size-sm font-weight-bold my-1">Food trends &amp; reviews</span>
-                                        <span class="text-muted font-size-sm font-weight-bold">Created by:
-                                        <span class="text-primary font-weight-bold">Figma Studio</span></span>
-                                    </div>
-                                    <!--end::Title-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center py-lg-0 py-2">
-                                        <div class="d-flex flex-column text-right">
-                                            <span class="text-dark-75 font-size-h4 font-weight-bolder">36,450</span>
-                                            <span class="text-muted font-size-sm font-weight-bolder">votes</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex flex-wrap align-items-center">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                        <div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-12.jpg')"></div>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Title-->
-                                    <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Cup &amp; Green</a>
-                                        <span class="text-muted font-weight-bold font-size-sm my-1">Local, clean &amp; environmental</span>
-                                        <span class="text-muted font-weight-bold font-size-sm">Created by:
-                                        <span class="text-primary font-weight-bold">CoreAd</span></span>
-                                    </div>
-                                    <!--end::Title-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center py-lg-0 py-2">
-                                        <div class="d-flex flex-column text-right">
-                                            <span class="text-dark-75 font-weight-bolder font-size-h4">23,900</span>
-                                            <span class="text-muted font-size-sm font-weight-bolder">votes</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::Item-->
-                            </div>
-                            <!--end::Body-->
-                        </div>
                         <!--end::List Widget 14-->
                     </div>
                     <div class="col-lg-6">
                         <!--begin::List Widget 10-->
-                        <div class="card card-custom card-stretch gutter-b">
-                            <!--begin::Header-->
-                            <div class="card-header border-0">
-                                <h3 class="card-title font-weight-bolder text-dark">Notifications</h3>
-                                <div class="card-toolbar">
-                                    <div class="dropdown dropdown-inline">
-                                        <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="ki ki-bold-more-ver"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                            <!--begin::Naviigation-->
-                                            <ul class="navi">
-                                                <li class="navi-header font-weight-bold py-5">
-                                                    <span class="font-size-lg">Add New:</span>
-                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="" data-bs-original-title="Click to learn more..." aria-label="Click to learn more..."></i>
-                                                </li>
-                                                <li class="navi-separator mb-3 opacity-70"></li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-icon">
-                                                            <i class="flaticon2-shopping-cart-1"></i>
-                                                        </span>
-                                                        <span class="navi-text">Order</span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-icon">
-                                                            <i class="navi-icon flaticon2-calendar-8"></i>
-                                                        </span>
-                                                        <span class="navi-text">Members</span>
-                                                        <span class="navi-label">
-                                                            <span class="label label-light-danger label-rounded font-weight-bold">3</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-icon">
-                                                            <i class="navi-icon flaticon2-telegram-logo"></i>
-                                                        </span>
-                                                        <span class="navi-text">Project</span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-icon">
-                                                            <i class="navi-icon flaticon2-new-email"></i>
-                                                        </span>
-                                                        <span class="navi-text">Record</span>
-                                                        <span class="navi-label">
-                                                            <span class="label label-light-success label-rounded font-weight-bold">5</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="navi-separator mt-3 opacity-70"></li>
-                                                <li class="navi-footer pt-5 pb-4">
-                                                    <a class="btn btn-light-primary font-weight-bolder btn-sm" href="#">More options</a>
-                                                    <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right" title="" data-bs-original-title="Click to learn more...">Learn more</a>
-                                                </li>
-                                            </ul>
-                                            <!--end::Naviigation-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body pt-0">
-                                <!--begin::Item-->
-                                <div class="mb-6">
-                                    <!--begin::Content-->
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Checkbox-->
-                                        <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                            <input type="checkbox" value="1">
-                                            <span></span>
-                                        </label>
-                                        <!--end::Checkbox-->
-                                        <!--begin::Section-->
-                                        <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                            <!--begin::Info-->
-                                            <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                <!--begin::Title-->
-                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Daily Standup Meeting</a>
-                                                <!--end::Title-->
-                                                <!--begin::Data-->
-                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                <!--end::Data-->
-                                            </div>
-                                            <!--end::Info-->
-                                            <!--begin::Label-->
-                                            <span class="label label-lg label-light-primary label-inline font-weight-bold py-4">Approved</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Section-->
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="mb-6">
-                                    <!--begin::Content-->
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Checkbox-->
-                                        <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                            <input type="checkbox" value="1">
-                                            <span></span>
-                                        </label>
-                                        <!--end::Checkbox-->
-                                        <!--begin::Section-->
-                                        <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                            <!--begin::Info-->
-                                            <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                <!--begin::Title-->
-                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Group Town Hall Meet-up with showcase</a>
-                                                <!--end::Title-->
-                                                <!--begin::Data-->
-                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                <!--end::Data-->
-                                            </div>
-                                            <!--end::Info-->
-                                            <!--begin::Label-->
-                                            <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Section-->
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="mb-6">
-                                    <!--begin::Content-->
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Checkbox-->
-                                        <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                            <input type="checkbox" value="1">
-                                            <span></span>
-                                        </label>
-                                        <!--end::Checkbox-->
-                                        <!--begin::Section-->
-                                        <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                            <!--begin::Info-->
-                                            <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                <!--begin::Title-->
-                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Next sprint planning and estimations</a>
-                                                <!--end::Title-->
-                                                <!--begin::Data-->
-                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                <!--end::Data-->
-                                            </div>
-                                            <!--end::Info-->
-                                            <!--begin::Label-->
-                                            <span class="label label-lg label-light-success label-inline font-weight-bold py-4">Success</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Section-->
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="mb-6">
-                                    <!--begin::Content-->
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Checkbox-->
-                                        <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                            <input type="checkbox" value="1">
-                                            <span></span>
-                                        </label>
-                                        <!--end::Checkbox-->
-                                        <!--begin::Section-->
-                                        <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                            <!--begin::Info-->
-                                            <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                <!--begin::Title-->
-                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Sprint delivery and project deployment</a>
-                                                <!--end::Title-->
-                                                <!--begin::Data-->
-                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                <!--end::Data-->
-                                            </div>
-                                            <!--end::Info-->
-                                            <!--begin::Label-->
-                                            <span class="label label-lg label-light-danger label-inline font-weight-bold py-4">Rejected</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Section-->
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end: Item-->
-                                <!--begin: Item-->
-                                <div class="">
-                                    <!--begin::Content-->
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Checkbox-->
-                                        <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                            <input type="checkbox" value="1">
-                                            <span></span>
-                                        </label>
-                                        <!--end::Checkbox-->
-                                        <!--begin::Section-->
-                                        <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                            <!--begin::Info-->
-                                            <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                <!--begin::Title-->
-                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Data analytics research showcase</a>
-                                                <!--end::Title-->
-                                                <!--begin::Data-->
-                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                <!--end::Data-->
-                                            </div>
-                                            <!--end::Info-->
-                                            <!--begin::Label-->
-                                            <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Section-->
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end: Item-->
-                            </div>
-                            <!--end: Card Body-->
-                        </div>
-                        <!--end: Card-->
                         <!--end: List Widget 10-->
                     </div>
                 </div>
@@ -710,7 +216,7 @@ $_SESSION["title"] = "Profile";
                             <span class="card-label font-weight-bolder text-dark">Attendance</span>
                         </h3>
                         <div class="card-toolbar">
-                            <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                            <ul class="nav nav-pills nav-pills-sm nav-success">
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_1">Month</a>
                                 </li>
@@ -766,7 +272,7 @@ $_SESSION["title"] = "Profile";
 								$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
 								foreach ($cursor1 as $document1)
 								{
-								$Cards_id = strval($document1->Cards_id);
+                                    $Cards_id = strval($document1->Cards_id);
 								}
 								/*
 								check date
@@ -786,42 +292,17 @@ $_SESSION["title"] = "Profile";
 								
 								foreach ($cursor2 as $document2)
 								{
-								$AttendanceDate = ($document2->AttendanceDate);
-								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-								$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$varcounting = $varcounting +1;
-								if ($varcounting % 2)
-								{
-								} 
-								else 
-								{
-									echo date_format($AttendanceDate,"d-m-Y")."<br>";
-								}
-								}
-								?>
-								</td>
-								<td style="text-align:center">
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-								$AttendanceDate = ($documentA->AttendanceDate);
-								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-								$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$varcounting = $varcounting +1;
-
-								if ($varcounting % 2)
-								{
-								echo date_format($AttendanceDate,"H:i:s")."<br>";
-								} 
-								else
-								{
-								}
+                                    $AttendanceDate = ($document2->AttendanceDate);
+                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                    $varcounting = $varcounting +1;
+                                    if ($varcounting % 2)
+                                    {
+                                    } 
+                                    else 
+                                    {
+                                        echo date_format($AttendanceDate,"d-m-Y")."<br>";
+                                    }
 								}
 								?>
 								</td>
@@ -835,46 +316,65 @@ $_SESSION["title"] = "Profile";
 								
 								foreach ($cursorA as $documentA)
 								{
-								$AttendanceDate = ($documentA->AttendanceDate);
-								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-								$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$varcounting = $varcounting +1;
+                                    $AttendanceDate = ($documentA->AttendanceDate);
+                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                    $varcounting = $varcounting +1;
 
-								if ($varcounting % 2)
-								{
-								} 
-								else
-								{
-								echo date_format($AttendanceDate,"H:i:s")."<br>";
+                                    if ($varcounting % 2)
+                                    {
+                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
+                                    } 
+                                    else
+                                    {
+                                    }
 								}
 								?>
+								</td>
+								<td style="text-align:center">
 								<?php
+								$varcounting = 0;
+								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+								$optionA = ['sort' => ['_id' => 1]];
+								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+								
+								foreach ($cursorA as $documentA)
+								{
+                                    $AttendanceDate = ($documentA->AttendanceDate);
+                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                    $varcounting = $varcounting +1;
+
+                                    if ($varcounting % 2)
+                                    {
+                                    } 
+                                    else
+                                    {
+                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
+                                    }
 								}
 								?>
 								</td>
 								</tr>
 						</tbody>
 						</table>
-						<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=staffdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+						<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=profile&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
 						<?php
 						}
-						?>
-						<?php
 						if (!isset($_GET['attendance']) && empty($_GET['attendance']))
 						{
-
 						}
 						else
 						{
-						$attendance = ($_GET['attendance']);
+                            $attendance = ($_GET['attendance']);
 						?>
 						<script>
 						$(document).ready(function () {
 							$("#attendance").table2excel({
-								filename: "attendancestaff.xls"
+								filename: "attendance.xls"
 							});
 						});
-						
 						</script>
 						<?php
 						}

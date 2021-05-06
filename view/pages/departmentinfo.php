@@ -1,19 +1,7 @@
 <?php
 $_SESSION["title"] = "Profile";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
-
-<style>
-.vl {
-  border-left: 6px solid green;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  margin-left: -3px;
-  top: 0;
-}
-</style>
-
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->
@@ -30,93 +18,22 @@ $_SESSION["title"] = "Profile";
                         <div class="d-flex justify-content-end">
                             <div class="dropdown dropdown-inline">
                                 <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ki ki-bold-more-hor"></i>
+                                
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                    <!--begin::Navigation-->
-                                    <ul class="navi navi-hover py-5">
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-drop"></i>
-                                                </span>
-                                                <span class="navi-text">New Group</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-list-3"></i>
-                                                </span>
-                                                <span class="navi-text">Contacts</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-rocket-1"></i>
-                                                </span>
-                                                <span class="navi-text">Groups</span>
-                                                <span class="navi-link-badge">
-                                                    <span class="label label-light-primary label-inline font-weight-bold">new</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-bell-2"></i>
-                                                </span>
-                                                <span class="navi-text">Calls</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-gear"></i>
-                                                </span>
-                                                <span class="navi-text">Settings</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-separator my-3"></li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-magnifier-tool"></i>
-                                                </span>
-                                                <span class="navi-text">Help</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="flaticon2-bell-2"></i>
-                                                </span>
-                                                <span class="navi-text">Privacy</span>
-                                                <span class="navi-link-badge">
-                                                    <span class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!--end::Navigation-->
+
                                 </div>
                             </div>
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::User-->
                         <div class="d-flex align-items-center">
-                            <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
-                                <i class="symbol-badge bg-success"></i>
-                            </div>
+                            <!-- <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
+                                 <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
+                            </div> -->
                             <div>
                                 <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
                                 <div class="text-muted"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
-                                <div class="mt-2">
-                                    <a href="#" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>
-                                    <a href="#" class="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Follow</a>
-                                </div>
                             </div>
                         </div>
                         <!--end::User-->
@@ -147,7 +64,7 @@ $_SESSION["title"] = "Profile";
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="index.php?page=profile" class="navi-link py-4 active">
+                                <a href="index.php?page=profile" class="navi-link py-4">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -263,7 +180,7 @@ $_SESSION["title"] = "Profile";
                                                 </span>
                                                 <span class="navi-text">Department Info</span>
                                                 <span class="navi-label">
-                                                    <span class="label label-light-danger label-rounded font-weight-bold">5</span>
+                                                    <span class="label label-light-warning label-rounded font-weight-bold">5</span>
                                                 </span>
                                             </a>
                                         </div>
@@ -295,576 +212,566 @@ $_SESSION["title"] = "Profile";
 					<!--begin::Header-->
 					<div class="card-header py-3">
 						<div class="card-title align-items-start flex-column">
-							<h3 class="card-label font-weight-bolder text-dark">Your Department</h3>
-							<span class="text-muted font-weight-bold font-size-sm mt-1"><?php echo $DepartmentName; ?></span>
+							<h3 class="card-label font-weight-bolder text-dark"><?php echo $DepartmentName; ?></h3>
 						</div>
 					</div>
 					<!--end::Header-->
-					<!--begin::Form-->
 					<div class="row" >
-					<div class="card-title">
-					<div class="col-md-12 section-1-box wow fadeInUp">
-						<div class="card-body">
-							<div class="row">
-							   <div class="col-sm">
-								<div class="table-responsive">
-								<table class="table table-bordered">
-								<thead class="table-light">
-								</thead>
-								<tbody>
-									<tr>
-									<th scope="row" class="table-secondary">Department</th>
-									<td class="table-secondary"><?php echo $DepartmentName; ?> </td>
-									</tr>
-									<tr>
-									<th scope="row">Staff List </th>
-									<td>
-									<?php
-									$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'Staffdepartment'=>$_SESSION["loggeduser_Staffdepartment"]];
-									$query = new MongoDB\Driver\Query($filter);
-									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-									$totalstaff = 0;
-									foreach ($cursor as $document)
-									{
-										$totalstaff = $totalstaff + 1;
-										$ConsumerID = strval($document->ConsumerID);
-										$id = new \MongoDB\BSON\ObjectId($ConsumerID);
-										$filter1 = ['_id'=>$id];
-										$query1 = new MongoDB\Driver\Query($filter1);
-										$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-										foreach ($cursor1 as $document1)
-										{
-										$Consumer_id = ($document1->_id);
-										$ConsumerFName = ($document1->ConsumerFName);
-										?>
-										<a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#076d79; text-decoration: none;">
-										<?php
-										echo $ConsumerFName."<br>";
-										}
-									}
-									?>
-									</td>
-									</tr>
-									<tr>
-									<th scope="row">Number of Staff</th>
-									<td><?php echo $totalstaff; ?></td>
-									</tr>
-								</tbody>
-								</table>
-								</div>
-							</div>
-							<div class="col-12 col-lg-6">
+						<div class="col-md-12 section-1-box wow fadeInUp">
+							<div class="card-body">
 								<div class="row">
-								<div class="col-12 col-lg-12">
-									<div class="card">
-									<div class="card-header">
-										<strong>Remarks</strong>
+									<div class="col-sm">
+										<div class="table-responsive">
+										<table class="table table-bordered">
+										<thead class="table-light">
+										</thead>
+										<tbody>
+											<tr>
+											<th scope="row" class="table-secondary">Department</th>
+											<td class="table-secondary"><?php echo $DepartmentName; ?> </td>
+											</tr>
+											<tr>
+											<th scope="row">Staff List </th>
+											<td>
+											<?php
+											$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'Staffdepartment'=>$_SESSION["loggeduser_Staffdepartment"]];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+											$totalstaff = 0;
+											foreach ($cursor as $document)
+											{
+												$totalstaff = $totalstaff + 1;
+												$ConsumerID = strval($document->ConsumerID);
+												$id = new \MongoDB\BSON\ObjectId($ConsumerID);
+												$filter1 = ['_id'=>$id];
+												$query1 = new MongoDB\Driver\Query($filter1);
+												$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+												foreach ($cursor1 as $document1)
+												{
+												$Consumer_id = ($document1->_id);
+												$ConsumerFName = ($document1->ConsumerFName);
+												?>
+												<a href="index.php?page=staffdetail&id=<?php echo $Consumer_id; ?>" style="color:#076d79; text-decoration: none;">
+												<?php
+												echo $ConsumerFName."<br>";
+												}
+											}
+											?>
+											</td>
+											</tr>
+											<tr>
+											<th scope="row">Number of Staff</th>
+											<td><?php echo $totalstaff; ?></td>
+											</tr>
+										</tbody>
+										</table>
+										</div>
 									</div>
-									<div class="card-body">
+									<div class="col-12 col-lg-6">
 										<div class="row">
-										<div class="col-12">
-										<div class="tab-content" id="v-pills-tabContent">
-											<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-											<div class="box">
-												<form name="AddDepartmentRemarkFormSubmit" action="model/adddepartmentremark.php" method="POST">
-												<div class="row">
-												<div class="col">
-													<textarea class="form-control" name="txtdepartmentRemark" rows="3"></textarea>
-													<br>
+										<div class="col-12 col-lg-12">
+											<div class="card">
+												<div class="card-header">
+													<strong>Remarks</strong>
+												</div>
+												<div class="card-body">
 													<div class="row">
-														<div class="col text-right">
-														<input type="hidden" value="<?php echo $_SESSION["loggeduser_Staffdepartment"]; ?>" name="txtdepartmentid">
-														<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkFormSubmit">Add remark</button>
+													<div class="col-12">
+													<div class="tab-content" id="v-pills-tabContent">
+														<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+														<div class="box">
+															<form name="AddDepartmentRemarkFormSubmit" action="model/adddepartmentremark.php" method="POST">
+															<div class="row">
+															<div class="col">
+																<textarea class="departmentinfo" name="txtdepartmentRemark" rows="3"></textarea>
+																<br>
+																<div class="row">
+																	<div class="col text-right">
+																	<input type="hidden" value="<?php echo $_SESSION["loggeduser_Staffdepartment"]; ?>" name="txtdepartmentid">
+																	<button type="submit" class="btn btn-success" name="AddDepartmentRemarkFormSubmit">Add remark</button>
+																	</div>
+																</div>
+																</div>
+															</div>
+														</form>
+														</div>
+														<div class="box">
+														<strong></strong>
+														<br>
+														<ul class="nav nav-tabs" id="myTab" role="tablist">
+															<li class="nav-item" role="presentation">
+															<a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Active</a>
+															</li>
+															<li class="nav-item" role="presentation">
+															<a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
+															</li>
+															<li class="nav-item" role="presentation">
+															<a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+															</li>
+														</ul>
+														<div class="tab-content" id="myTabContent">
+															<div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
+																<table class="table table-striped table-sm ">
+																<thead>
+																	<tr>
+																	<th>Date</th>
+																	<th>Details</th>
+																	<th>Staff</th>
+																	</tr>
+																</thead>
+																</table>
+																<?php
+																$filter2 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>'0','departmentRemarksStatus'=>'ACTIVE'];
+																$option2 = ['sort' => ['_id' => -1],'limit'=>10];
+																$query2 = new MongoDB\Driver\Query($filter2, $option2);
+																$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
+
+																foreach ($cursor2 as $document2)
+																{
+																$_SESSION["departmentparent"] = strval($document2->_id);
+																$remarkid1 = strval($document2->_id);
+																$remark1 = ($document2->departmentRemarksDetails);
+																$remarkdate1 = ($document2->departmentRemarksDate);
+																$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
+																$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+																$remarkstaffid1 = ($document2->departmentRemarksStaff_id);
+																?>
+																	<div class="accordion accordion-flush" id="accordionFlushExample">
+																	<div class="accordion-item" >
+																	<h6 class="accordion-header" id="flush-heading<?php echo $remarkid1; ?>">
+																		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $remarkid1; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $remarkid1; ?>">
+																		<tbody>
+																		<tr>
+																		<td><?php print_r($datetime1->format('r')); ?></td>
+																		<td>
+																			<?php
+																			$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+																			$query1 = new MongoDB\Driver\Query($filter1);
+																			$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+																			foreach ($cursor1 as $document1)
+																			{
+																			$ConsumerFName = ($document1->ConsumerFName);
+																			echo $ConsumerFName;
+																			?>
+																		</td>
+																		<td><?php echo $remark1;?></td>
+																		</tr>
+																		</tbody>
+																		</button>
+																	</h6>
+																	<div  id="flush-collapse<?php echo $remarkid1; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $remarkid1; ?>" data-bs-parent="#accordionFlushExample">
+																	<?php 
+																	$filter4 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'ACTIVE'];
+																	$option4 = ['sort' => ['_id' => -1],'limit'=>10];
+																	$query4 = new MongoDB\Driver\Query($filter4, $option4);
+																	$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+																	foreach ($cursor4 as $document4)
+																	{
+																		$remarkid2 = strval($document4->_id);
+																		$remark2 = ($document4->departmentRemarksDetails);
+																		$remarkdate2 = ($document4->departmentRemarksDate);
+																		$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
+																		$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+																		$remarkstaffid2 = ($document4->departmentRemarksStaff_id);
+																		?>
+																		<div class="accordion-body">
+																		<tbody>
+																		<tr>
+																			<td><?php print_r($datetime2->format('r')); ?></td>
+																			<td>
+																			<?php echo $remark2;?>
+																			</td>
+																		</tr>
+																		</tbody>
+																		</div>
+																		<?php
+																		}
+																		?>
+																		<form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
+																		<div class="row">
+																		<div class="col">
+																			<textarea class="departmentinfo" name="txtconsumerRemark" rows="3"></textarea>
+																			<br>
+																			<div class="row">
+																			<div class="col text-right">
+																				<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
+																				<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
+																				<button type="submit" class="btn btn-light-success font-weight-bold mr-2" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																				<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">Update</button>
+																				<br><br>
+																			</div>
+																			</div>
+																		</div>
+																		</div>
+																		</form>
+																	</div>
+																	</div>
+																	</div>
+																<?php
+																}
+																}
+																?>
+															</div>
+															<div class="tab-pane fade show pending" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+															<div class="table-responsive">
+																<table class="table table-striped table-sm ">
+																<thead>
+																	<tr>
+																	<th>Date</th>
+																	<th>Details</th>
+																	<th>Staff</th>
+																	</tr>
+																</thead>
+																</table>
+																<?php
+																$filter2 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>'0','departmentRemarksStatus'=>'PENDING'];
+																$option2 = ['sort' => ['_id' => -1],'limit'=>10];
+																$query2 = new MongoDB\Driver\Query($filter2, $option2);
+																$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
+
+																foreach ($cursor2 as $document2)
+																{
+																$_SESSION["departmentparent"] = strval($document2->_id);
+																$remarkid1 = strval($document2->_id);
+																$remark1 = ($document2->departmentRemarksDetails);
+																$remarkdate1 = ($document2->departmentRemarksDate);
+																$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
+																$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+																$remarkstaffid1 = ($document2->departmentRemarksStaff_id);
+																?>
+																	<div class="accordion accordion-flush" id="accordionFlushExample">
+																	<div class="accordion-item" >
+																	<h6 class="accordion-header" id="flush-headingOne">
+																		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+																		<tbody>
+																		<tr>
+																		<td><?php print_r($datetime1->format('r')); ?></td>
+																		<td>
+																			<?php
+																			$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+																			$query1 = new MongoDB\Driver\Query($filter1);
+																			$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+																			foreach ($cursor1 as $document1)
+																			{
+																			$ConsumerFName = ($document1->ConsumerFName);
+																			echo $ConsumerFName;
+																			?>
+																		</td>
+																		<td><?php echo $remark1;?></td>
+																		</tr>
+																		</tbody>
+																		</button>
+																	</h6>
+																	<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+																	<?php 
+																	$filter4 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'PENDING'];
+																	$option4 = ['sort' => ['_id' => -1],'limit'=>10];
+																	$query4 = new MongoDB\Driver\Query($filter4, $option4);
+																	$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+																	foreach ($cursor4 as $document4)
+																	{
+																		$remarkid2 = strval($document4->_id);
+																		$remark2 = ($document4->departmentRemarksDetails);
+																		$remarkdate2 = ($document4->departmentRemarksDate);
+																		$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
+																		$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+																		$remarkstaffid2 = ($document4->departmentRemarksStaff_id);
+																		?>
+																		<div class="accordion-body">
+																		<tbody>
+																		<tr>
+																			<td><?php print_r($datetime2->format('r')); ?></td>
+																			<td>
+																			<?php echo $remark2;?>
+																			</td>
+																		</tr>
+																		</tbody>
+																		</div>
+																		<?php
+																		}
+																		?>
+																		<form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
+																		<div class="row">
+																		<div class="col">
+																			<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																			<br>
+																			<div class="row">
+																			<div class="col text-right">
+																				<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
+																				<input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
+																				<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																			</div>
+																			</div>
+																		</div>
+																		</div>
+																		</form>
+																		<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+																	</div>
+																	</div>
+																	</div>
+																<?php
+																}
+																}
+																?>
+															</div>
+															</div>
+															<div class="tab-pane fade show completed" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+															<div class="table-responsive">
+																<table class="table table-striped table-sm ">
+																<thead>
+																	<tr>
+																	<th>Date</th>
+																	<th>Details</th>
+																	<th>Staff</th>
+																	</tr>
+																</thead>
+																</table>
+																<?php
+																$filter2 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>'0','departmentRemarksStatus'=>'COMPLETED'];
+																$option2 = ['sort' => ['_id' => -1],'limit'=>10];
+																$query2 = new MongoDB\Driver\Query($filter2, $option2);
+																$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
+
+																foreach ($cursor2 as $document2)
+																{
+																$_SESSION["departmentparent"] = strval($document2->_id);
+																$remarkid1 = strval($document2->_id);
+																$remark1 = ($document2->departmentRemarksDetails);
+																$remarkdate1 = ($document2->departmentRemarksDate);
+																$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
+																$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+																$remarkstaffid1 = ($document2->departmentRemarksStaff_id);
+																?>
+																	<div class="accordion accordion-flush" id="accordionFlushExample">
+																	<div class="accordion-item" >
+																	<h6 class="accordion-header" id="flush-headingOne">
+																		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+																		<tbody>
+																		<tr>
+																		<td><?php print_r($datetime1->format('r')); ?></td>
+																		<td>
+																			<?php
+																			$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+																			$query1 = new MongoDB\Driver\Query($filter1);
+																			$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+																			foreach ($cursor1 as $document1)
+																			{
+																			$ConsumerFName = ($document1->ConsumerFName);
+																			echo $ConsumerFName;
+																			?>
+																		</td>
+																		<td><?php echo $remark1;?></td>
+																		</tr>
+																		</tbody>
+																		</button>
+																	</h6>
+																	<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+																	<?php 
+																	$filter4 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'COMPLETED'];
+																	$option4 = ['sort' => ['_id' => -1],'limit'=>10];
+																	$query4 = new MongoDB\Driver\Query($filter4, $option4);
+																	$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+																	foreach ($cursor4 as $document4)
+																	{
+																		$remarkid2 = strval($document4->_id);
+																		$remark2 = ($document4->departmentRemarksDetails);
+																		$remarkdate2 = ($document4->departmentRemarksDate);
+																		$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
+																		$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+																		$remarkstaffid2 = ($document4->departmentRemarksStaff_id);
+																		?>
+																		<div class="accordion-body">
+																		<tbody>
+																		<tr>
+																			<td><?php print_r($datetime2->format('r')); ?></td>
+																			<td>
+																			<?php echo $remark2;?>
+																			</td>
+																		</tr>
+																		</tbody>
+																		</div>
+																		<?php
+																		}
+																		?>
+																		<form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
+																		<div class="row">
+																		<div class="col">
+																			<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
+																			<br>
+																			<div class="row">
+																			<div class="col text-right">
+																				<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
+																				<input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
+																				<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
+																			</div>
+																			</div>
+																		</div>
+																		</div>
+																		</form>
+																		<button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
+																	</div>
+																	</div>
+																	</div>
+																<?php
+																}
+																}
+																?>
+																</div>
+															</div>
+															</div>
 														</div>
 													</div>
 													</div>
-												</div>
-											</form>
-											</div>
-											<div class="box">
-											<strong></strong>
-											<br>
-											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item" role="presentation">
-												<a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Active</a>
-												</li>
-												<li class="nav-item" role="presentation">
-												<a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
-												</li>
-												<li class="nav-item" role="presentation">
-												<a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
-												</li>
-											</ul>
-											<div class="tab-content" id="myTabContent">
-												<div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
-												<div class="table-responsive">
-													<table class="table table-striped table-sm ">
-													<thead>
-														<tr>
-														<th>Date</th>
-														<th>Details</th>
-														<th>Staff</th>
-														</tr>
-													</thead>
-													</table>
-													<?php
-													$filter2 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>'0','departmentRemarksStatus'=>'ACTIVE'];
-													$option2 = ['sort' => ['_id' => -1],'limit'=>10];
-													$query2 = new MongoDB\Driver\Query($filter2, $option2);
-													$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
-
-													foreach ($cursor2 as $document2)
-													{
-													$_SESSION["departmentparent"] = strval($document2->_id);
-													$remarkid1 = strval($document2->_id);
-													$remark1 = ($document2->departmentRemarksDetails);
-													$remarkdate1 = ($document2->departmentRemarksDate);
-													$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
-													$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-													$remarkstaffid1 = ($document2->departmentRemarksStaff_id);
-													?>
-														<div class="accordion accordion-flush" id="accordionFlushExample">
-														<div class="accordion-item" >
-														<h6 class="accordion-header" id="flush-headingOne">
-															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-															<tbody>
-															<tr>
-															<td><?php print_r($datetime1->format('r')); ?></td>
-															<td>
-																<?php
-																$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
-																$query1 = new MongoDB\Driver\Query($filter1);
-																$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-																foreach ($cursor1 as $document1)
-																{
-																$ConsumerFName = ($document1->ConsumerFName);
-																echo $ConsumerFName;
-																?>
-															</td>
-															<td><?php echo $remark1;?></td>
-															</tr>
-															</tbody>
-															</button>
-														</h6>
-														<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-														<?php 
-														$filter4 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'ACTIVE'];
-														$option4 = ['sort' => ['_id' => -1],'limit'=>10];
-														$query4 = new MongoDB\Driver\Query($filter4, $option4);
-														$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
-														foreach ($cursor4 as $document4)
-														{
-															$remarkid2 = strval($document4->_id);
-															$remark2 = ($document4->departmentRemarksDetails);
-															$remarkdate2 = ($document4->departmentRemarksDate);
-															$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
-															$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-															$remarkstaffid2 = ($document4->departmentRemarksStaff_id);
-															?>
-															<div class="accordion-body">
-															<tbody>
-															<tr>
-																<td><?php print_r($datetime2->format('r')); ?></td>
-																<td>
-																<?php echo $remark2;?>
-																</td>
-															</tr>
-															</tbody>
-															</div>
-															<?php
-															}
-															?>
-															<form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
-															<div class="row">
-															<div class="col">
-																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
-																<br>
-																<div class="row">
-																<div class="col text-right">
-																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
-																	<input type="hidden" value="<?php echo $remarkid1; ?>" name="txtremarkid">
-																	<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
-																	<button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">Update</button>
-																	<br><br>
-																</div>
-																</div>
-															</div>
-															</div>
-															</form>
-														</div>
-														</div>
-														</div>
-													<?php
-													}
-													}
-													?>
-												</div>
-												</div>
-												<div class="tab-pane fade show pending" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-												<div class="table-responsive">
-													<table class="table table-striped table-sm ">
-													<thead>
-														<tr>
-														<th>Date</th>
-														<th>Details</th>
-														<th>Staff</th>
-														</tr>
-													</thead>
-													</table>
-													<?php
-													$filter2 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>'0','departmentRemarksStatus'=>'PENDING'];
-													$option2 = ['sort' => ['_id' => -1],'limit'=>10];
-													$query2 = new MongoDB\Driver\Query($filter2, $option2);
-													$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
-
-													foreach ($cursor2 as $document2)
-													{
-													$_SESSION["departmentparent"] = strval($document2->_id);
-													$remarkid1 = strval($document2->_id);
-													$remark1 = ($document2->departmentRemarksDetails);
-													$remarkdate1 = ($document2->departmentRemarksDate);
-													$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
-													$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-													$remarkstaffid1 = ($document2->departmentRemarksStaff_id);
-													?>
-														<div class="accordion accordion-flush" id="accordionFlushExample">
-														<div class="accordion-item" >
-														<h6 class="accordion-header" id="flush-headingOne">
-															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-															<tbody>
-															<tr>
-															<td><?php print_r($datetime1->format('r')); ?></td>
-															<td>
-																<?php
-																$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
-																$query1 = new MongoDB\Driver\Query($filter1);
-																$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-																foreach ($cursor1 as $document1)
-																{
-																$ConsumerFName = ($document1->ConsumerFName);
-																echo $ConsumerFName;
-																?>
-															</td>
-															<td><?php echo $remark1;?></td>
-															</tr>
-															</tbody>
-															</button>
-														</h6>
-														<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-														<?php 
-														$filter4 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'PENDING'];
-														$option4 = ['sort' => ['_id' => -1],'limit'=>10];
-														$query4 = new MongoDB\Driver\Query($filter4, $option4);
-														$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
-														foreach ($cursor4 as $document4)
-														{
-															$remarkid2 = strval($document4->_id);
-															$remark2 = ($document4->departmentRemarksDetails);
-															$remarkdate2 = ($document4->departmentRemarksDate);
-															$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
-															$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-															$remarkstaffid2 = ($document4->departmentRemarksStaff_id);
-															?>
-															<div class="accordion-body">
-															<tbody>
-															<tr>
-																<td><?php print_r($datetime2->format('r')); ?></td>
-																<td>
-																<?php echo $remark2;?>
-																</td>
-															</tr>
-															</tbody>
-															</div>
-															<?php
-															}
-															?>
-															<form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
-															<div class="row">
-															<div class="col">
-																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
-																<br>
-																<div class="row">
-																<div class="col text-right">
-																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
-																	<input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-																	<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
-																</div>
-																</div>
-															</div>
-															</div>
-															</form>
-															<button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
-														</div>
-														</div>
-														</div>
-													<?php
-													}
-													}
-													?>
-												</div>
-												</div>
-												<div class="tab-pane fade show completed" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-												<div class="table-responsive">
-													<table class="table table-striped table-sm ">
-													<thead>
-														<tr>
-														<th>Date</th>
-														<th>Details</th>
-														<th>Staff</th>
-														</tr>
-													</thead>
-													</table>
-													<?php
-													$filter2 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>'0','departmentRemarksStatus'=>'COMPLETED'];
-													$option2 = ['sort' => ['_id' => -1],'limit'=>10];
-													$query2 = new MongoDB\Driver\Query($filter2, $option2);
-													$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
-
-													foreach ($cursor2 as $document2)
-													{
-													$_SESSION["departmentparent"] = strval($document2->_id);
-													$remarkid1 = strval($document2->_id);
-													$remark1 = ($document2->departmentRemarksDetails);
-													$remarkdate1 = ($document2->departmentRemarksDate);
-													$utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
-													$datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-													$remarkstaffid1 = ($document2->departmentRemarksStaff_id);
-													?>
-														<div class="accordion accordion-flush" id="accordionFlushExample">
-														<div class="accordion-item" >
-														<h6 class="accordion-header" id="flush-headingOne">
-															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-															<tbody>
-															<tr>
-															<td><?php print_r($datetime1->format('r')); ?></td>
-															<td>
-																<?php
-																$filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
-																$query1 = new MongoDB\Driver\Query($filter1);
-																$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-																foreach ($cursor1 as $document1)
-																{
-																$ConsumerFName = ($document1->ConsumerFName);
-																echo $ConsumerFName;
-																?>
-															</td>
-															<td><?php echo $remark1;?></td>
-															</tr>
-															</tbody>
-															</button>
-														</h6>
-														<div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-														<?php 
-														$filter4 = ['department_id'=>$_SESSION["loggeduser_Staffdepartment"],'SubRemarks'=>$_SESSION["departmentparent"],'departmentRemarksStatus'=>'COMPLETED'];
-														$option4 = ['sort' => ['_id' => -1],'limit'=>10];
-														$query4 = new MongoDB\Driver\Query($filter4, $option4);
-														$cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
-														foreach ($cursor4 as $document4)
-														{
-															$remarkid2 = strval($document4->_id);
-															$remark2 = ($document4->departmentRemarksDetails);
-															$remarkdate2 = ($document4->departmentRemarksDate);
-															$utcdatetime2 = new MongoDB\BSON\UTCDateTime(strval($remarkdate2));
-															$datetime2 = $utcdatetime2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-															$remarkstaffid2 = ($document4->departmentRemarksStaff_id);
-															?>
-															<div class="accordion-body">
-															<tbody>
-															<tr>
-																<td><?php print_r($datetime2->format('r')); ?></td>
-																<td>
-																<?php echo $remark2;?>
-																</td>
-															</tr>
-															</tbody>
-															</div>
-															<?php
-															}
-															?>
-															<form name="AddDepartmentRemarkChildFormSubmit" action="model/adddepartmentremarkchild.php" method="POST">
-															<div class="row">
-															<div class="col">
-																<textarea class="form-control" name="txtconsumerRemark" rows="3"></textarea>
-																<br>
-																<div class="row">
-																<div class="col text-right">
-																	<input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
-																	<input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-																	<button type="submit" class="btn btn-primary" name="AddDepartmentRemarkChildFormSubmit">Add remark</button>
-																</div>
-																</div>
-															</div>
-															</div>
-															</form>
-															<button style="float: right;"type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Updatedepartmentremark" data-bs-whatever="<?php echo $remarkid1; ?>" style="display: flex;  ">update</button>
-														</div>
-														</div>
-														</div>
-													<?php
-													}
-													}
-													?>
-													</div>
-												</div>
 												</div>
 											</div>
 										</div>
 										</div>
 									</div>
-									</div>
 								</div>
-								</div>
-							</div>
-							</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-sm">
-							<div class="row py-5">
-								<div class="col-12 col-lg-12">
-								<div class="card">
-									<div class="card-header">
-									<strong>Attendance</strong>
-									</div>
-									<div class="card-body">
-									<div class="row">
-										<div class="col-sm-12">
-										<table id="attendance" class="table table-bordered ">
-										<thead class="table-light">
+								<div class="row py-5">
+									<div class="col-12 col-lg-12">
+									<div class="card">
+										<div class="card-header">
+										<strong>Attendance</strong>
+										</div>
+										<div class="card-body">
+										<div class="row">
+											<div class="col-sm-12">
+											<table id="attendance" class="table table-bordered ">
+											<thead class="table-light">
+												<tr>
+												<th scope="col" style="color:#696969; text-align:center">Staff ID</th>
+												<th scope="col" style="color:#696969; text-align:center">Staff Name</th>
+												<th scope="col" style="color:#696969; text-align:center">Date</th>
+												<th scope="col" style="color:#696969; text-align:center">IN</th>
+												<th scope="col" style="color:#696969; text-align:center">OUT</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+											$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$_SESSION["loggeduser_Staffdepartment"]];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+											foreach ($cursor as $document)
+											{
+											$ConsumerID = strval($document->ConsumerID);
+
+											$filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+											foreach ($cursor as $document)
+											{
+											$_SESSION["staffremarkid"] = strval($document->_id);
+											$ConsumerFName = ($document->ConsumerFName);
+											$ConsumerLName = ($document->ConsumerLName);
+											$ConsumerIDNo = ($document->ConsumerIDNo);
+											$consumerid = strval($document->_id);
+											$varnow = date("d-m-Y");
+											?>
 											<tr>
-											<th scope="col" style="color:#696969; text-align:center">Staff ID</th>
-											<th scope="col" style="color:#696969; text-align:center">Staff Name</th>
-											<th scope="col" style="color:#696969; text-align:center">Date</th>
-											<th scope="col" style="color:#696969; text-align:center">IN</th>
-											<th scope="col" style="color:#696969; text-align:center">OUT</th>
-											</tr>
-										</thead>
-										<tbody>
-										<?php
-										$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$_SESSION["loggeduser_Staffdepartment"]];
-										$query = new MongoDB\Driver\Query($filter);
-										$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-										foreach ($cursor as $document)
-										{
-										$ConsumerID = strval($document->ConsumerID);
-
-										$filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
-										$query = new MongoDB\Driver\Query($filter);
-										$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-										foreach ($cursor as $document)
-										{
-										$_SESSION["staffremarkid"] = strval($document->_id);
-										$ConsumerFName = ($document->ConsumerFName);
-										$ConsumerLName = ($document->ConsumerLName);
-										$ConsumerIDNo = ($document->ConsumerIDNo);
-										$consumerid = strval($document->_id);
-										$varnow = date("d-m-Y");
-										?>
-										<tr>
-											<td class="default"><?php echo $ConsumerIDNo; ?></td>
-											<td class="default"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-										<?php
-										$Cards_id ='';
-										$filter1 = ['Consumer_id'=>$consumerid];
-										$query1 = new MongoDB\Driver\Query($filter1);
-										$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
-										foreach ($cursor1 as $document1)
-										{
-										$Cards_id = strval($document1->Cards_id);
-										}
-										$varnow = date("d-m-Y");
-										$today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
-										?>
-										<td class="default"><?php echo $varnow."<br>"; ?></td>
-										<td class="default"><?php
-										$varcounting = 0;
-										$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-										$optionA = ['sort' => ['_id' => 1]];
-										$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-										$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-										foreach ($cursorA as $documentA)
-										{
-											$AttendanceDate = ($documentA->AttendanceDate);
-											$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-											$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-											$varcounting = $varcounting +1;
-										if ($varcounting % 2)
-										{
-										echo date_format($AttendanceDate,"H:i:s")."<br>";
-										} 
-										else
-										{
-										}
-										}
-										?></td>
-										<td class="default"><?php
-										$varcounting = 0;
-										$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-										$optionA = ['sort' => ['_id' => 1]];
-										$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-										$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-										foreach ($cursorA as $documentA)
-										{
-											$AttendanceDate = ($documentA->AttendanceDate);
-											$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-											$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-											$varcounting = $varcounting +1;
-
-										if ($varcounting % 2)
-										{
-										} 
-										else
-										{
+												<td class="default"><?php echo $ConsumerIDNo; ?></td>
+												<td class="default"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+											<?php
+											$Cards_id ='';
+											$filter1 = ['Consumer_id'=>$consumerid];
+											$query1 = new MongoDB\Driver\Query($filter1);
+											$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
+											foreach ($cursor1 as $document1)
+											{
+											$Cards_id = strval($document1->Cards_id);
+											}
+											$varnow = date("d-m-Y");
+											$today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
+											?>
+											<td class="default"><?php echo $varnow."<br>"; ?></td>
+											<td class="default"><?php
+											$varcounting = 0;
+											$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+											$optionA = ['sort' => ['_id' => 1]];
+											$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+											$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+											foreach ($cursorA as $documentA)
+											{
+												$AttendanceDate = ($documentA->AttendanceDate);
+												$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+												$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+												$varcounting = $varcounting +1;
+											if ($varcounting % 2)
+											{
 											echo date_format($AttendanceDate,"H:i:s")."<br>";
+											} 
+											else
+											{
+											}
+											}
+											?></td>
+											<td class="default"><?php
+											$varcounting = 0;
+											$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+											$optionA = ['sort' => ['_id' => 1]];
+											$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+											$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
+											foreach ($cursorA as $documentA)
+											{
+												$AttendanceDate = ($documentA->AttendanceDate);
+												$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
+												$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+												$varcounting = $varcounting +1;
+
+											if ($varcounting % 2)
+											{
+											} 
+											else
+											{
+												echo date_format($AttendanceDate,"H:i:s")."<br>";
+											}
+											}
+											?></td>
+											</tr>
+											<?php
+											}
 										}
-										}
-										?></td>
-										</tr>
-										<?php
-										}
+									?>
+									</tbody>
+										</table>
+										<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=departmentinfo&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+									<?php
+									if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+									{
+
 									}
-								?>
-								</tbody>
-									</table>
-									<button type="button" style="font-size:15px width:25%" class="btn btn-primary"><a href="index.php?page=departmentdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
-								<?php
-								if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-								{
+									else
+									{
+									$attendance = ($_GET['attendance']);
+									?>
+									<script>
+										$(document).ready(function () {
+										$("#attendance").table2excel({
+											filename: "attendancedepartment.xls"
+										});
+										});
+										
+									</script>
+									<?php
+									}
+									?>
+									<script type="text/javascript">
+									var rows = document.querySelectorAll('tr');
 
-								}
-								else
-								{
-								$attendance = ($_GET['attendance']);
-								?>
-								<script>
-									$(document).ready(function () {
-									$("#attendance").table2excel({
-										filename: "attendancedepartment.xls"
-									});
-									});
-									
-								</script>
-								<?php
-								}
-								?>
-								<script type="text/javascript">
-								var rows = document.querySelectorAll('tr');
-
-								[...rows].forEach((r) => {
-								if (r.querySelectorAll('td:empty').length > 0) {
-								r.classList.add('highlight');
-								}
-								})
-								</script>
+									[...rows].forEach((r) => {
+									if (r.querySelectorAll('td:empty').length > 0) {
+									r.classList.add('highlight');
+									}
+									})
+									</script>
+									</div>
 								</div>
 							</div>
-
-						</div>
 						</div>
 					</div>
-					<div class="col-md-1 section-1-box wow fadeInUp"></div>
-					</div>
-					</div>
-					<!--end::Form-->
 				</div>
 				<!--end::Card-->
 			</div>
@@ -875,4 +782,14 @@ $_SESSION["title"] = "Profile";
 	<!--end::Container-->
 </div>
 <!--end::Entry-->
+<script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+  selector: '.departmentinfo',
+  menubar:false,
+  statusbar: false,
+  toolbar: false,
+  height:100,
+});
+</script>
 <?php include ('view/pages/modal-updatedepartmentremark.php'); ?>
