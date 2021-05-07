@@ -18,7 +18,7 @@
 
 		<!--end::Text-->
 	</div>
-	<span class="label label-success label-lg font-weight-bold label-inline">3 messages</span>
+	<!--<span class="label label-success label-lg font-weight-bold label-inline">3 messages</span>-->
 </div>
 
 <!--end::Header-->

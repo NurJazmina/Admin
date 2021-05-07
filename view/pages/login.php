@@ -1,17 +1,6 @@
-<?php include 'model/login.php'; ?>
+
 <!-- live chat start-->
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="688d97be-cab6-4cc7-9458-e78b5df8cba4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
-<!-- live chat end-->
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/default.css">
-    <title>Go N Getz - Consumer</title>
-  </head>
-  <body>
+
       <style>
    body {
         background-image: url('image/student.jpg');
@@ -147,7 +136,7 @@
   </div>
   
   <p class="sign" align="center">Sign in to<br />SmartSchool Go N Getz</p>
-  <form class="form1" name="frmlogin" method="post" action="#">
+  <form class="form1" name="frmlogin" method="post" action="index.php?page=trylogin">
     <input class="un " type="text" align="center" id="txtID" name="txtID" placeholder="Your ID">
     <input class="pass" type="password" align="center" id="txtPassword" name="txtPassword" placeholder="Password" >
     <button class="submit" align="center"  name="LoginFormSubmit">Sign in</button>
@@ -156,7 +145,3 @@
   </form>
 </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-  </body>
-</html>

@@ -65,7 +65,7 @@ $_SESSION["title"] = "Profile";
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="index.php?page=profile" class="navi-link py-4 active">
+                                <a href="index.php?page=profile" class="navi-link py-4">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -120,7 +120,7 @@ $_SESSION["title"] = "Profile";
                                 </a>
                             </div>
                             <?php
-                            if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+                            if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
                             {
                                 //filter by department::teacher
                                 $filter1 = ['StaffLevel'=>$_SESSION["loggeduser_StaffLevel"]];
@@ -153,7 +153,29 @@ $_SESSION["title"] = "Profile";
                                             </span>
                                             <span class="navi-text font-size-lg">Classroom Info</span>
                                             <span class="navi-label">
-                                                <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                            <?php 
+                                            $latestremark = 0;
+                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+                                            $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $latestremark = $latestremark + 1;
+                                            }
+                                            if($latestremark == 0)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                <span class="label label-light-primary label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
+                                                <?php
+                                            }
+                                            ?>
                                             </span>
                                         </a>
                                     </div>
@@ -161,7 +183,7 @@ $_SESSION["title"] = "Profile";
                                 }
                             }
                                 //filter by group::school
-                                if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+                                if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
                                 {
                                     ?>
                                         <div class="navi-item mb-2">
@@ -181,8 +203,30 @@ $_SESSION["title"] = "Profile";
                                                 </span>
                                                 <span class="navi-text">Department Info</span>
                                                 <span class="navi-label">
-                                                    <span class="label label-light-warning label-rounded font-weight-bold">5</span>
-                                                </span>
+                                            <?php 
+                                            $latestremark1 = 0;
+                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+                                            $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $latestremark1 = $latestremark1 + 1;
+                                            }
+                                            if($latestremark1 == 0)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
+                                                <?php
+                                            }
+                                            ?>
+                                            </span>
                                             </a>
                                         </div>
                                     <?php

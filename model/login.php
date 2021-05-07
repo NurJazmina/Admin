@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
   if (isset($_POST['LoginFormSubmit']))
   {
     $filter = ['ConsumerIDNo' => $_POST["txtID"]];
@@ -51,8 +55,9 @@
               $_SESSION["loggeduser_schoolsPhoneNo"] = ($document2->SchoolsPhoneNo);
               $_SESSION["loggeduser_schoolsAddress"] = ($document2->SchoolsAddress);
               $_SESSION["loggeduser_SchoolsEmail"] = ($document2->SchoolsEmail);
+              header ('location: index.php?page=dashboard&action=loginsuccesful');
             }
-            header ('location: index.php?page=dashboard&action=loginsuccesful');
+            
 
             $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["Staffdepartment"]);
             $filter3 = ['_id'=>$departmentid];

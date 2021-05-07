@@ -73,14 +73,36 @@
 									</i>
 									<span class="menu-text">List News</span>
 									<span class="menu-label">
-										<span class="label label-rounded label-primary">6</span>
+									<?php 
+									$latestnews = 0;
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+									foreach ($cursor as $document)
+									{
+										$latestnews = $latestnews + 1;
+									}
+									if($latestnews == 0)
+									{
+
+									}
+									else
+									{
+										?>
+										<span class="label label-rounded label-primary"><?php echo $latestnews; ?></span>
+										<?php
+									}
+									?>
 									</span>
 								</a>
 							</li>
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -129,14 +151,36 @@
 									</i>
 									<span class="menu-text">Upcoming Events</span>
 									<span class="menu-label">
-										<span class="label label-rounded label-primary">4</span>
+									<?php 
+									$latestevent = 0;
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
+									foreach ($cursor as $document)
+									{
+										$latestevent = $latestevent + 1;
+									}
+									if($latestevent == 0)
+									{
+
+									}
+									else
+									{
+										?>
+										<span class="label label-rounded label-primary"><?php echo $latestevent; ?></span>
+										<?php
+									}
+									?>
 									</span>
 								</a>
 							</li>
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -248,6 +292,31 @@
 										<span></span>
 									</i>
 									<span class="menu-text">School & public</span>
+									<span class="menu-label">
+									<?php 
+									$latestforum = 0;
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+									foreach ($cursor as $document)
+									{
+										$latestforum = $latestforum + 1;
+									}
+									if($latestforum == 0)
+									{
+
+									}
+									else
+									{
+										?>
+										<span class="label label-rounded label-primary"><?php echo $latestforum; ?></span>
+										<?php
+									}
+									?>
+									</span>
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -264,7 +333,7 @@
 				<?php
 				//filter by::Group::school
 				//available for staff/teacher
-				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 				{
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -405,7 +474,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' )
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -496,7 +565,7 @@
 				<?php
 				//filter by::Group::school
 				//available for staff/teacher
-				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 				{
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -592,7 +661,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -654,7 +723,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
