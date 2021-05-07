@@ -1,3 +1,13 @@
+<style>
+
+  .div1 {
+    width: 300px;
+    height: 150px;
+    padding: 60px;
+    border: 1px solid red;
+  }
+
+</style>
 <?php
 $_SESSION["title"] = "Event";
 ?>
@@ -154,6 +164,10 @@ $_SESSION["title"] = "Event";
                 <span><?php echo $schoolEventVenue; ?></span>
                 <div class="event-location">
                 <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$schoolEventLocation; ?></span>
+                </div>
+                <br>
+                <div class="div1">
+                  Embed Google Maps display
                 </div>
                 </div>
               </div>
