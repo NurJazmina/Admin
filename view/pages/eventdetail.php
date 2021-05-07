@@ -88,7 +88,43 @@ foreach ($cursor as $document)
       <div class="card-header">
         <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
       </div>
+      <div class="card-footer" style="color:#687a86; text-align:center">
+          <ul style="list-style:none;text-align:center;border-bottom: 3px solid #e7e9ee;margin:0;padding:0;">
+              <li>
+              <a >Comments 0 </a>
+              </li>
+          </ul>
+          <br>
+          <div class="row" style="margin:0;">
+              <h1 class="title">Coming Soon!</h1>
+              <h3 class="intro">
+                  We are working hard to give you a better experience.
+              </h3>
+              <p class="uc__description">
+                  We are working hard on our commenting features. We promise, it will be worth the wait!
+              </p>
+              <!--
+              <div class="uc__subscribe">
+                  <h3>Get Notified When We Go Live</h3>
+                  <div class="uc__form">
+                      <form action="#">
+                          <input type="email" class="email" placeholder="Email Address..">
+                          <input type="submit" class="submit" value="Get Notified">
+                      </form>
+                  </div>
+              </div>
+              -->
+              <div class="uc__art">
+                  <img style="width: 30%;" src="assets/media/svg/construction/under_construction.svg" alt="">
+              </div>
+          </div>
+          <br>
+      </div>
+      </div>
     </div>
     </div>
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
+</div>
+<div class="row">
+
 </div>

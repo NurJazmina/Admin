@@ -37,6 +37,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
 
 		<!--end::Fonts-->
 
