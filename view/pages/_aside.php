@@ -73,7 +73,29 @@
 									</i>
 									<span class="menu-text">List News</span>
 									<span class="menu-label">
-										<span class="label label-rounded label-primary">6</span>
+									<?php 
+									$latestnews = 0;
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+									foreach ($cursor as $document)
+									{
+										$latestnews = $latestnews + 1;
+									}
+									if($latestnews == 0)
+									{
+
+									}
+									else
+									{
+										?>
+										<span class="label label-rounded label-primary"><?php echo $latestnews; ?></span>
+										<?php
+									}
+									?>
 									</span>
 								</a>
 							</li>
@@ -128,8 +150,30 @@
 										<span></span>
 									</i>
 									<span class="menu-text">Upcoming Events</span>
-									<span class="menu-label">
-										<span class="label label-rounded label-primary">4</span>
+									<span class="menu-label"></span>
+									<?php 
+									$latestevent = 0;
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
+									foreach ($cursor as $document)
+									{
+										$latestevent = $latestevent + 1;
+									}
+									if($latestevent == 0)
+									{
+
+									}
+									else
+									{
+										?>
+										<span class="label label-rounded label-primary"><?php echo $latestevent; ?></span>
+										<?php
+									}
+									?>
 									</span>
 								</a>
 							</li>
@@ -248,6 +292,31 @@
 										<span></span>
 									</i>
 									<span class="menu-text">School & public</span>
+									<span class="menu-label">
+									<?php 
+									$latestforum = 0;
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+									foreach ($cursor as $document)
+									{
+										$latestforum = $latestforum + 1;
+									}
+									if($latestforum == 0)
+									{
+
+									}
+									else
+									{
+										?>
+										<span class="label label-rounded label-primary"><?php echo $latestforum; ?></span>
+										<?php
+									}
+									?>
+									</span>
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
