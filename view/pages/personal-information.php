@@ -154,7 +154,29 @@ $_SESSION["title"] = "Profile";
                                             </span>
                                             <span class="navi-text font-size-lg">Classroom Info</span>
                                             <span class="navi-label">
-                                                <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                            <?php 
+                                            $latestremark = 0;
+                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+                                            $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $latestremark = $latestremark + 1;
+                                            }
+                                            if($latestremark == 0)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                <span class="label label-light-primary label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
+                                                <?php
+                                            }
+                                            ?>
                                             </span>
                                         </a>
                                     </div>
@@ -182,8 +204,30 @@ $_SESSION["title"] = "Profile";
                                                 </span>
                                                 <span class="navi-text">Department Info</span>
                                                 <span class="navi-label">
-                                                    <span class="label label-light-warning label-rounded font-weight-bold">5</span>
-                                                </span>
+                                            <?php 
+                                            $latestremark1 = 0;
+                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+                                            $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $latestremark1 = $latestremark1 + 1;
+                                            }
+                                            if($latestremark1 == 0)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
+                                                <?php
+                                            }
+                                            ?>
+                                            </span>
                                             </a>
                                         </div>
                                     <?php

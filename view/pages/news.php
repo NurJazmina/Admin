@@ -57,7 +57,7 @@ $_SESSION["title"] = "News";
 <div><br><br><br><h1 style="color:#696969; text-align:center">News</h1></div><br>
 <div class="row">
 <?php
-  $filterA = ['SchoolNewsAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
+  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
@@ -130,7 +130,7 @@ $_SESSION["title"] = "News";
 
   <!--begin::public-->
   <?php
-  $filterA = ['SchoolNewsAccess'=>'PUBLIC'];
+  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsAccess'=>'PUBLIC'];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);

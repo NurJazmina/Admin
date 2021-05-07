@@ -26,7 +26,7 @@ include ('model/home.php');
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
-    padding: 0 4rem;
+    padding: 0 2rem;
     align-items: flex-start;
     justify-content: center;
 }
@@ -213,7 +213,14 @@ include ('model/home.php');
 							We are working hard to give you a better experience.
 						</h3>
 						<p class="uc__description">
-							We are working hard on our school library features. We promise, it will be worth the wait!
+							Features
+							<span class="svg-icon svg-icon-light svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Forward.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<path d="M12.6571817,10 L12.6571817,5.67013288 C12.6571817,5.25591932 12.3213953,4.92013288 11.9071817,4.92013288 C11.7234961,4.92013288 11.5461972,4.98754181 11.4089088,5.10957589 L4.25168161,11.4715556 C3.94209454,11.7467441 3.91420899,12.2207984 4.1893975,12.5303855 C4.19915701,12.541365 4.209237,12.5520553 4.21962441,12.5624427 L11.3768516,19.7196699 C11.6697448,20.0125631 12.1446186,20.0125631 12.4375118,19.7196699 C12.5781641,19.5790176 12.6571817,19.3882522 12.6571817,19.1893398 L12.6571817,15 C14.004369,14.9188289 16.83481,14.9157978 21.1485046,14.9909069 L21.1485051,14.9908794 C21.4245904,14.9956866 21.6522988,14.7757721 21.6571059,14.4996868 C21.6571564,14.4967857 21.6571817,14.4938842 21.6571817,14.4909827 L21.6572352,10.5050185 C21.6572352,10.2288465 21.4333536,10.0049649 21.1571817,10.0049649 C21.1555649,10.0049649 21.1539481,10.0049728 21.1523314,10.0049884 C16.0215539,10.0547574 13.1898373,10.0530946 12.6571817,10 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.828591, 12.429736) scale(-1, 1) translate(-12.828591, -12.429736) "/>
+								</g>
+							</svg><!--end::Svg Icon--></span>
+						    Library<br>We promise, it will be worth the wait!
 						</p>
 						<!--
 						<div class="uc__subscribe">
@@ -242,7 +249,14 @@ include ('model/home.php');
 							We are working hard to give you a better experience.
 						</h3>
 						<p class="uc__description">
-							We are working hard on our user activity features. We promise, it will be worth the wait!
+							Features
+							<span class="svg-icon svg-icon-light svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Forward.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<path d="M12.6571817,10 L12.6571817,5.67013288 C12.6571817,5.25591932 12.3213953,4.92013288 11.9071817,4.92013288 C11.7234961,4.92013288 11.5461972,4.98754181 11.4089088,5.10957589 L4.25168161,11.4715556 C3.94209454,11.7467441 3.91420899,12.2207984 4.1893975,12.5303855 C4.19915701,12.541365 4.209237,12.5520553 4.21962441,12.5624427 L11.3768516,19.7196699 C11.6697448,20.0125631 12.1446186,20.0125631 12.4375118,19.7196699 C12.5781641,19.5790176 12.6571817,19.3882522 12.6571817,19.1893398 L12.6571817,15 C14.004369,14.9188289 16.83481,14.9157978 21.1485046,14.9909069 L21.1485051,14.9908794 C21.4245904,14.9956866 21.6522988,14.7757721 21.6571059,14.4996868 C21.6571564,14.4967857 21.6571817,14.4938842 21.6571817,14.4909827 L21.6572352,10.5050185 C21.6572352,10.2288465 21.4333536,10.0049649 21.1571817,10.0049649 C21.1555649,10.0049649 21.1539481,10.0049728 21.1523314,10.0049884 C16.0215539,10.0547574 13.1898373,10.0530946 12.6571817,10 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.828591, 12.429736) scale(-1, 1) translate(-12.828591, -12.429736) "/>
+								</g>
+							</svg><!--end::Svg Icon--></span>
+							User Activity<br>We promise, it will be worth the wait!
 						</p>
 						<!--
 						<div class="uc__subscribe">
@@ -264,7 +278,346 @@ include ('model/home.php');
 		</div>
 	</div>
 	<div class="col">
-		<!--begin::Base Table Widget 10-->
+	<div class="card card-custom gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-7">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">Upcoming Events</span>
+					<span class="menu-label">
+					<?php 
+						function time_elapsed($date){
+							$bit = array(
+								//' year'      => $date  / 31556926 % 12,
+								//' week'      => $date  / 604800 % 52,
+								' day'       => $date  / 86400 % 7,
+								' hour'      => $date  / 3600 % 24,
+								//' minute'    => $date  / 60 % 60,
+								//' second'    => $date  % 60
+								);
+							foreach($bit as $k => $v){
+								if($v > 1)$ret[] = $v . $k . 's';
+								if($v == 1)$ret[] = $v . $k;
+								}
+							array_splice($ret, count($ret)-1, 0, 'and');
+							$ret[] = '';
+						
+							return join(' ', $ret);
+					}
+					$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+					$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+					$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
+					$option = ['sort' => ['_id' => 1]];
+					$query = new MongoDB\Driver\Query($filter,$option);
+					$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
+					foreach ($cursor as $document)
+					{
+						$eventid = ($document->_id);
+						$eventid = new \MongoDB\BSON\ObjectId($eventid);
+					}
+					$filter1 = ['_id'=>$eventid];
+					$query1 = new MongoDB\Driver\Query($filter1);
+					$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query1);
+					foreach ($cursor1 as $document1)
+					{
+						$SchoolEventDateStart = ($document1->SchoolEventDateStart);
+
+						$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
+						$datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+						$dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+						$date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+					
+						$nowtime = time();
+						$time = strval($date);
+					}
+					?>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
+					<span class="text-primary"><?php echo " ".time_elapsed($time-$nowtime)." \n";  ?></span></span>
+					</span>
+				</h3>
+				<div class="card-toolbar">
+					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_3"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_4">Public</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body pt-1">
+				<div class="tab-content mt-5" id="myTabTables10">
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade" id="kt_tab_pane_10_3" role="tabpanel" aria-labelledby="kt_tab_pane_10_3">
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th class="p-0 w-50px"></th>
+										<th class="p-0 w-100 min-w-100px"></th>
+										<th class="p-0"></th>
+										<th class="p-0 min-w-130px w-100"></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+								$filter2 = ['_id' => $groupid];
+								$query2 = new MongoDB\Driver\Query($filter2);
+								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
+								foreach ($cursor2 as $document2)
+								{
+									$ConsumerGroupName = strval($document2->ConsumerGroupName);
+								}
+								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000); 
+
+								$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
+								$optionA = ['limit'=>5,'sort' => ['_id' => -1]];
+								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
+								foreach ($cursorA as $documentA)
+								{
+									$eventid = strval($documentA->_id);
+									$SchoolEventStaff_id = ($documentA->SchoolEventStaff_id);
+									$schoolEventTitle = ($documentA->schoolEventTitle);
+									$schoolEventVenue = ($documentA->schoolEventVenue);
+									$schoolEventLocation = ($documentA->schoolEventLocation);
+									$SchoolEventDateStart = ($documentA->SchoolEventDateStart);
+									$SchoolEventDateEnd = ($documentA->SchoolEventDateEnd);
+									$SchoolEventStatus = ($documentA->SchoolEventStatus);
+								
+									$utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
+									$datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									$utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateEnd));
+									$datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								
+									$id = new \MongoDB\BSON\ObjectId($SchoolEventStaff_id);
+									$filter1 = ['_id' => $id];
+									$query1 = new MongoDB\Driver\Query($filter1);
+									$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+									foreach ($cursor1 as $document1)
+									{
+										$consumerid = strval($document1->_id);
+										$ConsumerFName = ($document1->ConsumerFName);
+										$ConsumerLName = ($document1->ConsumerLName);
+										$filter2 = ['ConsumerID'=>$consumerid];
+										$query2 = new MongoDB\Driver\Query($filter2);
+										$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+										foreach ($cursor2 as $document2)
+										{
+											$Staffdepartment = ($document2->Staffdepartment);
+											$departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+								
+											$filter3 = ['_id'=>$departmentid];
+											$query3 = new MongoDB\Driver\Query($filter3);
+											$cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+											foreach ($cursor3 as $document3)
+											{
+												$DepartmentName = ($document3->DepartmentName);
+											}
+										}
+									}
+									?>
+								<tbody>
+									<tr>
+										<td class="pl-0 py-5">
+											<div class="symbol symbol-45 symbol-light-info mr-2">
+												<span class="symbol-label">
+													<span class="svg-icon svg-icon-2x svg-icon-info">
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Color-profile.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<rect x="0" y="0" width="24" height="24" />
+																<path d="M12,10.9996338 C12.8356605,10.3719448 13.8743941,10 15,10 C17.7614237,10 20,12.2385763 20,15 C20,17.7614237 17.7614237,20 15,20 C13.8743941,20 12.8356605,19.6280552 12,19.0003662 C11.1643395,19.6280552 10.1256059,20 9,20 C6.23857625,20 4,17.7614237 4,15 C4,12.2385763 6.23857625,10 9,10 C10.1256059,10 11.1643395,10.3719448 12,10.9996338 Z M13.3336047,12.504354 C13.757474,13.2388026 14,14.0910788 14,15 C14,15.9088933 13.7574889,16.761145 13.3336438,17.4955783 C13.8188886,17.8206693 14.3938466,18 15,18 C16.6568542,18 18,16.6568542 18,15 C18,13.3431458 16.6568542,12 15,12 C14.3930587,12 13.8175971,12.18044 13.3336047,12.504354 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+																<circle fill="#000000" cx="12" cy="9" r="5" />
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+												</span>
+											</div>
+										</td>
+										<td class="pl-0">
+											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $schoolEventTitle; ?></a>
+											<span class="text-muted font-weight-bold d-block"><?php echo " By ".$ConsumerFName;?></span>
+										</td>
+										<td></td>
+										<td class="text-left">
+											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo date_format($datetimeStart,"d M, H:i")." "; ?></span>
+											<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+										</td>
+										<td class="text-right pr-0">
+											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" target="_blank" class="btn btn-icon btn-light btn-sm">
+												<span class="svg-icon svg-icon-md svg-icon-success">
+													<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<polygon points="0 0 24 0 24 24 0 24" />
+															<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
+															<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+								<?php
+								}
+								?>
+								<!--end::Tbody-->
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more Event</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Tap pane-->
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade show active" id="kt_tab_pane_10_4" role="tabpanel" aria-labelledby="kt_tab_pane_10_4">
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th class="p-0 w-50px"></th>
+										<th class="p-0 w-100 min-w-100px"></th>
+										<th class="p-0"></th>
+										<th class="p-0 min-w-130px w-100"></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+								$filter2 = ['_id' => $groupid];
+								$query2 = new MongoDB\Driver\Query($filter2);
+								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
+								foreach ($cursor2 as $document2)
+								{
+									$ConsumerGroupName = strval($document2->ConsumerGroupName);
+								}
+								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000); 
+								
+								$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>'PUBLIC'];
+								$optionA = ['limit'=>5,'sort' => ['_id' => -1]];
+								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
+								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
+								foreach ($cursorA as $documentA)
+								{
+									$eventid = strval($documentA->_id);
+									$SchoolEventStaff_id = ($documentA->SchoolEventStaff_id);
+									$schoolEventTitle = ($documentA->schoolEventTitle);
+									$schoolEventVenue = ($documentA->schoolEventVenue);
+									$schoolEventLocation = ($documentA->schoolEventLocation);
+									$SchoolEventDateStart = ($documentA->SchoolEventDateStart);
+									$SchoolEventDateEnd = ($documentA->SchoolEventDateEnd);
+									$SchoolEventStatus = ($documentA->SchoolEventStatus);
+								
+									$utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
+									$datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									$utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateEnd));
+									$datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								
+									$id = new \MongoDB\BSON\ObjectId($SchoolEventStaff_id);
+									$filter1 = ['_id' => $id];
+									$query1 = new MongoDB\Driver\Query($filter1);
+									$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+									foreach ($cursor1 as $document1)
+									{
+										$consumerid = strval($document1->_id);
+										$ConsumerFName = ($document1->ConsumerFName);
+										$ConsumerLName = ($document1->ConsumerLName);
+										$filter2 = ['ConsumerID'=>$consumerid];
+										$query2 = new MongoDB\Driver\Query($filter2);
+										$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
+										foreach ($cursor2 as $document2)
+										{
+											$Staffdepartment = ($document2->Staffdepartment);
+											$departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+								
+											$filter3 = ['_id'=>$departmentid];
+											$query3 = new MongoDB\Driver\Query($filter3);
+											$cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+											foreach ($cursor3 as $document3)
+											{
+												$DepartmentName = ($document3->DepartmentName);
+											}
+										}
+									}
+									?>
+								<tbody>
+									<tr>
+										<td class="pl-0 py-5">
+										<div class="symbol symbol-45 symbol-light-warning mr-2">
+											<span class="symbol-label">
+												<span class="svg-icon svg-icon-2x svg-icon-warning">
+													<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<rect x="0" y="0" width="24" height="24"></rect>
+															<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
+															<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+											</span>
+										</div>
+										</td>
+										<td class="pl-0">
+											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $schoolEventTitle; ?></a>
+											<span class="text-muted font-weight-bold d-block"><?php echo " By ".$ConsumerFName;?></span>
+										</td>
+										<td></td>
+										<td class="text-left">
+											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo date_format($datetimeStart,"d M, H:i")." "; ?></span>
+											<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+										</td>
+										<td class="text-right pr-0">
+											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="btn btn-icon btn-light btn-sm">
+												<span class="svg-icon svg-icon-md svg-icon-success">
+													<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<polygon points="0 0 24 0 24 24 0 24" />
+															<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
+															<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+								<?php
+								}
+								?>
+								<!--end::Tbody-->
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more Event</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Tap pane-->
+				</div>
+			</div>
+			<!--end::Body-->
+		</div>
 		<div class="card card-custom gutter-b">
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
@@ -482,295 +835,6 @@ include ('model/home.php');
 							</table>
 							<footer>
 								<div class="text-center"><a href="index.php?page=news" class="btn btn-success">See more News</a></div><br><br>
-							</footer>
-						</div>
-						<!--end::Table-->
-					</div>
-					<!--end::Tap pane-->
-				</div>
-			</div>
-			<!--end::Body-->
-		</div>
-		<!--end::Base Table Widget 10-->
-		<!--begin::Base Table Widget 10-->
-		<div class="card card-custom gutter-b">
-			<!--begin::Header-->
-			<div class="card-header border-0 pt-7">
-				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Upcoming Events</span>
-					<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
-					<span class="text-primary">9 days</span></span>
-				</h3>
-				<div class="card-toolbar">
-					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_3"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_4">Public</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!--end::Header-->
-			<!--begin::Body-->
-			<div class="card-body pt-1">
-				<div class="tab-content mt-5" id="myTabTables10">
-					<!--begin::Tap pane-->
-					<div class="tab-pane fade" id="kt_tab_pane_10_3" role="tabpanel" aria-labelledby="kt_tab_pane_10_3">
-						<!--begin::Table-->
-						<div>
-							<table class="table table-borderless table-vertical-center">
-								<!--begin::Thead-->
-								<thead>
-									<tr>
-										<th class="p-0 w-50px"></th>
-										<th class="p-0 w-100 min-w-100px"></th>
-										<th class="p-0"></th>
-										<th class="p-0 min-w-130px w-100"></th>
-									</tr>
-								</thead>
-								<!--end::Thead-->
-								<!--begin::Tbody-->
-								<?php
-								$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-								$filter2 = ['_id' => $groupid];
-								$query2 = new MongoDB\Driver\Query($filter2);
-								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
-								foreach ($cursor2 as $document2)
-								{
-									$ConsumerGroupName = strval($document2->ConsumerGroupName);
-								}
-								
-								$filterA = ['SchoolEventAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
-								$optionA = ['limit'=>5,'sort' => ['_id' => -1]];
-								$queryA = new MongoDB\Driver\Query($filterA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
-								foreach ($cursorA as $documentA)
-								{
-									$eventid = strval($documentA->_id);
-									$SchoolEventStaff_id = ($documentA->SchoolEventStaff_id);
-									$schoolEventTitle = ($documentA->schoolEventTitle);
-									$schoolEventVenue = ($documentA->schoolEventVenue);
-									$schoolEventLocation = ($documentA->schoolEventLocation);
-									$SchoolEventDateStart = ($documentA->SchoolEventDateStart);
-									$SchoolEventDateEnd = ($documentA->SchoolEventDateEnd);
-									$SchoolEventStatus = ($documentA->SchoolEventStatus);
-								
-									$utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
-									$datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-									$utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateEnd));
-									$datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								
-									$id = new \MongoDB\BSON\ObjectId($SchoolEventStaff_id);
-									$filter1 = ['_id' => $id];
-									$query1 = new MongoDB\Driver\Query($filter1);
-									$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-									foreach ($cursor1 as $document1)
-									{
-										$consumerid = strval($document1->_id);
-										$ConsumerFName = ($document1->ConsumerFName);
-										$ConsumerLName = ($document1->ConsumerLName);
-										$filter2 = ['ConsumerID'=>$consumerid];
-										$query2 = new MongoDB\Driver\Query($filter2);
-										$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-										foreach ($cursor2 as $document2)
-										{
-											$Staffdepartment = ($document2->Staffdepartment);
-											$departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-								
-											$filter3 = ['_id'=>$departmentid];
-											$query3 = new MongoDB\Driver\Query($filter3);
-											$cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-											foreach ($cursor3 as $document3)
-											{
-												$DepartmentName = ($document3->DepartmentName);
-											}
-										}
-									}
-									?>
-								<tbody>
-									<tr>
-										<td class="pl-0 py-5">
-											<div class="symbol symbol-45 symbol-light-info mr-2">
-												<span class="symbol-label">
-													<span class="svg-icon svg-icon-2x svg-icon-info">
-														<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Color-profile.svg-->
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24" />
-																<path d="M12,10.9996338 C12.8356605,10.3719448 13.8743941,10 15,10 C17.7614237,10 20,12.2385763 20,15 C20,17.7614237 17.7614237,20 15,20 C13.8743941,20 12.8356605,19.6280552 12,19.0003662 C11.1643395,19.6280552 10.1256059,20 9,20 C6.23857625,20 4,17.7614237 4,15 C4,12.2385763 6.23857625,10 9,10 C10.1256059,10 11.1643395,10.3719448 12,10.9996338 Z M13.3336047,12.504354 C13.757474,13.2388026 14,14.0910788 14,15 C14,15.9088933 13.7574889,16.761145 13.3336438,17.4955783 C13.8188886,17.8206693 14.3938466,18 15,18 C16.6568542,18 18,16.6568542 18,15 C18,13.3431458 16.6568542,12 15,12 C14.3930587,12 13.8175971,12.18044 13.3336047,12.504354 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-																<circle fill="#000000" cx="12" cy="9" r="5" />
-															</g>
-														</svg>
-														<!--end::Svg Icon-->
-													</span>
-												</span>
-											</div>
-										</td>
-										<td class="pl-0">
-											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $schoolEventTitle; ?></a>
-											<span class="text-muted font-weight-bold d-block"><?php echo " By ".$ConsumerFName;?></span>
-										</td>
-										<td></td>
-										<td class="text-left">
-											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo date_format($datetimeStart,"d M, H:i")." "; ?></span>
-											<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
-										</td>
-										<td class="text-right pr-0">
-											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" target="_blank" class="btn btn-icon btn-light btn-sm">
-												<span class="svg-icon svg-icon-md svg-icon-success">
-													<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
-													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-															<polygon points="0 0 24 0 24 24 0 24" />
-															<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
-															<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
-														</g>
-													</svg>
-													<!--end::Svg Icon-->
-												</span>
-											</a>
-										</td>
-									</tr>
-								</tbody>
-								<?php
-								}
-								?>
-								<!--end::Tbody-->
-							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more Event</a></div><br><br>
-							</footer>
-						</div>
-						<!--end::Table-->
-					</div>
-					<!--end::Tap pane-->
-					<!--begin::Tap pane-->
-					<div class="tab-pane fade show active" id="kt_tab_pane_10_4" role="tabpanel" aria-labelledby="kt_tab_pane_10_4">
-						<!--begin::Table-->
-						<div>
-							<table class="table table-borderless table-vertical-center">
-								<!--begin::Thead-->
-								<thead>
-									<tr>
-										<th class="p-0 w-50px"></th>
-										<th class="p-0 w-100 min-w-100px"></th>
-										<th class="p-0"></th>
-										<th class="p-0 min-w-130px w-100"></th>
-									</tr>
-								</thead>
-								<!--end::Thead-->
-								<!--begin::Tbody-->
-								<?php
-								$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-								$filter2 = ['_id' => $groupid];
-								$query2 = new MongoDB\Driver\Query($filter2);
-								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
-								foreach ($cursor2 as $document2)
-								{
-									$ConsumerGroupName = strval($document2->ConsumerGroupName);
-								}
-								
-								$filterA = ['SchoolEventAccess'=>'PUBLIC'];
-								$optionA = ['limit'=>5,'sort' => ['_id' => -1]];
-								$queryA = new MongoDB\Driver\Query($filterA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
-								foreach ($cursorA as $documentA)
-								{
-									$eventid = strval($documentA->_id);
-									$SchoolEventStaff_id = ($documentA->SchoolEventStaff_id);
-									$schoolEventTitle = ($documentA->schoolEventTitle);
-									$schoolEventVenue = ($documentA->schoolEventVenue);
-									$schoolEventLocation = ($documentA->schoolEventLocation);
-									$SchoolEventDateStart = ($documentA->SchoolEventDateStart);
-									$SchoolEventDateEnd = ($documentA->SchoolEventDateEnd);
-									$SchoolEventStatus = ($documentA->SchoolEventStatus);
-								
-									$utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
-									$datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-									$utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateEnd));
-									$datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								
-									$id = new \MongoDB\BSON\ObjectId($SchoolEventStaff_id);
-									$filter1 = ['_id' => $id];
-									$query1 = new MongoDB\Driver\Query($filter1);
-									$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-									foreach ($cursor1 as $document1)
-									{
-										$consumerid = strval($document1->_id);
-										$ConsumerFName = ($document1->ConsumerFName);
-										$ConsumerLName = ($document1->ConsumerLName);
-										$filter2 = ['ConsumerID'=>$consumerid];
-										$query2 = new MongoDB\Driver\Query($filter2);
-										$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-										foreach ($cursor2 as $document2)
-										{
-											$Staffdepartment = ($document2->Staffdepartment);
-											$departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-								
-											$filter3 = ['_id'=>$departmentid];
-											$query3 = new MongoDB\Driver\Query($filter3);
-											$cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-											foreach ($cursor3 as $document3)
-											{
-												$DepartmentName = ($document3->DepartmentName);
-											}
-										}
-									}
-									?>
-								<tbody>
-									<tr>
-										<td class="pl-0 py-5">
-										<div class="symbol symbol-45 symbol-light-warning mr-2">
-											<span class="symbol-label">
-												<span class="svg-icon svg-icon-2x svg-icon-warning">
-													<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
-													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-															<rect x="0" y="0" width="24" height="24"></rect>
-															<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
-															<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
-														</g>
-													</svg>
-													<!--end::Svg Icon-->
-												</span>
-											</span>
-										</div>
-										</td>
-										<td class="pl-0">
-											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $schoolEventTitle; ?></a>
-											<span class="text-muted font-weight-bold d-block"><?php echo " By ".$ConsumerFName;?></span>
-										</td>
-										<td></td>
-										<td class="text-left">
-											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo date_format($datetimeStart,"d M, H:i")." "; ?></span>
-											<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
-										</td>
-										<td class="text-right pr-0">
-											<a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="btn btn-icon btn-light btn-sm">
-												<span class="svg-icon svg-icon-md svg-icon-success">
-													<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
-													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-															<polygon points="0 0 24 0 24 24 0 24" />
-															<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
-															<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
-														</g>
-													</svg>
-													<!--end::Svg Icon-->
-												</span>
-											</a>
-										</td>
-									</tr>
-								</tbody>
-								<?php
-								}
-								?>
-								<!--end::Tbody-->
-							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more Event</a></div><br><br>
 							</footer>
 						</div>
 						<!--end::Table-->

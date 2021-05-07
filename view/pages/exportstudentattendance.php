@@ -20,14 +20,6 @@ background:white;
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-
-					<?php
-					$uri = $_SERVER['REQUEST_URI'];
-					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-					$query = $_SERVER['QUERY_STRING'];
-					//echo $query; // Outputs: Query String
-
-					?> 
 					<h5 class="text-dark font-weight-bold my-1 mr-5">Student</h5>
 					<!--end::Page Title-->
 				</div>

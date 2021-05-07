@@ -9,7 +9,10 @@ $_SESSION["title"] = "Event";
   <div class="col-md-0 section-1-box wow fadeInUp"></div>
   <div class="col-md-12 section-1-box wow fadeInUp">
   <?php
-  $filterA = ['SchoolEventAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
+  $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+  $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
@@ -85,7 +88,10 @@ $_SESSION["title"] = "Event";
 </div><br>
   <?php
   }
-  $filterA = ['SchoolEventAccess'=>'PUBLIC'];
+  $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  
+  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>'PUBLIC'];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);

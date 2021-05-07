@@ -28,7 +28,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-secondary" name="UpdateTimetableFormSubmit">Confirm</button>
+          <button type="submit" class="btn btn-success" name="UpdateTimetableFormSubmit">Confirm</button>
         </div>
     </div>
   </div>
