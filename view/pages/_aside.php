@@ -102,7 +102,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -150,7 +150,7 @@
 										<span></span>
 									</i>
 									<span class="menu-text">Upcoming Events</span>
-									<span class="menu-label"></span>
+									<span class="menu-label">
 									<?php 
 									$latestevent = 0;
 									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
@@ -180,7 +180,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -333,7 +333,7 @@
 				<?php
 				//filter by::Group::school
 				//available for staff/teacher
-				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 				{
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -474,7 +474,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' )
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -565,7 +565,7 @@
 				<?php
 				//filter by::Group::school
 				//available for staff/teacher
-				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 				{
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -661,7 +661,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -723,7 +723,7 @@
 							<?php
 							//filter by::Group::school
 							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">

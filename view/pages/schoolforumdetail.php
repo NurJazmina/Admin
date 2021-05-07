@@ -60,7 +60,7 @@ include ('model/schoolforum.php');
         </div><br><br>
         <?php
         $id = new \MongoDB\BSON\ObjectId($_GET['id']);
-        if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
+        if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187' || $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
         {
             function time_elapsed($date){
                 $bit = array(

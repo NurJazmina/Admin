@@ -60,8 +60,6 @@ include ('model/schoolforum.php');
         </div><br><br>
         <?php
         $id = new \MongoDB\BSON\ObjectId($_GET['id']);
-        if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187')
-        {
             function time_elapsed($date){
                 $bit = array(
                     //' year'      => $date  / 31556926 % 12,
@@ -332,7 +330,6 @@ include ('model/schoolforum.php');
             <?php
                 }
             }
-        }
         ?>
     </div>
 </div>

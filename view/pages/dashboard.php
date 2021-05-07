@@ -298,7 +298,7 @@ include ('model/home.php');
 								if($v > 1)$ret[] = $v . $k . 's';
 								if($v == 1)$ret[] = $v . $k;
 								}
-							array_splice($ret, count($ret)-1, 0, 'and');
+							array_splice($ret, count($ret)-1, 0, '');
 							$ret[] = '';
 						
 							return join(' ', $ret);

@@ -120,7 +120,7 @@ $_SESSION["title"] = "Profile";
                                 </a>
                             </div>
                             <?php
-                            if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+                            if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
                             {
                                 //filter by department::teacher
                                 $filter1 = ['StaffLevel'=>$_SESSION["loggeduser_StaffLevel"]];
@@ -183,7 +183,7 @@ $_SESSION["title"] = "Profile";
                                 }
                             }
                                 //filter by group::school
-                                if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187')
+                                if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
                                 {
                                     ?>
                                         <div class="navi-item mb-2">

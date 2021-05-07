@@ -47,9 +47,9 @@
                                 "exportstaffattendance",
                                 "exportstudentattendance",
                                 "exportclassattendance",
-                                "testing",
                                 "mail",
                                 "mira",
+                                //"testing",
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -102,8 +102,7 @@
                                 //"exportstudentattendance",
                                 //"exportclassattendance",
                                 //"testing",
-                                "mail",
-                                "mira"
+                                "mail"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
@@ -112,7 +111,7 @@
         <div class="row" style="height:100vh;">
             <div class="col-sm-12 col-lg-6" style="background-image:url(images/loginpagebg.jpg); background-repeat:no-repeat; background-size:cover;">
             </div>
-                <?php include 'view/login.php'; ?>
+                <?php include 'view/pages/login.php'; ?>
         </div>
     <?php
     } 
@@ -126,18 +125,21 @@
         {
             if (file_exists('view/pages/'. $_GET['page'] . ".php")) 
             {
-                if($_SESSION["loggeduser_StaffLevel"]=="1")
+                if($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4f1697728c027c01f188' && $_SESSION["loggeduser_StaffLevel"]=="1")//filter by group::GonGetz
                 {
-                    if (in_array($_GET['page'], $staffallowedaccess)){
+                    include 'view/pages/'. $_GET['page'] . ".php";
+                }
+                elseif ($_SESSION["loggeduser_StaffLevel"]=="0")//filter by group::School::Teacher
+                {
+                    if (in_array($_GET['page'], $teacherallowedaccess)){
                         include 'view/pages/'. $_GET['page'] . ".php";
                     } else {
                         include 'view/pages/unauthorized.php';
                     }
-                    
                 }
-                elseif ($_SESSION["loggeduser_StaffLevel"]=="0")
+                elseif ($_SESSION["loggeduser_StaffLevel"]=="1")//filter by group::School::Staff
                 {
-                    if (in_array($_GET['page'], $teacherallowedaccess)){
+                    if (in_array($_GET['page'], $staffallowedaccess)){
                         include 'view/pages/'. $_GET['page'] . ".php";
                     } else {
                         include 'view/pages/unauthorized.php';
