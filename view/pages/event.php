@@ -1,10 +1,11 @@
 <style>
 
   .div1 {
+    
     width: 300px;
     height: 150px;
     padding: 60px;
-    border: 1px solid red;
+    border: 2px solid black;
   }
 
 </style>
@@ -167,7 +168,7 @@ $_SESSION["title"] = "Event";
                 </div>
                 <br>
                 <div class="div1">
-                  Embed Google Maps display
+                  Coming soon.
                 </div>
                 </div>
               </div>
