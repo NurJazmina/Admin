@@ -21,7 +21,6 @@ function time_elapsed($date){
 
 	return join(' ', $ret);
 }
-
 ?>
 <style>
 .construction {

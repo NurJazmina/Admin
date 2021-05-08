@@ -56,7 +56,7 @@ $_SESSION["title"] = "News";
 <div><br><br><br><h1 style="color:#696969; text-align:center">News</h1></div><br>
 <div class="row">
 <?php
-  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsAccess'=>$_SESSION["loggeduser_StaffLevel"]];
+  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsAccess'=>$_SESSION["loggeduser_DepartmentName"]];
   $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);

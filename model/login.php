@@ -77,6 +77,15 @@ error_reporting(E_ALL);
             $_SESSION["loggeduser_ConsumerID"] = strval($document1->ConsumerID);
             $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);
             $_SESSION["loggeduser_Staffdepartment"] = strval($document1->Staffdepartment);
+
+            if ($_SESSION["loggeduser_StaffLevel"] == '1')
+            {
+              $_SESSION["loggeduser_Staff"] = "STAFF";
+            }
+            else
+            {
+              $_SESSION["loggeduser_Staff"] = "TEACHER";
+            }
        }
        else
        {
