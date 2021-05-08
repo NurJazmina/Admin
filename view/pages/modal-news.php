@@ -20,8 +20,8 @@ $_SESSION["title"] = "News";
                 <div class="col-lg-12">
                 <select class="form-control" id="staticStaffNo" style="height: auto;" name="access" required>
                   <option value="PUBLIC">PUBLIC</option>
-                  <option value="SCHOOL1">STAFFS</option>
-                  <option value="SCHOOL0">TEACHERS</option>
+                  <option value="1">STAFFS</option>
+                  <option value="0">TEACHERS</option>
                   <option value="VIP">PARENTS</option>
                 </select>
                 </div>

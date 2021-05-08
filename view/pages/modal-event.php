@@ -109,8 +109,8 @@ $_SESSION["title"] = "Event";
                 <div class="col-lg-6">
                 <select class="form-control" id="staticStaffNo" name="txtaccess" style="height: auto;" required>
                   <option value="PUBLIC">PUBLIC</option>
-                  <option value="SCHOOL1">STAFFS</option>
-                  <option value="SCHOOL0">TEACHERS</option>
+                  <option value="1">STAFFS</option>
+                  <option value="0">TEACHERS</option>
                   <option value="VIP">PARENTS</option>
                 </select>
                 </div>
