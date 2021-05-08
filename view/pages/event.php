@@ -10,8 +10,8 @@
 </style>
 <?php
 $_SESSION["title"] = "Event";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <?php include ('model/event.php'); ?>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Upcoming Event</h1></div><br>
@@ -22,8 +22,8 @@ $_SESSION["title"] = "Event";
   $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
   $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>$ConsumerGroupName.$_SESSION["loggeduser_StaffLevel"]];
-  $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
+  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>$_SESSION["loggeduser_StaffLevel"]];
+  $optionA = ['limit'=>100,'sort' => ['SchoolEventDateStart' => 1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
   foreach ($cursorA as $documentA)
@@ -102,7 +102,7 @@ $_SESSION["title"] = "Event";
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   
   $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'SchoolEventAccess'=>'PUBLIC'];
-  $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
+  $optionA = ['limit'=>100,'sort' => ['SchoolEventDateStart' => 1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
   foreach ($cursorA as $documentA)
