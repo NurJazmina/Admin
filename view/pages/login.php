@@ -1,6 +1,4 @@
-
 <!-- live chat start-->
-
       <style>
    body {
         background-image: url('image/student.jpg');
@@ -22,7 +20,7 @@
     }
     
     .sign {
-        padding-top: 40px;
+        padding-top: 25px;
         color: #8C55AA;
         font-family: 'Ubuntu', sans-serif;
         font-weight: bold;
@@ -50,7 +48,7 @@
     }
     
     form.form1 {
-        padding-top: 40px;
+        padding-top: 25px;
         font-size: 12px;
     }
     
@@ -128,11 +126,10 @@
       }
       
     }
-        
   </style>
 <div class="main">
   <div align="center">
-    <img src="image/logogongetz.png" width="150" height="149">
+    <img src="image/logogongetz.png" width="132" height="145" style="padding-top: 20px;">
   </div>
   
   <p class="sign" align="center">Sign in to<br />SmartSchool Go N Getz</p>
