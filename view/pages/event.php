@@ -86,6 +86,9 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <div class="event-location">
                 <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$schoolEventLocation; ?></span>
                 </div>
+                <div class="div1">
+                  Coming soon.
+                </div>
                 </div>
               </div>
             </div>
