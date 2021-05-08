@@ -1,9 +1,12 @@
 <style>
 
+.form-group.row {
+    
+}
+
 .help-tip{
-    position: absolute;
-    top: 18px;
-    right: 18px;
+
+    overflow: visible;
     text-align: center;
     background-color: #BCDBEA;
     border-radius: 50%;
@@ -35,7 +38,7 @@
     background-color: #1E2021;
     padding: 20px;
     width: 300px;
-    position: absolute;
+    
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     right: -4px;
@@ -45,21 +48,21 @@
 }
 
 .help-tip p:before{ /* The pointer of the tooltip */
-    position: absolute;
+
     content: '';
     width:0;
     height: 0;
     border:6px solid transparent;
     border-bottom-color:#1E2021;
-    right:10px;
-    top:-12px;
+    left:10px;
+   
 }
 
 .help-tip p:after{ /* Prevents the tooltip from being hidden */
     width:100%;
     height:40px;
     content:'';
-    position: absolute;
+  
     top:-40px;
     left:0;
 }
