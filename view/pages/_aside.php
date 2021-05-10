@@ -283,15 +283,15 @@
 						<ul class="menu-subnav">
 							<li class="menu-item menu-item-parent" aria-haspopup="true">
 								<span class="menu-link">
-									<span class="menu-text">Forum</span>
+									<span class="menu-text" disable>Forum</span>
 								</span>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=forums" class="menu-link menu-toggle">
+								<a href="" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
-									<span class="menu-text">School & public</span>
+									<span class="menu-text">Coming soon</span>
 									<span class="menu-label">
 									<?php 
 									$latestforum = 0;
@@ -320,11 +320,11 @@
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=modal-forums" class="menu-link menu-toggle">
+								<a href="" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
-									<span class="menu-text">Add Forum</span>
+									<span class="menu-text">Coming soon</span>
 								</a>
 							</li>
 						</ul>

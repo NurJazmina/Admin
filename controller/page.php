@@ -49,6 +49,7 @@
                                 "exportclassattendance",
                                 "mail",
                                 "mira",
+                                "login",
                                 //"testing",
                                );
 
@@ -126,11 +127,7 @@
         {
             if (file_exists('view/pages/'. $_GET['page'] . ".php")) 
             {
-                if($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4f1697728c027c01f188' && $_SESSION["loggeduser_StaffLevel"]=="1")//filter by group::GonGetz
-                {
-                    include 'view/pages/'. $_GET['page'] . ".php";
-                }
-                elseif ($_SESSION["loggeduser_StaffLevel"]=="0")//filter by group::School::Teacher
+                if ($_SESSION["loggeduser_StaffLevel"]=="0")//filter by group::School::Teacher
                 {
                     if (in_array($_GET['page'], $teacherallowedaccess)){
                         include 'view/pages/'. $_GET['page'] . ".php";

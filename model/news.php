@@ -11,12 +11,12 @@ if (isset($_POST['AddNews'])) {
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'school_id'=>$varschoolid,
-    'SchoolNewsStaff_id'=>$varstaffid,
-    'schoolNewsTitle'=>$vartitle,
-    'schoolNewsDetails'=>$vardetail,
-    'SchoolNewsDate'=>$SchoolNewsDate,
-    'SchoolNewsAccess'=>$varaccess,
-    'SchoolNewsStatus'=>'ACTIVE']);
+    'NewsStaff_id'=>$varstaffid,
+    'NewsTitle'=>$vartitle,
+    'NewsDetails'=>$vardetail,
+    'NewsAccess'=>$varaccess,
+    'NewsStatus'=>'ACTIVE',
+    'NewsDate'=>$SchoolNewsDate]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -50,12 +50,4 @@ if (isset($_POST['AddNews'])) {
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-}
-$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-$filter2 = ['_id' => $groupid];
-$query2 = new MongoDB\Driver\Query($filter2);
-$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
-foreach ($cursor2 as $document2)
-{
-    $ConsumerGroupName = strval($document2->ConsumerGroupName);
 }
