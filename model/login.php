@@ -76,35 +76,6 @@
               }
             }
             
-            if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL')
-            {
-              if($_SESSION["loggeduser_StaffLevel"] == '1')
-              {
-                $_SESSION["loggedusergroup_ACCESS"] = "SCHOOL";
-                $_SESSION["loggeduser_ACCESS"] = "STAFF";
-              }
-              elseif ($_SESSION["loggeduser_StaffLevel"] == '0')
-              {
-                $_SESSION["loggedusergroup_ACCESS"] = "SCHOOL";
-                $_SESSION["loggeduser_ACCESS"] = "TEACHER";
-              }
-            }
-            elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
-            {
-              $_SESSION["loggedusergroup_ACCESS"] = "GONGETZ";
-              $_SESSION["loggeduser_ACCESS"] = "STAFF";
-            }
-            // this function coming soon!
-            //elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'PARENT')
-            //{
-            //  $_SESSION["loggedusergroup_ACCESS"] = "PARENT";
-            // $_SESSION["loggeduser_ACCESS"] = "PARENT";
-            //}
-            //else
-            //{
-            //  $_SESSION["loggedusergroup_ACCESS"] = "STUDENT";
-            // $_SESSION["loggeduser_ACCESS"] = "STUDENT";
-            //}
             header ('location: index.php?page=dashboard&action=loginsuccesful');
        }
        else
