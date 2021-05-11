@@ -3,24 +3,24 @@ if (isset($_POST['AddNews'])) {
 
   $vartitle = $_POST['txttitle'];
   $varaccess = $_POST['txtaccess'];
-  $varschoolEventVenue = $_POST['txtschoolEventVenue'];
-  $varschoolEventLocation = $_POST['txtschoolEventLocation'];
+  $EventVenue = $_POST['txtschoolEventVenue'];
+  $EventLocation = $_POST['txtschoolEventLocation'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $varSchoolEventDateStart = $_POST['txtSchoolEventDateStart'];
-  $varSchoolEventDateEnd = $_POST['txtSchoolEventDateEnd'];
+  $EventDateStart = $_POST['txtSchoolEventDateStart'];
+  $EventDateEnd = $_POST['txtSchoolEventDateEnd'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'school_id'=>$varschoolid,
-    'SchoolEventStaff_id'=>$varstaffid,
-    'schoolEventTitle'=>$vartitle,
-    'schoolEventVenue'=>$varschoolEventVenue,
-    'schoolEventLocation'=>$varschoolEventLocation,
-    'SchoolEventDateStart'=>new MongoDB\BSON\UTCDateTime(new DateTime($varSchoolEventDateStart)),
-    'SchoolEventDateEnd'=>new MongoDB\BSON\UTCDateTime(new DateTime($varSchoolEventDateEnd)),
-    'SchoolEventAccess'=>$varaccess,
-    'SchoolEventStatus'=>'ACTIVE']);
+    'EventStaff_id'=>$varstaffid,
+    'EventTitle'=>$vartitle,
+    'EventVenue'=>$EventVenue,
+    'EventLocation'=>$EventLocation,
+    'EventDateStart'=>new MongoDB\BSON\UTCDateTime(new DateTime($EventDateStart)),
+    'EventDateEnd'=>new MongoDB\BSON\UTCDateTime(new DateTime($EventDateEnd)),
+    'EventAccess'=>$varaccess,
+    'EventStatus'=>'ACTIVE']);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
@@ -56,13 +56,3 @@ if (isset($_POST['AddNews'])) {
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
-
-$groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-$filter2 = ['_id' => $groupid];
-$query2 = new MongoDB\Driver\Query($filter2);
-$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup', $query2);
-foreach ($cursor2 as $document2)
-{
-    $ConsumerGroupName = strval($document2->ConsumerGroupName);
-}
-

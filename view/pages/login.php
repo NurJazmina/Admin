@@ -133,7 +133,7 @@
   </div>
   
   <p class="sign" align="center">Sign in to<br />SmartSchool Go N Getz</p>
-  <form class="form1" name="frmlogin" method="post" action="index.php?page=trylogin">
+  <form class="form1" name="frmlogin" method="post" action="">
     <input class="un " type="text" align="center" id="txtID" name="txtID" placeholder="Your ID">
     <input class="pass" type="password" align="center" id="txtPassword" name="txtPassword" placeholder="Password" >
     <button class="submit" align="center"  name="LoginFormSubmit">Sign in</button>
