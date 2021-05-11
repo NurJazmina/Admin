@@ -1,13 +1,11 @@
 <style>
-.button1 {
-    margin: 5px;
-}
 
-.tooltip {
-    position: relative;
-    display: inline-block;
+.nav-item.dropdown {
+    /* for Firefox */
+        -moz-appearance: none;
+    /* for Safari, Chrome, Opera */
+        -webkit-appearance: none;
 }
-
 
 </style>
 
@@ -53,12 +51,13 @@ $_SESSION["title"] = "Event";
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left">
-                <h5>GOOGLE MAPS LINK 
+                <h5>GOOGLE MAPS LINK
+                <div class="nav-item dropdown" style="float:right">
                 <img src="assets/media/svg/icons/Code/Question-circle.svg" height="22px">
-                <div class="nav-item dropdown">
+               
                 <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"></a>
-                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="index.php?page=schooledit" style="color:#076d79;">User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field</a></li>
                     </ul>
                 </div>
                 </h5>
