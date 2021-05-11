@@ -54,8 +54,13 @@ $_SESSION["title"] = "Event";
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left">
                 <h5>GOOGLE MAPS LINK 
-                <a href="#" class="button1" data-toggle="tooltip" title="User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field">
-                    <img src="assets/media/svg/icons/Code/Question-circle.svg" height="20px"></a>
+                <img src="assets/media/svg/icons/Code/Question-circle.svg" height="20px">
+                <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle show" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"></a>
+                    <ul class="dropdown-menu show" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="index.php?page=schooledit" style="color:#076d79;">User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field</a></li>
+                    </ul>
+                </div>
                 </h5>
             </label>
                 <div class="col-lg-3">
