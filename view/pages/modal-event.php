@@ -1,18 +1,7 @@
-<style>
-
-.nav-item.dropdown {
-    /* for Firefox */
-        -moz-appearance: none;
-    /* for Safari, Chrome, Opera */
-        -webkit-appearance: none;
-}
-
-</style>
-
 <?php
 $_SESSION["title"] = "Event";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form action="index.php?page=event" method="post" name="AddNews"><br><br>
     <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
@@ -22,9 +11,9 @@ $_SESSION["title"] = "Event";
         
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="staticStaffNo" name="txttitle"  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
-                </div>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="staticStaffNo" name="txttitle"  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
+            </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
