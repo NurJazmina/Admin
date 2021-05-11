@@ -2,7 +2,6 @@
 $_SESSION["title"] = "Dashboard";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/home.php'); 
-
 function time_elapsed($date){
 	$bit = array(
 		//' year'      => $date  / 31556926 % 12,
@@ -378,7 +377,7 @@ function time_elapsed($date){
 								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
 								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000); 
 
-								$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'EventAccess'=>$_SESSION["loggeduser_StaffLevel"]];
+								$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventDateStart' => ['$gte' => $from_date,'$lte' => $to_date],'EventAccess'=>$_SESSION["loggedusergroup_ACCESS"]];
 								$optionA = ['limit'=>5,'sort' => ['EventDateStart' => 1]];
 								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
 								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
@@ -686,7 +685,7 @@ function time_elapsed($date){
 						$newsid="";
 						if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 						{
-							$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_Staff"]];
+							$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggedusergroup_ACCESS"]];
 							$option = ['sort' => ['NewsDate' => -1]];
 							$query = new MongoDB\Driver\Query($filter,$option);
 							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
@@ -719,7 +718,7 @@ function time_elapsed($date){
 						}
 						else
 						{
-							$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ConsumerGroupName"]];
+							$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggedusergroup_ACCESS"]];
 							$option = ['sort' => ['NewsDate' => -1]];
 							$query = new MongoDB\Driver\Query($filter,$option);
 							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
@@ -767,7 +766,7 @@ function time_elapsed($date){
 								<?php
 								if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 								{
-									$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_Staff"]];
+									$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggedusergroup_ACCESS"]];
 									$optionA = ['limit'=>5,'sort' => ['NewsDate' => -1]];
 									$queryA = new MongoDB\Driver\Query($filterA);
 									$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
@@ -842,7 +841,7 @@ function time_elapsed($date){
 								}
 								else
 								{
-									$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ConsumerGroupName"]];
+									$filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggedusergroup_ACCESS"]];
 									$optionA = ['limit'=>5,'sort' => ['NewsDate' => -1]];
 									$queryA = new MongoDB\Driver\Query($filterA);
 									$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);

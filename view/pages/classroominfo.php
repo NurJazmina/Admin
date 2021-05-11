@@ -120,7 +120,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                                 </a>
                             </div>
                             <?php
-                            if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+                            if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL')
                             {
                                 //filter by department::teacher
                                 $filter1 = ['StaffLevel'=>$_SESSION["loggeduser_StaffLevel"]];
@@ -182,56 +182,55 @@ include 'view/partials/_subheader/subheader-v1.php';
                                     <?php
                                 }
                             }
-                                //filter by group::school
-                                if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
-                                {
-                                    ?>
-                                        <div class="navi-item mb-2">
-                                            <a href="index.php?page=departmentinfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                                <span class="navi-icon mr-2">
-                                                    <span class="svg-icon">
-                                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                                <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
-                                                                <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <!--end::Svg Icon-->
-                                                    </span>
-                                                </span>
-                                                <span class="navi-text">Department Info</span>
-                                                <span class="navi-label">
-                                            <?php 
-                                            $latestremark1 = 0;
-                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL')
+							{
+							?>
+							<div class="navi-item mb-2">
+								<a href="index.php?page=departmentinfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
+									<span class="navi-icon mr-2">
+										<span class="svg-icon">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
+													<path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
+												</g>
+											</svg>
+											<!--end::Svg Icon-->
+										</span>
+									</span>
+									<span class="navi-text">Department Info</span>
+									<span class="navi-label">
+								<?php 
+								$latestremark1 = 0;
+								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
 
-                                            $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                            $query = new MongoDB\Driver\Query($filter);
-                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
-                                            foreach ($cursor as $document)
-                                            {
-                                                $latestremark1 = $latestremark1 + 1;
-                                            }
-                                            if($latestremark1 == 0)
-                                            {
+								$filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+								$query = new MongoDB\Driver\Query($filter);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+								foreach ($cursor as $document)
+								{
+									$latestremark1 = $latestremark1 + 1;
+								}
+								if($latestremark1 == 0)
+								{
 
-                                            }
-                                            else
-                                            {
-                                                ?>
-                                                <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
-                                                <?php
-                                            }
-                                            ?>
-                                            </span>
-                                            </a>
-                                        </div>
-                                    <?php
-                                }
-                                ?>
+								}
+								else
+								{
+									?>
+									<span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
+									<?php
+								}
+								?>
+								</span>
+								</a>
+							</div>
+							<?php
+							}
+							?>
                         </div>
                         <!--end::Nav-->
                     </div>
