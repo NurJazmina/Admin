@@ -54,26 +54,25 @@ include ('model/schoolforum.php');
                 </div>
             </div>
             <?php
-
-        function time_elapsed($date){
-                $bit = array(
-                    //' year'      => $date  / 31556926 % 12,
-                    //' week'      => $date  / 604800 % 52,
-                    ' day'       => $date  / 86400 % 7,
-                    ' hour'      => $date  / 3600 % 24,
-                    ' minute'    => $date  / 60 % 60,
-                    ' second'    => $date  % 60
-                    );
-                foreach($bit as $k => $v){
-                    if($v > 1)$ret[] = $v . $k . 's';
-                    if($v == 1)$ret[] = $v . $k;
-                    }
-                array_splice($ret, count($ret)-1, 0, 'and');
-                $ret[] = 'ago';
-            
-                return join(' ', $ret);
+        function time_elapsed($date)
+        {
+            $bit = array(
+                //' year'      => $date  / 31556926 % 12,
+                //' week'      => $date  / 604800 % 52,
+                ' day'       => $date  / 86400 % 7,
+                ' hour'      => $date  / 3600 % 24,
+                ' minute'    => $date  / 60 % 60,
+                ' second'    => $date  % 60
+                );
+            foreach($bit as $k => $v){
+                if($v > 1)$ret[] = $v . $k . 's';
+                if($v == 1)$ret[] = $v . $k;
+                }
+            array_splice($ret, count($ret)-1, 0, 'and');
+            $ret[] = 'ago';
+        
+            return join(' ', $ret);
         }
-
         $ConsumerFName3=" ";
         $ConsumerLName3=" ";
         $ForumDetails2=" ";

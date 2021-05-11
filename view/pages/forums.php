@@ -16,7 +16,7 @@ include 'model/forums.php';
     <div class="col-md-0 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp">
     <?php
-    if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187' || $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+    if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
     {
     ?>
         <div class="card">

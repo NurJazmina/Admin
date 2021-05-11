@@ -6,8 +6,6 @@
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
 
-    /* $cursor now contains an object that wraps around the document set.
-    use foreach() to iterate over all the document */
     foreach ($cursor as $document)
     {
       //ConsumerPassword using password_hash method
@@ -103,7 +101,7 @@
             $_SESSION["loggeduser_schoolsAddress"] = '';
             $_SESSION["loggeduser_SchoolsEmail"] = '';
 
-            $_SESSION["loggeduser_DepartmentName"] = 'aa';
+            $_SESSION["loggeduser_DepartmentName"] = '';
           }
           // this function coming soon!
           //elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'PARENT')
