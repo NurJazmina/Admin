@@ -50,6 +50,7 @@
                                 "mail",
                                 "mira",
                                 "login",
+                                "kid"
                                 //"testing",
                                );
 
