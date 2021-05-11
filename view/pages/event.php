@@ -3,8 +3,8 @@
   .div1 {
     
     width: 300px;
-    height: 150px;
-    padding: 60px;
+    height: 180px;
+    
     border: 2px solid black;
   }
 
@@ -86,10 +86,13 @@ include 'view/partials/_subheader/subheader-v1.php';
                   <h6 class="event-meta-tile">Venue</h6>
                   <span><?php echo $EventVenue; ?></span>
                   <div class="event-location">
-                  <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$EventLocation; ?></span>
+                  <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$EventAddress; ?></span>
                   </div>
                   <div class="div1">
-                    Coming soon.
+                  <div class="card custom-card gutter-b">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1991.8816563451512!2d101.71120731333397!3d3.1569911027993234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc88666cc8d01d22a!2sSurau%20Suria%20KLCC!5e0!3m2!1sen!2smy!4v1620713415320!5m2!1sen!2smy" ></iframe>
+                  <?php echo $EventLocation; ?>
+                  </div>
                   </div>
                   </div>
                 </div>
@@ -173,12 +176,15 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <div class="col-md-5 event-venue-wrap">
                 <h6 class="event-meta-tile">Venue</h6>
                 <span><?php echo $EventVenue; ?></span>
-                <div class="event-location">
-                <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$EventLocation; ?></span>
+                <div class="event-address">
+                <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$EventAddress; ?></span>
                 </div>
                 <br>
                 <div class="div1">
-                  Coming soon.
+                <div class="card custom-card gutter-b">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1991.8816563451512!2d101.71120731333397!3d3.1569911027993234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc88666cc8d01d22a!2sSurau%20Suria%20KLCC!5e0!3m2!1sen!2smy!4v1620713415320!5m2!1sen!2smy" ></iframe>
+                  <?php echo $EventLocation; ?>
+                </div>
                 </div>
                 </div>
               </div>
