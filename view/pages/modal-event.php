@@ -56,7 +56,7 @@ $_SESSION["title"] = "Event";
                     <img src="assets/media/svg/icons/Code/Question-circle.svg" height="40px" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field</a>
+                    <a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">Click here to redirect to googlemaps.com. Select preferred location, click on "Share" button and choose the smaller frame. Copy the embed html and paste it in this field</a>
                     </div>
                 </div>
             </h5>
