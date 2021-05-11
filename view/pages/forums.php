@@ -8,17 +8,37 @@ include 'model/forums.php';
     border-color: #fff;
     color:#687a86;
     background-color: transparent;
+    font-weight: bold;
 }
 </style>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Forums</h1></div><br>
 
 <div class="row" >
-    <div class="col-md-0 section-1-box wow fadeInUp"></div>
-    <div class="col-md-10 section-1-box wow fadeInUp">
-    <?php
-    if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
-    {
-    ?>
+    <div class="col-md-9">
+        <?php
+        function time_elapsed($date){
+            $bit = array(
+                //' year'      => $date  / 31556926 % 12,
+                //' week'      => $date  / 604800 % 52,
+                ' day'       => $date  / 86400 % 7,
+                ' hour'      => $date  / 3600 % 24,
+                ' minute'    => $date  / 60 % 60,
+                ' second'    => $date  % 60
+                );
+            foreach($bit as $k => $v){
+                if($v > 1)$ret[] = $v . $k . 's';
+                if($v == 1)$ret[] = $v . $k;
+                }
+            array_splice($ret, count($ret)-1, 0, 'and');
+            $ret[] = 'ago';
+        
+            return join(' ', $ret);
+        }
+        $nowtime = time();
+                    
+        if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
+        {
+        ?>
         <div class="card">
             <div class="card-header">
                 <strong>SCHOOL</strong>
@@ -26,17 +46,178 @@ include 'model/forums.php';
             <!--SCHOOL-->
             <div class="card-body">
             <div class="table-responsive-sm" style="line-height: 100%;">
-                <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "1"; ?>&topic=<?php echo "general" ?>">General</a><br><br>
-                <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "2"; ?>&topic=<?php echo "proposal" ?>">Proposal</a><br><br>
-                <a class="topic" href="index.php?page=schoolforum&forum=<?php echo "3"; ?>&topic=<?php echo "short news / info" ?>">Short News / Info</a><br><br>
+                <a class="topic" href="index.php?page=schoolforum&forum=1&topic=general">General</a>
+                    <div class="card-footer">
+                        <?php
+                        $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'1'];
+                        $option = ['limit'=>5,'sort' => ['_id' => -1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+                        foreach ($cursor as $document)
+                        {
+                            $Forumid = ($document->_id);
+                            $ForumTitle = ($document->ForumTitle);
+                            $ForumDate = ($document->ForumDate);
+                            $Consumer_id = ($document->Consumer_id);
+                            
+                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        
+                            $oldtime = strval($date);
+
+                            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                            $filter1 = ['_id' => $consumerid];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            
+                            foreach ($cursor1 as $document1)
+                            {
+                            $ConsumerFName = ($document1->ConsumerFName);
+                            }
+
+                            $total = 0;
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total = $total + 1;
+                            }
+                            ?>
+                            <a style="color:#076d79; text-decoration: none;" href="index.php?page=schoolforumdetail&forum=1&topic=general&id=<?php echo $Forumid; ?>"><?php echo $ForumTitle."<br>"; ?></a>
+                            <!--listbox-->
+                            <div id="listbox">
+                                <span class="thaut"><a style="color:#687a86;"><?php echo $ConsumerFName; ?></a></span>
+                                <span class="fff">|</span>
+                                    <span class="thdate"><a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a></span>
+                                <span class="fff">|</span>
+                                <span class="thcmd"><a style="color:#687a86;">Commenting : <?php echo $total; ?></span>
+                            </div>
+                            <br>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                <a class="topic" href="index.php?page=schoolforum&forum=2&topic=proposal">Proposal</a>
+                    <div class="card-footer">
+                        <?php
+                        $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'2'];
+                        $option = ['limit'=>5,'sort' => ['_id' => -1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+                        foreach ($cursor as $document)
+                        {
+                            $Forumid = ($document->_id);
+                            $ForumTitle = ($document->ForumTitle);
+                            $ForumDate = ($document->ForumDate);
+                            $Consumer_id = ($document->Consumer_id);
+                            
+                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        
+                            $oldtime = strval($date);
+
+                            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                            $filter1 = ['_id' => $consumerid];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            
+                            foreach ($cursor1 as $document1)
+                            {
+                            $ConsumerFName = ($document1->ConsumerFName);
+                            }
+
+                            $total = 0;
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total = $total + 1;
+                            }
+                            ?>
+                            <a style="color:#076d79; text-decoration: none;" href="index.php?page=schoolforumdetail&forum=1&topic=general&id=<?php echo $Forumid; ?>"><?php echo $ForumTitle."<br>"; ?></a>
+                            <!--listbox-->
+                            <div id="listbox">
+                                <span class="thaut"><a style="color:#687a86;"><?php echo $ConsumerFName; ?></a></span>
+                                <span class="fff">|</span>
+                                    <span class="thdate"><a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a></span>
+                                <span class="fff">|</span>
+                                <span class="thcmd"><a style="color:#687a86;">Commenting : <?php echo $total; ?></span>
+                            </div>
+                            <br>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                <a class="topic" href="index.php?page=schoolforum&forum=3&topic=short news / info">Short News / Info</a>
+                    <div class="card-footer">
+                        <?php
+                        $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'3'];
+                        $option = ['limit'=>5,'sort' => ['_id' => -1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+                        foreach ($cursor as $document)
+                        {
+                            $Forumid = ($document->_id);
+                            $ForumTitle = ($document->ForumTitle);
+                            $ForumDate = ($document->ForumDate);
+                            $Consumer_id = ($document->Consumer_id);
+                            
+                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        
+                            $oldtime = strval($date);
+
+                            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                            $filter1 = ['_id' => $consumerid];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            
+                            foreach ($cursor1 as $document1)
+                            {
+                            $ConsumerFName = ($document1->ConsumerFName);
+                            }
+
+                            $total = 0;
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total = $total + 1;
+                            }
+                            ?>
+                            <a style="color:#076d79; text-decoration: none;" href="index.php?page=schoolforumdetail&forum=1&topic=general&id=<?php echo $Forumid; ?>"><?php echo $ForumTitle."<br>"; ?></a>
+                            <!--listbox-->
+                            <div id="listbox">
+                                <span class="thaut"><a style="color:#687a86;"><?php echo $ConsumerFName; ?></a></span>
+                                <span class="fff">|</span>
+                                    <span class="thdate"><a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a></span>
+                                <span class="fff">|</span>
+                                <span class="thcmd"><a style="color:#687a86;">Commenting : <?php echo $total; ?></span>
+                            </div>
+                            <br>
+                            <?php
+                        }
+                        ?>
+                    </div>
             </div>
             </div>
         </div>
-    <?php
-    }
-    ?>
+        <?php
+        }
+        ?>
         <br>
-
         <div class="card">
             <div class="card-header">
                 <strong>PUBLIC</strong>
@@ -44,14 +225,178 @@ include 'model/forums.php';
 
             <div class="card-body">
                 <div class="table-responsive-sm" style="line-height: 100%;">
-                    <a class="topic" href="index.php?page=publicforum&forum=<?php echo "4"; ?>&topic=<?php echo "general" ?>">General</a><br><br>
-                    <a class="topic" href="index.php?page=publicforum&forum=<?php echo "5"; ?>&topic=<?php echo "proposal" ?>">Proposal</a><br><br>
-                    <a class="topic" href="index.php?page=publicforum&forum=<?php echo "6"; ?>&topic=<?php echo "short news / info" ?>">Short News / Info</a><br><br>
+                    <a class="topic" href="index.php?page=publicforum&forum=4&topic=general">General</a>
+                    <div class="card-footer">
+                        <?php
+                        $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'4'];
+                        $option = ['limit'=>5,'sort' => ['_id' => -1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+                        foreach ($cursor as $document)
+                        {
+                            $Forumid = ($document->_id);
+                            $ForumTitle = ($document->ForumTitle);
+                            $ForumDate = ($document->ForumDate);
+                            $Consumer_id = ($document->Consumer_id);
+                            
+                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        
+                            $oldtime = strval($date);
+
+                            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                            $filter1 = ['_id' => $consumerid];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            
+                            foreach ($cursor1 as $document1)
+                            {
+                            $ConsumerFName = ($document1->ConsumerFName);
+                            }
+
+                            $total = 0;
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total = $total + 1;
+                            }
+                            ?>
+                            <a style="color:#076d79; text-decoration: none;" href="index.php?page=publicforumdetail&forum=1&topic=general&id=<?php echo $Forumid; ?>"><?php echo $ForumTitle."<br>"; ?></a>
+                            <!--listbox-->
+                            <div id="listbox">
+                                <span class="thaut"><a style="color:#687a86;"><?php echo $ConsumerFName; ?></a></span>
+                                <span class="fff">|</span>
+                                    <span class="thdate"><a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a></span>
+                                <span class="fff">|</span>
+                                <span class="thcmd"><a style="color:#687a86;">Commenting : <?php echo $total; ?></span>
+                            </div>
+                            <br>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <a class="topic" href="index.php?page=publicforum&forum=5&topic=proposal">Proposal</a>
+                    <div class="card-footer">
+                        <a style="">
+                        <?php
+                        $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'5'];
+                        $option = ['limit'=>5,'sort' => ['_id' => -1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+                        foreach ($cursor as $document)
+                        {   
+                            $Forumid = ($document->_id);
+                            $ForumTitle = ($document->ForumTitle);
+                            $ForumDate = ($document->ForumDate);
+                            $Consumer_id = ($document->Consumer_id);
+                            
+                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        
+                            $oldtime = strval($date);
+
+                            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                            $filter1 = ['_id' => $consumerid];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            
+                            foreach ($cursor1 as $document1)
+                            {
+                            $ConsumerFName = ($document1->ConsumerFName);
+                            }
+
+                            $total = 0;
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total = $total + 1;
+                            }
+                            ?>
+                            <a style="color:#076d79; text-decoration: none;" href="index.php?page=publicforumdetail&forum=1&topic=general&id=<?php echo $Forumid; ?>"><?php echo $ForumTitle."<br>"; ?></a>
+                            <!--listbox-->
+                            <div id="listbox">
+                                <span class="thaut"><a style="color:#687a86;"><?php echo $ConsumerFName; ?></a></span>
+                                <span class="fff">|</span>
+                                    <span class="thdate"><a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a></span>
+                                <span class="fff">|</span>
+                                <span class="thcmd"><a style="color:#687a86;">Commenting : <?php echo $total; ?></span>
+                            </div>
+                            <br>
+                            <?php
+                        }
+                        ?>
+                        </a>
+                    </div>
+                    <a class="topic" href="index.php?page=publicforum&forum=6&topic=short news / info">Short News / Info</a>
+                    <div class="card-footer">
+                        <?php
+                        $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'6'];
+                        $option = ['limit'=>5,'sort' => ['_id' => -1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+                        foreach ($cursor as $document)
+                        {
+                            $Forumid = ($document->_id);
+                            $ForumTitle = ($document->ForumTitle);
+                            $ForumDate = ($document->ForumDate);
+                            $Consumer_id = ($document->Consumer_id);
+                            
+                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        
+                            $oldtime = strval($date);
+
+                            $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                            $filter1 = ['_id' => $consumerid];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+            
+                            foreach ($cursor1 as $document1)
+                            {
+                            $ConsumerFName = ($document1->ConsumerFName);
+                            }
+
+                            $total = 0;
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query2);
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total = $total + 1;
+                            }
+                            ?>
+                            <a style="color:#076d79; text-decoration: none;" href="index.php?page=publicforumdetail&forum=1&topic=general&id=<?php echo $Forumid; ?>"><?php echo $ForumTitle."<br>"; ?></a>
+                            <div id="listbox">
+                                <span class="thaut"><a style="color:#687a86;"><?php echo $ConsumerFName; ?></a></span>
+                                <span class="fff">|</span>
+                                    <span class="thdate"><a style="color:#687a86;"><?php echo date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$oldtime)." ) \n"; ?></a></span>
+                                <span class="fff">|</span>
+                                <span class="thcmd"><a style="color:#687a86;">Commenting : <?php echo $total; ?></span>
+                            </div>
+                            <br>
+                            <?php
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div><br>
+        </div>
     </div>
-    <div class="col-md-2 section-1-box wow fadeInUp">
+
+    <div class="col-md-3">
     <div class="card">
     <div class="card-header">
                 <strong>Details</strong>
@@ -113,5 +458,5 @@ include 'model/forums.php';
             </div>
     </div>
     </div>
-    <div class="col-md-1 section-1-box wow fadeInUp"></div>
+    </div>
 </div>
