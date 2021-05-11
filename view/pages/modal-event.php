@@ -51,16 +51,15 @@ $_SESSION["title"] = "Event";
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left">
-                <h5>GOOGLE MAPS LINK
-                <div class="nav-item dropdown" style="float:right">
-                <img src="assets/media/svg/icons/Code/Question-circle.svg" height="22px">
-               
-                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"></a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field</a></li>
-                    </ul>
+            <h5>
+                <div class="dropdown" style="">GOOGLE MAPS LINK
+                    <img src="assets/media/svg/icons/Code/Question-circle.svg" height="40px" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">User are adviced to go to googlemaps.com, select your location, copy the embed html and paste it in this field</a>
+                    </div>
                 </div>
-                </h5>
+            </h5>
             </label>
                 <div class="col-lg-3">
                     <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventLocation" required>
