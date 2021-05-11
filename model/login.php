@@ -65,7 +65,7 @@
                 $_SESSION["loggeduser_SchoolsEmail"] = ($document2->SchoolsEmail);
               }
     
-              $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["Staffdepartment"]);
+              $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_Staffdepartment"] );
               $filter3 = ['_id'=>$departmentid];
               $query3 = new MongoDB\Driver\Query($filter3);
               $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
@@ -103,7 +103,7 @@
             $_SESSION["loggeduser_schoolsAddress"] = '';
             $_SESSION["loggeduser_SchoolsEmail"] = '';
 
-            $_SESSION["loggeduser_DepartmentName"] = '';
+            $_SESSION["loggeduser_DepartmentName"] = 'aa';
           }
           // this function coming soon!
           //elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'PARENT')
