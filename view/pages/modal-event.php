@@ -33,8 +33,8 @@ $_SESSION["title"] = "Event";
                 <div class="col-lg-6">
                 <select class="form-control" id="staticStaffNo" name="txtaccess" style="height: auto;" required>
                   <option value="PUBLIC">PUBLIC</option>
-                  <option value="1">STAFFS</option>
-                  <option value="0">TEACHERS</option>
+                  <option value="STAFF">STAFFS</option>
+                  <option value="TEACHER">TEACHERS</option>
                   <option value="VIP">PARENTS</option>
                 </select>
                 </div>
@@ -42,13 +42,13 @@ $_SESSION["title"] = "Event";
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>VENUE</h5></label>
                 <div class="col-lg-6">
-                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventVenue">   
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventVenue" required>   
                 </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ADDRESS</h5></label>
                 <div class="col-lg-3">
-                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolLocation">
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventAddress" required>
                 </div>
         </div>
         <div class="form-group row">
@@ -59,7 +59,7 @@ $_SESSION["title"] = "Event";
                 </h5>
             </label>
                 <div class="col-lg-3">
-                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolGoogleMaps">
+                    <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventLocation" required>
                 </div>
         </div>
         <div class="form-group row">
