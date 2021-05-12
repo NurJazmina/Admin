@@ -220,6 +220,34 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/widgets.js"></script>
 		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
 		<?php include 'resources/default.php'; ?>
+		<?php
+		if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+		{
+
+		}
+		else
+		{
+			$attendance = ($_GET['attendance']);
+			?>
+			<script>
+  				$(document).ready(function () {
+     				$("#attendance").table2excel({
+         			filename: "attendanceclass.xls"
+     				});
+  				});  
+ 			</script>
+			<?php
+		}
+		?>
+		<script type="text/javascript">
+			var rows = document.querySelectorAll('tr');
+
+			[...rows].forEach((r) => {
+				if (r.querySelectorAll('td:empty').length > 0) {
+					r.classList.add('highlight');
+				}
+			})
+		</script>
 
 		<!--end::Page Scripts-->
 	</body>
