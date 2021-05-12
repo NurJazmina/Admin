@@ -1,3 +1,9 @@
+<style>
+.nav-link {
+color: white !important;
+border:1px solid #ffffff;
+}
+</style>
 <?php include ('model/classroomlist.php'); ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -9,14 +15,6 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-
-					<?php
-					$uri = $_SERVER['REQUEST_URI'];
-					$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-					$query = $_SERVER['QUERY_STRING'];
-					//echo $query; // Outputs: Query String
-
-					?> 
 					<h5 class="text-dark font-weight-bold my-1 mr-5">Classroom</h5>
 					<!--end::Page Title-->
 				</div>
@@ -29,9 +27,19 @@
               <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
-                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
+                  <?php 
+                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                  {
+                  ?>
+                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
                     <input  type="text" style="width:50%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-info font-weight-bolder btn-sm" name="searchclass" >Search</button>
+                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" name="searchclass" >Search</button>
+                  <?php
+                  } 
+                  else
+                  {
+                  }
+                  ?>
                   </div>
                 </div>
               </form>
@@ -57,8 +65,7 @@
         </div>
       <div class="card-body" >
         <!-- sorting -->
-        <div class="btn-group sort-btn">
-          <button class="btn btn-secondary dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
+          <button class="btn btn-success font-weight-bolder btn-sm" type="button" data-bs-toggle="dropdown">Sort by <i class="fas fa-sort"></i></button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=classroomlist" tabindex="-1" data-type="alpha">All</a></li>
             <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha">category 1</a></li>
@@ -68,7 +75,6 @@
             <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha">category 5</a></li>
             <li class="dropdown-item"><a href="index.php?page=classroomlist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha">category 6</a></li>
           </ul>
-        </div>
         <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
@@ -142,26 +148,23 @@
             <div class="col-12 text-right">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <?php
-                if (isset($_GET['paging']) && !empty($_GET['paging'])){
-                  if ($_GET['paging'=='0']) {
-                    $pagingprevious = '0';
+                if (isset($_GET['paging']) && !empty($_GET['paging']))
+                {
+                  if ($_GET['paging'] == 0) 
+                  {
+                    ?>
+                    <span class="btn btn-secondary">Previous</span>
+                  <?php
+                  } 
+                  else 
+                  {
+                  ?>
+                    <a href="index.php?page=classroomlist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                  <?php
                   }
-                } else {
-                  $pagingprevious = "0";
                 }
                 ?>
-                <?php
-                if ($pagingprevious == "0") {
-                  ?>
-                  <span class="btn btn-secondary">Previous</span>
-                <?php
-                } else {
-                  ?>
-                  <a href="index.php?page=classroomlist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                <?php
-                }
-                ?>
-                <a href="index.php?page=classroomlist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                <a href="index.php?page=classroomlist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
               </div>
             </div>
           </div>
@@ -361,7 +364,7 @@
                 </div>
                 <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active btn-primary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Class</a>
+                    <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Class</a>
                     <?php
                     $calc = 0;
                     $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
@@ -375,7 +378,7 @@
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
                     ?>
-                    <a class="nav-link btn-light text-dark" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php  echo $ClassCategory; echo "  "; echo $ClassName; ?></a>
+                    <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php  echo $ClassCategory; echo "  "; echo $ClassName; ?></a>
                     <?php
                     }
                     ?>

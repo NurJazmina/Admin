@@ -188,6 +188,8 @@ if (isset($_POST['DeleteclassFormSubmit']))
 else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
 
   if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
