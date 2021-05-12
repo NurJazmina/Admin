@@ -141,26 +141,6 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 </table>
 </div>
 </div>
-<?php
-if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-{
-
-}
-else
-{
-$attendance = ($_GET['attendance']);
-?>
-<script>
-  $(document).ready(function () {
-     $("#attendance").table2excel({
-         filename: "attendancestudent.xls"
-     });
-  });
-   
- </script>
-<?php
-}
-?>
 <script type="text/javascript">
 var rows = document.querySelectorAll('tr');
 
@@ -291,26 +271,6 @@ else
    </table>
    </div>
    </div>
-<?php
-if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-{
-
-}
-else
-{
-$attendance = ($_GET['attendance']);
-?>
-<script>
-  $(document).ready(function () {
-     $("#attendance").table2excel({
-         filename: "attendancestudent.xls"
-     });
-  });
-   
- </script>
-<?php
-}
-?>
 <script type="text/javascript">
 var rows = document.querySelectorAll('tr');
 

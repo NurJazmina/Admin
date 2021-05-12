@@ -234,7 +234,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<script>
   				$(document).ready(function () {
      				$("#attendance").table2excel({
-         			filename: "attendanceclass.xls"
+         			filename: "attendance.xls"
      				});
   				});  
  			</script>
