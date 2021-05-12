@@ -1,3 +1,4 @@
+
 <?php
 $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
@@ -8,16 +9,21 @@ include 'view/partials/_subheader/subheader-v1.php';
         <div class="card card-custom gutter-b">
         
         <div class="card-body">
-        
+        <div class="text-right">
+            <p>
+                <a href="#" role="button" class="btn btn-secondary" data-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">How to set the Google Link Map?</a>
+            </p>
+        </div>
+
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
-            <div class="col-lg-10">
+            <div class="col-lg-8">
                 <input type="text" class="form-control" id="staticStaffNo" name="txttitle"  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
             </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                 <select class="form-control" id="staticStaffNo" name="txtaccess" style="height: auto;" required>
                   <option value="PUBLIC">PUBLIC</option>
                   <option value="STAFF">STAFFS</option>
@@ -28,13 +34,13 @@ include 'view/partials/_subheader/subheader-v1.php';
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>VENUE</h5></label>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventVenue" required>   
                 </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>ADDRESS</h5></label>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventAddress" required>
                 </div>
         </div>
@@ -50,19 +56,19 @@ include 'view/partials/_subheader/subheader-v1.php';
                 </div>
             </h5>
             </label>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <input type="text" class="form-control"  id="staticStaffNo" name="txtschoolEventLocation" required>
                 </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>EVENT START</h5></label>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <input type="datetime-local" class="form-control" id="staticStaffNo" name="txtSchoolEventDateStart">
                 </div>
         </div>
         <div class="form-group row"> 
             <label class="col-lg-2 col-form-label text-lg-left"><h5>EVENT END</h5></label>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <input type="datetime-local" class="form-control" id="staticStaffNo" name="txtSchoolEventDateEnd">
                 </div>
         </div>
