@@ -48,11 +48,11 @@ if (isset($_POST['AddParentFormSubmit']))
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <h6 >You have entered an ID that already exist in this column.</h6>
-            <h5 >EDIT THIS DATA?</h5>
+            <h6 style="color:	#000000;">You have entered an ID that already exist in this column.</h6>
+            <h5 style="color:	#000000;">EDIT THIS DATA?</h5>
           </div>
-          <a style="color:#FFFFE0; text-decoration: none;" href="index.php?page=editparentduplicate&txtConsumerIDNoChild=<?php echo $varConsumerIDNoChild; ?>&txtConsumerIDNo=<?php echo $varConsumerIDNo; ?>"><button type="button" class="btn btn-secondary">Add Child</a>
-          <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
+          <a style="text-decoration: none;" href="index.php?page=editparentduplicate&txtConsumerIDNoChild=<?php echo $varConsumerIDNoChild; ?>&txtConsumerIDNo=<?php echo $varConsumerIDNo; ?>"><button type="button" class="btn btn-secondary">Add Child</a>
+          <button  onclick="index.php?page=parentlist" class="btn btn-success" >Close</button>
       </div>
   </div>
 </form>
