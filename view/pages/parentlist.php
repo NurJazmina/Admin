@@ -1,5 +1,4 @@
 <?php include ('model/parentlist.php'); ?>
-
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -21,7 +20,7 @@
         <?php 
         $parent = $_SESSION["totalparent"];
         ?>
-          <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $parent; ?> Total Parent</span>
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $parent; ?> Total Parent</span>
         </div>
         <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -34,7 +33,7 @@
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
                   <?php 
-                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
                   ?>
                     <button type="button" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
@@ -201,7 +200,7 @@
                   <td><?php if(($ParentStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                   <td>
                   <?php
-                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
                   ?>
                     <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">

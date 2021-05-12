@@ -51,7 +51,7 @@ if (isset($_POST['AddParentFormSubmit']))
             <h6 >You have entered an ID that already exist in this column.</h6>
             <h5 >EDIT THIS DATA?</h5>
           </div>
-          <a style="color:#FFFFE0; text-decoration: none;" href="index.php?page=editparentduplicate&txtConsumerIDNoChild=<?php echo $varConsumerIDNoChild; ?>&txtConsumerIDNo=<?php echo $varConsumerIDNo; ?>"><button type="button" class="btn btn-secondary">Edit</a>
+          <a style="color:#FFFFE0; text-decoration: none;" href="index.php?page=editparentduplicate&txtConsumerIDNoChild=<?php echo $varConsumerIDNoChild; ?>&txtConsumerIDNo=<?php echo $varConsumerIDNo; ?>"><button type="button" class="btn btn-secondary">Add Child</a>
           <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
       </div>
   </div>

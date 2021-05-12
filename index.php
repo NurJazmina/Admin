@@ -34,7 +34,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<title>Smart School</title>
 		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="canonical" href="https://keenthemes.com/metronic" />
+		<link rel="stylesheet" type="text/css" href="resources/default.css">
 
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -96,11 +96,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!--begin::Page-->
 					<div class="d-flex flex-row flex-column-fluid page">
 						<?php include 'view/pages/_aside.php'; ?>
+						
 						<!--begin::Wrapper-->
 						<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 							<?php include 'view/pages/_header.php'; ?>
 							<!--begin::Content-->
 							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+							<?php include 'view/partials/navgongetz.php'; ?>
 							<?php //include 'view/partials/_subheader/subheader-v1.php'; ?>
 							<!--Content area here-->
 								<div class="content content-fixed">

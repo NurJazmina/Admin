@@ -1,7 +1,6 @@
 <!--List of timetable-->
 <?php
-//display been filter using level
-if ($_SESSION["loggeduser_StaffLevel"] =='1')
+if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
 {
   if (isset($_GET['paging']) && !empty($_GET['paging']))
   {
@@ -12,6 +11,8 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
  else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
   if (!isset($_POST['teacherid']) && empty($_POST['teacherid']))
   {
@@ -83,8 +84,9 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
     }
     }
   }
+
+  include ('model/timetablelist.php'); 
 ?>
-<?php include ('model/timetablelist.php'); ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -154,8 +156,7 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
         </div>
         <div class="card-body">
           <!-- sorting -->
-        <div class="btn-group sort-btn">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
+          <button class="btn btn-success font-weight-bolder btn-sm" type="button" data-bs-toggle="dropdown">Sort by <i class="fas fa-sort"></i></button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=timetablelist" tabindex="-1" data-type="alpha">All</a></li>
             <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha">category 1</a></li>
@@ -165,7 +166,6 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
             <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha">category 5</a></li>
             <li class="dropdown-item"><a href="index.php?page=timetablelist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha">category 6</a></li>
           </ul>
-        </div>
         <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style="text-align: center;">
@@ -271,26 +271,23 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
                     <div class="col-12 text-right">
                       <div class="btn-group" role="group" aria-label="Basic example">
                         <?php
-                        if (isset($_GET['paging']) && !empty($_GET['paging'])){
-                          if ($_GET['paging'=='0']) {
-                            $pagingprevious = '0';
+                        if (isset($_GET['paging']) && !empty($_GET['paging']))
+                        {
+                          if ($_GET['paging'] == 0) 
+                          {
+                            ?>
+                            <span class="btn btn-secondary">Previous</span>
+                          <?php
+                          } 
+                          else 
+                          {
+                          ?>
+                            <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                          <?php
                           }
-                        } else {
-                          $pagingprevious = "0";
                         }
                         ?>
-                        <?php
-                        if ($pagingprevious == "0") {
-                          ?>
-                          <span class="btn btn-secondary">Previous</span>
-                        <?php
-                        } else {
-                          ?>
-                          <a href="index.php?page=timetablelist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                        <?php
-                        }
-                        ?>
-                        <a href="index.php?page=timetablelist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                        <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
                       </div>
                     </div>
                   </div>
@@ -306,7 +303,7 @@ if ($_SESSION["loggeduser_StaffLevel"] =='1')
           </div><br><br>
 <?php
 }
-else
+elseif ($_SESSION["loggeduser_ACCESS"] =='TEACHER')
 {
 ?>
 <!-- User/teacher timetable -->
@@ -420,26 +417,23 @@ else
             <div class="col-12 text-right">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <?php
-                if (isset($_GET['paging']) && !empty($_GET['paging'])){
-                  if ($_GET['paging'=='0']) {
-                    $pagingprevious = '0';
+                if (isset($_GET['paging']) && !empty($_GET['paging']))
+                {
+                  if ($_GET['paging'] == 0) 
+                  {
+                    ?>
+                    <span class="btn btn-secondary">Previous</span>
+                  <?php
+                  } 
+                  else 
+                  {
+                  ?>
+                    <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                  <?php
                   }
-                } else {
-                  $pagingprevious = "0";
                 }
                 ?>
-                <?php
-                if ($pagingprevious == "0") {
-                  ?>
-                  <span class="btn btn-secondary">Previous</span>
-                <?php
-                } else {
-                  ?>
-                  <a href="index.php?page=timetablelist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                <?php
-                }
-                ?>
-                <a href="index.php?page=timetablelist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
               </div>
             </div>
           </div>
@@ -566,27 +560,23 @@ else
                   <div class="col-12 text-right">
                     <div class="btn-group" role="group" aria-label="Basic example">
                       <?php
-                      if (isset($_GET['paging']) && !empty($_GET['paging'])){
-                        if ($_GET['paging'=='0']) {
-                          $pagingprevious = '0';
+                      if (isset($_GET['paging']) && !empty($_GET['paging']))
+                      {
+                        if ($_GET['paging'] == 0) 
+                        {
+                          ?>
+                          <span class="btn btn-secondary">Previous</span>
+                        <?php
+                        } 
+                        else 
+                        {
+                        ?>
+                          <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                        <?php
                         }
-                      } else {
-                        $pagingprevious = "0";
                       }
                       ?>
-                      <?php
-                      if ($pagingprevious == "0") {
-                        ?>
-                        <span class="btn btn-secondary">Previous</span>
-                      <?php
-                      } else {
-                        ?>
-                        <a href="index.php?page=timetablelist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                      <?php
-                      }
-                      ?>
-
-                      <a href="index.php?page=timetablelist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                      <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
                     </div>
                   </div>
                 </div>
@@ -602,6 +592,6 @@ else
         </div><br><br><br><br>
 <?php
 }
+include ('view/pages/modal-timetablelist.php'); 
 ?>
-<?php include ('view/pages/modal-timetablelist.php'); ?>
 

@@ -8,7 +8,10 @@
   else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
+  
   if (!isset($_POST['searchstaff']) && empty($_POST['searchstaff']))
   {
     //sorting by category
@@ -23,8 +26,7 @@
     {
     $sort = ($_GET['level']);
     $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],
-              'StaffLevel'=>$sort
-              ];
+              'StaffLevel'=>$sort];
     $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
