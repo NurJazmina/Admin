@@ -88,19 +88,16 @@
           elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
           {
             $_SESSION["loggeduser_ACCESS"] = "STAFF";
-
             $_SESSION["loggeduser_schoolID"] = '';
             $_SESSION["loggeduser_teacherid"] = '';
             $_SESSION["loggeduser_StaffLevel"] = '';
             $_SESSION["loggeduser_ConsumerID"] = '';
             $_SESSION["loggeduser_ClassID"] = '';
             $_SESSION["loggeduser_Staffdepartment"] = '';
-
             $_SESSION["loggeduser_schoolName"] = '';
             $_SESSION["loggeduser_schoolsPhoneNo"] = '';
             $_SESSION["loggeduser_schoolsAddress"] = '';
             $_SESSION["loggeduser_SchoolsEmail"] = '';
-
             $_SESSION["loggeduser_DepartmentName"] = '';
           }
           // this function coming soon!

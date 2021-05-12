@@ -1,3 +1,9 @@
+<style>
+.nav-link {
+color: white !important;
+border:1px solid #ffffff;
+}
+</style>
 <?php include ('model/stafflist.php'); ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -20,7 +26,7 @@
         <?php 
         $school = $_SESSION["totalstaff"] + $_SESSION["totalteacher"];
         ?>
-          <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $school; ?> Total Staff</span>
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $school; ?> Total Staff</span>
         </div>
         <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -33,10 +39,10 @@
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
                   <?php 
-                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
                   ?>
-                    <button type="button" style="width:20%;" class="btn btn-warning font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
+                    <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
                     <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
                     <div class="input-group input-group-sm input-group-solid" style="width:40%">
                       <input  type="text" style="";  id="kt_subheader_search_form"  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
@@ -111,14 +117,12 @@
       </div>
       <div class="card-body" >
         <!-- sorting -->
-        <div class="btn-group sort-btn" style="width:5%";>
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
+          <button class="btn btn-success font-weight-bolder btn-sm" type="button" data-bs-toggle="dropdown">Sort by <i class="fas fa-sort"></i></button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=stafflist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
             <li class="dropdown-item"><a href="index.php?page=stafflist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">Staff</a></li>
             <li class="dropdown-item"><a href="index.php?page=stafflist&level=<?php echo "0"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">Teacher</a></li>
           </ul>
-        </div>
         <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="example" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
@@ -141,9 +145,6 @@
                $StaffLevel = strval($document->StaffLevel);
                $Staffdepartment = strval($document->Staffdepartment);
                $iddepartment = new \MongoDB\BSON\ObjectId($Staffdepartment);
-
-               $department = ($document->Staffdepartment);
-               $StaffDepartment = $document->Staffdepartment;
                $ClassID = $document->ClassID;
                $StaffStatus = $document->StaffStatus;
 
@@ -198,8 +199,6 @@
                     $queryA = new MongoDB\Driver\Query($filterA);
                     $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
                     $varcounting = 0;
-                    ?>
-                    <?php
                       foreach ($cursorA as $documentA)
                         {
                           $varcounting = $varcounting +1;
@@ -224,7 +223,7 @@
                         </table>
                         <br>
                         <?php
-                        if($_SESSION["loggeduser_StaffLevel"]=='0') 
+                        if($_SESSION["loggeduser_ACCESS"] =='TEACHER') 
                         {
                         ?>
                         <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
@@ -269,7 +268,7 @@
                             </td>
                             <td>
                             <?php
-                            if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                            if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
                             ?>
                               <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
@@ -298,7 +297,7 @@
                             <td></td>
                             <td>
                             <?php
-                            if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                            if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
                             ?>
                               <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
@@ -322,7 +321,7 @@
                             <td><?php if(($StaffStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                             <td>
                             <?php
-                            if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                            if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
                             ?>
                             <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
@@ -345,31 +344,21 @@
                           <?php
                           if (isset($_GET['paging']) && !empty($_GET['paging']))
                           {
-                            if ($_GET['paging'=='0'])
+                            if ($_GET['paging'] == 0) 
                             {
-                              $pagingprevious = '0';
+                              ?>
+                              <span class="btn btn-secondary">Previous</span>
+                            <?php
+                            } 
+                            else 
+                            {
+                            ?>
+                              <a href="index.php?page=timetablelist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                            <?php
                             }
                           }
-                          else
-                          {
-                            $pagingprevious = "0";
-                          }
                           ?>
-                          <?php
-                          if ($pagingprevious == "0")
-                          {
-                          ?>
-                            <span class="btn btn-secondary">Previous</span>
-                          <?php
-                          }
-                          else
-                          {
-                          ?>
-                            <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                          <?php
-                          }
-                          ?>
-                            <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                          <a href="index.php?page=timetablelist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
                         </div>
                     </div>
                   </div>
@@ -481,60 +470,60 @@
                               {
                                 $departmentid = strval($document->_id);
                                 $DepartmentName = strval($document->DepartmentName);
-                              ?>
-                              <div class="tab-pane fade" id="v-pills-department<?php echo $departmentid;?>" role="tabpanel" aria-labelledby="v-pills-department<?php echo $departmentid;?>-tab">
-                                <div class="box" >
-                                  <strong>Total</strong>
-                                  <div class="table-responsive">
-                                  <table class="table table-sm">
-                                    <tr>
-                                      <th>Total</th>
-                                      <td>
+                                ?>
+                                <div class="tab-pane fade" id="v-pills-department<?php echo $departmentid;?>" role="tabpanel" aria-labelledby="v-pills-department<?php echo $departmentid;?>-tab">
+                                  <div class="box" >
+                                    <strong>Total</strong>
+                                    <div class="table-responsive">
+                                    <table class="table table-sm">
+                                      <tr>
+                                        <th>Total</th>
+                                        <td>
+                                          <?php
+                                          $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$departmentid];
+                                          $query = new MongoDB\Driver\Query($filter);
+                                          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                                          $totalstaff = 0;
+                                          foreach ($cursor as $document)
+                                          {
+                                            $totalstaff = $totalstaff+ 1;
+                                          }
+                                          echo $totalstaff;
+                                          ?>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th>Active</th>
+                                        <td>
                                         <?php
-                                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$departmentid];
-                                        $query = new MongoDB\Driver\Query($filter);
-                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                        $totalstaff = 0;
-                                        foreach ($cursor as $document)
-                                        {
-                                          $totalstaff = $totalstaff+ 1;
-                                        }
-                                        echo $totalstaff;
-                                        ?>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th>Active</th>
-                                      <td>
-                                       <?php
-                                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'ACTIVE'];
-                                        $query = new MongoDB\Driver\Query($filter);
-                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                        $totalstaff = 0;
+                                          $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'ACTIVE'];
+                                          $query = new MongoDB\Driver\Query($filter);
+                                          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                                          $totalstaff = 0;
 
-                                        foreach ($cursor as $document)
-                                        {
-                                          $totalstaff = $totalstaff + 1;
-                                        }
-                                        echo $totalstaff;
-                                        ?>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th>Inactive</th>
-                                      <td>
-                                       <?php
-                                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'INACTIVE'];
-                                        $query = new MongoDB\Driver\Query($filter);
-                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                        $totalstaff = 0;
+                                          foreach ($cursor as $document)
+                                          {
+                                            $totalstaff = $totalstaff + 1;
+                                          }
+                                          echo $totalstaff;
+                                          ?>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th>Inactive</th>
+                                        <td>
+                                        <?php
+                                          $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'INACTIVE'];
+                                          $query = new MongoDB\Driver\Query($filter);
+                                          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                                          $totalstaff = 0;
 
-                                        foreach ($cursor as $document)
-                                        {
-                                          $totalstaff = $totalstaff + 1;
-                                        }
-                                        echo $totalstaff;
-                                        ?>
+                                          foreach ($cursor as $document)
+                                          {
+                                            $totalstaff = $totalstaff + 1;
+                                          }
+                                          echo $totalstaff;
+                                          ?>
                                       </td>
                                     </tr>
                                   </table>
@@ -571,24 +560,24 @@
                             </div>
                           </div>
                           <div class="col-5" style="border-left: solid 1px #eee;">
-                              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link active btn-primary" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
-                                <?php
-                                $calc = 0;
-                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-                                foreach ($cursor as $document)
-                                {
-                                  $calc = $calc + 1;
-                                  $departmentid = strval($document->_id);
-                                  $DepartmentName = strval($document->DepartmentName);
-                                ?>
-                                <a class="nav-link btn-light text-dark" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
-                                <?php
-                                }
-                                ?>
-                              </div>
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                              <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
+                              <?php
+                              $calc = 0;
+                              $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $calc = $calc + 1;
+                                $departmentid = strval($document->_id);
+                                $DepartmentName = strval($document->DepartmentName);
+                              ?>
+                              <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-department<?php echo $departmentid;?>-tab" data-bs-toggle="pill" href="#v-pills-department<?php echo $departmentid;?>" role="tab" aria-controls="v-pills-department<?php echo $departmentid;?>" aria-selected="false"><?php echo $DepartmentName; ?></a>
+                              <?php
+                              }
+                              ?>
+                            </div>
                           </div>
                         </div>
                       </div>

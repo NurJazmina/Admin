@@ -274,27 +274,6 @@ else
         </div>         
         </div>
     </div>    
-
-<?php
-if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-{
-
-}
-else
-{
-$attendance = ($_GET['attendance']);
-?>
-<script>
-  $(document).ready(function () {
-     $("#attendance").table2excel({
-         filename: "attendanceclass.xls"
-     });
-  });
-   
- </script>
-<?php
-}
-?>
 <script type="text/javascript">
 var rows = document.querySelectorAll('tr');
 

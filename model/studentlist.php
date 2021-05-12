@@ -321,6 +321,8 @@ if (isset($_POST['StatusStudentFormSubmit']))
   else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
   if (!isset($_POST['searchstudent']) && empty($_POST['searchstudent']))
   {

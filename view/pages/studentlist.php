@@ -1,5 +1,10 @@
+<style>
+.nav-link {
+color: white !important;
+border:1px solid #ffffff;
+}
+</style>
 <?php include ('model/studentlist.php'); ?>
-
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -21,7 +26,7 @@
         <?php 
         $student = $_SESSION["totalstudent"];
         ?>
-          <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $student; ?> Total Student</span>
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $student; ?> Total Student</span>
         </div>
         <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -34,10 +39,10 @@
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                   <div class="row">
                   <?php 
-                  if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
                   ?>
-                    <button type="button" style="width:20%;" class="btn btn-warning font-weight-bolder btn-sm"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
+                    <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstudentattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
                     <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstudent" >Add</button>
                     <div class="input-group input-group-sm input-group-solid" style="width:40%">
                       <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
@@ -111,8 +116,7 @@
         </div>
         <div class="card-body">
         <!-- sorting -->
-        <div class="btn-group sort-btn" style="width:10%";>
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by </button>
+          <button class="btn btn-success font-weight-bolder btn-sm" type="button" data-bs-toggle="dropdown">Sort by <i class="fas fa-sort"></i></button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=studentlist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
             <li class="dropdown-item"><a href="index.php?page=studentlist&level=<?php echo "1"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 1</a></li>
@@ -122,7 +126,6 @@
             <li class="dropdown-item"><a href="index.php?page=studentlist&level=<?php echo "5"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 5</a></li>
             <li class="dropdown-item"><a href="index.php?page=studentlist&level=<?php echo "6"; ?>" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">category 6</a></li>
           </ul>
-        </div>
         <br><br>
           <div class="table-responsive" style="width:100%; margin:0 auto;">
             <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
@@ -228,7 +231,7 @@
                       </table>
                       <br>
                       <?php
-                      if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                      if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
                       ?>
                       <button type="button" style="font-size:15px width:25%" class="btn btn-light btn-hover-secondary"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>">more >></a></button>
@@ -289,7 +292,7 @@
                       <td><?php echo $ClassCategory." ".$ClassName; ?></td>
                       <td>
                       <?php
-                      if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                      if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
                       ?>
                         <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $studentid; ?>">
@@ -302,7 +305,7 @@
                       <td><?php if(($StudentsStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
                       <td>
                       <?php
-                      if($_SESSION["loggeduser_StaffLevel"]=='1') 
+                      if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
                       ?>
                         <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
@@ -323,31 +326,21 @@
                 <?php
                 if (isset($_GET['paging']) && !empty($_GET['paging']))
                 {
-                  if ($_GET['paging'=='0'])
+                  if ($_GET['paging'] == 0) 
                   {
-                    $pagingprevious = '0';
+                    ?>
+                    <span class="btn btn-secondary">Previous</span>
+                  <?php
+                  } 
+                  else 
+                  {
+                  ?>
+                    <a href="index.php?page=studentlist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                  <?php
                   }
                 }
-                else
-                {
-                  $pagingprevious = "0";
-                }
                 ?>
-                <?php
-                if ($pagingprevious == "0")
-                {
-                ?>
-                  <span class="btn btn-secondary">Previous</span>
-                <?php
-                }
-                else
-                {
-                ?>
-                  <a href="index.php?page=studentlist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                <?php
-                }
-                ?>
-                <a href="index.php?page=studentlist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                <a href="index.php?page=studentlist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
               </div>
             </div>
           </div>
@@ -547,7 +540,7 @@
                 </div>
                 <div class="col-4" style="border-left: solid 1px #eee;">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active btn-primary" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Students</a>
+                    <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Students</a>
                     <?php
                     $calc = 0;
                     $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
@@ -561,7 +554,7 @@
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
                     ?>
-                    <a class="nav-link btn-light text-dark" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
+                    <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
                     <?php
                     }
                     ?>
