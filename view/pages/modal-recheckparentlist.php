@@ -66,7 +66,7 @@ if (isset($_POST['AddParentFormSubmit']))
                       <div class="form-group row">
                         <h6 style="color:	#696969;">You have an ID number that already exist in this column.</h6>
                       </div>
-                      <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelationstudent&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
+                      <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelationstudentforparent&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
                       <button  onclick="index.php?page=parentlist" class="btn btn-success">Close</button>
                   </div>
               </div>
@@ -88,7 +88,7 @@ if (isset($_POST['AddParentFormSubmit']))
                       <div class="form-group row">
                         <h6 style="color:	#696969;">You have an ID number that already exist in this column.</h6>
                       </div>
-                      <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelation&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
+                      <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelationforparent&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
                       <button  onclick="index.php?page=parentlist" class="btn btn-success">Close</button>
                   </div>
               </div>
