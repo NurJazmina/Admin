@@ -40,8 +40,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="row">
                         <div class="col-lg-2"></div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success" name="AddForums">Confirm</button>
                                 <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="AddForums">Confirm</button>
                             </div>
                         </div>  
                     </div>

@@ -193,7 +193,7 @@ if (isset($_POST['AddParentFormSubmit']))
                 </div>
                 <div class="modal-footer">
                   <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
-                  <button type="submit" class="btn btn-secondary" name="submitaddparent">Confirm</button>
+                  <button type="submit" class="btn btn-success" name="submitaddparent">Confirm</button>
                 </div>
               </div>
           </div>
@@ -322,7 +322,7 @@ if (isset($_POST['EditParentFormSubmit']))
         </div>
         <div class="modal-footer">
           <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
-          <button type="submit" class="btn btn-secondary" name="submiteditparent">Confirm</button>
+          <button type="submit" class="btn btn-success" name="submiteditparent">Confirm</button>
         </div>
       </div>
   </div>

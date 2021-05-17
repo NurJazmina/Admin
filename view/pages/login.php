@@ -1,5 +1,5 @@
 <!-- live chat start-->
-      <style>
+<style>
    body {
         background-image: url('image/student.jpg');
         background-repeat: no-repeat;
@@ -126,7 +126,7 @@
       }
       
     }
-  </style>
+</style>
 <div class="main">
   <div align="center">
     <img src="image/logogongetz.png" width="132" height="145" style="padding-top: 20px;">

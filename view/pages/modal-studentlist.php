@@ -34,7 +34,7 @@
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="AddStudentFormSubmit">Re-Checking</button>
+          <button type="submit" class="btn btn-success" name="AddStudentFormSubmit">Re-Checking</button>
         </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="EditStudentFormSubmit">Edit</button>
+          <button type="submit" class="btn btn-success" name="EditStudentFormSubmit">Edit</button>
         </div>
     </div>
   </div>
@@ -89,7 +89,7 @@
           <div class="form-group row">
             <label for="txtStaffdepartment" class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-10">
-              <select class="form-control" name="txtStudentStatus" style="height: auto; width: 70%">
+              <select class="form-control" name="txtStudentStatus">
                 <option value="ACTIVE">ACTIVATE</option>
                 <option value="INACTIVE">DEACTIVATE</option>
               </select>
@@ -105,7 +105,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="StatusStudentFormSubmit">Confirm</button>
+          <button type="submit" class="btn btn-success" name="StatusStudentFormSubmit">Confirm</button>
         </div>
     </div>
   </div>

@@ -188,7 +188,7 @@ if (isset($_POST['AddStudentFormSubmit']))
                 </div>
                 <div class="modal-footer">
                 <button  onclick="index.php?page=studentlist" class="btn btn-secondary" >Close</button>
-                <button type="submit" class="btn btn-secondary" name="submitaddstudent">Confirm</button>
+                <button type="submit" class="btn btn-success" name="submitaddstudent">Confirm</button>
                 </div>
             </div>
         </div>
@@ -199,49 +199,47 @@ if (isset($_POST['AddStudentFormSubmit']))
         }
         else
         {
-        ?>
-        <br><br><br><br><div class="alert alert-danger" role="alert">
-        <h2 style="text-align: center;">AUTHORIZED PERSONNEL ONLY</h2>
-        <form id="submitstudent" name="submitstudent" action="index.php?page=studentlist" method="post">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="AddParentModalLabel">Add Parent</h5>
-                </div>
-                <div class="modal-body">
-                <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">Name</label>
-                    <div class="col-sm-10">
-                    <input   value="<?php echo  $ConsumerFName; echo " "; echo  $ConsumerLName; ?>" disabled>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad</label>
-                    <div class="col-sm-10">
-                    <input   value="<?php echo  $varConsumerIDNo; ?>" disabled>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-10">
-                    <input   value="UNAUTHORIZED" disabled>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button  onclick="index.php?page=studentlist" class="btn btn-secondary" >Close</button>
-                </div>
-            </div>
-        </div>
-        </form>
-        </div>
-        <?php
+          ?>
+          <br><br><br><br><div class="alert alert-danger" role="alert">
+          <h2 style="text-align: center;">AUTHORIZED PERSONNEL ONLY</h2>
+          <form id="submitstudent" name="submitstudent" action="index.php?page=studentlist" method="post">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="AddParentModalLabel">Add Parent</h5>
+                  </div>
+                  <div class="modal-body">
+                  <div class="form-group row">
+                      <label for="staticStaffNo" class="col-sm-2 col-form-label">Name</label>
+                      <div class="col-sm-10">
+                      <input   value="<?php echo  $ConsumerFName; echo " "; echo  $ConsumerLName; ?>" disabled>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad</label>
+                      <div class="col-sm-10">
+                      <input   value="<?php echo  $varConsumerIDNo; ?>" disabled>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="staticStaffNo" class="col-sm-2 col-form-label"></label>
+                      <div class="col-sm-10">
+                      <input   value="UNAUTHORIZED" disabled>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                  <button  onclick="index.php?page=studentlist" class="btn btn-secondary" >Close</button>
+                  </div>
+              </div>
+          </div>
+          </form>
+          </div>
+          <?php
+        }
     }
-}
-}
+  }
 }
 ?>
-
-
 <?php
 if (isset($_POST['EditStudentFormSubmit']))
 {
@@ -304,7 +302,7 @@ if (isset($_POST['EditStudentFormSubmit']))
         <div class="modal-footer">
            <input type="hidden" class="form-control" id="staticStaffNo" name="studentid" value="<?php echo  $varstudentid; ?>">
           <button  onclick="index.php?page=studentlist" class="btn btn-secondary" >Close</button>
-          <button type="submit" class="btn btn-secondary" name="submiteditstudent">Confirm</button>
+          <button type="submit" class="btn btn-success" name="submiteditstudent">Confirm</button>
         </div>
       </div>
   </div>

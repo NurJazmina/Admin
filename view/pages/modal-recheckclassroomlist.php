@@ -176,7 +176,7 @@ if (isset($_POST['EditclassFormSubmit']))
           <input type="hidden" class="form-control" id="staticStaffNo" name="txtclasscategory" value="<?php echo  $varClasscategory; ?>">
           <input type="hidden" class="form-control" id="staticStaffNo" name="txtclassid" value="<?php echo  $varclassid; ?>">
           <button  onclick="index.php?page=classroomlist" class="btn btn-secondary" >Close</button>
-          <button type="submit" class="btn btn-secondary" name="submiteditclass">Confirm</button>
+          <button type="submit" class="btn btn-success" name="submiteditclass">Confirm</button>
         </div>
       </div>
   </div>

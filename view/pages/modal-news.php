@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "News";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form action="index.php?page=news" method="post" name="AddNews"><br><br>
     <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
@@ -35,8 +35,8 @@ $_SESSION["title"] = "News";
             <div class="row">
             <div class="col-lg-2"></div>
         <div class="text-right">
-            <button type="submit" class="btn btn-success" name="AddNews">Confirm</button>
             <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success" name="AddNews">Confirm</button>
         </div>
 
         </div>  
