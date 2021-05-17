@@ -166,7 +166,6 @@ if (isset($_POST['submiteditparent']))
   $varparentid = $_POST['txtparentid'];
   $varstudentid = $_POST['txtstudentid'];
   $varrelation = $_POST['txtrelation'];
-  $varstudentclass = $_POST['txtstudentclass'];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert(['ParentID'=>$varparentid,'StudentID'=>$varstudentid,'ParentStudentRelation'=>$varrelation,'Schools_id'=>$varschoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
@@ -202,44 +201,6 @@ if (isset($_POST['submiteditparent']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-
-    //add student
-    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert(['Consumer_id'=>$varstudentid,'Schools_id'=> $varschoolID,'Class_id'=>$varstudentclass,'StudentsStatus'=>"ACTIVE"]);
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    try
-    {
-      $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Students', $bulk, $writeConcern);
-    }
-    catch (MongoDB\Driver\Exception\BulkWriteException $e)
-    {
-      $result = $e->getWriteResult();
-      // Check if the write concern could not be fulfilled
-      if ($writeConcernError = $result->getWriteConcernError())
-      {
-          printf("%s (%d): %s\n",
-              $writeConcernError->getMessage(),
-              $writeConcernError->getCode(),
-              var_export($writeConcernError->getInfo(), true)
-          );
-      }
-      // Check if any write operations did not complete at all
-      foreach ($result->getWriteErrors() as $writeError)
-      {
-          printf("Operation#%d: %s (%d)\n",
-              $writeError->getIndex(),
-              $writeError->getMessage(),
-              $writeError->getCode()
-          );
-      }
-    }
-    catch (MongoDB\Driver\Exception\Exception $e)
-    {
-      printf("Other error: %s\n", $e->getMessage());
-      exit;
-    }
-    
-
 }
 
 //Add Relation and Student
