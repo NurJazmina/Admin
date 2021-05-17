@@ -3,9 +3,10 @@
 if (isset($_POST['submitaddparent']))
 {
   //add parent
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
+  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
+  $ConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
+
+  $filter = ['ConsumerIDNo'=>$ConsumerIDNoParent];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
@@ -15,7 +16,7 @@ if (isset($_POST['submitaddparent']))
   $ConsumerFName = strval($document->ConsumerFName);
   $varParentRegDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ConsumerID'=>$ID,'Schools_id'=> $varschoolID,'ParentStatus'=> "ACTIVE",'ParentAddDate'=>$varParentRegDate]);
+  $bulk->insert(['ConsumerID'=>$ID,'Schools_id'=> $schoolID,'ParentStatus'=> "ACTIVE",'ParentAddDate'=>$varParentRegDate]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -50,16 +51,18 @@ if (isset($_POST['submitaddparent']))
   }
   }
   //add student
-  $varConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $varstudentclass = $_POST['txtstudentclass'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNoChild];
+  $ConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
+  $studentclass = $_POST['txtstudentclass'];
+
+  $filter = ['ConsumerIDNo'=>$ConsumerIDNoChild];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
   {
   $studentID = strval($document->_id);
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['Consumer_id'=>$studentID,'Schools_id'=> $varschoolID,'Class_id'=>$varstudentclass,'StudentsStatus'=>"ACTIVE"]);
+  $bulk->insert(['Consumer_id'=>$studentID,'Schools_id'=> $schoolID,'Class_id'=>$studentclass,'StudentsStatus'=>"ACTIVE"]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -94,8 +97,8 @@ if (isset($_POST['submitaddparent']))
   }
   }
   //add relation
-  $varrelation = $_POST['txtrelation'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
+  $relation = $_POST['txtrelation'];
+  $filter = ['ConsumerIDNo'=>$ConsumerIDNoParent];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -109,7 +112,7 @@ if (isset($_POST['submitaddparent']))
   $parentid = strval($document1->_id);
   }
   }
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNoChild];
+  $filter = ['ConsumerIDNo'=>$ConsumerIDNoChild];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -124,7 +127,7 @@ if (isset($_POST['submitaddparent']))
   }
   }
   $bulk1 = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk1->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$varrelation,'Schools_id'=>$varschoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk1->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {

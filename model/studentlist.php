@@ -50,9 +50,9 @@ if (isset($_POST['submitaddstudent']))
   }
 
   //add parent
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
+  $varConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
   $varParentRegDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
+  $filter = ['ConsumerIDNo'=>$varConsumerIDNoParent];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -97,9 +97,9 @@ if (isset($_POST['submitaddstudent']))
 
   //add relation
   $varrelation = $_POST['txtrelation'];
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
+  $varConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
   $varConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
+  $filter = ['ConsumerIDNo'=>$varConsumerIDNoParent];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)

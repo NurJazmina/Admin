@@ -64,8 +64,7 @@ if (isset($_POST['AddParentFormSubmit']))
                     </div>
                     <div class="modal-body">
                       <div class="form-group row">
-                        <h6 style="color:	#696969; ">You have entered an ID Number that already exist in this column.</h6>
-                        <h5 style="color:	#696969;">Add Multiple Child?</h5>
+                        <h6 style="color:	#696969;">You have an ID number that already exist in this column.</h6>
                       </div>
                       <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelationstudent&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
                       <button  onclick="index.php?page=parentlist" class="btn btn-success">Close</button>
@@ -87,8 +86,7 @@ if (isset($_POST['AddParentFormSubmit']))
                     </div>
                     <div class="modal-body">
                       <div class="form-group row">
-                        <h6 style="color:	#696969;">You have entered an ID Number that already exist in this column.</h6>
-                        <h5 style="color:	#696969;">Add Multiple Child?</h5>
+                        <h6 style="color:	#696969;">You have an ID number that already exist in this column.</h6>
                       </div>
                       <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelation&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
                       <button  onclick="index.php?page=parentlist" class="btn btn-success">Close</button>
@@ -99,7 +97,7 @@ if (isset($_POST['AddParentFormSubmit']))
             <?php
           }
         }
-        elseif($consumerid != $ConsumerID)
+        else
         {
         $count++;
         $ID = strval($document->_id);
@@ -129,8 +127,8 @@ if (isset($_POST['AddParentFormSubmit']))
                   <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad Parent</label>
                     <div class="col-sm-10">
-                      <input  value="<?php echo  $ConsumerIDNo; ?>" disabled><br>
-                      <input type="hidden" name="txtConsumerIDNo" value="<?php echo  $ConsumerIDNo; ?>" >
+                      <input  value="<?php echo  $ConsumerIDNoParent; ?>" disabled><br>
+                      <input type="hidden" name="txtConsumerIDNoParent" value="<?php echo  $ConsumerIDNoParent; ?>" >
                     </div>
                   </div>
                   <div class="form-group row">
@@ -148,8 +146,8 @@ if (isset($_POST['AddParentFormSubmit']))
                   <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">Mykad Child</label>
                     <div class="col-sm-10">
-                      <input  value="<?php echo  $varConsumerIDNoChild; ?>" disabled><br>
-                      <input type="hidden" name="txtConsumerIDNoChild" value="<?php echo  $varConsumerIDNoChild; ?>">
+                      <input  value="<?php echo  $ConsumerIDNoChild; ?>" disabled><br>
+                      <input type="hidden" name="txtConsumerIDNoChild" value="<?php echo  $ConsumerIDNoChild; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -180,7 +178,7 @@ if (isset($_POST['AddParentFormSubmit']))
                     <div class="col-sm-10">
                       <select class="form-control" id="txtstudentclass" name="txtstudentclass">
                         <?php
-                        $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varClasscategory];
+                        $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$Classcategory];
                         $query1 = new MongoDB\Driver\Query($filter1);
                         $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
                         foreach ($cursor1 as $document1):

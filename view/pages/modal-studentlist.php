@@ -10,7 +10,7 @@
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad Parent</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNo">
+              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNoParent">
             </div>
           </div>
           <div class="form-group row">
@@ -22,7 +22,7 @@
           <div class="form-group row">
             <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" style="height: auto; width: 70%">
+              <select class="form-control" id="sltStatus" name="txtClasscategory">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -55,7 +55,7 @@
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" style="height: auto; width: 70%">
+              <select class="form-control" id="sltStatus" name="txtClasscategory">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

@@ -250,6 +250,12 @@ License: You must have a valid license purchased only from themeforest(the above
 				}
 			})
 		</script>
+		<script>
+			if ( window.history.replaceState ) {
+				window.history.replaceState( null, null, window.location.href );
+			}
+		</script>
+
 
 		<!--end::Page Scripts-->
 	</body>

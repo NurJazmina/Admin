@@ -144,9 +144,6 @@
                     $ConsumerIDNoParent = $document1->ConsumerIDNo;
                     $ConsumerEmail = $document1->ConsumerEmail;
                     $ConsumerPhone = $document1->ConsumerPhone;
-                    $ConsumerPassword = $document1->ConsumerPassword;
-                    $options = ['cost' => 4,];
-                    $password_hash = password_verify("zaq12wsx", $ConsumerPassword);
                     ?>
                     <tr>
                     <td><a href="index.php?page=parentdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a></td>
