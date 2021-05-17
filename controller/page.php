@@ -48,9 +48,11 @@
                                 "exportstudentattendance",
                                 "exportclassattendance",
                                 "mail",
-                                "mira",
                                 "login",
-                                "kid"
+                                "addrelationstudent",
+                                "addrelation",
+                                "mira",
+                                "kid",
                                 //"testing",
                                );
 
