@@ -1,10 +1,7 @@
 <?php
 $_SESSION["title"] = "Staff";
-?>
-<?php
 //avoid put any gap in this page.Error behaviour due to gap.
 ?>
-
 <style>
 .highlight td {
 background:white;
@@ -34,8 +31,6 @@ background:white;
             </div>
         </div>
     </div>
-
-
 <?php
 if (!isset($_GET['id']) && empty($_GET['id']))
 {
@@ -145,26 +140,6 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 </div>
 </div>
 </div>
-
-<?php
-if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-{
-
-}
-else
-{
-$attendance = ($_GET['attendance']);
-?>
-<script>
-  $(document).ready(function () {
-     $("#attendance").table2excel({
-         filename: "attendancestaff.xls"
-     });
-  });
- </script>
-<?php
-}
-?>
 <script type="text/javascript">
 var rows = document.querySelectorAll('tr');
 
@@ -293,26 +268,6 @@ else
    </div>
    </div>
    </div>
-
-<?php
-if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-{
-}
-else
-{
-$attendance = ($_GET['attendance']);
-?>
-<script>
-  $(document).ready(function () {
-     $("#attendance").table2excel({
-         filename: "attendancestaff.xls"
-     });
-  });
-   
- </script>
-<?php
-}
-?>
 <script type="text/javascript">
 var rows = document.querySelectorAll('tr');
 

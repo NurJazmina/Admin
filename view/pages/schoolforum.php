@@ -7,7 +7,6 @@ include 'view/partials/_subheader/subheader-v1.php';
 include ('model/schoolforum.php');
 ?>
 <link rel="stylesheet" href="//c.disquscdn.com/next/96f5580/home/css/main.css">
-
 <div class="row">
     <div class="col-sm-2">
         <div class="aside__subheadings text-subheading">
@@ -57,25 +56,26 @@ include ('model/schoolforum.php');
                 </div>
             </div>
         <?php
-        if ($_SESSION["loggeduser_ConsumerGroup_id"]=='601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+        if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
         {
-            function time_elapsed($date){
-                $bit = array(
-                    //' year'      => $date  / 31556926 % 12,
-                    //' week'      => $date  / 604800 % 52,
-                    ' day'       => $date  / 86400 % 7,
-                    ' hour'      => $date  / 3600 % 24,
-                    ' minute'    => $date  / 60 % 60,
-                    ' second'    => $date  % 60
-                    );
-                foreach($bit as $k => $v){
-                    if($v > 1)$ret[] = $v . $k . 's';
-                    if($v == 1)$ret[] = $v . $k;
-                    }
-                array_splice($ret, count($ret)-1, 0, 'and');
-                $ret[] = 'ago';
-            
-                return join(' ', $ret);
+        function time_elapsed($date)
+        {
+            $bit = array(
+                //' year'      => $date  / 31556926 % 12,
+                //' week'      => $date  / 604800 % 52,
+                ' day'       => $date  / 86400 % 7,
+                ' hour'      => $date  / 3600 % 24,
+                ' minute'    => $date  / 60 % 60,
+                ' second'    => $date  % 60
+                );
+            foreach($bit as $k => $v){
+                if($v > 1)$ret[] = $v . $k . 's';
+                if($v == 1)$ret[] = $v . $k;
+                }
+            array_splice($ret, count($ret)-1, 0, 'and');
+            $ret[] = 'ago';
+        
+            return join(' ', $ret);
         }
 
         $ConsumerFName3=" ";

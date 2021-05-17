@@ -4,6 +4,7 @@ if (isset($_POST['AddNews'])) {
   $vartitle = $_POST['txttitle'];
   $varaccess = $_POST['txtaccess'];
   $EventVenue = $_POST['txtschoolEventVenue'];
+  $EventAddress = $_POST['txtschoolEventAddress'];
   $EventLocation = $_POST['txtschoolEventLocation'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
@@ -16,6 +17,7 @@ if (isset($_POST['AddNews'])) {
     'EventStaff_id'=>$varstaffid,
     'EventTitle'=>$vartitle,
     'EventVenue'=>$EventVenue,
+    'EventAddress' =>$EventAddress,
     'EventLocation'=>$EventLocation,
     'EventDateStart'=>new MongoDB\BSON\UTCDateTime(new DateTime($EventDateStart)),
     'EventDateEnd'=>new MongoDB\BSON\UTCDateTime(new DateTime($EventDateEnd)),

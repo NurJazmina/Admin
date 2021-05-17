@@ -48,8 +48,13 @@
                                 "exportstudentattendance",
                                 "exportclassattendance",
                                 "mail",
-                                "mira",
                                 "login",
+                                "addrelationstudentforstudent",
+                                "addrelationforstudent",
+                                "addrelationstudentforparent",
+                                "addrelationforparent",
+                                "mira",
+                                "kid",
                                 //"testing",
                                );
 
@@ -103,8 +108,6 @@
                                 //"exportstudentattendance",
                                 //"exportclassattendance",
                                 //"testing",
-                                "mail",
-                                "gongetz"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
@@ -127,7 +130,11 @@
         {
             if (file_exists('view/pages/'. $_GET['page'] . ".php")) 
             {
-                if ($_SESSION["loggeduser_StaffLevel"]=="0")//filter by group::School::Teacher
+                if($_SESSION["loggeduser_ConsumerGroupName"] == "GONGETZ")
+                {
+                    include 'view/pages/'. $_GET['page'] . ".php";
+                }
+                elseif ($_SESSION["loggeduser_ACCESS"]== "TEACHER")
                 {
                     if (in_array($_GET['page'], $teacherallowedaccess)){
                         include 'view/pages/'. $_GET['page'] . ".php";
@@ -135,7 +142,7 @@
                         include 'view/pages/unauthorized.php';
                     }
                 }
-                elseif ($_SESSION["loggeduser_StaffLevel"]=="1")//filter by group::School::Staff
+                elseif ($_SESSION["loggeduser_ACCESS"]=="STAFF")
                 {
                     if (in_array($_GET['page'], $staffallowedaccess)){
                         include 'view/pages/'. $_GET['page'] . ".php";
@@ -143,6 +150,7 @@
                         include 'view/pages/unauthorized.php';
                     }
                 }
+                
             }
             else 
             {

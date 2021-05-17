@@ -50,9 +50,9 @@ if (isset($_POST['submitaddstudent']))
   }
 
   //add parent
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
+  $varConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
   $varParentRegDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
+  $filter = ['ConsumerIDNo'=>$varConsumerIDNoParent];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -97,9 +97,9 @@ if (isset($_POST['submitaddstudent']))
 
   //add relation
   $varrelation = $_POST['txtrelation'];
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
+  $varConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
   $varConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
+  $filter = ['ConsumerIDNo'=>$varConsumerIDNoParent];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -211,6 +211,142 @@ if (isset($_POST['submiteditstudent']))
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
+//Add Relation and Student
+if (isset($_POST['addrelationstudent']))
+{
+  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
+  $parentid = $_POST['txtparentid'];
+  $childconsumerid = $_POST['txtchildconsumerid'];
+  $relation = $_POST['txtParentStudentRelation'];
+  $studentclass = $_POST['txtstudentclass'];
+
+  //adding student
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert(['Consumer_id'=>$childconsumerid,'Schools_id'=>$schoolID,'Class_id'=>$studentclass,'StudentsStatus'=>"ACTIVE"]);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  try
+  {
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Students', $bulk, $writeConcern);
+  }
+  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+  {
+    $result = $e->getWriteResult();
+    // Check if the write concern could not be fulfilled
+    if ($writeConcernError = $result->getWriteConcernError())
+    {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+    // Check if any write operations did not complete at all
+    foreach ($result->getWriteErrors() as $writeError)
+    {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+  }
+  catch (MongoDB\Driver\Exception\Exception $e)
+  {
+    printf("Other error: %s\n", $e->getMessage());
+    exit;
+  }
+
+  $filter = ['Consumer_id'=>$childconsumerid];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+  foreach ($cursor as $document) 
+  {
+    $studentid = strval($document->_id);
+  }
+
+  //adding relation
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  try
+  {
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ParentStudentRel', $bulk, $writeConcern);
+  }
+  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+  {
+    $result = $e->getWriteResult();
+    $_SESSION["loggeduser_schoolName"] = $varschoolname;
+    // Check if the write concern could not be fulfilled
+    if ($writeConcernError = $result->getWriteConcernError())
+    {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+    // Check if any write operations did not complete at all
+    foreach ($result->getWriteErrors() as $writeError)
+    {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+  }
+  catch (MongoDB\Driver\Exception\Exception $e)
+  {
+    printf("Other error: %s\n", $e->getMessage());
+    exit;
+  }
+}
+
+//Add Relation without Student
+if (isset($_POST['addrelation']))
+{
+  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
+  $parentid = $_POST['txtparentid'];
+  $studentid = $_POST['txtstudentid'];
+  $relation = $_POST['txtParentStudentRelation'];
+
+  //adding relation
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  try
+  {
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ParentStudentRel', $bulk, $writeConcern);
+  }
+  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+  {
+    $result = $e->getWriteResult();
+    $_SESSION["loggeduser_schoolName"] = $varschoolname;
+    // Check if the write concern could not be fulfilled
+    if ($writeConcernError = $result->getWriteConcernError())
+    {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+    // Check if any write operations did not complete at all
+    foreach ($result->getWriteErrors() as $writeError)
+    {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+  }
+  catch (MongoDB\Driver\Exception\Exception $e)
+  {
+    printf("Other error: %s\n", $e->getMessage());
+    exit;
+  }
+}
 
 //De/activate student
 if (isset($_POST['StatusStudentFormSubmit']))
@@ -321,6 +457,8 @@ if (isset($_POST['StatusStudentFormSubmit']))
   else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
   if (!isset($_POST['searchstudent']) && empty($_POST['searchstudent']))
   {

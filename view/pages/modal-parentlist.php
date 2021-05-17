@@ -10,7 +10,7 @@
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad Parent</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNo">
+              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNoParent">
             </div>
           </div>
           <div class="form-group row">
@@ -22,7 +22,7 @@
           <div class="form-group row">
             <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" style="height: auto; width: 70%">
+              <select class="form-control" id="sltStatus" name="txtClasscategory">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -34,7 +34,7 @@
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="AddParentFormSubmit">Re-Checking</button>
+          <button type="submit" class="btn btn-success" name="AddParentFormSubmit">Re-Checking</button>
         </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="EditParentFormSubmit">Edit</button>
+          <button type="submit" class="btn btn-success" name="EditParentFormSubmit">Edit</button>
         </div>
     </div>
   </div>
@@ -98,7 +98,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="StatusParentFormSubmit">Confirm</button>
+          <button type="submit" class="btn btn-success" name="StatusParentFormSubmit">Confirm</button>
         </div>
     </div>
   </div>

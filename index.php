@@ -34,7 +34,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<title>Smart School</title>
 		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="canonical" href="https://keenthemes.com/metronic" />
+		<link rel="stylesheet" type="text/css" href="resources/default.css">
 
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -102,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<?php include 'view/pages/_header.php'; ?>
 							<!--begin::Content-->
 							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-							<?php //include 'view/partials/navgongetz.php'; ?>
+							<?php include 'view/partials/navgongetz.php'; ?>
 							<?php //include 'view/partials/_subheader/subheader-v1.php'; ?>
 							<!--Content area here-->
 								<div class="content content-fixed">
@@ -222,6 +222,40 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/widgets.js"></script>
 		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
 		<?php include 'resources/default.php'; ?>
+		<?php
+		if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+		{
+
+		}
+		else
+		{
+			$attendance = ($_GET['attendance']);
+			?>
+			<script>
+  				$(document).ready(function () {
+     				$("#attendance").table2excel({
+         			filename: "attendance.xls"
+     				});
+  				});  
+ 			</script>
+			<?php
+		}
+		?>
+		<script type="text/javascript">
+			var rows = document.querySelectorAll('tr');
+
+			[...rows].forEach((r) => {
+				if (r.querySelectorAll('td:empty').length > 0) {
+					r.classList.add('highlight');
+				}
+			})
+		</script>
+		<script>
+			if ( window.history.replaceState ) {
+				window.history.replaceState( null, null, window.location.href );
+			}
+		</script>
+
 
 		<!--end::Page Scripts-->
 	</body>

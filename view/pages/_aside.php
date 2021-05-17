@@ -1,7 +1,5 @@
-
 <!--begin::Aside-->
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
-
 	<!--begin::Brand-->
 	<div class="brand flex-column-auto" id="kt_brand">
 
@@ -75,10 +73,10 @@
 									<span class="menu-label">
 									<?php 
 									$latestnews = 0;
-									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
-									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
 
-									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolNewsDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsDate' => ['$gte' => $from_date,'$lte' => $to_date]];
 									$query = new MongoDB\Driver\Query($filter);
 									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
 									foreach ($cursor as $document)
@@ -92,7 +90,7 @@
 									else
 									{
 										?>
-										<span class="label label-rounded label-primary"><?php echo $latestnews; ?></span>
+										<span class="label label-rounded label-warning"><?php echo $latestnews; ?></span>
 										<?php
 									}
 									?>
@@ -100,9 +98,7 @@
 								</a>
 							</li>
 							<?php
-							//filter by::Group::school
-							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187'||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -156,7 +152,7 @@
 									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
 									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'SchoolEventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
 									$query = new MongoDB\Driver\Query($filter);
 									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
 									foreach ($cursor as $document)
@@ -170,7 +166,7 @@
 									else
 									{
 										?>
-										<span class="label label-rounded label-primary"><?php echo $latestevent; ?></span>
+										<span class="label label-rounded label-warning"><?php echo $latestevent; ?></span>
 										<?php
 									}
 									?>
@@ -178,9 +174,7 @@
 								</a>
 							</li>
 							<?php
-							//filter by::Group::school
-							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -287,16 +281,16 @@
 								</span>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="" class="menu-link menu-toggle">
+								<a href="index.php?page=forums" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
-									<span class="menu-text">Coming soon</span>
+									<span class="menu-text">List Forum</span>
 									<span class="menu-label">
 									<?php 
 									$latestforum = 0;
 									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
 
 									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumDate' => ['$gte' => $from_date,'$lte' => $to_date]];
 									$query = new MongoDB\Driver\Query($filter);
@@ -311,29 +305,27 @@
 									}
 									else
 									{
-										?>
-										<span class="label label-rounded label-primary"><?php echo $latestforum; ?></span>
-										<?php
+									?>
+									<span class="label label-rounded label-warning"><?php echo $latestforum; ?></span>
+									<?php
 									}
 									?>
 									</span>
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="" class="menu-link menu-toggle">
+								<a href="index.php?page=modal-forums" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
-									<span class="menu-text">Coming soon</span>
+									<span class="menu-text">Add Forum</span>
 								</a>
 							</li>
 						</ul>
 					</div>
 				</li>
 				<?php
-				//filter by::Group::school
-				//available for staff/teacher
-				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+				if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 				{
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -472,9 +464,7 @@
 								</span>
 							</li>
 							<?php
-							//filter by::Group::school
-							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' )
+							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -563,9 +553,7 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<?php
-				//filter by::Group::school
-				//available for staff/teacher
-				if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+				if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 				{
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -721,9 +709,7 @@
 								</a>
 							</li>
 							<?php
-							//filter by::Group::school
-							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -749,5 +735,4 @@
 
 	<!--end::Aside Menu-->
 </div>
-
 <!--end::Aside-->
