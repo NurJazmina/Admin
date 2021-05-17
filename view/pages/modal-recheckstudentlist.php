@@ -245,6 +245,7 @@ if (isset($_POST['EditStudentFormSubmit']))
 {
   $varClasscategory = $_POST['txtClasscategory'];
   $varstudentid = strval($_POST['txtstudentid']);
+  
   $varstudentid = new \MongoDB\BSON\ObjectId($varstudentid);
   $filter = ['_id'=>$varstudentid];
   $query = new MongoDB\Driver\Query($filter);
@@ -252,6 +253,7 @@ if (isset($_POST['EditStudentFormSubmit']))
   foreach ($cursor as $document)
   {
     $Consumer_id = strval($document->Consumer_id);
+
     $id = new \MongoDB\BSON\ObjectId($Consumer_id);
     $filter1 = ['_id'=>$id];
     $query1 = new MongoDB\Driver\Query($filter1);
