@@ -16,7 +16,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
                             <div class="col-lg-12">
-                                <select class="form-control" id="staticStaffNo" style="height: auto;" name="type" required>
+                                <select class="form-control" id="staticStaffNo" style="height: auto;" name="access" required>
                                 <option value="SCHOOL">SCHOOL</option>
                                 <option value="PUBLIC">PUBLIC</option>
                                 </select>
@@ -40,8 +40,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="row">
                         <div class="col-lg-2"></div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success" name="AddForums">Confirm</button>
                                 <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="AddForums">Confirm</button>
                             </div>
                         </div>  
                     </div>

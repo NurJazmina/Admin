@@ -31,8 +31,6 @@ background:white;
             </div>
         </div>
     </div>
-
-
 <?php
 if (!isset($_GET['id']) && empty($_GET['id']))
 {

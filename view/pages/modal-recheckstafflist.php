@@ -119,7 +119,7 @@ if (isset($_POST['AddStaffFormSubmit']))
                 </div>
                 <div class="modal-footer">
                   <button  onclick="index.php?page=stafflist" class="btn btn-secondary">Close</button>
-                  <button type="submit" class="btn btn-secondary" name="submitaddstaff">Confirm</button>
+                  <button type="submit" class="btn btn-success" name="submitaddstaff">Confirm</button>
                 </div>
               </div>
           </div>
@@ -226,7 +226,7 @@ if (isset($_POST['AddStaffFormSubmit']))
                 <input type="hidden" class="form-control" id="staticStaffNo" name="txtClasscategory" value="<?php echo  $varClasscategory; ?>">
                 <input type="hidden" class="form-control" id="staticStaffNo" name="teacherid" value="<?php echo  $varteacherid; ?>">
                 <button  onclick="index.php?page=stafflist" class="btn btn-secondary" >Close</button>
-                <button type="submit" class="btn btn-secondary" name="submiteditstaff">Confirm</button>
+                <button type="submit" class="btn btn-success" name="submiteditstaff">Confirm</button>
                 </div>
             </div>
         </div>

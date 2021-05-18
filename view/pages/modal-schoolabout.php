@@ -18,7 +18,7 @@
         <div class="modal-footer">
           <input type="hidden" id="staticStaffNo" name="schoolname" value="<?=$schoolname?>">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-secondary" name="EditSchoolFormSubmit">Save changes</button>
+          <button type="submit" class="btn btn-success" name="EditSchoolFormSubmit">Save changes</button>
         </div>
     </div>
   </div>

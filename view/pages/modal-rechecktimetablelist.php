@@ -109,7 +109,7 @@ if (isset($_POST['AddtimetableFormSubmit']))
             <div class="modal-footer">
             <input type="hidden" class="form-control" id="staticStaffNo" name="txtteacherid" value="<?php echo  $teacherid; ?>">
             <button  onclick="index.php?page=timetablelist" class="btn btn-secondary">Close</button>
-            <button type="submit" class="btn btn-secondary" name="submitaddtimetable">Confirm</button>
+            <button type="submit" class="btn btn-success" name="submitaddtimetable">Confirm</button>
             </div>
         </div>
     </div>
@@ -232,7 +232,7 @@ if (isset($_POST['EditTimetableFormSubmit']))
         <div class="modal-footer">
           <input type="hidden" class="form-control" id="staticStaffNo" value="<?=$vartimetableid?>" name="txttimetableid">
           <button  onclick="index.php?page=timetablelist" class="btn btn-secondary">Close</button>
-          <button type="submit" class="btn btn-secondary" name="submitedittimetable">Confirm</button>
+          <button type="submit" class="btn btn-success" name="submitedittimetable">Confirm</button>
         </div>
       </div>
   </div>
