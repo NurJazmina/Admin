@@ -10,7 +10,7 @@ include ('model/event.php');
         <div class="card-body">
         <div class="text-right">
             <p>
-                <a href="#" role="button" class="btn btn-secondary" data-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">How to set the Google Link Map?</a>
+                <a href="#" role="button" class="btn btn-secondary" data-toggle="popover" title="How?TestingTestingTestingTesting" data-trigger="on-click" data-content="<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>" >How to set the Google Link Map?</a>
             </p>
         </div>
 
