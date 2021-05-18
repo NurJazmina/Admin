@@ -1,8 +1,11 @@
+<html>
+
 <?php
 $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/event.php'); 
 ?>
+
 <form action="index.php?page=event" method="post" name="AddEvent"><br><br>
     <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
         <div class="card card-custom gutter-b">
@@ -10,7 +13,7 @@ include ('model/event.php');
         <div class="card-body">
         <div class="text-right">
             <p>
-                <a href="#" role="button" class="btn btn-secondary" data-toggle="popover" title="How?TestingTestingTestingTesting" data-trigger="on-click" data-content="<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>" >How to set the Google Link Map?</a>
+                <button type="button" class="btn btn-lg btn-secondary" data-bs-toggle="popover" title="HOW" data-bs-content="User must go to googlemaps.com for location, once the location is selected, click on the 'Share' icon, select 'Embed a map', choose the smaller frame and copy the link after 'embed?' until the last apostrophe marking. Please paste it on the text field provided.">How to set the Google Link Map?</button>
             </p>
         </div>
 
@@ -82,3 +85,4 @@ include ('model/event.php');
         </div>
     </div>
 </form>
+</html>
