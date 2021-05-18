@@ -1,6 +1,7 @@
 <?php
 $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
+include ('model/event.php'); 
 ?>
 <form action="index.php?page=event" method="post" name="AddEvent"><br><br>
     <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
@@ -75,7 +76,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             <div class="col-lg-2"></div> 
             <div class="text-right">
                 <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-success" name="AddNews">Confirm</button>
+                <button type="submit" class="btn btn-success" name="AddEvent">Confirm</button>
             </div>
         </div>  
         </div>

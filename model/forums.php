@@ -85,8 +85,8 @@ catch (MongoDB\Driver\Exception\Exception $e)
 printf("Inserted %d document(s)\n", $result->getInsertedCount());
 printf("Updated  %d document(s)\n", $result->getModifiedCount());
 
-$NewsDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+$ForumsDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumsDate));
 $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 $date = date_format($datetime,"d M Y");
 
