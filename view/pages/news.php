@@ -184,7 +184,7 @@ include ('model/news.php');
                 <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
               </div>
               <div class="eventtitle">
-                <span class="claimedRight" style="color:black"><?php echo $schoolNewsDetails; ?></span><br>
+                <span class="claimedRight" style="color:black"><?php echo $NewsDetails; ?></span><br>
                 </table>
               </div>
             </div>
