@@ -14,7 +14,7 @@ if (isset($_POST['AddNews']))
     $vardetail = $_POST['txtdetail'];
     $varstaffid = strval($_SESSION["loggeduser_id"]);
     $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
-    $SchoolNewsDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+    $NewsDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
     $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
     $bulk->insert([
@@ -24,7 +24,7 @@ if (isset($_POST['AddNews']))
       'NewsDetails'=>$vardetail,
       'NewsAccess'=>$varaccess,
       'NewsStatus'=>'ACTIVE',
-      'NewsDate'=>$SchoolNewsDate]);
+      'NewsDate'=>$NewsDate]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
@@ -59,15 +59,9 @@ if (isset($_POST['AddNews']))
     printf("Inserted %d document(s)\n", $result->getInsertedCount());
     printf("Updated  %d document(s)\n", $result->getModifiedCount());
 
-    $filter = ['NewsDate'=>$SchoolNewsDate];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
-    foreach ($cursor as $document)
-    {
-      $NewsDate = ($document->NewsDate);
-      $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
-      $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-    }
+    $NewsDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+    $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     $date = date_format($datetime,"d M Y");
 
     $Bcc = $_POST['access'];
@@ -113,7 +107,7 @@ if (isset($_POST['AddNews']))
                           )
                       );
                       //Argument true in constructor enables exceptions
-                      $mail->SMTPDebug = 2;
+                      //$mail->SMTPDebug = 2;
                       $mail->isSMTP();
                       $mail->Host = 'mail.gongetz.com';
                       $mail->SMTPAuth = true;
@@ -317,7 +311,7 @@ if (isset($_POST['AddNews']))
                     ";
                     $mail->AltBody = "This is the plain text version of the email content";
 
-                    try { $mail->send(); echo "Message has been sent successfully";} 
+                    try { $mail->send();} 
 
                     catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
 
@@ -361,7 +355,7 @@ if (isset($_POST['AddNews']))
                           )
                       );
                       //Argument true in constructor enables exceptions
-                      $mail->SMTPDebug = 2;
+                      //$mail->SMTPDebug = 2;
                       $mail->isSMTP();
                       $mail->Host = 'mail.gongetz.com';
                       $mail->SMTPAuth = true;
@@ -565,7 +559,7 @@ if (isset($_POST['AddNews']))
                     ";
                     $mail->AltBody = "This is the plain text version of the email content";
 
-                    try { $mail->send(); echo "Message has been sent successfully";} 
+                    try { $mail->send();} 
 
                     catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
                     }
@@ -604,7 +598,7 @@ if (isset($_POST['AddNews']))
                       )
                   );
                   //Argument true in constructor enables exceptions
-                  $mail->SMTPDebug = 2;
+                  //$mail->SMTPDebug = 2;
                   $mail->isSMTP();
                   $mail->Host = 'mail.gongetz.com';
                   $mail->SMTPAuth = true;
@@ -808,7 +802,7 @@ if (isset($_POST['AddNews']))
                 ";
                 $mail->AltBody = "This is the plain text version of the email content";
 
-                try { $mail->send(); echo "Message has been sent successfully";} 
+                try { $mail->send();} 
 
                 catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
                 }
@@ -845,7 +839,7 @@ if (isset($_POST['AddNews']))
                       )
                   );
                   //Argument true in constructor enables exceptions
-                  $mail->SMTPDebug = 2;
+                  //$mail->SMTPDebug = 2;
                   $mail->isSMTP();
                   $mail->Host = 'mail.gongetz.com';
                   $mail->SMTPAuth = true;
@@ -1049,7 +1043,7 @@ if (isset($_POST['AddNews']))
                 ";
                 $mail->AltBody = "This is the plain text version of the email content";
 
-                try { $mail->send(); echo "Message has been sent successfully";} 
+                try { $mail->send();} 
 
                 catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
                 }
@@ -1083,7 +1077,7 @@ if (isset($_POST['AddNews']))
                       )
                   );
                   //Argument true in constructor enables exceptions
-                  $mail->SMTPDebug = 2;
+                  //$mail->SMTPDebug = 2;
                   $mail->isSMTP();
                   $mail->Host = 'mail.gongetz.com';
                   $mail->SMTPAuth = true;
@@ -1287,7 +1281,7 @@ if (isset($_POST['AddNews']))
                 ";
                 $mail->AltBody = "This is the plain text version of the email content";
 
-                try { $mail->send(); echo "Message has been sent successfully";} 
+                try { $mail->send();} 
 
                 catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
                 }

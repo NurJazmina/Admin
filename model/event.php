@@ -1,15 +1,15 @@
 <?php
-if (isset($_POST['AddNews'])) {
+if (isset($_POST['AddEvent'])) {
 
   $vartitle = $_POST['txttitle'];
   $varaccess = $_POST['txtaccess'];
-  $EventVenue = $_POST['txtschoolEventVenue'];
-  $EventAddress = $_POST['txtschoolEventAddress'];
-  $EventLocation = $_POST['txtschoolEventLocation'];
+  $EventVenue = $_POST['txtEventVenue'];
+  $EventAddress = $_POST['txtEventAddress'];
+  $EventLocation = $_POST['txtEventLocation'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
   $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $EventDateStart = $_POST['txtSchoolEventDateStart'];
-  $EventDateEnd = $_POST['txtSchoolEventDateEnd'];
+  $EventDateStart = $_POST['txtEventDateStart'];
+  $EventDateEnd = $_POST['txtEventDateEnd'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
