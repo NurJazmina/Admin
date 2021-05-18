@@ -255,6 +255,12 @@ License: You must have a valid license purchased only from themeforest(the above
 				window.history.replaceState( null, null, window.location.href );
 			}
 		</script>
+		<script>
+		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+		return new bootstrap.Popover(popoverTriggerEl)
+		})
+		</script>
 		<!--end::Page Scripts-->
 	</body>
 
