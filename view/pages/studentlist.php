@@ -64,11 +64,11 @@ border:1px solid #ffffff;
                       </div>
                     </div>
                     <button type="submit" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstudent">Search</button>
-                  <?php
-                  } 
-                  else
-                  {
-                  ?>
+                    <?php
+                    } 
+                    else
+                    {
+                    ?>
                     <div class="input-group input-group-sm input-group-solid" style="width:75%">
                       <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                       <div class="input-group-append">
@@ -89,9 +89,9 @@ border:1px solid #ffffff;
                       </div>
                     </div>
                     <button type="submit" style="width:25%; color:#FFFFFF; background-color:#db61c6;" class="btn btn-info font-weight-bolder btn-sm" name="searchstudent">Search</button>
-                  <?php
-                  }
-                  ?>
+                    <?php
+                    }
+                    ?>
                   </div>
                 </div>
               </form>
@@ -115,7 +115,7 @@ border:1px solid #ffffff;
           <strong>List</strong>
         </div>
         <div class="card-body">
-        <!-- sorting -->
+          <!-- sorting -->
           <button class="btn btn-success font-weight-bolder btn-sm" type="button" data-bs-toggle="dropdown">Sort by <i class="fas fa-sort"></i></button>
           <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="index.php?page=studentlist" tabindex="-1" data-type="alpha" style="color:#076d79; text-decoration: none;">All</a></li>
@@ -141,7 +141,7 @@ border:1px solid #ffffff;
                 </tr>
               </thead>
               <tbody>
-              <?php
+                <?php
                 foreach ($cursor as $document)
                 {
                   $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
@@ -203,26 +203,27 @@ border:1px solid #ffffff;
                       $queryA = new MongoDB\Driver\Query($filterA);
                       $cursorA =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
                       $varcounting = 0;
-                      ?>
-                      <?php
                         foreach ($cursorA as $documentA)
                           {
                             $varcounting = $varcounting +1;
-                            if ($varcounting % 2){
+                            if ($varcounting % 2)
+                            {
                               echo"<br>";
                               $displayinout = "IN";
-
-                            } else {
+                            } 
+                            else 
+                            {
                               $displayinout = " | OUT";
-
                             }
                             $AttendanceDate = ($documentA->AttendanceDate);
-                            if (!isset($datecapture) && empty($datecapture)) {
+                            if (!isset($datecapture) && empty($datecapture)) 
+                            {
                               $datecapture = $AttendanceDate;
                             }
                             $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
                             $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                            if ($datecapture!=$AttendanceDate) {
+                            if ($datecapture!=$AttendanceDate) 
+                            {
                             echo $displayinout ?><i class="fas fa-arrow-circle-right"></i><?php echo date_format($AttendanceDate,"h:i:a");
                             }
                           }
@@ -294,11 +295,11 @@ border:1px solid #ffffff;
                       <?php
                       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
-                      ?>
+                        ?>
                         <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fa fa-edit" style="font-size:15px"></i>
                         </button>
-                      <?php
+                        <?php
                       }
                       ?>
                       </td>
@@ -307,11 +308,11 @@ border:1px solid #ffffff;
                       <?php
                       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
-                      ?>
+                        ?>
                         <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
                           <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                         </button>
-                      <?php
+                        <?php
                       }
                       ?>
                       </td>
@@ -330,13 +331,13 @@ border:1px solid #ffffff;
                   {
                     ?>
                     <span class="btn btn-secondary">Previous</span>
-                  <?php
+                    <?php
                   } 
                   else 
                   {
-                  ?>
+                    ?>
                     <a href="index.php?page=studentlist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
-                  <?php
+                    <?php
                   }
                 }
                 ?>
@@ -451,7 +452,7 @@ border:1px solid #ffffff;
                     $classid = strval($document->_id);
                     $ClassCategory = strval($document->ClassCategory);
                     $ClassName = strval($document->ClassName);
-                   ?>
+                    ?>
                     <div class="tab-pane fade" id="v-pills-<?php echo $classid;?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $classid;?>-tab">
                       <div class="box" >
                         <strong>Total</strong>
@@ -553,7 +554,7 @@ border:1px solid #ffffff;
                       $classid = strval($document->_id);
                       $ClassCategory = strval($document->ClassCategory);
                       $ClassName = strval($document->ClassName);
-                    ?>
+                      ?>
                     <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-<?php echo $classid;?>-tab" data-bs-toggle="pill" href="#v-pills-<?php echo $classid;?>" role="tab" aria-controls="v-pills-<?php echo $classid;?>" aria-selected="false"><?php echo $ClassCategory;echo $ClassName;?></a>
                     <?php
                     }

@@ -257,7 +257,7 @@ if (isset($_POST['AddEvent'])) {
                                           <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                             <p>Hi $ConsumerFName $ConsumerLName,</p>
                                             <p>You've received this email because you're a member of $SchoolName</p>
-                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                             <p>Thanks,<br/>
                                             <p>Go N Getz</p>
                                             <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -505,7 +505,7 @@ if (isset($_POST['AddEvent'])) {
                                           <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                             <p>Hi $ConsumerFName $ConsumerLName,</p>
                                             <p>You've received this email because you're a member of $SchoolName</p>
-                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                             <p>Thanks,<br/>
                                             <p>Go N Getz</p>
                                             <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -748,7 +748,7 @@ if (isset($_POST['AddEvent'])) {
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi $ConsumerFName $ConsumerLName,</p>
                                         <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -989,7 +989,7 @@ if (isset($_POST['AddEvent'])) {
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi $ConsumerFName $ConsumerLName,</p>
                                         <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -1227,7 +1227,7 @@ if (isset($_POST['AddEvent'])) {
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi $ConsumerFName $ConsumerLName,</p>
                                         <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>

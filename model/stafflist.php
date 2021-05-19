@@ -80,12 +80,12 @@ if (isset($_POST['submitaddstaff']))
   $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
   $date = date_format($datetime,"d M Y");
 
-  $FromNameF = strval($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = strval($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = strval($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = strval($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = strval($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = strval($_SESSION["loggeduser_schoolsAddress"]);
+  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
+  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
+  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
+  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
+  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
+  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
 
   $varstaffid = new \MongoDB\BSON\ObjectId($ID);
   $filter = ['_id'=>$varstaffid];
@@ -96,6 +96,8 @@ if (isset($_POST['submitaddstaff']))
   {
     $ConsumerFName = strval($document->ConsumerFName);
     $ConsumerLName = strval($document->ConsumerLName);
+    $ConsumerIDType = strval($document->ConsumerIDType);
+    $ConsumerIDNo = strval($document->ConsumerIDNo);
     $Email = strval($document->ConsumerEmail);
 
     if($Email != "")
@@ -142,7 +144,7 @@ if (isset($_POST['submitaddstaff']))
       //Send HTML or Plain Text email
       $mail->isHTML(true);
 
-      $mail->Subject = "$SchoolName  - Your Data has been added";
+      $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
       <head>
@@ -257,8 +259,8 @@ if (isset($_POST['submitaddstaff']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerFName,</p>
-                              <p>{item} succesfully link with $ConsumerFName $ConsumerFName with {document type} {document number} on $date. If you found out this is an error, kindly contact:
+                              <p>Hi $ConsumerFName $ConsumerLName</p>
+                              <p>$SchoolName succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
                                     <li>$SchoolName</li>
                                     <li>Phone: $SchoolPhone</li>
@@ -385,11 +387,17 @@ if (isset($_POST['submiteditstaff']))
     $ClassCategoryNew = strval($document1->ClassCategory);
     $ClassNameNew = strval($document1->ClassName);
   }
+  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
+  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($datetime,"d M Y");
 
-  $FromNameF = strval($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = strval($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = strval($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = strval($_SESSION["loggeduser_SchoolsEmail"]);
+  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
+  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
+  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
+  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
+  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
+  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
 
   $Teacherid = new \MongoDB\BSON\ObjectId($Teacherid);
   $filter = ['_id'=>$Teacherid];
@@ -400,6 +408,8 @@ if (isset($_POST['submiteditstaff']))
   {
     $ConsumerFName = strval($document->ConsumerFName);
     $ConsumerLName = strval($document->ConsumerLName);
+    $ConsumerIDType = strval($document->ConsumerIDType);
+    $ConsumerIDNo = strval($document->ConsumerIDNo);
     $Email = strval($document->ConsumerEmail);
 
     if($Email != "")
@@ -446,7 +456,7 @@ if (isset($_POST['submiteditstaff']))
       //Send HTML or Plain Text email
       $mail->isHTML(true);
 
-      $mail->Subject = "$SchoolName  - Your Classroom has been changed";
+      $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
       <head>
@@ -562,8 +572,7 @@ if (isset($_POST['submiteditstaff']))
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                               <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>An Admin($FromNameF $FromNameL) has updated your classroom name.</p>
-                              <p>The previous classroom has been changed to  <span style='color:blue;font-weight:bold'>$ClassCategoryNew $ClassNameNew</span>.If you found out this is an error, kindly contact:
+                              <p>$ClassCategoryNew $ClassNameNew  succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
                                     <li>$SchoolName</li>
                                     <li>Phone: $SchoolPhone</li>
@@ -697,11 +706,17 @@ if (isset($_POST['StatusStaffFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
+  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
+  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($datetime,"d M Y");
 
-  $FromNameF = strval($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = strval($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = strval($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = strval($_SESSION["loggeduser_SchoolsEmail"]);
+  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
+  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
+  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
+  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
+  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
+  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
 
   $varstaffid = new \MongoDB\BSON\ObjectId($varstaffid);
   $filter = ['_id'=>$varstaffid];
@@ -712,6 +727,8 @@ if (isset($_POST['StatusStaffFormSubmit']))
   {
     $ConsumerFName = strval($document->ConsumerFName);
     $ConsumerLName = strval($document->ConsumerLName);
+    $ConsumerIDType = strval($document->ConsumerIDType);
+    $ConsumerIDNo = strval($document->ConsumerIDNo);
     $Email = strval($document->ConsumerEmail);
 
     if($Email != "")
@@ -758,7 +775,7 @@ if (isset($_POST['StatusStaffFormSubmit']))
       //Send HTML or Plain Text email
       $mail->isHTML(true);
 
-      $mail->Subject = "$SchoolName  - Your Status has been changed";
+      $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
       <head>
@@ -874,14 +891,14 @@ if (isset($_POST['StatusStaffFormSubmit']))
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                               <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>An Admin($FromNameF $FromNameL) has updated your Status.</p>
-                              <p>The previous Status has been changed to  <span style='color:red;font-weight:bold'> $varStaffStatus </span> because of <span style='font-weight:bold'>$varConsumerRemarksDetails</span> . If you found out this is an error, kindly contact:
-                              <ul>
-                                <li>$SchoolName</li>
-                                <li>Phone: $SchoolPhone</li>
-                                <li>Email: $SchoolEmail</li>
-                                <li>Address: $SchoolAddress</li>
-                            </ul>
+                              <p>Status for $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date has been change to $varStaffStatus. If you found out this is an error, kindly contact:
+                                <ul>
+                                    <li>$SchoolName</li>
+                                    <li>Phone: $SchoolPhone</li>
+                                    <li>Email: $SchoolEmail</li>
+                                    <li>Address: $SchoolAddress</li>
+                                </ul>
+                              </p>
                               <p>Thanks,<br/>
                               <p>Go N Getz</p>
                               <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
