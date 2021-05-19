@@ -1,9 +1,7 @@
 <?php
 $_SESSION["title"] = "Event";
-?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
+include 'view/partials/_subheader/subheader-v1.php'; 
 
-<?php
 $id = new \MongoDB\BSON\ObjectId($_GET['id']);
 $filter = ['_id'=>$id];
 $query = new MongoDB\Driver\Query($filter);
@@ -11,20 +9,21 @@ $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query
 foreach ($cursor as $document)
 {
     $eventid = strval($document->_id);
-    $SchoolEventStaff_id = ($document->SchoolEventStaff_id);
-    $schoolEventTitle = ($document->schoolEventTitle);
-    $schoolEventVenue = ($document->schoolEventVenue);
-    $schoolEventLocation = ($document->schoolEventLocation);
-    $SchoolEventDateStart = ($document->SchoolEventDateStart);
-    $SchoolEventDateEnd = ($document->SchoolEventDateEnd);
-    $SchoolEventStatus = ($document->SchoolEventStatus);
+    $EventStaff_id = ($document->EventStaff_id);
+    $EventTitle = ($document->EventTitle);
+    $EventVenue = ($document->EventVenue);
+    $EventAddress = ($document->EventAddress);
+    $EventLocation = ($document->EventLocation);
+    $EventDateStart = ($document->EventDateStart);
+    $EventDateEnd = ($document->EventDateEnd);
+    $EventStatus = ($document->EventStatus);
 
-    $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateStart));
+    $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($EventDateStart));
     $datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-    $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($SchoolEventDateEnd));
+    $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($EventDateEnd));
     $datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-    $staffid = new \MongoDB\BSON\ObjectId($SchoolEventStaff_id);
+    $staffid = new \MongoDB\BSON\ObjectId($EventStaff_id);
     $filter1 = ['_id' => $staffid];
     $query1 = new MongoDB\Driver\Query($filter1);
     $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
@@ -60,7 +59,7 @@ foreach ($cursor as $document)
 
 }
 ?>
-<div><br><br><br><h1 style="color:#696969; text-align:center"><?php echo $schoolEventTitle; ?></h1></div><br>
+<div><br><br><br><h1 style="color:#696969; text-align:center"><?php echo $EventTitle; ?></h1></div><br>
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
@@ -73,10 +72,16 @@ foreach ($cursor as $document)
               <div class="col-md-4 event-date"><h6 class="event-meta-tile">Date</h6><?php echo date_format($datetimeStart,"d M Y")." "; ?>to<?php echo " ".date_format($datetimeEnd,"d M Y"); ?></div>
                 <div class="col-md-3 event-time"><h6 class="event-meta-tile">Time</h6><?php echo date_format($datetimeStart,"H:i"); ?></div>
                 <div class="col-md-5 event-venue-wrap">
-                <h6 class="event-meta-tile">Venue</h6>
-                <span><?php echo $schoolEventVenue; ?></span>
-                <div class="event-location">
-                <span><i class="fas fa-map-marker-alt"></i><?php echo " ".$schoolEventLocation; ?></span>
+                    <h6 class="event-meta-tile">Venue</h6>
+                    <span><?php echo $EventVenue; ?></span>
+
+                    <div class="event-address">
+                    <span><i class="fas fa-map-marker-alt"></i><?php echo $EventAddress; ?></span>
+                    </div>
+                    <br>
+                    <div class="table-responsive-sm">
+                      <?php echo $EventLocation; ?>
+                    </div>
                 </div>
                 </div>
               </div>

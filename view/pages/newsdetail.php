@@ -11,16 +11,16 @@ $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query)
 foreach ($cursor as $document)
 {
     $Newsid = strval($document->_id);
-    $SchoolNewsStaff_id = ($document->SchoolNewsStaff_id);
-    $schoolNewsTitle = ($document->schoolNewsTitle);
-    $schoolNewsDetails = ($document->schoolNewsDetails);
-    $SchoolNewsDate = ($document->SchoolNewsDate);
-    $SchoolNewsStatus = ($document->SchoolNewsStatus);
+    $NewsStaff_id = ($document->NewsStaff_id);
+    $NewsTitle = ($document->NewsTitle);
+    $NewsDetails = ($document->NewsDetails);
+    $NewsDate = ($document->NewsDate);
+    $NewsStatus = ($document->NewsStatus);
 
-    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($SchoolNewsDate));
+    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-    $staffid = new \MongoDB\BSON\ObjectId($SchoolNewsStaff_id);
+    $staffid = new \MongoDB\BSON\ObjectId($NewsStaff_id);
     $filter1 = ['_id' => $staffid];
     $query1 = new MongoDB\Driver\Query($filter1);
     $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
@@ -63,10 +63,9 @@ foreach ($cursor as $document)
     {
     $total = $total + 1;
     }
-
 }
 ?>
-<div><br><br><br><h1 style="color:#696969; text-align:center"><?php echo $schoolNewsTitle; ?></h1></div><br>
+<div><br><br><br><h1 style="color:#696969; text-align:center"><?php echo $NewsTitle; ?></h1></div><br>
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
@@ -74,7 +73,7 @@ foreach ($cursor as $document)
       <div class="card-body">
         <div class="table-responsive-sm">
             <table class="table">
-            <span class="claimedRight" maxlength="100"><?php echo $schoolNewsDetails; ?></span><br>
+            <span class="claimedRight" maxlength="100"><?php echo $NewsDetails; ?></span><br>
             </table>
         </div>
       </div>

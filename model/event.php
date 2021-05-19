@@ -15,11 +15,11 @@ if (isset($_POST['AddEvent'])) {
   $EventDateStart = $_POST['txtEventDateStart'];
   $EventDateEnd = $_POST['txtEventDateEnd'];
 
-    list($maps1, $maps2) = explode("pb", $EventLocation);
-    list($maps3, $maps4) = explode(" ", $maps2);
-    $mapsA = '<iframe src="https://www.google.com/maps/embed?pb';
-    $mapsB = ' width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
-    $eventmaps = $mapsA.$maps3.$mapsB;
+  list($maps1, $maps2) = explode("pb", $EventLocation);
+  list($maps3, $maps4) = explode(" ", $maps2);
+  $mapsA = '<iframe src="https://www.google.com/maps/embed?pb';
+  $mapsB = ' width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+  $eventmaps = $mapsA.$maps3.$mapsB;
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
