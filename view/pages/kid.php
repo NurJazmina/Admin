@@ -1,27 +1,11 @@
-$_SESSION["loggeduser_id"] = '';
-            $_SESSION["loggeduser_consumerFName"] = '';
-            $_SESSION["loggeduser_consumerLName"] = '';
-            $_SESSION["loggeduser_consumerIDType"] = '';
-            $_SESSION["loggeduser_consumerIDNo"] = '';
-            $_SESSION["loggeduser_consumerEmail"] = '';
-            $_SESSION["loggeduser_consumerPhone"] = '';
-            $_SESSION["loggeduser_consumerAddress"] = '';
-            $_SESSION["loggeduser_consumerPostcode"] = '';
-            $_SESSION["loggeduser_consumerCity"] = '';
-            $_SESSION["loggeduser_consumerState"] = '';
-            $_SESSION["loggeduser_consumerStatus"] = '';
-            $_SESSION["loggeduser_ConsumerGroup_id"] = '';
+<?php
 
-            $_SESSION["loggeduser_schoolID"] = '';
-            $_SESSION["loggeduser_teacherid"] = '';
-            $_SESSION["loggeduser_StaffLevel"] = '';
-            $_SESSION["loggeduser_ConsumerID"] = '';
-            $_SESSION["loggeduser_ClassID"] = '';
-            $_SESSION["loggeduser_Staffdepartment"] = '';
+                        $varmaps = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15935.288164121743!2d101.6954547!3d3.1416399000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37d197ea7fdf%3A0x3790d8523745f1a8!2sMasjid%20Asy-Syakirin%20KLCC!5e0!3m2!1sen!2smy!4v1621390098905!5m2!1sen!2smy" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
 
-            $_SESSION["loggeduser_schoolName"] = '';
-            $_SESSION["loggeduser_schoolsPhoneNo"] = '';
-            $_SESSION["loggeduser_schoolsAddress"] = '';
-            $_SESSION["loggeduser_SchoolsEmail"] = '';
-
-            $_SESSION["loggeduser_DepartmentName"] = '';
+                        list($maps1, $maps2) = explode("pb", $varmaps);
+                        list($maps3, $maps4) = explode(" ", $maps2);
+                        $mapsA = '<iframe src="https://www.google.com/maps/embed?pb';
+                        $mapsB = ' width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+                        $eventmaps = $mapsA.$maps3.$mapsB;
+                        echo $eventmaps;
+?>
