@@ -108,7 +108,7 @@ include ('model/event.php');
   //'EventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]
   
   $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventAccess'=>'PUBLIC'];
-  $optionA = ['limit'=>100,'sort' => ['SchoolEventDateStart' => 1]];
+  $optionA = ['limit'=>100,'sort' => ['EventDateStart' => 1]];
   $queryA = new MongoDB\Driver\Query($filterA,$optionA );
   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$queryA);
   foreach ($cursorA as $documentA)
