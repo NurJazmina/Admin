@@ -57,21 +57,21 @@ h2 {text-align: center;}
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Parent Name</label>
             <div class="col-sm-10">
-              <input   value="<?php echo  $ConsumerFName." ".$ConsumerLName; ?>" disabled>
+              <input class="form-control" value="<?php echo  $ConsumerFName." ".$ConsumerLName; ?>" disabled>
               <input type="hidden" name="txtparentid" value="<?php echo $parentid; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Child Name</label>
             <div class="col-sm-10">
-              <input  value="<?php echo $ConsumerFNameChild." ".$ConsumerLNameChild; ?>" disabled><br>
+              <input class="form-control" value="<?php echo $ConsumerFNameChild." ".$ConsumerLNameChild; ?>" disabled><br>
               <input type="hidden" name="txtchildconsumerid" value="<?php echo $childconsumerid; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaff" class="col-sm-2 col-form-label">Relation</label>
             <div class="col-sm-10">
-              <input  value="<?php echo $ParentStudentRelation; ?>" disabled><br>
+              <input class="form-control" value="<?php echo $ParentStudentRelation; ?>" disabled><br>
               <input type="hidden" name="txtParentStudentRelation" value="<?php echo $ParentStudentRelation; ?>">
             </div>
           </div>

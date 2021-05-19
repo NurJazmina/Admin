@@ -1,13 +1,12 @@
 <?php
 $_SESSION["title"] = "Student";
-?>
-<?php
 //avoid put any gap in this page.Error behaviour due to gap.
 ?>
 
 <style>
 .highlight td {
-background:white;
+    background:#FFE2E5;
+color:#F64E60 ;
 }
 </style>
 

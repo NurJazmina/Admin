@@ -1,12 +1,11 @@
 <?php
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-  require_once "vendor/autoload.php";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once "vendor/autoload.php";
 
 //Add school staff
 if (isset($_POST['submitaddstaff']))
 {
-
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $varConsumerIDNo = $_POST['txtConsumerIDNo'];
   $varStaffdepartment = strval($_SESSION["departmentid"]);
@@ -259,7 +258,7 @@ if (isset($_POST['submitaddstaff']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName</p>
+                              <p>Hi $ConsumerFName $ConsumerLName,</p>
                               <p>$SchoolName succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
                                     <li>$SchoolName</li>

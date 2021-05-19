@@ -68,9 +68,9 @@ if (isset($_POST['AddStudentFormSubmit']))
             </form>
             </div>
             <?php
-          }
-          else
-          {
+            }
+            else
+            {
             ?>
             <div class="alert alert-danger" role="alert" style="text-align:center;">
             <h2>DUPLICATE ID NUMBER</h2>
@@ -94,10 +94,10 @@ if (isset($_POST['AddStudentFormSubmit']))
         }
         else
         {
-        $count++;
-        $ID = strval($document->_id);
-        $ConsumerFName = strval($document->ConsumerFName);
-        $ConsumerIDNo = strval($document->ConsumerIDNo);
+          $count++;
+          $ID = strval($document->_id);
+          $ConsumerFName = strval($document->ConsumerFName);
+          $ConsumerIDNo = strval($document->ConsumerIDNo);
         ?>
         <br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
         <form id="submitaddstudent" name="submitaddstudent" action="index.php?page=studentlist" method="post">
@@ -110,45 +110,45 @@ if (isset($_POST['AddStudentFormSubmit']))
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">Parent Name</label>
                     <div class="col-sm-10">
-                    <input   value="<?php echo  $ConsumerFName; ?>" disabled>
+                    <input class="form-control" value="<?php echo  $ConsumerFName; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Type</label>
                     <div class="col-sm-10">
-                    <input  value="<?php echo  $ConsumerIDType; ?>" disabled><br>
+                    <input class="form-control" value="<?php echo  $ConsumerIDType; ?>" disabled><br>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad Parent</label>
                     <div class="col-sm-10">
-                    <input  value="<?php echo $ConsumerIDNoParent; ?>" disabled><br>
+                    <input class="form-control" value="<?php echo $ConsumerIDNoParent; ?>" disabled><br>
                     <input type="hidden" name="txtConsumerIDNoParent" value="<?php echo $ConsumerIDNoParent; ?>" >
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">Child Name</label>
                     <div class="col-sm-10">
-                    <input   value="<?php echo  $ConsumerFNameChild; ?>" disabled>
+                    <input class="form-control" value="<?php echo  $ConsumerFNameChild; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Type</label>
                     <div class="col-sm-10">
-                    <input  value="<?php echo  $ConsumerIDTypeChild; ?>" disabled><br>
+                    <input class="form-control" value="<?php echo  $ConsumerIDTypeChild; ?>" disabled><br>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">Mykad Child</label>
                     <div class="col-sm-10">
-                    <input  value="<?php echo  $ConsumerIDNoChild; ?>" disabled><br>
+                    <input class="form-control" value="<?php echo  $ConsumerIDNoChild; ?>" disabled><br>
                     <input type="hidden" name="txtConsumerIDNoChild" value="<?php echo  $ConsumerIDNoChild; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">Group</label>
                     <div class="col-sm-10">
-                    <input   value="VIP" disabled>
+                    <input class="form-control" value="VIP" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -206,25 +206,25 @@ if (isset($_POST['AddStudentFormSubmit']))
           <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
                   <div class="modal-header">
-                  <h5 class="modal-title" id="AddParentModalLabel">Add Parent</h5>
+                  <h5 class="modal-title" id="AddParentModalLabel">Add Student</h5>
                   </div>
                   <div class="modal-body">
                   <div class="form-group row">
                       <label for="staticStaffNo" class="col-sm-2 col-form-label">Name</label>
                       <div class="col-sm-10">
-                      <input   value="<?php echo  $ConsumerFName; echo " "; echo  $ConsumerLName; ?>" disabled>
+                      <input class="form-control" value="<?php echo  $ConsumerFNameChild." ".$ConsumerLNameChild; ?>" disabled>
                       </div>
                   </div>
                   <div class="form-group row">
                       <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad</label>
                       <div class="col-sm-10">
-                      <input   value="<?php echo  $varConsumerIDNo; ?>" disabled>
+                      <input class="form-control" value="<?php echo  $ConsumerIDNoChild; ?>" disabled>
                       </div>
                   </div>
                   <div class="form-group row">
                       <label for="staticStaffNo" class="col-sm-2 col-form-label"></label>
                       <div class="col-sm-10">
-                      <input   value="UNAUTHORIZED" disabled>
+                      <input class="form-control" value="UNAUTHORIZED" disabled>
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -239,8 +239,6 @@ if (isset($_POST['AddStudentFormSubmit']))
     }
   }
 }
-?>
-<?php
 if (isset($_POST['EditStudentFormSubmit']))
 {
   $varClasscategory = $_POST['txtClasscategory'];
@@ -253,15 +251,14 @@ if (isset($_POST['EditStudentFormSubmit']))
   foreach ($cursor as $document)
   {
     $Consumer_id = strval($document->Consumer_id);
-
     $id = new \MongoDB\BSON\ObjectId($Consumer_id);
+
     $filter1 = ['_id'=>$id];
     $query1 = new MongoDB\Driver\Query($filter1);
     $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
     foreach ($cursor1 as $document1)
     {
-       $ConsumerFName = strval($document1->ConsumerFName);
-
+      $ConsumerFName = strval($document1->ConsumerFName);
 ?>
 <br><br><br><br><h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
 <form id="submiteditstudent" name="submiteditstudent" action="index.php?page=studentlist" method="post">
@@ -274,13 +271,13 @@ if (isset($_POST['EditStudentFormSubmit']))
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Student Name</label>
             <div class="col-sm-10">
-              <input value="<?php echo $ConsumerFName; ?>" disabled>
+              <input class="form-control" value="<?php echo $ConsumerFName; ?>" disabled>
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
             <div class="col-sm-10">
-              <input value="<?php echo $varClasscategory; ?>" disabled>
+              <input class="form-control" value="<?php echo $varClasscategory; ?>" disabled>
             </div>
           </div>
           <div class="form-group row">

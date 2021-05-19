@@ -28,6 +28,7 @@
                                 "modal-recheckclassroomlist",
                              
                                 "staffdetail",
+                                "studentdetail",
                                 "eventdetail",
                                 "newsdetail",
                                 "departmentdetail",
@@ -86,12 +87,13 @@
                                 //"modal-recheckparentlist",
                                 "modal-rechecktimetablelist",
                                 //"modal-recheckclassroomlist",
-                            
+
+                                "staffdetail",
+                                "studentdetail",
                                 "eventdetail",
                                 "newsdetail",
                                 //"departmentdetail",
                                 "classdetail",
-                                "studentdetail",
                                 "schoolforumdetail",
                                 "publicforumdetail",
 
@@ -112,13 +114,13 @@
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
     {
-    ?>
+        ?>
         <div class="row" style="height:100vh;">
             <div class="col-sm-12 col-lg-6" style="background-image:url(images/loginpagebg.jpg); background-repeat:no-repeat; background-size:cover;">
             </div>
                 <?php include 'view/pages/login.php'; ?>
         </div>
-    <?php
+        <?php
     } 
     else
     {
@@ -150,14 +152,11 @@
                         include 'view/pages/unauthorized.php';
                     }
                 }
-                
             }
             else 
             {
                 include 'view/partials/error.html';
             }
         }   
-
     }
-
 ?>

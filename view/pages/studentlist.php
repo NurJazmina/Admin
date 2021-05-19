@@ -296,7 +296,7 @@ border:1px solid #ffffff;
                       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
                         ?>
-                        <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $studentid; ?>">
+                        <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstudent" data-bs-whatever="<?php echo $Consumer_id; ?>">
                           <i class="fa fa-edit" style="font-size:15px"></i>
                         </button>
                         <?php
@@ -309,7 +309,7 @@ border:1px solid #ffffff;
                       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
                         ?>
-                        <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $studentid; ?>">
+                        <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStudentModal" data-bs-whatever="<?php echo $Consumer_id; ?>">
                           <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                         </button>
                         <?php

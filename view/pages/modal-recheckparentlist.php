@@ -48,6 +48,14 @@ if (isset($_POST['AddParentFormSubmit']))
         {
           $parentid = strval($document1->_id);
           $ConsumerID = strval($document1->ConsumerID);
+
+          $filter = ['ParentID'=>$parentid];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+          foreach ($cursor as $document) 
+          {
+            $ParentStudentRelation = strval($document->ParentStudentRelation);
+          }
         }
 
         if ($parentconsumerid == $ConsumerID)
@@ -99,107 +107,128 @@ if (isset($_POST['AddParentFormSubmit']))
         }
         else
         {
-        $count++;
-        $ID = strval($document->_id);
-        $ConsumerFName = strval($document->ConsumerFName);
-        $ConsumerIDNo = strval($document->ConsumerIDNo);
-        ?>
-        <h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
-        <form id="submitaddparent" name="submitaddparent" action="index.php?page=parentlist" method="post">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="AddParentModalLabel">Add Parent</h5>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">Parent Name</label>
-                    <div class="col-sm-10">
-                      <input   value="<?php echo  $ConsumerFName; ?>" disabled>
+          if($studentid == '')
+          {
+            ?>
+            <h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
+            <form id="submitaddparent" name="submitaddparent" action="index.php?page=parentlist" method="post">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="AddParentModalLabel">Add Parent</h5>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">Parent Name</label>
+                        <div class="col-sm-10">
+                          <input class="form-control"  value="<?php echo  $ConsumerFName; ?>" disabled>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Type</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo  $ConsumerIDType; ?>" disabled><br>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad Parent</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo  $ConsumerIDNoParent; ?>" disabled><br>
+                          <input type="hidden" name="txtConsumerIDNoParent" value="<?php echo  $ConsumerIDNoParent; ?>" >
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">Child Name</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo  $ConsumerFNameChild; ?>" disabled>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Type</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo  $ConsumerIDTypeChild; ?>" disabled><br>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">Mykad Child</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo  $ConsumerIDNoChild; ?>" disabled><br>
+                          <input type="hidden" name="txtConsumerIDNoChild" value="<?php echo  $ConsumerIDNoChild; ?>">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">Group</label>
+                        <div class="col-sm-10">
+                          <input class="form-control"  value="VIP" disabled>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaff" class="col-sm-2 col-form-label">Parent Status</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="sltStatus" value="ACTIVE" disabled>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticStaff" class="col-sm-2 col-form-label">Relation</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="txtrelation" name="txtrelation" >
+                            <option value="FATHER">FATHER</option>
+                            <option value="MOTHER">MOTHER</option>
+                            <option value="GUARDIAN">GUARDIAN</option>
+                            <option value="RELATIVE">RELATVE</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="txtstudentclass" class="col-sm-2 col-form-label">Class</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="txtstudentclass" name="txtstudentclass">
+                            <?php
+                            $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$Classcategory];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
+                            foreach ($cursor1 as $document1):
+                            ?>
+                            <option value="<?=($document1->_id)?>"><?=($document1->ClassName)?></option>
+                            <?php
+                            endforeach
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
+                      <button type="submit" class="btn btn-success" name="submitaddparent">Confirm</button>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Type</label>
-                    <div class="col-sm-10">
-                      <input  value="<?php echo  $ConsumerIDType; ?>" disabled><br>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad Parent</label>
-                    <div class="col-sm-10">
-                      <input  value="<?php echo  $ConsumerIDNoParent; ?>" disabled><br>
-                      <input type="hidden" name="txtConsumerIDNoParent" value="<?php echo  $ConsumerIDNoParent; ?>" >
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">Child Name</label>
-                    <div class="col-sm-10">
-                      <input   value="<?php echo  $ConsumerFNameChild; ?>" disabled>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Type</label>
-                    <div class="col-sm-10">
-                      <input  value="<?php echo  $ConsumerIDTypeChild; ?>" disabled><br>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">Mykad Child</label>
-                    <div class="col-sm-10">
-                      <input  value="<?php echo  $ConsumerIDNoChild; ?>" disabled><br>
-                      <input type="hidden" name="txtConsumerIDNoChild" value="<?php echo  $ConsumerIDNoChild; ?>">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaffNo" class="col-sm-2 col-form-label">Group</label>
-                    <div class="col-sm-10">
-                      <input   value="VIP" disabled>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaff" class="col-sm-2 col-form-label">Parent Status</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" id="sltStatus" value="ACTIVE" disabled>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticStaff" class="col-sm-2 col-form-label">Relation</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" id="txtrelation" name="txtrelation" >
-                        <option value="FATHER">FATHER</option>
-                        <option value="MOTHER">MOTHER</option>
-                        <option value="GUARDIAN">GUARDIAN</option>
-                        <option value="RELATIVE">RELATVE</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="txtstudentclass" class="col-sm-2 col-form-label">Class</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" id="txtstudentclass" name="txtstudentclass">
-                        <?php
-                        $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$Classcategory];
-                        $query1 = new MongoDB\Driver\Query($filter1);
-                        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
-                        foreach ($cursor1 as $document1):
-                        ?>
-                        <option value="<?=($document1->_id)?>"><?=($document1->ClassName)?></option>
-                        <?php
-                          endforeach
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
-                  <button type="submit" class="btn btn-success" name="submitaddparent">Confirm</button>
-                </div>
               </div>
-          </div>
-        </form> 
-        <?php
-        if ($count == $end) break;
+            </form> 
+            <?php
+            if ($count == $end) break;
+          }
+          else
+          {
+            ?>
+            <div class="alert alert-danger" role="alert" style="text-align:center;">
+            <h2>DUPLICATE ID NUMBER</h2>
+            <form>
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <h6 style="color:	#696969;">You have an ID number that already exist in this column.</h6>
+                      </div>
+                      <a style="text-decoration: none; color:	#ffffff;" href="index.php?page=addrelationforparent&ConsumerIDNoParent=<?php echo $ConsumerIDNoParent; ?>&ConsumerIDNoChild=<?php echo $ConsumerIDNoChild; ?>&Classcategory=<?php echo $Classcategory; ?>"><button type="button" class="btn btn-success">Add Child</a>
+                      <button  onclick="index.php?page=parentlist" class="btn btn-success">Close</button>
+                  </div>
+              </div>
+            </form>
+            </div>
+            <?php
+          }
         }
       }
       else
@@ -216,19 +245,19 @@ if (isset($_POST['AddParentFormSubmit']))
                 <div class="form-group row">
                   <label for="staticStaffNo" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input   value="<?php echo  $ConsumerFName; echo " "; echo  $ConsumerLName; ?>" disabled>
+                    <input class="form-control" value="<?php echo  $ConsumerFName; echo " "; echo  $ConsumerLName; ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad</label>
                   <div class="col-sm-10">
-                    <input   value="<?php echo  $varConsumerIDNo; ?>" disabled>
+                    <input class="form-control" value="<?php echo  $ConsumerIDNoParent; ?>" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="staticStaffNo" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-10">
-                    <input   value="UNAUTHORIZED" disabled>
+                    <input class="form-control" value="UNAUTHORIZED" disabled>
                   </div>
                 </div>
               <div class="modal-footer">
@@ -291,21 +320,21 @@ if (isset($_POST['EditParentFormSubmit']))
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Parent Name</label>
             <div class="col-sm-10">
-              <input   value="<?php echo  $ConsumerFName." ".$ConsumerLName; ?>" disabled>
+              <input class="form-control" value="<?php echo  $ConsumerFName." ".$ConsumerLName; ?>" disabled>
               <input type="hidden" name="txtparentid" value="<?php echo $parentid; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Child Name</label>
             <div class="col-sm-10">
-              <input  value="<?php echo $ConsumerFNameChild." ".$ConsumerLNameChild; ?>" disabled><br>
+              <input class="form-control" value="<?php echo $ConsumerFNameChild." ".$ConsumerLNameChild; ?>" disabled><br>
               <input type="hidden" name="txtstudentid" value="<?php echo $studentid; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Group</label>
             <div class="col-sm-10">
-              <input   value="VIP" disabled>
+              <input class="form-control" value="VIP" disabled>
             </div>
           </div>
           <div class="form-group row">
