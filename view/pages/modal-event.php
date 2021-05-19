@@ -11,12 +11,7 @@ include ('model/event.php');
         <div class="card card-custom gutter-b">
         
         <div class="card-body">
-        <div class="text-right">
-            <p>
-                <button type="button" class="btn btn-lg btn-secondary" data-bs-toggle="popover" title="HOW" data-bs-content="User must go to googlemaps.com for location, once the location is selected, click on the 'Share' icon, select 'Embed a map', choose the smaller frame and copy the link after 'embed?' until the last apostrophe marking. Please paste it on the text field provided.">How to set the Google Link Map?</button>
-            </p>
-        </div>
-
+        
         <div class="form-group row">
             <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
             <div class="col-lg-8">
@@ -53,7 +48,7 @@ include ('model/event.php');
                     <img src="assets/media/svg/icons/Code/Question-circle.svg" height="40px" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">Click here to redirect to googlemaps.com. Select preferred location, click on "Share" button and choose the smaller frame. Copy the embed html and paste it in this field</a>
+                    <a class="dropdown-item" href="https://www.google.com.my/maps" target="_blank" style="color:black;">Click here to redirect to googlemaps.com. Select the preferred location, click on "Share" button and choose "Embed a map". Copy the html and please paste it in this field.</a>
                     </div>
                 </div>
             </h5>
