@@ -82,7 +82,7 @@
           <div class="form-group row">
             <label for="txtStaffdepartment" class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-10">
-              <select class="form-control" name="txtparentStatus" style="height: auto; width: 70%">
+              <select class="form-control" name="txtparentStatus">
                 <option value="ACTIVE">ACTIVATE</option>
                 <option value="INACTIVE">DEACTIVATE</option>
               </select>

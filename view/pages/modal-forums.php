@@ -16,7 +16,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
                             <div class="col-lg-12">
-                                <select class="form-control" id="staticStaffNo" style="height: auto;" name="type" required>
+                                <select class="form-control" id="staticStaffNo" style="height: auto;" name="access" required>
                                 <option value="SCHOOL">SCHOOL</option>
                                 <option value="PUBLIC">PUBLIC</option>
                                 </select>

@@ -166,7 +166,6 @@ if (isset($_POST['submitaddstudent']))
 //Edit student
 if (isset($_POST['submiteditstudent']))
 {
-  session_start();
   $studentclass= $_POST['txtstudentclass'];
   $studentid= $_POST['studentid'];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
