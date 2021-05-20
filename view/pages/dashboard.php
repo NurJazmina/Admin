@@ -277,7 +277,7 @@ function time_elapsed($date){
 		    <div class="construction">
 				<div class="uc__wrapper">
 					<div class="uc__details">
-						<h1 class="title">Coming Soon!</h1>
+						<h1 class="title">Coming Soon!</h1> 
 						<h3 class="intro">
 							We are working hard to give you a better experience.
 						</h3>
@@ -682,7 +682,7 @@ function time_elapsed($date){
 				</div>
 			</div>
 			<!--end::Header-->
-			<!--begin::Body-->
+			<!--begin::Body--> 
 			<div class="card-body pt-1">
 				<div class="tab-content mt-5" id="myTabTables10">
 					<!--begin::Tap pane-->
@@ -949,6 +949,8 @@ function time_elapsed($date){
 				</div>
 			</div>
 			<!--end::Body-->
+		</div>
+
 		</div>
 	</div>
 </div>
