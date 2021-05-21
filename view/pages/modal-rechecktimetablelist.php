@@ -32,27 +32,27 @@ if (isset($_POST['AddtimetableFormSubmit']))
             <div class="form-group row">
                 <label for="staticStaffNo" class="col-sm-2 col-form-label">Teacher Name</label>
                 <div class="col-sm-10">
-                <input   value="<?php echo $ConsumerFName; ?>" disabled>
+                <input class="form-control" value="<?php echo $ConsumerFName; ?>" disabled>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="staticStaffNo" class="col-sm-2 col-form-label">MyKad</label>
                 <div class="col-sm-10">
-                <input  value="<?php echo $ConsumerIDNo; ?>"  disabled><br>
+                <input class="form-control" value="<?php echo $ConsumerIDNo; ?>"  disabled><br>
                 <input type="hidden" name="txtConsumerIDNo" value="<?php echo  $ConsumerIDNo; ?>"  >
                 </div>
             </div>
             <div class="form-group row">
                 <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
                 <div class="col-sm-10">
-                <input   value="<?php echo $varcategory; ?>"  disabled>
+                <input class="form-control" value="<?php echo $varcategory; ?>"  disabled>
                 <input type="hidden" name="txtcategory" value="<?php echo  $varcategory; ?>" >
                 </div>
             </div>
             <div class="form-group row">
                 <label for="staticStaffNo" class="col-sm-2 col-form-label">Subject</label>
                 <div class="col-sm-10">
-                <input  value="<?php echo $varsubject; ?>" disabled><br>
+                <input class="form-control" value="<?php echo $varsubject; ?>" disabled><br>
                 <input type="hidden" name="txtsubject" value="<?php echo  $varsubject; ?>" >
                 </div>
             </div>
@@ -77,13 +77,13 @@ if (isset($_POST['AddtimetableFormSubmit']))
             <div class="form-group row">
                 <label for="staticStaffNo" class="col-sm-2 col-form-label">Timetable Start</label>
                 <div class="col-sm-10">
-                <input type="datetime-local" id="staticStaffNo" name="txtTimetableStart">
+                <input class="form-control" type="datetime-local" id="staticStaffNo" name="txtTimetableStart">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="staticStaffNo" class="col-sm-2 col-form-label">Timetable End</label>
                 <div class="col-sm-10">
-                <input type="datetime-local" id="staticStaffNo" name="txtTimetableEnd">
+                <input class="form-control" type="datetime-local" id="staticStaffNo" name="txtTimetableEnd">
                 </div>
             </div><br>
             <input type="hidden" name="txtTimetableWeeklyRepeat" value="NO" >
@@ -203,20 +203,20 @@ if (isset($_POST['EditTimetableFormSubmit']))
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
             <div class="col-sm-10">
-              <input  value="<?php echo $varcategory; ?>"  disabled>
+              <input class="form-control" value="<?php echo $varcategory; ?>"  disabled>
               <input type="hidden" name="txtcategory" value="<?php echo  $varcategory; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Timetable Start</label>
             <div class="col-sm-10">
-              <input type="datetime-local" id="staticStaffNo" name="txtTimetableStart">
+              <input class="form-control" type="datetime-local" id="staticStaffNo" name="txtTimetableStart">
             </div>
           </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Timetable End</label>
             <div class="col-sm-10">
-              <input type="datetime-local" id="staticStaffNo" name="txtTimetableEnd">
+              <input class="form-control" type="datetime-local" id="staticStaffNo" name="txtTimetableEnd">
             </div>
           </div>
           <input type="hidden" name="txtTimetableWeeklyRepeat" value="NO" >

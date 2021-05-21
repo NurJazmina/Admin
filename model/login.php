@@ -58,9 +58,9 @@
               foreach ($cursor2 as $document2)
               {
                 $_SESSION["loggeduser_schoolName"] = strval($document2->SchoolsName);
-                $_SESSION["loggeduser_schoolsPhoneNo"] = ($document2->SchoolsPhoneNo);
-                $_SESSION["loggeduser_schoolsAddress"] = ($document2->SchoolsAddress);
-                $_SESSION["loggeduser_SchoolsEmail"] = ($document2->SchoolsEmail);
+                $_SESSION["loggeduser_schoolsPhoneNo"] = strval($document2->SchoolsPhoneNo);
+                $_SESSION["loggeduser_schoolsAddress"] = strval($document2->SchoolsAddress);
+                $_SESSION["loggeduser_SchoolsEmail"] = strval($document2->SchoolsEmail);
               }
     
               $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_Staffdepartment"] );

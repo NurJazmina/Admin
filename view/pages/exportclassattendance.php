@@ -3,8 +3,8 @@
 ?>
 <style>
 .highlight td {
-background:red;
-color:#ffffff;
+background:#FFE2E5;
+color:#F64E60 ;
 }
 </style>
 <?php

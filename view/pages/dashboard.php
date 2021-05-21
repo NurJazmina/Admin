@@ -205,6 +205,36 @@ function time_elapsed($date){
 			</div>
 			<!--end::Body-->
 		</div>
+		<div class="card card-custom gutter-b">
+			<!--begin::Body-->
+			<div class="card-body">
+				<!--begin::Wrapper-->
+				<div class="d-flex justify-content-between flex-column h-100">
+					<!--begin::Container-->
+					<div class="h-100">
+						<!--begin::Header-->
+						<div class="d-flex flex-column flex-center">
+						aaaaa
+						</div>
+						<!--end::Header-->
+						<!--begin::Body-->
+						<div class="pt-1">
+						bbbb
+						</div>
+						<!--end::Body-->
+					</div>
+					<!--eng::Container-->
+
+					<!--begin::Footer-->
+					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+					ccccc
+					</div>
+					<!--end::Footer-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Body-->
+		</div>
 	</div>
 	<div class="col">
 		<div class="card card-custom gutter-b">
@@ -247,7 +277,7 @@ function time_elapsed($date){
 		    <div class="construction">
 				<div class="uc__wrapper">
 					<div class="uc__details">
-						<h1 class="title">Coming Soon!</h1>
+						<h1 class="title">Coming Soon!</h1> 
 						<h3 class="intro">
 							We are working hard to give you a better experience.
 						</h3>
@@ -281,7 +311,7 @@ function time_elapsed($date){
 		</div>
 	</div>
 	<div class="col">
-	<div class="card card-custom gutter-b">
+	    <div class="card card-custom gutter-b">
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
 				<h3 class="card-title align-items-start flex-column">
@@ -652,7 +682,7 @@ function time_elapsed($date){
 				</div>
 			</div>
 			<!--end::Header-->
-			<!--begin::Body-->
+			<!--begin::Body--> 
 			<div class="card-body pt-1">
 				<div class="tab-content mt-5" id="myTabTables10">
 					<!--begin::Tap pane-->
@@ -919,6 +949,8 @@ function time_elapsed($date){
 				</div>
 			</div>
 			<!--end::Body-->
+		</div>
+
 		</div>
 	</div>
 </div>

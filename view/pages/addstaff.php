@@ -22,7 +22,7 @@ $_SESSION["title"] = "Staff";
           <div class="form-group row">
             <label for="txtStaffdepartment" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
-              <select class="form-control" id="txtStaffdepartment" name="txtStaffdepartment" style="height: auto; width: 70%" onchange="SelecttxtStaffdepartment(this.value);">
+              <select class="form-control" id="txtStaffdepartment" name="txtStaffdepartment" onchange="SelecttxtStaffdepartment(this.value);">
                 <?php
                 $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
                 $query = new MongoDB\Driver\Query($filter);
@@ -43,7 +43,7 @@ $_SESSION["title"] = "Staff";
             <div class="form-group row">
             <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" style="height: auto; width: 70%">
+              <select class="form-control" name="txtClasscategory">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

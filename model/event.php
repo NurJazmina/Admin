@@ -15,6 +15,12 @@ if (isset($_POST['AddEvent'])) {
   $EventDateStart = $_POST['txtEventDateStart'];
   $EventDateEnd = $_POST['txtEventDateEnd'];
 
+  list($maps1, $maps2) = explode("pb", $EventLocation);
+  list($maps3, $maps4) = explode(" ", $maps2);
+  $mapsA = '<iframe src="https://www.google.com/maps/embed?pb';
+  $mapsB = ' width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+  $eventmaps = $mapsA.$maps3.$mapsB;
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'school_id'=>$varschoolid,
@@ -22,7 +28,7 @@ if (isset($_POST['AddEvent'])) {
     'EventTitle'=>$vartitle,
     'EventVenue'=>$EventVenue,
     'EventAddress' =>$EventAddress,
-    'EventLocation'=>$EventLocation,
+    'EventLocation'=>$eventmaps,
     'EventDateStart'=>new MongoDB\BSON\UTCDateTime(new DateTime($EventDateStart)),
     'EventDateEnd'=>new MongoDB\BSON\UTCDateTime(new DateTime($EventDateEnd)),
     'EventAccess'=>$varaccess,
@@ -257,7 +263,7 @@ if (isset($_POST['AddEvent'])) {
                                           <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                             <p>Hi $ConsumerFName $ConsumerLName,</p>
                                             <p>You've received this email because you're a member of $SchoolName</p>
-                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                             <p>Thanks,<br/>
                                             <p>Go N Getz</p>
                                             <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -505,7 +511,7 @@ if (isset($_POST['AddEvent'])) {
                                           <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                             <p>Hi $ConsumerFName $ConsumerLName,</p>
                                             <p>You've received this email because you're a member of $SchoolName</p>
-                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                             <p>Thanks,<br/>
                                             <p>Go N Getz</p>
                                             <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -748,7 +754,7 @@ if (isset($_POST['AddEvent'])) {
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi $ConsumerFName $ConsumerLName,</p>
                                         <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -989,7 +995,7 @@ if (isset($_POST['AddEvent'])) {
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi $ConsumerFName $ConsumerLName,</p>
                                         <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -1227,7 +1233,7 @@ if (isset($_POST['AddEvent'])) {
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi $ConsumerFName $ConsumerLName,</p>
                                         <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we tought it might need your attention.</p>
+                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
