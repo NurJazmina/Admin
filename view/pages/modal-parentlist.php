@@ -51,7 +51,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <input type="text" class="form-control" name="txtConsumerIDNoParent">
+        <input type="hidden" class="form-control" name="txtConsumerIDNoParent">
           <div class="form-group row">
             <label for="staticStaff" class="col-sm-2 col-form-label">Relation</label>
             <div class="col-sm-10">
