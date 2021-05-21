@@ -755,10 +755,10 @@ if (isset($_POST['addrelation']))
   }
 }
 }
-/* ------------------------------------------- end:edit relation -------------------------------------------------------------------*/
+/* ------------------------------------------- end:edit relation ----------------------------------------------------------------------------*/
 
 
-/* ------------------------------------------- begin:add student,relation ----------------------------------------------------------*/
+/* ------------------------------------------- begin:add student,relation -------------------------------------------------------------------*/
 if (isset($_POST['addrelationstudent']))
 {
   $schoolID = strval($_SESSION["loggeduser_schoolID"]);
@@ -1479,14 +1479,34 @@ if (isset($_POST['addrelationparent']))
 
 
 /* ------------------------------------------- begin:edit relation ----------------------------------------------------------------------*/
-if (isset($_POST['submiteditparent']))
+if (isset($_POST['EditParentFormSubmit']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $varparentid = $_POST['txtparentid'];
-  $varstudentid = $_POST['txtstudentid'];
+  $ConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
   $varrelation = $_POST['txtrelation'];
+
+  $filter = ['ConsumerIDNo'=>$ConsumerIDNoParent];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  foreach ($cursor as $document)
+  {
+    $_idparent = strval($document->_id);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+
+    $filter = ['ConsumerID'=>$_idparent];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+    foreach ($cursor as $document)
+    {
+      $parentid = strval($document->_id);
+    }
+  }
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ParentID'=>$varparentid,'StudentID'=>$varstudentid,'ParentStudentRelation'=>$varrelation,'Schools_id'=>$varschoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk->update(['ParentID'=> $parentid],
+                ['$set' => ['ParentStudentRelation'=>$varrelation]],
+                ['multi'=> TRUE]
+               );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
