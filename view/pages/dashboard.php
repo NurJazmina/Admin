@@ -977,7 +977,7 @@ function time_elapsed($date){
 						<?php
 						$Forumid=" ";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
-						$option = ['limit'=>5,'sort' => ['ForumDate' => 1]];
+						$option = ['limit'=>10,'sort' => ['ForumDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
 						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
 						foreach ($cursor as $document)
@@ -1105,7 +1105,7 @@ function time_elapsed($date){
 						<span class="menu-label">
 						<?php
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'4'];
-						$option = ['limit'=>5,'sort' => ['_id' => -1]];
+						$option = ['limit'=>10,'sort' => ['_id' => -1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
 						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
 
