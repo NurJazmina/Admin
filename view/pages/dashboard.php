@@ -977,13 +977,13 @@ function time_elapsed($date){
 						<?php
 						$Forumid=" ";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
-						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
+						$option = ['limit'=>5,'sort' => ['ForumDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
 						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
 						foreach ($cursor as $document)
 						{
 							$Forumid = ($document->_id);
-							$newsid = new \MongoDB\BSON\ObjectId($newsid);
+							$Forumid = new \MongoDB\BSON\ObjectId($Forumid);
 						}
 						if(!$Forumid == "")
 						{
@@ -993,7 +993,7 @@ function time_elapsed($date){
 							foreach ($cursor as $document)
 							{
 								$ForumDate = ($document->ForumDate);
-								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
 								$datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 								$datenew = date_format($datetime,"Y-m-d\TH:i:s");
 								$date = new MongoDB\BSON\UTCDateTime((new DateTime($datenew))->getTimestamp());
@@ -1020,20 +1020,22 @@ function time_elapsed($date){
 								<!--begin::Tbody-->
 								<?php
 								$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"]];
-								$option = ['limit'=>5,'sort' => ['_id' => -1]];
+								$option = ['limit'=>10,'sort' => ['_id' => -1]];
 								$query = new MongoDB\Driver\Query($filter,$option);
 								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
 
 								foreach ($cursor as $document)
 								{
-									$Forumid = ($document->_id);
 									$Forum = ($document->Forum);
-									$ForumTitle = ($document->ForumTitle);
-									$ForumDate = ($document->ForumDate);
-									$Consumer_id = ($document->Consumer_id);
 									
 									if ($Forum == '1' || $Forum == '2' || $Forum == '3')
 									{
+
+									$Forumid = ($document->_id);
+									$ForumTitle = ($document->ForumTitle);
+									$ForumDate = ($document->ForumDate);
+									$Consumer_id = ($document->Consumer_id);
+
 									$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
 									$datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 									$dateforum = date_format($datetime,"Y-m-d\TH:i:s");
@@ -1158,13 +1160,18 @@ function time_elapsed($date){
 								<!--end::Thead-->
 								<!--begin::Tbody-->
 								<?php
-								$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'4'];
-								$option = ['limit'=>5,'sort' => ['_id' => -1]];
+								$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"]];
+								$option = ['limit'=>10,'sort' => ['_id' => -1]];
 								$query = new MongoDB\Driver\Query($filter,$option);
 								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
 
 								foreach ($cursor as $document)
 								{
+									$Forum = ($document->Forum);
+									
+									if ($Forum == '4' || $Forum == '5' || $Forum == '6')
+									{
+
 									$Forumid = ($document->_id);
 									$ForumTitle = ($document->ForumTitle);
 									$ForumDate = ($document->ForumDate);
@@ -1196,9 +1203,6 @@ function time_elapsed($date){
 										$total = $total + 1;
 									}
 									?>
-									<?php
-									}
-									?>
 								<tbody>
 									<tr>
 										<td class="pl-0 py-5">
@@ -1226,8 +1230,9 @@ function time_elapsed($date){
 									</tr>
 								</tbody>
 								<?php
-								
-								?>
+									}
+								}
+									?>
 								<!--end::Tbody-->
 							</table>
 							<footer>
