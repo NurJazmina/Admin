@@ -54,6 +54,8 @@
                                 "addrelationforstudent",
                                 "addrelationstudentforparent",
                                 "addrelationforparent",
+                                "duplicateforparentlist",
+                                "duplicateforstudentlist",
                                 "mira",
                                 "kid",
                                 //"testing",
@@ -110,6 +112,7 @@
                                 //"exportstudentattendance",
                                 //"exportclassattendance",
                                 //"testing",
+                                //"duplicate",
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
