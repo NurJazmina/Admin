@@ -14,7 +14,7 @@ $_SESSION["title"] = "Online learning";
                 <h3 class="card-label"> Notes </div>
             </div>
         <div class="card-body">
-            Contents
+            Display view only for notes. Teachers are able to create notes depending on their subjects, it will be linked later on for the subjects they are involving.
         </div>
     </div>
     <div class="card card-custom gutter-b">
@@ -23,7 +23,7 @@ $_SESSION["title"] = "Online learning";
                 <h3 class="card-label">Exercises and quiz </div>
         </div>
         <div class="card-body">
-            Contents
+            Display view for exercises. Teachers are able to add/create questions through here. There will be a button to add or delete.
         </div>
 </div>
 
