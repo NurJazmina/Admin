@@ -571,11 +571,27 @@
 							<li class="menu-item menu-item-parent" aria-haspopup="true">
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=assessment" class="menu-link menu-toggle">
+								<a href="index.php?page=kid" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
-									<span class="menu-text">Assessment</span>
+									<span class="menu-text">Main</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=notes" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Notes</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=exercises" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Exercises and Quiz</span>
 								</a>
 							</li>
 						</ul>
