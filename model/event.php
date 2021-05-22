@@ -101,6 +101,7 @@ if (isset($_POST['AddEvent'])) {
               {
                   $ConsumerFName = strval($document1->ConsumerFName);
                   $ConsumerLName = strval($document1->ConsumerLName);
+                  $ConsumerIDNo = strval($document1->ConsumerIDNo);
                   $Email = strval($document1->ConsumerEmail);
                   if($Email != "")
                   {
@@ -261,9 +262,9 @@ if (isset($_POST['AddEvent'])) {
                                       <tr>
                                         <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                           <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                            <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                            <p>You've received this email because you're a member of $SchoolName</p>
-                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                            <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                            <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
+                                            <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                             <p>Thanks,<br/>
                                             <p>Go N Getz</p>
                                             <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -350,6 +351,7 @@ if (isset($_POST['AddEvent'])) {
               {
                   $ConsumerFName = strval($document1->ConsumerFName);
                   $ConsumerLName = strval($document1->ConsumerLName);
+                  $ConsumerIDNo = strval($document1->ConsumerIDNo);
                   $Email = strval($document1->ConsumerEmail);
                   if($Email != "")
                   {
@@ -509,9 +511,9 @@ if (isset($_POST['AddEvent'])) {
                                       <tr>
                                         <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                           <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                            <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                            <p>You've received this email because you're a member of $SchoolName</p>
-                                            <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                            <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                            <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
+                                            <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                             <p>Thanks,<br/>
                                             <p>Go N Getz</p>
                                             <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -593,6 +595,7 @@ if (isset($_POST['AddEvent'])) {
           {
               $ConsumerFName = strval($document1->ConsumerFName);
               $ConsumerLName = strval($document1->ConsumerLName);
+              $ConsumerIDNo = strval($document1->ConsumerIDNo);
               $Email = strval($document1->ConsumerEmail);
               if($Email != "")
               {
@@ -752,9 +755,9 @@ if (isset($_POST['AddEvent'])) {
                                   <tr>
                                     <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                        <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                        <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                        <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                        <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
+                                        <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -834,6 +837,7 @@ if (isset($_POST['AddEvent'])) {
           {
               $ConsumerFName = strval($document1->ConsumerFName);
               $ConsumerLName = strval($document1->ConsumerLName);
+              $ConsumerIDNo = strval($document1->ConsumerIDNo);
               $Email = strval($document1->ConsumerEmail);
               if($Email != "")
               {
@@ -993,9 +997,9 @@ if (isset($_POST['AddEvent'])) {
                                   <tr>
                                     <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                        <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                        <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                        <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                        <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
+                                        <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
@@ -1072,6 +1076,7 @@ if (isset($_POST['AddEvent'])) {
           {
               $ConsumerFName = strval($document1->ConsumerFName);
               $ConsumerLName = strval($document1->ConsumerLName);
+              $ConsumerIDNo = strval($document1->ConsumerIDNo);
               $Email = strval($document1->ConsumerEmail);
               if($Email != "")
               {
@@ -1231,9 +1236,9 @@ if (isset($_POST['AddEvent'])) {
                                   <tr>
                                     <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                       <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                        <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                        <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Event <a href='smartschool.gongetz.com/index.php?page=event'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                        <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                        <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
+                                        <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Thanks,<br/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
