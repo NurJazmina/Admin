@@ -266,6 +266,8 @@
                                                     <span class="menu-label">
                                                     <?php 
                                                     $newsid1="";
+                                                    $nowtimeNew1 = "";
+                                                    $timeNew1 = "";
                                                     $filter = ['school_id'=>$school_id,'NewsAccess'=>'PUBLIC'];
                                                     $option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
                                                     $query = new MongoDB\Driver\Query($filter,$option);
@@ -403,6 +405,8 @@
                                                     <span class="menu-label">
                                                     <?php 
                                                     $eventid2="";
+                                                    $nowtimeEvent2="";
+                                                    $timeEvent2="";
                                                     $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
                                                     $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
