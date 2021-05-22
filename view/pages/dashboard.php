@@ -326,6 +326,7 @@ function time_elapsed($date){
 					<span class="menu-label">
 						<?php
 						$eventid1="";
+						$nowtimeEvent1="";
 						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
 						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -679,6 +680,7 @@ function time_elapsed($date){
 						<span class="menu-label">
 						<?php
 						$newsid="";
+						$nowtimeNew ="";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
 						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
