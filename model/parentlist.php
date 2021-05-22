@@ -2165,6 +2165,8 @@ if (isset($_POST['StatusParentFormSubmit']))
   } else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
   if (!isset($_POST['searchname']) && empty($_POST['searchname']))
   {

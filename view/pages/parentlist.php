@@ -218,34 +218,24 @@
             </table>
             <div class="col-12 text-right">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <?php
+              <?php
                 if (isset($_GET['paging']) && !empty($_GET['paging']))
                 {
-                  if ($_GET['paging'=='0'])
+                  if ($_GET['paging'] == 0) 
                   {
-                    $pagingprevious = '0';
+                    ?>
+                    <span class="btn btn-secondary">Previous</span>
+                    <?php
+                  } 
+                  else 
+                  {
+                    ?>
+                    <a href="index.php?page=parentlist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                    <?php
                   }
                 }
-                else
-                {
-                  $pagingprevious = "0";
-                }
                 ?>
-                <?php
-                if ($pagingprevious == "0")
-                {
-                ?>
-                  <span class="btn btn-secondary">Previous</span>
-                <?php
-                }
-                else
-                {
-                ?>
-                  <a href="index.php?page=parentlist&paging=<?php echo $pagingprevious;?>" class="btn btn-secondary">Previous</a>
-                <?php
-                }
-                ?>
-                <a href="index.php?page=parentlist&paging=<?php echo $pagingnext;?>" class="btn btn-secondary">Next</a>
+                <a href="index.php?page=parentlist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
               </div>
             </div>
           </div>
