@@ -21,6 +21,7 @@
         return join(' ', $ret);
     }
     $user_id = $_GET['id'];
+    $parent_id = "";
     //$school_id = "5fb5a728c930cc7b988b3bb7";
 
     $filter = ['ConsumerIDNo'=>$user_id];
@@ -119,6 +120,7 @@
         $totalparent = 0;
         foreach ($cursor as $document)
         {
+            $parent_id = strval($document->_id);
             $ConsumerID = strval($document->ConsumerID);
             $Schools_id = strval($document->Schools_id);
             $_SESSION["loggeduser_ACCESS"] = "PARENT";
@@ -215,6 +217,10 @@
         .pt-9, .py-9 {
             padding-top: 1.25rem !important;
         }
+
+        .mt-5 {
+            margin-top: 1rem!important;
+        }
         </style>
         <title>Go N Getz - School Name</title>
     </head>
@@ -239,7 +245,7 @@
                                 <div class="col-sm-12 col-lg-4">
                                     <div class="card">
                                         <div class="card-header" style="text-align:center;">
-                                            <strong>Statistics</strong>
+                                            <strong>Profile</strong>
                                         </div>
                                         <div class="card-body">
                                             <!--begin::Profile Card-->
@@ -249,28 +255,17 @@
                                                     <!--begin::Toolbar-->
                                                     <div class="d-flex justify-content-end">
                                                         <div class="dropdown dropdown-inline">
-                                                            <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-
-                                                            </div>
+                                                            <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right"></div>
                                                         </div>
                                                     </div>
                                                     <!--end::Toolbar-->
-                                                    <!--begin::User-->
-                                                    <div class="d-flex align-items-center">
-                                                        <!-- <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                                            <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
-                                                        </div> -->
-                                                        <div>
-                                                            <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?php echo $ConsumerFName ." ".$ConsumerLName  ?></a>
-                                                            <div class="text-muted"><?php //echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
-                                                        </div>
-                                                    </div>
-                                                    <!--end::User-->
                                                     <!--begin::Contact-->
-                                                    <div class="py-9">
+                                                    <div class="py-7">
+                                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                                            <span class="font-weight-bold mr-2">Name:</span>
+                                                            <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerFName ." ".$ConsumerLName  ?></a>
+                                                        </div>
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <span class="font-weight-bold mr-2">ID Type:</span>
                                                             <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerIDType; ?></a>
@@ -287,12 +282,72 @@
                                                             <span class="font-weight-bold mr-2">Location:</span>
                                                             <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerCity.",".$ConsumerState; ?></a>
                                                         </div>
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <span class="font-weight-bold mr-2">Status:</span>
-                                                            <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerStatus; ?></a>
-                                                        </div>
                                                     </div>
                                                     <!--end::Contact-->
+                                                    <!--end::User-->
+                                                    <?php
+                                                    $totalstudent = 0;
+                                                    $filter = ['ParentID'=>$parent_id];
+                                                    $query = new MongoDB\Driver\Query($filter);
+                                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                                                    foreach ($cursor as $document)
+                                                    {
+                                                        $StudentID = strval($document->StudentID);
+                                                        $ParentStudentRelation = strval($document->ParentStudentRelation);
+                                                        $ParentStudentRelationStatus = strval($document->ParentStudentRelationStatus);
+                                                        
+                                        
+                                                        $Student_ID = new \MongoDB\BSON\ObjectId($StudentID);
+                                                        $filter = ['_id'=>$Student_ID];
+                                                        $query = new MongoDB\Driver\Query($filter);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                                                        
+                                                        foreach ($cursor as $document)
+                                                        {
+                                                            $totalstudent = $totalstudent+ 1;
+                                                            $Consumer_id = strval($document->Consumer_id);
+                                                            $Schools_id = strval($document->Schools_id);
+                                        
+                                                            $Consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+                                                            $filter = ['_id'=>$Consumerid];
+                                                            $query = new MongoDB\Driver\Query($filter);
+                                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                                            foreach ($cursor as $document)
+                                                            {
+                                                                $id = strval($document->_id);
+                                                                $ConsumerFNameChild = strval($document->ConsumerFName);
+                                                                $ConsumerLNameChild = strval($document->ConsumerLName);
+                                                                $ConsumerIDTypeChild = strval($document->ConsumerIDType);
+                                                                $ConsumerIDNo = strval($document->ConsumerIDNo);
+                                                           
+                                                                if($parent_id !== '')
+                                                                {
+                                                                ?><br>
+                                                                <div class="card">
+                                                                    <ul class="list-group ">
+                                                                        <li class="list-group-item">Child <?php echo $totalstudent; ?></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="py-9">
+                                                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                                                        <span class="font-weight-bold mr-2">Name:</span>
+                                                                        <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerFNameChild; ?></a>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                                                        <span class="font-weight-bold mr-2">ID Type:</span>
+                                                                        <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerIDTypeChild; ?></a>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                                                        <span class="font-weight-bold mr-2">ID No:</span>
+                                                                        <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerIDNo; ?></a>
+                                                                    </div>
+                                                                </div>
+                                                                <?php
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <!--end::Body-->
                                             </div>
@@ -308,17 +363,15 @@
                                         <div class="card-body">
                                             <div class="card card-custom gutter-b">
                                                 <!--begin::Header-->
-                                                <div class="card-header border-0 pt-3">
-                                                    <div class="card-toolbar">
-                                                        <ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link py-2 px-4 font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_1"><?php echo $_SESSION["loggeduser_ACCESS"]; ?></a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link py-2 px-4 active font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_2">PUBLIC</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                <div class="card-header border-0 pt-2">
+                                                    <ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_1"><?php echo $_SESSION["loggeduser_ACCESS"]; ?></a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link py-2 px-4 active font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_2">PUBLIC</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                                 <!--end::Header-->
                                                 <!--begin::Body--> 
@@ -357,7 +410,7 @@
                                                             }
                                                             ?>
                                                             <span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-                                                            <span class="text-primary"><?php echo "".time_elapsed($nowtimeNew-$timeNew)." ago \n";  ?></span></span>
+                                                            <span class="text-primary"><?php echo "".time_elapsed($nowtimeNew-$timeNew);  ?></span></span>
                                                             </span>
                                                             <!--begin::Table-->
                                                             <div>
@@ -474,7 +527,7 @@
                                                                 }
                                                                 ?>
                                                                 <span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-                                                                <span class="text-primary"><?php echo "".time_elapsed($nowtimeNew1-$timeNew1)." ago \n";  ?></span></span>
+                                                                <span class="text-primary"><?php echo "".time_elapsed($nowtimeNew1-$timeNew1);  ?></span></span>
                                                                 <?php
                                                             }
                                                             ?>
@@ -576,17 +629,15 @@
                                         <div class="card-body">
                                             <div class="card card-custom gutter-b">
                                                 <!--begin::Header-->
-                                                <div class="card-header border-0 pt-3">
-                                                    <div class="card-toolbar">
-                                                        <ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link py-2 px-4 font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_3"><?php echo $_SESSION["loggeduser_ACCESS"]; ?></a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link py-2 px-4 active font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_4">PUBLIC</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                <div class="card-header border-0 pt-2">
+                                                    <ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_3"><?php echo $_SESSION["loggeduser_ACCESS"]; ?></a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link py-2 px-4 active font-weight-bolder" data-bs-toggle="tab" href="#kt_tab_pane_10_4">PUBLIC</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                                 <!--end::Header-->
                                                 <!--begin::Body-->

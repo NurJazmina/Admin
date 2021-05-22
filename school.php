@@ -114,6 +114,10 @@
         .pt-9, .py-9 {
             padding-top: 1.25rem !important;
         }
+
+        .mt-5 {
+            margin-top: 0rem!important;
+        }
         </style>
         <title>Go N Getz - School Name</title>
     </head>
@@ -141,117 +145,110 @@
                                             <strong>Statistics</strong>
                                         </div>
                                         <div class="card-body">
-                                        <!--begin::Body-->
-                                            <div class="card-body">
-                                                    <!--begin::Container-->
-                                                        <!--begin::Body-->
-                                                        <div class="pt-0">
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
-                                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
-                                                                            <i class="fas fa-user-tie fa-2x"></i>
-                                                                            <!--end::Svg Icon-->
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Text-->
-                                                                <div class="d-flex flex-column flex-grow-1">
-                                                                    <a href="index.php?page=stafflist&level=1" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Staff</a>
-                                                                    <span class="text-muted font-weight-bold">Good Fellas</span>
-                                                                </div>
-                                                                <!--end::Text-->
-                                                                <!--begin::label-->
-                                                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalstaff"] ?></span>
-                                                                <!--end::label-->
-                                                            </div>
-                                                            <!--end::Item-->
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
-                                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
-                                                                            <i class="fas fa-chalkboard-teacher fa-2x"></i>
-                                                                            <!--end::Svg Icon-->
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Text-->
-                                                                <div class="d-flex flex-column flex-grow-1">
-                                                                    <a href="index.php?page=stafflist&level=0" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Teacher</a>
-                                                                    <span class="text-muted font-weight-bold">Successful Fellas</span>
-                                                                </div>
-                                                                <!--end::Text-->
-                                                                <!--begin::label-->
-                                                                <span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalteacher"] ?></span>
-                                                                <!--end::label-->
-                                                            </div>
-                                                            <!--end::Item-->
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
-                                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
-                                                                            <i class="fas fa-user-graduate fa-2x"></i>
-                                                                            <!--end::Svg Icon-->
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Text-->
-                                                                <div class="d-flex flex-column flex-grow-1">
-                                                                    <a href="index.php?page=studentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Students</a>
-                                                                    <span class="text-muted font-weight-bold">Creative Fellas</span>
-                                                                </div>
-                                                                <!--end::Text-->
-                                                                <!--begin::label-->
-                                                                <span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalstudent"] ?></span>
-                                                                <!--end::label-->
-                                                            </div>
-                                                            <!--end::Item-->
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
-                                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                                                            <i class="fas fa-user-friends fa-2x"></i>
-                                                                            <!--end::Svg Icon-->
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Text-->
-                                                                <div class="d-flex flex-column flex-grow-1">
-                                                                    <a href="index.php?page=parentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Parent</a>
-                                                                    <span class="text-muted font-weight-bold">Productive Fellas</span>
-                                                                </div>
-                                                                <!--end::Text-->
-                                                                <!--begin::label-->
-                                                                <span class="font-weight-bolder label label-xl label-light-info label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalparent"] ?></span>
-                                                                <!--end::label-->
-                                                            </div>
-                                                            <!--end::Item-->
-                                                        </div>
-                                                        <!--end::Body-->
-                                                    <!--eng::Container-->
-                                                    <!--begin::Footer-->
-                                                    <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-                                                        <button class="btn btn-success font-weight-bolder font-size-sm py-1 px-14" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
-                                                    </div>
-                                                    <!--end::Footer-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex align-items-center pb-9">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-45 symbol-light mr-4">
+                                                    <span class="symbol-label">
+                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
+                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
+                                                            <i class="fas fa-user-tie fa-2x"></i>
+                                                            <!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <!--end::Symbol-->
+                                                <!--begin::Text-->
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <a href="index.php?page=stafflist&level=1" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Staff</a>
+                                                    <span class="text-muted font-weight-bold">Good Fellas</span>
+                                                </div>
+                                                <!--end::Text-->
+                                                <!--begin::label-->
+                                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalstaff"] ?></span>
+                                                <!--end::label-->
                                             </div>
-                                            <!--end::Body-->
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex align-items-center pb-9">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-45 symbol-light mr-4">
+                                                    <span class="symbol-label">
+                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
+                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                            <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                                                            <!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <!--end::Symbol-->
+                                                <!--begin::Text-->
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <a href="index.php?page=stafflist&level=0" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Teacher</a>
+                                                    <span class="text-muted font-weight-bold">Successful Fellas</span>
+                                                </div>
+                                                <!--end::Text-->
+                                                <!--begin::label-->
+                                                <span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalteacher"] ?></span>
+                                                <!--end::label-->
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex align-items-center pb-9">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-45 symbol-light mr-4">
+                                                    <span class="symbol-label">
+                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
+                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
+                                                            <i class="fas fa-user-graduate fa-2x"></i>
+                                                            <!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <!--end::Symbol-->
+                                                <!--begin::Text-->
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <a href="index.php?page=studentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Students</a>
+                                                    <span class="text-muted font-weight-bold">Creative Fellas</span>
+                                                </div>
+                                                <!--end::Text-->
+                                                <!--begin::label-->
+                                                <span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalstudent"] ?></span>
+                                                <!--end::label-->
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex align-items-center pb-9">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-45 symbol-light mr-4">
+                                                    <span class="symbol-label">
+                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
+                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                                            <i class="fas fa-user-friends fa-2x"></i>
+                                                            <!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <!--end::Symbol-->
+                                                <!--begin::Text-->
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <a href="index.php?page=parentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Parent</a>
+                                                    <span class="text-muted font-weight-bold">Productive Fellas</span>
+                                                </div>
+                                                <!--end::Text-->
+                                                <!--begin::label-->
+                                                <span class="font-weight-bolder label label-xl label-light-info label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalparent"] ?></span>
+                                                <!--end::label-->
+                                            </div>
+                                            <!--end::Item-->
+                                        </div>
+                                       
+                                        <div class="card-footer">
+                                        <!--begin::Footer-->
+                                        <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+                                            <button class="btn btn-success font-weight-bolder font-size-sm py-1 px-14" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
+                                        </div>
+                                        <!--end::Footer-->
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +294,7 @@
                                                         }
                                                         ?>
                                                         <br><span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-                                                        <span class="text-primary"><?php echo "".time_elapsed($nowtimeNew1-$timeNew1)." ago \n";  ?></span></span>
+                                                        <span class="text-primary"><?php echo "".time_elapsed($nowtimeNew1-$timeNew1);  ?></span></span>
                                                         <?php
                                                     }
                                                     ?>
@@ -517,7 +514,7 @@
                                                                             </svg><!--end::Svg Icon--></span>
                                                                         </td>
                                                                         <td class="pl-0">
-                                                                            <a href="index.php?page=newsdetail&id=<?php echo $eventid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $EventTitle; ?></a>
+                                                                            <a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $EventTitle; ?></a>
                                                                             <span class="text-muted font-weight-bold d-block"><?php echo " By ".$ConsumerFName;?></span>
                                                                             <span class="text-muted font-weight-bold d-block"><?php echo date_format($datetimeStart,"d M, H:i")." "; ?></span>
                                                                         </td>
