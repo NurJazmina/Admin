@@ -34,7 +34,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                         </div>
                         <div>
                             <label><h5> FORUM </h5></label>
-                            <textarea class="forum" name="detail" ></textarea>
+                            <textarea class="forum" name="detail"></textarea>
                         </div>
                 <div class="card-footer">
                     <div class="row">

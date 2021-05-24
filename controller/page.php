@@ -57,7 +57,7 @@
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
                                 "mira",
-                                "kid",
+                                "onlinelearning",
                                 "notes",
                                 "exercises",
                                 //"testing",
