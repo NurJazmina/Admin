@@ -272,7 +272,7 @@
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <span class="font-weight-bold mr-2">Email:</span>
-                                                            <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerAddress; ?></a>
+                                                            <a href="#" class="text-muted text-hover-primary"><?php echo $ConsumerEmail; ?></a>
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <span class="font-weight-bold mr-2">Phone:</span>

@@ -1,6 +1,7 @@
 <?php
 $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
+include 'model/counter.php'; 
 
 $id = new \MongoDB\BSON\ObjectId($_GET['id']);
 $filter = ['_id'=>$id];

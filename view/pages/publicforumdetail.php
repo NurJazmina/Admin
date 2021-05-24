@@ -5,6 +5,7 @@ $_SESSION["title"] = "Public Forum : $topic ";
 
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/schoolforum.php'); 
+include 'model/counter.php';
 
 ?>
 <style>

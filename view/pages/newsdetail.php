@@ -1,7 +1,8 @@
 <?php
 $_SESSION["title"] = "News";
+include 'view/partials/_subheader/subheader-v1.php'; 
+include 'model/counter.php';
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <?php
 $id = new \MongoDB\BSON\ObjectId($_GET['id']);
