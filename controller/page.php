@@ -58,6 +58,8 @@
                                 "duplicateforstudentlist",
                                 "mira",
                                 "kid",
+                                "notes",
+                                "exercises",
                                 //"testing",
                                );
 
