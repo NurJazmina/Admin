@@ -12,6 +12,7 @@ if (isset($_POST['submitaddstaff']))
   $varDepartmentName = strval($_SESSION["DepartmentName"]);
   $varStaffstatus = $_POST['txtStaffstatus'];
   $varteacherclass = $_POST['txtteacherclass'];
+  $varaccesslevel = $_POST['txtaccesslevel'];
 
   $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
   $query = new MongoDB\Driver\Query($filter);
@@ -21,7 +22,7 @@ if (isset($_POST['submitaddstaff']))
       $ID = strval($document->_id);
       $ConsumerFName = strval($document->ConsumerFName);
       $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-      if ($varDepartmentName !== "TEACHER")
+      if ($varaccesslevel !== "0")
       {
         $bulk->insert([
           'ConsumerID'=>$ID,
