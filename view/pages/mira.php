@@ -1,0 +1,1 @@
+<?php include 'model/counter.php'; ?>

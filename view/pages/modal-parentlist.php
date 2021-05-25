@@ -42,7 +42,7 @@
   </div>
 </form>
 
-<form id="EditParentFormSubmit" name="EditParentFormSubmit" action="index.php?page=modal-recheckparentlist" method="post">
+<form id="EditParentFormSubmit" name="EditParentFormSubmit" action="index.php?page=parentlist" method="post">
   <div class="modal fade" id="RecheckEditParent" tabindex="-1" aria-labelledby="EditParentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -51,11 +51,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="txtConsumerIDNo">
+        <input type="hidden" class="form-control" name="txtConsumerIDNoParent">
           <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">ID Child</label>
+            <label for="staticStaff" class="col-sm-2 col-form-label">Relation</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNoChild">
+              <select class="form-control" id="txtrelation" name="txtrelation" >
+                <option value="FATHER">FATHER</option>
+                <option value="MOTHER">MOTHER</option>
+                <option value="GUARDIAN">GUARDIAN</option>
+                <option value="RELATIVE">RELATVE</option>
+              </select>
             </div>
           </div>
         </div>

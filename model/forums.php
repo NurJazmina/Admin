@@ -112,6 +112,7 @@ if ($Bcc == 'SCHOOL')
         {
             $ConsumerFName = strval($document1->ConsumerFName);
             $ConsumerLName = strval($document1->ConsumerLName);
+            $ConsumerIDNo = strval($document1->ConsumerIDNo);
             $Email = strval($document1->ConsumerEmail);
             if($Email != "")
             {
@@ -272,12 +273,12 @@ if ($Bcc == 'SCHOOL')
                                 <tr>
                                     <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                     <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                        <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                        <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Forum <a href='smartschool.gongetz.com/index.php?page=forums'> $title </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
-                                        <p>Thanks,<br/>
-                                        <p>Go N Getz</p>
-                                        <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
+                                      <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                      <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$schoolid'>$SchoolName</a></p>
+                                      <p>Here's the latest Forums <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $title </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                      <p>Thanks,<br/>
+                                      <p>Go N Getz</p>
+                                      <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                     </p>
                                     <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
                                         <tbody>
@@ -355,6 +356,7 @@ elseif ($Bcc == 'PUBLIC')
         {
             $ConsumerFName = strval($document1->ConsumerFName);
             $ConsumerLName = strval($document1->ConsumerLName);
+            $ConsumerIDNo = strval($document1->ConsumerIDNo);
             $Email = strval($document1->ConsumerEmail);
             if($Email != "")
             {
@@ -515,12 +517,12 @@ elseif ($Bcc == 'PUBLIC')
                                 <tr>
                                     <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                     <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                        <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                        <p>You've received this email because you're a member of $SchoolName</p>
-                                        <p>Here's the latest Forum <a href='smartschool.gongetz.com/index.php?page=forums'> $title </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
-                                        <p>Thanks,<br/>
-                                        <p>Go N Getz</p>
-                                        <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
+                                      <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                      <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$schoolid'>$SchoolName</a></p>
+                                      <p>Here's the latest Forums <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $title </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                      <p>Thanks,<br/>
+                                      <p>Go N Getz</p>
+                                      <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                     </p>
                                     <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
                                         <tbody>
@@ -594,6 +596,7 @@ elseif ($Bcc == 'PUBLIC')
         {
             $ConsumerFName = strval($document1->ConsumerFName);
             $ConsumerLName = strval($document1->ConsumerLName);
+            $ConsumerIDNo = strval($document1->ConsumerIDNo);
             $Email = strval($document1->ConsumerEmail);
             if($Email != "")
             {
@@ -753,9 +756,9 @@ elseif ($Bcc == 'PUBLIC')
                                     <tr>
                                       <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                         <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                          <p>Hi $ConsumerFName $ConsumerLName,</p>
-                                          <p>You've received this email because you're a member of $SchoolName</p>
-                                          <p>Here's the latest Forum <a href='smartschool.gongetz.com/index.php?page=forums'> $title </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                          <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                          <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$schoolid'>$SchoolName</a></p>
+                                          <p>Here's the latest Forums <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $title </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                           <p>Thanks,<br/>
                                           <p>Go N Getz</p>
                                           <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>

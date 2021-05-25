@@ -5,6 +5,8 @@ if (isset($_POST['AddStaffFormSubmit']))
     $varConsumerIDNo = $_POST['txtConsumerIDNo'];
     $varStaffdepartment = $_POST['txtStaffdepartment'];
     $varClasscategory = $_POST['txtClasscategory'];
+    $varaccesslevel = $_POST['txtaccesslevel'];
+
 
     $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"], 'DepartmentName'=>$varStaffdepartment];
     $query = new MongoDB\Driver\Query($filter);
@@ -48,6 +50,7 @@ if (isset($_POST['AddStaffFormSubmit']))
                     <label for="staticStaffNo" class="col-sm-2 col-form-label">Staff Name</label>
                     <div class="col-sm-10">
                       <input class="form-control" value="<?php echo $ConsumerFName; ?>" disabled>
+                      <input type="hidden" name="txtaccesslevel" value="<?php echo  $varaccesslevel; ?>" >
                     </div>
                   </div>
                   <div class="form-group row">
@@ -70,7 +73,7 @@ if (isset($_POST['AddStaffFormSubmit']))
                     </div>
                   </div>
                   <?php
-                  if ($varStaffdepartment == 'Teacher')
+                  if ($varaccesslevel == '0')
                   {
                     ?>
                     <div class="form-group row">

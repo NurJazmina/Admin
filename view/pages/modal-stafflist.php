@@ -1,3 +1,5 @@
+
+
 <form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div class="modal fade" id="recheckaddstaff" tabindex="-1" aria-labelledby="AddStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -12,6 +14,15 @@
             <label for="txtteacherclass" class="col-sm-2 col-form-label">Staff</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNo" >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="txtclasscategory" class="col-sm-2 col-form-label">Access Level</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="txtaccesslevel">
+                <option value="0">TEACHER</option>
+                <option value="1">OFFICE</option>
+              </select>
             </div>
           </div>
           <!--Add department-->
@@ -35,11 +46,11 @@
               </select>
             </div>
           </div>
-          <div id="teacherbox">
-            <div class="form-group row">
+          <div class="form-group row">
             <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
               <select class="form-control" id="sltStatus" name="txtClasscategory">
+                <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -48,7 +59,6 @@
                 <option value="6">6</option>
               </select>
             </div>
-          </div>
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -59,17 +69,6 @@
     </div>
   </div>
 </form>
-<script>
-    function SelecttxtStaffdepartment() {
-      var d = document.getElementById("txtStaffdepartment").value;
-      var dTypeA = document.getElementById("teacherbox");
-      if(d == "TEACHER")
-        dTypeA.style.display = "block";
-      else
-        dTypeA.style.display = "none";
-    }
-    SelecttxtStaffdepartment();
-</script>
 
 <br><br><form id="EditStaffFormSubmit"  name="EditStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div class="modal fade" id="recheckeditstaff" tabindex="-1" aria-labelledby="EditStaffModalLabel" aria-hidden="true">

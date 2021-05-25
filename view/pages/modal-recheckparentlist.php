@@ -41,7 +41,7 @@ if (isset($_POST['AddParentFormSubmit']))
       $ConsumerIDType = strval($document->ConsumerIDType);
       $ConsumerGroup_id = strval($document->ConsumerGroup_id);
 
-      if($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c')
+      if($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c' || $ConsumerGroup_id == '601b4cfd97728c027c01f187')
       {
         $filter = ['Schools_id'=>$schoolID, 'ConsumerID'=>$parentconsumerid];
         $query = new MongoDB\Driver\Query($filter);
@@ -291,92 +291,3 @@ if (isset($_POST['AddParentFormSubmit']))
   }
 }
 
-if (isset($_POST['EditParentFormSubmit']))
-{
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
-  $varConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNoChild];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document)
-  {
-    $_idchild = strval($document->_id);
-    $ConsumerFNameChild = $document->ConsumerFName;
-    $ConsumerLNameChild = $document->ConsumerLName;
-
-    $filter = ['Consumer_id'=>$_idchild];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-    foreach ($cursor as $document)
-    {
-      $studentid = strval($document->_id);
-    }
-  }
-  $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document)
-  {
-    $_idparent = strval($document->_id);
-    $ConsumerFName = $document->ConsumerFName;
-    $ConsumerLName = $document->ConsumerLName;
-
-    $filter = ['ConsumerID'=>$_idparent];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-    foreach ($cursor as $document)
-    {
-      $parentid = strval($document->_id);
-    }
-  }
-?>
-<h2 style="text-align: center;">PLEASE CONFIRM BEFORE PROCEED</h2>
-<form id="submiteditparent" name="submiteditparent" action="index.php?page=parentlist" method="post">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-  <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="EditParentModalLabel">Edit Parent</h5>
-        </div>
-        <div class="modal-body">
-          <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Parent Name</label>
-            <div class="col-sm-10">
-              <input class="form-control" value="<?php echo  $ConsumerFName." ".$ConsumerLName; ?>" disabled>
-              <input type="hidden" name="txtparentid" value="<?php echo $parentid; ?>">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Child Name</label>
-            <div class="col-sm-10">
-              <input class="form-control" value="<?php echo $ConsumerFNameChild." ".$ConsumerLNameChild; ?>" disabled><br>
-              <input type="hidden" name="txtstudentid" value="<?php echo $studentid; ?>">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Group</label>
-            <div class="col-sm-10">
-              <input class="form-control" value="VIP" disabled>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="staticStaff" class="col-sm-2 col-form-label">Relation</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="txtrelation" name="txtrelation" >
-                <option value="FATHER">FATHER</option>
-                <option value="MOTHER">MOTHER</option>
-                <option value="GUARDIAN">GUARDIAN</option>
-                <option value="RELATIVE">RELATVE</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button  onclick="index.php?page=parentlist" class="btn btn-secondary" >Close</button>
-          <button type="submit" class="btn btn-success" name="submiteditparent">Confirm</button>
-        </div>
-      </div>
-  </div>
-</form>
-<?php
-}
-?>
