@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Online learning";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <html>
     <body>

@@ -1,5 +1,4 @@
 <?php
-
 $_SESSION["title"] = "Dashboard";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/home.php'); 
@@ -205,36 +204,25 @@ function time_elapsed($date){
 			</div>
 			<!--end::Body-->
 		</div>
+		<!--
 		<div class="card card-custom gutter-b">
-			<!--begin::Body-->
 			<div class="card-body">
-				<!--begin::Wrapper-->
 				<div class="d-flex justify-content-between flex-column h-100">
-					<!--begin::Container-->
 					<div class="h-100">
-						<!--begin::Header-->
 						<div class="d-flex flex-column flex-center">
 						aaaaa
 						</div>
-						<!--end::Header-->
-						<!--begin::Body-->
 						<div class="pt-1">
 						bbbb
 						</div>
-						<!--end::Body-->
 					</div>
-					<!--eng::Container-->
-
-					<!--begin::Footer-->
 					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
 					ccccc
 					</div>
-					<!--end::Footer-->
 				</div>
-				<!--end::Wrapper-->
 			</div>
-			<!--end::Body-->
 		</div>
+		-->
 	</div>
 	<div class="col">
 		<div class="card card-custom gutter-b">
@@ -1003,7 +991,7 @@ function time_elapsed($date){
 							}
 					    }
 						?>
-						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest Forum update 
 						
 						</span>
 						<!--begin::Table-->
