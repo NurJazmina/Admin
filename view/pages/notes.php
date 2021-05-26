@@ -3,8 +3,6 @@ $_SESSION["title"] = "Online learning";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
 
-<html>
-    <body>
     <form id="AddNotesSubmit" name="AddNotesSubmit" action="index.php?page=onlinelearning" method="post">
         <div id="AddNotesModal" tabindex="-1" aria-labelledby="AddNotesModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -31,5 +29,3 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
         </div>
     </form>
-    </body>
-</html>

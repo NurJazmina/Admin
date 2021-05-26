@@ -2,9 +2,16 @@
 $_SESSION["title"] = "News";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include 'model/counter.php';
-?>
 
-<?php
+$filter = ['url'=>$URL];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Views',$query);
+foreach ($cursor as $document)
+{
+    $url = strval($document->url);
+    $count = strval($document->count);
+}
+
 $id = new \MongoDB\BSON\ObjectId($_GET['id']);
 $filter = ['_id'=>$id];
 $query = new MongoDB\Driver\Query($filter);
@@ -66,11 +73,15 @@ foreach ($cursor as $document)
     }
 }
 ?>
+
 <div><br><br><br><h1 style="color:#696969; text-align:center"><?php echo $NewsTitle; ?></h1></div><br>
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
     <div class="card">
+      <div class = "mt-2 px-2" style="text-align:right;">
+          <h5 class="btn btn-light-success font-weight-bolder btn-sm">Views : <?php echo $count; ?></h5>
+      </div>
       <div class="card-body">
         <div class="table-responsive-sm">
             <table class="table">

@@ -3,13 +3,9 @@ $_SESSION["title"] = "Online learning";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
 
-<html>
-    <body>
         (If the teacher wants to edit then the teacher must select the subject first > edit page optional subjective/objective > save) <br>
         (If objective questions, must set with the correct answers too, while subjective, just leave with with the text area)
     <br><br>
-    <html>
-    <body>
     <form id="AddNewExercise" name="AddNewExercise" action="index.php?page=onlinelearning" method="post">
         <div id="AddExerciseModal" tabindex="-1" aria-labelledby="AddExerciseModalLabel" aria-hidden="true">
 
@@ -83,8 +79,6 @@ include 'view/partials/_subheader/subheader-v1.php';
 
         </div>
     </form>
-    </body>
-</html>
 
 <!-- <div class="form-group row">
                             <label for="AddNewExercises">Question goes here:</label><br><br>

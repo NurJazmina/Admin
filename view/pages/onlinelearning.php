@@ -3,7 +3,9 @@ $_SESSION["title"] = "Online learning";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
 
+<?php
 
+?>
     <div class="card card-custom gutter-b">
         <div class="card-header">
             <div class="card-title">

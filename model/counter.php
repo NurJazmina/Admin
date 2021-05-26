@@ -1,7 +1,6 @@
 <?php
 
   $URL = "$_SERVER[REQUEST_URI]";
-  echo $URL;
   $url = "";
 
 	if (!isset($_SESSION[$URL]) && empty($_SESSION[$URL]))
@@ -17,6 +16,14 @@
 
         if ($url == "")
         {
+          $filter = ['url'=>$URL];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Views',$query);
+          foreach ($cursor as $document)
+          {
+              $url = strval($document->url);
+              $count = strval($document->count);
+          }
             $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
             $bulk->insert(['url'=>$URL,
                           'count'=>1]);
