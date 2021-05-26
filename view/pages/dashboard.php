@@ -966,7 +966,7 @@ function time_elapsed($date){
 					<div class="tab-pane fade" id="kt_tab_pane_10_5" role="tabpanel" aria-labelledby="kt_tab_pane_10_5">
 						<span class="menu-label">
 						<?php
-						$Forumid=" ";
+						$Forumid =" ";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
 						$option = ['limit'=>10,'sort' => ['ForumDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
@@ -989,14 +989,12 @@ function time_elapsed($date){
 								$datenew = date_format($datetime,"Y-m-d\TH:i:s");
 								$date = new MongoDB\BSON\UTCDateTime((new DateTime($datenew))->getTimestamp());
 						
-								$nowtimeNew = time();
-								$timeNew = strval($date);
+								$nowtimeNew3 = time();
+								$timeNew3 = strval($date);
 							}
 					    }
 						?>
-						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-						
-						</span>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest Forum update</span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -1132,7 +1130,7 @@ function time_elapsed($date){
 							{
 								$total = $total + 1;
 							}
-							?>
+								?>
 								<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest Forum update 
 								<?php
 							}
