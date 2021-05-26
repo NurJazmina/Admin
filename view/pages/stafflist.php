@@ -353,12 +353,12 @@ border:1px solid #ffffff;
                             else 
                             {
                             ?>
-                              <a href="index.php?page=timetablelist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                              <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
                             <?php
                             }
                           }
                           ?>
-                          <a href="index.php?page=timetablelist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
+                          <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
                         </div>
                     </div>
                   </div>

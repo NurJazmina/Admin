@@ -4,7 +4,8 @@ $_SESSION["title"] = "Department";
 ?>
 <style>
 .highlight td {
-background:red;
+background:#FFE2E5;
+color:#F64E60 ;
 }
 </style>
 <!--begin::Content-->
@@ -28,7 +29,7 @@ background:red;
             <div class="card-toolbar" style="text-align:right;">
                         <!--begin::Dropdown-->
                         <div class="dropdown dropdown-inline mr-2">
-                        <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-light-success font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
