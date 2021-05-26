@@ -3,10 +3,7 @@ $_SESSION["title"] = "Online learning";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
 
-<html>
-    <body>
-        Only teachers are accessible for editing notes and create questions.
-    <br><br>
+
     <div class="card card-custom gutter-b">
         <div class="card-header">
             <div class="card-title">
@@ -113,6 +110,3 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
         </div>
     </div>
-
-    </body>
-</html>
