@@ -3,7 +3,8 @@
   $filter = ['_id'=>$id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  foreach ($cursor as $document){
+  foreach ($cursor as $document)
+  {
     $_SESSION["staffremarkid"] = strval($document->_id);
     $ConsumerFName = ($document->ConsumerFName);
     $ConsumerLName = ($document->ConsumerLName);

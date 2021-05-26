@@ -36,7 +36,7 @@ $_SESSION["title"] = "School";
           </span>
           <a href="#" class="text-warning font-weight-bold font-size-h6"><?php echo $_SESSION["loggeduser_schoolName"] ?></a>
         </div>
-        <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+        <div class="col bg-light-primary px-6 py-8 rounded-xl mr-7 mb-7">
           <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -58,7 +58,7 @@ $_SESSION["title"] = "School";
       <!--end::Row-->
       <!--begin::Row-->
       <div class="row m-0">
-        <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
+        <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7 mb-7">
           <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -72,7 +72,7 @@ $_SESSION["title"] = "School";
           </span>
           <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2"><?php echo $_SESSION["loggeduser_schoolsAddress"] ?></a>
         </div>
-        <div class="col bg-light-success px-6 py-8 rounded-xl">
+        <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
           <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

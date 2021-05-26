@@ -349,11 +349,11 @@ if (isset($_POST['submitaddparent']))
                       <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                            <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$SchoolName and $ConsumerFNameChild $ConsumerLNameChild succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                <ul>
-                                    <li>$SchoolName</li>
+                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                <p><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a> and $ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                  <ul>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
                                     <li>Phone: $SchoolPhone</li>
                                     <li>Email: $SchoolEmail</li>
                                     <li>Address: $SchoolAddress</li>
@@ -683,11 +683,11 @@ if (isset($_POST['addrelation']))
                       <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                            <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                <ul>
-                                    <li>$SchoolName</li>
+                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                  <ul>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
                                     <li>Phone: $SchoolPhone</li>
                                     <li>Email: $SchoolEmail</li>
                                     <li>Address: $SchoolAddress</li>
@@ -1053,10 +1053,10 @@ if (isset($_POST['addrelationstudent']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                <ul>
-                                    <li>$SchoolName</li>
+                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                  <ul>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
                                     <li>Phone: $SchoolPhone</li>
                                     <li>Email: $SchoolEmail</li>
                                     <li>Address: $SchoolAddress</li>
@@ -1403,13 +1403,13 @@ if (isset($_POST['addrelationparent']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
-                                    <li>$SchoolName</li>
-                                    <li>Phone: $SchoolPhone</li>
-                                    <li>Email: $SchoolEmail</li>
-                                    <li>Address: $SchoolAddress</li>
+                                  <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
+                                  <li>Phone: $SchoolPhone</li>
+                                  <li>Email: $SchoolEmail</li>
+                                  <li>Address: $SchoolAddress</li>
                                 </ul>
                               </p>
                               <p>Thanks,<br/>
@@ -1713,13 +1713,13 @@ if (isset($_POST['EditParentFormSubmit']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$varrelation succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                              <p>$varrelation succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
-                                    <li>$SchoolName</li>
-                                    <li>Phone: $SchoolPhone</li>
-                                    <li>Email: $SchoolEmail</li>
-                                    <li>Address: $SchoolAddress</li>
+                                  <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
+                                  <li>Phone: $SchoolPhone</li>
+                                  <li>Email: $SchoolEmail</li>
+                                  <li>Address: $SchoolAddress</li>
                                 </ul>
                               </p>
                               <p>Thanks,<br/>
@@ -2080,13 +2080,13 @@ if (isset($_POST['StatusParentFormSubmit']))
                             <tr>
                               <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                 <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                  <p>Hi $ConsumerFName $ConsumerLName,</p>
+                                  <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                   <p>Status for $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date has been change to $varStaffStatus. If you found out this is an error, kindly contact:
                                     <ul>
-                                        <li>$SchoolName</li>
-                                        <li>Phone: $SchoolPhone</li>
-                                        <li>Email: $SchoolEmail</li>
-                                        <li>Address: $SchoolAddress</li>
+                                      <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
+                                      <li>Phone: $SchoolPhone</li>
+                                      <li>Email: $SchoolEmail</li>
+                                      <li>Address: $SchoolAddress</li>
                                     </ul>
                                   </p>
                                   <p>Thanks,<br/>
@@ -2165,6 +2165,8 @@ if (isset($_POST['StatusParentFormSubmit']))
   } else
   {
     $datapaging = 0;
+    $pagingnext = 1;
+    $pagingprevious = 0;
   }
   if (!isset($_POST['searchname']) && empty($_POST['searchname']))
   {

@@ -6,12 +6,14 @@ require_once "vendor/autoload.php";
 //Add school staff
 if (isset($_POST['submitaddstaff']))
 {
+  $varteacherclass = '';
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $varConsumerIDNo = $_POST['txtConsumerIDNo'];
   $varStaffdepartment = strval($_SESSION["departmentid"]);
   $varDepartmentName = strval($_SESSION["DepartmentName"]);
   $varStaffstatus = $_POST['txtStaffstatus'];
   $varteacherclass = $_POST['txtteacherclass'];
+  $varaccesslevel = $_POST['txtaccesslevel'];
 
   $filter = ['ConsumerIDNo'=>$varConsumerIDNo];
   $query = new MongoDB\Driver\Query($filter);
@@ -21,7 +23,7 @@ if (isset($_POST['submitaddstaff']))
       $ID = strval($document->_id);
       $ConsumerFName = strval($document->ConsumerFName);
       $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-      if ($varDepartmentName !== "TEACHER")
+      if ($varaccesslevel !== "0")
       {
         $bulk->insert([
           'ConsumerID'=>$ID,
@@ -33,6 +35,8 @@ if (isset($_POST['submitaddstaff']))
       }
       else
       {
+        if ($varteacherclass != '')
+        {
         $bulk->insert([
           'ConsumerID'=>$ID,
           'SchoolID'=> $varschoolID,
@@ -40,6 +44,17 @@ if (isset($_POST['submitaddstaff']))
           'StaffLevel'=>"0",
           'Staffdepartment'=> $varStaffdepartment,
           'StaffStatus'=>$varStaffstatus]);
+        }
+        else
+        {
+          $bulk->insert([
+            'ConsumerID'=>$ID,
+            'SchoolID'=> $varschoolID,
+            'ClassID'=> '',
+            'StaffLevel'=>"0",
+            'Staffdepartment'=> $varStaffdepartment,
+            'StaffStatus'=>$varStaffstatus]);
+        }
       }
       $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
       try
@@ -258,10 +273,10 @@ if (isset($_POST['submitaddstaff']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$SchoolName succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                              <p><a href='https://smartschool.gongetz.com/school.php?id=$varschoolID'>$SchoolName</a> succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
-                                    <li>$SchoolName</li>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$varschoolID'>$SchoolName</a></li>
                                     <li>Phone: $SchoolPhone</li>
                                     <li>Email: $SchoolEmail</li>
                                     <li>Address: $SchoolAddress</li>
@@ -570,10 +585,10 @@ if (isset($_POST['submiteditstaff']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>$ClassCategoryNew $ClassNameNew  succesfully link with $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                              <p>$ClassCategoryNew $ClassNameNew  succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                 <ul>
-                                    <li>$SchoolName</li>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$varschoolID'>$SchoolName</a></li>
                                     <li>Phone: $SchoolPhone</li>
                                     <li>Email: $SchoolEmail</li>
                                     <li>Address: $SchoolAddress</li>
@@ -889,10 +904,10 @@ if (isset($_POST['StatusStaffFormSubmit']))
                         <tr>
                           <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                             <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi $ConsumerFName $ConsumerLName,</p>
-                              <p>Status for $ConsumerFName $ConsumerLName with $ConsumerIDType $ConsumerIDNo on $date has been change to $varStaffStatus. If you found out this is an error, kindly contact:
+                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                              <p>Status for <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date has been change to $varStaffStatus. If you found out this is an error, kindly contact:
                                 <ul>
-                                    <li>$SchoolName</li>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$varschoolID'>$SchoolName</a></li>
                                     <li>Phone: $SchoolPhone</li>
                                     <li>Email: $SchoolEmail</li>
                                     <li>Address: $SchoolAddress</li>
@@ -921,7 +936,6 @@ if (isset($_POST['StatusStaffFormSubmit']))
                       </table>
                     </td>
                   </tr>
-
                 <!-- END MAIN CONTENT AREA -->
                 </table>
 

@@ -41,7 +41,7 @@ if (isset($_POST['AddStudentFormSubmit']))
       $ConsumerIDType = strval($document->ConsumerIDType);
       $ConsumerGroup_id = strval($document->ConsumerGroup_id);
 
-      if($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c')
+      if($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c' || $ConsumerGroup_id == '601b4cfd97728c027c01f187')
       {
         $filter = ['Schools_id'=>$schoolID, 'ConsumerID'=>$parentconsumerid];
         $query = new MongoDB\Driver\Query($filter);
