@@ -601,6 +601,22 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
         }
         ?>
         <?php
+        if ($_GET['page']=="onlinelearning") {
+          ?>
+          <script>
+          //Limit characters displayed in span
+          $(document).ready(function(){
+          $('.claimedRight').each(function (f) {
+              var newstr = $(this).text().substring(0,300)+'....';
+              $(this).text(newstr);
+
+              });
+          })
+          </script>
+          <?php
+        }
+        ?>
+        <?php
   
 }
 ?>

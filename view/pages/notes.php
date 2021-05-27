@@ -1,6 +1,7 @@
 <?php
 $_SESSION["title"] = "Online learning";
 include 'view/partials/_subheader/subheader-v1.php'; 
+
 ?>
 
     <form id="AddNotesSubmit" name="AddNotesSubmit" action="index.php?page=onlinelearning" method="post">

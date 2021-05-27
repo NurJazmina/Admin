@@ -545,8 +545,6 @@
                     {
                       echo date_format($AttendanceDate,"H:i:s")."<br>";
                     }
-                    ?>
-                    <?php
                     }
                     ?>
                     </td>
