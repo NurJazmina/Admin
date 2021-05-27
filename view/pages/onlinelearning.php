@@ -109,6 +109,6 @@ include 'view/partials/_subheader/subheader-v1.php';
                     </div>
                 </div>
                 <!--end::Card-->
-            </div>
+            </div> 
         </div>
     </div>
