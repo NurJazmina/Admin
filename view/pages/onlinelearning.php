@@ -226,17 +226,5 @@ include 'view/partials/_subheader/subheader-v1.php';
                 </div>
                 <?php
             }
-            ?>
-    </div>
+?>
 </div>
-
-<script>
-function Sort() {
-  var sortedCards = $('.card').sort(function(a, b) {
-    return $(a).find('.lname').text().localeCompare($(b).find('.lname').text())
-  })
-  $('.main').remove('.card').append(sortedCards)
-}
-
-$('.sort_button').on('click',Sort)
-</script>

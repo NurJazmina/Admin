@@ -62,6 +62,7 @@
                                 "notes",
                                 "exercises",
                                 //"testing",
+                                "imagetest"
                                );
 
     $teacherallowedaccess = array("dashboard",
