@@ -1,6 +1,8 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Kreait\Firebase\Factory;
+
 require_once "vendor/autoload.php";
 
 if (isset($_POST['AddNews'])) 
@@ -311,6 +313,19 @@ if (isset($_POST['AddNews']))
                     try { $mail->send();} 
 
                     catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+
+                    //firebase notification//
+                   
+                    $factory = (new Factory)
+                        ->withServiceAccount('/path/to/firebase_credentials.json')
+                        ->withDatabaseUri('https://my-project-default-rtdb.firebaseio.com');
+
+                    $auth = $factory->createAuth();
+                    $realtimeDatabase = $factory->createDatabase();
+                    $cloudMessaging = $factory->createMessaging();
+                    $remoteConfig = $factory->createRemoteConfig();
+                    $cloudStorage = $factory->createStorage();
+                    $firestore = $factory->createFirestore();
 
                     }
     

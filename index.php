@@ -215,6 +215,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.2.0/dist/alpine.js"></script>
 		
 		<!--end::Page Vendors-->
 

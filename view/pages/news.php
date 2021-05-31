@@ -172,7 +172,10 @@ include ('model/news.php');
       ?>
       <div class="col-lg-4">
         <div class="card card-custom gutter-b">
-            <div class="card-header">
+            <div class="card-header ribbon ribbon-clip ribbon-right">
+              <div class="ribbon-target" style="top: 12px;">
+              <span class="ribbon-inner bg-warning"></span>Views : 
+              </div>
               <div class="card-title">
                 <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $NewsTitle; ?></a></strong>
               </div>

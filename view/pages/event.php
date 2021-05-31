@@ -62,7 +62,10 @@ include ('model/event.php');
     }
     ?>
   <div class="card">
-  <div class="card-header">
+  <div class="card-header ribbon ribbon-clip ribbon-right">
+  <div class="ribbon-target" style="top: 12px;">
+    <span class="ribbon-inner bg-warning"></span>Views : 
+  </div>
     <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" ><?php echo $EventTitle; ?></a></strong>
   </div>
   <div class="card-body">
@@ -155,7 +158,10 @@ include ('model/event.php');
     }
     ?>
   <div class="card">
-<div class="card-header">
+<div class="card-header ribbon ribbon-clip ribbon-right">
+<div class="ribbon-target" style="top: 12px;">
+  <span class="ribbon-inner bg-warning"></span>Views : 
+</div>
 <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid ; ?>"><?php echo $EventTitle; ?></a></strong><br><br>
 </div>
 <div class="card-body">

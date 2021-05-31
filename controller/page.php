@@ -115,6 +115,10 @@
                                 //"exportclassattendance",
                                 //"testing",
                                 //"duplicate",
+                                "onlinelearning",
+                                "notes",
+                                "exercises",
+                                "test"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
