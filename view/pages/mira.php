@@ -26,7 +26,7 @@
       <?php
     }
     ?>
-    <form id="AddImage" name="AddImage" action="index.php?page=mira" method="post">
+    <form id="AddImage" name="AddImage" action="index.php?page=mira" method="post" enctype ="multipart/form-data">
     <div id="AddDepartmentModal" tabindex="-1" aria-labelledby="AddDepartmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">

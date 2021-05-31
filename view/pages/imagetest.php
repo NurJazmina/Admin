@@ -1,23 +1,45 @@
+<?php 
+    include ('model/imagetest.php');
 
-<div class="col-lg-4">
-        <div class="card card-custom gutter-b">
-            <div class="card-header">
-              <div class="card-title">
-              hello <?php echo $testing; ?>
-                <!-- <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $NewsTitle; ?></a></strong> -->
-              </div>
-            </div>
-        </div>
-
-    <?php
-    $calc = 0;
-    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+    $filter = [NULL];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.testing',$query);
     foreach ($cursor as $document)
     {
-        $testing = strval($document->testing);
+      $testing_id = strval($document->_id);
+      $Date = strval($document->Date);
+      $Image = strval($document->Image);
+      ?>
+      <div class="card">
+        <div class="card-header">
+        <?php
+        echo $testing_id."<br>";
+        ?>
+        </div>
+        <div class="card-body">
+        <?php
+        echo $Date."<br>";
+        echo $Image
+        ?>
+        </div>
+      </div>
+      <?php
     }
     ?>
 
+<div class="card">
+  <div class="card-header">
+   Testing for upload photos
+  </div>
+  <div class="card-body">
+  <form action="index.php?imagetest" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <button type="submit" name="submit" class="btn btn-secondary"> Upload </button>
+  </div>
+  <div class="card-footer">
+  <button type="button" class="btn btn-secondary" name="submit"> Next </button>
+  </div>
+    
+  </div>
 </div>
+?>
