@@ -1,8 +1,8 @@
 <?php
 $_SESSION["title"] = "Department";
+include 'view/partials/_subheader/subheader-v1.php';
+include ('model/departmentlist.php'); 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
-<?php include ('model/departmentlist.php'); ?>
 <div class="myDiv" style="color:#696969;text-align:center"><br><br><br><h1>Departments</h1></div><br>
 <div class="table-responsive">
 <table class="table table-bordered table-sm" style="text-align:center;">

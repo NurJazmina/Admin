@@ -1,4 +1,3 @@
-
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -87,8 +86,8 @@ if (isset($_GET['id']) && !empty($_GET['id']))
   ?>
   <style>
   .highlight td.default {
-  background:red;
-  color:#ffffff;
+  background:#FFE2E5;
+  color:#F64E60 ;
   }
   </style>
   <div><br><br><br><h1 style="color:#696969; text-align:center">Class Info</h1></div><br>
@@ -557,14 +556,14 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-12">
-                      <table id="attendance" class="table table-bordered ">
+                      <table id="attendance" class="table table-bordered" style="text-align:center">
                       <thead class="table-light">
-                          <tr>
-                          <th scope="col" style="color:#696969; text-align:center">Student ID</th>
-                          <th scope="col" style="color:#696969; text-align:center">Student Name</th>
-                          <th scope="col" style="color:#696969; text-align:center">Date</th>
-                          <th scope="col" style="color:#696969; text-align:center">IN</th>
-                          <th scope="col" style="color:#696969; text-align:center">OUT</th>
+                          <tr style="color:#696969;">
+                          <th scope="col">Student ID</th>
+                          <th scope="col">Student Name</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">IN</th>
+                          <th scope="col">OUT</th>
                           </tr>
                       </thead>
                       <?php

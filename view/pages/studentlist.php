@@ -100,7 +100,7 @@ border:1px solid #ffffff;
 			<!--end::Toolbar-->
 		</div>
 	</div>
-	<!--end::Subheader-->
+<!--end::Subheader-->
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">

@@ -1,5 +1,5 @@
 <?php
-$_SESSION["title"] = "Department";
+$_SESSION["title"] = "Department Detail";
 ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -97,8 +97,8 @@ foreach ($cursor as $document)
 ?>
 <style>
 .highlight td.default {
-background:red;
-color:#ffffff;
+background:#FFE2E5;
+color:#F64E60 ;
 }
 </style>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Department Info</h1></div><br>
@@ -666,7 +666,6 @@ color:#ffffff;
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
 </div>
-<?php include ('view/pages/modal-updatedepartmentremark.php'); ?>
 <?php
 }
 else
