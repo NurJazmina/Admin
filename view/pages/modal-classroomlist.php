@@ -47,7 +47,7 @@
               </select>
             </div>
           </div>
-          </div>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" name="AddclassFormSubmit">Re-Checking</button>
@@ -66,11 +66,17 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="txtclassid">
+        <input type="hidden" class="form-control" id="staticStaffNo" name="txtclassid" >
+          <div class="form-group row">
+            <label for="staticStaffNo" class="col-sm-2 col-form-label">Number of Subject</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="staticStaffNo" name="txtnumber" >
+            </div>
+          </div>
           <div class="form-group row">
             <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" style="height: auto; width: 70%">
+              <select class="form-control" id="sltStatus" name="txtClasscategory">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -80,43 +86,14 @@
               </select>
             </div>
           </div>
-          <div class="form-group row">
-              <label for="staticStaffNo" class="col-sm-2 col-form-label">Teacher</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="teacher[]">
-              </div>
-
-              <label for="staticStaffNo" class="col-sm-2 col-form-label">Subject</label>
-              <div class="col-sm-10">
-                <select class="form-select" name="subject[]">
-                  <?php
-                  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"], 'Class_category'=>$varClasscategory];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
-                  foreach ($cursor as $document):
-                  ?>
-                  <option value="<?=($document->subjectid)?>"><?=($document->SubjectName)?></option>
-                  <?php
-                  endforeach
-                  ?>
-                </select>
-              </div>
-              <br>
-              <div class="container1">
-                <button class="add_form_field btn btn-success btn-sm" >Add New Field &nbsp; 
-                  <span style="font-size:16px; font-weight:bold;">+ </span>
-                </button>
-              </div>
-              <br>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" name="EditclassFormSubmit">Edit</button>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </form>
 
 <br><br><form name="DeleteclassFormSubmit" action="index.php?page=classroomlist" method="post">
@@ -138,29 +115,3 @@
   </div>
 </div>
 </form>   
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    var max_fields = 15;
-    var wrapper = $(".container1");
-    var add_button = $(".add_form_field");
-
-    var x = 1;
-    $(add_button).click(function(e) {
-        e.preventDefault();
-        if (x < max_fields) {
-            x++;
-            $(wrapper).append('<div class="form-group row"><label class="col-sm-2 col-form-label">Teacher</label><div class="col-sm-10"><input type="text" class="form-control" name="teacher[]"></div><label for="staticStaffNo" class="col-sm-2 col-form-label">subject</label><div class="col-sm-10"><input type="text" class="form-control" name="subject[]"></div><a href="#" class="delete"> Delete</a></div>'); //add input box
-        } else {
-            alert('You Reached the limits')
-        }
-    });
-
-    $(wrapper).on("click", ".delete", function(e) {
-        e.preventDefault();
-        $(this).parent('div').remove();
-        x--;
-    })
-});
-</script>
