@@ -81,7 +81,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm"" name="searchname">Search</button>
+                    <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" name="searchname">Search</button>
                   <?php
                   } 
                   ?>

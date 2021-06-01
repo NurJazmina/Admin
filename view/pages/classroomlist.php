@@ -82,7 +82,7 @@ border:1px solid #ffffff;
                 <tr>
                   <th scope="col">Teacher</th>
                   <th scope="col">Class name</th>
-                  <th scope="col">Subject</th>
+                  <th colspan="2">Subject</th>
                   <th scope="col">Total Student</th>
                   <th scope="col">Attendance</th>
                   <th scope="col">Update</th>
@@ -140,11 +140,37 @@ border:1px solid #ffffff;
                     $Subject_id = $document->Subject_id;
                     $Teacher_id = $document->Teacher_id;
 
+                    $filter = ['_id' => new \MongoDB\BSON\ObjectId($Subject_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $subjectid = $document->_id;
+                      $SubjectName = $document->SubjectName;
+                      ?>
+                      <a href="index.php?page=subjectdetail&id=<?php echo $subjectid; ?>" style="color:#076d79; text-decoration: none;">
+                      <?php echo $SubjectName."<br>"; ?></a>
+                      <?php
+                    }
+                  }
+                  ?>
+                  </td>
+                  <td>
+                  <?php
+                  $filter = ['Class_id' => $idclass];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $Subject_id = $document->Subject_id;
+                    $Teacher_id = $document->Teacher_id;
+
                     $filter = ['_id' => new \MongoDB\BSON\ObjectId($Teacher_id)];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                     foreach ($cursor as $document)
                     {
+                      $teacherid = $document->_id;
                       $ConsumerID = $document->ConsumerID;
 
                       $filter = ['_id' => new \MongoDB\BSON\ObjectId($ConsumerID)];
@@ -153,15 +179,10 @@ border:1px solid #ffffff;
                       foreach ($cursor as $document)
                       {
                         $ConsumerFName = $document->ConsumerFName;
-
-                        $filter = ['_id' => new \MongoDB\BSON\ObjectId($Subject_id)];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
-                        foreach ($cursor as $document)
-                        {
-                          $SubjectName = $document->SubjectName;
-                          echo $SubjectName." : TEACHER ".$ConsumerFName."<br>";
-                        }
+                        ?>
+                        <a href="index.php?page=staffdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;">
+                        <?php echo "TEACHER ".$ConsumerFName."<br>"; ?></a>
+                        <?php
                       }
                     }
                   }

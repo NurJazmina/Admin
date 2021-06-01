@@ -90,7 +90,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
   color:#F64E60 ;
   }
   </style>
-  <div><br><br><br><h1 style="color:#696969; text-align:center">Class Info</h1></div><br>
+  <div><br><h1 style="color:#696969; text-align:center">Class Info</h1></div><br>
   <div class="row" >
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp">

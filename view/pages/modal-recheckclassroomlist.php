@@ -170,7 +170,7 @@ if (isset($_POST['EditclassFormSubmit']))
                 ?>
               </select>
             </div>
-          </div>
+          </div>      
         </div>
         <div class="modal-footer">
           <input type="hidden" class="form-control" id="staticStaffNo" name="txtclasscategory" value="<?php echo  $varClasscategory; ?>">
