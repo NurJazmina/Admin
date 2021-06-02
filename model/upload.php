@@ -3,6 +3,8 @@ if (isset($_POST['AddImage']))
 {
         $varimage = $_POST['txtimage'];
         $Date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+        $document = array( 
+        $imageUpload => new MongoDB\BSON\Binary(file_get_contents($path_to_image_file), MongoDB\BSON\Binary::TYPE_GENERIC)); 
         $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
         $bulk->insert(['Date'=>$Date,'Image'=> $varimage]);
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
