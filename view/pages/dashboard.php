@@ -1,5 +1,4 @@
 <?php
-
 $_SESSION["title"] = "Dashboard";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/home.php'); 
@@ -205,7 +204,7 @@ function time_elapsed($date){
 			</div>
 			<!--end::Body-->
 		</div>
-		<!-- 10 latest comment::forum
+		<!--
 		<div class="card card-custom gutter-b">
 			<div class="card-body">
 				<div class="d-flex justify-content-between flex-column h-100">
@@ -326,7 +325,6 @@ function time_elapsed($date){
 					<span class="menu-label">
 						<?php
 						$eventid1="";
-						$nowtimeEvent1="";
 						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
 						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -680,7 +678,6 @@ function time_elapsed($date){
 						<span class="menu-label">
 						<?php
 						$newsid="";
-						$nowtimeNew ="";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
 						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
@@ -994,7 +991,7 @@ function time_elapsed($date){
 							}
 					    }
 						?>
-						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest Forum update 
 						
 						</span>
 						<!--begin::Table-->

@@ -5,7 +5,7 @@
 
 		<!--begin::Logo-->
 		<a href="index.php?page=dashboard" class="brand-logo">
-			<img alt="Logo" src="assets/media/logos/logogongetz.png" width="50" height="50"/>
+			<img alt="Logo" src="assets/media/logos/logogongetz.png" width="30" height="30"/>
 		</a>
 		<!--end::Logo-->
 
@@ -31,7 +31,7 @@
 	<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 
 		<!--begin::Menu Container-->
-		<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
+		<div id="kt_aside_menu" class="aside-menu" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
 
 			<!--begin::Menu Nav-->
 			<ul class="menu-nav">
@@ -191,8 +191,7 @@
 						</ul>
 					</div>
 				</li>
-				<br>
-				<li class="menu-item menu-item" aria-haspopup="true">
+				<li class="menu-item menu-item" aria-haspopup="true" style="border-top: 1px solid #eceef7;; margin-top: 12px; padding-top: 12px;">
 					<a href="index.php?page=dashboard" class="menu-link">
 						<span class="svg-icon menu-icon">
 
@@ -209,7 +208,7 @@
 						</span>
 						<span class="menu-text">Dashboard</span>
 					</a>
-				</li><br>
+				</li>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
@@ -548,7 +547,84 @@
 						</ul>
 					</div>
 				</li>
-				<li class="menu-section">
+				<li class="menu-section" style="border-top: 1px solid #eceef7; margin-top: 12px; padding-top: 12px;">
+					<h4 class="menu-text">Online Learning</h4>
+					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true" >
+					<a href="index.php?page=onlinelearning" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-laptop icon-l"></i>
+						</span>
+						<span class="menu-text">Dashboard</span>
+					</a>
+				</li>
+				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+					<a href="javascript:;" class="menu-link menu-toggle">
+					<span class="svg-icon menu-icon">
+						<i class="flaticon2-open-text-book icon-l"></i>
+					</span>
+					<span class="menu-text">My Subject</span>
+					<i class="menu-arrow"></i>
+					</a>
+					<div class="menu-submenu">
+						<i class="menu-arrow"></i>
+						<ul class="menu-subnav">
+							<li class="menu-item menu-item-parent" aria-haspopup="true">
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=notes" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Bahasa Melayu</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=exercises" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Matematik</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=exercises" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Pendidikan Islam</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=exercises" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Sains</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true">
+					<a href="index.php?page=notes" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-crisp-icons icon-l"></i>
+						</span>
+						</span>
+						<span class="menu-text">Add Notes</span>
+					</a>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true">
+					<a href="index.php?page=exercises" class="menu-link">
+					    <span class="svg-icon menu-icon">
+							<i class="flaticon2-writing icon-l"></i>
+						</span>
+						<span class="menu-text">Add Quiz/Exercise</span>
+					</a>
+				</li>
+				<li class="menu-section" style="border-top: 1px solid #eceef7;; margin-top: 12px; padding-top: 12px;">
 					<h4 class="menu-text">Directory</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
@@ -559,17 +635,7 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24"/>
-									<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"/>
-									<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"/>
-								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+								<i class="fas fa-user-tie"></i>
 						</span>
 						<span class="menu-text">Staff</span>
 						<i class="menu-arrow"></i>
@@ -614,18 +680,8 @@
 				?>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
-						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24"/>
-									<rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="1"/>
-									<path d="M5,10 L7,10 C7.55228475,10 8,10.4477153 8,11 L8,13 C8,13.5522847 7.55228475,14 7,14 L5,14 C4.44771525,14 4,13.5522847 4,13 L4,11 C4,10.4477153 4.44771525,10 5,10 Z M11,4 L13,4 C13.5522847,4 14,4.44771525 14,5 L14,7 C14,7.55228475 13.5522847,8 13,8 L11,8 C10.4477153,8 10,7.55228475 10,7 L10,5 C10,4.44771525 10.4477153,4 11,4 Z M11,10 L13,10 C13.5522847,10 14,10.4477153 14,11 L14,13 C14,13.5522847 13.5522847,14 13,14 L11,14 C10.4477153,14 10,13.5522847 10,13 L10,11 C10,10.4477153 10.4477153,10 11,10 Z M17,4 L19,4 C19.5522847,4 20,4.44771525 20,5 L20,7 C20,7.55228475 19.5522847,8 19,8 L17,8 C16.4477153,8 16,7.55228475 16,7 L16,5 C16,4.44771525 16.4477153,4 17,4 Z M17,10 L19,10 C19.5522847,10 20,10.4477153 20,11 L20,13 C20,13.5522847 19.5522847,14 19,14 L17,14 C16.4477153,14 16,13.5522847 16,13 L16,11 C16,10.4477153 16.4477153,10 17,10 Z M5,16 L7,16 C7.55228475,16 8,16.4477153 8,17 L8,19 C8,19.5522847 7.55228475,20 7,20 L5,20 C4.44771525,20 4,19.5522847 4,19 L4,17 C4,16.4477153 4.44771525,16 5,16 Z M11,16 L13,16 C13.5522847,16 14,16.4477153 14,17 L14,19 C14,19.5522847 13.5522847,20 13,20 L11,20 C10.4477153,20 10,19.5522847 10,19 L10,17 C10,16.4477153 10.4477153,16 11,16 Z M17,16 L19,16 C19.5522847,16 20,16.4477153 20,17 L20,19 C20,19.5522847 19.5522847,20 19,20 L17,20 C16.4477153,20 16,19.5522847 16,19 L16,17 C16,16.4477153 16.4477153,16 17,16 Z" fill="#000000"/>
-								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+					    <span class="svg-icon menu-icon">
+								<i class="fas fa-user-graduate"></i>
 						</span>
 						<span class="menu-text">Student</span>
 						<i class="menu-arrow"></i>
@@ -676,18 +732,8 @@
 				</li>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
-						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24"/>
-									<path d="M10.5,5 L20.5,5 C21.3284271,5 22,5.67157288 22,6.5 L22,9.5 C22,10.3284271 21.3284271,11 20.5,11 L10.5,11 C9.67157288,11 9,10.3284271 9,9.5 L9,6.5 C9,5.67157288 9.67157288,5 10.5,5 Z M10.5,13 L20.5,13 C21.3284271,13 22,13.6715729 22,14.5 L22,17.5 C22,18.3284271 21.3284271,19 20.5,19 L10.5,19 C9.67157288,19 9,18.3284271 9,17.5 L9,14.5 C9,13.6715729 9.67157288,13 10.5,13 Z" fill="#000000"/>
-									<rect fill="#000000" opacity="0.3" x="2" y="5" width="5" height="14" rx="1"/>
-								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+					    <span class="svg-icon menu-icon">
+								<i class="fas fa-user-alt"></i>
 						</span>
 						<span class="menu-text">Parent</span>
 						<i class="menu-arrow"></i>
@@ -736,3 +782,4 @@
 	<!--end::Aside Menu-->
 </div>
 <!--end::Aside-->
+<!--testing-->

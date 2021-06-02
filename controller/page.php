@@ -57,8 +57,11 @@
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
                                 "mira",
-                                "kid",
+                                "onlinelearning",
+                                "notes",
+                                "exercises",
                                 //"testing",
+                                "upload"
                                );
 
     $teacherallowedaccess = array("dashboard",
