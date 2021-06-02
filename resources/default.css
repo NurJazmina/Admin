@@ -11,6 +11,10 @@ input[type=text]:focus {
     border: 2px solid #1BC5BD;
 }
 
+input[type=number]:focus {
+    border: 2px solid #1BC5BD;
+}
+
 input[type=datetime-local]:focus {
     border: 2px solid #1BC5BD;
 }
@@ -21,4 +25,8 @@ select.form-control:focus {
 
 select, option {
     background-color: #fff;
+}
+body {
+    font-family: Arial,sans-serif;
+    font-size: 30px;
 }
