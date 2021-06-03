@@ -567,12 +567,20 @@
 						<span class="menu-text">Dashboard</span>
 					</a>
 				</li>
+				<li class="menu-item menu-item" aria-haspopup="true" >
+					<a href="index.php?page=calendar" class="menu-link">
+						<span class="svg-icon menu-icon">
+						<i class="far fa-calendar-alt icon-lg"></i>
+						</span>
+						<span class="menu-text">Calendar</span>
+					</a>
+				</li>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 					<span class="svg-icon menu-icon">
 						<i class="flaticon2-open-text-book icon-l"></i>
 					</span>
-					<span class="menu-text">My Subject</span>
+					<span class="menu-text">Subject</span>
 					<i class="menu-arrow"></i>
 					</a>
 					<div class="menu-submenu">

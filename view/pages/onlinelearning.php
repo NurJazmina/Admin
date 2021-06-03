@@ -100,6 +100,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
         </div>
     </div>
+    <br>
     <div class="" x-bind:class="{'row': layout === 'list', 'row': layout === 'grid'}" >
     <?php
     $filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
@@ -117,60 +118,60 @@ include 'view/partials/_subheader/subheader-v1.php';
             $SubjectName = $document->SubjectName;
         }
         ?>
-        <section class="" x-bind:class="{'col-sm px-5': layout === 'list', 'col-sm-3 px-5 py-2': layout === 'grid'}">
-            <br>
-            <article class="bg-white p-4 shadow">
-                <div class="card dashboard-card" x-show="layout === 'grid'" x-cloak>
-                    <img src="assets/media/bg/bg-8.jpg" height="100">
-                    <div class="col-md-12 bg-light">
-                        <p class="font-size-h4 text-center mt-3">
-                        <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
-                        </p>
-                        <div class="dropdown text-right" >
-                            <button type="button" class="btn btn-light btn-icon btn-sm btn-hover-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-bold-more-hor text-secondary"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Star this subject</a>
-                                <a class="dropdown-item" href="#">Remove from view</a>
-                                <a class="dropdown-item" href="#">Unstar this subject</a>
-                                <a class="dropdown-item" href="#">Remove from view</a>
+        <section class="" x-bind:class="{'col-sm': layout === 'list', 'col-sm-3 px-5 py-2': layout === 'grid'}">
+                <div x-show="layout === 'grid'" x-cloak>
+                    <article class="bg-white p-4 shadow">
+                        <div class="card dashboard-card">
+                        <img src="assets/media/bg/bg-8.jpg" height="100">
+                        <div class="col-md-12 bg-light">
+                            <p class="font-size-h4 text-center mt-3">
+                            <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                            </p>
+                            <div class="dropdown text-right" >
+                                <button type="button" class="btn btn-light btn-icon btn-sm btn-hover-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ki ki-bold-more-hor text-secondary"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Star this subject</a>
+                                    <a class="dropdown-item" href="#">Remove from view</a>
+                                    <a class="dropdown-item" href="#">Unstar this subject</a>
+                                    <a class="dropdown-item" href="#">Remove from view</a>
+                                </div>
                             </div>
                         </div>
+                        </div>
+                    </article>
+                </div>
+                <div x-show="layout === 'list'" x-cloak>
+                    <div class="list-group-item mt-1 mb-1">
+                        <p class="font-size-h4 mt-3">
+                        <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                        </p>
+                        <?php
+                        $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningNotes',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Subject_id = $document->Subject_id;
+                            $Title = $document->Title;
+                            $Detail = $document->Detail;
+                            $Created_by = $document->Created_by;
+                            $Edited_by = $document->Edited_by;
+                            $y=substr($Detail,0,500) . '...';
+                            echo $y;
+                        }
+                        ?>
+                        <p class="text-right"><a href="#" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
                     </div>
                 </div>
-                <div class="list-group-item " x-show="layout === 'list'" x-cloak>
-                    <p class="font-size-h4">
-                    <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
-                    </p>
-                    <?php
-                    $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningNotes',$query);
-                    foreach ($cursor as $document)
-                    {
-                        $Subject_id = $document->Subject_id;
-                        $Title = $document->Title;
-                        $Detail = $document->Detail;
-                        $Created_by = $document->Created_by;
-                        $Edited_by = $document->Edited_by;
-                        //echo $Title."<br>".$Detail;
-                        $y=substr($Detail,0,500) . '...';
-                        echo $y;
-                    ?>
-                    <p class="text-right"><a href="#" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
-                    <?php
-                    }
-                    ?>
-                </div>
-            </article>
-            <br>
-            </section>
+        </section>
         <?php
     }
     ?>
     </div>
-    </main>
+    <br>
+</main>
 </div>
 
 <div class="card card-custom gutter-b px-5">
@@ -197,11 +198,12 @@ include 'view/partials/_subheader/subheader-v1.php';
         }
         ?>
         <div class="col-lg-3 px-5 py-2">
-            <div class="card card-custom card-stretch bg-light">
+            <div class="card card-custom card-stretch bg-white p-4 shadow">
+            <article class="bg-white">
                 <p class="font-size-h4 text-center mt-3">
                 <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                 </p>
-                <div class="separator separator-solid separator-border-3"></div><br>
+                <div class="separator separator-solid separator-border-3 separator-secondary"></div><br>
                 <?php
                 $filter = ['Subject_id'=>$Subjectid];
                 $query = new MongoDB\Driver\Query($filter);
@@ -230,7 +232,9 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <?php
                 }
                 ?>
+                 </article>
             </div>
+       
         </div>
         <?php
     }

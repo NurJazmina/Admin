@@ -45,11 +45,11 @@ $(document).ready(function(){
             <div class="firstform firstBackground">
             </div>
             <div class="text">
-            <label class="col-lg-12 col-form-label text-lg-center"><h5>TITLE QUESTION</h5></label>
+            <label class="col-lg-12 col-form-label text-lg-center"><h5>QUESTIONS</h5></label>
             <textarea class="notes" name="title" required></textarea>
             </div>
             <div class="text">
-            <label class="col-lg-12 col-form-label text-lg-center"><h5>QUESTIONS DESCRIPTION</h5></label>
+            <label class="col-lg-12 col-form-label text-lg-center"><h5>DESCRIPTION</h5></label>
             <textarea class="notesdetail" name="title" required></textarea>
             </div>
         </div>
@@ -58,7 +58,7 @@ $(document).ready(function(){
                 <label for="questiontype" class="col-lg-2 col-form-label text-lg-left">QUESTION TYPE</label>
                 <div class="col-lg-10">
                     <select class="form-control" id="type" required>
-                        <option>CHOOSE YOUR QUESTION</option>
+                        <option>CHOOSE YOUR TYPE</option>
                         <option value="OBJECTIVE">OBJECTIVE</option>
                         <option value="SUBJECTIVE">SUBJECTIVE</option>
                     </select>
@@ -87,7 +87,7 @@ $(document).ready(function(){
                 <label for="questiontype" class="col-lg-2 col-form-label text-lg-left">ANSWER</label>
                     <div class="col-lg-10">
                         <select class="form-control" name="answer" required>
-                            <option>CHOOSE YOUR ANSWER</option>
+                            <option>CHOOSE CORRECT ANSWER</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
