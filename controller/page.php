@@ -124,6 +124,7 @@
                                 "notes",
                                 "exercises",
                                 "test",
+                                "tests",
                                 "modal-news"
                                 );
 

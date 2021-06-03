@@ -55,6 +55,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href='assets/css/main.css' rel='stylesheet' />
 
 		<!--end::Global Theme Styles-->
 
@@ -227,6 +228,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
+		<script src='assets/js/main.js'></script>
 		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
 		<?php include 'resources/default.php'; ?>
 		<?php

@@ -1,66 +1,71 @@
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js"></script>
-  <link rel="stylesheet" href="./fullcalendar/main.min.css">
-  <script src="./fullcalendar/main.min.js" defer></script>
 
-<div class="row">
- <div class="col-lg-3">
-  <!--begin::Card-->
-  <div class="card card-custom card-stretch">
-   <div class="card-header">
-    <div class="card-title">
-     <h3 class="card-label">
-      External Events
-     </h3>
-    </div>
-   </div>
-   <div class="card-body">
-    <div id="kt_calendar_external_events" class="fc-unthemed">
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-primary label-inline mb-5 cursor-move" data-color="fc-event-primary">Meeting</div><br/>
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-primary label-inline mb-5 cursor-move" data-color="fc-event-primary">Conference Call</div><br/><br/>
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-success label-inline mb-5 cursor-move" data-color="fc-event-success">Dinner</div><br/>
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-warning label-inline mb-5 cursor-move" data-color="fc-event-warning">Product Launch</div><br/>
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-danger label-inline cursor-move" data-color="fc-event-danger">Reporting</div><br/>
+<body>
+  <div id='calendar'></div>
+</body>
 
-                    <div class="separator separator-dashed my-10"></div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
 
-                    <div class="fc-draggable-handle label font-weight-bolder label-lg label-success label-inline mb-5 cursor-move" data-color="fc-event-success">Project Update</div><br/>
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-info label-inline mb-5 cursor-move" data-color="fc-event-info">Staff Meeting</div><br/>
-     <div class="fc-draggable-handle label font-weight-bolder label-lg label-dark label-inline cursor-move" data-color="fc-event-dark">Lunch</div><br/>
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: '2021-06-07',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: [
+      {
+        title: 'All Day Event',
+        start: '2021-06-01'
+      },
+      {
+        title: 'Long Event',
+        start: '2021-06-07',
+        end: '2021-06-10'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2021-06-09T16:00:00'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2021-06-16T16:00:00'
+      },
+      {
+        title: 'Conference',
+        start: '2021-06-11',
+        end: '2021-06-13'
+      },
+      {
+        title: 'Meeting',
+        start: '2021-06-12T10:30:00',
+        end: '2021-06-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2021-06-12T12:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2021-06-12T14:30:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2021-06-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2021-06-28'
+      }
+    ]
+  });
 
-                    <div class="separator separator-dashed my-10"></div>
-     <div>
-      <label class="checkbox checkbox-primary">
-      <input type="checkbox" id="kt_calendar_external_events_remove"> Remove after drop
-      <span></span>
-      </label>
-     </div>
-    </div>
-   </div>
-  </div>
-  <!--end::Card-->
- </div>
- <div class="col-lg-9">
-  <!--begin::Card-->
-  <div class="card card-custom card-stretch">
-   <div class="card-header">
-    <div class="card-title">
-     <h3 class="card-label">
-      Basic Calendar
-     </h3>
-    </div>
-    <div class="card-toolbar">
-     <a href="#" class="btn btn-light-primary font-weight-bold">
-     <i class="ki ki-plus "></i> Add Event
-     </a>
-    </div>
-   </div>
-   <div class="card-body">
-    <div id="kt_calendar"></div>
-   </div>
-  </div>
-  <!--end::Card-->
- </div>
-</div>
+  calendar.render();
+});
+  </script>
