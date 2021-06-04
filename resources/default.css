@@ -19,6 +19,13 @@ input[type=datetime-local]:focus {
     border: 2px solid #1BC5BD;
 }
 
+input[type=date]:focus {
+    border: 2px solid #1BC5BD;
+}
+
+input[type=time]:focus {
+    border: 2px solid #1BC5BD;
+}
 select.form-control:focus {
   border: 2px solid #1BC5BD;
 }
@@ -29,4 +36,9 @@ select, option {
 body {
     font-family: Arial,sans-serif;
     font-size: 30px;
+}
+
+select option:checked,
+select option:hover {
+  background: #fff !important;
 }

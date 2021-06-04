@@ -63,7 +63,7 @@
                                 "notes",
                                 "exercises",
                                 //"testing",
-                                "imagetest"
+                                "imagetest",
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -119,12 +119,16 @@
                                 //"exportclassattendance",
                                 //"testing",
                                 //"duplicate",
+
+                                //will be sort//
                                 "onlinelearning",
                                 "calendar",
                                 "notes",
                                 "exercises",
                                 "test",
+                                "mira",
                                 "tests",
+                                "modal-event",
                                 "modal-news"
                                 );
 

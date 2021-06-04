@@ -55,7 +55,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-		<link href='assets/css/main.css' rel='stylesheet' />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css">
+		<link rel="stylesheet" href="./fullcalendar/main.min.css">
 
 		<!--end::Global Theme Styles-->
 
@@ -66,6 +68,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/aside/light.css" rel="stylesheet" type="text/css" />
 		<link href="resources/default.css" rel="stylesheet" type="text/css" />
 		<link href="resources/calendar.css" rel="stylesheet" type="text/css" />
+		<!--<link href='assets/css/main.css' rel='stylesheet' />-->
+		
 
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/logogongetz.png" />
@@ -216,6 +220,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js"></script>
+		<script src="./fullcalendar/main.min.js" defer></script>
 		
 
 		<!--end::Global Theme Bundle-->
@@ -229,6 +235,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
 		<script src='assets/js/main.js'></script>
+		<script src="assets/js/todo.js" defer></script>
 		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
 		<?php include 'resources/default.php'; ?>
 		<?php

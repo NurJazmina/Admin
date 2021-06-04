@@ -226,7 +226,7 @@ border:1px solid #ffffff;
                         if($_SESSION["loggeduser_ACCESS"] =='TEACHER') 
                         {
                         ?>
-                        <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
+                        <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
                         <?php
                         }
                         ?>
