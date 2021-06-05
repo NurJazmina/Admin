@@ -1,5 +1,4 @@
 todoMain();
-
 function todoMain() {
   const DEFAULT_OPTION = "Choose category";
 
@@ -178,6 +177,7 @@ function todoMain() {
     // edit cell
     let editSpan = document.createElement("span");
     editSpan.innerText = "edit";
+    editSpan.style.color = "#7E8299";
     editSpan.className = "material-icons";
     editSpan.addEventListener("click", toEditItem, false);
     editSpan.dataset.id = id;
@@ -189,6 +189,7 @@ function todoMain() {
     // delete cell
     let spanElem = document.createElement("span");
     spanElem.innerText = "delete";
+    spanElem.style.color = "#7E8299";
     spanElem.className = "material-icons";
     spanElem.addEventListener("click", deleteItem, false);
     spanElem.dataset.id = id;
@@ -273,32 +274,45 @@ function todoMain() {
 
     renderRows(todoList);
   }
-
   function initCalendar() {
     var calendarEl = document.getElementById('calendar');
 
     calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: 'bootstrap',
       initialView: 'dayGridMonth',
       initialDate: '2021-06-04',
+
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
+
+      customButtons: {
+        myCustomButton: {
+          text: 'custom!',
+          color:'#f7c30d',
+          prevYear: 'fa-angle-double-left',
+          click: function() {
+            alert('clicked the custom button!');
+          }
+        }
+      },
+
       events: [],
       eventClick: function(info) {
         toEditItem(info.event);
       },
-      eventBackgroundColor: "#a11e12",
-      eventBorderColor: "#ed6a5e",
+      eventBorderColor: "#f7c30d",
+      eventBackgroundColor: "#f7c30d",
       editable: true,
       eventDrop: function(info) {
         calendarEventDragged(info.event);
       } 
     });
-
     calendar.render();
   }
+  document.getElementById("calendar").style.color = "#1BC5BD";
 
   function addEvent(event){
     calendar.addEvent( event );

@@ -9,7 +9,6 @@ $calendar = new Calendar();
  .todo-overlay{
   width: 100vw;
   height: 100vh;
-  background-color: #ddd;
   position: fixed;
   top: 0;
   left: 0;
@@ -24,12 +23,9 @@ $calendar = new Calendar();
   .todo-modal{
   min-width: 50vw;
   height: 50vh;
-  /*border: 1px solid green;*/
-  background-color: #ffd6cc;
 }
 
 .todo-modal-close-btn{
-  background-color: red;
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -38,9 +34,6 @@ $calendar = new Calendar();
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  color: white;
-  font-weight: bold;
 }
 
 .slidedIntoView {
@@ -97,19 +90,22 @@ $calendar = new Calendar();
                         </div>
                     </div>
                     <div class="separator separator-dashed my-10"></div>
-                    <table id="todoTable" class="table table-bordered dt-responsive nowrap table-sm" style="text-align:center;">
-                        <tr class="table-warning">
-                            <td></td>
-                            <td>Date</td>
-                            <td>Time</td>
-                            <td>to-do</td>
-                            <td>
-                                <select id="categoryFilter" class="form-control">
-                                </select>
-                            </td>
-                            <td colspan="2">Edit</td>
-                        </tr>
-                    </table>
+                    <div class="table-responsive rounded">
+                        <table id="todoTable" class="table table-bordered table-sm " style="text-align:center;">
+                        <thead>
+                            <tr class="table-danger" style="color:#fff">
+                                <th colspan="2">Date</th>
+                                <th>Time</th>
+                                <th>to-do</th>
+                                <th>
+                                    <select id="categoryFilter" class="form-control">
+                                    </select>
+                                </th>
+                                <th colspan="2">Edit</th>
+                            </tr>
+                        </table>
+                        </thead>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,6 +173,11 @@ $calendar = new Calendar();
                         $Duration = date_format($datetimeEnd,"d") - date_format($datetimeStart,"d") + 1;
                         
                         $calendar->add_event($Event_Title,$DateStart,$Duration,'yellow',);
+
+                        $NowDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000); 
+                        $Now = $NowDate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                        $date = date_format($Now,"Y/m/d");
+                    
                     }
                     ?>
                     <div class="todo-calendar  todo-block">
@@ -227,4 +228,4 @@ $calendar = new Calendar();
     </div>
 </div>
 <!--end::Row-->
- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.0/beautify-js.min.js"></script>

@@ -121,6 +121,7 @@
                                 //"duplicate",
 
                                 //will be sort//
+                                "simplecalendar",
                                 "onlinelearning",
                                 "calendar",
                                 "notes",
@@ -129,7 +130,8 @@
                                 "mira",
                                 "tests",
                                 "modal-event",
-                                "modal-news"
+                                "modal-news",
+                                "departmentlist"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 

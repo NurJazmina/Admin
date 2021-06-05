@@ -68,8 +68,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/aside/light.css" rel="stylesheet" type="text/css" />
 		<link href="resources/default.css" rel="stylesheet" type="text/css" />
 		<link href="resources/calendar.css" rel="stylesheet" type="text/css" />
-		<!--<link href='assets/css/main.css' rel='stylesheet' />-->
-		
 
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/logogongetz.png" />
@@ -236,7 +234,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/widgets.js"></script>
 		<script src='assets/js/main.js'></script>
 		<script src="assets/js/todo.js" defer></script>
-		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
+
 		<?php include 'resources/default.php'; ?>
 		<?php
 		if (!isset($_GET['attendance']) && empty($_GET['attendance']))
