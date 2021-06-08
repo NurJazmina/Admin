@@ -210,10 +210,9 @@ include 'view/partials/_subheader/subheader-v1.php';
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningQuestions',$query);
                 foreach ($cursor as $document)
                 {
+                    $Question_id = $document->_id;
                     $Title = $document->Title;
-                    $Question_type = $document->Question_type;
                     $Created_by = $document->Created_by;
-                    $Note_sort = $document->Note_sort;
 
                     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
                     $query = new MongoDB\Driver\Query($filter);
@@ -226,7 +225,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="col">
                         <div class="card-title">
                             <img alt="Logo" src="assets/media/svg/social-icons/quiz.svg" width="30" height="30"/>
-                            <a href="index.php?page=notes&id=<?php echo $Question_id ; ?>"><?php echo "Slot : ".$Note_sort." ".$Title." Quiz Teacher ".$ConsumerFName; ?></a>
+                            <a href="index.php?page=notes&id=<?php echo $Question_id ; ?>"><span><?php echo $Title."Quiz Teacher ".$ConsumerFName; ?></span></a>
                         </div>
                     </div>
                     <?php

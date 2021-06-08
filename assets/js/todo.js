@@ -1,6 +1,6 @@
 todoMain();
 function todoMain() {
-  const DEFAULT_OPTION = "Choose category";
+  const DEFAULT_OPTION = "Type";
 
   let inputElem,
     inputElem2,
@@ -15,7 +15,7 @@ function todoMain() {
     changeBtn,
     todoTable,
     draggingElement;
-
+    
   getElements();
   addListeners();
   initCalendar();
@@ -82,9 +82,6 @@ function todoMain() {
     save();
 
     updateSelectOptions();
-
-
-
   }
 
   function updateSelectOptions() {
@@ -285,18 +282,7 @@ function todoMain() {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-
-      customButtons: {
-        myCustomButton: {
-          text: 'custom!',
-          color:'#f7c30d',
-          prevYear: 'fa-angle-double-left',
-          click: function() {
-            alert('clicked the custom button!');
-          }
-        }
+        right: 'dayGridMonth,timeGridWeek,timeGridDay',
       },
 
       events: [],
@@ -306,13 +292,13 @@ function todoMain() {
       eventBorderColor: "#f7c30d",
       eventBackgroundColor: "#f7c30d",
       editable: true,
+
       eventDrop: function(info) {
         calendarEventDragged(info.event);
       } 
     });
     calendar.render();
   }
-  document.getElementById("calendar").style.color = "#1BC5BD";
 
   function addEvent(event){
     calendar.addEvent( event );
@@ -427,9 +413,9 @@ function todoMain() {
   function formatDate(date){
     let dateObj = new Date(date);
     let formattedDate = dateObj.toLocaleString("en-GB", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
     });
     return formattedDate;
   }

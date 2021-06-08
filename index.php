@@ -58,6 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css">
 		<link rel="stylesheet" href="./fullcalendar/main.min.css">
+		<link href="path/to/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
 
 		<!--end::Global Theme Styles-->
 
