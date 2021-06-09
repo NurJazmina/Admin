@@ -128,6 +128,7 @@
                                 "calendar",
                                 "notes",
                                 "test",
+                                "read",
                                 "addquestion",
                                 "exercises",
                                 "mira",
