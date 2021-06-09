@@ -150,26 +150,42 @@ function myevent(action)
     }
 }
 </script>
-<form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
+<form id="AddQuestion" name="AddQuestion" action="index.php?page=modal-recheckstafflist" method="post">
 <div class="row">
     <div class="col-2">
     </div>
     <div class="col-8 py-1">
-    <div class="col">
-        <div class="card mb-2">
-            <div class="card-header allform">
-                <div class="firstform firstBackground">
-                </div>
-                <div class="text">
-                <label class="col-lg-12 col-form-label text-lg-center"><h3>TITLE</h3></label>
-                <textarea class="notesdetail" name="title" required></textarea>
-                </div>
-                <div class="col-lg-12 mt-5" id="AddDel" align="right">
-                    <input type="button" class="btn btn-success btn-sm" id="add" onclick="myevent(this)" value="Add Question" data-toggle="tooltip" title="Add more question!"/>
+        <div class="col">
+            <div class="card mb-2">
+                <div class="card-header allform">
+                    <div class="firstform firstBackground">
+                    </div>
+                    <div class="text">
+                    <p id="demo"></p><br>
+                    <p id="demo1"></p><br>
+                    <p id="demo2"></p><br>
+                    <label class="col-lg-12 col-form-label text-lg-center"><h3>TITLE</h3></label>
+                    <textarea class="notesdetail" name="title" required></textarea>
+                    </div>
+                    <div class="col-lg-12 mt-5" id="AddDel" align="right">
+                        <input type="button" class="btn btn-success btn-sm" id="add" onclick="myevent(this)" value="Add Question" data-toggle="tooltip" title="Add more question!"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col">
+            <div class="card-footer">
+                <div class="col-lg-12 ml-lg-auto" align="right">
+                    <button type="submit" class="btn btn-success" name="AddQuestion">Confirm</button>
+                    <button onclick="myFunction()">Try it</button>
+                    <form>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" />
+                    <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-2">
     </div>
@@ -188,4 +204,23 @@ tinymce.init({
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+var cars = ["Saab", "Volvo", "BMW"];
+    document.getElementById("demo1").innerHTML = cars;
+
+function myFunction() {
+  var fruits = ["Banana", "Orange", "Apple", "Mango"];
+  var x = document.getElementById("demo");
+  x.innerHTML = Array.isArray(fruits);
+}
+
+function handleSubmit(event) {
+event.preventDefault();
+const data = new FormData(event.target);
+const value = data.get('email');
+var a = console.log({ value });
+document.getElementById("demo2").innerHTML = a;
+}
+const form = document.querySelector('form');
+form.addEventListener('submit', handleSubmit);
 </script>
