@@ -1,6 +1,11 @@
 <?php
+
+require '../vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Kreait\Firebase;
+use Kreait\Firebase\Messaging\CloudMessage;
 require_once "vendor/autoload.php";
 
 if (isset($_POST['AddNews'])) 
@@ -308,7 +313,20 @@ if (isset($_POST['AddNews']))
                     ";
                     $mail->AltBody = "This is the plain text version of the email content";
 
-                    try { $mail->send();} 
+                    try { 
+                      
+                      $mail->send();
+                      $messaging = (new Firebase\Factory())
+                        ->withServiceAccount('go-n-getz-298607-firebase-adminsdk-idlfu-c52841d0d9.json')
+                        ->createMessaging();
+
+                        $message = CloudMessage::withTarget(/* see sections below */)
+                            ->withNotification(Notification::create('Title', 'Body'))
+                            ->withData(['key' => 'value']);
+
+                        $messaging->send($message);
+                    
+                    } 
 
                     catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
 
