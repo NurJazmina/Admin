@@ -127,6 +127,7 @@
                                 "onlinelearning",
                                 "calendar",
                                 "notes",
+                                "test",
                                 "addquestion",
                                 "exercises",
                                 "mira",
