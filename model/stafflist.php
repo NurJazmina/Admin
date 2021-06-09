@@ -6,6 +6,7 @@ require_once "vendor/autoload.php";
 //Add school staff
 if (isset($_POST['submitaddstaff']))
 {
+  $varteacherclass = '';
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $varConsumerIDNo = $_POST['txtConsumerIDNo'];
   $varStaffdepartment = strval($_SESSION["departmentid"]);
@@ -34,6 +35,8 @@ if (isset($_POST['submitaddstaff']))
       }
       else
       {
+        if ($varteacherclass != '')
+        {
         $bulk->insert([
           'ConsumerID'=>$ID,
           'SchoolID'=> $varschoolID,
@@ -41,6 +44,17 @@ if (isset($_POST['submitaddstaff']))
           'StaffLevel'=>"0",
           'Staffdepartment'=> $varStaffdepartment,
           'StaffStatus'=>$varStaffstatus]);
+        }
+        else
+        {
+          $bulk->insert([
+            'ConsumerID'=>$ID,
+            'SchoolID'=> $varschoolID,
+            'ClassID'=> '',
+            'StaffLevel'=>"0",
+            'Staffdepartment'=> $varStaffdepartment,
+            'StaffStatus'=>$varStaffstatus]);
+        }
       }
       $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
       try

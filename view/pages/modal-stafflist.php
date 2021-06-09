@@ -1,5 +1,3 @@
-
-
 <form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div class="modal fade" id="recheckaddstaff" tabindex="-1" aria-labelledby="AddStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">

@@ -75,38 +75,47 @@ if (isset($_POST['AddStaffFormSubmit']))
                   <?php
                   if ($varaccesslevel == '0')
                   {
-                    ?>
-                    <div class="form-group row">
-                      <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
-                      <div class="col-sm-10">
-                        <input class="form-control" value="<?php echo $varClasscategory; ?>" disabled><br>
-                      </div>
-                    </div>
-                    <div id="teacherbox">
+                    if ($varClasscategory == '')
+                    {
+                      ?>
+                      <input type="hidden" name="txtteacherclass" value="" >
+                      <?php
+                    }
+                    else
+                    {
+                      ?>
                       <div class="form-group row">
-                      <label for="txtteacherclass" class="col-sm-2 col-form-label">Class</label>
-                      <div class="col-sm-10">
-                        <select class="form-control" id="txtteacherclass" name="txtteacherclass">
-                          <?php
-                          $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varClasscategory];
-                          $query1 = new MongoDB\Driver\Query($filter1);
-                          $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
-                          foreach ($cursor1 as $document1):
-                          ?>
-                          <option value="<?=($document1->_id)?>"><?=($document1->ClassName)?></option>
-                          <?php
-                          endforeach
-                          ?>
-                        </select>
+                        <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" value="<?php echo $varClasscategory; ?>" disabled><br>
+                        </div>
                       </div>
-                    </div>
-                    </div>
-                    <?php
+                      <div id="teacherbox">
+                        <div class="form-group row">
+                        <label for="txtteacherclass" class="col-sm-2 col-form-label">Class</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="txtteacherclass" name="txtteacherclass">
+                            <?php
+                            $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varClasscategory];
+                            $query1 = new MongoDB\Driver\Query($filter1);
+                            $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
+                            foreach ($cursor1 as $document1):
+                            ?>
+                            <option value="<?=($document1->_id)?>"><?=($document1->ClassName)?></option>
+                            <?php
+                            endforeach
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                      </div>
+                      <?php
+                    }
                   }
                 else
                 {
                 ?>
-                <input type="hidden" name="txtteacherclass" value="<?php echo  ""; ?>" >
+                <input type="hidden" name="txtteacherclass" value="" >
                 <?php
                 }
                 ?>
