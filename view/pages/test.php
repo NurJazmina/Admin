@@ -1,65 +1,30 @@
 
-  <title>Random AJAX Welcome</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script>
-    $(function(){
-        $('body').css('background','wheat');
-        $('#mybtn').on('click', function(e){
-        alert('Button clicked'); //<==========================
-        e.preventDefault();
-        $('#mybtn').fadeOut(300);
+<button id="fpx" type="button" onclick='testing($(this).val());' class="btn btn-primary">test</button>
+<script
+  src="../js/jquery-3.6.0.min.js"></script>
+  
+<script>
+var body = {};
+body.name = "Meowsy";
+body.species = "cat";
+body.likes = "catnip";
+body.dislikes = "zucchini";
+var data = data;
 
-        $.ajax({
-            url: 'ajax.php',
-            type: 'post',
-            data: 'test=Hello',
-            success: function(d){
-                alert(d);
-            }
-        }); // end ajax call
-      })});
-</script>
+function testing(data) {
+  return fetch(`http://localhost/smartschool.gongetz.com/new.php`, {
+    method: 'post',
+    body: JSON.stringify(body)
+  })
 
-  <script>
-    function getWelcome(){
-
-      var ajaxRequest = new XMLHttpRequest();
-      ajaxRequest.onreadystatechange = function(){
-
-        if(ajaxRequest.readyState == 4){
-          //the request is completed, now check its status
-          if(ajaxRequest.status == 200){
-            //turn JSON into array
-            var messagesArray = JSON.parse(ajaxRequest.responseText);
-
-            //get random object from array
-            var randomIndex = Math.floor(Math.random()*messagesArray.length);
-            var messageObj = messagesArray[randomIndex];
-
-            //use that object to set content and color
-            var welcomeDiv = document.getElementById("welcome");
-            welcomeDiv.innerHTML = messageObj.text;
-            welcomeDiv.style.color = messageObj.color;	
-          }
-          else{
-            console.log("Status error: " + ajaxRequest.status);
-          }
-        }
-        else{
-          console.log("Ignored readyState: " + ajaxRequest.readyState);
-        }
-      }
-      ajaxRequest.open('GET', 'https://happycoding.io/tutorials/javascript/example-ajax-files/random-welcomes.json');
-      ajaxRequest.send();
+  .then(response => response.text())
+  .then(text => {
+    try {
+        console.log(text);
+        // Do your JSON handling here
+    } catch(err) {
+       // It is text, do you text handling here
     }
-	
-  </script>	
-<body onload="getWelcome()">
-  <div id="welcome"></div>
-  <p>This is an example website.</p>
-</body>
-
-<?php
-    $recd = $_POST['test'];
-    echo 'PHP side received: ' . $recd;
-?>
+  });
+}
+</script>

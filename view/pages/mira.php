@@ -1,126 +1,240 @@
-<?php
-$_SESSION["title"] = "Calendar";
-include 'view/partials/_subheader/subheader-v1.php'; 
-include 'model/calendar.php';
-$calendar = new Calendar();
-?>
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-<!--begin::Entry-->
-<div class="d-flex flex-column-fluid">
-    <!--begin::Container-->
-    <div class="container">
-        <!--begin::Example-->
-        <!--begin::Row-->
-        <div class="row">
-            <div class="col-lg-3">
-                <!--begin::Card-->
-                <div class="card card-custom card-stretch">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3 class="card-label">External Events</h3>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="kt_calendar_external_events" class="fc-unthemed">
-                            <div class="btn btn-block text-left font-weight-bold btn-light-primary fc-draggable-handle mb-5 cursor-move" data-color="fc-event-primary">Meeting</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-success fc-draggable-handle mb-5 cursor-move" data-color="fc-event-primary">Conference Call</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-danger fc-draggable-handle mb-5 cursor-move" data-color="fc-event-success">Dinner</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-info fc-draggable-handle mb-5 cursor-move" data-color="fc-event-warning">Product Launch</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-warning fc-draggable-handle cursor-move" data-color="fc-event-danger">Reporting</div>
-                            <div class="separator separator-dashed my-10"></div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-success fc-draggable-handle cursor-move" data-color="fc-event-success">Project Update</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-primary fc-draggable-handle cursor-move" data-color="fc-event-info">Staff Meeting</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-danger fc-draggable-handle cursor-move" data-color="fc-event-dark">Lunch</div>
-                            <div class="separator separator-dashed my-10"></div>
-                            <div>
-                                <label class="checkbox checkbox-primary">
-                                <input type="checkbox" id="kt_calendar_external_events_remove" />Remove after drop
-                                <span></span></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end::Card-->
-            </div>
-            <div class="col-lg-9">
-                <!--begin::Card-->
-                <div class="card card-custom card-stretch">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3 class="card-label">Your Calendar</h3>
-                        </div>
-                        <div class="card-toolbar">
-                            <a href="#" class="btn btn-light-success font-weight-bold">
-                            <i class="ki ki-plus"></i>Add Event</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                       <div id="kt_calendar" class="fc fc-ltr fc-unthemed" style="">
-                            <?php
-                            function time_elapsed($date){
-                                $bit = array(
-                                    //' year'      => $date  / 31556926 % 12,
-                                    ' week'      => $date  / 604800 % 52,
-                                    ' day'       => $date  / 86400 % 7,
-                                    ' hour'      => $date  / 3600 % 24,
-                                    //' minute'    => $date  / 60 % 60,
-                                    //' second'    => $date  % 60
-                                    );
-                                foreach($bit as $k => $v){
-                                    if($v > 1)$ret[] = $v . $k . 's';
-                                    if($v == 1)$ret[] = $v . $k;
-                                    }
-                                array_splice($ret, count($ret)-1, 0, '');
-                                $ret[] = '';
-                            
-                                return join(' ', $ret);
-                            }
-                            $filter = ['Created_by'=>$_SESSION["loggeduser_id"]];
-                            $query = new MongoDB\Driver\Query($filter);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Calendar',$query);
-             
-                            foreach ($cursor as $document)
-                            {
-                                $calendarid = $document->_id;
-                                $Created_by = $document->Created_by;
-                                $Description = $document->Description;
-                                $Event_Title = $document->Event_Title;
-                                $Venue = $document->Venue;
-                                $Location = $document->Location;
-                                $Repeated = $document->Repeated;
-                                $Type_Event = $document->Type_Event;
-                                $Class_id = $document->Class_id;
-                                $Date_Start = $document->Date_Start;
-                                $Date_End = $document->Date_End;
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<style>
+:root {
+  --color-lightest: #f9fdfe;
+  --color-gray-light: #cdcfcf;
+  --color-gray-medium: #686a69;
+  --color-gray-dark: #414643;
+  --color-darkest: #2a2f2c;
+}
 
-                                $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($Date_Start));
-                                $datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($Date_End));
-                                $datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                
-                                $DateStart = date_format($datetimeStart,"Y/m/d");
-                                $DateEnd = date_format($datetimeEnd,"Y/m/d");
+*,
+::before,
+::after {
+  margin: 0;
+  box-sizing: border-box;
+}
 
-                                $Duration = date_format($datetimeEnd,"d") - date_format($datetimeStart,"d") + 1;
-                                
-                                $calendar->add_event($Event_Title,$DateStart,$Duration,'yellow',);
-                            }
-                            ?>
-                            <div class="content home">
-                                <?=$calendar?>
-                            </div>
-                            
-                       </div>
-                    </div>
-                </div>
-                <!--end::Card-->
-            </div>
-        </div>
-        <!--end::Row-->
-        </div>
-        <!--end::Container-->
+/* Heydon Pickering’s lobotomized owl. Details: https://bit.ly/1H7MXUD */
+* + * {
+  margin-top: 1rem;
+}
+
+/* Set up fonts, colors and all that jazz. */
+body {
+  background: var(--color-lightest);
+  color: var(--color-gray-medium);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+/* Headings use a different font because they’re hipsters. */
+h1,
+h2 {
+  color: var(--color-darkest);
+  font-size: 110%;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 125%;
+}
+
+/* Set up general layout rules for outer containers. */
+.contact-form,
+.results {
+  width: 90vw;
+  max-width: 550px;
+  margin: 8vh auto;
+}
+
+p {
+  margin-top: 0.5rem;
+  font-size: 87.5%;
+}
+
+.results pre {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: $color-lightest;
+  border: 1px solid var(--color-gray-light);
+  overflow-x: scroll;
+}
+
+.contact-form form {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 1rem 0 2rem;
+  border-top: 1px solid var(--color-gray-light);
+  border-bottom: 1px solid var(--color-gray-light);
+  overflow: hidden;
+}
+
+.input-group {
+  margin-top: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.contact-form label {
+  display: block;
+  color: $color-gray-dark;
+  font-family: Lato, sans-serif;
+  font-size: 90%;
+  line-height: 1.125;
+}
+
+.group-label {
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 90%;
+}
+
+.contact-form label.inline {
+  display: inline-block;
+  margin-left: 0.25rem;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea{
+  display: block;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $color-gray-light;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  transition: 150ms border-color linear;
+}
+
+.contact-form input[type=checkbox],
+.contact-form input[type=radio] {
+  display: inline-block;
+  width: auto;
+}
+
+.contact-form input[type=checkbox]:not(:first-of-type),
+.contact-form input[type=radio]:not(:first-of-type) {
+  margin-left: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form input:active {
+  border-color: var(--color-gray-medium);
+}
+
+.contact-form button {
+  display: block;
+  margin: 0.5rem 1rem 0;
+  padding: 0 1rem 0.125rem;
+  background-color: var(--color-gray-medium);
+  border: 0;
+  color: var(--color-lightest);
+  font-family: lato, sans-serif;
+  font-size: 100%;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  transition: 150ms all linear;
+}
+
+.contact-form button:hover,
+.contact-form button:active,
+.contact-form button:focus {
+  background: var(--color-darkest);
+  cursor: pointer;
+}
+</style>
+<section class="contact-form">
+  <h1>Send Me a Message</h1>
+  <p>Use this handy contact form to get in touch with me.</p>
+  
+  <form>
+    <div class="input-group">
+      <input id="salutation-mr" name="salutation" type="radio" value="Mr."/>
+      <label class="inline" for="salutation-mr">Mr.</label>
+      
+      <input id="salutation-mrs" name="salutation" type="radio" value="Mrs."/>
+      <label class="inline" for="salutation-mrs">Mrs.</label>
+      
+      <input id="salutation-ms" name="salutation" type="radio" value="Ms."/>
+      <label class="inline" for="salutation-ms">Ms.</label>
     </div>
-    <!--end::Entry-->
+    
+    <div class="input-group">
+      <label for="name">Full Name</label>
+      <input id="name" name="name" type="text"/>
+    </div>
+    
+    <div class="input-group">
+      <label for="email">Email Address</label>
+      <input id="email" name="email" type="email"/>
+    </div>
+    
+    <div class="input-group">
+      <label for="subject">How can I help you?</label>
+      <select id="subject" name="subject">
+        <option>I have a problem.</option>
+        <option>I have a general question.</option>
+      </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="message">Enter a Message</label>
+      <textarea id="message" name="message" rows="6" cols="65"></textarea>
+    </div>
+    
+    <div class="input-group">
+      <p class="group-label">Please send me:</p>
+      <input id="snacks-pizza" name="snacks" type="checkbox" value="pizza"/>
+      <label class="inline" for="snacks-pizza">Pizza</label>
+      <input id="snacks-cake" name="snacks" type="checkbox" value="cake"/>
+      <label class="inline" for="snacks-cake">Cake</label>
+    </div>
+    <input name="secret" type="hidden" value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"/>
+    <button type="submit" onclick='handleFormSubmit();'>Send It!</button>
+  </form>
+</section>
+
+<div class="results">
+  <h2>Form Data</h2>
+  <pre></pre>
 </div>
-<!--end::Content-->
+
+<script>
+function handleFormSubmit(event) {
+  event.preventDefault();
+  
+  const data = new FormData(event.target);
+  
+  const formJSON = Object.fromEntries(data.entries());
+
+  // for multi-selects, we need special handling
+  formJSON.snacks = data.getAll('snacks');
+  
+  const results = document.querySelector('.results pre');
+  results.innerText = JSON.stringify(formJSON, null, 2);
+
+  return fetch(`http://localhost/smartschool.gongetz.com/new.php`, {
+    method: 'post',
+    body: results.innerText
+  })
+
+  .then(response => response.text())
+  .then(text => {
+    try {
+        console.log(text);
+        // Do your JSON handling here
+    } catch(err) {
+       // It is text, do you text handling here
+    }
+  });
+}
+
+const form = document.querySelector('.contact-form');
+form.addEventListener('submit', handleFormSubmit);
+
+</script>

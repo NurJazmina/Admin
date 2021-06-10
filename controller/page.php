@@ -128,10 +128,11 @@
                                 "calendar",
                                 "notes",
                                 "test",
+                                "test2",
+                                "mira",
                                 "read",
                                 "addquestion",
                                 "exercises",
-                                "mira",
                                 "modal-event",
                                 "modal-news",
                                 "departmentlist"
@@ -152,6 +153,7 @@
         if (!isset($_GET['page']) || empty($_GET['page']))
         {
             include 'view/pages/dashboard.php';
+          
         } 
         else 
         {

@@ -248,4 +248,3 @@ $calendar = new Calendar();
 </div>
 </div>
 <!--end::Row-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.0/beautify-js.min.js"></script>
