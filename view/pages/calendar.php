@@ -197,8 +197,8 @@ $calendar = new Calendar();
                     
                     }
                     ?>
-                    <div class="card-body">
-                        <div id='calendar' class="fc fc-ltr fc-unthemed"></div>
+                    <div class="container">
+                    <div id='calendar' class="fc fc-ltr fc-unthemed"></div>
                     </div>
 
                     <div class="todo-overlay" id="todo-overlay">

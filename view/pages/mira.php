@@ -153,7 +153,7 @@ p {
   <p>Use this handy contact form to get in touch with me.</p>
   
   <form>
-    <div class="input-group">
+    <div class="form-group">
       <input id="salutation-mr" name="salutation" type="radio" value="Mr."/>
       <label class="inline" for="salutation-mr">Mr.</label>
       
@@ -164,30 +164,30 @@ p {
       <label class="inline" for="salutation-ms">Ms.</label>
     </div>
     
-    <div class="input-group">
+    <div class="form-group">
       <label for="name">Full Name</label>
       <input id="name" name="name" type="text"/>
     </div>
     
-    <div class="input-group">
+    <div class="form-group">
       <label for="email">Email Address</label>
       <input id="email" name="email" type="email"/>
     </div>
     
-    <div class="input-group">
+    <div class="form-group">
       <label for="subject">How can I help you?</label>
-      <select id="subject" name="subject">
+      <select class="form-control" id="subject" name="subject">
         <option>I have a problem.</option>
         <option>I have a general question.</option>
       </select>
     </div>
     
-    <div class="input-group">
+    <div class="form-group">
       <label for="message">Enter a Message</label>
       <textarea id="message" name="message" rows="6" cols="65"></textarea>
     </div>
     
-    <div class="input-group">
+    <div class="form-group">
       <p class="group-label">Please send me:</p>
       <input id="snacks-pizza" name="snacks" type="checkbox" value="pizza"/>
       <label class="inline" for="snacks-pizza">Pizza</label>
@@ -236,5 +236,4 @@ function handleFormSubmit(event) {
 
 const form = document.querySelector('.contact-form');
 form.addEventListener('submit', handleFormSubmit);
-
 </script>

@@ -123,20 +123,20 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <article class="bg-white p-4 shadow">
                         <div class="card dashboard-card">
                         <img src="assets/media/bg/bg-8.jpg" height="100">
-                        <div class="col-md-12 bg-light">
+                        <div class="bg-light" style="height:50px;">
                             <p class="font-size-h4 text-center mt-3">
                             <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                             </p>
-                            <div class="dropdown text-right" >
-                                <button type="button" class="btn btn-light btn-icon btn-sm btn-hover-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ki ki-bold-more-hor text-secondary"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Star this subject</a>
-                                    <a class="dropdown-item" href="#">Remove from view</a>
-                                    <a class="dropdown-item" href="#">Unstar this subject</a>
-                                    <a class="dropdown-item" href="#">Remove from view</a>
-                                </div>
+                        </div>
+                        <div class="dropdown text-right bg-light" >
+                            <button type="button" class="btn btn-light btn-icon btn-sm btn-hover-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ki ki-bold-more-hor text-secondary"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Star this subject</a>
+                                <a class="dropdown-item" href="#">Remove from view</a>
+                                <a class="dropdown-item" href="#">Unstar this subject</a>
+                                <a class="dropdown-item" href="#">Remove from view</a>
                             </div>
                         </div>
                         </div>
@@ -225,7 +225,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="col">
                         <div class="card-title">
                             <img alt="Logo" src="assets/media/svg/social-icons/quiz.svg" width="30" height="30"/>
-                            <a href="index.php?page=notes&id=<?php echo $Question_id ; ?>"><span><?php echo $Title."Quiz Teacher ".$ConsumerFName; ?></span></a>
+                            <a href="index.php?page=notes&id=<?php echo $Question_id ; ?>"><span><?php echo $Title.": Quiz Teacher ".$ConsumerFName; ?></span></a>
                         </div>
                     </div>
                     <?php
