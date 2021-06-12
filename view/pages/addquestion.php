@@ -200,18 +200,18 @@ function myevent(action)
     // Object
     var b = {      
         "Option_A": "Red",
-        "Option_B": "Blue",
-        "Option_C": "Pink",
         "Option_D": "White"
     };
+    for (i = 0; i < 3; i++) {
+            // for multi-selects, we need special handling
+            formJSON.Quiz = data.getAll('Quiz');
+            formJSON.Quiz.push(b);
+    }
 
     // Array
     //var stuff = [];
     //stuff.push('a');
 
-    // for multi-selects, we need special handling
-    formJSON.Quiz = data.getAll('Quiz');
-    formJSON.Quiz.push(b);
 
     const results = document.querySelector('.results pre');
     results.innerText = JSON.stringify(formJSON, null, 2);
