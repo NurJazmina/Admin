@@ -1,4 +1,7 @@
 <?php
+$_SESSION["title"] = "Staff Detail";
+include 'view/partials/_subheader/subheader-v1.php'; 
+
   $id = new \MongoDB\BSON\ObjectId($_GET['id']);
   $filter = ['_id'=>$id];
   $query = new MongoDB\Driver\Query($filter);
@@ -16,6 +19,12 @@
     $ConsumerStatus = ($document->ConsumerStatus);
   }
 ?>
+<style>
+.highlight td.default {
+background:#FFE2E5;
+color:#F64E60 ;
+}
+</style>
 <div><br><br><br><h1 style="color:#696969; text-align:center">Staff Personal Info</h1></div><br>
 <div class="row">
 <div class="col-md-1 section-1-box wow fadeInUp"></div>
@@ -104,7 +113,7 @@
                         </ul>
                           <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
-                              <div class="table-responsive">
+                              <div>
                                 <table class="table table-striped table-sm ">
                                   <thead>
                                     <tr>
@@ -189,13 +198,13 @@
                                               <div class="col text-right">
                                                 <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
                                                 <input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-                                                <button type="submit" class="btn btn-primary" name="AddStaffRemarkChildFormSubmit">Add remark</button>
+                                                <button type="submit" class="btn btn-light-success font-weight-bold mr-2" name="AddStaffRemarkChildFormSubmit">Add remark</button>
+                                                <button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UpdateStaffremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display:flex;">update</button>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                         </form>
-                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateStaffremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display:flex;">update</button>
                                       </div>
                                       </div>
                                     </div>
@@ -206,7 +215,7 @@
                               </div>
                             </div>
                             <div class="tab-pane fade show pending" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                              <div class="table-responsive">
+                              <div>
                                 <table class="table table-striped table-sm ">
                                   <thead>
                                     <tr>
@@ -291,14 +300,13 @@
                                               <div class="col text-right">
                                                 <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
                                                 <input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-                                                <button type="submit" class="btn btn-primary" name="AddStaffRemarkChildFormSubmit">Add remark</button>
+                                                <button type="submit" class="btn btn-light-success font-weight-bold mr-2" name="AddStaffRemarkChildFormSubmit">Add remark</button>
+                                                <button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UpdateStaffremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;">update</button>
                                               </div>
                                             </div>
-                                            ?>
                                           </div>
                                         </div>
                                         </form>
-                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateStaffremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;">update</button>
                                       </div>
                                       </div>
                                     </div>
@@ -309,7 +317,7 @@
                               </div>
                             </div>
                             <div class="tab-pane fade show completed" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-                              <div class="table-responsive">
+                              <div>
                                 <table class="table table-striped table-sm ">
                                   <thead>
                                     <tr>
@@ -394,13 +402,13 @@
                                               <div class="col text-right">
                                                 <input type="hidden" value="<?php echo $_GET['id']; ?>" name="txtconsumerid">
                                                 <input type="hidden" value="<?php echo $remarkid; ?>" name="txtremarkid">
-                                                <button type="submit" class="btn btn-primary" name="AddStaffRemarkChildFormSubmit">Add remark</button>
+                                                <button type="submit" class="btn btn-light-success font-weight-bold mr-2" name="AddStaffRemarkChildFormSubmit">Add remark</button>
+                                                <button style="float: right;"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UpdateStaffremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;">update</button>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                         </form>
-                                        <button style="float: right;"type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateStaffremark" data-bs-whatever="<?php echo $remarkid; ?>" style="display: flex;">update</button>
                                       </div>
                                       </div>
                                     </div>
@@ -442,22 +450,21 @@
                         $ConsumerLName = ($document->ConsumerLName);
                         $ConsumerIDNo = ($document->ConsumerIDNo);
                     ?>
-                    <table id="attendance" class="table table-bordered ">
+                    <table id="attendance" class="table table-bordered" style="text-align:center">
                     <thead class="table-light">
-                        <tr>
-                        <th scope="col" style="color:#696969; text-align:center">Staff ID</th>
-                        <th scope="col" style="color:#696969; text-align:center">Staff Name</th>
-                        <th scope="col" style="color:#696969; text-align:center">Date</th>
-                        <th scope="col" style="color:#696969; text-align:center">IN</th>
-                        <th scope="col" style="color:#696969; text-align:center">OUT</th>
+                        <tr style="color:#696969;">
+                        <th scope="col">Staff ID</th>
+                        <th scope="col">Staff Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">IN</th>
+                        <th scope="col">OUT</th>
                         </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
-                        <td style="text-align:center"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-                        <td style="text-align:center">
-                    <?php
+                        <td class="default"><?php echo $ConsumerIDNo; ?></td>
+                        <td class="default"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+                        <td class="default"><?php
                     $Cards_id ='';
                     $filter1 = ['Consumer_id'=>$_GET['id']];
                     $query1 = new MongoDB\Driver\Query($filter1);
@@ -496,10 +503,8 @@
                         echo date_format($AttendanceDate,"d-m-Y")."<br>";
                       }
                     }
-                    ?>
-                    </td>
-                    <td style="text-align:center">
-                    <?php
+                    ?></td>
+                    <td class="default"><?php
                     $varcounting = 0;
                     $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
                     $optionA = ['sort' => ['_id' => 1]];
@@ -521,10 +526,8 @@
                     {
                     }
                     }
-                    ?>
-                    </td>
-                    <td style="text-align:center">
-                    <?php
+                    ?></td>
+                    <td class="default"><?php
                     $varcounting = 0;
                     $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
                     $optionA = ['sort' => ['_id' => 1]];
@@ -545,38 +548,42 @@
                     {
                       echo date_format($AttendanceDate,"H:i:s")."<br>";
                     }
-                    ?>
-                    <?php
                     }
-                    ?>
-                    </td>
+                    ?></td>
                     </tr>
               </tbody>
               </table>
               <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=staffdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
               <?php
               }
-              ?>
-            <?php
-            if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-            {
+              if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+              {
 
-            }
-            else
-            {
-            $attendance = ($_GET['attendance']);
-            ?>
-            <script>
-              $(document).ready(function () {
-                $("#attendance").table2excel({
-                    filename: "attendancestaff.xls"
+              }
+              else
+              {
+              $attendance = ($_GET['attendance']);
+              ?>
+              <script>
+                $(document).ready(function () {
+                  $("#attendance").table2excel({
+                      filename: "attendancestaff.xls"
+                  });
                 });
-              });
-              
-            </script>
-            <?php
-            }
-            ?>
+                
+              </script>
+              <?php
+              }
+              ?>
+              <script type="text/javascript">
+              var rows = document.querySelectorAll('tr');
+
+              [...rows].forEach((r) => {
+              if (r.querySelectorAll('td:empty').length > 0) {
+              r.classList.add('highlight');
+              }
+              })
+              </script>
           </div>
         </div>
       </div>

@@ -116,8 +116,9 @@ if (isset($_POST['AddclassFormSubmit']))
 
 if (isset($_POST['EditclassFormSubmit']))
 {
-  $varClasscategory = $_POST['txtClasscategory'];
   $varclassid = $_POST['txtclassid'];
+  $number = $_POST['txtnumber'];
+  $varClasscategory = $_POST['txtClasscategory'];
   $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassID'=>$varclassid];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
@@ -170,9 +171,62 @@ if (isset($_POST['EditclassFormSubmit']))
                 ?>
               </select>
             </div>
+          </div>    
+          <?php
+          for ($x = 1; $x <= $number; $x++)
+          { 
+          ?>  
+          <div class="form-group row">
+            <label for="staticStaffNo" class="col-sm-2 col-form-label">Teacher</label>
+            <div class="col-sm-10">
+              <select class="form-select" name="teacher<?php echo $x; ?>">
+              <?php
+              $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+              $query1 = new MongoDB\Driver\Query($filter1);
+              $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
+              foreach ($cursor1 as $document1)
+              {
+                $ConsumerID = strval($document1->ConsumerID);  
+                $consumerid = new \MongoDB\BSON\ObjectId($ConsumerID); 
+                $filter2 = ['_id'=>$consumerid];
+                $query2 = new MongoDB\Driver\Query($filter2);   
+                $cursor2 =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query2);
+                foreach ($cursor2 as $document2)
+                {
+                  $ConsumerFName = strval($document2->ConsumerFName);
+                  $_id = strval($document1->_id); 
+                  $ConsumerIDNo = strval($document2->ConsumerIDNo);
+                ?>
+                <option value="<?=($document1->_id)?>"><?=($document2->ConsumerFName)." ".($document2->ConsumerLName)?></option>
+                <?php
+                }
+              }
+              ?>
+              </select>
+            </div>
+            <label for="staticStaffNo" class="col-sm-2 col-form-label">subject</label>
+            <div class="col-sm-10">
+              <select class="form-select" name="subject<?php echo $x; ?>">
+                <?php
+                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"], 'Class_category'=>$varClasscategory];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                foreach ($cursor as $document):
+                ?>
+                <option value="<?=($document->_id)?>"><?=($document->SubjectName)?></option>
+                <?php
+                endforeach
+                ?>
+              </select>
+            </div>
+            <br>
           </div>
+          <?php
+          }
+          ?>
         </div>
         <div class="modal-footer">
+          <input type="hidden" class="form-control" id="staticStaffNo" name="txtnumber" value="<?php echo $number; ?>">
           <input type="hidden" class="form-control" id="staticStaffNo" name="txtclasscategory" value="<?php echo  $varClasscategory; ?>">
           <input type="hidden" class="form-control" id="staticStaffNo" name="txtclassid" value="<?php echo  $varclassid; ?>">
           <button  onclick="index.php?page=classroomlist" class="btn btn-secondary" >Close</button>
@@ -184,3 +238,28 @@ if (isset($_POST['EditclassFormSubmit']))
 <?php
 }
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    var max_fields = 15;
+    var wrapper = $(".container1");
+    var add_button = $(".add_form_field");
+
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append('<div class="form-group row"><label class="col-sm-2 col-form-label">Teacher</label><div class="col-sm-10"><input type="text" class="form-control" name="teacher[]"></div><label for="staticStaffNo" class="col-sm-2 col-form-label">subject</label><div class="col-sm-10"><input type="text" class="form-control" name="subject[]"></div><a href="#" class="delete"> Delete</a></div>'); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+});
+</script>

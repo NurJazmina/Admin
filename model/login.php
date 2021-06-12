@@ -44,7 +44,7 @@
           foreach ($cursor1 as $document1)
           {
               $_SESSION["loggeduser_schoolID"] = strval($document1->SchoolID);
-              $_SESSION["loggeduser_teacherid"] = ($document1->_id);
+              $_SESSION["loggeduser_teacherid"] = strval($document1->_id);
               $_SESSION["loggeduser_StaffLevel"] = strval($document1->StaffLevel);
               $_SESSION["loggeduser_ConsumerID"] = ($document1->ConsumerID);
               $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);

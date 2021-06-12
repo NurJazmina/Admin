@@ -25,7 +25,7 @@ foreach ($cursor as $document)
     }
 }
 ?>
-<div><br><br><br><h1 style="color:#696969; text-align:center">Parent Personal Info</h1>
+<div><br><h1 style="color:#696969; text-align:center">Parent Personal Info</h1><br>
 <div class="row">
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">

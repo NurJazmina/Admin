@@ -49,7 +49,7 @@ if (isset($_POST['UpdatedepartmentRemarkFormSubmit'])) {
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['SubRemarks'=>$varremarkid],
                 ['$set' => ['departmentRemarksStatus'=>$vardepartmentRemarksStatus]],
-                ['upsert' => TRUE]
+                ['multi' => TRUE,'upsert' => TRUE]
                );
    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
    try

@@ -75263,17 +75263,17 @@ code {
   border: 0;
   background: #F3F6F9;
   border: 1px solid #EBEDF3;
-  color: #B5B5C3;
+  color: #b8b8c0;
 }
 .fc-unthemed .fc-toolbar .fc-button:focus, .fc-unthemed .fc-toolbar .fc-button:active, .fc-unthemed .fc-toolbar .fc-button.fc-button-active {
-  background: #3699FF;
-  color: #FFFFFF;
-  border: 1px solid #3699FF;
+  background: #C9F7F5;
+  color: #1BC5BD;
+  border: 1px solid #C9F7F5;
   box-shadow: none;
   text-shadow: none;
 }
 .fc-unthemed .fc-toolbar .fc-button:focus .fc-icon, .fc-unthemed .fc-toolbar .fc-button:active .fc-icon, .fc-unthemed .fc-toolbar .fc-button.fc-button-active .fc-icon {
-  color: #FFFFFF;
+  color: #1BC5BD;
 }
 .fc-unthemed .fc-toolbar .fc-button.fc-button-disabled {
   opacity: 0.7;

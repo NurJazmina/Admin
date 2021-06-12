@@ -32,6 +32,7 @@
                                 "eventdetail",
                                 "newsdetail",
                                 "departmentdetail",
+                                "subjectdetail",
                                 "classdetail",
                                 "schoolforumdetail",
                                 "publicforumdetail",
@@ -56,12 +57,19 @@
                                 "addrelationforparent",
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
-                                "mira",
+                                
+                                "calendar",
+                                "simplecalendar",
                                 "onlinelearning",
+                                "mira",
                                 "notes",
                                 "exercises",
                                 //"testing",
+<<<<<<< HEAD
                                 "upload"
+=======
+                                "imagetest",
+>>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -98,6 +106,7 @@
                                 "eventdetail",
                                 "newsdetail",
                                 //"departmentdetail",
+                                "subjectdetail",
                                 "classdetail",
                                 "schoolforumdetail",
                                 "publicforumdetail",
@@ -116,6 +125,21 @@
                                 //"exportclassattendance",
                                 //"testing",
                                 //"duplicate",
+
+                                //will be sort//
+                                "simplecalendar",
+                                "onlinelearning",
+                                "calendar",
+                                "notes",
+                                "test",
+                                "test2",
+                                "mira",
+                                "read",
+                                "addquestion",
+                                "exercises",
+                                "modal-event",
+                                "modal-news",
+                                "departmentlist"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
@@ -133,6 +157,7 @@
         if (!isset($_GET['page']) || empty($_GET['page']))
         {
             include 'view/pages/dashboard.php';
+          
         } 
         else 
         {

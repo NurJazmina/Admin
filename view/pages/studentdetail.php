@@ -1,4 +1,7 @@
 <?php
+$_SESSION["title"] = "Student Detail";
+include 'view/partials/_subheader/subheader-v1.php'; 
+
   $id = new \MongoDB\BSON\ObjectId($_GET['id']);
   $filter = ['_id'=>$id];
   $query = new MongoDB\Driver\Query($filter);
@@ -41,7 +44,13 @@
 
   }
 ?>
-<div><br><br><br><h1 style="color:#696969; text-align:center">Student Personal Info</h1></div><br>
+<style>
+.highlight td.default {
+background:#FFE2E5;
+color:#F64E60 ;
+}
+</style>
+<div><br><h1 style="color:#696969; text-align:center">Student Personal Info</h1></div><br>
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
@@ -534,22 +543,21 @@
                         $ConsumerLName = ($document->ConsumerLName);
                         $ConsumerIDNo = ($document->ConsumerIDNo);
                     ?>
-                    <table id="attendance" class="table table-bordered ">
+                    <table id="attendance" class="table table-bordered" style="text-align:center">
                     <thead class="table-light">
-                        <tr>
-                        <th scope="col" style="color:#696969; text-align:center">Student ID</th>
-                        <th scope="col" style="color:#696969; text-align:center">Student Name</th>
-                        <th scope="col" style="color:#696969; text-align:center">Date</th>
-                        <th scope="col" style="color:#696969; text-align:center">IN</th>
-                        <th scope="col" style="color:#696969; text-align:center">OUT</th>
+                        <tr style="color:#696969;">
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">IN</th>
+                        <th scope="col">OUT</th>
                         </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
-                        <td style="text-align:center"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-                        <td style="text-align:center">
-                    <?php
+                        <td class="default"><?php echo $ConsumerIDNo; ?></td>
+                        <td class="default"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
+                        <td class="default"><?php
                     $Cards_id ='';
                     $filter1 = ['Consumer_id'=>$_GET['id']];
                     $query1 = new MongoDB\Driver\Query($filter1);
@@ -588,10 +596,8 @@
                         echo date_format($AttendanceDate,"d-m-Y")."<br>";
                       }
                     }
-                    ?>
-                    </td>
-                    <td style="text-align:center">
-                    <?php
+                    ?></td>
+                    <td class="default"><?php
                     $varcounting = 0;
                     $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
                     $optionA = ['sort' => ['_id' => 1]];
@@ -613,10 +619,8 @@
                     {
                     }
                     }
-                    ?>
-                    </td>
-                    <td style="text-align:center">
-                    <?php
+                    ?></td>
+                    <td class="default"><?php
                     $varcounting = 0;
                     $filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
                     $optionA = ['sort' => ['_id' => 1]];
@@ -637,11 +641,8 @@
                     {
                       echo date_format($AttendanceDate,"H:i:s")."<br>";
                     }
-                    ?>
-                    <?php
                     }
-                    ?>
-                    </td>
+                    ?></td>
                     </tr>
               </tbody>
               </table>
@@ -652,7 +653,6 @@
             <?php
             if (!isset($_GET['attendance']) && empty($_GET['attendance']))
             {
-
             }
             else
             {
@@ -664,11 +664,19 @@
                     filename: "attendancestudent.xls"
                 });
               });
-              
             </script>
             <?php
             }
             ?>
+            <script type="text/javascript">
+            var rows = document.querySelectorAll('tr');
+
+            [...rows].forEach((r) => {
+            if (r.querySelectorAll('td:empty').length > 0) {
+            r.classList.add('highlight');
+            }
+            })
+            </script>
           </div>
         </div>
         

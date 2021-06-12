@@ -4,8 +4,13 @@ if (isset($_POST['AddSubjectFormSubmit']))
 {
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $varsubject = $_POST['txtsubject'];
+  $varClasscategory = $_POST['txtClasscategory'];
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['School_id'=>$varschoolID,'SubjectName'=> $varsubject]);
+  $bulk->insert(['School_id'=>$varschoolID,
+                'SubjectName'=> $varsubject,
+                'Class_category'=>$varClasscategory
+                ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {

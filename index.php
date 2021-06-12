@@ -55,6 +55,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css">
+		<link rel="stylesheet" href="./fullcalendar/main.min.css">
+		<link href="path/to/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
 
 		<!--end::Global Theme Styles-->
 
@@ -64,6 +68,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/brand/light.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/light.css" rel="stylesheet" type="text/css" />
 		<link href="resources/default.css" rel="stylesheet" type="text/css" />
+		<link href="resources/calendar.css" rel="stylesheet" type="text/css" />
 
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/logogongetz.png" />
@@ -73,6 +78,11 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="manifest" href="/site.webmanifest">
 		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
+		<!--begin::Calendar-->
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="calendar.css" rel="stylesheet" type="text/css">
+
+		<!--end::Calendar-->
 		<link rel="stylesheet" type="text/css" href="resources/default.css">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#ffffff">
@@ -215,12 +225,15 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.2.0/dist/alpine.js"></script>
 		
 		<!--end::Page Vendors-->
 
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
-		<script id="dsq-count-scr" src="//smartschoolgongetz.disqus.com/count.js" async></script>
+		<script src='assets/js/main.js'></script>
+		<script src="assets/js/todo.js" defer></script>
+
 		<?php include 'resources/default.php'; ?>
 		<?php
 		if (!isset($_GET['attendance']) && empty($_GET['attendance']))
