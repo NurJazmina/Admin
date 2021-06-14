@@ -19,7 +19,7 @@ include 'view/partials/_subheader/subheader-v1.php';
 /* Set up general layout rules for outer containers. */
 .contact-form,
 .results {
-  width: 90vw;
+  width: 200vw;
   max-width: 550px;
   margin: 8vh auto;
 }
@@ -67,7 +67,7 @@ function myevent(action)
                         '</select>'+
                     '</div>'+
                 '</div>'+
-                '<div class="OBJECTIVE box_'+id+'" name="Quiz">'+
+                '<div class="OBJECTIVE box_'+id+'" id="Quiz">'+
                     '<div class="form-group row">'+
                         '<label  class="col-sm-2 col-form-label text-sm-right">OPTION A</label>'+
                         '<div class="col-sm-10">'+
@@ -104,7 +104,7 @@ function myevent(action)
                         '</div>'+
                     '</div>'+
                 '</div>'+
-                '<div class="SUBJECTIVE box_'+id+'" name="Quiz">'+
+                '<div class="SUBJECTIVE box_'+id+'" id="Quiz">'+
                     '<div class="form-group row">'+
                         '<label class="col-sm-2 col-form-label text-sm-right">SUBJECTIVE</label>'+
                         '<div class="col-sm-10">'+
@@ -151,39 +151,73 @@ function myevent(action)
     <h2>Form Data</h2>
     <pre></pre>
 </div>
+<?php
+$date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+?>
 <section class="contact-form">
 <form>
     <div class="card card-custom card-stretch">
         <div class="container">
-            <div class="col">
-                <div class="card mb-2">
-                    <div class="card-header allform" align="center">
-                        <div class="firstform firstBackground">
-                        </div>
-                        <label class="col-form-label"><h3>TITLE</h3></label>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-sm-right">DATE START</label>
-                            <div class="col-sm-10">
-                                <input type="datetime-local" class="form-control" id="Start_date" name="Start_date">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-sm-right">DATE END</label>
-                            <div class="col-sm-10">
-                                <input type="datetime-local" class="form-control" id="End_date" name="End_date">
-                            </div>
-                        </div>
-                        <div class="mt-5" id="AddDel" align="right">
-                            <input type="button" class="btn btn-success btn-sm" id="add" onclick="myevent(this)" value="Add Question" data-toggle="tooltip" title="Add more question!"/>
-                            <div class="separator separator-dashed my-10"></div>
-                        </div>
-                        <div class="separator separator-dashed my-10"></div>
-                        <div align="right">
-                            <button type="submit"  onclick='TestingForm();'>Confirm!</button>
-                        </div>
+            <div align="center">
+                <label class="col-form-label"><h3>TITLE</h3></label>
+                <textarea class="notesdetail" name="title"></textarea><br>
+                
+                <input type="hidden" id="School_id" name="School_id" value="<?php echo $date; ?>">
+                <div class="form-group row">
+                    <label for="txtclasscategory" class="col-sm-2 col-form-label">SUBJECT</label>
+                    <div class="col-sm-10">
+                    <select class="form-control" id="sltStatus" name="Subject_id">
+                    <?php
+                    $filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+                    foreach ($cursor as $document)
+                    {
+                        $id = strval($document->_id);
+                        $Subject_id = strval($document->Subject_id);
+
+                        $filter = ['_id'=> new \MongoDB\BSON\ObjectID($Subject_id)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $SubjectName = strval($document->SubjectName);
+                        ?>
+                        <option value="<?=$Subject_id?>"><?=$SubjectName?></option>
+                        <?php
+                        }
+                    }
+                    ?>
+                    </select>
                     </div>
                 </div>
+                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" id="Created_by" name="Created_by" value="<?php echo $_SESSION["loggeduser_id"]; ?>">
+                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" id="Created_date" name="Created_date" value="<?php echo $date; ?>">
+                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" id="Edit_by" name="Edit_by" value="<?php echo $_SESSION["loggeduser_id"]; ?>">
+                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" id="Edit_date" name="Edit_date" value="<?php echo $date; ?>">
+                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" id="Total_question" name="Total_question" value="<?php echo "3"; ?>">
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label text-sm-right">DATE START</label>
+                    <div class="col-sm-10">
+                        <input type="datetime-local" class="form-control" id="Start_date" name="Start_date">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label text-sm-right">DATE END</label>
+                    <div class="col-sm-10">
+                        <input type="datetime-local" class="form-control" id="End_date" name="End_date">
+                    </div>
+                </div>
+                
+                <div class="mt-5" id="AddDel" align="right">
+                    <input type="button" class="btn btn-success btn-sm" id="add" onclick="myevent(this)" value="Add Question" data-toggle="tooltip" title="Add more question!"/>
+                    <div class="separator separator-dashed my-10"></div>
+                </div>
+                <div class="separator separator-dashed my-10"></div>
+                <div align="right">
+                    <button type="submit" class="btn btn-secondary btn-sm" onclick='TestingForm();'>Confirm!</button>
+                </div><br>
             </div>
         </div>
     </div>
@@ -196,23 +230,27 @@ function myevent(action)
     const data = new FormData(event.target);
     
     const formJSON = Object.fromEntries(data.entries());
+    var x = document.getElementById("Quiz");
+    // for multi-selects, we need special handling
+    formJSON.Quiz = data.getAll('Quiz');
 
     // Object
-    var b = {      
-        "Option_A": "Red",
-        "Option_D": "White"
-    };
-    for (i = 0; i < 3; i++) {
-            // for multi-selects, we need special handling
-            formJSON.Quiz = data.getAll('Quiz');
-            formJSON.Quiz.push(b);
+    var b = [{      
+        "Option_A": "a",
+        "Option_D": "b"
+    },{      
+        "Option_A": "c",
+        "Option_D": "d"
+    }];
+    
+    var c = data.getAll('Mark');
+    for (i = 0; i < 1; i++) {
+        formJSON.Quiz.push(b[i]);
     }
 
     // Array
     //var stuff = [];
     //stuff.push('a');
-
-
     const results = document.querySelector('.results pre');
     results.innerText = JSON.stringify(formJSON, null, 2);
 
