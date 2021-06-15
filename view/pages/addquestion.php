@@ -230,7 +230,6 @@ $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000)
     const data = new FormData(event.target);
     
     const formJSON = Object.fromEntries(data.entries());
-    var x = document.getElementById("Quiz");
     // for multi-selects, we need special handling
     formJSON.Quiz = data.getAll('Quiz');
 

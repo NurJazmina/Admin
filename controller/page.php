@@ -131,6 +131,7 @@
                                 "upload",
                                 "mira",
                                 "read",
+                                "addquiz",
                                 "addquestion",
                                 "exercises",
                                 "modal-event",
