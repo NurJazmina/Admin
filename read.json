@@ -10,7 +10,8 @@
     "Edit_date": {
         "$date": "2021-04-13T02:18:57.000Z"
     },
-    "Title": "<p>Type Of Color</p>",
+    "Name": "<p>Type Of Color</p>",
+    "Description": "<p>Color.....</p>",
     "Total_question": {
         "$numberLong": "3"
     },
