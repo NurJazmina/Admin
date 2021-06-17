@@ -32,36 +32,42 @@ function myevent(action)
                 '<div class="form-group row">'+
                     '<label for="questiontype" class="col-sm-2 col-form-label text-sm-right">TYPE</label>'+
                     '<div class="col-sm-10">'+
-                        '<select class="form-control" id="type'+id+'" name="Type" required>'+
+                        '<select class="form-control" id="type'+id+'" name="Type'+id+'" required>'+
                             '<option>CHOOSE YOUR TYPE</option>'+
                             '<option value="OBJECTIVE">OBJECTIVE</option>'+
                             '<option value="SUBJECTIVE">SUBJECTIVE</option>'+
                         '</select>'+
                     '</div>'+
                 '</div>'+
-                '<div class="OBJECTIVE box_'+id+'" id="Quiz">'+
+                '<div class="OBJECTIVE box">'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right">QUESTIONS</label>'+
+                        '<div class="col-sm-10">'+
+                            '<textarea class="quiz" name="Question'+id+'"></textarea>'+
+                        '</div>'+
+                    '</div>'+
                     '<div class="form-group row">'+
                         '<label  class="col-sm-2 col-form-label text-sm-right">OPTION A</label>'+
                         '<div class="col-sm-10">'+
-                            '<input class="form-control" type="text" id="Option_A" name="Option_A">'+
+                            '<input class="form-control" type="text" id="Option_A" name="Option_A'+id+'">'+
                         '</div>'+
                         ' <label  class="col-sm-2 col-form-label text-sm-right">OPTION B</label>'+
                         '<div class="col-sm-10">'+
-                            '<input class="form-control" type="text" id="Option_B" name="Option_B">'+
+                            '<input class="form-control" type="text" id="Option_B" name="Option_B'+id+'">'+
                         '</div>'+
                         '<label  class="col-sm-2 col-form-label text-sm-right">OPTION C</label>'+
                         '<div class="col-sm-10">'+
-                            '<input class="form-control" type="text" id="Option_C" name="Option_C">'+
+                            '<input class="form-control" type="text" id="Option_C" name="Option_C'+id+'">'+
                         '</div>'+
                         '<label  class="col-sm-2 col-form-label text-sm-right">OPTION D</label>'+
                         '<div class="col-sm-10">'+
-                            '<input class="form-control" type="text" id="Option_D" name="Option_D">'+
+                            '<input class="form-control" type="text" id="Option_D" name="Option_D'+id+'">'+
                         '</div>'+
                     '</div>'+
                     '<div class="form-group row">'+
                     '<label for="questiontype" class="col-sm-2 col-form-label text-sm-right">ANSWER</label>'+
                         '<div class="col-sm-10">'+
-                            '<select class="form-control" id="Answer" name="Answer" >'+
+                            '<select class="form-control" id="Answer" name="Answer'+id+'" >'+
                                 '<option value="Option_A" >A</option>'+
                                 '<option value="Option_B" >B</option>'+
                                 '<option value="Option_C" >C</option>'+
@@ -72,24 +78,35 @@ function myevent(action)
                     '<div class="form-group row">'+
                         '<label class="col-sm-2 col-form-label text-sm-right" for="Mark">TOTAL MARK</label>'+
                         '<div class="col-sm-10">'+
-                            '<input type="number" class="form-control" id="Mark" name="Mark" min="0" max="100">'+
+                            '<input type="number" class="form-control" id="Mark" name="Mark'+id+'" min="0" max="100">'+
                         '</div>'+
                     '</div>'+
                 '</div>'+
-                '<div class="SUBJECTIVE box_'+id+'" id="Quiz">'+
+                '<div class="SUBJECTIVE box">'+
                     '<div class="form-group row">'+
-                        '<label class="col-sm-2 col-form-label text-sm-right">SUBJECTIVE</label>'+
+                        '<label class="col-sm-2 col-form-label text-sm-right">QUESTIONS</label>'+
                         '<div class="col-sm-10">'+
-                            '<input type="text" class="form-control" id="Answer" name="Answer" size="200">'+
+                            '<textarea class="quiz" name="Question'+id+'"></textarea>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right">ANSWER</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input type="text" class="form-control" id="Answer" name="Answer'+id+'" size="200">'+
                         '</div>'+
                     '</div>'+
                     '<div class="form-group row">'+
                         '<label class="col-sm-2 col-form-label text-sm-right" for="quantity">TOTAL MARK</label>'+
                         '<div class="col-sm-10">'+
-                            '<input type="number" class="form-control" id="quantity" name="Mark" min="0" max="100">'+
+                            '<input type="number" class="form-control" id="quantity" name="Mark'+id+'" min="0" max="100">'+
                         '</div>'+
                     '</div>'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_A'+id+'">'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_B'+id+'">'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_C'+id+'">'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_D'+id+'">'+
                 '</div>'+
+                '<input type="hidden" class="form-control" name="Total_question" value="'+id+'" >'+
             '</div><div class="separator separator-dashed my-10"></div>'+
             '<div class="row"><div class="col" align="right">'+
             '<button type="submit" id='+id+' class="btn btn-sm" onclick="myevent(this)" value="Delete" /><i class="flaticon-delete icon-md"></i></button>'+
@@ -102,10 +119,10 @@ function myevent(action)
             $(this).find("option:selected").each(function(){
                 var optionValue = $(this).attr("value");
                 if(optionValue){
-                    $(".box_"+id).not("." + optionValue).hide();
+                    $(".box").not("." + optionValue).hide();
                     $("." + optionValue).show();
                 } else{
-                    $(".box_"+id).hide();
+                    $(".box").hide();
                 }
             });
         }).change();
@@ -116,7 +133,13 @@ function myevent(action)
         var element = document.getElementById(action.id);
         element.parentNode.removeChild(element);
     }
-    
+    tinymce.init({
+    selector: '.quiz',
+    menubar:false,
+    statusbar: false,
+    toolbar: false,
+    height:50,
+    });
 }
 </script>
 <br>
@@ -124,7 +147,7 @@ function myevent(action)
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" name="addquiz" action="index.php?page=addquiz" method="post">
+                <form class="form" id="addquiz" name="addquiz" action="index.php?page=addquiz" method="post">
                     <div class="card-body">
                         <div class="checkbox-inline">
                             <h2>Adding a new Quiz
@@ -144,17 +167,19 @@ function myevent(action)
                             <li>To deliver immediate feedback about performance</li>
                             <li>For self-assessment</li>
                             </ul>'>
-                            <i class="icon fa fa-question-circle text-info fa-fw " title="Help with Quiz" aria-label="Help with Quiz"></i></a></h2>
+                            <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Quiz" aria-label="Help with Quiz"></i></a></h2>
                         </div>
                         <div align="right">
                         <a data-toggle="collapse" href="#collapseTwo,#collapseThree,#collapseFour,#collapseFive,#collapseSix,#collapseSeven" ...>
                             Expand / Collapse
-                            <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Navigation\Angle-down.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <polygon points="0 0 24 0 24 24 0 24"/>
-                                    <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) "/>
-                                </g>
-                            </svg><!--end::Svg Icon--></span>
+                            <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"/>
+                                        <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) "/>
+                                    </g>
+                                </svg>
+                            </span>
                         </a>
                         </div>
                         <div class="accordion" id="accordionExample">
@@ -169,13 +194,13 @@ function myevent(action)
                                 <!-- begin::body -->
                                     <div class="form-group row ">
                                         <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                            <label class="d-inline word-break " for="id_name">Name</label>
+                                            <label class="d-inline word-break">Name</label>
                                             <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
                                                 <i class="icon fa fa-exclamation-circle text-danger fa-fw " title="Required" aria-label="Required"></i>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control " name="name" required>
+                                            <input type="text" class="form-control" name="title" required>
                                         </div>
                                     </div>
                                     <div class="form-group row ">
@@ -200,7 +225,14 @@ function myevent(action)
                                 <div class="accordion-body">
                                 <!-- begin::body -->
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Open the quiz</label>
+                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                            <label class="d-inline word-break">Open the quiz</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>Students can only start their attempt(s) after the open time and they must complete their attempts before the close time.</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with open and close dates" aria-label="Help with open and close dates"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
                                                 <input type="datetime-local" class="form-control" name="DateOpen" placeholder="Select date" id="kt_datepicker">
@@ -216,12 +248,19 @@ function myevent(action)
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Time limit</label>
+                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                            <label class="d-inline word-break">Time limit</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>If enabled, the time limit is stated on the initial quiz page and a countdown timer is displayed in the quiz navigation block.</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Time limit" aria-label="Help with Time limit"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                         <div class="col-md-3">
                                             <input type="number" class="form-control" name="timeunit">
                                         </div>
                                         <div class="col-md-3">
-                                            <select class="custom-select" name="timelimit[timeunit]" id="id_timelimit_timeunit">
+                                            <select class="custom-select" name="timelimit" id="id_timelimit_timeunit">
                                                 <option value="604800">weeks</option>
                                                 <option value="86400">days</option>
                                                 <option value="3600">hours</option>
@@ -231,12 +270,19 @@ function myevent(action)
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0">When time expired</label>
+                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                            <label class="d-inline word-break " for="id_name">When time expired</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>This setting controls what happens if a student fails to submit their quiz attempt before the time expires. If the student is actively working on the quiz at the time, then the countdown timer will always automatically submit the attempt for them, but if they have logged out, then this setting controls what happens.</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with When time expires" aria-label="Help with When time expires"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <select class="form-control" id="kt_bootstrap_select" name="timeexpired">
-                                                <option value="autosubmit" selected>Open attempts are submitted automatically</option>
+                                                <option value="autosubmit">Open attempts are submitted automatically</option>
                                                 <option value="graceperiod">There is a grace period when open attempts can be submitted, but no more questions answered</option>
-                                                <option value="autoabandon">Attempts must be submitted before time expires, or they are not counted</option>
+                                                <option value="autoabandon" selected>Attempts must be submitted before time expires, or they are not counted</option>
                                             </select>
                                         </div>
                                     </div>
@@ -280,7 +326,14 @@ function myevent(action)
                                 <div class="accordion-body">
                                 <!-- begin::body -->
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Shuffle within question</label>
+                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                            <label class="d-inline word-break">Shuffle within question</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>If enabled, the parts making up each question will be randomly shuffled each time a student attempts the quiz, provided the option is also enabled in the question settings. This setting only applies to questions that have multiple parts, such as multiple choice or matching questions.</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Shuffle within questions" aria-label="Help with Shuffle within questions"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <select class="form-control" name="shuffle">
                                                 <option value="YES">Yes</option>
@@ -295,7 +348,14 @@ function myevent(action)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingFive">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <p style="color:#0f6fc5;">OVERALL FEEDBACK</p>
+                                    <div class="d-flex">
+                                            <label class="d-inline word-break" for="id_name" style="color:#0f6fc5;">OVERALL FEEDBACK</label>
+                                            <div class="ml-1 d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>Overall feedback is text that is shown after a quiz has been attempted. By specifying additional grade boundaries (as a percentage or as a number), the text shown can depend on the grade obtained.</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw" title="Help with Overall feedback" aria-label="Help with Overall feedback"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                 </button>
                                 </h2>
                                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
@@ -355,7 +415,15 @@ function myevent(action)
                                 <div class="accordion-body">
                                 <!-- begin::body -->
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Availability</label>
+                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                            <label class="d-inline word-break" >Availability</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>If the availability is set to Show on course page, the activity or resource is available to students (subject to any access restrictions which may be set).</p>
+                                                <p>If the availability is set to Hide from students, the activity or resource is only available to users with permission to view hidden activities (by default, users with the role of teacher or non-editing teacher).</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Availability" aria-label="Help with Availability"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <select class="form-control" name="availability">
                                                 <option value="SHOW" selected>Show on subject page</option>
@@ -365,14 +433,31 @@ function myevent(action)
                                     </div>
                                     <div class="form-group row ">
                                         <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                            <label class="d-inline word-break " for="id_name">ID Number</label>
+                                            <label class="d-inline word-break" >ID Number</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>Setting an ID number provides a way of identifying the activity or resource for purposes such as grade calculation or custom reporting. Otherwise the field may be left blank.</p>
+                                                <p>For gradable activities, the ID number can also be set in the gradebook, though it can only be edited on the activity settings page.</p>'>
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with ID number" aria-label="Help with ID number"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="idnumber">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0" for="groupmode">Group Mode</label>
+                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                            <label class="d-inline word-break " for="groupmode">Group Mode</label>
+                                            <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
+                                                <a type="button" data-bs-toggle="popover" title="" data-bs-content='<p>This setting has 3 options:</p>
+                                                    <ul><li>No groups</li>
+                                                    <li>Separate groups - Each group member can only see their own group, others are invisible</li>
+                                                    <li>Visible groups - Each group member works in their own group, but can also see other groups</li>
+                                                    </ul><p>The group mode defined at course level is the default mode for all activities within the course. Each activity that supports groups can also define its own group mode, though if the group mode is forced at course level, the group mode setting for each activity is ignored.</p>'>                                     
+                                                    <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Group mode" aria-label="Help with Group mode"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <select class="form-control" name="groupmode" id="groupmode" onchange="Selectgroupmode(this.value);">
                                                 <option value="NO" selected>No group</option>
@@ -397,11 +482,11 @@ function myevent(action)
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseNine">
                                     <p style="color:#0f6fc5;">QUESTIONS</p>
                                 </button>
                                 </h2>
-                                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                 <!-- begin::body -->
                                 <div class="mt-5" id="AddDel" align="left">
@@ -417,14 +502,12 @@ function myevent(action)
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" id="Total_question" name="Total_question" value="<?php echo "3"; ?>">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
-                                
-                                <button type="submit" class="btn btn-success mr-2">Submit </button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="reset" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-success mr-2" name="addquiz">Save and return to the subject</button>
+                                <button type="submit" class="btn btn-success mr-2">Save and display</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
                     </div>

@@ -8,39 +8,93 @@ if (isset($_POST['addquiz']))
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $Edit_by = strval($_SESSION["loggeduser_id"]);
   $Edit_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $Name = $_POST['name'];
+
+  $Description = '';
+  $DateOpen = '';
+  $DateClose = '';
+  $timeunit = '';
+  $timelimit = '';
+  $feedback100 = '';
+  $grade = 50;
+  $feedback0 = '';
+  $idnumber = '';
+  $group = '';
+  $Total_question = 0;
+
+  $Type1 = '';
+  $Question1 = '';
+  $Option_A1 = '';
+  $Option_B1 = '';
+  $Option_C1 = '';
+  $Option_D1 = '';
+  $Answer1 = '';
+  $Mark1 = '';
+
+  $title = $_POST['title'];
   $Description = $_POST['description'];
 
   $DateOpen = $_POST['DateOpen'];
   $DateClose = $_POST['DateClose'];
   $timeunit = $_POST['timeunit'];
-  $timelimit = $_POST['timelimit[timeunit]'];
+  $timelimit = $_POST['timelimit'];
   $timeexpired = $_POST['timeexpired'];
+
   $attempt = $_POST['attempt'];
+
   $shuffle = $_POST['shuffle'];
+
   $feedback100 = $_POST['feedback100'];
   $grade = $_POST['grade'];
+  $feedback0 = $_POST['feedback0'];
+
   $availability = $_POST['availability'];
   $idnumber = $_POST['idnumber'];
   $groupmode = $_POST['groupmode'];
   $group = $_POST['group'];
   
   $Total_question = $_POST['Total_question'];
-  $Questions = $_POST['Questions'];
-  $Type = $_POST['Type'];
-  $Option_A = $_POST['Option_A'];
-  $Option_B = $_POST['Option_B'];
-  $Option_C = $_POST['Option_C'];
-  $Option_D = $_POST['Option_D'];
-  $Answer = $_POST['Answer'];
 
+  for ($i=1; $i<=$Total_question; $i++)
+  {
+    $array[$i] =
+            [
+              'Type'=>$_POST['Type'.$i],
+              'Question'=>$_POST['Question'.$i],
+              'Option_A'=>$_POST['Option_A'.$i],
+              'Option_B'=>$_POST['Option_B'.$i],
+              'Option_C'=>$_POST['Option_C'.$i],
+              'Option_D'=>$_POST['Option_D'.$i],
+              'Answer'=>$_POST['Answer'.$i],
+              'Mark'=> $_POST['Mark'.$i]
+            ];
+  }
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
-      'School_id'=>$varschoolID,
-      'DepartmentName'=> $vardepartment,
-      'School_id'=>$varschoolID,
-      'DepartmentName'=> $vardepartment
-      ]);
+                  'School_id'=>$School_id,
+                  'Subject_id'=>$Subject_id,
+                  'Created_by'=>$Created_by,
+                  'Created_date'=>$Created_date,
+                  'Edit_by'=>$Edit_by,
+                  'Edit_date'=>$Edit_date,
+                  'Title'=>$title,
+                  'Description'=>$Description,
+                  'DateOpen'=>$DateOpen,
+                  'DateClose'=>$DateClose,
+                  'Timeunit'=>$timeunit,
+                  'Timelimit'=>$timelimit,
+                  'Timeexpired'=>$timeexpired,
+                  'Attempt'=>$attempt,
+                  'Shuffle'=>$shuffle,
+                  'Feedback100'=>$feedback100,
+                  'Grade'=>$grade,
+                  'Feedback0'=>$feedback0,
+                  'Availability'=>$availability,
+                  'Idnumber'=>$idnumber,
+                  'Groupmode'=>$groupmode,
+                  'Group'=>$group,
+                  'Total_Question'=>$Total_question,
+                  'Quiz'=>$array
+                ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {

@@ -67,7 +67,7 @@ function myevent(action)
                         '</select>'+
                     '</div>'+
                 '</div>'+
-                '<div class="OBJECTIVE box_'+id+'" id="Quiz">'+
+                '<div class="OBJECTIVE box">'+
                     '<div class="form-group row">'+
                         '<label  class="col-sm-2 col-form-label text-sm-right">OPTION A</label>'+
                         '<div class="col-sm-10">'+
@@ -104,7 +104,7 @@ function myevent(action)
                         '</div>'+
                     '</div>'+
                 '</div>'+
-                '<div class="SUBJECTIVE box_'+id+'" id="Quiz">'+
+                '<div class="SUBJECTIVE box">'+
                     '<div class="form-group row">'+
                         '<label class="col-sm-2 col-form-label text-sm-right">SUBJECTIVE</label>'+
                         '<div class="col-sm-10">'+
@@ -130,10 +130,10 @@ function myevent(action)
             $(this).find("option:selected").each(function(){
                 var optionValue = $(this).attr("value");
                 if(optionValue){
-                    $(".box_"+id).not("." + optionValue).hide();
+                    $(".box").not("." + optionValue).hide();
                     $("." + optionValue).show();
                 } else{
-                    $(".box_"+id).hide();
+                    $(".box").hide();
                 }
             });
         }).change();
