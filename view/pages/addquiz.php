@@ -114,20 +114,28 @@ function myevent(action)
         '</div><br>';
 
         document.getElementById('AddDel').appendChild(div);
-        $(document).ready(function(){
-        $("#type"+id).change(function(){
-            $(this).find("option:selected").each(function(){
-                var optionValue = $(this).attr("value");
-                if(optionValue){
-                    $(".box").not("." + optionValue).hide();
-                    $("." + optionValue).show();
-                } else{
-                    $(".box").hide();
-                }
-            });
-        }).change();
+        $(document).ready(function() {
+        $("select").change(function() {
+            var type = $(this).val();
+            if (type == "OBJECTIVE") 
+            {
+                $(".box").not(".OBJECTIVE").hide();
+                $(".OBJECTIVE").show();
+            } 
+            else if (type == "SUBJECTIVE") 
+            {
+                $(".box").not(".SUBJECTIVE").hide();
+                $(".SUBJECTIVE").show();
+            }  
+            else 
+            {
+            $(".box").hide();
+            }
         });
-    }
+
+
+        });
+            }
     else
     {
         var element = document.getElementById(action.id);

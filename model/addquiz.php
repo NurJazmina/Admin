@@ -53,20 +53,33 @@ if (isset($_POST['addquiz']))
   $group = $_POST['group'];
   
   $Total_question = $_POST['Total_question'];
-
+  $a =[];
   for ($i=1; $i<=$Total_question; $i++)
   {
-    $array[$i] =
-            [
-              'Type'=>$_POST['Type'.$i],
-              'Question'=>$_POST['Question'.$i],
-              'Option_A'=>$_POST['Option_A'.$i],
-              'Option_B'=>$_POST['Option_B'.$i],
-              'Option_C'=>$_POST['Option_C'.$i],
-              'Option_D'=>$_POST['Option_D'.$i],
-              'Answer'=>$_POST['Answer'.$i],
-              'Mark'=> $_POST['Mark'.$i]
-            ];
+    $arrayi =
+    [
+      'Type'=>$_POST['Type'.$i],
+      'Question'=>$_POST['Question'.$i],
+      'Option_A'=>$_POST['Option_A'.$i],
+      'Option_B'=>$_POST['Option_B'.$i],
+      'Option_C'=>$_POST['Option_C'.$i],
+      'Option_D'=>$_POST['Option_D'.$i],
+      'Answer'=>$_POST['Answer'.$i],
+      'Mark'=> $_POST['Mark'.$i]
+    ];
+    $array =
+    [
+      'Type'=>$_POST['Type1'],
+      'Question'=>$_POST['Question1'],
+      'Option_A'=>$_POST['Option_A1'],
+      'Option_B'=>$_POST['Option_B1'],
+      'Option_C'=>$_POST['Option_C1'],
+      'Option_D'=>$_POST['Option_D1'],
+      'Answer'=>$_POST['Answer1'],
+      'Mark'=> $_POST['Mark1']
+    ];
+    $a = [$array];
+    array_push($a, $arrayi);
   }
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
@@ -93,8 +106,9 @@ if (isset($_POST['addquiz']))
                   'Groupmode'=>$groupmode,
                   'Group'=>$group,
                   'Total_Question'=>$Total_question,
-                  'Quiz'=>$array
+                  'Quiz'=>$a
                 ]);
+  
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {

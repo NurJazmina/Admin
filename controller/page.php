@@ -122,21 +122,15 @@
                                 //"testing",
                                 //"duplicate",
 
-                                //will be sort//
+                                //online learning//
                                 "simplecalendar",
                                 "onlinelearning",
                                 "calendar",
                                 "notes",
-                                "image",
-                                "upload",
-                                "mira",
-                                "read",
                                 "addquiz",
-                                "addquestion",
+                                "subject",
+                                "upload",
                                 "exercises",
-                                "modal-event",
-                                "modal-news",
-                                "departmentlist"
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
