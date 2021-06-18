@@ -134,9 +134,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="col-sm">
                     </div>
                     <div class="col-sm text-right">
-                        <span>
-                        Edit<i class="flaticon2-down icon-md" type="button" data-bs-toggle="dropdown"></i>
-                        </span>
+                        <i class="flaticon2-down icon-md" type="button" data-bs-toggle="dropdown"></i>
                         <div class="dropdown-menu dropdown-menu-md py-5">
                             <ul class="navi navi-hover">
                             </ul>
