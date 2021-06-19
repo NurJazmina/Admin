@@ -1,7 +1,6 @@
 <?php
 $_SESSION["title"] = "Add Quiz";
 include 'view/partials/_subheader/subheader-v1.php'; 
-include ('model/addquiz.php');
 ?>
 <style>
 .btn-link:hover {
@@ -13,6 +12,16 @@ include ('model/addquiz.php');
     text-decoration-color: initial;
 }
 </style>
+<?php
+if (isset($_POST['recheckquiz']))
+{
+  $totalobj = 0;
+  $totalsub = 0;
+  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
+  $Subject_id = $_POST['Subject_id'];
+  $totalobj = $_POST['totalobj'];
+  $totalsub = $_POST['totalsub'];
+?>
 <div class="d-flex flex-column-fluid">
     <div class="container">
         <div class="col-lg-12">
@@ -360,8 +369,6 @@ include ('model/addquiz.php');
                                 <div class="accordion-body">
                                 <!-- begin::body -->
                                 <?php 
-                                $totalobj = 2;
-                                $totalsub = 1;
                                 $total = $totalsub + $totalobj;
 
                                 if ($totalobj != 0)
@@ -488,6 +495,9 @@ include ('model/addquiz.php');
         </div>
     </div>
 </div>
+<?php
+}
+?>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
