@@ -1,8 +1,4 @@
-<?php
-$_SESSION["title"] = "Add Quiz";
-include 'view/partials/_subheader/subheader-v1.php'; 
-include ('model/addquiz.php');
-?>
+<?php include ('model/addquiz.php'); ?>
 <style>
 .btn-link:hover {
     color: #0a477e;
@@ -13,6 +9,148 @@ include ('model/addquiz.php');
     text-decoration-color: initial;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+<script language="javascript">
+localStorage.i = Number(1);
+
+function myevent(action)
+{
+    var i = Number(localStorage.i);
+    var div = document.createElement('div');
+
+    if(action.id == "add")
+    {
+        localStorage.i = Number(localStorage.i) + Number(1);
+        var id = i;
+        div.id = id;
+    
+        div.innerHTML = 
+        '<div class="card">'+
+            '<div class="card-body">'+
+            '<h5 align="left">QUESTION '+id+'</h5>'+
+                '<div class="form-group row">'+
+                    '<label for="questiontype" class="col-sm-2 col-form-label text-sm-right">TYPE</label>'+
+                    '<div class="col-sm-10">'+
+                        '<select class="form-control" id="type'+id+'" name="Type'+id+'" required>'+
+                            '<option>CHOOSE YOUR TYPE</option>'+
+                            '<option value="OBJECTIVE">OBJECTIVE</option>'+
+                            '<option value="SUBJECTIVE">SUBJECTIVE</option>'+
+                        '</select>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="OBJECTIVE box">'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right">QUESTIONS</label>'+
+                        '<div class="col-sm-10">'+
+                            '<textarea class="quiz" name="Question'+id+'"></textarea>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-group row">'+
+                        '<label  class="col-sm-2 col-form-label text-sm-right">OPTION A</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input class="form-control" type="text" id="Option_A" name="Option_A'+id+'">'+
+                        '</div>'+
+                        ' <label  class="col-sm-2 col-form-label text-sm-right">OPTION B</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input class="form-control" type="text" id="Option_B" name="Option_B'+id+'">'+
+                        '</div>'+
+                        '<label  class="col-sm-2 col-form-label text-sm-right">OPTION C</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input class="form-control" type="text" id="Option_C" name="Option_C'+id+'">'+
+                        '</div>'+
+                        '<label  class="col-sm-2 col-form-label text-sm-right">OPTION D</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input class="form-control" type="text" id="Option_D" name="Option_D'+id+'">'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-group row">'+
+                    '<label for="questiontype" class="col-sm-2 col-form-label text-sm-right">ANSWER</label>'+
+                        '<div class="col-sm-10">'+
+                            '<select class="form-control" id="Answer" name="Answer'+id+'" >'+
+                                '<option value="Option_A" >A</option>'+
+                                '<option value="Option_B" >B</option>'+
+                                '<option value="Option_C" >C</option>'+
+                                '<option value="Option_D" >D</option>'+
+                            '</select>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right" for="Mark">TOTAL MARK</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input type="number" class="form-control" id="Mark" name="Mark'+id+'" min="0" max="100">'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="SUBJECTIVE box">'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right">QUESTIONS</label>'+
+                        '<div class="col-sm-10">'+
+                            '<textarea class="quiz" name="Question'+id+'"></textarea>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right">ANSWER</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input type="text" class="form-control" id="Answer" name="Answer'+id+'" size="200">'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-group row">'+
+                        '<label class="col-sm-2 col-form-label text-sm-right" for="quantity">TOTAL MARK</label>'+
+                        '<div class="col-sm-10">'+
+                            '<input type="number" class="form-control" id="quantity" name="Mark'+id+'" min="0" max="100">'+
+                        '</div>'+
+                    '</div>'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_A'+id+'">'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_B'+id+'">'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_C'+id+'">'+
+                    '<input class="form-control" type="hidden" id="Option_A" name="Option_D'+id+'">'+
+                '</div>'+
+                '<input type="hidden" class="form-control" name="Total_question" value="'+id+'" >'+
+            '</div><div class="separator separator-dashed my-10"></div>'+
+            '<div class="row"><div class="col" align="right">'+
+            '<button type="submit" id='+id+' class="btn btn-sm" onclick="myevent(this)" value="Delete" /><i class="flaticon-delete icon-md"></i></button>'+
+            '</div></div><br>'+
+        '</div><br>';
+
+        document.getElementById('AddDel').appendChild(div);
+        $(document).ready(function() {
+        $("select").change(function() {
+            var type = $(this).val();
+            if (type == "OBJECTIVE") 
+            {
+                $(".box").not(".OBJECTIVE").hide();
+                $(".OBJECTIVE").show();
+            } 
+            else if (type == "SUBJECTIVE") 
+            {
+                $(".box").not(".SUBJECTIVE").hide();
+                $(".SUBJECTIVE").show();
+            }  
+            else 
+            {
+            $(".box").hide();
+            }
+        });
+
+
+        });
+    }
+    else
+    {
+        var element = document.getElementById(action.id);
+        element.parentNode.removeChild(element);
+    }
+    tinymce.init({
+    selector: '.quiz',
+    menubar:false,
+    statusbar: false,
+    toolbar: false,
+    height:50,
+    });
+}
+</script>
+<br>
 <div class="d-flex flex-column-fluid">
     <div class="container">
         <div class="col-lg-12">
@@ -20,7 +158,7 @@ include ('model/addquiz.php');
                 <form class="form" id="addquiz" name="addquiz" action="index.php?page=addquiz" method="post">
                     <div class="card-body">
                         <div class="checkbox-inline">
-                            <h2>Adding a New Quiz
+                            <h2>Adding a new Quiz
                             <a type="button" data-bs-toggle="popover" title="" data-bs-content='
                             <p>The quiz activity enables a teacher to create quizzes comprising questions of various types, including multiple choice, matching, short-answer and numerical.</p>
                             <p>The teacher can allow the quiz to be attempted multiple times, with the questions shuffled or randomly selected from the question bank. A time limit may be set.</p>
@@ -40,7 +178,7 @@ include ('model/addquiz.php');
                             <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Quiz" aria-label="Help with Quiz"></i></a></h2>
                         </div>
                         <div align="right">
-                        <a data-toggle="collapse" href="#collapseOne,#collapseTwo,#collapseThree,#collapseFour,#collapseFive,#collapseSix,#collapseSeven" ...>
+                        <a data-toggle="collapse" href="#collapseTwo,#collapseThree,#collapseFour,#collapseFive,#collapseSix,#collapseSeven" ...>
                             Expand / Collapse
                             <span class="svg-icon svg-icon-primary svg-icon-2x">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -55,11 +193,11 @@ include ('model/addquiz.php');
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <p style="color:#0f6fc5;">GENERAL</p>
                                 </button>
                                 </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                 <!-- begin::body -->
                                     <div class="form-group row ">
@@ -352,118 +490,17 @@ include ('model/addquiz.php');
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSix">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseNine">
                                     <p style="color:#0f6fc5;">QUESTIONS</p>
                                 </button>
                                 </h2>
                                 <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                 <!-- begin::body -->
-                                <?php 
-                                $totalobj = 2;
-                                $totalsub = 1;
-                                $total = $totalsub + $totalobj;
-
-                                if ($totalobj != 0)
-                                {
-
-                                    for ($i=1; $i<=$totalobj; $i++)
-                                    {
-                                    ?>
-                                    <div class="OBJECTIVE box">
-                                        <h5 align="center">QUESTIONS <?php echo $i; ?> : OBJECTIVE </h5>
-                                        <div class="form-group row">
-                                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                <label for="questiontype" class="d-inline word-break">Question</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <textarea class="quiz" name="Question<?php echo $i; ?>"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option A</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_A" name="Option_A<?php echo $i; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option B</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_B" name="Option_B<?php echo $i; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option C</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_C" name="Option_C<?php echo $i; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option D</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_D" name="Option_D<?php echo $i; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="questiontype" class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Answer</label>
-                                            <div class="col-md-6">
-                                                <select class="form-control" id="Answer" name="Answer<?php echo $i; ?>" >
-                                                    <option value="Option_A" >A</option>
-                                                    <option value="Option_B" >B</option>
-                                                    <option value="Option_C" >C</option>
-                                                    <option value="Option_D" >D</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0" for="Mark">Total mark</label>
-                                            <div class="col-md-6">
-                                                <input type="number" class="form-control" id="Mark" name="Mark<?php echo $i; ?>" min="0" max="100">
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="mt-5" id="AddDel" align="left">
+                                    <input type="button" class="btn btn-success btn-sm" id="add" onclick="myevent(this)" value="Add Question" data-toggle="tooltip" title="Add more question!"/>
                                     <div class="separator separator-dashed my-10"></div>
-                                    <?php
-                                    }
-                                }
-                                
-                                if ($totalsub != 0)
-                                {
-                                    for ($i=$totalobj+1; $i<=$total; $i++)
-                                    {
-                                    ?>
-                                    <div class="SUBJECTIVE box">
-                                        <h5 align="center">QUESTIONS <?php echo $i; ?>: SUBJECTIVE </h5>
-                                        <div class="form-group row">
-                                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                <label for="questiontype" class="d-inline word-break">Question</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <textarea class="quiz" name="question<?php echo $i; ?>"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="questiontype" class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Answer</label>
-                                            <div class="col-md-6">
-                                                <textarea class="quiz" name="answer<?php echo $i; ?>"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0" for="Mark">Total mark</label>
-                                            <div class="col-md-6">
-                                                <input type="number" class="form-control" id="Mark" name="Mark<?php echo $i; ?>" min="0" max="100">
-                                            </div>
-                                        </div>
-                                        <input class="form-control" type="hidden" name="Option_A" value="">
-                                        <input class="form-control" type="hidden" name="Option_B" value="">
-                                        <input class="form-control" type="hidden" name="Option_C" value="">
-                                        <input class="form-control" type="hidden" name="Option_D" value="">
-                                    </div>
-                                    <div class="separator separator-dashed my-10"></div>
-                                    <?php
-                                    }
-                                }
-                                ?>
+                                </div>
                                 <!-- end::body -->
                                 </div>
                                 </div>
@@ -474,7 +511,6 @@ include ('model/addquiz.php');
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
-                                <input type="hidden" class="form-control" name="totalquiz" value="<?php echo $total; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
                                 <button type="submit" class="btn btn-success mr-2" name="addquiz">Save and return to the subject</button>

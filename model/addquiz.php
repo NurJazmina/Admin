@@ -52,9 +52,9 @@ if (isset($_POST['addquiz']))
   $groupmode = $_POST['groupmode'];
   $group = $_POST['group'];
   
-  $Total_question = $_POST['Total_question'];
+  $totalquiz = $_POST['totalquiz'];
   $a =[];
-  for ($i=1; $i<=$Total_question; $i++)
+  for ($i=1; $i<=$totalquiz; $i++)
   {
     $arrayi =
     [

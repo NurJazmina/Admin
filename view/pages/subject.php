@@ -121,14 +121,20 @@ include 'view/partials/_subheader/subheader-v1.php';
                         </a>
                     </h3>
                 </div>
+                <div id="contentinfo">
+                aaaaaaaaaaaaaa
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-sm text-right">
                     <button class="btn btn-link" data-action="open-chooser" data-sectionid="0" data-sectionreturnid="0">
-                        <i class="icon fa fa-plus fa-fw " aria-hidden="true"></i>
-                        <span class="text">Add an activity or resource</span>
+                        <span class="text">
+                        <i class="icon fa fa-plus fa-fw text-primary" aria-hidden="true"></i> 
+                        Add an activity or resource</span>
                     </button>
                 </div>
-                <div id="contentinfo">
-                </div>
+            </div>
+            <div class="row">
                 <div class="separator separator-dashed my-10"></div>
                 <div id="section-1">
                     <div class="col-sm">

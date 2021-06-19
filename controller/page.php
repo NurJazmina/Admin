@@ -127,6 +127,7 @@
                                 "onlinelearning",
                                 "calendar",
                                 "notes",
+                                "modal-recheckquiz",
                                 "addquiz",
                                 "subject",
                                 "upload",
