@@ -132,6 +132,7 @@
                                 "subject",
                                 "upload",
                                 "exercises",
+                                "alertexample",
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 

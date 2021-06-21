@@ -40,10 +40,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                                     </div>
                                     <div class="separator separator-dashed my-10"></div>
                                     <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12 text-lg-right">
                                         <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
-                                    </div>
-                                    <div class="col-lg-6 text-lg-right">
                                         <button type="submit" class="btn btn-success mr-2" name="recheckquiz">Submit</button>
                                     </div>
                                 </div>

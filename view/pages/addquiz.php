@@ -1,6 +1,7 @@
 <?php
 $_SESSION["title"] = "Add Quiz";
 include 'view/partials/_subheader/subheader-v1.php'; 
+include ('model/addquiz.php');
 ?>
 <style>
 .btn-link:hover {
@@ -11,12 +12,43 @@ include 'view/partials/_subheader/subheader-v1.php';
     text-decoration-style: initial;
     text-decoration-color: initial;
 }
+
+input[aria-invalid='false'] {
+  border: 1px solid green;
+}
+input[aria-invalid='true'] {
+  border: 1px solid red;
+}
+
+.error {
+  display: none;
+  color: red;
+  font-weight: bold;
+  p {
+    margin: 0;
+  }
+}
+
+.info {
+  background: #ccc;
+  padding: 20px;
+  h2 {
+    margin: 0 10px;
+  }
+  code {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <?php
 if (isset($_POST['recheckquiz']))
 {
-  $totalobj = 0;
-  $totalsub = 0;
   $schoolID = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];
   $totalobj = $_POST['totalobj'];
@@ -28,6 +60,7 @@ if (isset($_POST['recheckquiz']))
             <div class="card card-custom gutter-b example example-compact">
                 <form class="form" id="addquiz" name="addquiz" action="index.php?page=addquiz" method="post">
                     <div class="card-body">
+                    <p id="demo"></p>
                         <div class="checkbox-inline">
                             <h2>Adding a New Quiz
                             <a type="button" data-bs-toggle="popover" title="" data-bs-content='
@@ -62,8 +95,8 @@ if (isset($_POST['recheckquiz']))
                         </a>
                         </div>
                         <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
+                            <div class="accordion-item" id="focus">
+                                <h2 class="accordion-header" id="headingOne" class="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                     <p style="color:#0f6fc5;">GENERAL</p>
                                 </button>
@@ -73,13 +106,16 @@ if (isset($_POST['recheckquiz']))
                                 <!-- begin::body -->
                                     <div class="form-group row ">
                                         <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                            <label class="d-inline word-break">Name</label>
+                                            <label class="d-inline word-break" for="title" >Name</label>
                                             <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
                                                 <i class="icon fa fa-exclamation-circle text-danger fa-fw " title="Required" aria-label="Required"></i>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="title" required>
+                                            <input type="text" class="form-control" name="title" id="title" aria-required="true" aria-invalid="false" data-rule="title" required>
+                                            <div class="error" id="titleErrorMessage" aria-hidden="true" role="alert" tabindex="1">
+                                                <p> - You must supply a value here !</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row ">
@@ -373,7 +409,6 @@ if (isset($_POST['recheckquiz']))
 
                                 if ($totalobj != 0)
                                 {
-
                                     for ($i=1; $i<=$totalobj; $i++)
                                     {
                                     ?>
@@ -428,6 +463,7 @@ if (isset($_POST['recheckquiz']))
                                                 <input type="number" class="form-control" id="Mark" name="Mark<?php echo $i; ?>" min="0" max="100">
                                             </div>
                                         </div>
+                                        <input class="form-control" type="hidden" name="Type<?php echo $i; ?>" value="OBJECTIVE">
                                     </div>
                                     <div class="separator separator-dashed my-10"></div>
                                     <?php
@@ -446,13 +482,13 @@ if (isset($_POST['recheckquiz']))
                                                 <label for="questiontype" class="d-inline word-break">Question</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <textarea class="quiz" name="question<?php echo $i; ?>"></textarea>
+                                                <textarea class="quiz" name="Question<?php echo $i; ?>"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="questiontype" class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Answer</label>
                                             <div class="col-md-6">
-                                                <textarea class="quiz" name="answer<?php echo $i; ?>"></textarea>
+                                                <textarea class="quiz" name="Answer<?php echo $i; ?>"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -461,10 +497,11 @@ if (isset($_POST['recheckquiz']))
                                                 <input type="number" class="form-control" id="Mark" name="Mark<?php echo $i; ?>" min="0" max="100">
                                             </div>
                                         </div>
-                                        <input class="form-control" type="hidden" name="Option_A" value="">
-                                        <input class="form-control" type="hidden" name="Option_B" value="">
-                                        <input class="form-control" type="hidden" name="Option_C" value="">
-                                        <input class="form-control" type="hidden" name="Option_D" value="">
+                                        <input class="form-control" type="hidden" name="Type<?php echo $i; ?>" value="SUBJECTIVE">
+                                        <input class="form-control" type="hidden" name="Option_A<?php echo $i; ?>" value="">
+                                        <input class="form-control" type="hidden" name="Option_B<?php echo $i; ?>" value="">
+                                        <input class="form-control" type="hidden" name="Option_C<?php echo $i; ?>" value="">
+                                        <input class="form-control" type="hidden" name="Option_D<?php echo $i; ?>" value="">
                                     </div>
                                     <div class="separator separator-dashed my-10"></div>
                                     <?php
@@ -481,12 +518,13 @@ if (isset($_POST['recheckquiz']))
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
-                                <input type="hidden" class="form-control" name="totalquiz" value="<?php echo $total; ?>">
+                                <input class="form-control" type="hidden" name="totalquiz" value="<?php echo $total; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" class="btn btn-success mr-2" name="addquiz">Save and return to the subject</button>
-                                <button type="submit" class="btn btn-success mr-2">Save and display</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            <a href="#focus">Save and return to the subject</a>
+                                <button type="submit" class="btn btn-success mr-2" name="addquiz" onclick="myFunction()">Save and return to the subject/button>
+                                <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button>
+                                <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
                     </div>
@@ -500,6 +538,54 @@ if (isset($_POST['recheckquiz']))
 ?>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
+(function(win, undefined) {
+ $(function() {
+    var rules = {
+      email: function(node) {
+        var inputText = node.value,
+				    inputRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        
+			  return inputRegex.test(inputText);
+      },
+      title: function(node) {
+        var inputText = node.value,
+				    inputRegex = /^\s*[a-zA-Z0-9,\s]+\s*$/;
+				
+			 return inputRegex.test(inputText);
+      }
+    };
+    
+    function onFocusOut() {
+      validate(this);
+    }
+    
+    function validate(node) { 
+     var valid = isValid(node),
+         $error = $(node).next('.error'); 
+      
+      if (valid) {
+        $(node).attr('aria-invalid', false);
+        $error
+          .attr('aria-hidden', true)
+          .hide();
+        $(node).attr('aria-describedby', '');
+      } else {
+        $(node).attr('aria-invalid', true);
+        $error
+          .attr('aria-hidden', false)
+          .show();
+        $(node).attr('aria-describedby', $error.attr('id'));
+      }
+    }
+    
+    function isValid(node) {
+      return rules[node.dataset.rule](node);
+    }
+    
+    $('[aria-invalid]').on('focusout', onFocusOut);
+  });
+}(window));
+
 tinymce.init({
   selector: '.quiz',
   menubar:false,
@@ -521,4 +607,15 @@ function Selectgroupmode() {
     box.style.display = "none";
 }
 Selectgroupmode();
+
+function myFunction() { 
+    // region is collapsed
+    var invalid = document.getElementById("title").getAttribute("aria-invalid");
+    var collapseOne = document.getElementById('collapseOne');
+    var bsCollapse = new bootstrap.Collapse(collapseOne, {
+    show: true
+    }
+    )
+   
+}
 </script>

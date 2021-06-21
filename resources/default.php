@@ -618,7 +618,16 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
       }
-  
+      if ($_GET['page']=="subject") 
+      {
+        ?>
+          <script>
+          $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+          })
+          </script>
+          <?php
+        }
 }
 ?>
 

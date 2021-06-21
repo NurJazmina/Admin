@@ -1,6 +1,7 @@
 <?php
 $_SESSION["title"] = "Subject";
 include 'view/partials/_subheader/subheader-v1.php'; 
+$Subject_id = 3;
 ?>
 <div class="content d-flex flex-column flex-column-fluid">
     <div class="px-10">
@@ -127,10 +128,8 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
             <div class="row">
                 <div class="col-sm text-right">
-                    <button class="btn btn-link" data-action="open-chooser" data-sectionid="0" data-sectionreturnid="0">
-                        <span class="text">
-                        <i class="icon fa fa-plus fa-fw text-primary" aria-hidden="true"></i> 
-                        Add an activity or resource</span>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#activity">
+                    <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
                     </button>
                 </div>
             </div>
@@ -151,6 +150,7 @@ include 'view/partials/_subheader/subheader-v1.php';
         </div>
     </div>
 </div>
+<?php include ('view/pages/modal-activity.php'); ?>
 <script>
 function myFunction(button) 
 {
