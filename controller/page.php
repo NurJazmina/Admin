@@ -129,6 +129,7 @@
                                 "notes",
                                 "modal-recheckquiz",
                                 "addquiz",
+                                "addassignment",
                                 "subject",
                                 "upload",
                                 "exercises",
