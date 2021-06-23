@@ -1,7 +1,7 @@
 <?php
-$_SESSION["title"] = "Add Quiz";
+$_SESSION["title"] = "Add Assignment";
 include 'view/partials/_subheader/subheader-v1.php'; 
-include ('model/addquiz.php');
+include ('model/assignment.php');
 ?>
 <style>
 .btn-link:hover {
@@ -47,8 +47,10 @@ html {
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
+
+//hide and display box
 $(document).ready(function(){
-  
+
   $('#textsubmit').hide();
   $('#filesubmit1').hide();
   $('#filesubmit2').hide();
@@ -102,27 +104,28 @@ $(document).ready(function(){
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addquiz" name="addquiz" action="index.php?page=addquiz" method="post">
+                <form class="form" id="addassignment" name="addassignment" action="index.php?page=addassignment" method="post">
                     <div class="card-body">
                     <p id="demo"></p>
                         <div class="checkbox-inline">
                             <h2>Adding a New Assignment
                             <a type="button" data-bs-html="true" data-bs-toggle="popover" title="" data-bs-content='
-                            <p>The quiz activity enables a teacher to create quizzes comprising questions of various types, including multiple choice, matching, short-answer and numerical.</p>
-                            <p>The teacher can allow the quiz to be attempted multiple times, with the questions shuffled or randomly selected from the question bank. A time limit may be set.</p>
-
-                            <p>Each attempt is marked automatically, with the exception of essay questions, and the grade is recorded in the gradebook.</p>
-
-                            <p>The teacher can choose when and if hints, feedback and correct answers are shown to students.</p>
-
-                            <p>Quizzes may be used</p>
-
-                            <ul><li>As course exams</li>
-                            <li>As mini tests for reading assignments or at the end of a topic</li>
-                            <li>As exam practice using questions from past exams</li>
-                            <li>To deliver immediate feedback about performance</li>
-                            <li>For self-assessment</li>
-                            </ul>'>
+                            <p>
+                                The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.
+                            </p>
+                            <p>
+                                Students can submit any digital content (files), such as word-processed documents, spreadsheets, images, or audio and video clips. 
+                                Alternatively, or in addition, the assignment may require students to type text directly into the text editor. 
+                                An assignment can also be used to remind students of real-world assignments they need to complete offline, 
+                                such as art work, and thus not require any digital content. 
+                                Students can submit work individually or as a member of a group.
+                            </p>
+                            <p>
+                                When reviewing assignments, teachers can leave feedback comments and upload files, 
+                                such as marked-up student submissions, documents with comments or spoken audio feedback. 
+                                Assignments can be graded using a numerical or custom scale or an advanced grading method such as a rubric. 
+                                Final grades are recorded in the gradebook.
+                            </p>'>
                             <i class="icon fa fa-question-circle text-success fa-fw " title="Help with Quiz" aria-label="Help with Quiz"></i></a></h2>
                         </div>
                         <div align="right">
@@ -180,7 +183,9 @@ $(document).ready(function(){
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            
+                                            <!-- begin::add drop files -->
+                                            <div id="drag-drop-area"></div>
+                                            <!-- end::add drop files -->
                                         </div>
                                     </div>
                                 <!-- end::body -->
@@ -535,7 +540,7 @@ $(document).ready(function(){
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" href="#focus" class="btn btn-success mr-2" name="addquiz" onclick="myFunction()">Save and return to the subject</button>
+                                <button type="submit" href="#focus" class="btn btn-success mr-2" name="addassignment" onclick="myFunction()">Save and return to the subject</button>
                                 <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button>
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
@@ -549,9 +554,11 @@ $(document).ready(function(){
 <?php
 
 ?>
-
+<script src="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.js"></script>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
+
+//custom tinymce
 tinymce.init({
   selector: '.assignment',
   menubar:false,
@@ -560,6 +567,7 @@ tinymce.init({
   height:50,
 });
 
+//invalid input
 (function(win, undefined) {
  $(function() {
     var rules = {
@@ -609,10 +617,12 @@ tinymce.init({
   });
 }(window));
 
+//popover
 $(function () {
   $('[data-bs-toggle="popover"]').popover()
 })
 
+//groupclass
 function Selectgroupmode() {
     var group = document.getElementById("groupmode").value;
     var box = document.getElementById("groupbox");
@@ -623,6 +633,33 @@ function Selectgroupmode() {
 }
 Selectgroupmode();
 
+//fileupload
+var uppy = Uppy.Core
+    ({
+    debug: true,
+    autoProceed: false,
+    restrictions: {
+        maxFileSize: 1000000,
+        maxNumberOfFiles: 3,
+        minNumberOfFiles: 2,
+        allowedFileTypes: ['image/*', 'video/*']
+    }
+    })
+    .use(Uppy.Dashboard, {
+      inline: true,
+      width: 750,
+      height: 400,
+      theme: 'light',
+      note: 'Images and video only, 2–3 files, up to 1 MB',
+      metaFields: [
+        { id: 'name', name: 'Name', placeholder: 'file name' },
+        { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+        ],
+      target: '#drag-drop-area'
+    })
+    .use(Uppy.Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
 
-
+  uppy.on('complete', (result) => {
+    console.log('Upload complete! We’ve uploaded these files:', result.successful)
+  })
 </script>

@@ -1,6 +1,6 @@
 <?php
 //Add Quiz
-if (isset($_POST['addquiz']))
+if (isset($_POST['addassignment']))
 {
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];
@@ -10,44 +10,45 @@ if (isset($_POST['addquiz']))
   $Edit_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $Description = '';
-  $DateOpen = '';
-  $DateClose = '';
-  $timeunit = '';
-  $timelimit = '';
+  $Submitfrom = '';
+  $Duedate = '';
+  $Cutoffdate = '';
+  $reminder = '';
+
+  $wordlimit = 'none';
+  $filetypes = 'none';
+
   $feedback100 = '';
   $grade = 50;
   $feedback0 = '';
   $idnumber = '';
   $group = '';
 
-  $Type1 = '';
-  $Question1 = '';
-  $Option_A1 = '';
-  $Option_B1 = '';
-  $Option_C1 = '';
-  $Option_D1 = '';
-  $Answer1 = '';
-  $Mark1 = '';
-
   $title = $_POST['title'];
   $Description = $_POST['description'];
 
-  $DateOpen = $_POST['DateOpen'];
-  $DateClose = $_POST['DateClose'];
-  $timeunit = $_POST['timeunit'];
-  $timelimit = $_POST['timelimit'];
-  $timeexpired = $_POST['timeexpired'];
-  $attempt = $_POST['attempt'];
-  $shuffle = $_POST['shuffle'];
+  $Submitfrom = $_POST['Submitfrom'];
+  $Duedate = $_POST['Duedate'];
+  $Cutoffdate = $_POST['Cutoffdate'];
+  $reminder = $_POST['reminder'];
+
+  $wordlimit = $_POST['wordlimit'];
+  $maxnumberfile = $_POST['maxnumberfile'];
+  $maxsizebytes = $_POST['maxsizebytes'];
+  $filetypes = $_POST['filetypes'];
+  
   $feedback100 = $_POST['feedback100'];
   $grade = $_POST['grade'];
   $feedback0 = $_POST['feedback0'];
+
   $availability = $_POST['availability'];
   $idnumber = $_POST['idnumber'];
   $groupmode = $_POST['groupmode'];
   $group = $_POST['group'];
+
   $array = [];
   $totalquiz = $_POST['totalquiz'];
+
   for ($i=1; $i<=$totalquiz; $i++)
   {
     $arraycount =
@@ -73,28 +74,33 @@ if (isset($_POST['addquiz']))
                     'Edit_date'=>$Edit_date,
                     'Title'=>$title,
                     'Description'=>$Description,
-                    'DateOpen'=>$DateOpen,
-                    'DateClose'=>$DateClose,
-                    'Timeunit'=>$timeunit,
-                    'Timelimit'=>$timelimit,
-                    'Timeexpired'=>$timeexpired,
-                    'Attempt'=>$attempt,
-                    'Shuffle'=>$shuffle,
+                   
+
+                    'Submitfrom'=>$Submitfrom,
+                    'Duedate'=>$Duedate,
+                    'Cutoffdate'=>$Cutoffdate,
+                    'reminder'=>$reminder,
+
+                    'wordlimit'=>$wordlimit,
+                    'maxnumberfile'=>$maxnumberfile,
+                    'maxsizebytes'=>$maxsizebytes,
+                    'filetypes'=>$filetypes,
+
                     'Feedback100'=>$feedback100,
                     'Grade'=>$grade,
                     'Feedback0'=>$feedback0,
+
                     'Availability'=>$availability,
                     'Idnumber'=>$idnumber,
                     'Groupmode'=>$groupmode,
                     'Group'=>$group,
-                    'Total_Question'=>$totalquiz,
                     'Quiz'=>$array
                   ]);
     
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
-      $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OnlineLearningQuestions', $bulk, $writeConcern);
+      $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OnlineLearningAssignment', $bulk, $writeConcern);
     }
     catch (MongoDB\Driver\Exception\BulkWriteException $e)
     {

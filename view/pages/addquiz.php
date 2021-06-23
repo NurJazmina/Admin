@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Add Quiz";
 include 'view/partials/_subheader/subheader-v1.php'; 
-include ('model/addquiz.php');
+include ('model/quiz.php');
 ?>
 <style>
 .btn-link:hover {
