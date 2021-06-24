@@ -403,7 +403,7 @@ $(document).ready(function(){
                                     <div class="d-flex">
                                             <label class="d-inline word-break" for="id_name" style="color:#0f6fc5;">OVERALL FEEDBACK</label>
                                             <div class="ml-1 d-flex align-items-center align-self-start">
-                                                <a type="button" data-bs-html="true" data-bs-toggle="popover" title="" data-bs-content='<p>Overall feedback is text that is shown after a quiz has been attempted. By specifying additional grade boundaries (as a percentage or as a number), the text shown can depend on the grade obtained.</p>'>
+                                                <a type="button" data-bs-html="true" data-bs-toggle="popover" title="" data-bs-content='<p>Overall feedback is text that is shown after a assignment has been attempted. By specifying additional grade boundaries (as a percentage or as a number), the text shown can depend on the grade obtained.</p>'>
                                                     <i class="icon fa fa-question-circle text-success fa-fw" title="Help with Overall feedback" aria-label="Help with Overall feedback"></i>
                                                 </a>
                                             </div>
@@ -551,9 +551,6 @@ $(document).ready(function(){
         </div>
     </div>
 </div>
-<?php
-
-?>
 <script src="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.js"></script>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
@@ -641,7 +638,7 @@ var uppy = Uppy.Core
     restrictions: {
         maxFileSize: 1000000,
         maxNumberOfFiles: 3,
-        minNumberOfFiles: 2,
+        minNumberOfFiles: 1,
         allowedFileTypes: ['image/*', 'video/*']
     }
     })
@@ -659,7 +656,16 @@ var uppy = Uppy.Core
     })
     .use(Uppy.Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
 
+  uppy.on('file-added', (file) => {
+    console.log('Added file', file)
+  })
+
   uppy.on('complete', (result) => {
     console.log('Upload complete! We’ve uploaded these files:', result.successful)
   })
+
+  uppy.on('upload-success', (file, response) => {
+  console.log(file.name, response.uploadURL)
+  })
+
 </script>

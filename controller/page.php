@@ -130,8 +130,11 @@
                                 "modal-recheckquiz",
                                 "addquiz",
                                 "addassignment",
+                                "addurl",
                                 "subject",
-                                "upload",
+                                "save",
+                                "send",
+                                "fetch",
                                 "exercises",
                                 "alertexample",
                                 );
