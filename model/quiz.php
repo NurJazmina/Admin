@@ -123,7 +123,5 @@ if (isset($_POST['addquiz']))
       printf("Other error: %s\n", $e->getMessage());
       exit;
     }
-  
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }

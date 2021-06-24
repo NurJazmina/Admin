@@ -399,8 +399,8 @@ input[aria-invalid='true'] {
                                         <div class="col-lg-6">
                                             <select class="form-control" name="tracking" id="tracking" onchange="Selecttracking(this.value);">
                                                 <option value="NONE">Do not indicate any activity completion</option>
-                                                <option value="SHOW" selected>Student can manually mark the activity as completed</option>
-                                                <option value="HIDE">Show the activity as complete when the require are met</option>
+                                                <option value="MANUALMARK" selected>Student can manually mark the activity as completed</option>
+                                                <option value="AUTOMARK">Show the activity as complete when the require are met</option>
                                             </select>
                                         </div>
                                     </div>
@@ -429,7 +429,7 @@ input[aria-invalid='true'] {
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <input type="datetime-local" class="form-control" name="reminder" placeholder="Select date" id="kt_datepicker">
+                                            <input type="datetime-local" class="form-control" name="expectcompleted" placeholder="Select date" id="kt_datepicker">
                                         </div>
                                     </div>
                                     </div>
@@ -445,8 +445,8 @@ input[aria-invalid='true'] {
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" href="#focus" class="btn btn-success mr-2" name="addurl" onclick="myFunction()">Save and return to the subject</button>
-                                <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button>
+                                <button type="submit" href="" class="btn btn-success mr-2" name="addurl" onclick="myFunction()">Save and return to the subject</button>
+                                <button type="submit" class="btn btn-success mr-2" name="addurl" onclick="myFunction()">Save and display</button>
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
@@ -534,12 +534,12 @@ function Selecttracking() {
     var tracking = document.getElementById("tracking").value;
     var box1 = document.getElementById("expectcompleted");
     var box2 = document.getElementById("requireview");
-    if(tracking == "SHOW")
+    if(tracking == "MANUALMARK")
     {
     box1.style.display = "block";
     box2.style.display = "none";
     }
-    else if(tracking == "HIDE")
+    else if(tracking == "AUTOMARK")
     {
     box1.style.display = "block";
     box2.style.display = "block";

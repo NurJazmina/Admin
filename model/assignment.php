@@ -46,24 +46,7 @@ if (isset($_POST['addassignment']))
   $groupmode = $_POST['groupmode'];
   $group = $_POST['group'];
 
-  $array = [];
-  $totalquiz = $_POST['totalquiz'];
 
-  for ($i=1; $i<=$totalquiz; $i++)
-  {
-    $arraycount =
-    [
-      'Type'=>$_POST['Type'.$i],
-      'Question'=>$_POST['Question'.$i],
-      'Option_A'=>$_POST['Option_A'.$i],
-      'Option_B'=>$_POST['Option_B'.$i],
-      'Option_C'=>$_POST['Option_C'.$i],
-      'Option_D'=>$_POST['Option_D'.$i],
-      'Answer'=>$_POST['Answer'.$i],
-      'Mark'=> $_POST['Mark'.$i]
-    ];
-    array_push($array, $arraycount);
-  }
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->insert([
                     'School_id'=>$School_id,
@@ -75,7 +58,6 @@ if (isset($_POST['addassignment']))
                     'Title'=>$title,
                     'Description'=>$Description,
                    
-
                     'Submitfrom'=>$Submitfrom,
                     'Duedate'=>$Duedate,
                     'Cutoffdate'=>$Cutoffdate,
@@ -94,7 +76,6 @@ if (isset($_POST['addassignment']))
                     'Idnumber'=>$idnumber,
                     'Groupmode'=>$groupmode,
                     'Group'=>$group,
-                    'Quiz'=>$array
                   ]);
     
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
@@ -129,7 +110,5 @@ if (isset($_POST['addassignment']))
       printf("Other error: %s\n", $e->getMessage());
       exit;
     }
-  
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
