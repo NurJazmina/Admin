@@ -3,13 +3,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Add an activity or resource</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
         <div class="row">
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=addassignment" title="Add a new assignment" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=addassignment&Subject=<?php echo $Subject_id; ?>" title="Add a new assignment" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg">
                         </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=modal-recheckquiz" title="Add a new quiz" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=modal-recheckquiz&Subject=<?php echo $Subject_id; ?>" title="Add a new quiz" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg">
                         </div>
@@ -149,7 +149,7 @@
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=addurl" title="Add a new url" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=addurl&Subject=<?php echo $Subject_id; ?>" title="Add a new url" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg">
                         </div>

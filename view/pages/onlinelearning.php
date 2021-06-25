@@ -125,7 +125,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <img src="assets/media/bg/bg-8.jpg" height="100">
                         <div class="bg-light" style="height:50px;">
                             <p class="font-size-h4 text-center mt-3">
-                            <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                            <a href="index.php?page=subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                             </p>
                         </div>
                         <div class="dropdown text-right bg-light" >
@@ -145,7 +145,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <div x-show="layout === 'list'" x-cloak>
                     <div class="list-group-item mt-1 mb-1">
                         <p class="font-size-h4 mt-3">
-                        <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                        <a href="index.php?page=subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                         </p>
                         <?php
                         $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
@@ -201,7 +201,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             <div class="card card-custom card-stretch bg-white p-4 shadow">
             <article class="bg-white">
                 <p class="font-size-h4 text-center mt-3">
-                <a href="index.php?page=notes&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                <a href="index.php?page=subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                 </p>
                 <div class="separator separator-solid separator-border-3 separator-secondary"></div><br>
                 <?php
@@ -225,7 +225,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="col">
                         <div class="card-title">
                             <img alt="Logo" src="assets/media/svg/social-icons/quiz.svg" width="30" height="30"/>
-                            <a href="index.php?page=notes&id=<?php echo $Question_id ; ?>"><span><?php echo $Title.": Quiz Teacher ".$ConsumerFName; ?></span></a>
+                            <a href="index.php?page=subject&id=<?php echo $Question_id ; ?>"><span><?php echo $Title.": Quiz Teacher ".$ConsumerFName; ?></span></a>
                         </div>
                     </div>
                     <?php

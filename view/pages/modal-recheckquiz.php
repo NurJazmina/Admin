@@ -1,6 +1,7 @@
 <?php
 $_SESSION["title"] = "Add Quiz";
 include 'view/partials/_subheader/subheader-v1.php'; 
+$Subject_id = $_GET['Subject'];
 ?>
 <style>
 /* tooltip link */

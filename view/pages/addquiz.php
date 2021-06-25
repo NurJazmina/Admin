@@ -518,6 +518,7 @@ if (isset($_POST['recheckquiz']))
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo "2"; ?>">
                                 <input class="form-control" type="hidden" name="totalquiz" value="<?php echo $total; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">

@@ -98,7 +98,7 @@ $(document).ready(function(){
    });
 </script>
 <?php
-
+$Subject_id = $_GET['Subject'];
 ?>
 <div class="d-flex flex-column-fluid">
     <div class="container">
@@ -538,6 +538,7 @@ $(document).ready(function(){
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo "2"; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
                                 <button type="submit" href="#focus" class="btn btn-success mr-2" name="addassignment" onclick="myFunction()">Save and return to the subject</button>

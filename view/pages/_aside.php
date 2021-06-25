@@ -588,57 +588,34 @@
 						<ul class="menu-subnav">
 							<li class="menu-item menu-item-parent" aria-haspopup="true">
 							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=notes" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Bahasa Melayu</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=exercises" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Matematik</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=exercises" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Pendidikan Islam</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=exercises" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Sains</span>
-								</a>
-							</li>
+							<?php 
+							$filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+							foreach ($cursor as $document)
+							{
+								$Subject_id = $document->Subject_id;
+								$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+								$query = new MongoDB\Driver\Query($filter);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+								foreach ($cursor as $document)
+								{
+									$SubjectName = $document->SubjectName;
+								}
+								?>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="index.php?page=subject&id=<?php echo $Subject_id; ?>" class="menu-link menu-toggle">
+										<i class="menu-bullet menu-bullet-dot">
+											<span></span>
+										</i>
+										<span class="menu-text"><?php echo $SubjectName; ?></span>
+									</a>
+								</li>
+								<?php
+							}
+							?>
 						</ul>
 					</div>
-				</li>
-				<li class="menu-item menu-item" aria-haspopup="true">
-					<a href="index.php?page=notes" class="menu-link">
-						<span class="svg-icon menu-icon">
-							<i class="flaticon2-crisp-icons icon-l"></i>
-						</span>
-						</span>
-						<span class="menu-text">Add Notes</span>
-					</a>
-				</li>
-				<li class="menu-item menu-item" aria-haspopup="true">
-					<a href="index.php?page=exercises" class="menu-link">
-					    <span class="svg-icon menu-icon">
-							<i class="flaticon2-writing icon-l"></i>
-						</span>
-						<span class="menu-text">Add Quiz/Exercise</span>
-					</a>
 				</li>
 				<li class="menu-section" style="border-top: 1px solid #eceef7;; margin-top: 12px; padding-top: 12px;">
 					<h4 class="menu-text">Directory</h4>
