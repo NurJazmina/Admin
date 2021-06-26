@@ -142,78 +142,23 @@ foreach ($cursor as $document)
                 </div>
                 </div>
             </div>
-			</div>
-			<!--end::Toolbar-->
 		</div>
+		<!--end::Toolbar-->
 	</div>
-	<!--end::Subheader-->
+</div>
+<!--end::Subheader-->
 
 <div class="content d-flex flex-column flex-column-fluid">
     <div class="card card-custom gutter-b px-5">
         <div class="card-body">
             <div class="row">
                <?php
-                $filter = ['Subject_id'=>$Subject_id, 'Note_sort'=>0];
+                $filter = ['Subject_id'=>$Subject_id];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
                 foreach ($cursor as $document)
                 {
-                    $Notes_id = $document->_id;
-                    $Title = $document->Title;
-                    $Detail = $document->Detail;
-                    $Title = $document->Title;
-                    ?>
-                    <div class="col-sm">
-                    <div class="checkbox-inline">
-                        <h3  id="section0" contenteditable="true" style="color:#04ada5;">GENERAL : <?php echo $Title; ?> </h3>
-                        <div class="col-sm text-right">
-                            <i class="fas fa-pencil-alt" type="button" data-bs-toggle="dropdown"> EDIT</i>
-                            <div class="dropdown-menu dropdown-menu-md py-5">
-                                <ul class="navi navi-hover">
-                                    <li class="navi-item">
-                                        <a class="navi-link" href="#">
-                                            <span class="navi-icon"><i class="icon fa fa-cog fa-fw text-success"></i></span>
-                                            <span class="navi-text">Edit Topic</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a class="navi-link" href="#">
-                                            <span class="navi-icon"><i class="far fa-eye text-success"></i></span>
-                                            <span class="navi-text">Hide Topic</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a class="navi-link" href="#">
-                                            <span class="navi-icon"><i class="fas fa-trash-alt text-success"></i></span>
-                                            <span class="navi-text">Delete Topic</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="px-10" id="contentinfo">
-                        <p><?php echo $Detail; ?></p>
-                    </div>
-                    <div class="col-sm text-right">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#activity">
-                        <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
-                        </button>
-                    </div>
-                    <div class="separator separator-dashed my-10"></div>
-                    <?php
-                }
-                ?>
-            </div>
-            <div class="row">
-               <?php
-                $filter = ['Subject_id'=>$Subject_id, 'Note_sort'=>['$gte' => 1]];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
-                foreach ($cursor as $document)
-                {
-                    $Notes_id = $document->_id;
+                    $Notes_id = strval($document->_id);
                     $Title = $document->Title;
                     $Detail = $document->Detail;
                     $Note_sort = $document->Note_sort;
@@ -248,8 +193,72 @@ foreach ($cursor as $document)
                         </div>
                     </div>
                     </div>
-                    <div class="px-10" id="contentinfo">
+                    <div class="px-10 mb-10" id="contentinfo">
                         <p><?php echo $Detail; ?></p>
+                    </div>
+                    <div class="px-5" id="assignment">
+                        <?php
+                        $filter = ['Notes_id'=>$Notes_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Assignment_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        $filter = ['Notes_id'=>$Notes_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Quiz_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        $filter = ['Notes_id'=>$Notes_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_URL',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $URL_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        $filter = ['Notes_id'=>$Notes_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Survey_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class="col-sm text-right">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#activity">

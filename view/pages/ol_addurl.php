@@ -48,7 +48,7 @@ input[aria-invalid='true'] {
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addurl" name="addurl" action="index.php?page=addurl" method="post">
+                <form class="form" id="addurl" name="addurl" action="#" method="post">
                     <div class="card-body">
                     <p id="demo"></p>
                         <div class="checkbox-inline">

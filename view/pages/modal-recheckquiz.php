@@ -35,7 +35,7 @@ li {
 <div class="d-flex flex-column-fluid">
     <div class="container">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="recheckquiz" name="recheckquiz" action="index.php?page=addquiz" method="post">
+                <form class="form" id="recheckquiz" name="recheckquiz" action="index.php?page=ol_addquiz" method="post">
                     <div class="card-body">
                     <div class="row">
                         <div class="col-sm"></div>

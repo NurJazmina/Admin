@@ -568,7 +568,7 @@
 					</a>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true" >
-					<a href="index.php?page=calendar" class="menu-link">
+					<a href="index.php?page=ol_calendar" class="menu-link">
 						<span class="svg-icon menu-icon">
 						<i class="far fa-calendar-alt icon-lg"></i>
 						</span>
@@ -604,7 +604,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=subject&id=<?php echo $Subject_id; ?>" class="menu-link menu-toggle">
+									<a href="index.php?page=ol_subject&id=<?php echo $Subject_id; ?>" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>

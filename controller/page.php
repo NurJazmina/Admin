@@ -58,14 +58,7 @@
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
                                 
-                                "calendar",
-                                "simplecalendar",
-                                "onlinelearning",
-                                "mira",
-                                "notes",
-                                "exercises",
                                 //"testing",
-                                "imagetest",
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -123,15 +116,23 @@
                                 //"duplicate",
 
                                 //online learning//
-                                "simplecalendar",
                                 "onlinelearning",
-                                "calendar",
-                                "notes",
+                                "ol_calendar",
                                 "modal-recheckquiz",
-                                "addquiz",
-                                "addassignment",
-                                "addurl",
-                                "subject",
+                                "ol_addquiz",
+                                "ol_addassignment",
+                                "ol_addurl",
+                                "ol_addsurvey",
+                                "ol_survey1",
+                                "ol_survey2",
+                                "ol_survey3",
+                                "ol_survey4",
+                                "ol_survey5",
+                                "ol_subject",
+
+                                //in progress//
+                                "simplecalendar",
+                                "notes",
                                 "save",
                                 "send",
                                 "fetch",

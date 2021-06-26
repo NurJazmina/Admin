@@ -4,7 +4,6 @@ if (isset($_POST['addquiz']))
 {
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];
-  $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $Edit_by = strval($_SESSION["loggeduser_id"]);
@@ -67,8 +66,7 @@ if (isset($_POST['addquiz']))
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->insert([
                     'School_id'=>$School_id,
-                    'Subject_id'=>$Subject_id,
-                    'Notes_id' => '$Notes_id',
+                    'Notes_id' => $Notes_id,
                     'Created_by'=>$Created_by,
                     'Created_date'=>$Created_date,
                     'Edit_by'=>$Edit_by,

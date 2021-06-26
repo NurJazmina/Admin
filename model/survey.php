@@ -1,6 +1,6 @@
 <?php
 //Add Quiz
-if (isset($_POST['addurl']))
+if (isset($_POST['addsurvey']))
 {
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];
@@ -9,34 +9,18 @@ if (isset($_POST['addurl']))
   $Edit_by = strval($_SESSION["loggeduser_id"]);
   $Edit_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-  $Description ='';
-  $parameter_0 ='';
-  $parameter_1 = '';
-  $parameter_2 = '';
-  $variable_0 ='';
-  $variable_1 ='';
-  $variable_2 ='';
+  $Description = '';
   $idnumber = '';
   $view = '';
   $expectcompleted = '';
 
   $title = $_POST['title'];
-  $url = $_POST['url'];
+  $type = $_POST['type'];
   $Description = $_POST['description'];
-
-  $display = $_POST['display'];
-
-  $parameter_0 = $_POST['parameter_0'];
-  $parameter_1 = $_POST['parameter_1'];
-  $parameter_2 = $_POST['parameter_2'];
-  $variable_0 = $_POST['variable_0'];
-  $variable_1 = $_POST['variable_1'];
-  $variable_2 = $_POST['variable_2'];
-
   $availability = $_POST['availability'];
   $idnumber = $_POST['idnumber'];
-  $tracking = $_POST['tracking'];
 
+  $tracking = $_POST['tracking'];
   if($tracking == 'MANUALMARK')
   {
     $expectcompleted = $_POST['expectcompleted'];
@@ -56,15 +40,8 @@ if (isset($_POST['addurl']))
                     'Edit_by'=>$Edit_by,
                     'Edit_date'=>$Edit_date,
                     'Title'=>$title,
-                    'Url'=>$url,
+                    'type'=>$type,
                     'Description'=>$Description,
-                    'Display'=>$display,
-                    'Parameter_0'=>$parameter_0,
-                    'Parameter_1'=>$parameter_1,
-                    'Parameter_2'=>$parameter_2,
-                    'Variable_0'=>$variable_0,
-                    'Variable_1'=>$variable_1,
-                    'Variable_2'=>$variable_2,
                     'Availability'=>$availability,
                     'Idnumber'=>$idnumber,
                     'Tracking'=>$tracking,
@@ -75,7 +52,7 @@ if (isset($_POST['addurl']))
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
-      $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_URL', $bulk, $writeConcern);
+      $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey', $bulk, $writeConcern);
     }
     catch (MongoDB\Driver\Exception\BulkWriteException $e)
     {
@@ -104,5 +81,5 @@ if (isset($_POST['addurl']))
       printf("Other error: %s\n", $e->getMessage());
       exit;
     }
-    printf("Inserted %d document(s)\n", $result->getInsertedCount());
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
