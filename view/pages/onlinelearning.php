@@ -125,7 +125,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <img src="assets/media/bg/bg-8.jpg" height="100">
                         <div class="bg-light" style="height:50px;">
                             <p class="font-size-h4 text-center mt-3">
-                            <a href="index.php?page=subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                            <a href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                             </p>
                         </div>
                         <div class="dropdown text-right bg-light" >
@@ -145,7 +145,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <div x-show="layout === 'list'" x-cloak>
                     <div class="list-group-item mt-1 mb-1">
                         <p class="font-size-h4 mt-3">
-                        <a href="index.php?page=subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                        <a href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                         </p>
                         <?php
                         $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
@@ -187,9 +187,9 @@ include 'view/partials/_subheader/subheader-v1.php';
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
     foreach ($cursor as $document)
     {
-        $Subjectid =strval($document->Subject_id);
+        $Subject_id =strval($document->Subject_id);
 
-        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subjectid)];
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
         foreach ($cursor as $document)
@@ -201,36 +201,78 @@ include 'view/partials/_subheader/subheader-v1.php';
             <div class="card card-custom card-stretch bg-white p-4 shadow">
             <article class="bg-white">
                 <p class="font-size-h4 text-center mt-3">
-                <a href="index.php?page=subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                <a href="index.php?page=ol_subject&id=<?php echo $Subject_id ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                 </p>
                 <div class="separator separator-solid separator-border-3 separator-secondary"></div><br>
                 <?php
-                $filter = ['Subject_id'=>$Subjectid];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningQuestions',$query);
-                foreach ($cursor as $document)
-                {
-                    $Question_id = $document->_id;
-                    $Title = $document->Title;
-                    $Created_by = $document->Created_by;
-
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
+                    $filter = ['NULL'];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                     foreach ($cursor as $document)
                     {
                         $ConsumerFName = $document->ConsumerFName;
                     }
-                    ?>
-                    <div class="col">
-                        <div class="card-title">
-                            <img alt="Logo" src="assets/media/svg/social-icons/quiz.svg" width="30" height="30"/>
-                            <a href="index.php?page=subject&id=<?php echo $Question_id ; ?>"><span><?php echo $Title.": Quiz Teacher ".$ConsumerFName; ?></span></a>
+                        $filter = ['Subject_id'=>$Subject_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Assignment_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
+                            </a>
                         </div>
-                    </div>
-                    <?php
-                }
-                ?>
+                        <?php
+                        }
+                        $filter = ['Subject_id'=>$Subject_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Quiz_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        $filter = ['Subject_id'=>$Subject_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_URL',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $URL_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        $filter = ['Subject_id'=>$Subject_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Survey_id = $document->_id;
+                            $Title = $document->Title;
+                        ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="#">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        ?>
                  </article>
             </div>
        

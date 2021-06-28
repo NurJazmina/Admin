@@ -13,19 +13,19 @@
               <input type="text" class="form-control" id="staticStaffNo" name="txtsubject" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
             </div>
           </div>
-        </div>
-        <div class="form-group row">
-            <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-            </div>
+          <div class="form-group row">
+              <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="sltStatus" name="txtClasscategory">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
