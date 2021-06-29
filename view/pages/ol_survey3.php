@@ -34,7 +34,7 @@ include 'model/survey.php';
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">COLLES (Actual)</span>
+                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">COLLES (Prefer)</span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -62,9 +62,9 @@ include 'model/survey.php';
                     <div>
                         <input type="hidden" name="id" value="">
                         <input type="hidden" name="sesskey" value="">
-                        <h3 style="color:#04ada5;">COLLES (Actual)</h3>
+                        <h3 style="color:#04ada5;">COLLES (Prefer)</h3>
                         <div id="intro" class="box py-3 ">
-                            <div class="no-overflow">The purpose of this survey is to help us understand how well the online delivery of this unit enabled you to learn. Each one of the 24 statements below asks about your experience in this unit. There are no 'right' or 'wrong' answers; we are interested only in your opinion. Please be assured that your responses will be treated with a high degree of confidentiality, and will not affect your assessment. Your carefully considered responses will help us improve the way this unit is presented online in the future. Thanks very much.</div>
+                            <div class="no-overflow">The purpose of this survey is to help us understand what you value in an online learning experience. Each one of the 24 statements below asks about your preferred (ideal) experience in this unit. There are no 'right' or 'wrong' answers; we are interested only in your opinion. Please be assured that your responses will be treated with a high degree of confidentiality, and will not affect your assessment. Your carefully considered responses will help us improve the way this unit is presented online in the future. Thanks very much.</div>
                         </div>
                         <div class="mb-10">All questions are required and must be answered.</div>
                         <table class="table mt-10">
@@ -263,7 +263,7 @@ include 'model/survey.php';
                                     <th scope="row" class="w-50 p-3"><b>26</b> &nbsp; Do you have any other comments?</th>
                                     <td align="left" class="whitecell">
                                     <div class="col-sm-12">
-                                        <textarea class="survey1" name="q26"></textarea>
+                                        <textarea class="survey3" name="q26"></textarea>
                                         </div>
                                     </td>
                                 </tr>
@@ -285,7 +285,7 @@ include 'model/survey.php';
 <script>
 //custom tinymce
 tinymce.init({
-  selector: '.survey1',
+  selector: '.survey3',
   menubar:false,
   statusbar: false,
   toolbar: false,

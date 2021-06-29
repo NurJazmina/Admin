@@ -129,6 +129,7 @@
                                 "ol_survey4",
                                 "ol_survey5",
                                 "ol_subject",
+                                "ol_submit_assignment",
 
                                 //in progress//
                                 "simplecalendar",

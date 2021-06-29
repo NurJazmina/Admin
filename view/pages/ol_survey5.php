@@ -62,51 +62,51 @@ include 'model/survey.php';
                     <div>
                         <p><b>While thinking about recent events in this class, answer the questions below. All questions are required and must be answered.</b></p>
                         <ol class="mt-10 mb-3">
-                        <div class="form-group row ">
-                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                <li>At what moment in class were you most engaged as a learner?</li>
-                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                    <li>At what moment in class were you most engaged as a learner?</li>
+                                </div>
 
-                            <div class="col-md-6">
-                                <textarea class="survey5" name="question1"></textarea>
+                                <div class="col-md-6">
+                                    <textarea class="survey5" name="question1"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row ">
-                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                <li>At what moment in class were you most distanced as a learner?</li>
-                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                    <li>At what moment in class were you most distanced as a learner?</li>
+                                </div>
 
-                            <div class="col-md-6">
-                                <textarea class="survey5" name="question2"></textarea>
+                                <div class="col-md-6">
+                                    <textarea class="survey5" name="question2"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row ">
-                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                <li>What action from anyone in the forums did you find most affirming or helpful?</li>
-                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                    <li>What action from anyone in the forums did you find most affirming or helpful?</li>
+                                </div>
 
-                            <div class="col-md-6">
-                                <textarea class="survey5" name="question3"></textarea>
+                                <div class="col-md-6">
+                                    <textarea class="survey5" name="question3"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row ">
-                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                <li>What action from anyone in the forums did you find most puzzling or confusing?</li>
-                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                    <li>What action from anyone in the forums did you find most puzzling or confusing?</li>
+                                </div>
 
-                            <div class="col-md-6">
-                                <textarea class="survey5" name="question4"></textarea>
+                                <div class="col-md-6">
+                                    <textarea class="survey5" name="question4"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row ">
-                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                <li>What event surprised you most?</li>
-                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                    <li>What event surprised you most?</li>
+                                </div>
 
-                            <div class="col-md-6">
-                                <textarea class="survey5" name="question5"></textarea>
+                                <div class="col-md-6">
+                                    <textarea class="survey5" name="question5"></textarea>
+                                </div>
                             </div>
-                        </div>
                         </ol>
                     </div>
                     <div class="separator separator-dashed my-10"></div>

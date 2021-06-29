@@ -10,10 +10,6 @@ if (isset($_POST['addassignment']))
   $Edit_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $Description = '';
-  $Submitfrom = '';
-  $Duedate = '';
-  $Cutoffdate = '';
-  $reminder = '';
 
   $wordlimit = 'none';
   $filetypes = 'none';
@@ -27,10 +23,10 @@ if (isset($_POST['addassignment']))
   $title = $_POST['title'];
   $Description = $_POST['description'];
 
-  $Submitfrom = $_POST['Submitfrom'];
-  $Duedate = $_POST['Duedate'];
-  $Cutoffdate = $_POST['Cutoffdate'];
-  $reminder = $_POST['reminder'];
+  $Submitfrom = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['Submitfrom']))->getTimestamp()*1000);
+  $Duedate = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['Duedate']))->getTimestamp()*1000);
+  $Cutoffdate = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['Cutoffdate']))->getTimestamp()*1000);
+  $reminder = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['reminder']))->getTimestamp()*1000);
 
   $wordlimit = $_POST['wordlimit'];
   $maxnumberfile = $_POST['maxnumberfile'];
@@ -50,7 +46,8 @@ if (isset($_POST['addassignment']))
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->insert([
                     'School_id'=>$School_id,
-                    'Notes_id' => $Notes_id,
+                    'Notes_id' =>$Notes_id,
+                    'Subject_id' =>$Subject_id,
                     'Created_by'=>$Created_by,
                     'Created_date'=>$Created_date,
                     'Edit_by'=>$Edit_by,

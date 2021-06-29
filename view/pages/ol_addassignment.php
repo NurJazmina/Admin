@@ -99,6 +99,15 @@ $(document).ready(function(){
 </script>
 <?php
 $Subject_id = $_GET['Subject'];
+$Submitfrom = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$Submitfrom = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$Submitfrom = date_format($Submitfrom,"Y-m-d\TH:i:s");
+
+$Due = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+$Due = $Due->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$Due = date_format($Due,"Y-m-d\TH:i:s");
+
+//echo $Due;
 ?>
 <div class="d-flex flex-column-fluid">
     <div class="container">
@@ -212,7 +221,7 @@ $Subject_id = $_GET['Subject'];
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="Submitfrom" placeholder="Select date" id="kt_datepicker">
+                                                <input type="datetime-local" class="form-control" name="Submitfrom" placeholder="Select date" id="kt_datepicker" value="<?php echo $Submitfrom; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +236,7 @@ $Subject_id = $_GET['Subject'];
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="Duedate" placeholder="Select date" id="kt_datepicker">
+                                                <input type="datetime-local" class="form-control" name="Duedate" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -242,7 +251,7 @@ $Subject_id = $_GET['Subject'];
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="Cutoffdate" placeholder="Select date" id="kt_datepicker">
+                                                <input type="datetime-local" class="form-control" name="Cutoffdate" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -257,7 +266,7 @@ $Subject_id = $_GET['Subject'];
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="reminder" placeholder="Select date" id="kt_datepicker">
+                                                <input type="datetime-local" class="form-control" name="reminder" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
                                             </div>
                                         </div>
                                     </div>

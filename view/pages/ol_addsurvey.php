@@ -112,7 +112,7 @@ input[aria-invalid='true'] {
                                         <div class="col-lg-6">
                                             <select class="form-control" name="type" aria-required="true" aria-invalid="false" data-rule="url" required>
                                                 <option disabled selected>CHOOSE...</option>
-                                                <option value="4" >ATTLS (20 ITEM VERSION)</option>
+                                                <option value="4">ATTLS (20 ITEM VERSION)</option>
                                                 <option value="5">CRITICAL INCIDENTS</option>
                                                 <option value="1">COLLES (ACTUAL)</option>
                                                 <option value="3">COLLES (PREFFERED & ACTUAL)</option>

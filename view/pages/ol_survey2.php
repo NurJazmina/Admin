@@ -129,7 +129,7 @@ include 'model/survey.php';
                                 
                                 <tr class="table-light" ><th scope="row" class="w-50 p-3" style="color:#3F4254" class="optioncell"><b class="qnumtopcell">10</b> &nbsp; I found that   I think critically about how I learn.</th>
                                 <td align="center" class="whitecell"><label for="q10"><input type="radio" name="q10" id="q10_D" value="0" checked="checked" data-survey-default="true"></label></td align="center"><td align="center"><label for="q10_1"><input type="radio" name="q10" id="q10_1" value="1"></label></td align="center"><td align="center"><label for="q10_2"><input type="radio" name="q10" id="q10_2" value="2"></label></td align="center"><td align="center"><label for="q10_3"><input type="radio" name="q10" id="q10_3" value="3"></label></td align="center"><td align="center"><label for="q10_4"><input type="radio" name="q10" id="q10_4" value="4"></label></td align="center"><td align="center"><label for="q10_5"><input type="radio" name="q10" id="q10_5" value="5"></label></td align="center"></tr>
-                                
+
                                 <tr class="bg-secondary"><th scope="row" class="w-50 p-3" class="optioncell"><b class="qnumtopcell">11</b> &nbsp; I prefer that   I think critically about my own ideas.</th>
                                 <td align="center" class="whitecell"><label for="q11"><input type="radio" name="q11" id="q11_D" value="0" checked="checked" data-survey-default="true"></label></td align="center"><td align="center"><label for="q11_1"><input type="radio" name="q11" id="q11_1" value="1"></label></td align="center"><td align="center"><label for="q11_2"><input type="radio" name="q11" id="q11_2" value="2"></label></td align="center"><td align="center"><label for="q11_3"><input type="radio" name="q11" id="q11_3" value="3"></label></td align="center"><td align="center"><label for="q11_4"><input type="radio" name="q11" id="q11_4" value="4"></label></td align="center"><td align="center"><label for="q11_5"><input type="radio" name="q11" id="q11_5" value="5"></label></td align="center"></tr>
                                 
@@ -323,7 +323,7 @@ include 'model/survey.php';
                                 <tr>
                                     <th scope="row" class="w-50 p-3"><b>49</b> &nbsp; How long did this survey take you to complete?</th>
                                     <td align="left" class="whitecell">
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-12">
                                         <select class="form-control" id="q49" name="q49">
                                             <option value="1">under 1 min</option>
                                             <option value="2">1-2 min</option>
@@ -339,7 +339,7 @@ include 'model/survey.php';
                                 <tr>
                                     <th scope="row" class="w-50 p-3"><b>50</b> &nbsp; Do you have any other comments?</th>
                                     <td align="left" class="whitecell">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-12">
                                         <textarea class="survey2" name="q50"></textarea>
                                         </div>
                                     </td>
@@ -367,6 +367,5 @@ tinymce.init({
   statusbar: false,
   toolbar: false,
   height:50,
-  width:500,
 });
 </script>

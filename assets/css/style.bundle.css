@@ -26259,6 +26259,14 @@ h3 {
   background-color: #187DE4 !important;
 }
 
+.bg-diagonal-gray:before {
+  background-color: #7e8299 !important;
+}
+
+.bg-diagonal-r-lightgray:after {
+  background-color: #e4e6ef !important;
+}
+
 .bg-diagonal-primary:before {
   background-color: #3699FF !important;
 }
