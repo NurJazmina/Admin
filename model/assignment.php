@@ -4,6 +4,7 @@ if (isset($_POST['addassignment']))
 {
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];
+  $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $Edit_by = strval($_SESSION["loggeduser_id"]);

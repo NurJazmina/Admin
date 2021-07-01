@@ -61,8 +61,7 @@ function time_elapsed($date){
     <div class="card card-custom gutter-b px-5">
         <div class="card-body">
             <?php
-            $Notes_id = $_GET['Notes'];
-            $filter = ['Notes_id'=>$Notes_id];
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
             foreach ($cursor as $document)
@@ -124,6 +123,9 @@ function time_elapsed($date){
                                 echo "Yes";
                             }
                              ?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="text-dark-50">
                             <th>Participants</th>
@@ -149,14 +151,23 @@ function time_elapsed($date){
                             }
                             ?>
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="bg-gray-300 text-dark-50">
                             <th>Submitted</th>
                             <td>2</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="text-dark-50">
                             <th>Needs grading</th>
                             <td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="bg-gray-300 text-dark-50">
                             <th>Time remaining</th>
@@ -178,6 +189,9 @@ function time_elapsed($date){
                             }
                             ?>
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

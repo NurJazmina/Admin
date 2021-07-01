@@ -10,17 +10,29 @@ foreach ($cursor as $document)
     $SubjectName = $document->SubjectName;
 }
 ?>
+<style>
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #30cfd0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5))
+}
+</style>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
 		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Subject</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5">Subject</h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -28,7 +40,7 @@ foreach ($cursor as $document)
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -40,7 +52,7 @@ foreach ($cursor as $document)
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
                 <div class="row">
                     <div class="input-group input-group-sm " style="width:25%">
-                        <span class="svg-icon svg-icon-success svg-icon-2x" type="button" data-bs-toggle="dropdown">
+                        <span class="svg-icon svg-icon-light svg-icon-2x" type="button" data-bs-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect x="0" y="0" width="24" height="24"/>
@@ -138,7 +150,7 @@ foreach ($cursor as $document)
                             </ul>
                         </div>
                     </div>
-                    <button type="submit" style="width:75%;" class="btn btn-success font-weight-bolder btn-sm" name="editing">Turn Editing On</button>
+                    <button type="submit" style="width:75%;" class="btn btn-white font-weight-bolder btn-sm" name="editing">Turn Editing On</button>
                 </div>
                 </div>
             </div>
@@ -165,9 +177,9 @@ foreach ($cursor as $document)
                     ?>
                     <div class="col-sm">
                     <div class="checkbox-inline">
-                        <h3  id="section0" contenteditable="true" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h3>
+                        <h1  id="section0" contenteditable="true" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h1>
                         <div class="col-sm text-right">
-                            <i class="fas fa-pencil-alt" type="button" data-bs-toggle="dropdown"> EDIT</i>
+                            <i class="fas fa-pencil-alt text-success" type="button" data-bs-toggle="dropdown"></i>
                             <div class="dropdown-menu dropdown-menu-md py-5">
                                 <ul class="navi navi-hover">
                                     <li class="navi-item">
@@ -207,7 +219,7 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&Notes=<?php echo $Notes_id; ?>">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>">
                                 <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
                                 </a>
                             </div>
@@ -222,7 +234,7 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&Notes=<?php echo $Notes_id; ?>">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>">
                                 <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
                                 </a>
                             </div>
@@ -235,9 +247,10 @@ foreach ($cursor as $document)
                         {
                             $URL_id = $document->_id;
                             $Title = $document->Title;
+                            $Url = $document->Url;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="#">
+                                <a  style="color:#04ada5;" href="<?php echo $Url; ?>">
                                 <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
                                 </a>
                             </div>
@@ -252,8 +265,24 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="#">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>">
                                 <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
+                                </a>
+                            </div>
+                            <?php
+                        }
+                        $filter = ['Notes_id'=>$Notes_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Announcement',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $Announcement_id = $document->_id;
+                            $Title = $document->Title;
+                            $Description = $document->Description;
+                            ?>
+                            <div class="checkbox-inline mb-5">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_announcement&id=<?php echo $Announcement_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?php echo " ".$Title; ?>
                                 </a>
                             </div>
                             <?php
@@ -265,7 +294,7 @@ foreach ($cursor as $document)
                         <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
                         </button>
                     </div>
-                    <div class="separator separator-dashed my-10"></div>
+                    <div class="separator separator-dashed my-10 separator-success"></div>
                     <?php
                 }
                 ?>
@@ -280,7 +309,7 @@ foreach ($cursor as $document)
         </div>
     </div>
 </div>
-<?php include ('view/pages/modal-activity.php'); ?>
+<?php include ('view/pages/ol_modal-activity.php'); ?>
 <?php include ('view/pages/modal-sorting.php'); ?>
 <script>
     var topic = document.getElementById('topic')

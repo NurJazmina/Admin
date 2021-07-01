@@ -11,30 +11,28 @@ foreach ($cursor as $document)
     $SubjectName = $document->SubjectName;
 }
 ?>
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                    <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Quiz</h5>
-                    <!--end::Page Title-->
-                </div>
-                <!--begin::Separator-->
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-                <!--end::Separator-->
-                <!--begin::Detail-->
-                <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
-                </div>
-                <!--end::Detail-->
-                <!--end::Page Heading-->
+<!--begin::Subheader-->
+<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Quiz</h5>
+                <!--end::Page Title-->
             </div>
-            <!--end::Info-->
+            <!--begin::Separator-->
+            <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+            <!--end::Separator-->
+            <!--begin::Detail-->
+            <div class="d-flex align-items-center" id="kt_subheader_search">
+            <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
+            </div>
+            <!--end::Detail-->
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
     </div>
 </div>
 <!--end::Subheader-->
@@ -44,7 +42,7 @@ foreach ($cursor as $document)
                     <div class="modal-body">
                         <div class="form-group row">
                         <?php
-                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId("60d5a6ec4eec695a083d5bd2")];
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
                         $query = new MongoDB\Driver\Query($filter);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
                         foreach ($cursor as $document)

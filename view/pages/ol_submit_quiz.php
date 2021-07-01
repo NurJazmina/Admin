@@ -61,49 +61,38 @@ function time_elapsed($date){
     <div class="card card-custom gutter-b px-5">
         <div class="card-body">
             <?php
-            $Notes_id = $_GET['Notes'];
-            $filter = ['Notes_id'=>$Notes_id];
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
             $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
             foreach ($cursor as $document)
             {
                 $Assignment_id = $document->_id;
                 $Title = $document->Title;
-                $Submitfrom = $document->Submitfrom;
-                $Duedate = $document->Duedate;
-                $Cutoffdate = $document->Cutoffdate;
-                $reminder = $document->reminder;
+                $DateOpen = $document->DateOpen;
+                $DateClose = $document->DateClose;
                 $Availability = $document->Availability;
 
-                $Submitfrom = new MongoDB\BSON\UTCDateTime(strval($Submitfrom));
-                $Submitfrom = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                $DateOpen = new MongoDB\BSON\UTCDateTime(strval($DateOpen));
+                $DateOpen = $DateOpen->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                 //Monday, 19 February 2018, 1:00 AM
-                $Submitfrom = date_format($Submitfrom,"l, d F Y, h:i")." PM";
+                $DateOpen = date_format($DateOpen,"l, d F Y, h:i")." PM";
 
-                $Dueutc = new MongoDB\BSON\UTCDateTime(strval($Duedate));
-                $Duetimezone = $Dueutc->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                $DateCloseutc = new MongoDB\BSON\UTCDateTime(strval($DateClose));
+                $DateClosetimezone = $DateCloseutc->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                 //Monday, 19 February 2018, 1:00 AM
-                $Duedate = date_format($Duetimezone,"l, d F Y, h:i")." PM";
+                $DateClosedate = date_format($DateClosetimezone,"l, d F Y, h:i")." PM";
 
-                $Cutoffdate = new MongoDB\BSON\UTCDateTime(strval($Cutoffdate));
-                $Cutoffdate = $Cutoffdate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                //Monday, 19 February 2018, 1:00 AM
-                $Cutoffdate = date_format($Cutoffdate,"l, d F Y, h:i")." PM";
                 ?>
-                <h3 class="text-dark-600 mb-8">ASSIGNMENT : <?php echo $Title; ?></h3>
+                <h3 class="text-dark-600 mb-8"> QUIZ : <?php echo $Title; ?></h3>
 
                 <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4">
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Opened </h6></div>
-                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$Submitfrom; ?></h6></div>
+                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$DateOpen; ?></h6></div>
                     </div>
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Closed </h6></div>
-                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$Duedate; ?></h6></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 text-left"><h6>Cut off date </h6></div>
-                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$Cutoffdate; ?></h6></div>
+                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$DateClosedate; ?></h6></div>
                     </div>
                 </div>
 
@@ -124,9 +113,12 @@ function time_elapsed($date){
                                 echo "Yes";
                             }
                              ?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="text-dark-50">
-                            <th>Participants</th>
+                            <th >Participants</th>
                             <td>
                             <?php
                             $total_student = 0;
@@ -149,20 +141,29 @@ function time_elapsed($date){
                             }
                             ?>
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="bg-gray-300 text-dark-50">
                             <th>Submitted</th>
                             <td>2</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="text-dark-50">
                             <th>Needs grading</th>
                             <td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr class="bg-gray-300 text-dark-50">
                             <th>Time remaining</th>
                             <td>
                             <?php
-                            $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
+                            $due = date_format($DateClosetimezone,"Y-m-d\TH:i:s");
                             $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
 
                             $now = time();
@@ -174,10 +175,13 @@ function time_elapsed($date){
                             }
                             else
                             {
-                                ?> Assignment is due <?php
+                                ?> Quiz is due <?php
                             }
                             ?>
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
