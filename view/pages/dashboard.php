@@ -204,25 +204,27 @@ function time_elapsed($date){
 			</div>
 			<!--end::Body-->
 		</div>
-		<!--
+		<!-- forum commenting section -->
 		<div class="card card-custom gutter-b">
 			<div class="card-body">
 				<div class="d-flex justify-content-between flex-column h-100">
 					<div class="h-100">
-						<div class="d-flex flex-column flex-center">
-						aaaaa
+						<div class="d-flex flex-column flex">
+						<h3 class="card-title align-items-start flex-column">
+						<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Forum Commenting Section</span>
 						</div>
 						<div class="pt-1">
-						bbbb
+						(Forum commenting section will be included here)
 						</div>
 					</div>
-					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-					ccccc
+					<br>
+					<div class="d-flex flex" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+					(Contents)
 					</div>
 				</div>
 			</div>
 		</div>
-		-->
+		<!-- end forum commenting section -->
 	</div>
 	<div class="col">
 		<div class="card card-custom gutter-b">
