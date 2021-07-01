@@ -11,7 +11,4 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $apiSession = $_GET['api_session'];
 $_SESSION['api_session'] = $apiSession;
-
-return 200;
-
-//header ('location: ../index.php?page=dashboard&action=loginsuccesful');
+header ('location: ../index.php');
