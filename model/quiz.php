@@ -10,8 +10,6 @@ if (isset($_POST['addquiz']))
   $Edit_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $Description = '';
-  $DateOpen = '';
-  $DateClose = '';
   $timeunit = '';
   $timelimit = '';
   $feedback100 = '';
@@ -34,6 +32,7 @@ if (isset($_POST['addquiz']))
 
   $DateOpen = $_POST['DateOpen'];
   $DateClose = $_POST['DateClose'];
+
   $timeunit = $_POST['timeunit'];
   $timelimit = $_POST['timelimit'];
   $timeexpired = $_POST['timeexpired'];

@@ -116,9 +116,10 @@
                                 //"duplicate",
 
                                 //online learning//
-                                "onlinelearning",
+                                "ol_dashboard",
                                 "ol_calendar",
-                                "modal-recheckquiz",
+                                "ol_modal-recheckquiz",
+                                "ol_addglossary",
                                 "ol_addquiz",
                                 "ol_addassignment",
                                 "ol_addurl",
@@ -130,6 +131,8 @@
                                 "ol_survey5",
                                 "ol_subject",
                                 "ol_submit_assignment",
+                                "ol_submit_quiz",
+                                "ol_quiz",
 
                                 //in progress//
                                 "simplecalendar",

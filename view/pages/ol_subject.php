@@ -205,13 +205,13 @@ foreach ($cursor as $document)
                         {
                             $Assignment_id = $document->_id;
                             $Title = $document->Title;
-                        ?>
-                        <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&Notes=<?php echo $Notes_id; ?>">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
-                            </a>
-                        </div>
-                        <?php
+                            ?>
+                            <div class="checkbox-inline mb-5">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&Notes=<?php echo $Notes_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
+                                </a>
+                            </div>
+                            <?php
                         }
                         $filter = ['Notes_id'=>$Notes_id];
                         $query = new MongoDB\Driver\Query($filter);
@@ -220,13 +220,13 @@ foreach ($cursor as $document)
                         {
                             $Quiz_id = $document->_id;
                             $Title = $document->Title;
-                        ?>
-                        <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
-                            </a>
-                        </div>
-                        <?php
+                            ?>
+                            <div class="checkbox-inline mb-5">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&Notes=<?php echo $Notes_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
+                                </a>
+                            </div>
+                            <?php
                         }
                         $filter = ['Notes_id'=>$Notes_id];
                         $query = new MongoDB\Driver\Query($filter);
@@ -235,13 +235,13 @@ foreach ($cursor as $document)
                         {
                             $URL_id = $document->_id;
                             $Title = $document->Title;
-                        ?>
-                        <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
-                            </a>
-                        </div>
-                        <?php
+                            ?>
+                            <div class="checkbox-inline mb-5">
+                                <a  style="color:#04ada5;" href="#">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
+                                </a>
+                            </div>
+                            <?php
                         }
                         $filter = ['Notes_id'=>$Notes_id];
                         $query = new MongoDB\Driver\Query($filter);
@@ -250,13 +250,13 @@ foreach ($cursor as $document)
                         {
                             $Survey_id = $document->_id;
                             $Title = $document->Title;
-                        ?>
-                        <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
-                            </a>
-                        </div>
-                        <?php
+                            ?>
+                            <div class="checkbox-inline mb-5">
+                                <a  style="color:#04ada5;" href="#">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
+                                </a>
+                            </div>
+                            <?php
                         }
                         ?>
                     </div>

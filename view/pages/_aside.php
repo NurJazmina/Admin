@@ -560,7 +560,7 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true" >
-					<a href="index.php?page=onlinelearning" class="menu-link">
+					<a href="index.php?page=ol_dashboard" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<i class="flaticon2-laptop icon-l"></i>
 						</span>
