@@ -167,8 +167,26 @@
               return response.text();
             })
             .then(text => {
-              console.log(text);
-              //window.location.href = 'http://localhost:7070/index.php?page=dashboard&action=loginsuccesful';
+              var json = JSON.parse(text);
+              var token = json.data.token;
+              var url = `http://localhost:7070/api/api_session.php?api_session=` + token;
+              return fetch(url, {
+                  method: 'get',
+              })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(response.statusText);
+                }
+                return response.text();
+              })
+              .then(text => {
+                console.log(text);
+                window.location.href = 'http://localhost:7070/index.php?page=dashboard&action=loginsuccesful';
+              })
+              .catch(error => {
+                console.log(error);
+              });
+              
             })
             .catch(error => {
                 console.log(error);

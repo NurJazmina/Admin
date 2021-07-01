@@ -15,11 +15,6 @@
       {
        if ($document->ConsumerStatus=='ACTIVE')
        {
-
-        if(isset($_SESSION['api_session']))
-          header ('location: index.php?page=dashboard&action=loginsuccesful');
-
-        else {
           $_SESSION["loggeduser_id"] = strval($document->_id);
           $_SESSION["loggeduser_consumerFName"] = ($document->ConsumerFName);
           $_SESSION["loggeduser_consumerLName"] = ($document->ConsumerLName);
@@ -34,89 +29,88 @@
           $_SESSION["loggeduser_consumerStatus"] = ($document->ConsumerStatus);
           $_SESSION["loggeduser_ConsumerGroup_id"] = ($document->ConsumerGroup_id);
 
-            $Groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
-            $filter = ['_id'=>$Groupid];
-            $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup',$query);
-            foreach ($cursor as $document)
-            {
-              $_SESSION["loggeduser_ConsumerGroupName"] = strval($document->ConsumerGroupName);
-            }
+          $Groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
+          $filter = ['_id'=>$Groupid];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup',$query);
+          foreach ($cursor as $document)
+          {
+            $_SESSION["loggeduser_ConsumerGroupName"] = strval($document->ConsumerGroupName);
+          }
 
-            $filter1 = ['ConsumerID'=>$_SESSION["loggeduser_id"]];
-            $query1 = new MongoDB\Driver\Query($filter1);
-            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
-            foreach ($cursor1 as $document1)
-            {
-                $_SESSION["loggeduser_schoolID"] = strval($document1->SchoolID);
-                $_SESSION["loggeduser_teacherid"] = ($document1->_id);
-                $_SESSION["loggeduser_StaffLevel"] = strval($document1->StaffLevel);
-                $_SESSION["loggeduser_ConsumerID"] = ($document1->ConsumerID);
-                $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);
-                $_SESSION["loggeduser_Staffdepartment"] = strval($document1->Staffdepartment);
-                
-                $schoolid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_schoolID"]);
-                $filter2 = ['_id'=>$schoolid];
-                $query2 = new MongoDB\Driver\Query($filter2);
-                $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Schools',$query2);
+          $filter1 = ['ConsumerID'=>$_SESSION["loggeduser_id"]];
+          $query1 = new MongoDB\Driver\Query($filter1);
+          $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
+          foreach ($cursor1 as $document1)
+          {
+              $_SESSION["loggeduser_schoolID"] = strval($document1->SchoolID);
+              $_SESSION["loggeduser_teacherid"] = ($document1->_id);
+              $_SESSION["loggeduser_StaffLevel"] = strval($document1->StaffLevel);
+              $_SESSION["loggeduser_ConsumerID"] = ($document1->ConsumerID);
+              $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);
+              $_SESSION["loggeduser_Staffdepartment"] = strval($document1->Staffdepartment);
+              
+              $schoolid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_schoolID"]);
+              $filter2 = ['_id'=>$schoolid];
+              $query2 = new MongoDB\Driver\Query($filter2);
+              $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Schools',$query2);
 
-                foreach ($cursor2 as $document2)
-                {
-                  $_SESSION["loggeduser_schoolName"] = strval($document2->SchoolsName);
-                  $_SESSION["loggeduser_schoolsPhoneNo"] = strval($document2->SchoolsPhoneNo);
-                  $_SESSION["loggeduser_schoolsAddress"] = strval($document2->SchoolsAddress);
-                  $_SESSION["loggeduser_SchoolsEmail"] = strval($document2->SchoolsEmail);
-                }
-      
-                $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_Staffdepartment"] );
-                $filter3 = ['_id'=>$departmentid];
-                $query3 = new MongoDB\Driver\Query($filter3);
-                $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-      
-                foreach ($cursor3 as $document3)
-                {
-                  $_SESSION["loggeduser_DepartmentName"] = strval($document3->DepartmentName);
-                }
-            }
-
-            if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL')
-            {
-              if($_SESSION["loggeduser_StaffLevel"] == '1')
+              foreach ($cursor2 as $document2)
               {
-                $_SESSION["loggeduser_ACCESS"] = "STAFF";
+                $_SESSION["loggeduser_schoolName"] = strval($document2->SchoolsName);
+                $_SESSION["loggeduser_schoolsPhoneNo"] = strval($document2->SchoolsPhoneNo);
+                $_SESSION["loggeduser_schoolsAddress"] = strval($document2->SchoolsAddress);
+                $_SESSION["loggeduser_SchoolsEmail"] = strval($document2->SchoolsEmail);
               }
-              elseif ($_SESSION["loggeduser_StaffLevel"] == '0')
+    
+              $departmentid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_Staffdepartment"] );
+              $filter3 = ['_id'=>$departmentid];
+              $query3 = new MongoDB\Driver\Query($filter3);
+              $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
+    
+              foreach ($cursor3 as $document3)
               {
-                $_SESSION["loggeduser_ACCESS"] = "TEACHER";
+                $_SESSION["loggeduser_DepartmentName"] = strval($document3->DepartmentName);
               }
-            }
-            elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
+          }
+
+          if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL')
+          {
+            if($_SESSION["loggeduser_StaffLevel"] == '1')
             {
               $_SESSION["loggeduser_ACCESS"] = "STAFF";
-              $_SESSION["loggeduser_schoolID"] = '';
-              $_SESSION["loggeduser_teacherid"] = '';
-              $_SESSION["loggeduser_StaffLevel"] = '';
-              $_SESSION["loggeduser_ConsumerID"] = '';
-              $_SESSION["loggeduser_ClassID"] = '';
-              $_SESSION["loggeduser_Staffdepartment"] = '';
-              $_SESSION["loggeduser_schoolName"] = '';
-              $_SESSION["loggeduser_schoolsPhoneNo"] = '';
-              $_SESSION["loggeduser_schoolsAddress"] = '';
-              $_SESSION["loggeduser_SchoolsEmail"] = '';
-              $_SESSION["loggeduser_DepartmentName"] = '';
             }
-            // this function coming soon!
-            //elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'PARENT')
-            //{
-            // $_SESSION["loggeduser_ACCESS"] = "PARENT";
-            //}
-            //else
-            //{
-            // $_SESSION["loggeduser_ACCESS"] = "STUDENT";
-            //}
-            header ('location: index.php?page=dashboard&action=loginsuccesful');
-        }
-         
+            elseif ($_SESSION["loggeduser_StaffLevel"] == '0')
+            {
+              $_SESSION["loggeduser_ACCESS"] = "TEACHER";
+            }
+          }
+          elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
+          {
+            $_SESSION["loggeduser_ACCESS"] = "STAFF";
+            $_SESSION["loggeduser_schoolID"] = '';
+            $_SESSION["loggeduser_teacherid"] = '';
+            $_SESSION["loggeduser_StaffLevel"] = '';
+            $_SESSION["loggeduser_ConsumerID"] = '';
+            $_SESSION["loggeduser_ClassID"] = '';
+            $_SESSION["loggeduser_Staffdepartment"] = '';
+            $_SESSION["loggeduser_schoolName"] = '';
+            $_SESSION["loggeduser_schoolsPhoneNo"] = '';
+            $_SESSION["loggeduser_schoolsAddress"] = '';
+            $_SESSION["loggeduser_SchoolsEmail"] = '';
+            $_SESSION["loggeduser_DepartmentName"] = '';
+          }
+          // this function coming soon!
+          //elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'PARENT')
+          //{
+          // $_SESSION["loggeduser_ACCESS"] = "PARENT";
+          //}
+          //else
+          //{
+          // $_SESSION["loggeduser_ACCESS"] = "STUDENT";
+          //}
+          header ('location: index.php?page=dashboard&action=loginsuccesful');
+        
        }
        else
        {
@@ -125,4 +119,5 @@
       }
     }
   }
+    
 ?>
