@@ -1,7 +1,7 @@
 <!-- live chat start-->
 <style>
    body {
-        background-image: url('image/student.jpg');
+        /* background-image: url('image/student.jpg'); */
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -136,9 +136,44 @@
   <form class="form1" name="frmlogin" method="post" action="">
     <input class="un " type="text" align="center" id="txtID" name="txtID" placeholder="Your ID">
     <input class="pass" type="password" align="center" id="txtPassword" name="txtPassword" placeholder="Password" >
-    <button class="submit" align="center"  name="LoginFormSubmit">Sign in</button>
+    <button id="login" type="button" class="submit" align="center"  name="LoginFormSubmit">Sign in</button>
     <p class="forgot" align="center"><a href="#">1st Time Login</a> | <a href="#">Forgot Password?</a></p>
     <p class="dev" align="center">Developed by G&G Softech Sdn Bhd</p>
   </form>
 </div>
+<script>
+   document.addEventListener('click', ({ target }) => {
+    if (target.matches('button')) {
+      var id = document.getElementById('txtID').value;
+      var passwd = document.getElementById('txtPassword').value;
+      var formData = new FormData();
+      var postData = {};
+      postData.nric = id;
+      postData.password = passwd;
+      var json = JSON.stringify(postData);
+      return fetch(`http://localhost:8000/api/login`, {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
+              },
+              body: json
+            })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(response.statusText);
+              }
+              
+              return response.text();
+            })
+            .then(text => {
+              console.log(text);
+              //window.location.href = 'http://localhost:7070/index.php?page=dashboard&action=loginsuccesful';
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+});
+</script>
     </div>
