@@ -2,19 +2,19 @@
 include 'model/survey.php';
 ?>
 <style>
-   input[type='radio']:checked:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #04ada5;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
-    }
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #04ada5;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
 </style>
 <?php
 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
@@ -28,17 +28,16 @@ foreach ($cursor as $document)
 if($type == "1")
 {
 ?>
-<!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
 		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Survey</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5">Survey</h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -46,7 +45,7 @@ if($type == "1")
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">COLLES (Actual)</span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total">COLLES (Actual)</span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -56,9 +55,8 @@ if($type == "1")
 			<div class="d-flex align-items-center">
             <div class="col-12 col-sm-12 col-sm-12">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
-                <div class="row">
-          
-                </div>
+                    <div class="row">
+                    </div>
                 </div>
             </div>
 		</div>
@@ -324,17 +322,16 @@ elseif($type == "2")
         border: 2px solid white;
     }
 </style>
-<!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
 		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Survey</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5">Survey</h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -342,7 +339,7 @@ elseif($type == "2")
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">COLLES (Preffered and Actual)</span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total">COLLES (Preffered & Actual)</span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -352,9 +349,8 @@ elseif($type == "2")
 			<div class="d-flex align-items-center">
             <div class="col-12 col-sm-12 col-sm-12">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
-                <div class="row">
-          
-                </div>
+                    <div class="row">
+                    </div>
                 </div>
             </div>
 		</div>
@@ -671,17 +667,16 @@ elseif($type == "2")
 elseif($type == "3")
 {
 ?>
-<!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
 		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Survey</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5">Survey</h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -689,7 +684,7 @@ elseif($type == "3")
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">COLLES (Prefer)</span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total">COLLES (Prefer)</span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -699,9 +694,8 @@ elseif($type == "3")
 			<div class="d-flex align-items-center">
             <div class="col-12 col-sm-12 col-sm-12">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
-                <div class="row">
-          
-                </div>
+                    <div class="row">
+                    </div>
                 </div>
             </div>
 		</div>
@@ -941,17 +935,16 @@ elseif($type == "3")
 elseif($type == "4")
 {
 ?>
-<!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
 		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Survey</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5">Survey</h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -959,7 +952,7 @@ elseif($type == "4")
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">ATTLS (20 Item Version)</span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total">ATTLS 20 Item Version</span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -969,9 +962,8 @@ elseif($type == "4")
 			<div class="d-flex align-items-center">
             <div class="col-12 col-sm-12 col-sm-12">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
-                <div class="row">
-          
-                </div>
+                    <div class="row">
+                    </div>
                 </div>
             </div>
 		</div>
@@ -1084,17 +1076,16 @@ elseif($type == "4")
 elseif($type == "5")
 {
 ?>
-<!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
 		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Survey</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5">Survey</h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -1102,7 +1093,7 @@ elseif($type == "5")
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">CRITICAL INCIDENT</span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total">Critical Incident</span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -1112,9 +1103,8 @@ elseif($type == "5")
 			<div class="d-flex align-items-center">
             <div class="col-12 col-sm-12 col-sm-12">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
-                <div class="row">
-          
-                </div>
+                    <div class="row">
+                    </div>
                 </div>
             </div>
 		</div>
@@ -1135,7 +1125,7 @@ elseif($type == "5")
                                     <li>At what moment in class were you most engaged as a learner?</li>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <textarea class="survey" name="question1"></textarea>
                                 </div>
                             </div>
@@ -1144,7 +1134,7 @@ elseif($type == "5")
                                     <li>At what moment in class were you most distanced as a learner?</li>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <textarea class="survey" name="question2"></textarea>
                                 </div>
                             </div>
@@ -1153,7 +1143,7 @@ elseif($type == "5")
                                     <li>What action from anyone in the forums did you find most affirming or helpful?</li>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <textarea class="survey" name="question3"></textarea>
                                 </div>
                             </div>
@@ -1162,7 +1152,7 @@ elseif($type == "5")
                                     <li>What action from anyone in the forums did you find most puzzling or confusing?</li>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <textarea class="survey" name="question4"></textarea>
                                 </div>
                             </div>
@@ -1171,7 +1161,7 @@ elseif($type == "5")
                                     <li>What event surprised you most?</li>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <textarea class="survey" name="question5"></textarea>
                                 </div>
                             </div>
@@ -1192,3 +1182,13 @@ elseif($type == "5")
 <?php
 }
 ?>
+<script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+  selector: '.survey',
+  menubar:false,
+  statusbar: false,
+  toolbar: false,
+  height:100,
+});
+</script>

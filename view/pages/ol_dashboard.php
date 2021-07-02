@@ -1,7 +1,3 @@
-<?php
-$_SESSION["title"] = "Online learning";
-include 'view/partials/_subheader/subheader-v1.php'; 
-?>
 <style>
 .show>.btn-outline-secondary.dropdown-toggle {
     color: #fff;
@@ -20,6 +16,42 @@ include 'view/partials/_subheader/subheader-v1.php';
     border: 1px solid rgba(0,0,0,.125);
 }
 </style>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+					<h5 class="text-white font-weight-bold my-1 mr-5">Online Learning</h5>
+					<!--end::Page Title-->
+				</div>
+                <!--begin::Separator-->
+                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+                <!--end::Separator-->
+                <!--begin::Detail-->
+                <div class="d-flex align-items-center" id="kt_subheader_search">
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo ""; ?></span>
+                </div>
+                <!--end::Detail-->
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+            <div class="col-12 col-sm-12 col-sm-12">
+                <div class="col-12 col-sm-12 col-lg-12 text-right">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+		</div>
+		<!--end::Toolbar-->
+	</div>
+</div>
+<!--end::Subheader-->
 <div class="card card-custom gutter-b px-5">
 <main class="" x-data="{'layout': 'grid'}">
     <div class="card-header" >
@@ -122,13 +154,18 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <div x-show="layout === 'grid'" x-cloak>
                     <article class="bg-white p-4 shadow">
                         <div class="card dashboard-card">
-                        <img src="assets/media/bg/bg-8.jpg" height="100">
-                        <div class="bg-light" style="height:50px;">
+                        <div class="card card-custom wave wave-animate-slow wave-purple mb-8 mb-lg-0">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center p-5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white" style="height:50px;">
                             <p class="font-size-h4 text-center mt-3">
                             <a href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
                             </p>
                         </div>
-                        <div class="dropdown text-right bg-light" >
+                        <div class="dropdown text-right bg-white" >
                             <button type="button" class="btn btn-light btn-icon btn-sm btn-hover-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ki ki-bold-more-hor text-secondary"></i>
                             </button>

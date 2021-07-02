@@ -1,7 +1,13 @@
 <?php
-$_SESSION["title"] = "Add Assignment";
-include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/assignment.php');
+$Subject_id = $_GET['Subject'];
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+foreach ($cursor as $document)
+{
+    $SubjectName = $document->SubjectName;
+}
 ?>
 <style>
 .btn-link:hover {
@@ -45,6 +51,43 @@ html {
   scroll-behavior: smooth;
 }
 </style>
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+					<h5 class="text-white font-weight-bold my-1 mr-5">Add Assignment</h5>
+					<!--end::Page Title-->
+				</div>
+                <!--begin::Separator-->
+                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+                <!--end::Separator-->
+                <!--begin::Detail-->
+                <div class="d-flex align-items-center" id="kt_subheader_search">
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
+                </div>
+                <!--end::Detail-->
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+            <div class="col-12 col-sm-12 col-sm-12">
+                <div class="col-12 col-sm-12 col-lg-12 text-right">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+		</div>
+		<!--end::Toolbar-->
+	</div>
+</div>
+<!--end::Subheader-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
 
@@ -98,7 +141,6 @@ $(document).ready(function(){
    });
 </script>
 <?php
-$Subject_id = $_GET['Subject'];
 $Submitfrom = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 $Submitfrom = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 $Submitfrom = date_format($Submitfrom,"Y-m-d\TH:i:s");
