@@ -26,7 +26,7 @@ foreach ($cursor as $document)
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
 	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
-		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap mx-3">
 			<!--begin::Info-->
 			<div class="d-flex align-items-center flex-wrap mr-1">
 				<!--begin::Page Heading-->
@@ -47,12 +47,11 @@ foreach ($cursor as $document)
 			</div>
 			<!--end::Info-->
 			<!--begin::Toolbar-->
-			<div class="d-flex align-items-center">
-            <div class="col-12 col-sm-12 col-sm-12">
-                <div class="col-12 col-sm-12 col-lg-12 text-right">
+			<div class="align-items-center">
+                <div class="text-right">
                 <div class="row">
                     <div class="input-group input-group-sm " style="width:25%">
-                        <span class="svg-icon svg-icon-light svg-icon-2x" type="button" data-bs-toggle="dropdown">
+                        <span class="svg-icon svg-icon-white svg-icon-2x" type="button" data-bs-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect x="0" y="0" width="24" height="24"/>
@@ -151,7 +150,6 @@ foreach ($cursor as $document)
                         </div>
                     </div>
                     <button type="submit" style="width:75%;" class="btn btn-white font-weight-bolder btn-sm" name="editing">Turn Editing On</button>
-                </div>
                 </div>
             </div>
 		</div>
