@@ -2,6 +2,7 @@
 <?php
 // Start the session
 session_start();
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -97,7 +98,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		
         <div class="page">
             <?php 
-			if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) 
+			if(isset($_SESSION['api_session'])) 
 			{
 			?>
 				<!--begin::Main-->
