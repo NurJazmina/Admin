@@ -98,7 +98,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		
         <div class="page">
             <?php 
-			if(isset($_SESSION['api_session'])) 
+			if (isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id']))  //(isset($_POST['LoginFormSubmit'])) 
 			{
 			?>
 				<!--begin::Main-->

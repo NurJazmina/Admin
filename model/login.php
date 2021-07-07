@@ -1,17 +1,17 @@
 <?php
-  if (isset($_GET['api_session']))
+  if (isset($_POST['LoginFormSubmit'])) //(isset($_GET['api_session']))
   {
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: POST");
-    header("Access-Control-Max-Age: 3600");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    // header("Access-Control-Allow-Origin: *");
+    // header("Content-Type: application/json; charset=UTF-8");
+    // header("Access-Control-Allow-Methods: POST");
+    // header("Access-Control-Max-Age: 3600");
+    // header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     
-    $json = json_decode($_POST['json']);
-    $nric = $json['nric'];
-    $password = $json['password'];
+    // $json = json_decode($_POST['json']);
+    // $nric = $json['nric'];
+    // $password = $json['password'];
 
-    $filter = ['ConsumerIDNo' => $nric];
+    $filter = ['ConsumerIDNo' => $_POST['txtID']];
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
@@ -21,11 +21,11 @@
       //ConsumerPassword using password_hash method
       $password_hash = ($document->ConsumerPassword);
       //convert password using password_verify
-      if (password_verify($password, $password_hash))
+      if (password_verify($_POST['txtPassword'], $password_hash))
       {
        if ($document->ConsumerStatus=='ACTIVE')
        {
-         $_SESSION["api_session"] = $_GET['api_session'];
+         //$_SESSION["api_session"] = $_GET['api_session'];
          $_SESSION["loggeduser_id"] = strval($document->_id);
          $_SESSION["loggeduser_consumerFName"] = ($document->ConsumerFName);
          $_SESSION["loggeduser_consumerLName"] = ($document->ConsumerLName);

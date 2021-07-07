@@ -69760,6 +69760,7 @@ code {
   border-style: solid;
   border-color: #E4E6EF;
 }
+
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .pulse .pulse-ring {
     top: 2px;

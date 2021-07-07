@@ -1,6 +1,34 @@
 <?php
 include ('model/quiz.php');
+
+function time_elapsed($date){
+	$bit = array(
+		//' year'      => $date  / 31556926 % 12,
+		' week'      => $date  / 604800 % 52,
+		' day'       => $date  / 86400 % 7,
+		' hour'      => $date  / 3600 % 24,
+		//' minute'    => $date  / 60 % 60,
+		//' second'    => $date  % 60
+		);
+	foreach($bit as $k => $v){
+		if($v > 1)$ret[] = $v . $k . 's';
+		if($v == 1)$ret[] = $v . $k;
+		}
+	array_splice($ret, count($ret)-1, 0, '');
+	$ret[] = '';
+
+	return join(' ', $ret);
+}
 ?>
+<style>
+.dot {
+  height: 5px;
+  width: 5px;
+  background-color: #7E8299;
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
 	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
@@ -41,7 +69,6 @@ include ('model/quiz.php');
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="form-group row">
                 <?php
                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
                 $query = new MongoDB\Driver\Query($filter);
@@ -49,6 +76,7 @@ include ('model/quiz.php');
                 foreach ($cursor as $document)
                 {
                     $Quiz_id = $document->_id;
+                    $Subject_id = $document->Subject_id;
                     $Title = $document->Title;
                     $Description = $document->Description;
                     $Created_by = $document->Created_by;
@@ -56,15 +84,81 @@ include ('model/quiz.php');
                     $Timelimit = $document->Timelimit;
                     $Timeunit = $document->Timeunit;
                     $Total_Question = $document->Total_Question;
+
+                    $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
+                    $Created_date = $Created_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                    $Created_date = date_format($Created_date,"Y-m-d\TH:i:s");
+                    $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime($Created_date))->getTimestamp());
+                
+                    $nowtime = time();
+                    $time = strval($Created_date);
+
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                    foreach ($cursor as $document1)
+                    {
+                        $SubjectName = $document1->SubjectName;
+                        $Class_category = $document1->Class_category;
+                    }
                     ?>
-                    <h4><?php echo $Title; ?></h4>
-                    <label class="col-lg-2 col-form-label text-lg-left"><h5>Selection:</h5></label>
-                    <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-2"> 
+                            <button class="btn btn-light"><i class="fab la-hotjar icon-7x"></i></button>
+                        </div>
+                        <div class="col-md-7">
+                            <span class="new-tag hidden" aria-label="New"><h4><?php echo $Title; ?></h4></span>
+                            <div class="mt-6">
+                                <span><i class="fas fa-graduation-cap icon-s mx-2"></i>Category <?php echo $Class_category; ?></span>
+                                <span class="dot mx-2"></span>
+                                <span><i class="flaticon2-open-text-book icon-s mx-2"></i></i><?php echo $SubjectName; ?></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <a href="#" class="btn btn-light rounded-circle">
+                                <i class="fas fa-exclamation-triangle icon-md"></i>
+                            </a>
+                            <a href="#" class="btn btn-light rounded-circle">
+                                <i class="flaticon-doc icon-md"></i>
+                            </a>
+                            <a href="#" class="btn btn-light rounded-circle">
+                                <i class="flaticon2-fax icon-md"></i>
+                            </a>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-9 mt-3">
+                            <a href="index.php?page=staffdetail&id=<?php echo $Created_by; ?>" class="d-flex align-items-center">
+                                <?php
+                                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                foreach ($cursor as $document2)
+                                {
+                                    $ConsumerFName = $document2->ConsumerFName;
+                                    $name = $ConsumerFName;
+                                    $firstCharacter = $name[0];
+                                }
+                                ?>
+                                <span class="symbol symbol-lg-35 symbol-25 symbol-light">
+                                    <span class="symbol-label symbol-secondary font-size-h5 font-weight-bold" ><?php echo $firstCharacter; ?></span>
+                                </span>
+                                <div class="col">
+                                    <div class="row"><span class="text-muted font-weight-bold mr-1"><?php echo " ".time_elapsed($nowtime-$time)." ago\n";  ?></span></div>
+                                    <div class="row"><span class="text-dark-75 font-weight-bold">by <?php echo $ConsumerFName; ?></span></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button class="btn btn-sm btn-light"><i class="fas fa-folder-open"></i>save</button>
+                            <button class="btn btn-sm btn-light"><i class="fas fa-heartbeat"></i> 1</button>
+                        </div>
+                    </div>
+
+                     
                     <?php
                 }
                 ?>
-                </div>
             </div>
         </div>
     </div>
