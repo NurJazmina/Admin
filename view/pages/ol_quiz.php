@@ -28,6 +28,21 @@ function time_elapsed($date){
   border-radius: 50%;
   display: inline-block;
 }
+.separator {
+    width: 100%;
+    border-bottom: solid 1px;
+    position: relative;
+    margin: 30px 0px;
+}
+
+.separator::before {
+    content: "answer choices";
+    position: absolute;
+    left: 6%;
+    top: -10px;
+    background-color: #fff;
+    padding: 0px 10px;
+}
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -65,7 +80,7 @@ function time_elapsed($date){
 	</div>
 </div>
 <!--end::Subheader-->
-<div id="AddExerciseModal" tabindex="-1" aria-labelledby="AddExerciseModalLabel" aria-hidden="true">
+<div id="AddExerciseModal" aria-labelledby="AddExerciseModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -83,6 +98,9 @@ function time_elapsed($date){
                     $Created_date = $document->Created_date;
                     $Timelimit = $document->Timelimit;
                     $Timeunit = $document->Timeunit;
+                    $Timeexpired = $document->Timeexpired;
+                    $Attempt = $document->Attempt;
+
                     $Total_Question = $document->Total_Question;
 
                     $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
@@ -103,31 +121,32 @@ function time_elapsed($date){
                     }
                     ?>
                     <div class="row">
-                        <div class="col-md-2"> 
-                            <button class="btn btn-light"><i class="fab la-hotjar icon-7x"></i></button>
+                        <div class="col-md-2 text-left"> 
+                            <button class="btn btn-sm btn-light"><img src="image/logogongetz.png" style="opacity:0.7; width:90px; height:90px; display:block; position:relative;"></button>
                         </div>
-                        <div class="col-md-7">
-                            <span class="new-tag hidden" aria-label="New"><h4><?php echo $Title; ?></h4></span>
-                            <div class="mt-6">
-                                <span><i class="fas fa-graduation-cap icon-s mx-2"></i>Category <?php echo $Class_category; ?></span>
-                                <span class="dot mx-2"></span>
-                                <span><i class="flaticon2-open-text-book icon-s mx-2"></i></i><?php echo $SubjectName; ?></span>
+                        <div class="col-md-6 text-left">
+                            <p class="text-muted font-weight-bold mb-5">QUIZ</p>
+                            <h4 class="mb-4"><?php echo $Title; ?></h4>
+                            <div>
+                                <small class="text-muted"><i class="fas fa-user-graduate icon-s mx-2"></i>Category <?php echo $Class_category; ?></small>
+                                <small class="dot text-muted mx-2"></small>
+                                <small class="text-muted"><?php echo $SubjectName; ?></small>
                             </div>
                         </div>
-                        <div class="col-md-3 text-right">
-                            <a href="#" class="btn btn-light rounded-circle">
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?php echo $Created_by; ?>">
                                 <i class="fas fa-exclamation-triangle icon-md"></i>
-                            </a>
-                            <a href="#" class="btn btn-light rounded-circle">
+                            </button>
+                            <a class="btn btn-sm btn-light">
                                 <i class="flaticon-doc icon-md"></i>
                             </a>
-                            <a href="#" class="btn btn-light rounded-circle">
+                            <a class="btn btn-sm btn-light">
                                 <i class="flaticon2-fax icon-md"></i>
                             </a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-9 mt-3">
+                    <div class="row mt-5">
+                        <div class="col-md-4">
                             <a href="index.php?page=staffdetail&id=<?php echo $Created_by; ?>" class="d-flex align-items-center">
                                 <?php
                                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
@@ -140,18 +159,17 @@ function time_elapsed($date){
                                     $firstCharacter = $name[0];
                                 }
                                 ?>
-                                <span class="symbol symbol-lg-35 symbol-25 symbol-light">
-                                    <span class="symbol-label symbol-secondary font-size-h5 font-weight-bold" ><?php echo $firstCharacter; ?></span>
-                                </span>
+                                <button class="btn btn-light rounded-circle"><?php echo $firstCharacter; ?></button>
                                 <div class="col">
-                                    <div class="row"><span class="text-muted font-weight-bold mr-1"><?php echo " ".time_elapsed($nowtime-$time)." ago\n";  ?></span></div>
-                                    <div class="row"><span class="text-dark-75 font-weight-bold">by <?php echo $ConsumerFName; ?></span></div>
+                                    <div class="row"><small class="text-muted font-weight-bold mr-1"><?php echo " ".time_elapsed($nowtime-$time)." ago\n";  ?></small></div>
+                                    <div class="row"><small class="text-dark-75 font-weight-bold">by <?php echo $ConsumerFName; ?></small></div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-md-3 text-right">
+                        <div class="col-md-8 text-right">
                             <button class="btn btn-sm btn-light"><i class="fas fa-folder-open"></i>save</button>
                             <button class="btn btn-sm btn-light"><i class="fas fa-heartbeat"></i> 1</button>
+                            <button class="btn btn-sm btn-light"><i class="flaticon2-reply"></i>share</button>
                         </div>
                     </div>
 
@@ -173,20 +191,55 @@ function time_elapsed($date){
         $Option_D = $document->Quiz[$i]->Option_D;
         $Answer = $document->Quiz[$i]->Answer;
         $Mark = $document->Quiz[$i]->Mark;
+
+        $Qi = $i + 1;
         if ($Type == "OBJECTIVE")
         {
         ?>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="objective">Objective</h5> 
-                </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-lg-12 col-form-label text-lg-left"><h5>Question <?php echo $i." : ".$Question; ?></h5></label>
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Objective</button> 
+                    <div class="row mx-0 mt-1">
+                        <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
                     </div>
-                </div>
-                <div class="modal-footer">
+                    <div class="separator separator-solid"></div>
+                    <div class="row">
+                        <div class="radio-inline">
+                            <div class="col mb-2">
+                                <label class="radio radio-outline radio-success">
+                                    <input type="radio" name="radios15"/>
+                                    <span></span>
+                                    <?php echo $Option_A; ?>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label class="radio radio-outline radio-success">
+                                    <input type="radio" name="radios15"/>
+                                    <span></span>
+                                    <?php echo $Option_B; ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="radio-inline">
+                            <div class="col">
+                                <label class="radio radio-outline radio-success">
+                                    <input type="radio" name="radios15"/>
+                                    <span></span>
+                                    <?php echo $Option_C; ?>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label class="radio radio-outline radio-success">
+                                    <input type="radio" name="radios15"/>
+                                    <span></span>
+                                    <?php echo $Option_D; ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,15 +250,12 @@ function time_elapsed($date){
         ?>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="subjective">Subjective</h5> 
-                </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-lg-12 col-form-label text-lg-left"><h5>Question <?php echo $i." : ".$Question; ?></h5></label>
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Subjective</button>
+                    <div class="row mx-0 mt-1">
+                        <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
                     </div>
-                </div>
-                <div class="modal-footer">
+                    <div class="separator separator-solid"></div>
                     <textarea class="quiz" name="q<?php echo $i; ?>" ></textarea>
                 </div>
             </div>
@@ -214,7 +264,14 @@ function time_elapsed($date){
         }
     }
     ?>
+     <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                </div>
+                </div>
+                </div>
 </div>
+<?php include ('view/pages/ol_modal-report.php'); ?>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({

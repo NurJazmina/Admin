@@ -271,7 +271,7 @@ border:1px solid #ffffff;
                             if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
                             ?>
-                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff">
                                 <i class="fa fa-edit" style="font-size:15px"></i>
                               </button>
                             <?php
