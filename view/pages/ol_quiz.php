@@ -1,5 +1,6 @@
 <?php
 include ('model/quiz.php');
+include ('model/modal-report.php');
 
 function time_elapsed($date){
 	$bit = array(
@@ -43,6 +44,7 @@ function time_elapsed($date){
     background-color: #fff;
     padding: 0px 10px;
 }
+
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -80,6 +82,69 @@ function time_elapsed($date){
 	</div>
 </div>
 <!--end::Subheader-->
+<?php  
+if (isset($_GET['notify']) && !empty($_GET['notify']))
+{
+?>
+<!--begin::success-->
+<div class="alert alert-custom alert-light-info fade show mb-10" role="alert">
+    <div class="alert-icon">
+        <span class="svg-icon svg-icon-primary svg-icon-2x">
+            <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Shield-thunder.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"/>
+                    <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"/>
+                    <polygon fill="#000000" opacity="0.3" points="11.3333333 18 16 11.4 13.6666667 11.4 13.6666667 7 9 13.6 11.3333333 13.6"/>
+                </g>
+            </svg>
+            <!--end::Svg Icon-->
+        </span>
+    </div>
+    <div class="alert-text font-weight-bold">Your report has been submitted !</div>
+    <div class="alert-close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+                <i class="ki ki-close"></i>
+            </span>
+        </button>
+    </div>
+</div>
+<!--end::success-->
+<?php 
+}
+elseif (isset($_GET['error']) && !empty($_GET['error']))
+{
+?>
+<!--begin::Email null-->
+<div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+    <div class="alert-icon">
+        <span class="svg-icon svg-icon-danger svg-icon-2x">
+            <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24" />
+                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                    <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
+                    <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                </g>
+            </svg>
+            <!--end::Svg Icon-->
+        </span>
+    </div>
+    <div class="alert-text font-weight-bold">This report can't be sent, User doesn't have an email address !</div>
+    <div class="alert-close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+                <i class="ki ki-close"></i>
+            </span>
+        </button>
+    </div>
+</div>
+<!--end::Email null-->
+<?php  
+}
+?>
 <div id="AddExerciseModal" aria-labelledby="AddExerciseModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -119,42 +184,53 @@ function time_elapsed($date){
                         $SubjectName = $document1->SubjectName;
                         $Class_category = $document1->Class_category;
                     }
+
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                    foreach ($cursor as $document2)
+                    {
+                        $CreatedEmail = "";
+                        $CreatedEmail = ($document2->ConsumerEmail);
+                    }
                     ?>
                     <div class="row">
-                        <div class="col-md-2 text-left"> 
-                            <button class="btn btn-sm btn-light"><img src="image/logogongetz.png" style="opacity:0.7; width:90px; height:90px; display:block; position:relative;"></button>
-                        </div>
-                        <div class="col-md-6 text-left">
-                            <p class="text-muted font-weight-bold mb-5">QUIZ</p>
-                            <h4 class="mb-4"><?php echo $Title; ?></h4>
+                        <div class="col-md-8 checkbox-inline"> 
                             <div>
-                                <small class="text-muted"><i class="fas fa-user-graduate icon-s mx-2"></i>Category <?php echo $Class_category; ?></small>
-                                <small class="dot text-muted mx-2"></small>
-                                <small class="text-muted"><?php echo $SubjectName; ?></small>
+                                <button class="btn btn-sm btn-light"><img src="image/logogongetz.png" style="opacity:0.7; width:90px; height:90px; display:block; position:relative;"></button>
+                            </div>
+                            <div class="mx-5">
+                                <p class="text-muted font-weight-bold mb-5">QUIZ</p>
+                                <h4 class="mb-4"><?php echo $Title; ?></h4>
+                                <div>
+                                    <small class="text-muted"><i class="fas fa-user-graduate icon-s mx-2"></i>Category <?php echo $Class_category; ?></small>
+                                    <small class="dot text-muted mx-2"></small>
+                                    <small class="text-muted"><?php echo $SubjectName; ?></small>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4 text-right">
                             <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?php echo $Created_by; ?>">
-                                <i class="fas fa-exclamation-triangle icon-md"></i>
+                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Report an issue"><i class="fas fa-exclamation-triangle icon-md"></i></a>    
                             </button>
-                            <a class="btn btn-sm btn-light">
-                                <i class="flaticon-doc icon-md"></i>
-                            </a>
-                            <a class="btn btn-sm btn-light">
-                                <i class="flaticon2-fax icon-md"></i>
-                            </a>
+                            <!-- <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?php echo $Created_by; ?>">
+                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Copy and edit"><i class="flaticon-doc icon-md"></i></a>
+                            </button> -->
+                            <button type="button" class="btn btn-sm btn-light" onclick="window.print()">
+                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Print"><i class="flaticon2-fax icon-md"></i></a>
+                            </button>
                         </div>
                     </div>
                     <div class="row mt-5">
-                        <div class="col-md-4">
+                        <div class="col-md-6 checkbox-inline">
                             <a href="index.php?page=staffdetail&id=<?php echo $Created_by; ?>" class="d-flex align-items-center">
                                 <?php
                                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                                foreach ($cursor as $document2)
+                                foreach ($cursor as $document3)
                                 {
-                                    $ConsumerFName = $document2->ConsumerFName;
+                                    $ConsumerFName = $document3->ConsumerFName;
                                     $name = $ConsumerFName;
                                     $firstCharacter = $name[0];
                                 }
@@ -166,10 +242,10 @@ function time_elapsed($date){
                                 </div>
                             </a>
                         </div>
-                        <div class="col-md-8 text-right">
+                        <div class="col-md-6 text-right">
                             <button class="btn btn-sm btn-light"><i class="fas fa-folder-open"></i>save</button>
                             <button class="btn btn-sm btn-light"><i class="fas fa-heartbeat"></i> 1</button>
-                            <button class="btn btn-sm btn-light"><i class="flaticon2-reply"></i>share</button>
+                            <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#share"><i class="flaticon2-reply"></i>share</button>
                         </div>
                     </div>
 
@@ -208,14 +284,14 @@ function time_elapsed($date){
                         <div class="radio-inline">
                             <div class="col mb-2">
                                 <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radios15"/>
+                                    <input type="radio" name="radio<?= $i ?>"/>
                                     <span></span>
                                     <?php echo $Option_A; ?>
                                 </label>
                             </div>
                             <div class="col">
                                 <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radios15"/>
+                                    <input type="radio" name="radio<?= $i ?>"/>
                                     <span></span>
                                     <?php echo $Option_B; ?>
                                 </label>
@@ -226,14 +302,14 @@ function time_elapsed($date){
                         <div class="radio-inline">
                             <div class="col">
                                 <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radios15"/>
+                                    <input type="radio" name="radio<?= $i ?>"/>
                                     <span></span>
                                     <?php echo $Option_C; ?>
                                 </label>
                             </div>
                             <div class="col">
                                 <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radios15"/>
+                                    <input type="radio" name="radio<?= $i ?>"/>
                                     <span></span>
                                     <?php echo $Option_D; ?>
                                 </label>
@@ -265,13 +341,18 @@ function time_elapsed($date){
     }
     ?>
      <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                </div>
-                </div>
-                </div>
+        <div class="modal-content">
+            <div class="modal-body text-right">
+                <button type="reset" class="btn btn-secondary btn-sm" name="reportquiz">reset</button>
+                <button type="submit" class="btn btn-success btn-sm" name="reportquiz">Submit</button>
+            </div>
+        </div>
+    </div>
 </div>
-<?php include ('view/pages/ol_modal-report.php'); ?>
+<?php 
+include ('view/pages/ol_modal-report.php'); 
+include ('view/pages/ol_modal-share.php'); 
+?>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({

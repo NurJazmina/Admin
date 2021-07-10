@@ -147,7 +147,7 @@ if (isset($_POST['AddEvent'])) {
                     //Send HTML or Plain Text email
                     $mail->isHTML(true);
 
-                    $mail->Subject = "$SchoolName  - $vartitle";
+                    $mail->Subject = "$SchoolName - $vartitle";
                     $mail->Body ="
                     <html>
                     <head>
@@ -758,7 +758,7 @@ if (isset($_POST['AddEvent'])) {
                                         <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                         <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
                                         <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
-                                        <p>Thanks,<br/>
+                                        <p>Thanks,<p/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                       </p>
@@ -1000,7 +1000,7 @@ if (isset($_POST['AddEvent'])) {
                                         <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                         <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
                                         <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
-                                        <p>Thanks,<br/>
+                                        <p>Thanks,<p/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                       </p>
@@ -1239,7 +1239,7 @@ if (isset($_POST['AddEvent'])) {
                                         <p?>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                         <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$varschoolid'>$SchoolName</a></p>
                                         <p>Here's the latest Event <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'> $vartitle </a> from $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
-                                        <p>Thanks,<br/>
+                                        <p>Thanks,<p/>
                                         <p>Go N Getz</p>
                                         <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                       </p>
