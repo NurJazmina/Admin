@@ -1,8 +1,11 @@
 <?php
-$emps = json_decode($_POST['emps']);
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-print_r($emps);
-foreach ($emps as $emp) {
-    print_r($emp->name);
-}
+$json = json_decode($_POST['emps']);
+$Like = $json['addr'];
+echo $Like;
 ?>

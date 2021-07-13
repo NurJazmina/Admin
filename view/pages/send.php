@@ -27,4 +27,3 @@ $.ajax({
 })
 </script>
 <div id="data"></div>
-<img src="https://tusd.tusdemo.net/files/edc85effb4f337cf78e427a1a45141d0+01QO8l6HNWm6X5y0Yn6RL9WwUI0pg70JUvOGoxK6McEh9HjWKv6fDYHqnvBjrYalNNV6GypTcI2R9tS9uhiEbgJzcVEjd6mZCM_B.s6130.5kUmdRLQxuGBBYPQyKm77" width="200px" height="300px">
