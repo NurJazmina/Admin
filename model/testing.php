@@ -100,9 +100,7 @@ if (isset($_POST['AddParent']))
       $bulk->update(
                     ['_id' => new \MongoDB\BSON\ObjectID($var_id)],
                     ['$push' => 
-                      [
-                        'parent'=> $array
-                      ],
+                      ['parent'=> $array],
                       '$set' => ['totalparent'=>$totalparent]
                     ],
                     ['upsert' => TRUE]

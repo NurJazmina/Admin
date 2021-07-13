@@ -1,17 +1,4 @@
-<?php 
-if ($CreatedEmail !== "")
-{
-?>
-<form name="reportquiz" action="index.php?page=ol_quiz&id=<?php echo $Quiz_id; ?>&notify=succeed" method="post">
-<?php
-}
-else
-{
-?>
-<form name="reportquiz" action="index.php?page=ol_quiz&id=<?php echo $Quiz_id; ?>&error=failed" method="post">
-<?php 
-}
-?>
+<form name="reportquiz" action="" method="post">
     <div class="modal fade" id="report" tabindex="-1" aria-labelledby="EditSchoolModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
@@ -63,9 +50,18 @@ else
                 <div class="modal-footer mx-3">
                     <input type="hidden" name="Created_by" value="<?php echo $Created_by; ?>">
                     <input type="hidden" name="Quiz_id" value="<?php echo $Quiz_id; ?>">
-                    <button type="submit" class="btn btn-outline-success btn-sm btn-block" name="reportquiz">Submit</button>
+                    <button type="submit" class="btn btn-outline-success btn-sm btn-block" name="reportquiz" onclick="sweetalert2()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script>
+//submit
+function sweetalert2() {
+    Swal.fire({
+    icon: 'success',
+    title: 'Email was sent !'
+    })
+}
+</script>

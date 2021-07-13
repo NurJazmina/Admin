@@ -131,6 +131,7 @@
                                 "ol_submit_quiz",
                                 "ol_quiz",
                                 "ol_announcement",
+                                "mira",
 
                                 //in progress//
                                 "simplecalendar",

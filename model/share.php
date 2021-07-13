@@ -3,62 +3,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-if (isset($_POST['reportquiz'])) {
-
-    $Information = "Other";
-    $Description = "None";
+if (isset($_POST['sharequiz'])) {
 
     $School_id = strval($_SESSION["loggeduser_schoolID"]);
     $Quiz_id = $_POST['Quiz_id'];
     $Created_by = $_POST['Created_by'];
     $Report_by =  strval($_SESSION["loggeduser_id"]);
-    $Information = $_POST['Information'];
-    $Question_number = $_POST['Question_number'];
-    $Description = $_POST['Description'];
-
-    $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-    $bulk->insert([
-        'School_id'=>$School_id,
-        'Quiz_id'=>$Quiz_id,
-        'Created_by'=>$Created_by,
-        'Report_by' =>$Report_by,
-        'Report_date'=> new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000),
-        'Information'=>$Information,
-        'Question_number'=>$Question_number,
-        'Description'=>$Description]);
-
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    try
-    {
-        $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Report_Quiz', $bulk, $writeConcern);
-    }
-    catch (MongoDB\Driver\Exception\BulkWriteException $e)
-    {
-        $result = $e->getWriteResult();
-        // Check if the write concern could not be fulfilled
-        if ($writeConcernError = $result->getWriteConcernError())
-        {
-            printf("%s (%d): %s\n",
-                $writeConcernError->getMessage(),
-                $writeConcernError->getCode(),
-                var_export($writeConcernError->getInfo(), true)
-            );
-        }
-        // Check if any write operations did not complete at all
-        foreach ($result->getWriteErrors() as $writeError) {
-            printf("Operation#%d: %s (%d)\n",
-                $writeError->getIndex(),
-                $writeError->getMessage(),
-                $writeError->getCode()
-            );
-        }
-    }
-    catch (MongoDB\Driver\Exception\Exception $e)
-    {
-        printf("Other error: %s\n", $e->getMessage());
-        exit;
-    }
-    printf("Inserted %d document(s)\n", $result->getInsertedCount());
+    $email = $_POST['email'];
 
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Quiz_id)];
     $query = new MongoDB\Driver\Query($filter);
@@ -66,7 +17,6 @@ if (isset($_POST['reportquiz'])) {
     foreach ($cursor as $document)
     {
         $Title = $document->Title;
-        $Question = $document->Quiz[$Question_number]->Question;
     }
 
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
@@ -121,10 +71,10 @@ if (isset($_POST['reportquiz'])) {
             $mail->FromName = $SchoolName;
 
             //To address and name
-            $mail->addAddress($FromEmail,$ConsumerFName);
+            $mail->addAddress($email,$ConsumerFName);
 
             //Address to which recipient will reply
-            $mail->addReplyTo($CreatedEmail,$ConsumerFName);
+            $mail->addReplyTo($email,$ConsumerFName);
 
             //CC and BCC
             $mail->addCC("gngsoftech@gmail.com");
@@ -132,7 +82,7 @@ if (isset($_POST['reportquiz'])) {
             //Send HTML or Plain Text email
             $mail->isHTML(true);
 
-            $mail->Subject = "$SchoolName  - REPORTED ISSUE FOR QUIZ";
+            $mail->Subject = "$SchoolName  - $FromNameF share Quiz with you ";
             $mail->Body ="
             <html>
             <head>
@@ -264,10 +214,7 @@ if (isset($_POST['reportquiz'])) {
                                     <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                         <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$School_id'>$SchoolName</a></p>
-                                        <p>Your Quiz <a href='https://smartschool.gongetz.com/index.php?ol_quiz&id=$Quiz_id'> $Title </a> has been reported by $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
-                                        <p>Information : $Information.</p>
-                                        <p>Specific question : $Question</p>
-                                        <div class='checkbox-inline'> <p>Additional details : </p> $Description </div>
+                                        <p>$FromNameF $FromNameL invited you to view '<a href='https://smartschool.gongetz.com/index.php?page=ol_quiz&id=$Quiz_id'> $Title </a>' on the SmartSchool platform.</p>
                                         <p>Thanks <br> Go N Getz <br> <small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                     </p>
                                     <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
