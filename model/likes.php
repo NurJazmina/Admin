@@ -1,12 +1,12 @@
 <?php
 include '../connections/db.php';
+
 if (isset($_POST['like']))
 {
-    $URL_LIKES = "$_SERVER[REQUEST_URI]";
     $url = "";
-
     $like = $_POST['like'];
     $Consumer_id = $_POST['Consumer_id'];
+    $URL_LIKES = $_POST['url_likes'];
 
     $filter = ['url'=>$URL_LIKES];
     $query = new MongoDB\Driver\Query($filter);

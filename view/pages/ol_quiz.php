@@ -47,6 +47,51 @@ function time_elapsed($date){
 }
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+  var toggleText = $("#ip").val();
+  var name = $("#loguser-id").val();
+  var url_likes = $("#url-likes").val();
+  $("#ipclear").click(function() {
+        if ($("#ip").val() != '1') 
+        {
+            toggleText = $("#ip").val();
+
+            $.post("model/likes.php", {
+            like: '1',
+            Consumer_id: name,
+            url_likes: url_likes
+            },
+            function(data, status){
+                $("#test").html(data);
+            },
+            );
+            $("#ip").val('1');
+            $("#ip").prop("disabled", false);
+                $(this).removeClass('btn-light').addClass('btn-success');
+        }
+        else
+        {
+            $("#ip").val(toggleText);
+
+            $.post("model/likes.php", {
+            like: '0',
+            Consumer_id: name,
+            url_likes: url_likes
+            }, 
+            function(data, status){
+                $("#test").html(data);
+            });
+
+            $("#ip").prop("disabled", false);
+                $(this).removeClass('btn-success').addClass('btn-light');
+        }
+    });
+
+});
+</script>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
 	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
@@ -182,7 +227,18 @@ function time_elapsed($date){
                         </div>
                         <div class="col-md-6 text-right">
                             <button class="btn btn-sm btn-light"><i class="fas fa-folder-open"></i>save</button>
-                            <button class="btn btn-sm btn-light"><i class="fas fa-heartbeat"></i> 1</button>
+                            <!-- begin::like/unlike -->
+                            <input type="hidden" id="ip" value="0">
+                            <input type="hidden" id="loguser-id" value="<?php echo $_SESSION["loggeduser_id"]; ?>">
+                            <input type="hidden" id="url-likes" value="<?php echo $URL_LIKES; ?>">
+                            <?php
+                            $URL_LIKES = "$_SERVER[REQUEST_URI]";
+                            ?>
+                            <button type="button" class="btn btn-sm btn-light" id="ipclear">
+                            <i class="fas fa-heartbeat"></i>
+                                <a id="test"></a>
+                            </button>
+                            <!-- end::like/unlike -->
                             <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#share"><i class="flaticon2-reply"></i>share</button>
                         </div>
                     </div>
