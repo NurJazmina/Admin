@@ -9,7 +9,7 @@ $(document).ready(function() {
         {
             toggleText = $("#ip").val();
 
-            $.post("view/pages/likes.php", {
+            $.post("model/likes.php", {
             like: '1',
             Consumer_id: name
             },
@@ -25,7 +25,7 @@ $(document).ready(function() {
         {
             $("#ip").val(toggleText);
 
-            $.post("view/pages/likes.php", {
+            $.post("model/likes.php", {
             like: '0',
             Consumer_id: name
             }, 

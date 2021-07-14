@@ -1,6 +1,5 @@
 <?php
-include '../../connections/db.php';
-
+include '../connections/db.php';
 if (isset($_POST['like']))
 {
     $URL_LIKES = "$_SERVER[REQUEST_URI]";
@@ -8,21 +7,23 @@ if (isset($_POST['like']))
 
     $like = $_POST['like'];
     $Consumer_id = $_POST['Consumer_id'];
-    echo $like ;
+
+    $filter = ['url'=>$URL_LIKES];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Likes',$query);
+    foreach ($cursor as $document)
+    {
+        $url = strval($document->url);
+        $Consumer = $document->Consumer;
+        $total_likes = count((array)$Consumer);
+        //echo $total_likes;
+    }
 
     if ($like == 1)
     {
-        $filter = ['url'=>$URL_LIKES];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Likes',$query);
-        foreach ($cursor as $document)
-        {
-            $url = strval($document->url);
-            $Consumer = $document->Consumer;
-            $total_likes = count((array)$Consumer);
-        }
         if ($url == "")
         {
+            echo '1';
             $array = [];
             $arraycount =[ 'Consumer_id'=>$Consumer_id];
             array_push($array, $arraycount);
@@ -42,9 +43,11 @@ if (isset($_POST['like']))
             foreach ($cursor as $document)
             {
                 $check = 1;
+                echo $total_likes;
             }
             if ($check == 0)
             {
+                echo $total_likes + 1;
                 $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
                 $bulk->update(
                                 ['url' => $URL_LIKES],
@@ -66,6 +69,8 @@ if (isset($_POST['like']))
     }
     elseif($like == 0)
     {
+        $total_likes = $total_likes-1;
+        echo $total_likes;
         $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
         $bulk->update(
                         ['url' => $URL_LIKES],
@@ -82,7 +87,6 @@ if (isset($_POST['like']))
                         );
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
         $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Likes', $bulk, $writeConcern);
-       
     }
 }
 ?>
