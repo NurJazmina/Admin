@@ -2,6 +2,7 @@
 include ('model/quiz.php');
 include ('model/share.php');
 include ('model/report.php');
+include ('model/save.php');
 
 function time_elapsed($date){
 	$bit = array(
@@ -143,6 +144,7 @@ $(document).ready(function() {
         <div class="modal-content">
             <div class="modal-body">
                 <?php
+                $URL = "$_SERVER[REQUEST_URI]";
                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
@@ -236,7 +238,7 @@ $(document).ready(function() {
                             </a>
                         </div>
                         <div class="col-md-6 text-right">
-                            <button class="btn btn-sm btn-light"><i class="fas fa-folder-open"></i>save</button>
+                            <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#save"><i class="fas fa-folder-open"></i>save</button>
 
                             <!-- begin::like/unlike -->
                             <?php
@@ -393,6 +395,7 @@ $(document).ready(function() {
 <?php 
 include ('view/pages/ol_modal-report.php'); 
 include ('view/pages/ol_modal-share.php'); 
+include ('view/pages/ol_modal-save.php'); 
 ?>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
