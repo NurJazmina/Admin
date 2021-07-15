@@ -299,98 +299,102 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
-    <?php
-    for ($i = 0; $i < $Total_Question; $i++)
-    {
-        $Type = $document->Quiz[$i]->Type;
-        $Question = $document->Quiz[$i]->Question;
-        $Option_A = $document->Quiz[$i]->Option_A;
-        $Option_B = $document->Quiz[$i]->Option_B;
-        $Option_C = $document->Quiz[$i]->Option_C;
-        $Option_D = $document->Quiz[$i]->Option_D;
-        $Answer = $document->Quiz[$i]->Answer;
-        $Mark = $document->Quiz[$i]->Mark;
+    <form name="answer" action="#" method="post">
+        <?php
+        for ($i = 0; $i < $Total_Question; $i++)
+        {
+            $Type = $document->Quiz[$i]->Type;
+            $Question = $document->Quiz[$i]->Question;
+            $Option_A = $document->Quiz[$i]->Option_A;
+            $Option_B = $document->Quiz[$i]->Option_B;
+            $Option_C = $document->Quiz[$i]->Option_C;
+            $Option_D = $document->Quiz[$i]->Option_D;
+            $Answer = $document->Quiz[$i]->Answer;
+            $Mark = $document->Quiz[$i]->Mark;
 
-        $Qi = $i + 1;
-        if ($Type == "OBJECTIVE")
-        {
-        ?>
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Objective</button> 
-                    <div class="row mx-0 mt-1">
-                        <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
-                    </div>
-                    <div class="separator separator-solid"></div>
-                    <div class="row">
-                        <div class="radio-inline">
-                            <div class="col mb-2">
-                                <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radio<?= $i ?>"/>
-                                    <span></span>
-                                    <?php echo $Option_A; ?>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radio<?= $i ?>"/>
-                                    <span></span>
-                                    <?php echo $Option_B; ?>
-                                </label>
+            $Qi = $i + 1;
+            if ($Type == "OBJECTIVE")
+            {
+            ?>
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Objective</button> 
+                        <div class="row mx-0 mt-1">
+                            <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
+                        </div>
+                        <div class="separator separator-solid"></div>
+                        <div class="row">
+                            <div class="radio-inline">
+                                <div class="col mb-2">
+                                    <label class="radio radio-outline radio-success">
+                                        <input type="radio" name="ans<?= $Qi ?>" value="A">
+                                        <span></span>
+                                        <?php echo $Option_A; ?>
+                                    </label>
+                                </div>
+                                <div class="col">
+                                    <label class="radio radio-outline radio-success">
+                                        <input type="radio" name="ans<?= $Qi ?>" value="B">
+                                        <span></span>
+                                        <?php echo $Option_B; ?>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="radio-inline">
-                            <div class="col">
-                                <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radio<?= $i ?>"/>
-                                    <span></span>
-                                    <?php echo $Option_C; ?>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <label class="radio radio-outline radio-success">
-                                    <input type="radio" name="radio<?= $i ?>"/>
-                                    <span></span>
-                                    <?php echo $Option_D; ?>
-                                </label>
+                        <div class="row">
+                            <div class="radio-inline">
+                                <div class="col">
+                                    <label class="radio radio-outline radio-success">
+                                        <input type="radio" name="ans<?= $Qi ?>" value="C">
+                                        <span></span>
+                                        <?php echo $Option_C; ?>
+                                    </label>
+                                </div>
+                                <div class="col">
+                                    <label class="radio radio-outline radio-success">
+                                        <input type="radio" name="ans<?= $Qi ?>" value="D">
+                                        <span></span>
+                                        <?php echo $Option_D; ?>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php
+            <?php
+            }
+            elseif($Type == "SUBJECTIVE")
+            {
+            ?>
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Subjective</button>
+                        <div class="row mx-0 mt-1">
+                            <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
+                        </div>
+                        <div class="separator separator-solid"></div>
+                        <textarea class="quiz" name="ans<?= $Qi ?>" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <?php
+            }
         }
-        elseif($Type == "SUBJECTIVE")
-        {
         ?>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body">
-                    <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Subjective</button>
-                    <div class="row mx-0 mt-1">
-                        <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
-                    </div>
-                    <div class="separator separator-solid"></div>
-                    <textarea class="quiz" name="q<?php echo $i; ?>" ></textarea>
+                <div class="modal-body text-right">
+                    <input type="hidden" name="Quiz_id" value="<?= $Quiz_id; ?>">
+                    <input type="hidden" name="Total_Question" value="<?= $Total_Question; ?>">
+                    <button type="reset" class="btn btn-secondary btn-sm">reset</button>
+                    <button type="submit" class="btn btn-success btn-sm" name="answer">Submit</button>
                 </div>
             </div>
         </div>
-        <?php
-        }
-    }
-    ?>
-     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-right">
-                <button type="reset" class="btn btn-secondary btn-sm">reset</button>
-                <button type="submit" class="btn btn-success btn-sm" name="reportquiz">Submit</button>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
 <?php 
 include ('view/pages/ol_modal-report.php'); 
