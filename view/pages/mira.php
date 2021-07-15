@@ -98,4 +98,23 @@ else
     <?php
 }
 ?>
-
+<br>
+<?php
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId('60e545f7fdde22274bae6f44')];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+foreach ($cursor as $document)
+{
+    $Title = $document->Title;
+    $Quiz = $document->Quiz;
+    $Total_Question = count((array)$Quiz);
+}
+shuffle($Quiz);
+for ($i = 0; $i < $Total_Question; $i++)
+{
+    $id = $i;
+    print_r ($Quiz[$i]->id);
+    print_r ($Quiz[$i]->Type);
+    echo " --> $id<br>";
+}
+?>

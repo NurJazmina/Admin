@@ -161,7 +161,8 @@ $(document).ready(function() {
                     $Timeexpired = $document->Timeexpired;
                     $Attempt = $document->Attempt;
 
-                    $Total_Question = $document->Total_Question;
+                    $Quiz = $document->Quiz;
+                    $Total_Question = count((array)$Quiz);
 
                     $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
                     $Created_date = $Created_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -301,25 +302,34 @@ $(document).ready(function() {
     </div>
     <form name="answer" action="#" method="post">
         <?php
+
+        shuffle($Quiz);
+        // for ($i = 0; $i < $Total_Question; $i++)
+        // {
+        //     $id = $i;
+        //     print_r ($Quiz[$i]->id);
+        //     print_r ($Quiz[$i]->Type);
+        //     echo " --> $id<br>";
+        // }
         for ($i = 0; $i < $Total_Question; $i++)
         {
-            $Type = $document->Quiz[$i]->Type;
-            $Question = $document->Quiz[$i]->Question;
-            $Option_A = $document->Quiz[$i]->Option_A;
-            $Option_B = $document->Quiz[$i]->Option_B;
-            $Option_C = $document->Quiz[$i]->Option_C;
-            $Option_D = $document->Quiz[$i]->Option_D;
-            $Answer = $document->Quiz[$i]->Answer;
-            $Mark = $document->Quiz[$i]->Mark;
+            $id = $Quiz[$i]->id;
+            $Type = $Quiz[$i]->Type;
+            $Question = $Quiz[$i]->Question;
+            $Option_A = $Quiz[$i]->Option_A;
+            $Option_B = $Quiz[$i]->Option_B;
+            $Option_C = $Quiz[$i]->Option_C;
+            $Option_D = $Quiz[$i]->Option_D;
+            $Answer = $Quiz[$i]->Answer;
+            $Mark = $Quiz[$i]->Mark;
 
-            $Qi = $i + 1;
             if ($Type == "OBJECTIVE")
             {
             ?>
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Objective</button> 
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Objective</button> 
                         <div class="row mx-0 mt-1">
                             <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
                         </div>
@@ -328,14 +338,14 @@ $(document).ready(function() {
                             <div class="radio-inline">
                                 <div class="col mb-2">
                                     <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $Qi ?>" value="A">
+                                        <input type="radio" name="ans<?= $id ?>" value="A">
                                         <span></span>
                                         <?php echo $Option_A; ?>
                                     </label>
                                 </div>
                                 <div class="col">
                                     <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $Qi ?>" value="B">
+                                        <input type="radio" name="ans<?= $id ?>" value="B">
                                         <span></span>
                                         <?php echo $Option_B; ?>
                                     </label>
@@ -346,14 +356,14 @@ $(document).ready(function() {
                             <div class="radio-inline">
                                 <div class="col">
                                     <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $Qi ?>" value="C">
+                                        <input type="radio" name="ans<?= $id ?>" value="C">
                                         <span></span>
                                         <?php echo $Option_C; ?>
                                     </label>
                                 </div>
                                 <div class="col">
                                     <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $Qi ?>" value="D">
+                                        <input type="radio" name="ans<?= $id ?>" value="D">
                                         <span></span>
                                         <?php echo $Option_D; ?>
                                     </label>
@@ -371,12 +381,12 @@ $(document).ready(function() {
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$Qi ?> : Subjective</button>
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Subjective</button>
                         <div class="row mx-0 mt-1">
                             <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
                         </div>
                         <div class="separator separator-solid"></div>
-                        <textarea class="quiz" name="ans<?= $Qi ?>" ></textarea>
+                        <textarea class="quiz" name="ans<?= $id ?>" ></textarea>
                     </div>
                 </div>
             </div>

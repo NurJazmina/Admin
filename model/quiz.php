@@ -135,7 +135,7 @@ if (isset($_POST['answer']))
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $array = [];
-  for ($i=1; $i<=$Total_Question; $i++)
+  for ($i=0; $i<$Total_Question; $i++)
   {
     $arraycount =
     [
