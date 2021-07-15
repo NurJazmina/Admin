@@ -10,5 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 $apiSession = $_GET['api_session'];
+if(isset($_GET['is_mobile']))
+    $_SESSION['is_mobile'] = true;
 $_SESSION['api_session'] = $apiSession;
-header ('location: ../index.php');
+header('location:http://acc741c60de4.ngrok.io/index.php?page=dashboard&action=loginsuccesful');
