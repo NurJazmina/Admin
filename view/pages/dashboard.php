@@ -1008,7 +1008,7 @@ function time_elapsed($date){
 							<table class="table table-borderless table-vertical-center">
 								<!--begin::Thead-->
 								<thead>
-									<tr>
+									<tr></tr>
 										<th></th>
 										<th></th>
 									</tr>
