@@ -160,6 +160,7 @@ $(document).ready(function() {
                     $Timeunit = $document->Timeunit;
                     $Timeexpired = $document->Timeexpired;
                     $Attempt = $document->Attempt;
+                    $Shuffle = $document->Shuffle;
 
                     $Quiz = $document->Quiz;
                     $Total_Question = count((array)$Quiz);
@@ -302,15 +303,10 @@ $(document).ready(function() {
     </div>
     <form name="answer" action="#" method="post">
         <?php
-
-        shuffle($Quiz);
-        // for ($i = 0; $i < $Total_Question; $i++)
-        // {
-        //     $id = $i;
-        //     print_r ($Quiz[$i]->id);
-        //     print_r ($Quiz[$i]->Type);
-        //     echo " --> $id<br>";
-        // }
+        if ($Shuffle == "YES")
+        {
+            shuffle($Quiz);
+        }
         for ($i = 0; $i < $Total_Question; $i++)
         {
             $id = $Quiz[$i]->id;
