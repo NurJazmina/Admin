@@ -6,17 +6,30 @@ require_once "vendor/autoload.php";
 if (isset($_POST['sharequiz'])) {
 
     $School_id = strval($_SESSION["loggeduser_schoolID"]);
-    $Quiz_id = $_POST['Quiz_id'];
+    $id = $_POST['id'];
     $Created_by = $_POST['Created_by'];
     $Report_by =  strval($_SESSION["loggeduser_id"]);
     $email = $_POST['email'];
 
-    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Quiz_id)];
+    $Title = '';
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($id)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
     foreach ($cursor as $document)
     {
         $Title = $document->Title;
+        $link = 'ol_quiz';
+    }
+    if ($Title == '')
+    {
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($id)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+        foreach ($cursor as $document)
+        {
+            $Title = $document->Title;
+        }
+        $link = 'ol_assignment';
     }
 
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
@@ -82,7 +95,7 @@ if (isset($_POST['sharequiz'])) {
             //Send HTML or Plain Text email
             $mail->isHTML(true);
 
-            $mail->Subject = "$SchoolName  - $FromNameF share Quiz with you ";
+            $mail->Subject = "$SchoolName  - $FromNameF share with you ";
             $mail->Body ="
             <html>
             <head>
@@ -214,7 +227,7 @@ if (isset($_POST['sharequiz'])) {
                                     <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                         <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$School_id'>$SchoolName</a></p>
-                                        <p>$FromNameF $FromNameL invited you to view '<a href='https://smartschool.gongetz.com/index.php?page=ol_quiz&id=$Quiz_id'> $Title </a>' on the SmartSchool platform.</p>
+                                        <p>$FromNameF $FromNameL invited you to view '<a href='https://smartschool.gongetz.com/index.php?page=$link&id=$id'> $Title </a>' on the SmartSchool platform.</p>
                                         <p>Thanks <br> Go N Getz <br> <small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                     </p>
                                     <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>

@@ -3,13 +3,14 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-if (isset($_POST['reportquiz'])) {
+if (isset($_POST['report'])) {
 
     $Information = "Other";
     $Description = "None";
 
     $School_id = strval($_SESSION["loggeduser_schoolID"]);
-    $Quiz_id = $_POST['Quiz_id'];
+    $id = $_POST['id'];
+    $url = $_POST['url'];
     $Created_by = $_POST['Created_by'];
     $Report_by =  strval($_SESSION["loggeduser_id"]);
     $Information = $_POST['Information'];
@@ -19,7 +20,7 @@ if (isset($_POST['reportquiz'])) {
     $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
     $bulk->insert([
         'School_id'=>$School_id,
-        'Quiz_id'=>$Quiz_id,
+        'url'=>$url,
         'Created_by'=>$Created_by,
         'Report_by' =>$Report_by,
         'Report_date'=> new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000),
@@ -30,7 +31,7 @@ if (isset($_POST['reportquiz'])) {
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
-        $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Report_Quiz', $bulk, $writeConcern);
+        $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Report', $bulk, $writeConcern);
     }
     catch (MongoDB\Driver\Exception\BulkWriteException $e)
     {
@@ -60,13 +61,29 @@ if (isset($_POST['reportquiz'])) {
     }
     printf("Inserted %d document(s)\n", $result->getInsertedCount());
 
-    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Quiz_id)];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
-    foreach ($cursor as $document)
+    if ($Question_number !== '')
     {
-        $Title = $document->Title;
-        $Question = $document->Quiz[$Question_number]->Question;
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($id)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+        foreach ($cursor as $document)
+        {
+            $Title = $document->Title;
+            $Question = $document->Quiz[$Question_number]->Question;
+        }
+        $link = 'ol_quiz';
+    }
+    else
+    {
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($id)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+        foreach ($cursor as $document)
+        {
+            $Title = $document->Title;
+            $Question = 'none';
+        }
+        $link = 'ol_assignment';
     }
 
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
@@ -132,7 +149,7 @@ if (isset($_POST['reportquiz'])) {
             //Send HTML or Plain Text email
             $mail->isHTML(true);
 
-            $mail->Subject = "$SchoolName  - REPORTED ISSUE FOR QUIZ";
+            $mail->Subject = "$SchoolName  - REPORTED ISSUE";
             $mail->Body ="
             <html>
             <head>
@@ -264,7 +281,7 @@ if (isset($_POST['reportquiz'])) {
                                     <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                         <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
                                         <p>You've received this email because you're a member of <a href='https://smartschool.gongetz.com/school.php?id=$School_id'>$SchoolName</a></p>
-                                        <p>Your Quiz <a href='https://smartschool.gongetz.com/index.php?page=ol_quiz&id=$Quiz_id'> $Title </a> has been reported by $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
+                                        <p>Your <a href='https://smartschool.gongetz.com/index.php?page=$link&id=$id'> $Title </a> has been reported by $FromNameF $FromNameL on $date and we thought it might need your attention.</p>
                                         <p>Information : $Information.</p>
                                         <p>Specific question : $Question</p>
                                         <div class='checkbox-inline'> <p>Additional details : </p> $Description </div>

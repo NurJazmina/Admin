@@ -536,7 +536,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                     </div>
                                     <div class="form-group row ">
                                         <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                            <label class="d-inline word-break" >ID Number</label>
+                                            <label class="d-inline word-break">ID Number</label>
                                             <div class="ml-1 ml-md-auto d-flex align-items-center align-self-start">
                                                 <a type="button" data-bs-html="true" data-bs-toggle="popover" title="" data-bs-content='<p>Setting an ID number provides a way of identifying the activity or resource for purposes such as grade calculation or custom reporting. Otherwise the field may be left blank.</p>
                                                 <p>For gradable activities, the ID number can also be set in the gradebook, though it can only be edited on the activity settings page.</p>'>

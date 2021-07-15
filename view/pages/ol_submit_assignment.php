@@ -107,7 +107,7 @@ function time_elapsed($date){
                 <div class="separator separator-dashed my-10"></div>
 
                 <h3 class="text-dark-600 mb-8">GRADING SUMMARY</h3>
-                <table class="table">
+                <table class="table table-hover table-borderless">
                     <tbody>
                         <tr class="bg-gray-300 text-dark-50">
                             <th>Hidden from students</th>

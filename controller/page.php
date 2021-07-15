@@ -131,6 +131,9 @@
                                 "ol_submit_quiz",
                                 "ol_quiz",
                                 "ol_announcement",
+                                "ol_assignment",
+
+                                //rujukan mira
                                 "suggestions",
                                 "mira",
                                 "likes",

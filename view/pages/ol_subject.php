@@ -175,7 +175,7 @@ foreach ($cursor as $document)
                     ?>
                     <div class="col-sm">
                     <div class="checkbox-inline">
-                        <h1  id="section0" contenteditable="true" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h1>
+                        <h1  id="section0" contenteditable="false" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h1>
                         <div class="col-sm text-right">
                             <i class="fas fa-pencil-alt text-success" type="button" data-bs-toggle="dropdown"></i>
                             <div class="dropdown-menu dropdown-menu-md py-5">
@@ -204,7 +204,7 @@ foreach ($cursor as $document)
                     </div>
                     </div>
                     <div class="px-10 mb-10" id="contentinfo">
-                        <p><?php echo $Detail; ?></p>
+                        <a align="justify"><?php echo $Detail; ?></a>
                     </div>
                     <div class="px-5" id="assignment">
                         <?php

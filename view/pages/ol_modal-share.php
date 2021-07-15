@@ -44,17 +44,14 @@
                         <input type="text" name="email" class="form-control" id="input-email" oninput="validateForm()">
                     </div>
                     <div class="col-sm-6">
-                        <input type="hidden" name="Created_by" value="<?php echo $Created_by; ?>">
-                        <input type="hidden" name="Quiz_id" value="<?php echo $Quiz_id; ?>">
+                        <input type="hidden" name="Created_by" value="<?= $Created_by; ?>">
+                        <input type="hidden" name="id" value="<?= $_id; ?>">
                         <button type="submit" name="sharequiz" class="btn btn-secondary btn-hover-success btn-block" id="submit-button" disabled>share invite via link</button>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <?php
-                    $url = "$_SERVER[REQUEST_URI]";
-                    ?>
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" value="<?php echo $url; ?>" id="url">
+                        <input type="text" class="form-control" value="<?= $URL; ?>" id="url">
                         <button type="button" class="btn btn-sm btn-hover-light-success btn-text-success" onclick="sweetalert1()">
                             <span class="svg-icon svg-icon-success svg-icon-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

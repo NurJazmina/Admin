@@ -285,8 +285,8 @@ if (isset($_POST['recheckquiz']))
                                         </div>
                                         <div class="col-md-6">
                                             <select class="form-control" name="shuffle">
-                                                <option value="YES">Yes</option>
-                                                <option value="NO" selected>No</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No" selected>No</option>
                                             </select>
                                         </div>
                                     </div>

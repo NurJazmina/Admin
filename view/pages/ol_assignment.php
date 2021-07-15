@@ -1,5 +1,5 @@
 <?php
-include ('model/quiz.php');
+include ('model/assignment.php');
 include ('model/share.php');
 include ('model/report.php');
 include ('model/save.php');
@@ -23,31 +23,6 @@ function time_elapsed($date){
 	return join(' ', $ret);
 }
 ?>
-<style>
-.dot {
-  height: 5px;
-  width: 5px;
-  background-color: #7E8299;
-  border-radius: 50%;
-  display: inline-block;
-}
-.separator {
-    width: 100%;
-    border-bottom: solid 1px;
-    position: relative;
-    margin: 30px 0px;
-}
-
-.separator::before {
-    content: "answer choices";
-    position: absolute;
-    left: 6%;
-    top: -10px;
-    background-color: #fff;
-    padding: 0px 10px;
-}
-
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -147,23 +122,21 @@ $(document).ready(function() {
                 $URL = "$_SERVER[REQUEST_URI]";
                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
                 $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
                 foreach ($cursor as $document)
                 {
                     $_id = $document->_id;
                     $Subject_id = $document->Subject_id;
+                    $Notes_id = $document->Notes_id;
                     $Title = $document->Title;
                     $Description = $document->Description;
                     $Created_by = $document->Created_by;
                     $Created_date = $document->Created_date;
-                    $Timelimit = $document->Timelimit;
-                    $Timeunit = $document->Timeunit;
-                    $Timeexpired = $document->Timeexpired;
-                    $Attempt = $document->Attempt;
-                    $Shuffle = $document->Shuffle;
-
-                    $Quiz = $document->Quiz;
-                    $Total_Question = count((array)$Quiz);
+                    $Submitfrom = $document->Submitfrom;
+                    $Duedate = $document->Duedate;
+                    $Cutoffdate = $document->Cutoffdate;
+                    $reminder = $document->reminder;
+                    $Total_Question = '';
 
                     $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
                     $Created_date = $Created_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -192,21 +165,7 @@ $(document).ready(function() {
                     }
                     ?>
                     <div class="row">
-                        <div class="col-md-8 checkbox-inline"> 
-                            <div>
-                                <button class="btn btn-sm btn-light"><img src="image/logogongetz.png" style="opacity:0.7; width:90px; height:90px; display:block; position:relative;"></button>
-                            </div>
-                            <div class="mx-5">
-                                <p class="text-muted font-weight-bold mb-5">QUIZ</p>
-                                <h4 class="mb-4"><?php echo $Title; ?></h4>
-                                <div>
-                                    <small class="text-muted"><i class="fas fa-user-graduate icon-s mx-2"></i>Category <?php echo $Class_category; ?></small>
-                                    <small class="dot text-muted mx-2"></small>
-                                    <small class="text-muted"><?php echo $SubjectName; ?></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-right">
+                        <div class="col-md-12 text-right">
                             <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?php echo $Created_by; ?>">
                                 <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Report an issue"><i class="fas fa-exclamation-triangle icon-md"></i></a>    
                             </button>
@@ -216,6 +175,16 @@ $(document).ready(function() {
                             <button type="button" class="btn btn-sm btn-light" onclick="window.print()">
                                 <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Print"><i class="flaticon2-fax icon-md"></i></a>
                             </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 checkbox-inline"> 
+                            <div class="mx-5">
+                                <h4 class="mb-4"><?php echo $Title; ?></h4>
+                                <div>
+                                    <a class="text-muted" align="justify"><?php echo $Description; ?></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-5">
@@ -299,121 +268,92 @@ $(document).ready(function() {
                 }
                 ?>
             </div>
+            <form id="" name="answer" action="#" method="post">
+                <div class="separator separator-dashed"></div>
+                <div class="modal-body">
+                    <div class="row mb-10">
+                        <div class="col-md-2 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break">Online text</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <textarea class="assignment" name="answer"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-md-2 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break">File submission</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <!-- begin::add drop files -->
+                            <div id="drag-drop-area"></div>
+                            <!-- end::add drop files -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-lg-12 text-lg-right">
+                            <input type="hidden" name="id" value="<?= $_id; ?>">
+                            <button type="reset"  class="btn btn-sm btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-success mr-2" name="answer">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <form name="answer" action="#" method="post">
-        <?php
-        if ($Shuffle == "Yes")
-        {
-            shuffle($Quiz);
-        }
-        for ($i = 0; $i < $Total_Question; $i++)
-        {
-            $id = $Quiz[$i]->id;
-            $Type = $Quiz[$i]->Type;
-            $Question = $Quiz[$i]->Question;
-            $Option_A = $Quiz[$i]->Option_A;
-            $Option_B = $Quiz[$i]->Option_B;
-            $Option_C = $Quiz[$i]->Option_C;
-            $Option_D = $Quiz[$i]->Option_D;
-            $Answer = $Quiz[$i]->Answer;
-            $Mark = $Quiz[$i]->Mark;
-
-            if ($Type == "OBJECTIVE")
-            {
-            ?>
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Objective</button> 
-                        <div class="row mx-0 mt-1">
-                            <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
-                        </div>
-                        <div class="separator separator-solid"></div>
-                        <div class="row">
-                            <div class="radio-inline">
-                                <div class="col mb-2">
-                                    <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $id ?>" value="A">
-                                        <span></span>
-                                        <?php echo $Option_A; ?>
-                                    </label>
-                                </div>
-                                <div class="col">
-                                    <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $id ?>" value="B">
-                                        <span></span>
-                                        <?php echo $Option_B; ?>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="radio-inline">
-                                <div class="col">
-                                    <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $id ?>" value="C">
-                                        <span></span>
-                                        <?php echo $Option_C; ?>
-                                    </label>
-                                </div>
-                                <div class="col">
-                                    <label class="radio radio-outline radio-success">
-                                        <input type="radio" name="ans<?= $id ?>" value="D">
-                                        <span></span>
-                                        <?php echo $Option_D; ?>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-            }
-            elseif($Type == "SUBJECTIVE")
-            {
-            ?>
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Subjective</button>
-                        <div class="row mx-0 mt-1">
-                            <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
-                        </div>
-                        <div class="separator separator-solid"></div>
-                        <textarea class="quiz" name="ans<?= $id ?>" ></textarea>
-                    </div>
-                </div>
-            </div>
-            <?php
-            }
-        }
-        ?>
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-right">
-                    <input type="hidden" name="id" value="<?= $_id; ?>">
-                    <input type="hidden" name="Total_Question" value="<?= $Total_Question; ?>">
-                    <button type="reset" class="btn btn-secondary btn-sm">reset</button>
-                    <button type="submit" class="btn btn-success btn-sm" name="answer">Submit</button>
-                </div>
-            </div>
-        </div>
-    </form>
 </div>
 <?php 
 include ('view/pages/ol_modal-report.php'); 
 include ('view/pages/ol_modal-share.php'); 
 include ('view/pages/ol_modal-save.php'); 
 ?>
+<script src="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.js"></script>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/jwc9s2y5k97422slkhbv6eu2eqwbwl2skj9npskngzqtsrhq/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
-  selector: '.quiz',
+  selector: '.assignment',
   menubar:false,
   statusbar: false,
   toolbar: false,
   height:100,
 });
+
+//fileupload
+var uppy = Uppy.Core
+    ({
+    debug: true,
+    autoProceed: false,
+    restrictions: {
+        maxFileSize: 1000000,
+        maxNumberOfFiles: 3,
+        minNumberOfFiles: 1,
+        allowedFileTypes: ['image/*', 'video/*']
+    }
+    })
+    .use(Uppy.Dashboard, {
+      inline: true,
+      width: 750,
+      height: 100,
+      theme: 'light',
+      note: 'Images and video only, 2–3 files, up to 1 MB',
+      metaFields: [
+        { id: 'name', name: 'Name', placeholder: 'file name' },
+        { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+        ],
+      target: '#drag-drop-area'
+    })
+    .use(Uppy.Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
+
+  uppy.on('file-added', (file) => {
+    console.log('Added file', file)
+  })
+
+  uppy.on('complete', (result) => {
+    console.log('Upload complete! We’ve uploaded these files:', result.successful)
+  })
+
+  uppy.on('upload-success', (file, response) => {
+  console.log(file.name, response.uploadURL)
+  })
 </script>

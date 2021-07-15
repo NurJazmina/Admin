@@ -69,6 +69,7 @@ function time_elapsed($date){
                 $DateOpen = $document->DateOpen;
                 $DateClose = $document->DateClose;
                 $Availability = $document->Availability;
+                $Shuffle = $document->Shuffle;
 
                 $DateOpen = new MongoDB\BSON\UTCDateTime(strval($DateOpen));
                 $DateOpen = $DateOpen->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -97,7 +98,7 @@ function time_elapsed($date){
                 <div class="separator separator-dashed my-10"></div>
 
                 <h3 class="text-dark-600 mb-8">GRADING SUMMARY</h3>
-                <table class="table">
+                <table class="table table-hover table-borderless">
                     <tbody>
                         <tr class="bg-gray-300 text-dark-50">
                             <th>Hidden from students</th>
@@ -116,6 +117,13 @@ function time_elapsed($date){
                             <td></td>
                         </tr>
                         <tr class="text-dark-50">
+                            <th>Shuffle</th>
+                            <td><?php echo $Shuffle; ?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-gray-300 text-dark-50">
                             <th >Participants</th>
                             <td>
                             <?php
@@ -143,21 +151,21 @@ function time_elapsed($date){
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr class="bg-gray-300 text-dark-50">
+                        <tr class="text-dark-50">
                             <th>Submitted</th>
                             <td>2</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr class="text-dark-50">
+                        <tr class="bg-gray-300 text-dark-50">
                             <th>Needs grading</th>
                             <td>1</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr class="bg-gray-300 text-dark-50">
+                        <tr class="text-dark-50">
                             <th>Time remaining</th>
                             <td>
                             <?php

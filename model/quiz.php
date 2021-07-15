@@ -128,7 +128,7 @@ if (isset($_POST['addquiz']))
 //answer for quiz
 if (isset($_POST['answer']))
 {
-  $Quiz_id = $_POST['Quiz_id'];
+  $Quiz_id = $_POST['id'];
   $Total_Question = $_POST['Total_Question'];
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
