@@ -151,11 +151,11 @@
       postData.nric = id;
       postData.password = passwd;
       var json = JSON.stringify(postData);
-      return fetch(`http://localhost:8000/api/login`, {
+      return fetch(`http://8ce958c31199.ngrok.io/api/login`, {
               method: 'post',
               headers: {
-                'Content-Type': 'application/json',
                 'Accept': '*/*',
+                'Content-Type': 'application/json',
               },
               body: json
             })
@@ -167,6 +167,7 @@
               return response.text();
             })
             .then(text => {
+              console.log(text);
               var json = JSON.parse(text);
               var token = json.data.token;
               var url = `http://localhost:7070/api/api_session.php?api_session=` + token;
@@ -180,7 +181,6 @@
                 return response.text();
               })
               .then(text => {
-                console.log(text);
                 window.location.href = 'http://localhost:7070/index.php?page=dashboard&action=loginsuccesful';
               })
               .catch(error => {
