@@ -1,4 +1,3 @@
-
 <!--begin::Header-->
 <div class="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(assets/media/misc/bg-3.jpg)">
 	<div class="d-flex align-items-center mr-2">
@@ -56,8 +55,6 @@
 			</div>
 		</div>
 	</a>
-
-
 	<a href="custom/apps/user/profile-2.html" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
@@ -69,7 +66,6 @@
 			</div>
 		</div>
 	</a>
-
 	<a href="custom/apps/userprofile-1/overview.html" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
@@ -81,14 +77,21 @@
 			</div>
 		</div>
 	</a>
-
 --end::Item-->
 
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>
-	<div class="navi-footer px-8 py-5" >
-		<a href="model/logout.php" class="btn btn-light-success font-weight-bold">Sign Out</a>
-	</div>
+	<?php
+		if(!isset($_SESSION['is_mobile']))
+		{
+	?>
+			<div class="navi-footer px-8 py-5" >
+			<a href="model/logout.php" class="btn btn-light-success font-weight-bold">Sign Out</a>
+			</div>
+	<?php
+		}
+	?>
+	
 
 	<!--end::Footer-->
 </div>
