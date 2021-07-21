@@ -110,3 +110,49 @@ if (isset($_POST['addassignment']))
     }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
+
+
+if (isset($_POST['EditGrade']))
+{
+  $answer_id = $_POST['answer_id'];
+  $Mark = $_POST['Mark'];
+  $comment = $_POST['comment'];
+
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($answer_id)],
+                ['$set' => ['Mark'=>$Mark , 'comment'=>$comment]],
+                ['multi'=> TRUE]
+                );
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  try
+  {
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Assignment_Answer', $bulk, $writeConcern);
+  }
+  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+  {
+    $result = $e->getWriteResult();
+    // Check if the write concern could not be fulfilled
+    if ($writeConcernError = $result->getWriteConcernError())
+    {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+    // Check if any write operations did not complete at all
+    foreach ($result->getWriteErrors() as $writeError)
+    {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+  }
+  catch (MongoDB\Driver\Exception\Exception $e)
+  {
+    printf("Other error: %s\n", $e->getMessage());
+    exit;
+  }
+}

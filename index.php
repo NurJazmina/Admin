@@ -238,11 +238,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<?php include 'resources/default.php'; ?>
 		<?php
-		if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-		{
-
-		}
-		else
+		if (isset($_GET['attendance']) && !empty($_GET['attendance']))
 		{
 			$attendance = ($_GET['attendance']);
 			?>
@@ -253,6 +249,19 @@ License: You must have a valid license purchased only from themeforest(the above
      				});
   				});  
  			</script>
+			<?php
+		}
+		if (isset($_GET['list_submission']) && !empty($_GET['list_submission']))
+		{
+			$list = ($_GET['list_submission']);
+			?>
+			<script>
+				$(document).ready(function () {
+					$("#list").table2excel({
+					filename: "listsubmission.xls"
+					});
+				}); 
+			</script>
 			<?php
 		}
 		?>

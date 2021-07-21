@@ -20,6 +20,28 @@ function time_elapsed($date){
 }
 
 ?>
+<style>
+@media print {
+.noprint {
+    visibility: hidden;
+}
+}
+td.ygtvcell {
+    border: 0;
+    padding: 0;
+}
+.ygtvln {
+    width: 18px;
+    height: 22px;
+    background: url(/theme/yui_image.php?file=2.9.0/treeview-sprite.gif) 0 -1600px no-repeat;
+    cursor: pointer;
+}
+.ygtvspacer {
+    color: red;
+    height: 22px;
+    width: 18px;
+}
+</style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
 	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
@@ -47,7 +69,8 @@ function time_elapsed($date){
 			<div class="d-flex align-items-center">
             <div class="col-12 col-sm-12 col-sm-12">
                 <div class="col-12 col-sm-12 col-lg-12 text-right">
-                    <div class="row">
+                    <div class="card-toolbar">
+
                     </div>
                 </div>
             </div>
@@ -56,10 +79,7 @@ function time_elapsed($date){
 	</div>
 </div>
 <!--end::Subheader-->
-<?php
-if (!isset($_GET['action']) && empty($_GET['action']))
-{
-?>
+
 <div class="content d-flex flex-column flex-column-fluid">
     <div class="card card-custom gutter-b px-5">
         <div class="card-body">
@@ -78,9 +98,9 @@ if (!isset($_GET['action']) && empty($_GET['action']))
                 $Availability = $document->Availability;
 
                 $Submitfrom = new MongoDB\BSON\UTCDateTime(strval($Submitfrom));
-                $Submitfrom = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                $Submitfromzone = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                 //Monday, 19 February 2018, 1:00 AM
-                $Submitfrom = date_format($Submitfrom,"l, d F Y, h:i")." PM";
+                $Submitfrom = date_format($Submitfromzone,"l, d F Y, h:i")." PM";
 
                 $Dueutc = new MongoDB\BSON\UTCDateTime(strval($Duedate));
                 $Duetimezone = $Dueutc->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -110,200 +130,134 @@ if (!isset($_GET['action']) && empty($_GET['action']))
                 </div>
 
                 <div class="separator separator-dashed my-10"></div>
-
-                <h3 class="text-dark-600 mb-8">GRADING SUMMARY</h3>
-                <table class="table table-hover table-borderless">
-                    <tbody>
-                        <tr class="bg-gray-300 text-dark-50">
-                            <th>Hidden from students</th>
-                            <td><?php
-                            if($Availability == 'SHOW')
-                            {
-                                echo "No";
-                            }
-                            else
-                            {
-                                echo "Yes";
-                            }
-                             ?></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="text-dark-50">
-                            <th>Participants</th>
-                            <td>
-                            <?php
-                            $total_student = 0;
-                            $filter = ['Subject_id'=>$Subject_id];
-                            $query = new MongoDB\Driver\Query($filter);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
-                            foreach ($cursor as $document)
-                            {
-                                $Class_id = $document->Class_id;
-
-                                $filter = ['Class_id'=>$Class_id ];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                foreach ($cursor as $document)
-                                {
-                                    $total_student = $total_student + 1;
-                                }
-                                $total= $total_student;
-                                echo $total;
-                            }
-                            ?>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="bg-gray-300 text-dark-50">
-                            <th>Submitted</th>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="text-dark-50">
-                            <th>Needs grading</th>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="bg-gray-300 text-dark-50">
-                            <th>Time remaining</th>
-                            <td>
-                            <?php
-                            $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
-                            $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
-
-                            $Submit = time();
-                            $due = strval($due);
-
-                            if ($due >= $Submit)
-                            {
-                                echo " ".time_elapsed($due-$Submit)." \n";  
-                            }
-                            else
-                            {
-                                ?> Assignment is due <?php
-                            }
-                            ?>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
                 <?php
-
-                if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+                if (!isset($_GET['action']) && empty($_GET['action']))
                 {
-                    ?>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <input type="hidden" name="id" value="<?= $_id; ?>">
-                                <a href="index.php?page=ol_submit_assignment&id=60dace7aad9ff4564463d482&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
-                                <a href="index.php?page=ol_submit_assignment&id=60dace7aad9ff4564463d482&action=grader"><button type="button" class="btn btn-sm text-white mr-2" name="grade" style="background-color:#7e8299;">Grade</button></a>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                } 
-                elseif($_SESSION["loggeduser_ConsumerGroup_id"] == '6018c32b10184a751c102eb6') //student
-                {
-                    ?>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <input type="hidden" name="id" value="<?= $_id; ?>">
-                                <button type="button" class="btn btn-sm text-white mr-2" name="submission" style="background-color:#7e8299;">Add submission</button>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
-        </div>
-    </div>
-</div>
-<?php
-}
-else
-{
-    $action = $_GET['action'];
-
-    if($action == 'grading')
-    {
-        ?>
-        <div class="content d-flex flex-column flex-column-fluid">
-            <div class="card card-custom gutter-b px-5">
-                <div class="card-body">
-                    <?php
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
+                    $total = 0;
+                    $total_submission = 0;
+                    $not_graded = 0;
+                    $graded = 0;
+                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
                     $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+
                     foreach ($cursor as $document)
                     {
-                        $Assignment_id = $document->_id;
-                        $Title = $document->Title;
-                        $Submitfrom = $document->Submitfrom;
-                        $Duedate = $document->Duedate;
-                        $Cutoffdate = $document->Cutoffdate;
-                        $reminder = $document->reminder;
-                        $Availability = $document->Availability;
-                        $Subject_id = $document->Subject_id;
+                        $Consumer_id = $document->Consumer_id;
+                        $total = $total + 1;
+                        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                        $query1 = new MongoDB\Driver\Query($filter1);
+                        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                            
+                        foreach ($cursor1 as $document1)
+                        {
+                            $consumer_id = strval($document1->_id);
 
-                        $Submitfrom = new MongoDB\BSON\UTCDateTime(strval($Submitfrom));
-                        $Submitfrom = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                        //Monday, 19 February 2018, 1:00 AM
-                        $Submitfrom = date_format($Submitfrom,"l, d F Y, h:i")." PM";
+                            $filter2 = ['Created_by'=>$consumer_id];
+                            $query2 = new MongoDB\Driver\Query($filter2);
+                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
-                        $Dueutc = new MongoDB\BSON\UTCDateTime(strval($Duedate));
-                        $Duetimezone = $Dueutc->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                        //Monday, 19 February 2018, 1:00 AM
-                        $Duedate = date_format($Duetimezone,"l, d F Y, h:i")." PM";
+                            foreach ($cursor2 as $document2)
+                            {
+                                $total_submission = $total_submission + 1;
+                                $Mark = $document2->Mark;
+                                if($Mark == 0)
+                                {
+                                    $not_graded = $not_graded + 1;
+                                }
+                                else
+                                {
+                                    $graded = $graded + 1;
+                                }
+                            }
+                        }
+                    }
+                    ?>
+                    <h3 class="text-dark-600 mb-8">GRADING SUMMARY</h3>
+                    <table class="table table-hover table-borderless">
+                        <tbody>
+                            <tr class="bg-gray-300 text-dark-50">
+                                <th>Hidden from students</th>
+                                <td><?php
+                                if($Availability == 'SHOW')
+                                {
+                                    echo "No";
+                                }
+                                else
+                                {
+                                    echo "Yes";
+                                }
+                                ?></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="text-dark-50">
+                                <th>Participants</th>
+                                <td>
+                                <?php echo $total; ?>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="bg-gray-300 text-dark-50">
+                                <th>Submitted</th>
+                                <td><?php echo $total_submission; ?></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="text-dark-50">
+                                <th>Needs grading</th>
+                                <td><?php echo $not_graded; ?></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="bg-gray-300 text-dark-50">
+                                <th>Time remaining</th>
+                                <td>
+                                <?php
+                                $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
+                                $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
 
-                        $Cutoffdate = new MongoDB\BSON\UTCDateTime(strval($Cutoffdate));
-                        $Cutoffdate = $Cutoffdate->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                        //Monday, 19 February 2018, 1:00 AM
-                        $Cutoffdate = date_format($Cutoffdate,"l, d F Y, h:i")." PM";
+                                $now = time();
+                                $due = strval($due);
+
+                                if ($due >= $now)
+                                {
+                                    echo " ".time_elapsed($due-$now)." \n";  
+                                }
+                                else
+                                {
+                                    ?> Assignment is due <?php
+                                }
+                                ?>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php
+                }
+                else
+                {
+                    $action = $_GET['action'];
+                    if($action == 'grading')
+                    {
                         ?>
-                        <h3 class="text-dark-600 mb-8">ASSIGNMENT : <?php echo $Title; ?></h3>
-
-                        <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4">
-                            <div class="row">
-                                <div class="col-sm-2 text-left"><h6>Opened </h6></div>
-                                <div class="col-sm-10 text-left"><h6><?php echo ": ".$Submitfrom; ?></h6></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-2 text-left"><h6>Closed </h6></div>
-                                <div class="col-sm-10 text-left"><h6><?php echo ": ".$Duedate; ?></h6></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-2 text-left"><h6>Cut off date </h6></div>
-                                <div class="col-sm-10 text-left"><h6><?php echo ": ".$Cutoffdate; ?></h6></div>
-                            </div>
-                        </div>
-
-                        <div class="separator separator-dashed my-10 mb-10"></div>
-
-                            <!--begin::Card-->
-                            <div class="card card-custom">
-                                <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                                    <div class="card-title">
-                                        <h3 class="card-label">Local Datasource
-                                        <span class="text-muted pt-2 font-size-sm d-block">Javascript array as data source</span></h3>
-                                    </div>
-                                    <div class="card-toolbar">
+                        <!--begin::Card-->
+                        <div class="card card-custom shadow p-3 mb-5 bg-white rounded">
+                            <div class="card-body">
+                                <!--begin::Search Form-->
+                                <div class="mb-7">
+                                    <div class="noprint text-right">
                                         <!--begin::Dropdown-->
                                         <div class="dropdown dropdown-inline mr-2">
-                                            <button type="button" class="btn btn-light-success font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" class="btn btn-light font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="svg-icon svg-icon-md">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -319,9 +273,9 @@ else
                                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                 <!--begin::Navigation-->
                                                 <ul class="navi flex-column navi-hover py-2">
-                                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-success pb-2">Choose an option:</li>
+                                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-secondary pb-2">Choose an option:</li>
                                                     <li class="navi-item">
-                                                        <a href="#" class="navi-link">
+                                                        <a type="button" class="navi-link" onclick="window.print()">
                                                             <span class="navi-icon">
                                                                 <i class="la la-print"></i>
                                                             </span>
@@ -329,35 +283,11 @@ else
                                                         </a>
                                                     </li>
                                                     <li class="navi-item">
-                                                        <a href="#" class="navi-link">
-                                                            <span class="navi-icon">
-                                                                <i class="la la-copy"></i>
-                                                            </span>
-                                                            <span class="navi-text">Copy</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link">
+                                                        <a href="index.php?page=ol_submit_assignment&id=<?= $Assignment_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
                                                             <span class="navi-icon">
                                                                 <i class="la la-file-excel-o"></i>
                                                             </span>
                                                             <span class="navi-text">Excel</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link">
-                                                            <span class="navi-icon">
-                                                                <i class="la la-file-text-o"></i>
-                                                            </span>
-                                                            <span class="navi-text">CSV</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link">
-                                                            <span class="navi-icon">
-                                                                <i class="la la-file-pdf-o"></i>
-                                                            </span>
-                                                            <span class="navi-text">PDF</span>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -366,230 +296,544 @@ else
                                             <!--end::Dropdown Menu-->
                                         </div>
                                         <!--end::Dropdown-->
-                                        <!--begin::Button-->
-                                        <a href="#" class="btn btn-success font-weight-bolder">
-                                        <span class="svg-icon svg-icon-md">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24" />
-                                                    <circle fill="#000000" cx="9" cy="15" r="6" />
-                                                    <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>New Record</a>
-                                        <!--end::Button-->
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <!--begin::Search Form-->
-                                    <div class="mb-7">
-                                        <div class="row align-items-center">
-                                            <div class="col-lg-9 col-xl-8">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-4 my-2 my-md-0">
-                                                        <div class="input-icon">
-                                                            <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
-                                                            <span>
-                                                                <i class="flaticon2-search-1 text-muted"></i>
-                                                            </span>
-                                                        </div>
+                                <!--end::Search Form-->
+                                <!--begin: Datatable-->
+                                <table id="list" class="table table-borderless" style="background-color: #7e8299 !important;">
+                                <thead class="text-white text-center">
+                                    <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Grade</th>
+                                    <th scope="col">File submissions</th>
+                                    <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-secondary">
+
+                                <?php
+                                $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+
+                                foreach ($cursor as $document)
+                                {
+                                    $Consumer_id = $document->Consumer_id;
+                                    $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                    $query1 = new MongoDB\Driver\Query($filter1);
+                                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                                        
+                                    foreach ($cursor1 as $document1)
+                                    {
+                                        $consumer_id = strval($document1->_id);
+                                        $Consumer_FName = $document1->ConsumerFName;
+                                        $Consumer_LName = $document1->ConsumerLName;
+                                        ?>
+                                        <tr bgcolor="white" class="text-center">
+                                        <td><?php echo $Consumer_FName; ?></td>
+                                        <?php
+
+                                        $Answer_Created_by = '';
+                                        $Mark = 0;
+                                        $File_submission = 'null';
+
+                                        $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
+                                        $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
+                                    
+                                        $now = time();
+                                        $due = strval($due);
+                                        $time_elapsed = 0;
+
+                                        $filter2 = ['Created_by'=>$consumer_id];
+                                        $query2 = new MongoDB\Driver\Query($filter2);
+                                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
+
+                                        foreach ($cursor2 as $document2)
+                                        {
+                                            $Answer_id = strval($document2->_id);
+                                            $Answer_Created_by = $document2->Created_by;
+                                            $Created_date = $document2->Created_date;
+                                            $Mark = $document2->Mark;
+                                            $File_submission = $document2->File_submission;
+
+                                            $Submit = new MongoDB\BSON\UTCDateTime(strval($Created_date));
+                                            $Submit = $Submit->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                            $Submit = date_format($Submit,"Y-m-d\TH:i:s");
+                                            $Submit = new MongoDB\BSON\UTCDateTime((new DateTime($Submit))->getTimestamp());
+                
+                                            $Submit = strval($Submit);
+                                            $now = time();
+                                            $due = strval($due);
+
+                                            //before due
+                                            if($due >= $now)
+                                            {
+                                                ?>
+                                                <td>
+                                                <div class="row">
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col-sm-3">
+                                                        <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
                                                     </div>
-                                                    <div class="col-md-4 my-2 my-md-0">
-                                                        <div class="d-flex align-items-center">
-                                                            <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                                            <select class="form-control" id="kt_datatable_search_status">
-                                                                <option value="">All</option>
-                                                                <option value="1">Pending</option>
-                                                                <option value="2">Delivered</option>
-                                                                <option value="3">Canceled</option>
-                                                                <option value="4">Success</option>
-                                                                <option value="5">Info</option>
-                                                                <option value="6">Danger</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 my-2 my-md-0">
-                                                        <div class="d-flex align-items-center">
-                                                            <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                                            <select class="form-control" id="kt_datatable_search_type">
-                                                                <option value="">All</option>
-                                                                <option value="1">Online</option>
-                                                                <option value="2">Retail</option>
-                                                                <option value="3">Direct</option>
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-sm text-left">
+                                                        <a style="color:green;"><?php echo "Assignment was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                                <a href="#" class="btn btn-light-success px-6 font-weight-bold">Search</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end::Search Form-->
-                                    <!--begin: Datatable-->
-                                    <table id="submission" class="table table-borderless" style="background-color: #7e8299 !important;">
-                                    <thead class="text-white">
-                                        <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Grade</th>
-                                        <th scope="col">File submissions</th>
-                                        <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-secondary">
-                                    <?php
-                                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
-                                    $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
-                                    foreach ($cursor as $document)
-                                    {
-                                        $Consumer_id = $document->Consumer_id;
-
-                                        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                        $query1 = new MongoDB\Driver\Query($filter1);
-                                        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-
-                                        foreach ($cursor1 as $document1)
-                                        {
-                                            $consumer_id = strval($document1->_id);
-                                            $Consumer_FName = $document1->ConsumerFName;
-                                            $Consumer_LName = $document1->ConsumerLName;
-
-                                            $Answer_Created_by = '';
-                                            $Mark = 0;
-                                            $File_submission = 'null';
-                                            $filter2 = ['Created_by'=>$consumer_id];
-                                            $query2 = new MongoDB\Driver\Query($filter2);
-                                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
-
-                                            foreach ($cursor2 as $document2)
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
+                                                    <?= $Mark; ?> / 100
+                                                    </button>
+                                                </td>
+                                                <td><?= $File_submission; ?></td>
+                                                <td>
+                                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditGrade" data-bs-whatever="<?php echo $Answer_id; ?>">
+                                                    <i  class="fa fa-edit"></i>
+                                                </button>
+                                                </td>
+                                                <?php
+                                            }       
+                                            //after due   
+                                            else
                                             {
-                                                $Answer_Created_by = $document2->Created_by;
-                                                $Created_date = $document2->Created_date;
-                                                $Mark = $document2->Mark;
-                                                $File_submission = $document2->File_submission;
-                                            }
-                                            
-                                                ?>
-                                                <tr bgcolor="white">
-                                                    <td><?php echo $Consumer_FName; ?></td>
-                                                    <?php
-                                                    $Submit = new MongoDB\BSON\UTCDateTime(strval($Created_date));
-                                                    $Submit = $Submit->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                                    $Submit = date_format($Submit,"Y-m-d\TH:i:s");
-                                                    $Submit = new MongoDB\BSON\UTCDateTime((new DateTime($Submit))->getTimestamp());
-
-                                                    $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
-                                                    $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
-                        
-                                                    $Submit = strval($Submit);
-                                                    $due = strval($due);
-                        
-                                                    //overdue and not submitted
-                                                    if ($due <= $Submit && $Answer_Created_by == '')
-                                                    {
-                                                        ?>
-                                                        <td>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
-                                                            </div>
-                                                            <div class="col-sm">
-                                                                <a style="color:red;"><?php echo "Assignment is overdue :";  echo " ".time_elapsed($Submit-$due)." ago \n"; ?></a>
-                                                            </div>
-                                                        </div>
-                                                        </td>
-                                                        <td><?= $Mark; ?></td>
-                                                        <td><?= $File_submission; ?></td>
-                                                        <?php
-                                                    }
-                                                    //not submitted
-                                                    elseif($due >= $Submit && $Answer_Created_by == '')
-                                                    {
-                                                        ?>
-                                                        <td>
-                                                        <div class="row">
-                                                            <div class="col-sm">
-                                                                <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
-                                                            </div>
-                                                        </div>
-                                                        </td>
-                                                        <td><?= $Mark; ?></td>
-                                                        <td><?= $File_submission; ?></td>
-                                                        <?php
-                                                    }
-                                                    //overdue and submitted
-                                                    elseif($due <= $Submit && $Answer_Created_by !== '')
-                                                    {
-                                                        ?>
-                                                        <td>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
-                                                            </div>
-                                                            <div class="col-sm">
-                                                                <a style="color:red;"><?php echo "Assignment was submitted :".time_elapsed($Submit-$due)." late \n"; ?></a>
-                                                            </div>
-                                                        </div>
-                                                        </td>
-                                                        <td><?= $Mark; ?></td>
-                                                        <td><?= $File_submission; ?></td>
-                                                        <?php
-                                                    }
-                                                    //submitted
-                                                    elseif($due >= $Submit && $Answer_Created_by !== '')
-                                                    {
-                                                        ?>
-                                                        <td>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
-                                                            </div>
-                                                            <div class="col-sm">
-                                                                <a style="color:green;"><?php echo "Assignment was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
-                                                            </div>
-                                                        </div>
-                                                        </td>
-                                                        <td><?= $Mark; ?></td>
-                                                        <td><?= $File_submission; ?></td>
-                                                        <?php
-                                                    }
+                                                //overdue
+                                                if($due <= $Submit)
+                                                {
                                                     ?>
                                                     <td>
-                                                    <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#EditGrade" data-bs-whatever="<?php echo $consumer_id; ?>">
+                                                    <div class="row">
+                                                        <div class="col-sm-1"></div>
+                                                        <div class="col-sm-3">
+                                                            <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
+                                                        </div>
+                                                        <div class="col-sm text-left">
+                                                            <a style="color:red;"><?php echo "Assignment was submitted : ".time_elapsed($Submit-$due)." late \n"; ?></a>
+                                                        </div>
+                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
+                                                        <?= $Mark; ?> / 100
+                                                        </button>
+                                                    </td>
+                                                    <td><?= $File_submission; ?></td>
+                                                    <td>
+                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditGrade" data-bs-whatever="<?php echo $Answer_id; ?>">
                                                         <i  class="fa fa-edit"></i>
                                                     </button>
                                                     </td>
-                                                </tr>
-                                                <?php
+                                                    <?php
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <td>
+                                                    <div class="row">
+                                                        <div class="col-sm-1"></div>
+                                                        <div class="col-sm-3">
+                                                            <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
+                                                        </div>
+                                                        <div class="col-sm text-left">
+                                                        <a style="color:green;"><?php echo "Assignment was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
+                                                        </div>
+                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
+                                                        <?= $Mark; ?> / 100
+                                                        </button>
+                                                    </td>
+                                                    <td><?= $File_submission; ?></td>
+                                                    <td>
+                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditGrade" data-bs-whatever="<?php echo $Answer_id; ?>">
+                                                        <i  class="fa fa-edit"></i>
+                                                    </button>
+                                                    </td>
+                                                    <?php
+                                                }
+                                            }      
                                         }
-                                        
+                                        if($Answer_Created_by == '')
+                                        {
+                                            //before due
+                                            if($due >= $now)
+                                            {
+                                                ?>
+                                                <td>
+                                                <div class="row">
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col-sm-3">
+                                                        <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
+                                                    </div>
+                                                    <div class="col-sm text-left">
+                                                        <a style="color:green;"><?php echo "Assignment not due yet :";  echo " ".time_elapsed($due-$now)." left \n"; ?></a>
+                                                    </div>
+                                                </div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm rounded-pill btn-hover-outline-white btn-block">
+                                                    <?= $Mark; ?> / 100
+                                                    </button>
+                                                </td>
+                                                <td><?= $File_submission; ?></td>
+                                                <td>
+                                                <button type="button" class="btn" disabled>
+                                                    <i  class="fa fa-edit"></i>
+                                                </button>
+                                                </td>
+                                                <?php
+                                            }       
+                                            //after due   
+                                            else
+                                            {
+                                                ?>
+                                                <td>
+                                                <div class="row">
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col-sm-3">
+                                                        <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
+                                                    </div>
+                                                    <div class="col-sm text-left">
+                                                        <a style="color:red;"><?php echo "Assignment is overdue :";  echo " ".time_elapsed($now-$due)." ago \n"; ?></a>
+                                                    </div>
+                                                </div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm rounded-pill btn-hover-outline-white btn-block">
+                                                    <?= $Mark; ?> / 100
+                                                    </button>
+                                                </td>
+                                                <td><?= $File_submission; ?></td>
+                                                <td>
+                                                <button type="button" class="btn" disabled>
+                                                    <i  class="fa fa-edit"></i>
+                                                </button>
+                                                </td>
+                                                <?php
+                                            }    
+                                        }  
+                                        ?>
+                                    </tr>
+                                    <?php 
                                     }
-                                    ?>
-                                    </tbody>
-                                    </table>
-                                 </div>
-                                    <!--end: Datatable-->
+                                }
+                                ?>
+                                </tbody>
+                                </table>
+                                </div>
+                                <!--end: Datatable-->
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    elseif ($action == 'grader')
+                    {
+                        ?>
+                        <!--begin::Card-->
+                        <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
+                            <?php
+                            $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+
+                            foreach ($cursor as $document)
+                            {
+                                $Consumer_id = $document->Consumer_id;
+                            }
+                            ?>
+                            <div class="row">
+                                <div class="col-sm-10"></div>
+                                <div class="col-sm-2 text-right">
+                                    <button class="btn btn-secondary font-weight-bolder btn-sm mb-2" type="button" data-bs-toggle="dropdown">Change User &nbsp; <i class="fas fa-sort"></i></button>
+                                    <ul class="dropdown-menu">
+                                    <?php
+                                        $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                        $query = new MongoDB\Driver\Query($filter);
+                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+
+                                        foreach ($cursor as $document)
+                                        {
+                                            $Consumer_id = $document->Consumer_id;
+
+                                            $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                            $query1 = new MongoDB\Driver\Query($filter1);
+                                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                                                
+                                            foreach ($cursor1 as $document1)
+                                            {
+                                                $consumer_id = strval($document1->_id);
+                                                $Consumer_FName = $document1->ConsumerFName;
+                                                $Consumer_LName = $document1->ConsumerLName;
+                                            }
+                                            ?>
+                                            <li class="dropdown-item"><a class="text-secondary text-hover-primary" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grader&user=<?php echo $Consumer_id; ?>"><?php echo $Consumer_FName." ".$Consumer_LName; ?></a></li>
+                                            <?php
+                                        }
+                                        ?>
+                                    </ul>
                                 </div>
                             </div>
-                            <!--end::Card-->
+                            <?php
+
+                            if (!isset($_GET['user']) && empty($_GET['user']))
+                            {
+                                $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                $query1 = new MongoDB\Driver\Query($filter1);
+                                $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                            }
+                            else
+                            {
+                                $Consumer_id = ($_GET['user']);
+                                $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                $query1 = new MongoDB\Driver\Query($filter1);
+                                $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                            }
+                                
+                            foreach ($cursor1 as $document1)
+                            {
+                                $consumer_id = strval($document1->_id);
+                                $Consumer_FName = $document1->ConsumerFName;
+                                $Consumer_LName = $document1->ConsumerLName;
+                                $ConsumerIDNo = $document1->ConsumerIDNo;
+                                $ConsumerAddress = $document1->ConsumerAddress;
+                                $ConsumerPhone = $document1->ConsumerPhone;
+                               
+                                ?>
+                                    <div class="mx-10 mb-3">
+                                        <h5><b><?php echo $Consumer_FName." ".$Consumer_LName."<br>"; ?></b></h5>
+                                        <?php
+                                        echo $ConsumerIDNo."<br>";
+                                        echo $ConsumerPhone."<br>";
+                                        echo $ConsumerAddress."<br>";
+                                        ?>
+                                    </div>
+                                    <?php
+                                    $Answer_Created_by = '';
+                                    $Mark = 0;
+                                    $File_submission = 'null';
+
+                                    $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
+                                    $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
+                                
+                                    $now = time();
+                                    $due = strval($due);
+                                    $time_elapsed = 0;
+
+                                    $filter2 = ['Created_by'=>$consumer_id];
+                                    $query2 = new MongoDB\Driver\Query($filter2);
+                                    $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
+
+                                    foreach ($cursor2 as $document2)
+                                    {
+                                        $Answer_id = strval($document2->_id);
+                                        $Answer_Created_by = $document2->Created_by;
+                                        $Created_date = $document2->Created_date;
+                                        $Mark = $document2->Mark;
+                                        $File_submission = $document2->File_submission;
+
+                                        $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
+                                        $Created_date = $Created_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                                        $Submit_dateformat = date_format($Created_date,"D, d F, h:i");
+                                        $Created_date = date_format($Created_date,"Y-m-d\TH:i:s");
+                                        $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime($Created_date))->getTimestamp());
+
+                                        $Submitfrom = date_format($Submitfromzone,"D, d F, h:i");
+                                        $Duedate = date_format($Duetimezone,"D, d F, h:i");
+            
+                                        $Created_date = strval($Created_date);
+                                        $now = time();
+                                        $due = strval($due);
+                                        ?>
+                                        <br>
+                                        <div class="mx-10 mb-3">
+                                            <a class="btn btn-sm btn-circle btn-outline-success"><b>Submission Timeline</b></a>
+                                            <!--begin::Timeline-->
+                                            <div class="timeline timeline-6 mt-3 mx-3">
+                                                <!--begin::Item-->
+                                                <div class="timeline-item align-items-start">
+                                                    <!--begin::Label-->
+                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submitfrom; ?></b></div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Badge-->
+                                                    <div class="timeline-badge">
+                                                        <i class="fa fa-genderless text-success icon-xl"></i>
+                                                    </div>
+                                                    <!--end::Badge-->
+                                                    <!--begin::Content-->
+                                                    <div class="timeline-content d-flex">
+                                                        <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">Opened Date</span>
+                                                    </div>
+                                                    <!--end::Content-->
+                                                </div>
+                                                <!--end::Item-->
+                                                <?php
+                                                if($due >= $Created_date)
+                                                {
+                                                ?>
+                                                <!--begin::Item-->
+                                                <div class="timeline-item align-items-start">
+                                                    <!--begin::Label-->
+                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Badge-->
+                                                    <div class="timeline-badge">
+                                                        <i class="fa fa-genderless text-warning icon-xl"></i>
+                                                    </div>
+                                                    <!--end::Badge-->
+                                                    <!--begin::Desc-->
+                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Assignment Submission : 
+                                                    <a href="#" class="text-primary">file</a></div>
+                                                    <!--end::Desc-->
+                                                </div>
+                                                <!--end::Item-->
+                                                <?php
+                                                }
+                                                ?>
+                                                <!--begin::Item-->
+                                                <div class="timeline-item align-items-start">
+                                                    <!--begin::Label-->
+                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Duedate; ?></b></div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Badge-->
+                                                    <div class="timeline-badge">
+                                                        <i class="fa fa-genderless text-success icon-xl"></i>
+                                                    </div>
+                                                    <!--end::Badge-->
+                                                    <!--begin::Desc-->
+                                                    <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">Closed Date</div>
+                                                    <!--end::Desc-->
+                                                </div>
+                                                <!--end::Item-->
+                                                <?php
+                                                if($due <= $Created_date)
+                                                {
+                                                ?>
+                                                <!--begin::Item-->
+                                                <div class="timeline-item align-items-start">
+                                                    <!--begin::Label-->
+                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Badge-->
+                                                    <div class="timeline-badge">
+                                                        <i class="fa fa-genderless text-danger icon-xl"></i>
+                                                    </div>
+                                                    <!--end::Badge-->
+                                                    <!--begin::Desc-->
+                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Assignment Submission : 
+                                                    &nbsp; <a href="#" class="text-primary">file</a>&nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-danger">overdue</span>
+                                                    </div>
+                                                    <!--end::Desc-->
+                                                </div>
+                                                <!--end::Item-->
+                                                <?php
+                                                }
+                                                ?>
+                                                <!--begin::Item-->
+                                                <div class="timeline-item align-items-start">
+                                                    <!--begin::Label-->
+                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b>Grade</b></div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Badge-->
+                                                    <div class="timeline-badge">
+                                                        <i class="fa fa-genderless text-primary icon-xl"></i>
+                                                    </div>
+                                                    <!--end::Badge-->
+                                                    <!--begin::Desc-->
+                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3"> <?php echo $Mark; ?> / 100
+                                                    &nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-primary">
+                                                    <?php
+                                                    if ($Mark == 0)
+                                                    {
+                                                        echo "not graded";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "graded";
+                                                    }
+                                                    ?>
+                                                    </span>
+                                                    </div>
+                                                    <!--end::Desc-->
+                                                </div>
+                                                <!--end::Item-->
+                                            </div>
+                                        </div>
+                                        <div class="mx-5 mb-3">
+                                            <form name="EditGrade" action="" method="post">
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="answer_id" value="<?php echo $Answer_id; ?>">
+                                                    <div class="row mb-5"> 
+                                                        <div class="col-sm">
+                                                            <label>Grade out of 100</label>
+                                                            <input class="form-control" type="number" name="Mark" min="0" max="100">
+                                                        </div>  
+                                                        <div class="col-sm"></div>  
+                                                    </div>
+                                                    <div class="row mb-5">
+                                                        <div class="col-sm">
+                                                            <label>Feedback comments</label>
+                                                            <textarea class="grade" name="comment"></textarea>
+                                                        </div>
+                                                        <div class="col-sm"></div>  
+                                                    </div>
+                                                    <div class="row mb-5">
+                                                        <div class="col-sm ">
+                                                            <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
+                                                            <button type="submit" name="EditGrade" class="btn btn-success btn-sm">Submit</button>
+                                                        </div>  
+                                                        <div class="col-sm"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <!--end::Card-->
                         <?php
                     }
+                }
+                ?>
+
+                <?php
+
+                if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+                {
                     ?>
-                </div>
-            </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <a href="index.php?page=ol_assignment&id=<?php echo $Assignment_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Assignment Attempts</a>
+                                <a href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
+                                <a href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grader"><button type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Grade</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                } 
+                elseif($_SESSION["loggeduser_ConsumerGroup_id"] == '6018c32b10184a751c102eb6') //student
+                {
+                    ?>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <a href="index.php?page=ol_assignment&id=<?php echo $Assignment_id; ?>" type="button" class="btn btn-sm text-white">Assignment Attempts</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
         </div>
-        <?php
-    }
-    elseif($action == 'grader')
-    {
-        echo "grader";
-    }
-}
+    </div>
+</div>
+<?php
+include ('view/pages/ol_modal-grade.php'); 
 ?>
-<?php include ('view/pages/ol_modal-grade.php'); ?>
