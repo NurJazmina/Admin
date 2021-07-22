@@ -134,13 +134,34 @@ if (isset($_POST['answer']))
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-  $array = [];
-  for ($i=0; $i<$Total_Question; $i++)
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Quiz_id)];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+  foreach ($cursor as $document)
   {
+      $Quiz_id = $document->_id;
+      $Quiz = $document->Quiz;
+      $Created_by = $document->Created_by;
+      $Total_Question = count((array)$Quiz);
+  }
+  $array = [];
+  $totalmark = 0;
+  for ($i = 0; $i < $Total_Question; $i++)
+  {
+    $id = $Quiz[$i]->id;
+    $Type = $Quiz[$i]->Type;
+    $Answer = $Quiz[$i]->Answer;
+    $Mark = 0;
+
+    if($Answer == $_POST['ans'.$i])
+    {
+      $Mark = $Quiz[$i]->Mark;
+      $totalmark += $Mark ;
+    }
     $arraycount =
     [
       'Answer'=>$_POST['ans'.$i],
-      'Mark'=> ''
+      'Mark'=> $Mark
     ];
     array_push($array, $arraycount);
   }
@@ -150,9 +171,23 @@ if (isset($_POST['answer']))
                   'Quiz_id' => $Quiz_id,
                   'Created_by'=>$Created_by,
                   'Created_date'=>$Created_date,
-                  'Quiz'=>$array
+                  'Quiz'=>$array,
+                  'Mark'=>$totalmark
                 ]);
-  
+
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
+}
+
+if (isset($_POST['EditCommentQuiz']))
+{
+  $answer_id = $_POST['answer_id'];
+  $Comment = $_POST['Comment'];
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($answer_id)],
+                ['$set' => ['Comment'=>$Comment]],
+                ['multi'=> TRUE]
+                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -185,5 +220,60 @@ if (isset($_POST['answer']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-  printf("Inserted %d document(s)\n", $result->getInsertedCount());
+}
+
+if (isset($_POST['GradeSubjective']))
+{
+  $answer_id = $_POST['answer_id'];
+  $Mark = $_POST['Mark'];
+  $Comment = $_POST['Comment'];
+
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($answer_id)];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query);
+
+  foreach ($cursor as $document)
+  {
+      $Mark_before = $document->Mark;
+  }
+
+  $Mark = $Mark + $Mark_before;
+  
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($answer_id)],
+                ['$set' => ['Mark'=>$Mark ,'Comment'=>$Comment]],
+                ['multi'=> TRUE]
+                );
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  try
+  {
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
+  }
+  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+  {
+    $result = $e->getWriteResult();
+    // Check if the write concern could not be fulfilled
+    if ($writeConcernError = $result->getWriteConcernError())
+    {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+    // Check if any write operations did not complete at all
+    foreach ($result->getWriteErrors() as $writeError)
+    {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+  }
+  catch (MongoDB\Driver\Exception\Exception $e)
+  {
+    printf("Other error: %s\n", $e->getMessage());
+    exit;
+  }
 }

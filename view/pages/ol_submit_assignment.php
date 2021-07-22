@@ -26,21 +26,6 @@ function time_elapsed($date){
     visibility: hidden;
 }
 }
-td.ygtvcell {
-    border: 0;
-    padding: 0;
-}
-.ygtvln {
-    width: 18px;
-    height: 22px;
-    background: url(/theme/yui_image.php?file=2.9.0/treeview-sprite.gif) 0 -1600px no-repeat;
-    cursor: pointer;
-}
-.ygtvspacer {
-    color: red;
-    height: 22px;
-    width: 18px;
-}
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -799,9 +784,6 @@ td.ygtvcell {
                         <?php
                     }
                 }
-                ?>
-
-                <?php
 
                 if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                 {

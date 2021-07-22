@@ -137,6 +137,7 @@
                                 "suggestions",
                                 "mira",
                                 "likes",
+                                "test",
 
                                 //in progress//
                                 "simplecalendar",

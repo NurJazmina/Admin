@@ -484,10 +484,10 @@ if (isset($_POST['recheckquiz']))
                                             <label for="questiontype" class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Answer</label>
                                             <div class="col-md-6">
                                                 <select class="form-control" id="Answer" name="Answer<?php echo $i; ?>" >
-                                                    <option value="Option_A" >A</option>
-                                                    <option value="Option_B" >B</option>
-                                                    <option value="Option_C" >C</option>
-                                                    <option value="Option_D" >D</option>
+                                                    <option value="A" >A</option>
+                                                    <option value="B" >B</option>
+                                                    <option value="C" >C</option>
+                                                    <option value="D" >D</option>
                                                 </select>
                                             </div>
                                         </div>
