@@ -25,6 +25,29 @@ function time_elapsed($date){
     visibility: hidden;
 }
 }
+.dot {
+  height: 5px;
+  width: 5px;
+  background-color: #7E8299;
+  border-radius: 50%;
+  display: inline-block;
+}
+.separator {
+    width: 100%;
+    border-bottom: solid 1px;
+    position: relative;
+    margin: 30px 0px;
+}
+
+.separator::before {
+    content: "Manually mark : subjective questions";
+    position: absolute;
+    left: 40%;
+    top: -10px;
+    background-color: #fff;
+    padding: 0px 10px;
+}
+
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -108,7 +131,7 @@ function time_elapsed($date){
                 ?>
                 <h3 class="text-dark-600 mb-8"> QUIZ : <?php echo $Title; ?></h3>
 
-                <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4">
+                <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4 mb-10">
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Opened </h6></div>
                         <div class="col-sm-10 text-left"><h6><?php echo ": ".$DateOpen; ?></h6></div>
@@ -119,7 +142,6 @@ function time_elapsed($date){
                     </div>
                 </div>
 
-                <div class="separator separator-dashed my-10"></div>
                 <?php
                 if (!isset($_GET['action']) && empty($_GET['action']))
                 {
@@ -633,6 +655,7 @@ function time_elapsed($date){
                                         $Created_date = strval($Created_date);
                                         $now = time();
                                         $due = strval($due);
+                                        $Quiz_Answer = $document2->Quiz;
                                         ?>
                                         <br>
                                         <div class="mx-10 mb-3">
@@ -751,6 +774,7 @@ function time_elapsed($date){
                                         <div class="checkbox-inline mx-13 mt-3">
                                             <b>Feedback Comments :</b>&nbsp;<?php echo $Comment; ?>
                                         </div>
+                                        <div class="separator separator-solid my-5"></div>
                                         <div class="mx-6 mb-3">
                                             <form name="GradeSubjective" action="" method="post">
                                                 <div class="modal-body">
@@ -758,7 +782,6 @@ function time_elapsed($date){
                                                     <?php
                                                     for ($i = 0; $i < $Total_Question; $i++)
                                                     {
-                                                        $id = $Quiz[$i]->id;
                                                         $Type = $Quiz[$i]->Type;
                                                         $Question = $Quiz[$i]->Question;
                                                         $Option_A = $Quiz[$i]->Option_A;
@@ -769,19 +792,40 @@ function time_elapsed($date){
                                                         $Mark = $Quiz[$i]->Mark;
                                                         if ($Type == "SUBJECTIVE")
                                                         {
+                                                            $id = $Quiz[$i]->id;
                                                             $Mark_subjective = $Quiz[$i]->Mark;
+
+                                                            $Answer2 = $Quiz_Answer[$id]->Answer; 
+                                                            $Mark2 = $Quiz_Answer[$i]->Mark;
                                                             ?>
-                                                            <div class="row mb-5">     
-                                                                <label>Adding mark for subjective
-                                                                    <span class="label label-md font-weight-bold label-pill label-inline label-primary">
-                                                                        Mark out of <?php echo $Mark; ?>
-                                                                    </span>
-                                                                </label>
+                                                            <div class="row mb-5">
                                                                 <div class="col-sm">
-                                                                    <label><?php echo "Question : ".$Question; ?></label>
-                                                                    <input class="form-control" type="number" name="Mark" min="0" max="<?=  $Mark ?>">
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <label class="align-items-baseline">Question <?php echo $id; ?></label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label align="justify"><?php echo $Question; ?></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <label>Answer</label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label align="justify"><b><?php echo $Answer2; ?></b></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <label>Mark</label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input class="form-control" type="number" name="Mark" min="0" max="<?=  $Mark ?>" placeholder="  Mark out of <?php echo $Mark; ?>">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-sm"></div> 
+                                                                <div class="col-sm"></div>
                                                             </div>
                                                             <?php
                                                         }
