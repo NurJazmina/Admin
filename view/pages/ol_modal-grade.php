@@ -33,24 +33,6 @@
     </div>
   </div>
 </div>
-<?php
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
-$query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
-foreach ($cursor as $document)
-{
-    $Quiz = $document->Quiz;
-    $Total_Question = count((array)$Quiz);
-}
-for ($i = 0; $i < $Total_Question; $i++)
-{
-    $Type = $Quiz[$i]->Type;
-    if ($Type == "SUBJECTIVE")
-    {
-        $Mark = $Quiz[$i]->Mark;
-    }
-}
-?>
 <div class="modal fade" id="EditCommentQuiz" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
@@ -89,28 +71,4 @@ tinymce.init({
   toolbar: false,
   height:100,
 });
-</script>
-<script>
-//copied url
-function sweetalert1() {
-    var Url = document.getElementById("url");
-    Url.value = window.location.href;
-    Url.focus();
-    Url.select();  
-    const successful = document.execCommand("Copy");
-
-    if(successful) 
-    {
-        Swal.fire({
-        icon: 'success',
-        title: 'URL have been copied',
-        confirmButtonColor: "#1BC5BD",
-        timer: 5000
-        })
-    } 
-    else 
-    {
-        // ...
-    }
-}
 </script>

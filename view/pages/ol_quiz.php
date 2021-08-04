@@ -327,7 +327,7 @@ $(document).ready(function() {
                     <div class="modal-body">
                         <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Objective</button> 
                         <div class="row mx-0 mt-1">
-                            <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
+                            <label class="col-lg-12 col-form-label" align="justify"><h5><?php echo $Question; ?></h5></label>
                         </div>
                         <div class="separator separator-solid"></div>
                         <div class="row">
@@ -379,7 +379,7 @@ $(document).ready(function() {
                     <div class="modal-body">
                         <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Subjective</button>
                         <div class="row mx-0 mt-1">
-                            <label class="col-lg-12 col-form-label text-lg-left"><h5><?php echo $Question; ?></h5></label>
+                            <label class="col-lg-12 col-form-label" align="justify"><h5><?php echo $Question; ?></h5></label>
                         </div>
                         <div class="separator separator-solid"></div>
                         <textarea class="quiz" name="ans<?= $id ?>" ></textarea>

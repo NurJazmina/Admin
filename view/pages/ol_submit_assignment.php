@@ -26,6 +26,28 @@ function time_elapsed($date){
     visibility: hidden;
 }
 }
+.dot {
+  height: 5px;
+  width: 5px;
+  background-color: #7E8299;
+  border-radius: 50%;
+  display: inline-block;
+}
+.separator {
+    width: 100%;
+    border-bottom: solid 1px;
+    position: relative;
+    margin: 30px 0px;
+}
+
+.separator::before {
+    content: "Manually Mark";
+    position: absolute;
+    left: 45%;
+    top: -10px;
+    background-color: #fff;
+    padding: 0px 10px;
+}
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -99,7 +121,7 @@ function time_elapsed($date){
                 ?>
                 <h3 class="text-dark-600 mb-8">ASSIGNMENT : <?php echo $Title; ?></h3>
 
-                <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4">
+                <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4 mb-10">
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Opened </h6></div>
                         <div class="col-sm-10 text-left"><h6><?php echo ": ".$Submitfrom; ?></h6></div>
@@ -114,7 +136,6 @@ function time_elapsed($date){
                     </div>
                 </div>
 
-                <div class="separator separator-dashed my-10"></div>
                 <?php
                 if (!isset($_GET['action']) && empty($_GET['action']))
                 {
@@ -616,6 +637,7 @@ function time_elapsed($date){
                                         $Created_date = $document2->Created_date;
                                         $Mark = $document2->Mark;
                                         $File_submission = $document2->File_submission;
+                                        $comment = $document2->comment;
 
                                         $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
                                         $Created_date = $Created_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -632,119 +654,131 @@ function time_elapsed($date){
                                         $due = strval($due);
                                         ?>
                                         <br>
-                                        <div class="mx-10 mb-3">
-                                            <a class="btn btn-sm btn-circle btn-outline-success"><b>Submission Timeline</b></a>
-                                            <!--begin::Timeline-->
-                                            <div class="timeline timeline-6 mt-3 mx-3">
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submitfrom; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-success icon-xl"></i>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="mx-10 mb-3">
+                                                    <a class="btn btn-sm btn-circle btn-outline-success"><b>Submission Timeline</b></a>
+                                                    <!--begin::Timeline-->
+                                                    <div class="timeline timeline-6 mt-3 mx-3">
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submitfrom; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-success icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Content-->
+                                                            <div class="timeline-content d-flex">
+                                                                <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">Opened Date</span>
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        if($due >= $Created_date)
+                                                        {
+                                                        ?>
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-warning icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Desc-->
+                                                            <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Assignment Submission : 
+                                                            <a href="#" class="text-primary">file</a></div>
+                                                            <!--end::Desc-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Duedate; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-success icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Desc-->
+                                                            <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">Closed Date</div>
+                                                            <!--end::Desc-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        if($due <= $Created_date)
+                                                        {
+                                                        ?>
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-danger icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Desc-->
+                                                            <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Assignment Submission : 
+                                                            &nbsp; <a href="#" class="text-primary">file</a>&nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-danger">overdue</span>
+                                                            </div>
+                                                            <!--end::Desc-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Content-->
-                                                    <div class="timeline-content d-flex">
-                                                        <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">Opened Date</span>
-                                                    </div>
-                                                    <!--end::Content-->
                                                 </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                if($due >= $Created_date)
-                                                {
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-warning icon-xl"></i>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <a class="btn btn-sm btn-circle btn-outline-success"><b>Grade</b></a>
+                                                <div class="row mx-0 mt-3 text-primary">
+                                                    <div class="col-sm-2">
+                                                        <b>Total Mark</b>
                                                     </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Assignment Submission : 
-                                                    <a href="#" class="text-primary">file</a></div>
-                                                    <!--end::Desc-->
+                                                    <div class="col-sm">
+                                                        <b>:</b>
+                                                        <b><?php echo $Mark; ?> / 100</b>
+                                                        &nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-primary">
+                                                        <?php
+                                                        if ($Mark == 0)
+                                                        {
+                                                            echo "not graded";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "graded";
+                                                        }
+                                                        ?>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Duedate; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-success icon-xl"></i>
+                                                <div class="row mx-0 mt-3">
+                                                    <div class="col-sm-2">
+                                                        <b>Comments</b>
                                                     </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">Closed Date</div>
-                                                    <!--end::Desc-->
+                                                    <div class="col-sm">
+                                                        <div class="checkbox-inline">
+                                                            <b>:</b>&nbsp;
+                                                            <b><?php echo $comment; ?></b>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                if($due <= $Created_date)
-                                                {
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-danger icon-xl"></i>
-                                                    </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Assignment Submission : 
-                                                    &nbsp; <a href="#" class="text-primary">file</a>&nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-danger">overdue</span>
-                                                    </div>
-                                                    <!--end::Desc-->
-                                                </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b>Grade</b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-primary icon-xl"></i>
-                                                    </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3"> <?php echo $Mark; ?> / 100
-                                                    &nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-primary">
-                                                    <?php
-                                                    if ($Mark == 0)
-                                                    {
-                                                        echo "not graded";
-                                                    }
-                                                    else
-                                                    {
-                                                        echo "graded";
-                                                    }
-                                                    ?>
-                                                    </span>
-                                                    </div>
-                                                    <!--end::Desc-->
-                                                </div>
-                                                <!--end::Item-->
                                             </div>
                                         </div>
+                                        <div class="separator separator-solid my-5"></div>
                                         <div class="mx-5 mb-3">
                                             <form name="EditGrade" action="" method="post">
                                                 <div class="modal-body">

@@ -47,7 +47,6 @@ function time_elapsed($date){
     background-color: #fff;
     padding: 0px 10px;
 }
-
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -114,6 +113,9 @@ function time_elapsed($date){
                 $Quiz = $document->Quiz;
                 $Total_Question = count((array)$Quiz);
                 $totalmark = 0;
+                $objective_mark = 0;
+                $subjective_mark = 0;
+
                 for ($i = 0; $i < $Total_Question; $i++)
                 {
                     $id = $Quiz[$i]->id;
@@ -125,7 +127,18 @@ function time_elapsed($date){
                     $Option_D = $Quiz[$i]->Option_D;
                     $Answer = $Quiz[$i]->Answer;
                     $Mark = $Quiz[$i]->Mark;
-                    $totalmark += $Mark ;
+                    $totalmark += $Mark;
+                    
+                    if($Type == 'OBJECTIVE')
+                    {
+                        $Mark = $Quiz[$i]->Mark;
+                        $objective_mark += $Mark;
+                    }
+                    elseif($Type == 'SUBJECTIVE')
+                    {
+                        $Mark = $Quiz[$i]->Mark;
+                        $subjective_mark += $Mark;
+                    }
                 }
                
                 ?>
@@ -172,8 +185,23 @@ function time_elapsed($date){
                             foreach ($cursor2 as $document2)
                             {
                                 $total_submission = $total_submission + 1;
-                                $Mark = $document2->Mark;
-                                if($Mark == 0)
+
+                                $Quiz_Answer = $document2->Quiz;
+                                $Total_Answer = count((array)$Quiz_Answer);
+                                $sub_mark = 0;
+
+                                for ($i = 0; $i < $Total_Question; $i++)
+                                {
+                                    $Type = $Quiz[$i]->Type;
+                                    if($Type == 'SUBJECTIVE')
+                                    {
+                                        $id = $Quiz[$i]->id;
+                                        $Mark_ans = $Quiz_Answer[$id]->Mark;
+                                        $sub_mark += $Mark_ans;
+                                    }
+                                }
+                                //echo $sub_mark;
+                                if($sub_mark == 0)
                                 {
                                     $not_graded = $not_graded + 1;
                                 }
@@ -370,7 +398,6 @@ function time_elapsed($date){
                                             $Answer_id = strval($document2->_id);
                                             $Answer_Created_by = $document2->Created_by;
                                             $Created_date = $document2->Created_date;
-                                            $Mark = $document2->Mark;
 
                                             $Submit = new MongoDB\BSON\UTCDateTime(strval($Created_date));
                                             $Submit = $Submit->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -380,6 +407,16 @@ function time_elapsed($date){
                                             $Submit = strval($Submit);
                                             $now = time();
                                             $due = strval($due);
+
+                                            $Quiz_Answer = $document2->Quiz;
+                                            $Total_Answer = count((array)$Quiz_Answer);
+                                            $total_mark = 0;
+
+                                            for ($i = 0; $i < $Total_Answer; $i++)
+                                            {
+                                                $Mark_ans = $Quiz_Answer[$i]->Mark;
+                                                $total_mark += $Mark_ans;
+                                            }
 
                                             //before due
                                             if($due >= $now)
@@ -398,7 +435,7 @@ function time_elapsed($date){
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
-                                                    <?= $Mark; ?> / 100
+                                                    <?= $total_mark; ?> / 100
                                                     </button>
                                                 </td>
                                                 <td>
@@ -428,7 +465,7 @@ function time_elapsed($date){
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
-                                                        <?= $Mark; ?> / <?=  $totalmark ?>
+                                                        <?= $total_mark; ?> / <?=  $totalmark ?>
                                                         </button>
                                                     </td>
                                                     <td>
@@ -454,7 +491,7 @@ function time_elapsed($date){
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
-                                                        <?= $Mark; ?> / <?=  $totalmark ?>
+                                                        <?= $total_mark; ?> / <?=  $totalmark ?>
                                                         </button>
                                                     </td>
                                                     <td>
@@ -485,7 +522,7 @@ function time_elapsed($date){
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-danger btn-sm rounded-pill btn-hover-outline-white btn-block">
-                                                    <?= $Mark; ?> / <?=  $totalmark ?>
+                                                    0 / <?=  $totalmark ?>
                                                     </button>
                                                 </td>
                                                 <td>
@@ -512,7 +549,7 @@ function time_elapsed($date){
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-danger btn-sm rounded-pill btn-hover-outline-white btn-block">
-                                                    <?= $Mark; ?> / <?=  $totalmark ?>
+                                                    0 / <?=  $totalmark ?>
                                                     </button>
                                                 </td>
                                                 <td>
@@ -639,7 +676,6 @@ function time_elapsed($date){
                                         $Answer_id = strval($document2->_id);
                                         $Answer_Created_by = $document2->Created_by;
                                         $Created_date = $document2->Created_date;
-                                        $Mark = $document2->Mark;
                                         $Comment = $document2->Comment;
 
                                         $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
@@ -656,123 +692,187 @@ function time_elapsed($date){
                                         $now = time();
                                         $due = strval($due);
                                         $Quiz_Answer = $document2->Quiz;
+                                        $Total_Answer = count((array)$Quiz_Answer);
+                                        $objective_ans_mark = 0;
+                                        $subjective_ans_mark = 0;
+                        
+                                        for ($i = 0; $i < $Total_Question; $i++)
+                                        {
+                                            $Type = $Quiz[$i]->Type;
+                                            $id = $Quiz[$i]->id;
+
+                                            if($Type == 'OBJECTIVE')
+                                            {
+                                                $Mark_ans = $Quiz_Answer[$id]->Mark;
+                                                $objective_ans_mark += $Mark_ans;
+                                            }
+                                            elseif($Type == 'SUBJECTIVE')
+                                            {
+                                                $Mark_ans = $Quiz_Answer[$id]->Mark;
+                                                $subjective_ans_mark += $Mark_ans;
+                                            }
+                                            $Total_ans_mark = $objective_ans_mark + $subjective_ans_mark;
+                                        }
+                                        
                                         ?>
                                         <br>
-                                        <div class="mx-10 mb-3">
-                                            <a class="btn btn-sm btn-circle btn-outline-success"><b>Submission Timeline</b></a>
-                                            <!--begin::Timeline-->
-                                            <div class="timeline timeline-6 mt-3 mx-3">
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submitfrom; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-success icon-xl"></i>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="mx-10 mb-3">
+                                                    <a class="btn btn-sm btn-circle btn-outline-success"><b>Submission Timeline</b></a>
+                                                    <!--begin::Timeline-->
+                                                    <div class="timeline timeline-6 mt-3 mx-3">
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submitfrom; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-success icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Content-->
+                                                            <div class="timeline-content d-flex">
+                                                                <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">Opened Date</span>
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        if($due >= $Created_date)
+                                                        {
+                                                        ?>
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-warning icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Desc-->
+                                                            <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Quiz Submission : 
+                                                            <a href="#" class="text-primary">file</a></div>
+                                                            <!--end::Desc-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Duedate; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-success icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Desc-->
+                                                            <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">Closed Date</div>
+                                                            <!--end::Desc-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        if($due <= $Created_date)
+                                                        {
+                                                        ?>
+                                                        <!--begin::Item-->
+                                                        <div class="timeline-item align-items-start">
+                                                            <!--begin::Label-->
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                            <!--end::Label-->
+                                                            <!--begin::Badge-->
+                                                            <div class="timeline-badge">
+                                                                <i class="fa fa-genderless text-danger icon-xl"></i>
+                                                            </div>
+                                                            <!--end::Badge-->
+                                                            <!--begin::Desc-->
+                                                            <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Quiz Submission : 
+                                                            &nbsp; <a href="#" class="text-primary">file</a>&nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-danger">overdue</span>
+                                                            </div>
+                                                            <!--end::Desc-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Content-->
-                                                    <div class="timeline-content d-flex">
-                                                        <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">Opened Date</span>
-                                                    </div>
-                                                    <!--end::Content-->
                                                 </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                if($due >= $Created_date)
-                                                {
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-warning icon-xl"></i>
-                                                    </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Quiz Submission : 
-                                                    <a href="#" class="text-primary">file</a></div>
-                                                    <!--end::Desc-->
-                                                </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Duedate; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-success icon-xl"></i>
-                                                    </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">Closed Date</div>
-                                                    <!--end::Desc-->
-                                                </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                if($due <= $Created_date)
-                                                {
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-danger icon-xl"></i>
-                                                    </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Quiz Submission : 
-                                                    &nbsp; <a href="#" class="text-primary">file</a>&nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-danger">overdue</span>
-                                                    </div>
-                                                    <!--end::Desc-->
-                                                </div>
-                                                <!--end::Item-->
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--begin::Item-->
-                                                <div class="timeline-item align-items-start">
-                                                    <!--begin::Label-->
-                                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b>Auto Grade</b></div>
-                                                    <!--end::Label-->
-                                                    <!--begin::Badge-->
-                                                    <div class="timeline-badge">
-                                                        <i class="fa fa-genderless text-primary icon-xl"></i>
-                                                    </div>
-                                                    <!--end::Badge-->
-                                                    <!--begin::Desc-->
-                                                    <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3"> <?php echo $Mark; ?> / <?=  $totalmark ?>
-                                                    &nbsp; <span class="label label-md font-weight-bold label-pill label-inline label-primary">
-                                                    <?php
-                                                    if ($Mark == 0)
-                                                    {
-                                                        echo "not graded";
-                                                    }
-                                                    else
-                                                    {
-                                                        echo "graded";
-                                                    }
-                                                    ?>
-                                                    </span>
-                                                    </div>
-                                                    <!--end::Desc-->
-                                                </div>
-                                                <!--end::Item-->
                                             </div>
-                                        </div>
-                                        <div class="checkbox-inline mx-13 mt-3">
-                                            <b>Feedback Comments :</b>&nbsp;<?php echo $Comment; ?>
+                                            <div class="col-sm-6">
+                                                <a class="btn btn-sm btn-circle btn-outline-success"><b>Grade</b></a>
+                                                <div class="row mx-0 mt-3 text-primary">
+                                                    <div class="col-sm-2">
+                                                        <b>Total Mark</b>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <b>:</b>
+                                                        <b><?php echo $Total_ans_mark; ?> / <?=  $totalmark ?></b>
+                                                    </div>
+                                                </div>
+                                                <div class="row mx-0 mt-3">
+                                                    <div class="col-sm-2">
+                                                        <b>Objective</b>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <div class="checkbox-inline">
+                                                            <b>:</b>&nbsp;
+                                                            <b><?php echo $objective_ans_mark; ?> / <?=  $objective_mark ?></b>&nbsp; &nbsp;
+                                                            <span class="label label-md font-weight-bold label-pill label-inline label-primary">
+                                                            <?php
+                                                            if ($objective_ans_mark == 0)
+                                                            {
+                                                                echo "not graded";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "graded";
+                                                            }
+                                                            ?>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mx-0 mt-3">
+                                                    <div class="col-sm-2">
+                                                        <b>Subjective</b>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <div class="checkbox-inline">
+                                                            <b>:</b>&nbsp;
+                                                            <b><?php echo $subjective_ans_mark; ?> / <?=  $subjective_mark ?></b>&nbsp; &nbsp;
+                                                            <span class="label label-md font-weight-bold label-pill label-inline label-primary">
+                                                            <?php
+                                                            if ($subjective_ans_mark == 0)
+                                                            {
+                                                                echo "not graded";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "graded";
+                                                            }
+                                                            ?>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mx-0 mt-3">
+                                                    <div class="col-sm-2">
+                                                        <b>Comments</b>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <div class="checkbox-inline">
+                                                            <b>:</b>&nbsp;
+                                                            <b><?php echo $Comment; ?></b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="separator separator-solid my-5"></div>
                                         <div class="mx-6 mb-3">
@@ -784,12 +884,8 @@ function time_elapsed($date){
                                                     {
                                                         $Type = $Quiz[$i]->Type;
                                                         $Question = $Quiz[$i]->Question;
-                                                        $Option_A = $Quiz[$i]->Option_A;
-                                                        $Option_B = $Quiz[$i]->Option_B;
-                                                        $Option_C = $Quiz[$i]->Option_C;
-                                                        $Option_D = $Quiz[$i]->Option_D;
                                                         $Answer = $Quiz[$i]->Answer;
-                                                        $Mark = $Quiz[$i]->Mark;
+                                                        
                                                         if ($Type == "SUBJECTIVE")
                                                         {
                                                             $id = $Quiz[$i]->id;
@@ -798,7 +894,7 @@ function time_elapsed($date){
                                                             $Answer2 = $Quiz_Answer[$id]->Answer; 
                                                             $Mark2 = $Quiz_Answer[$i]->Mark;
                                                             ?>
-                                                            <div class="row mb-5">
+                                                            <div class="row mb-5 p-5 border">
                                                                 <div class="col-sm">
                                                                     <div class="row">
                                                                         <div class="col-2">
@@ -810,10 +906,18 @@ function time_elapsed($date){
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-2">
-                                                                            <label>Answer</label>
+                                                                            <label>Answer Key</label>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label align="justify"><b><?php echo $Answer2; ?></b></label>
+                                                                            <label align="justify"><?php echo $Answer; ?></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <label class="text-primary"><b>Answer</b></label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="text-primary" align="justify"><b><?php echo $Answer2; ?></b></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
@@ -821,7 +925,7 @@ function time_elapsed($date){
                                                                             <label>Mark</label>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <input class="form-control" type="number" name="Mark" min="0" max="<?=  $Mark ?>" placeholder="  Mark out of <?php echo $Mark; ?>">
+                                                                            <input class="form-control" type="number" name="ans<?= $id  ?>" min="0" max="<?=  $Mark_subjective ?>" placeholder="  Mark out of <?php echo $Mark_subjective; ?>">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -840,6 +944,7 @@ function time_elapsed($date){
                                                     </div>
                                                     <div class="row mb-5">
                                                         <div class="col-sm ">
+                                                            <input type="hidden" name="quiz_id" value="<?php echo $Quiz_id; ?>">
                                                             <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
                                                             <button type="submit" name="GradeSubjective" class="btn btn-success btn-sm">Submit</button>
                                                         </div>  
