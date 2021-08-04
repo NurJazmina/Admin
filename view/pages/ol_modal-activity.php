@@ -87,7 +87,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-sm-3 mb-1 mt-1">
+            <!-- <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
                     <a class="d-flex flex-column justify-content-between flex-fill" href="" title="Add a new choice" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
@@ -166,7 +166,7 @@
                         <div>H5P</div>
                     </a>
                 </div>
-            </div>
+            </div> -->
         </div>
       </div>
       <div class="modal-footer">
