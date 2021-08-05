@@ -1,7 +1,7 @@
 <!-- live chat start-->
 <style>
    body {
-        background-image: url('image/student.jpg');
+        /* background-image: url('image/student.jpg'); */
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -136,12 +136,16 @@
   <form class="form1" name="LoginFormSubmit" method="post" action="">
     <input class="un " type="text" align="center" id="txtID" name="txtID" placeholder="Your ID">
     <input class="pass" type="password" align="center" id="txtPassword" name="txtPassword" placeholder="Password" >
+
     <button class="submit" id="login" align="center" name="LoginFormSubmit">Sign in</button>
+
     <p class="forgot" align="center"><a href="#">1st Time Login</a> | <a href="#">Forgot Password?</a></p>
     <p class="dev" align="center">Developed by G&G Softech Sdn Bhd</p>
   </form>
 </div>
+
 <!-- <script>
+
    document.addEventListener('click', ({ target }) => {
     if (target.matches('button')) {
       var id = document.getElementById('txtID').value;
@@ -153,6 +157,7 @@
       var json = JSON.stringify(postData);
       return fetch(`http://8ce958c31199.ngrok.io/api/login`, {
               method: 'post',
+
               mode: 'no-cors',
               headers: {
                 'Content-Type': 'application/json',
@@ -174,7 +179,9 @@
               console.log(text);
               var json = JSON.parse(text);
               var token = json.data.token;
+
               var url = `http://localhost:80/smartschool.gongetz.com/api/api_session.php?api_session=` + token;
+
               return fetch(url, {
                   method: 'get',
               })
@@ -185,8 +192,10 @@
                 return response.text();
               })
               .then(text => {
+
                 console.log(text);
                 window.location.href = 'http://localhost:80/smartschool.gongetz.com/index.php?page=dashboard&action=loginsuccesful';
+
               })
               .catch(error => {
                 console.log(error);
@@ -198,4 +207,6 @@
             });
     }
 });
+
 </script> -->
+
