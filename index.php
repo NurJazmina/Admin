@@ -2,6 +2,7 @@
 <?php
 // Start the session
 session_start();
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -97,7 +98,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		
         <div class="page">
             <?php 
-			if(isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id'])) 
+			if (isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id']))  //(isset($_POST['LoginFormSubmit']))
 			{
 			?>
 				<!--begin::Main-->
@@ -226,6 +227,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.2.0/dist/alpine.js"></script>
+		<link href="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.css" rel="stylesheet">
 		
 		<!--end::Page Vendors-->
 
@@ -236,11 +238,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<?php include 'resources/default.php'; ?>
 		<?php
-		if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-		{
-
-		}
-		else
+		if (isset($_GET['attendance']) && !empty($_GET['attendance']))
 		{
 			$attendance = ($_GET['attendance']);
 			?>
@@ -251,6 +249,19 @@ License: You must have a valid license purchased only from themeforest(the above
      				});
   				});  
  			</script>
+			<?php
+		}
+		if (isset($_GET['list_submission']) && !empty($_GET['list_submission']))
+		{
+			$list = ($_GET['list_submission']);
+			?>
+			<script>
+				$(document).ready(function () {
+					$("#list").table2excel({
+					filename: "listsubmission.xls"
+					});
+				}); 
+			</script>
 			<?php
 		}
 		?>

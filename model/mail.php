@@ -203,7 +203,7 @@ if (isset($_POST['Staffmail']))
             )
         );
         //Argument true in constructor enables exceptions
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         $mail->isSMTP();
         $mail->Host = 'mail.gongetz.com';
         $mail->SMTPAuth = true;

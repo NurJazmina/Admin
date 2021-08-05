@@ -1,4 +1,4 @@
-<form  id="AddtimetableFormSubmit"  name="AddtimetableFormSubmit" action="index.php?page=rechecktimetable" method="post">
+<form  id="AddtimetableFormSubmit"  name="AddtimetableFormSubmit" action="index.php?page=modal-rechecktimetablelist" method="post">
   <div class="modal fade" id="recheckaddtimetable" tabindex="-1" aria-labelledby="AddtimetableModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

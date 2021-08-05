@@ -1,8 +1,0 @@
-<header>
-  <h1>JSON and AJAX</h1>
-  <button id="btn">Fetch Info for 3 New Animals</button>
-</header>
-
-<div id="animal-info"></div>
-
-<script src="view/pages/info.js"></script>

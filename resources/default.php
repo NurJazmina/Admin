@@ -603,22 +603,58 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         </script>
         <?php
       }
-      if ($_GET['page']=="onlinelearning") 
+      if ($_GET['page']=="subject") 
+      {
+        ?>
+          <script>
+          $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+          })
+          </script>
+          <?php
+      }
+      if ($_GET['page']=="ol_submit_assignment") 
       {
       ?>
       <script>
-      //Limit characters displayed in span
-      $(document).ready(function(){
-      $('.claimedRight').each(function (f) {
-          var newstr = $(this).text().substring(0,300)+'....';
-          $(this).text(newstr);
-
-          });
+      var EditGrade = document.getElementById('EditGrade')
+      EditGrade.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = EditGrade.querySelector('.modal-title')
+      var modalBodyInput = EditGrade.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
       })
       </script>
       <?php
       }
-  
+      if ($_GET['page']=="ol_submit_quiz") 
+      {
+      ?>
+      <script>
+      var EditCommentQuiz = document.getElementById('EditCommentQuiz')
+      EditCommentQuiz.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = EditCommentQuiz.querySelector('.modal-title')
+      var modalBodyInput = EditCommentQuiz.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+      </script>
+      <?php
+      }
 }
 ?>
 

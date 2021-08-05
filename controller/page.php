@@ -58,18 +58,7 @@
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
                                 
-                                "calendar",
-                                "simplecalendar",
-                                "onlinelearning",
-                                "mira",
-                                "notes",
-                                "exercises",
-                                //"testing",
-<<<<<<< HEAD
-                                "upload"
-=======
-                                "imagetest",
->>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
+                                
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -126,20 +115,39 @@
                                 //"testing",
                                 //"duplicate",
 
-                                //will be sort//
-                                "simplecalendar",
-                                "onlinelearning",
-                                "calendar",
-                                "notes",
-                                "test",
-                                "test2",
+                                //online learning//
+                                "ol_dashboard",
+                                "ol_calendar",
+                                "ol_modal-recheckquiz",
+                                "ol_addannouncement",
+                                "ol_addglossary",
+                                "ol_addquiz",
+                                "ol_addassignment",
+                                "ol_addurl",
+                                "ol_addsurvey",
+                                "ol_survey",
+                                "ol_subject",
+                                "ol_submit_assignment",
+                                "ol_submit_quiz",
+                                "ol_quiz",
+                                "ol_announcement",
+                                "ol_assignment",
+
+                                //rujukan mira
+                                "suggestions",
                                 "mira",
-                                "read",
-                                "addquestion",
+                                "likes",
+                                "test",
+                                "ask",
+
+                                //in progress//
+                                "simplecalendar",
+                                "notes",
+                                "save",
+                                "send",
+                                "fetch",
                                 "exercises",
-                                "modal-event",
-                                "modal-news",
-                                "departmentlist"
+                                "alertexample",
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 

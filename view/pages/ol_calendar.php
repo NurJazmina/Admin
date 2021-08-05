@@ -1,6 +1,4 @@
 <?php
-$_SESSION["title"] = "Calendar";
-include 'view/partials/_subheader/subheader-v1.php'; 
 include 'model/calendar.php';
 $calendar = new Calendar();
 ?>
@@ -61,8 +59,54 @@ $calendar = new Calendar();
 .fc-daygrid-day-top{
     color: #3699FF !important;
 }
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #30cfd0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5))
 }
 </style>
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
+		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+					<h5 class="text-white font-weight-bold my-1 mr-5">Calendar</h5>
+					<!--end::Page Title-->
+				</div>
+                <!--begin::Separator-->
+                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+                <!--end::Separator-->
+                <!--begin::Detail-->
+                <div class="d-flex align-items-center" id="kt_subheader_search">
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo ""; ?></span>
+                </div>
+                <!--end::Detail-->
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+            <div class="col-12 col-sm-12 col-sm-12">
+                <div class="col-12 col-sm-12 col-lg-12 text-right">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+		</div>
+		<!--end::Toolbar-->
+	</div>
+</div>
+<!--end::Subheader-->
 <!--begin::Row-->
 <div class="container">
 <div class="row">
