@@ -1,4 +1,3 @@
-<!-- testt -->
 <style>
 .show>.btn-outline-secondary.dropdown-toggle {
     color: #fff;
@@ -117,7 +116,7 @@
             </div>
             <div class="dropdown mb-0">
                 <button id="displaydropdown" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Display drop-down menu">
-                    <i class="icon fa fa-th fa-fw " aria-hidden="true"></i>
+                    <i class="icon fa fa-th fa-fw" style="color:#7E8299;"></i>
                     <span class="d-sm-inline-block" data-active-item-text="">
                         Card
                     </span>
@@ -125,12 +124,12 @@
                 <ul class="dropdown-menu" >
                     <li>
                         <a class="dropdown-item">
-                        <button type="button" class="btn btn-hover-bg-light" x-on:click="layout = 'grid'" x-bind:class="{'bg-white-800': layout === 'grid'}">Grid</button>
+                        <button type="button" class="btn" x-on:click="layout = 'grid'" x-bind:class="{'bg-white-800': layout === 'grid'}">Grid</button>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item">
-                        <button type="button" class="btn btn-hover-bg-light" x-on:click="layout = 'list'" x-bind:class="{'bg-white-800': layout === 'list'}">List</button>
+                        <button type="button" class="btn" x-on:click="layout = 'list'" x-bind:class="{'bg-white-800': layout === 'list'}">List</button>
                         </a>
                     </li>
                 </ul>
