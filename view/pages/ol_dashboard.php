@@ -15,6 +15,10 @@
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.125);
 }
+.lightsecondary
+{
+    color:#7E8299;
+}
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -61,7 +65,7 @@
         <div data-region="filter" class="d-flex flex-wrap" aria-label="Course overview controls" >
             <div class="dropdown mb-0 mr-auto">
                 <button id="groupingdropdown" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Grouping drop-down menu">
-                    <i class="icon fa fa-filter fa-fw " aria-hidden="true"></i>
+                    <i class="icon fa fa-filter fa-fw" style="color:#7E8299;"></i>
                     <span class="d-sm-inline-block" data-active-item-text="">
                         All (except removed from view)
                     </span>
@@ -155,6 +159,8 @@
                     <article class="bg-white p-4 shadow">
                         <div class="card dashboard-card">
                         <div class="card card-custom wave wave-animate-slow wave-purple mb-8 mb-lg-0">
+
+                        
                             <div class="card-body">
                                 <div class="d-flex align-items-center p-5">
                                 </div>
@@ -166,8 +172,8 @@
                             </p>
                         </div>
                         <div class="dropdown text-right bg-white" >
-                            <button type="button" class="btn btn-light btn-icon btn-sm btn-hover-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-bold-more-hor text-secondary"></i>
+                            <button type="button" class="btn btn-sm btn-light btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ki ki-bold-more-hor lightsecondary"></i>
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Star this subject</a>
