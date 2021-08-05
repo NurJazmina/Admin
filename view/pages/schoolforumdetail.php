@@ -7,6 +7,15 @@ include 'view/partials/_subheader/subheader-v1.php';
 include ('model/schoolforum.php'); 
 include 'model/counter.php';
 
+$filter = ['url'=>$URL];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Views',$query);
+foreach ($cursor as $document)
+{
+    $url = strval($document->url);
+    $count = strval($document->count);
+}
+
 ?>
 <style>
 .button--tag.button-large, .topics--large .button--tag {
@@ -155,11 +164,14 @@ include 'model/counter.php';
                             <div class="col-lg-5">
                                 <div class="row">
                                     <div class="col-lg-5">
+                                        <h5 class="btn btn-light-success font-weight-bolder btn-sm">Views : <?php echo $count; ?></h5>
+                                    </div>
+                                    <div class="col-lg-5">
                                         <a class="button--recommend button-small" href="#" style="color:#f05f70;">
                                             <span class="button__text hidden-md"></span>
                                         </a>
                                     </div>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-2">
                                     </div>
                                 </div>    
                             </div>
@@ -421,7 +433,7 @@ include 'model/counter.php';
             <div class="d-flex mb-5">
                 <div class="d-flex align-items-center mr-7">
                     <span class="font-weight-bold mr-4">posted by :</span>
-                    <span class="btn btn-light-primary btn-sm font-weight-bold btn-upper btn-text"><?php echo $ConsumerFName; ?></span>
+                    <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text"><?php echo $ConsumerFName; ?></span>
                 </div>
             </div>
             <!--end::Data-->

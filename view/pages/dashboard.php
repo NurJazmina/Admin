@@ -21,7 +21,6 @@ function time_elapsed($date){
 
 	return join(' ', $ret);
 }
-
 ?>
 <style>
 .construction {
@@ -204,11 +203,16 @@ function time_elapsed($date){
 			</div>
 			<!--end::Body-->
 		</div>
+<<<<<<< HEAD
 		<!-- forum commenting section -->
+=======
+		<!--
+>>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
 		<div class="card card-custom gutter-b">
 			<div class="card-body">
 				<div class="d-flex justify-content-between flex-column h-100">
 					<div class="h-100">
+<<<<<<< HEAD
 						<div class="d-flex flex-column flex">
 						<h3 class="card-title align-items-start flex-column">
 						<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Forum Commenting Section</span>
@@ -220,11 +224,26 @@ function time_elapsed($date){
 					<br>
 					<div class="d-flex flex" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
 					(Contents)
+=======
+						<div class="d-flex flex-column flex-center">
+						aaaaa
+						</div>
+						<div class="pt-1">
+						bbbb
+						</div>
+					</div>
+					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+					ccccc
+>>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
 					</div>
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		<!-- end forum commenting section -->
+=======
+		-->
+>>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
 	</div>
 	<div class="col">
 		<div class="card card-custom gutter-b">
@@ -327,6 +346,7 @@ function time_elapsed($date){
 					<span class="menu-label">
 						<?php
 						$eventid1="";
+						$time1 = "";
 						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
 						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -356,10 +376,11 @@ function time_elapsed($date){
 						
 							$nowtimeEvent1 = time();
 							$timeEvent1 = strval($date);
+							$time1 = time_elapsed($timeEvent1-$nowtimeEvent1);
 						}
 						?>
 						<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
-						<span class="text-primary"><?php echo " ".time_elapsed($timeEvent1-$nowtimeEvent1)." \n";  ?></span></span>
+						<span class="text-primary"><?php echo " ".$time1." \n";  ?></span></span>
 						<?php
 						}
 						?>
@@ -491,6 +512,7 @@ function time_elapsed($date){
 						<span class="menu-label">
 						<?php 
 						$eventid2="";
+						$time2 = "";
 						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
 						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -520,10 +542,11 @@ function time_elapsed($date){
 						
 							$nowtimeEvent2 = time();
 							$timeEvent2 = strval($date);
+							$time2 = time_elapsed($timeEvent2-$nowtimeEvent2);
 						}
 						?>
 						<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
-						<span class="text-primary"><?php echo " ".time_elapsed($timeEvent2-$nowtimeEvent2)." \n";  ?></span></span>
+						<span class="text-primary"><?php echo " ".$time2." \n";  ?></span></span>
 						<?php
 						}
 						?>
@@ -680,6 +703,7 @@ function time_elapsed($date){
 						<span class="menu-label">
 						<?php
 						$newsid="";
+						$time = "";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
 						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
@@ -704,11 +728,12 @@ function time_elapsed($date){
 						
 								$nowtimeNew = time();
 								$timeNew = strval($date);
+								$time = time_elapsed($nowtimeNew-$timeNew);
 							}
 					    }
 						?>
 						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-						<span class="text-primary"><?php echo "".time_elapsed($nowtimeNew-$timeNew)." ago \n";  ?></span></span>
+						<span class="text-primary"><?php echo "".$time." ago \n";  ?></span></span>
 						</span>
 						<!--begin::Table-->
 						<div>
@@ -808,7 +833,8 @@ function time_elapsed($date){
 					<div class="tab-pane fade show active" id="kt_tab_pane_10_2" role="tabpanel" aria-labelledby="kt_tab_pane_10_2">
 						<span class="menu-label">
 						<?php 
-						$newsid1="";
+						$newsid1= "";
+						$time1 = "";
 						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>'PUBLIC'];
 						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
@@ -834,10 +860,11 @@ function time_elapsed($date){
 							
 								$nowtimeNew1 = time();
 								$timeNew1 = strval($date);
+								$time1 = time_elapsed($nowtimeNew1-$timeNew1);
 							}
 							?>
 							<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-							<span class="text-primary"><?php echo "".time_elapsed($nowtimeNew1-$timeNew1)." ago \n";  ?></span></span>
+							<span class="text-primary"><?php echo "".$time1." ago \n";  ?></span></span>
 						    <?php
 						}
 						?>
@@ -966,7 +993,8 @@ function time_elapsed($date){
 						<span class="menu-label">
 						<?php
 						$Forumid=" ";
-						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
+						$time1 = '';
+						$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"]];
 						$option = ['limit'=>10,'sort' => ['ForumDate' => 1]];
 						$query = new MongoDB\Driver\Query($filter,$option);
 						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
@@ -990,6 +1018,7 @@ function time_elapsed($date){
 						
 								$nowtimeNew = time();
 								$timeNew = strval($date);
+								$time1 = time_elapsed($nowtimeNew-$timeNew);
 							}
 					    }
 						?>
@@ -1001,7 +1030,7 @@ function time_elapsed($date){
 							<table class="table table-borderless table-vertical-center">
 								<!--begin::Thead-->
 								<thead>
-									<tr>
+									<tr></tr>
 										<th></th>
 										<th></th>
 									</tr>
@@ -1239,4 +1268,8 @@ function time_elapsed($date){
 		</div>
 	</div>
 </div>
+<<<<<<< HEAD
 <?php
+=======
+<?php
+>>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb

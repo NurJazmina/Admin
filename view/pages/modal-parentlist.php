@@ -105,7 +105,7 @@
           <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="submit" class="btn btn-success" name="StatusParentFormSubmit">Confirm</button>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </form>

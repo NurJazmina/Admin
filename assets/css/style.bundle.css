@@ -5434,6 +5434,17 @@ a.badge-white:focus, a.badge-white.focus {
   }
 }
 
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #30cfd0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5))
+}
+
 .progress-bar-striped {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 1rem 1rem;
@@ -26236,6 +26247,7 @@ h3 {
     border-color: #EBEDF3;
   }
 }
+
 .bg-hover-primary {
   transition: all 0.15s ease;
   cursor: pointer;
@@ -26257,6 +26269,14 @@ h3 {
 .bg-hover-state-primary:hover {
   transition: all 0.15s ease;
   background-color: #187DE4 !important;
+}
+
+.bg-diagonal-gray:before {
+  background-color: #7e8299 !important;
+}
+
+.bg-diagonal-r-lightgray:after {
+  background-color: #e4e6ef !important;
 }
 
 .bg-diagonal-primary:before {
@@ -69741,6 +69761,7 @@ code {
   border-style: solid;
   border-color: #E4E6EF;
 }
+
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .pulse .pulse-ring {
     top: 2px;
@@ -70347,6 +70368,10 @@ code {
 }
 .svg-icon.svg-logo-danger svg path {
   fill: #F64E60 !important;
+}
+.svg-icon.svg-icon-purple svg g [fill] {
+  transition: fill 0.3s ease;
+  fill: #695585 !important;
 }
 .svg-icon.svg-icon-light svg g [fill] {
   transition: fill 0.3s ease;
@@ -71354,7 +71379,7 @@ code {
 .timeline.timeline-6:before {
   content: "";
   position: absolute;
-  left: 51px;
+  left: 151px;
   width: 3px;
   top: 0;
   bottom: 0;
@@ -71370,7 +71395,7 @@ code {
   margin-bottom: 0;
 }
 .timeline.timeline-6 .timeline-item .timeline-label {
-  width: 50px;
+  width: 150px;
   flex-shrink: 0;
   font-size: 1rem;
   font-weight: 500;
@@ -71491,8 +71516,16 @@ code {
   background-color: rgba(27, 197, 189, 0.1) !important;
 }
 .wave.wave-success .svg-icon svg g [fill] {
-  fill: #1BC5BD;
+  fill: #8950FC;
 }
+
+.wave.wave-purple {
+  background-color: rgba(215, 136, 233, 0.1) !important;
+}
+.wave.wave-purple .svg-icon svg g [fill] {
+  fill: #8a7baa;
+}
+
 .wave.wave-info {
   background-color: rgba(137, 80, 252, 0.1) !important;
 }
@@ -75263,17 +75296,17 @@ code {
   border: 0;
   background: #F3F6F9;
   border: 1px solid #EBEDF3;
-  color: #B5B5C3;
+  color: #b8b8c0;
 }
 .fc-unthemed .fc-toolbar .fc-button:focus, .fc-unthemed .fc-toolbar .fc-button:active, .fc-unthemed .fc-toolbar .fc-button.fc-button-active {
-  background: #3699FF;
-  color: #FFFFFF;
-  border: 1px solid #3699FF;
+  background: #C9F7F5;
+  color: #1BC5BD;
+  border: 1px solid #C9F7F5;
   box-shadow: none;
   text-shadow: none;
 }
 .fc-unthemed .fc-toolbar .fc-button:focus .fc-icon, .fc-unthemed .fc-toolbar .fc-button:active .fc-icon, .fc-unthemed .fc-toolbar .fc-button.fc-button-active .fc-icon {
-  color: #FFFFFF;
+  color: #1BC5BD;
 }
 .fc-unthemed .fc-toolbar .fc-button.fc-button-disabled {
   opacity: 0.7;

@@ -1,0 +1,7 @@
+{
+    "name": "package-name-goes-here",
+    "version": "0.0.0",
+    "scripts": {
+      "compile-typescript": "tsc"
+    }
+  }

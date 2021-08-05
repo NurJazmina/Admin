@@ -1,7 +1,17 @@
 <?php
-  if (isset($_POST['LoginFormSubmit']))
+  if (isset($_POST['LoginFormSubmit'])) //(isset($_GET['api_session']))
   {
-    $filter = ['ConsumerIDNo' => $_POST["txtID"]];
+    // header("Access-Control-Allow-Origin: *");
+    // header("Content-Type: application/json; charset=UTF-8");
+    // header("Access-Control-Allow-Methods: POST");
+    // header("Access-Control-Max-Age: 3600");
+    // header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    
+    // $json = json_decode($_POST['json']);
+    // $nric = $json['nric'];
+    // $password = $json['password'];
+
+    $filter = ['ConsumerIDNo' => $_POST['txtID']];
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
@@ -11,23 +21,26 @@
       //ConsumerPassword using password_hash method
       $password_hash = ($document->ConsumerPassword);
       //convert password using password_verify
-      if (password_verify($_POST["txtPassword"], $password_hash))
+      if (password_verify($_POST['txtPassword'], $password_hash))
       {
        if ($document->ConsumerStatus=='ACTIVE')
        {
-          $_SESSION["loggeduser_id"] = strval($document->_id);
-          $_SESSION["loggeduser_consumerFName"] = ($document->ConsumerFName);
-          $_SESSION["loggeduser_consumerLName"] = ($document->ConsumerLName);
-          $_SESSION["loggeduser_consumerIDType"] = ($document->ConsumerIDType);
-          $_SESSION["loggeduser_consumerIDNo"] = ($document->ConsumerIDNo);
-          $_SESSION["loggeduser_consumerEmail"] = ($document->ConsumerEmail);
-          $_SESSION["loggeduser_consumerPhone"] = ($document->ConsumerPhone);
-          $_SESSION["loggeduser_consumerAddress"] = ($document->ConsumerAddress);
-          $_SESSION["loggeduser_consumerPostcode"] = ($document->ConsumerPostcode);
-          $_SESSION["loggeduser_consumerCity"] = ($document->ConsumerCity);
-          $_SESSION["loggeduser_consumerState"] = ($document->ConsumerState);
-          $_SESSION["loggeduser_consumerStatus"] = ($document->ConsumerStatus);
-          $_SESSION["loggeduser_ConsumerGroup_id"] = ($document->ConsumerGroup_id);
+
+         //$_SESSION["api_session"] = $_GET['api_session'];
+         $_SESSION["loggeduser_id"] = strval($document->_id);
+         $_SESSION["loggeduser_consumerFName"] = ($document->ConsumerFName);
+         $_SESSION["loggeduser_consumerLName"] = ($document->ConsumerLName);
+         $_SESSION["loggeduser_consumerIDType"] = ($document->ConsumerIDType);
+         $_SESSION["loggeduser_consumerIDNo"] = ($document->ConsumerIDNo);
+         $_SESSION["loggeduser_consumerEmail"] = ($document->ConsumerEmail);
+         $_SESSION["loggeduser_consumerPhone"] = ($document->ConsumerPhone);
+         $_SESSION["loggeduser_consumerAddress"] = ($document->ConsumerAddress);
+         $_SESSION["loggeduser_consumerPostcode"] = ($document->ConsumerPostcode);
+         $_SESSION["loggeduser_consumerCity"] = ($document->ConsumerCity);
+         $_SESSION["loggeduser_consumerState"] = ($document->ConsumerState);
+         $_SESSION["loggeduser_consumerStatus"] = ($document->ConsumerStatus);
+         $_SESSION["loggeduser_ConsumerGroup_id"] = ($document->ConsumerGroup_id);
+
 
           $Groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
           $filter = ['_id'=>$Groupid];
@@ -44,7 +57,7 @@
           foreach ($cursor1 as $document1)
           {
               $_SESSION["loggeduser_schoolID"] = strval($document1->SchoolID);
-              $_SESSION["loggeduser_teacherid"] = ($document1->_id);
+              $_SESSION["loggeduser_teacherid"] = strval($document1->_id);
               $_SESSION["loggeduser_StaffLevel"] = strval($document1->StaffLevel);
               $_SESSION["loggeduser_ConsumerID"] = ($document1->ConsumerID);
               $_SESSION["loggeduser_ClassID"] = strval($document1->ClassID);

@@ -430,6 +430,14 @@
 									<span class="menu-text">Add Subject</span>
 								</a>
 							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=subjectdetail" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Subject Info</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>
@@ -552,11 +560,19 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true" >
-					<a href="index.php?page=onlinelearning" class="menu-link">
+					<a href="index.php?page=ol_dashboard" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<i class="flaticon2-laptop icon-l"></i>
 						</span>
 						<span class="menu-text">Dashboard</span>
+					</a>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true" >
+					<a href="index.php?page=ol_calendar" class="menu-link">
+						<span class="svg-icon menu-icon">
+						<i class="far fa-calendar-alt icon-lg"></i>
+						</span>
+						<span class="menu-text">Calendar</span>
 					</a>
 				</li>
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -564,7 +580,7 @@
 					<span class="svg-icon menu-icon">
 						<i class="flaticon2-open-text-book icon-l"></i>
 					</span>
-					<span class="menu-text">My Subject</span>
+					<span class="menu-text">Subject</span>
 					<i class="menu-arrow"></i>
 					</a>
 					<div class="menu-submenu">
@@ -572,57 +588,34 @@
 						<ul class="menu-subnav">
 							<li class="menu-item menu-item-parent" aria-haspopup="true">
 							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=notes" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Bahasa Melayu</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=exercises" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Matematik</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=exercises" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Pendidikan Islam</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=exercises" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Sains</span>
-								</a>
-							</li>
+							<?php 
+							$filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+							foreach ($cursor as $document)
+							{
+								$Subject_id = $document->Subject_id;
+								$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+								$query = new MongoDB\Driver\Query($filter);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+								foreach ($cursor as $document)
+								{
+									$SubjectName = $document->SubjectName;
+								}
+								?>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="index.php?page=ol_subject&id=<?php echo $Subject_id; ?>" class="menu-link menu-toggle">
+										<i class="menu-bullet menu-bullet-dot">
+											<span></span>
+										</i>
+										<span class="menu-text"><?php echo $SubjectName; ?></span>
+									</a>
+								</li>
+								<?php
+							}
+							?>
 						</ul>
 					</div>
-				</li>
-				<li class="menu-item menu-item" aria-haspopup="true">
-					<a href="index.php?page=notes" class="menu-link">
-						<span class="svg-icon menu-icon">
-							<i class="flaticon2-crisp-icons icon-l"></i>
-						</span>
-						</span>
-						<span class="menu-text">Add Notes</span>
-					</a>
-				</li>
-				<li class="menu-item menu-item" aria-haspopup="true">
-					<a href="index.php?page=exercises" class="menu-link">
-					    <span class="svg-icon menu-icon">
-							<i class="flaticon2-writing icon-l"></i>
-						</span>
-						<span class="menu-text">Add Quiz/Exercise</span>
-					</a>
 				</li>
 				<li class="menu-section" style="border-top: 1px solid #eceef7;; margin-top: 12px; padding-top: 12px;">
 					<h4 class="menu-text">Directory</h4>
@@ -635,7 +628,7 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-								<i class="fas fa-user-tie"></i>
+							<i class="fas fa-user-tie"></i>
 						</span>
 						<span class="menu-text">Staff</span>
 						<i class="menu-arrow"></i>

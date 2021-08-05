@@ -50,7 +50,7 @@ $_SESSION["title"] = "School";
           </span>
           <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?php print_r($SchoolsPhoneNo); ?>
             <button type="button" style="vertical-align: inherit;" class="btn" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
-             <i class="fa fa-edit" style="vertical-align: inherit;"></i>
+             <i class="fa fa-edit text-primary" style="vertical-align: inherit;"></i>
             </button>
           </a>
         </div>

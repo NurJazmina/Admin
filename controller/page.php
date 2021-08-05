@@ -32,6 +32,7 @@
                                 "eventdetail",
                                 "newsdetail",
                                 "departmentdetail",
+                                "subjectdetail",
                                 "classdetail",
                                 "schoolforumdetail",
                                 "publicforumdetail",
@@ -56,12 +57,8 @@
                                 "addrelationforparent",
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
-                                "mira",
-                                "onlinelearning",
-                                "notes",
-                                "exercises",
-                                //"testing",
-                                "upload"
+                                
+                                
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -98,6 +95,7 @@
                                 "eventdetail",
                                 "newsdetail",
                                 //"departmentdetail",
+                                "subjectdetail",
                                 "classdetail",
                                 "schoolforumdetail",
                                 "publicforumdetail",
@@ -116,6 +114,40 @@
                                 //"exportclassattendance",
                                 //"testing",
                                 //"duplicate",
+
+                                //online learning//
+                                "ol_dashboard",
+                                "ol_calendar",
+                                "ol_modal-recheckquiz",
+                                "ol_addannouncement",
+                                "ol_addglossary",
+                                "ol_addquiz",
+                                "ol_addassignment",
+                                "ol_addurl",
+                                "ol_addsurvey",
+                                "ol_survey",
+                                "ol_subject",
+                                "ol_submit_assignment",
+                                "ol_submit_quiz",
+                                "ol_quiz",
+                                "ol_announcement",
+                                "ol_assignment",
+
+                                //rujukan mira
+                                "suggestions",
+                                "mira",
+                                "likes",
+                                "test",
+                                "ask",
+
+                                //in progress//
+                                "simplecalendar",
+                                "notes",
+                                "save",
+                                "send",
+                                "fetch",
+                                "exercises",
+                                "alertexample",
                                 );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
@@ -133,6 +165,7 @@
         if (!isset($_GET['page']) || empty($_GET['page']))
         {
             include 'view/pages/dashboard.php';
+          
         } 
         else 
         {

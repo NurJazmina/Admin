@@ -100,7 +100,7 @@ border:1px solid #ffffff;
 			<!--end::Toolbar-->
 		</div>
 	</div>
-	<!--end::Subheader-->
+<!--end::Subheader-->
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">
@@ -235,7 +235,7 @@ border:1px solid #ffffff;
                       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                       {
                       ?>
-                      <button type="button" style="font-size:15px width:25%" class="btn btn-light btn-hover-secondary"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>">more >></a></button>
+                      <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstudentattendance&id=<?php echo $consumerid; ?>">more >></a></button>
                       <?php
                       }
                       ?>

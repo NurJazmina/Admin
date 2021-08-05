@@ -4,6 +4,7 @@ if (isset($_POST['AddDepartmentFormSubmit']))
 {
   $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
   $vardepartment = $_POST['txtdepartment'];
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert(['School_id'=>$varschoolID,'DepartmentName'=> $vardepartment]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);

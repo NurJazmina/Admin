@@ -226,7 +226,7 @@ border:1px solid #ffffff;
                         if($_SESSION["loggeduser_ACCESS"] =='TEACHER') 
                         {
                         ?>
-                        <button type="button" style="font-size:15px width:25%" class="btn btn-info"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
+                        <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
                         <?php
                         }
                         ?>
@@ -271,7 +271,7 @@ border:1px solid #ffffff;
                             if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
                             ?>
-                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff">
                                 <i class="fa fa-edit" style="font-size:15px"></i>
                               </button>
                             <?php
@@ -353,12 +353,12 @@ border:1px solid #ffffff;
                             else 
                             {
                             ?>
-                              <a href="index.php?page=timetablelist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                              <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
                             <?php
                             }
                           }
                           ?>
-                          <a href="index.php?page=timetablelist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
+                          <a href="index.php?page=stafflist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
                         </div>
                     </div>
                   </div>

@@ -121,7 +121,7 @@ if (isset($_POST['EditDetailFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-printf("nMatched: %d\n", $result->getMatchedCount());
+printf("Matched: %d\n", $result->getMatchedCount());
 printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
