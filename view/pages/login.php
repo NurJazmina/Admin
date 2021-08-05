@@ -131,21 +131,17 @@
   <div align="center">
     <img src="image/logogongetz.png" width="132" height="145" style="padding-top: 20px;">
   </div>
-  
   <p class="sign" align="center">Sign in to<br />SmartSchool Go N Getz</p>
   <form class="form1" name="LoginFormSubmit" method="post" action="">
     <input class="un " type="text" align="center" id="txtID" name="txtID" placeholder="Your ID">
     <input class="pass" type="password" align="center" id="txtPassword" name="txtPassword" placeholder="Password" >
-
     <button class="submit" id="login" align="center" name="LoginFormSubmit">Sign in</button>
-
     <p class="forgot" align="center"><a href="#">1st Time Login</a> | <a href="#">Forgot Password?</a></p>
     <p class="dev" align="center">Developed by G&G Softech Sdn Bhd</p>
   </form>
 </div>
 
 <!-- <script>
-
    document.addEventListener('click', ({ target }) => {
     if (target.matches('button')) {
       var id = document.getElementById('txtID').value;
@@ -207,6 +203,5 @@
             });
     }
 });
-
 </script> -->
 

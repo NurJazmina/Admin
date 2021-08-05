@@ -65,7 +65,7 @@
         </div>
         <div data-region="filter" class="d-flex flex-wrap" aria-label="Course overview controls" >
             <div class="dropdown mb-0 mr-auto">
-                <button id="groupingdropdown" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Grouping drop-down menu">
+                <button id="groupingdropdown" type="button" class="btn btn-outline-secondary btn-hover-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Grouping drop-down menu">
                     <i class="icon fa fa-filter fa-fw" style="color:#7E8299;"></i>
                     <span class="d-sm-inline-block" data-active-item-text="">
                         All (except removed from view)
@@ -116,8 +116,8 @@
                 </ul>
             </div>
             <div class="dropdown mb-0">
-                <button id="displaydropdown" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Display drop-down menu">
-                    <i class="icon fa fa-th fa-fw " aria-hidden="true"></i>
+                <button id="displaydropdown" type="button" class="btn btn-outline-secondary btn-hover-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Display drop-down menu">
+                    <i class="icon fa fa-th fa-fw" style="color:#7E8299;"></i>
                     <span class="d-sm-inline-block" data-active-item-text="">
                         Card
                     </span>
@@ -125,12 +125,12 @@
                 <ul class="dropdown-menu" >
                     <li>
                         <a class="dropdown-item">
-                        <button type="button" class="btn btn-hover-bg-light" x-on:click="layout = 'grid'" x-bind:class="{'bg-white-800': layout === 'grid'}">Grid</button>
+                        <button type="button" class="btn" x-on:click="layout = 'grid'" x-bind:class="{'bg-white-800': layout === 'grid'}">Grid</button>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item">
-                        <button type="button" class="btn btn-hover-bg-light" x-on:click="layout = 'list'" x-bind:class="{'bg-white-800': layout === 'list'}">List</button>
+                        <button type="button" class="btn" x-on:click="layout = 'list'" x-bind:class="{'bg-white-800': layout === 'list'}">List</button>
                         </a>
                     </li>
                 </ul>
@@ -160,8 +160,6 @@
                     <article class="bg-white p-4 shadow">
                         <div class="card dashboard-card">
                         <div class="card card-custom wave wave-animate-slow wave-purple mb-8 mb-lg-0">
-
-
                             <div class="card-body">
                                 <div class="d-flex align-items-center p-5">
                                 </div>
@@ -169,11 +167,11 @@
                         </div>
                         <div class="bg-white" style="height:50px;">
                             <p class="font-size-h4 text-center mt-3">
-                            <a href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                            <a class="lightsecondary text-hover-secondary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
                             </p>
                         </div>
                         <div class="dropdown text-right bg-white" >
-                            <button type="button" class="btn btn-sm btn-light btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-sm btn-light btn-icon m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ki ki-bold-more-hor lightsecondary"></i>
                             </button>
                             <div class="dropdown-menu">
@@ -245,7 +243,7 @@
             <div class="card card-custom card-stretch bg-white p-4 shadow">
             <article class="bg-white">
                 <p class="font-size-h4 text-center mt-3">
-                <a href="index.php?page=ol_subject&id=<?php echo $Subject_id ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                <a  class="lightsecondary" ><?php echo $SubjectName; ?></a>
                 </p>
                 <div class="separator separator-solid separator-border-3 separator-secondary"></div><br>
                 <?php
@@ -256,67 +254,84 @@
                     {
                         $ConsumerFName = $document->ConsumerFName;
                     }
-                        $filter = ['Subject_id'=>$Subject_id];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
-                        foreach ($cursor as $document)
-                        {
-                            $Assignment_id = $document->_id;
-                            $Title = $document->Title;
+                    $filter = ['Subject_id'=>$Subject_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+                    foreach ($cursor as $document)
+                    {
+                        $Assignment_id = $document->_id;
+                        $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
+                            <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
                         <?php
-                        }
-                        $filter = ['Subject_id'=>$Subject_id];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
-                        foreach ($cursor as $document)
-                        {
-                            $Quiz_id = $document->_id;
-                            $Title = $document->Title;
+                    }
+                    $filter = ['Subject_id'=>$Subject_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+                    foreach ($cursor as $document)
+                    {
+                        $Quiz_id = $document->_id;
+                        $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
+                            <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
                         <?php
-                        }
-                        $filter = ['Subject_id'=>$Subject_id];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_URL',$query);
-                        foreach ($cursor as $document)
-                        {
-                            $URL_id = $document->_id;
-                            $Title = $document->Title;
+                    }
+                    $filter = ['Subject_id'=>$Subject_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_URL',$query);
+                    foreach ($cursor as $document)
+                    {
+                        $URL_id = $document->_id;
+                        $Title = $document->Title;
+                        $Url = $document->Url;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
+                            <a  style="color:#04ada5;" href="<?php echo $Url; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
                         <?php
-                        }
-                        $filter = ['Subject_id'=>$Subject_id];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
-                        foreach ($cursor as $document)
-                        {
-                            $Survey_id = $document->_id;
-                            $Title = $document->Title;
+                    }
+                    $filter = ['Subject_id'=>$Subject_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
+                    foreach ($cursor as $document)
+                    {
+                        $Survey_id = $document->_id;
+                        $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="#">
+                            <a  style="color:#04ada5;" href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
                         <?php
-                        }
+                    }
+                    $filter = ['Subject_id'=>$Subject_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Announcement',$query);
+                    foreach ($cursor as $document)
+                    {
+                        $Announcement_id = $document->_id;
+                        $Title = $document->Title;
+                        $Description = $document->Description;
                         ?>
+                        <div class="checkbox-inline mb-5">
+                            <a  style="color:#04ada5;" href="index.php?page=ol_announcement&id=<?php echo $Announcement_id; ?>">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?php echo " ".$Title; ?>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                    ?>
                  </article>
             </div>
        

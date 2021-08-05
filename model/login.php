@@ -1,16 +1,6 @@
 <?php
   if (isset($_POST['LoginFormSubmit'])) //(isset($_GET['api_session']))
   {
-    // header("Access-Control-Allow-Origin: *");
-    // header("Content-Type: application/json; charset=UTF-8");
-    // header("Access-Control-Allow-Methods: POST");
-    // header("Access-Control-Max-Age: 3600");
-    // header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
-    // $json = json_decode($_POST['json']);
-    // $nric = $json['nric'];
-    // $password = $json['password'];
-
     $filter = ['ConsumerIDNo' => $_POST['txtID']];
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
@@ -40,7 +30,6 @@
          $_SESSION["loggeduser_consumerState"] = ($document->ConsumerState);
          $_SESSION["loggeduser_consumerStatus"] = ($document->ConsumerStatus);
          $_SESSION["loggeduser_ConsumerGroup_id"] = ($document->ConsumerGroup_id);
-
 
           $Groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
           $filter = ['_id'=>$Groupid];
@@ -113,14 +102,14 @@
             $_SESSION["loggeduser_SchoolsEmail"] = '';
             $_SESSION["loggeduser_DepartmentName"] = '';
           }
+          elseif (($_SESSION["loggeduser_ConsumerGroupName"] == 'STUDENT'))
+          {
+            $_SESSION["loggeduser_ACCESS"] = "STUDENT";
+          }
           // this function coming soon!
           //elseif ($_SESSION["loggeduser_ConsumerGroupName"] == 'PARENT')
           //{
           // $_SESSION["loggeduser_ACCESS"] = "PARENT";
-          //}
-          //else
-          //{
-          // $_SESSION["loggeduser_ACCESS"] = "STUDENT";
           //}
           header ('location: index.php?page=dashboard&action=loginsuccesful');
         
