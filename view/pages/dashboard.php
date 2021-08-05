@@ -203,16 +203,11 @@ function time_elapsed($date){
 			</div>
 			<!--end::Body-->
 		</div>
-<<<<<<< HEAD
 		<!-- forum commenting section -->
-=======
-		<!--
->>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
-		<div class="card card-custom gutter-b">
+		<!-- <div class="card card-custom gutter-b">
 			<div class="card-body">
 				<div class="d-flex justify-content-between flex-column h-100">
 					<div class="h-100">
-<<<<<<< HEAD
 						<div class="d-flex flex-column flex">
 						<h3 class="card-title align-items-start flex-column">
 						<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Forum Commenting Section</span>
@@ -224,26 +219,11 @@ function time_elapsed($date){
 					<br>
 					<div class="d-flex flex" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
 					(Contents)
-=======
-						<div class="d-flex flex-column flex-center">
-						aaaaa
-						</div>
-						<div class="pt-1">
-						bbbb
-						</div>
-					</div>
-					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-					ccccc
->>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
 					</div>
 				</div>
 			</div>
-		</div>
-<<<<<<< HEAD
+		</div> -->
 		<!-- end forum commenting section -->
-=======
-		-->
->>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
 	</div>
 	<div class="col">
 		<div class="card card-custom gutter-b">
@@ -1268,8 +1248,4 @@ function time_elapsed($date){
 		</div>
 	</div>
 </div>
-<<<<<<< HEAD
 <?php
-=======
-<?php
->>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
