@@ -7,8 +7,13 @@
       </div>
       <div class="modal-body">
         <input type="text" class="form-control" name="notes_id">
-        <?php 
-        include ('model/ajax.php');
+        <?php
+        if( isset($_POST['value']) )
+        {
+            $val = $_POST['value'];
+            echo ($val);
+            echo json_encode($val);
+        }
         ?>
         <div class="row">
             <div class="col-sm-3 mb-1 mt-1">

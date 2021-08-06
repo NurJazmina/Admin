@@ -131,7 +131,7 @@
   <div align="center">
     <img src="image/logogongetz.png" width="132" height="145" style="padding-top: 20px;">
   </div>
-  <p class="sign" align="center">Sign in to<br />SmartSchool Go N Getz</p>
+  <p class="sign" align="center">Sign in to<br/>SmartSchool Go N Getz</p>
   <form class="form1" name="LoginFormSubmit" method="post" action="">
     <input class="un " type="text" align="center" id="txtID" name="txtID" placeholder="Your ID">
     <input class="pass" type="password" align="center" id="txtPassword" name="txtPassword" placeholder="Password" >
@@ -153,7 +153,6 @@
       var json = JSON.stringify(postData);
       return fetch(`http://8ce958c31199.ngrok.io/api/login`, {
               method: 'post',
-
               mode: 'no-cors',
               headers: {
                 'Content-Type': 'application/json',

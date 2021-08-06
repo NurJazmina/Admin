@@ -22,7 +22,6 @@ foreach ($cursor as $document)
   background: linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5))
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -291,7 +290,6 @@ foreach ($cursor as $document)
                     <div class="col-sm text-right">
                         <button type="button" class="btn btn-success" id="ipclear" data-bs-toggle="modal" data-bs-target="#activity" data-bs-whatever="<?php echo $Notes_id; ?>">
                             <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
-                            <a id="test"></a>
                         </button>
                     </div>
                     <div class="separator separator-dashed my-10 separator-success"></div>
@@ -313,6 +311,7 @@ foreach ($cursor as $document)
 include ('view/pages/ol_modal-activity.php'); 
 include ('view/pages/modal-sorting.php'); 
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 var activity = document.getElementById('activity')
 activity.addEventListener('show.bs.modal', function (event) {
@@ -322,16 +321,25 @@ var button = event.relatedTarget
 var recipient = button.getAttribute('data-bs-whatever')
 // If necessary, you could initiate an AJAX request here
 // and then do the updating in a callback.
-$(document).ready(function() {
-    $("#ipclear").click(function() {
-        $.post("model/ajax.php", {
-            id_value: recipient
-        },
-        function(data, status){
-            $("#test").html(data);
-        },
-        );
-    });
+// $.ajax({
+//     type: 'post',
+//     dataType:'json',
+//     data: {value: recipient},
+//     error: function(request, status, error){
+//         alert("Error");
+//     }
+// });
+$.ajax({ 
+    url: 'index.php?page=ol_subject&id=60c1ed3b947f462be2c4e98e',
+    data: {'value' : recipient},
+    type: 'post',
+    dataType:'json',
+    success: function(output) {
+                alert(output);
+            },
+    error: function(request, status, error){
+    alert("Error: Could not delete");
+    }
 });
 // Update the modal's content.
 var modalTitle = activity.querySelector('.modal-title')
