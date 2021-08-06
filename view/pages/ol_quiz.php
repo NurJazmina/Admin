@@ -19,7 +19,6 @@ function time_elapsed($date){
 		}
 	array_splice($ret, count($ret)-1, 0, '');
 	$ret[] = '';
-
 	return join(' ', $ret);
 }
 ?>
@@ -37,7 +36,6 @@ function time_elapsed($date){
     position: relative;
     margin: 30px 0px;
 }
-
 .separator::before {
     content: "answer choices";
     position: absolute;
@@ -46,7 +44,6 @@ function time_elapsed($date){
     background-color: #fff;
     padding: 0px 10px;
 }
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>

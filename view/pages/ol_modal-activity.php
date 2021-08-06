@@ -6,6 +6,10 @@
         <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
+        <input type="text" class="form-control" name="notes_id">
+        <?php 
+        include ('model/ajax.php');
+        ?>
         <div class="row">
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">

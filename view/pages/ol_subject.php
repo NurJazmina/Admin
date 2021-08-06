@@ -22,6 +22,7 @@ foreach ($cursor as $document)
   background: linear-gradient(to left, rgba(48, 207, 208, 0.5), rgba(51, 8, 103, 0.5))
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -149,7 +150,7 @@ foreach ($cursor as $document)
                             </ul>
                         </div>
                     </div>
-                    <button type="submit" style="width:75%;" class="btn btn-white font-weight-bolder btn-sm" name="editing">Turn Editing On</button>
+                    <button type="submit" style="width:75%;" class="btn btn-white font-weight-bolder text-lightsecondary btn-sm" name="editing">Turn Editing On</button>
                 </div>
             </div>
 		</div>
@@ -288,8 +289,9 @@ foreach ($cursor as $document)
                         ?>
                     </div>
                     <div class="col-sm text-right">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#activity">
-                        <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
+                        <button type="button" class="btn btn-success" id="ipclear" data-bs-toggle="modal" data-bs-target="#activity" data-bs-whatever="<?php echo $Notes_id; ?>">
+                            <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
+                            <a id="test"></a>
                         </button>
                     </div>
                     <div class="separator separator-dashed my-10 separator-success"></div>
@@ -299,7 +301,7 @@ foreach ($cursor as $document)
             </div>
             <div class="row">
                 <div class="col-sm text-right">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#topic" data-bs-whatever="<?php echo $Subject_id; ?>">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#topic" data-bs-whatever="<?php echo $Notes_id; ?>">
                     <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add Topic
                     </button>
                 </div>
@@ -307,21 +309,33 @@ foreach ($cursor as $document)
         </div>
     </div>
 </div>
-<?php include ('view/pages/ol_modal-activity.php'); ?>
-<?php include ('view/pages/modal-sorting.php'); ?>
+<?php 
+include ('view/pages/ol_modal-activity.php'); 
+include ('view/pages/modal-sorting.php'); 
+?>
 <script>
-    var topic = document.getElementById('topic')
-    topic.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = topic.querySelector('.modal-title')
-      var modalBodyInput = topic.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      })
+var activity = document.getElementById('activity')
+activity.addEventListener('show.bs.modal', function (event) {
+// Button that triggered the modal
+var button = event.relatedTarget
+// Extract info from data-bs-* attributes
+var recipient = button.getAttribute('data-bs-whatever')
+// If necessary, you could initiate an AJAX request here
+// and then do the updating in a callback.
+$(document).ready(function() {
+    $("#ipclear").click(function() {
+        $.post("model/ajax.php", {
+            id_value: recipient
+        },
+        function(data, status){
+            $("#test").html(data);
+        },
+        );
+    });
+});
+// Update the modal's content.
+var modalTitle = activity.querySelector('.modal-title')
+var modalBodyInput = activity.querySelector('.modal-body input')
+modalBodyInput.value = recipient
+})
 </script>

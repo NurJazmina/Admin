@@ -16,10 +16,6 @@
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.125);
 }
-.lightsecondary
-{
-    color:#7E8299;
-}
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -167,12 +163,12 @@
                         </div>
                         <div class="bg-white" style="height:50px;">
                             <p class="font-size-h4 text-center mt-3">
-                            <a class="lightsecondary text-hover-secondary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                            <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
                             </p>
                         </div>
                         <div class="dropdown text-right bg-white" >
                             <button type="button" class="btn btn-sm btn-light btn-icon m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-bold-more-hor lightsecondary"></i>
+                                <i class="ki ki-bold-more-hor text-lightsecondary"></i>
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Star this subject</a>
@@ -187,7 +183,7 @@
                 <div x-show="layout === 'list'" x-cloak>
                     <div class="list-group-item mt-1 mb-1">
                         <p class="font-size-h4 mt-3">
-                        <a href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>" style="color:#7E8299; text-decoration: underline;"><?php echo $SubjectName; ?></a>
+                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
                         </p>
                         <?php
                         $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
@@ -204,7 +200,7 @@
                             echo $y;
                         }
                         ?>
-                        <p class="text-right"><a href="#" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
+                        <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
                     </div>
                 </div>
         </section>
@@ -243,7 +239,7 @@
             <div class="card card-custom card-stretch bg-white p-4 shadow">
             <article class="bg-white">
                 <p class="font-size-h4 text-center mt-3">
-                <a  class="lightsecondary" ><?php echo $SubjectName; ?></a>
+                <a  class="text-lightsecondary text-hover-primary"><?php echo $SubjectName; ?></a>
                 </p>
                 <div class="separator separator-solid separator-border-3 separator-secondary"></div><br>
                 <?php
@@ -263,7 +259,7 @@
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>">
+                            <a  class="text-success" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
@@ -278,7 +274,7 @@
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>">
+                            <a  class="text-success" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
@@ -294,7 +290,7 @@
                         $Url = $document->Url;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="<?php echo $Url; ?>">
+                            <a  class="text-success" href="<?php echo $Url; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
@@ -309,7 +305,7 @@
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>">
+                            <a  class="text-success" href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
@@ -325,7 +321,7 @@
                         $Description = $document->Description;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  style="color:#04ada5;" href="index.php?page=ol_announcement&id=<?php echo $Announcement_id; ?>">
+                            <a  class="text-success" href="index.php?page=ol_announcement&id=<?php echo $Announcement_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>
