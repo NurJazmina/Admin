@@ -1,7 +1,13 @@
 <?php
 include ('model/assignment.php');
-$Subject_id = $_GET['Subject'];
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+
+if (isset($_POST['assignment'])) 
+{
+    $subject_id = $_POST['subject_id'];
+    $notes_id = $_POST['notes_id'];
+}
+echo "test".$notes_id;
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($subject_id)];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
 foreach ($cursor as $document)

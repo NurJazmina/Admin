@@ -288,7 +288,7 @@ foreach ($cursor as $document)
                         ?>
                     </div>
                     <div class="col-sm text-right">
-                        <button type="button" class="btn btn-success" id="ipclear" data-bs-toggle="modal" data-bs-target="#activity" data-bs-whatever="<?php echo $Notes_id; ?>">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#activity" data-bs-whatever="<?php echo $Notes_id; ?>" onClick="jstophp()">
                             <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add an activity or resource
                         </button>
                     </div>
@@ -321,26 +321,6 @@ var button = event.relatedTarget
 var recipient = button.getAttribute('data-bs-whatever')
 // If necessary, you could initiate an AJAX request here
 // and then do the updating in a callback.
-// $.ajax({
-//     type: 'post',
-//     dataType:'json',
-//     data: {value: recipient},
-//     error: function(request, status, error){
-//         alert("Error");
-//     }
-// });
-$.ajax({ 
-    url: 'index.php?page=ol_subject&id=60c1ed3b947f462be2c4e98e',
-    data: {'value' : recipient},
-    type: 'post',
-    dataType:'json',
-    success: function(output) {
-                alert(output);
-            },
-    error: function(request, status, error){
-    alert("Error: Could not delete");
-    }
-});
 // Update the modal's content.
 var modalTitle = activity.querySelector('.modal-title')
 var modalBodyInput = activity.querySelector('.modal-body input')

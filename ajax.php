@@ -1,38 +1,31 @@
 <?php
-// Handle AJAX request (start)
-if( isset($_POST['ajax']) && isset($_POST['name']) ){
- echo $_POST['name'];
- exit;
-}
-echo $_POST['name'];
-// Handle AJAX request (end)
 ?>
+<script>
+function jstophp(){
+var javavar=document.getElementById("text").value;  
+document.getElementById("rslt").innerHTML="<?php 
+  $phpvar='"+javavar+"'; 
+  echo $phpvar;
+?>";
+}
 
-<!doctype html>
-<html>
- <body >
-  <form method='post' action>
-   <input type='text' name='name' placeholder='Enter your name' id='name'>
-   <input type='submit' value='submit' name='submit'><br>
-   <div id='response'></div>
-  </form>
+function phptojs(){
+var javavar2 = "<?php 
+  $phpvar2="I am php variable value";
+  echo $phpvar2;
+?>";
+alert(javavar2);
+}
+</script> 
 
-  <!-- Script -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>
-  $(document).ready(function(){
-    $('#name').keyup(function(){
-     var name = $('#name').val();
+<body>
+  <div id="rslt">
+  </div>
+  <input type="text" id="text"/>
+  <button onClick="jstophp()">Convert js to php</button>
+  <button onClick="phptojs()">Convert php to js</button>
 
-     $.ajax({
-      type: 'post',
-      data: {ajax: 1,name: name},
-      success: function(response){
-       $('#response').text('name : ' + response);
-      }
-     });
-    });
-  });
-  </script>
- </body>
-</html>
+  PHP variable will appear here:
+  <div id="rslt2">
+  </div>
+</body>
