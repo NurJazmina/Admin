@@ -101,7 +101,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addquiz" name="add_quiz_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>" method="post">
+                <form class="form" name="add_quiz_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>" method="post">
                     <div class="card-body">
                     <p id="demo"></p>
                         <div class="checkbox-inline">

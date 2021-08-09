@@ -6,6 +6,7 @@ $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
     $Subject_id = strval($document->Subject_id);
+    $Note_sort = strval($document->Note_sort);
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
@@ -81,7 +82,7 @@ li {
 </div>
 <!--end::Subheader-->
 <div class="card card-custom overflow-hidden position-relative mb-8">
-        <form class="form" id="recheckquiz" name="recheckquiz" action="index.php?page=ol_addquiz" method="post">
+        <form class="form" name="recheckquiz" action="index.php?page=ol_addquiz" method="post">
             <div class="card-body">
             <div class="row justify-content-around">
                     <div class="col-sm-6 border shadow p-3 mb-5 bg-white rounded">
