@@ -1,13 +1,24 @@
 <?php
-$Subject_id = ($_GET['id']);
 include ('model/subject.php');
+include ('model/assignment.php');
+include ('model/quiz.php');
+include ('model/announcement.php');
+$Notes_id = strval($_GET['id']);
+$slot = ($_GET['slot']);
 
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
-    $SubjectName = $document->SubjectName;
+    $Subject_id = strval($document->Subject_id);
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+    foreach ($cursor as $document1)
+    {
+        $SubjectName = $document1->SubjectName;
+    }
 }
 ?>
 <style>
@@ -32,7 +43,7 @@ foreach ($cursor as $document)
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-white font-weight-bold my-1 mr-5">Subject</h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5"><?php echo $SubjectName; ?></h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -40,7 +51,7 @@ foreach ($cursor as $document)
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo "SLOT ".$slot ?></span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -163,7 +174,7 @@ foreach ($cursor as $document)
         <div class="card-body">
             <div class="row">
                <?php
-                $filter = ['Subject_id'=>$Subject_id];
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
                 foreach ($cursor as $document)
@@ -175,7 +186,32 @@ foreach ($cursor as $document)
                     ?>
                     <div class="col-sm">
                     <div class="checkbox-inline">
-                        <a href="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>"><h1  id="section0" contenteditable="false" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h1></a>
+                        <h1  id="section0" contenteditable="false" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h1>
+                        <div class="col-sm text-right">
+                            <i class="fas fa-pencil-alt text-success" type="button" data-bs-toggle="dropdown"></i>
+                            <div class="dropdown-menu dropdown-menu-md py-5">
+                                <ul class="navi navi-hover">
+                                    <li class="navi-item">
+                                        <a class="navi-link" href="#">
+                                            <span class="navi-icon"><i class="icon fa fa-cog fa-fw text-success"></i></span>
+                                            <span class="navi-text">Edit Topic</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a class="navi-link" href="#">
+                                            <span class="navi-icon"><i class="far fa-eye text-success"></i></span>
+                                            <span class="navi-text">Hide Topic</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a class="navi-link" href="#">
+                                            <span class="navi-icon"><i class="fas fa-trash-alt text-success"></i></span>
+                                            <span class="navi-text">Delete Topic</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     </div>
                     <div class="px-10 mb-10" id="contentinfo">
@@ -262,21 +298,18 @@ foreach ($cursor as $document)
                         }
                         ?>
                     </div>
-                    <div class="separator separator-dashed my-10 separator-success"></div>
+                    <div class="col-sm text-right">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#activity">
+                            <i class="icon fa fa-plus fa-fw text-light-success"></i>  Add an activity or resource
+                        </button>
+                    </div>
                     <?php
                 }
                 ?>
-            </div>
-            <div class="row">
-                <div class="col-sm text-right">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#topic" data-bs-whatever="<?php echo $Notes_id; ?>">
-                    <i class="icon fa fa-plus fa-fw text-light-success" aria-hidden="true"></i>  Add Topic
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 </div>
 <?php 
-include ('view/pages/modal-sorting.php'); 
+include ('view/pages/ol_modal-activity.php'); 
 ?>

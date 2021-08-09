@@ -15,7 +15,6 @@
       {
        if ($document->ConsumerStatus=='ACTIVE')
        {
-
          //$_SESSION["api_session"] = $_GET['api_session'];
          $_SESSION["loggeduser_id"] = strval($document->_id);
          $_SESSION["loggeduser_consumerFName"] = ($document->ConsumerFName);

@@ -6,50 +6,30 @@
         <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <script>
-        function jstophp(){
-        var javavar=document.getElementById("notes_id").value;
-        document.getElementById("rslt1").innerHTML="<?php 
-            $phpvar='"+javavar+"'; 
-            echo $phpvar;
-        ?>";
-        }
-        </script>
-        <input type="text" id="notes_id" class="form-control" name="notes_id">
         <div class="row">
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <form id="assignment"  name="assignment"  action="index.php?page=ol_addassignment" method="post">
-                        <input type="text" id="rslt1" name="rslt1">
-                        <button type="submit" class="btn" name="assignment">
-                            <a class="d-flex flex-column justify-content-between flex-fill">
-                                <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
-                                    <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg">
-                                </div>
-                                <div>Assignment</div>
-                            </a>
-                        </button>
-                    </form>
+                <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addassignment&Notes=<?= $Notes_id; ?>">
+                    <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
+                        <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg">
+                    </div>
+                    <div>Assignment</div>
+                </a>
                 </div>
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <form id="quiz"  name="quiz"  action="index.php?page=ol_modal-recheckquiz" method="post">
-                        <!-- <input type="text" id="rslt2" name="rslt2"> -->
-                        <button type="submit" class="btn" name="quiz">
-                            <a class="d-flex flex-column justify-content-between flex-fill">
-                                <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
-                                    <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg">
-                                </div>
-                                <div>Quiz</div>
-                            </a>
-                        </button>
-                    </form>
+                <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_modal-recheckquiz&Notes=<?= $Notes_id; ?>">
+                    <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
+                        <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg">
+                    </div>
+                    <div>Quiz</div>
+                </a>
                 </div>
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addsurvey&Subject=<?php echo $Subject_id; ?>" title="Add a new survey" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addsurvey&Notes=<?= $Notes_id; ?>" title="Add a new survey" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg">
                         </div>
@@ -59,7 +39,7 @@
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addannouncement&Subject=<?php echo $Subject_id; ?>" title="Add a new announcement" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addannouncement&Notes=<?= $Notes_id; ?>" title="Add a new announcement" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg">
                         </div>
@@ -69,7 +49,7 @@
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addurl&Subject=<?php echo $Subject_id; ?>" title="Add a new url" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addurl&Notes=<?= $Notes_id; ?>" title="Add a new url" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg">
                         </div>
@@ -79,7 +59,7 @@
             </div>
             <div class="col-sm-3 mb-1 mt-1">
                 <div class="card-body d-flex flex-column text-center p-1 border">
-                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addglossary&Subject=<?php echo $Subject_id; ?>" title="Add a new tool" tabindex="-1" data-action="add-chooser-option">
+                    <a class="d-flex flex-column justify-content-between flex-fill" href="index.php?page=ol_addglossary&Notes=<?= $Notes_id; ?>" title="Add a new tool" tabindex="-1" data-action="add-chooser-option">
                         <div class="optionicon mt-2 mb-1 icon-size-5 icon-no-margin">
                             <img class="icon icon" alt="" aria-hidden="true" src="assets/media/svg/social-icons/glossary.svg">
                         </div>

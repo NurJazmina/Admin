@@ -1,6 +1,3 @@
-<?php
-include ('model/quiz.php');
-?>
 <style>
 .btn-link:hover {
     color: #0a477e;
@@ -48,9 +45,10 @@ html {
 if (isset($_POST['recheckquiz']))
 {
   $schoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $Subject_id = $_POST['Subject_id'];
   $totalobj = $_POST['totalobj'];
   $totalsub = $_POST['totalsub'];
+  $Subject_id = $_POST['Subject_id'];
+  $Notes_id = $_POST['Notes_id'];
 ?>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -92,7 +90,7 @@ if (isset($_POST['recheckquiz']))
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addquiz" name="addquiz" action="#" method="post">
+                <form class="form" id="addquiz" name="add_quiz_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=0" method="post">
                     <div class="card-body">
                     <p id="demo"></p>
                         <div class="checkbox-inline">
@@ -551,13 +549,13 @@ if (isset($_POST['recheckquiz']))
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo "2"; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
                                 <input class="form-control" type="hidden" name="totalquiz" value="<?php echo $total; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" href="#focus" class="btn btn-success mr-2" name="addquiz" onclick="myFunction()">Save and return to the subject</button>
-                                <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button>
+                                <button type="submit" class="btn btn-success mr-2" name="add_quiz_return_notes">Save and return to the subject</button>
+                                <!-- <button type="submit" class="btn btn-success mr-2" name="add_quiz_display">Save and display</button> -->
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>

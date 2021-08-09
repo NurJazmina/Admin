@@ -1,12 +1,18 @@
 <?php
-include ('model/announcement.php');
-$Subject_id = $_GET['Subject'];
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$Notes_id = strval($_GET['Notes']);
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
-    $SubjectName = $document->SubjectName;
+    $Subject_id = strval($document->Subject_id);
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+    foreach ($cursor as $document1)
+    {
+        $SubjectName = $document1->SubjectName;
+    }
 }
 ?>
 <style>
@@ -93,7 +99,7 @@ html {
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addannouncement" name="addannouncement" action="#" method="post">
+                <form class="form" name="add_announcement_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=0" method="post">
                     <div class="card-body">
                         <div class="checkbox-inline mb-10">
                             <h2>Adding a New Announcement</h2>
@@ -126,12 +132,12 @@ html {
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo "2"; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" class="btn btn-success mr-2" name="addannouncement">Save and return to the subject</button>
-                                <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button>
+                                <button type="submit" class="btn btn-success mr-2" name="add_announcement_return_notes">Save and return to the subject</button>
+                                <!-- <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button> -->
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>

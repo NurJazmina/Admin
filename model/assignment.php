@@ -1,6 +1,6 @@
 <?php
 //Add Quiz
-if (isset($_POST['addassignment']))
+if (isset($_POST['add_assignment_return_notes']))
 {
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];

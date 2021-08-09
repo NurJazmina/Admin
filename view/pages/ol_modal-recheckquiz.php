@@ -1,11 +1,18 @@
 <?php
-$Subject_id = $_GET['Subject'];
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$Notes_id = strval($_GET['Notes']);
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
-    $SubjectName = $document->SubjectName;
+    $Subject_id = strval($document->Subject_id);
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+    foreach ($cursor as $document1)
+    {
+        $SubjectName = $document1->SubjectName;
+    }
 }
 ?>
 <style>
@@ -113,7 +120,8 @@ li {
                             <div class="separator separator-dashed my-10"></div>
                             <div class="row">
                             <div class="col-lg-8 text-lg-right">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
                                 <button type="submit" class="btn btn-success mr-2" name="recheckquiz">Submit</button>
                             </div>
                         </div>

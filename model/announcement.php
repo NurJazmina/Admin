@@ -1,6 +1,6 @@
 <?php
 //Add announcement
-if (isset($_POST['addannouncement']))
+if (isset($_POST['add_announcement_return_notes']))
 {
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Subject_id = $_POST['Subject_id'];

@@ -125,6 +125,7 @@
                                 "ol_addsurvey",
                                 "ol_survey",
                                 "ol_subject",
+                                "ol_notes",
                                 "ol_submit_assignment",
                                 "ol_submit_quiz",
                                 "ol_quiz",

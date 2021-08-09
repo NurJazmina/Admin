@@ -17,7 +17,6 @@ var javavar2 = "<?php
 alert(javavar2);
 }
 </script> 
-
 <body>
   <div id="rslt">
   </div>
