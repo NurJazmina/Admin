@@ -99,7 +99,7 @@ html {
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" name="add_announcement_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=0" method="post">
+                <form class="form" name="add_announcement_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>" method="post">
                     <div class="card-body">
                         <div class="checkbox-inline mb-10">
                             <h2>Adding a New Announcement</h2>
@@ -136,7 +136,7 @@ html {
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" class="btn btn-success mr-2" name="add_announcement_return_notes">Save and return to the subject</button>
+                                <button type="submit" class="btn btn-success mr-2" name="add_announcement_return_notes">Save and return to the notes</button>
                                 <!-- <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button> -->
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>

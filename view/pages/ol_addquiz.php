@@ -86,11 +86,22 @@ if (isset($_POST['recheckquiz']))
 	</div>
 </div>
 <!--end::Subheader-->
+<?php
+$Submitfrom = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$Submitfrom = $Submitfrom->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$Submitfrom = date_format($Submitfrom,"Y-m-d\TH:i:s");
+
+$Due = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
+$Due = $Due->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$Due = date_format($Due,"Y-m-d\TH:i:s");
+
+//echo $Due;
+?>
 <div class="d-flex flex-column-fluid">
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addquiz" name="add_quiz_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=0" method="post">
+                <form class="form" id="addquiz" name="add_quiz_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>" method="post">
                     <div class="card-body">
                     <p id="demo"></p>
                         <div class="checkbox-inline">
@@ -182,7 +193,7 @@ if (isset($_POST['recheckquiz']))
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="DateOpen" placeholder="Select date" id="kt_datepicker">
+                                                <input type="datetime-local" class="form-control" name="DateOpen" placeholder="Select date" id="kt_datepicker" value="<?php echo $Submitfrom; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -190,7 +201,7 @@ if (isset($_POST['recheckquiz']))
                                         <label class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Closed the quiz</label>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="DateClose" placeholder="Select date" id="kt_datepicker">
+                                                <input type="datetime-local" class="form-control" name="DateClose" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -554,7 +565,7 @@ if (isset($_POST['recheckquiz']))
                                 <input class="form-control" type="hidden" name="totalquiz" value="<?php echo $total; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" class="btn btn-success mr-2" name="add_quiz_return_notes">Save and return to the subject</button>
+                                <button type="submit" class="btn btn-success mr-2" name="add_quiz_return_notes">Save and return to the notes</button>
                                 <!-- <button type="submit" class="btn btn-success mr-2" name="add_quiz_display">Save and display</button> -->
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>

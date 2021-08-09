@@ -159,7 +159,7 @@ function time_elapsed($date){
                         {
                             $consumer_id = strval($document1->_id);
 
-                            $filter2 = ['Created_by'=>$consumer_id];
+                            $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
@@ -351,7 +351,7 @@ function time_elapsed($date){
                                         $due = strval($due);
                                         $time_elapsed = 0;
 
-                                        $filter2 = ['Created_by'=>$consumer_id];
+                                        $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
                                         $query2 = new MongoDB\Driver\Query($filter2);
                                         $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
@@ -635,6 +635,7 @@ function time_elapsed($date){
                                         $Answer_id = strval($document2->_id);
                                         $Answer_Created_by = $document2->Created_by;
                                         $Created_date = $document2->Created_date;
+                                        $Answer = $document2->Answer;
                                         $Mark = $document2->Mark;
                                         $File_submission = $document2->File_submission;
                                         $comment = $document2->comment;
@@ -783,6 +784,20 @@ function time_elapsed($date){
                                             <form name="EditGrade" action="" method="post">
                                                 <div class="modal-body">
                                                     <input type="hidden" name="answer_id" value="<?php echo $Answer_id; ?>">
+                                                    <?php
+                                                    if($Answer != '')
+                                                    {
+                                                        ?>
+                                                        <div class="row mb-5"> 
+                                                            <div class="col-sm">
+                                                                <label>Answer</label>
+                                                                <label align="justify"><?php echo $Answer; ?></label>
+                                                            </div>  
+                                                            <div class="col-sm"></div>  
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <div class="row mb-5"> 
                                                         <div class="col-sm">
                                                             <label>Grade out of 100</label>

@@ -2,7 +2,9 @@
 include ('model/subject.php');
 include ('model/assignment.php');
 include ('model/quiz.php');
+include 'model/survey.php';
 include ('model/announcement.php');
+
 $Notes_id = strval($_GET['id']);
 $slot = ($_GET['slot']);
 

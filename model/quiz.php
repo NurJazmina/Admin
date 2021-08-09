@@ -19,15 +19,6 @@ if (isset($_POST['add_quiz_return_notes']))
   $idnumber = '';
   $group = '';
 
-  $Type1 = '';
-  $Question1 = '';
-  $Option_A1 = '';
-  $Option_B1 = '';
-  $Option_C1 = '';
-  $Option_D1 = '';
-  $Answer1 = '';
-  $Mark1 = '';
-
   $title = $_POST['title'];
   $Description = $_POST['description'];
 

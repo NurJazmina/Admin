@@ -23,6 +23,8 @@ $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
 foreach ($cursor as $document)
 {
     $type = $document->type;
+    $Subject_id = $document->Subject_id;
+    $Notes_id = $document->Notes_id;
 }
 
 if($type == "1")
