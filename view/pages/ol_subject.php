@@ -179,7 +179,7 @@ foreach ($cursor as $document)
                     </div>
                     </div>
                     <div class="px-10 mb-10" id="contentinfo">
-                        <a align="justify"><?php echo $Detail; ?></a>
+                        <a align="justify"><?php echo mb_strimwidth($Detail, 0,900, "..."); ?></a>
                     </div>
                     <div class="px-5" id="assignment">
                         <?php

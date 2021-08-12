@@ -189,6 +189,8 @@ function time_elapsed($date){
                                 $Quiz_Answer = $document2->Quiz;
                                 $Total_Answer = count((array)$Quiz_Answer);
                                 $sub_mark = 0;
+                                
+                                //0 subjective question
                                 $subjective = 0;
 
                                 for ($i = 0; $i < $Total_Question; $i++)
@@ -701,6 +703,9 @@ function time_elapsed($date){
                                         $Total_Answer = count((array)$Quiz_Answer);
                                         $objective_ans_mark = 0;
                                         $subjective_ans_mark = 0;
+
+                                        //0 subjective question
+                                        $subjective = 0;
                         
                                         for ($i = 0; $i < $Total_Question; $i++)
                                         {
@@ -714,6 +719,7 @@ function time_elapsed($date){
                                             }
                                             elseif($Type == 'SUBJECTIVE')
                                             {
+                                                $subjective = 1;
                                                 $Mark_ans = $Quiz_Answer[$id]->Mark;
                                                 $subjective_ans_mark += $Mark_ans;
                                             }
@@ -835,29 +841,36 @@ function time_elapsed($date){
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mx-0 mt-3">
-                                                    <div class="col-sm-2">
-                                                        <b>Subjective</b>
-                                                    </div>
-                                                    <div class="col-sm">
-                                                        <div class="checkbox-inline">
-                                                            <b>:</b>&nbsp;
-                                                            <b><?php echo $subjective_ans_mark; ?> / <?=  $subjective_mark ?></b>&nbsp; &nbsp;
-                                                            <span class="label label-md font-weight-bold label-pill label-inline label-primary">
-                                                            <?php
-                                                            if ($subjective_ans_mark == 0)
-                                                            {
-                                                                echo "not graded";
-                                                            }
-                                                            else
-                                                            {
-                                                                echo "graded";
-                                                            }
-                                                            ?>
-                                                            </span>
+                                                <?php
+                                                if ($subjective == 1)
+                                                {
+                                                    ?>
+                                                    <div class="row mx-0 mt-3">
+                                                        <div class="col-sm-2">
+                                                            <b>Subjective</b>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <div class="checkbox-inline">
+                                                                <b>:</b>&nbsp;
+                                                                <b><?php echo $subjective_ans_mark; ?> / <?=  $subjective_mark ?></b>&nbsp; &nbsp;
+                                                                <span class="label label-md font-weight-bold label-pill label-inline label-primary">
+                                                                <?php
+                                                                if ($subjective_ans_mark == 0)
+                                                                {
+                                                                    echo "not graded";
+                                                                }
+                                                                else
+                                                                {
+                                                                    echo "graded";
+                                                                }
+                                                                ?>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <?php
+                                                }
+                                                ?>
                                                 <div class="row mx-0 mt-3">
                                                     <div class="col-sm-2">
                                                         <b>Comments</b>
