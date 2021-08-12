@@ -49,6 +49,7 @@ if (isset($_POST['recheckquiz']))
   $totalsub = $_POST['totalsub'];
   $Subject_id = $_POST['Subject_id'];
   $Notes_id = $_POST['Notes_id'];
+  $Note_sort = $_POST['Note_sort'];
 ?>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -468,25 +469,25 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                         <div class="form-group row">
                                             <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option A</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_A" name="Option_A<?php echo $i; ?>">
+                                                <input class="form-control" type="text" id="Option_A" name="Option_A<?php echo $i; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option B</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_B" name="Option_B<?php echo $i; ?>">
+                                                <input class="form-control" type="text" id="Option_B" name="Option_B<?php echo $i; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option C</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_C" name="Option_C<?php echo $i; ?>">
+                                                <input class="form-control" type="text" id="Option_C" name="Option_C<?php echo $i; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label  class="col-md-3 col-form-label d-flex pb-0 pr-md-0">Option D</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" id="Option_D" name="Option_D<?php echo $i; ?>">
+                                                <input class="form-control" type="text" id="Option_D" name="Option_D<?php echo $i; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">

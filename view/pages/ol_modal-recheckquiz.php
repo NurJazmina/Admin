@@ -123,6 +123,7 @@ li {
                             <div class="col-lg-8 text-lg-right">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Note_sort" value="<?php echo $Note_sort; ?>">
                                 <button type="submit" class="btn btn-success mr-2" name="recheckquiz">Submit</button>
                             </div>
                         </div>

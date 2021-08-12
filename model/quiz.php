@@ -22,8 +22,8 @@ if (isset($_POST['add_quiz_return_notes']))
   $title = $_POST['title'];
   $Description = $_POST['description'];
 
-  $DateOpen = $_POST['DateOpen'];
-  $DateClose = $_POST['DateClose'];
+  $DateOpen = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['DateOpen']))->getTimestamp()*1000);
+  $DateClose = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['DateClose']))->getTimestamp()*1000);
 
   $timeunit = $_POST['timeunit'];
   $timelimit = $_POST['timelimit'];
@@ -39,10 +39,16 @@ if (isset($_POST['add_quiz_return_notes']))
   $group = $_POST['group'];
   $array = [];
   $totalquiz = $_POST['totalquiz'];
+
   for ($i=1; $i<=$totalquiz; $i++)
   {
+    if($_POST['Mark'.$i] == '')
+    {
+      $_POST['Mark'.$i] = '1';
+    }
     $arraycount =
     [
+      'id'=> $i-1,
       'Type'=>$_POST['Type'.$i],
       'Question'=>$_POST['Question'.$i],
       'Option_A'=>$_POST['Option_A'.$i],

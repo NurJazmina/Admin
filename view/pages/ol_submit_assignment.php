@@ -96,7 +96,7 @@ function time_elapsed($date){
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
             foreach ($cursor as $document)
             {
-                $Assignment_id = $document->_id;
+                $Assignment_id =strval($document->_id);
                 $Title = $document->Title;
                 $Submitfrom = $document->Submitfrom;
                 $Duedate = $document->Duedate;
@@ -581,7 +581,6 @@ function time_elapsed($date){
                                 </div>
                             </div>
                             <?php
-
                             if (!isset($_GET['user']) && empty($_GET['user']))
                             {
                                 $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
@@ -626,7 +625,7 @@ function time_elapsed($date){
                                     $due = strval($due);
                                     $time_elapsed = 0;
 
-                                    $filter2 = ['Created_by'=>$consumer_id];
+                                    $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
                                     $query2 = new MongoDB\Driver\Query($filter2);
                                     $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 

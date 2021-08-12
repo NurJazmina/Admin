@@ -6,8 +6,8 @@ function time_elapsed($date){
 		' week'      => $date  / 604800 % 52,
 		' day'       => $date  / 86400 % 7,
 		' hour'      => $date  / 3600 % 24,
-		//' minute'    => $date  / 60 % 60,
-		//' second'    => $date  % 60
+		' minute'    => $date  / 60 % 60,
+		' second'    => $date  % 60
 		);
 	foreach($bit as $k => $v){
 		if($v > 1)$ret[] = $v . $k . 's';
@@ -93,7 +93,7 @@ function time_elapsed($date){
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
             foreach ($cursor as $document)
             {
-                $Quiz_id = $document->_id;
+                $Quiz_id = strval($document->_id);
                 $Title = $document->Title;
                 $DateOpen = $document->DateOpen;
                 $DateClose = $document->DateClose;
@@ -178,7 +178,7 @@ function time_elapsed($date){
                         {
                             $consumer_id = strval($document1->_id);
 
-                            $filter2 = ['Created_by'=>$consumer_id];
+                            $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
 
@@ -189,21 +189,27 @@ function time_elapsed($date){
                                 $Quiz_Answer = $document2->Quiz;
                                 $Total_Answer = count((array)$Quiz_Answer);
                                 $sub_mark = 0;
+                                $subjective = 0;
 
                                 for ($i = 0; $i < $Total_Question; $i++)
                                 {
                                     $Type = $Quiz[$i]->Type;
                                     if($Type == 'SUBJECTIVE')
                                     {
+                                        $subjective = 1;
                                         $id = $Quiz[$i]->id;
+
                                         $Mark_ans = $Quiz_Answer[$id]->Mark;
                                         $sub_mark += $Mark_ans;
                                     }
                                 }
-                                //echo $sub_mark;
-                                if($sub_mark == 0)
+                                if($subjective == 1 && $sub_mark == 0)
                                 {
                                     $not_graded = $not_graded + 1;
+                                }
+                                elseif($subjective == 0 && $sub_mark == 0)
+                                {
+                                    $not_graded = 0;
                                 }
                                 else
                                 {
@@ -389,7 +395,7 @@ function time_elapsed($date){
                                         $due = strval($due);
                                         $time_elapsed = 0;
 
-                                        $filter2 = ['Created_by'=>$consumer_id];
+                                        $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
                                         $query2 = new MongoDB\Driver\Query($filter2);
                                         $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
 
@@ -435,7 +441,7 @@ function time_elapsed($date){
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-warning btn-sm rounded-pill btn-hover-outline-white btn-block">
-                                                    <?= $total_mark; ?> / 100
+                                                    <?= $total_mark; ?> / <?=  $totalmark ?>
                                                     </button>
                                                 </td>
                                                 <td>
@@ -667,7 +673,7 @@ function time_elapsed($date){
                                     $due = strval($due);
                                     $time_elapsed = 0;
 
-                                    $filter2 = ['Created_by'=>$consumer_id];
+                                    $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
                                     $query2 = new MongoDB\Driver\Query($filter2);
                                     $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
 
@@ -824,16 +830,7 @@ function time_elapsed($date){
                                                             <b>:</b>&nbsp;
                                                             <b><?php echo $objective_ans_mark; ?> / <?=  $objective_mark ?></b>&nbsp; &nbsp;
                                                             <span class="label label-md font-weight-bold label-pill label-inline label-primary">
-                                                            <?php
-                                                            if ($objective_ans_mark == 0)
-                                                            {
-                                                                echo "not graded";
-                                                            }
-                                                            else
-                                                            {
-                                                                echo "graded";
-                                                            }
-                                                            ?>
+                                                           graded   
                                                             </span>
                                                         </div>
                                                     </div>
