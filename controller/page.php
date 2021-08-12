@@ -128,6 +128,7 @@
                                 "ol_notes",
                                 "ol_submit_assignment",
                                 "ol_submit_quiz",
+                                "ol_submit_survey",
                                 "ol_quiz",
                                 "ol_announcement",
                                 "ol_assignment",

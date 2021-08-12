@@ -84,54 +84,31 @@ if (isset($_POST['add_survey_return_notes']))
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
-if (isset($_POST['answer']))
+if (isset($_POST['surveyform4']))
 {
-  $Quiz_id = $_POST['id'];
-  $Total_Question = $_POST['Total_Question'];
+  $Survey_id = $_POST['Survey_id'];
   $School_id = strval($_SESSION["loggeduser_schoolID"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Quiz_id)];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
-  foreach ($cursor as $document)
-  {
-    $Quiz_id = strval($document->_id);
-    $Quiz = $document->Quiz;
-    $Created_by = $document->Created_by;
-    $Total_Question = count((array)$Quiz);
-  }
   $array = [];
-  $totalmark = 0;
-  for ($i = 0; $i < $Total_Question; $i++)
+  for ($i = 0; $i < 20; $i++)
   {
-    $id = $Quiz[$i]->id;
-    $Type = $Quiz[$i]->Type;
-    $Answer = $Quiz[$i]->Answer;
-    $Mark = '0';
-
-    if($Type== 'OBJECTIVE' && $Answer == $_POST['ans'.$i])
-    {
-      $Mark = $Quiz[$i]->Mark;
-    }
     $arraycount =
     [
-      'Answer'=>$_POST['ans'.$i],
-      'Mark'=> $Mark
+      'Q'.$i=>$_POST['q'.$i]
     ];
     array_push($array, $arraycount);
   }
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
                   'School_id'=>$School_id,
-                  'Quiz_id' => $Quiz_id,
+                  'Survey_id' => $Survey_id,
                   'Created_by'=>$Created_by,
                   'Created_date'=>$Created_date,
-                  'Comment'=>'null',
-                  'Quiz'=>$array
+                  'Survey_ans'=>$array
                 ]);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey_Answer', $bulk, $writeConcern);
 }

@@ -183,7 +183,7 @@ function time_elapsed($date){
                     <table class="table table-hover table-borderless">
                         <tbody>
                             <tr class="bg-gray-300 text-dark-50">
-                                <th>Hidden from students</th>
+                                <th class="col-6">Hidden from students</th>
                                 <td><?php
                                 if($Availability == 'SHOW')
                                 {
@@ -194,35 +194,23 @@ function time_elapsed($date){
                                     echo "Yes";
                                 }
                                 ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="text-dark-50">
-                                <th>Participants</th>
+                                <th class="col-6">Participants</th>
                                 <td>
                                 <?php echo $total; ?>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
-                                <th>Submitted</th>
+                                <th class="col-6">Submitted</th>
                                 <td><?php echo $total_submission; ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="text-dark-50">
-                                <th>Needs grading</th>
+                                <th class="col-6">Needs grading</th>
                                 <td><?php echo $not_graded; ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
-                                <th>Time remaining</th>
+                                <th class="col-6">Time remaining</th>
                                 <td>
                                 <?php
                                 $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
@@ -241,9 +229,6 @@ function time_elapsed($date){
                                 }
                                 ?>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -847,7 +832,7 @@ function time_elapsed($date){
                     </div>
                     <?php
                 } 
-                elseif($_SESSION["loggeduser_ConsumerGroup_id"] == '6018c32b10184a751c102eb6') //student
+                elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT')
                 {
                     ?>
                     <div class="card-footer">
