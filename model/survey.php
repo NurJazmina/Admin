@@ -84,6 +84,99 @@ if (isset($_POST['add_survey_return_notes']))
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
+if (isset($_POST['surveyform1']))
+{
+  $Survey_id = $_POST['Survey_id'];
+  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+  $array = [];
+  for ($i = 0; $i < 26; $i++)
+  {
+    $arraycount =
+    [
+      'Q'=>$_POST['q'.$i]
+
+    ];
+    array_push($array, $arraycount);
+  }
+  
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert([
+                  'School_id'=>$School_id,
+                  'Survey_id' => $Survey_id,
+                  'Created_by'=>$Created_by,
+                  'Created_date'=>$Created_date,
+                  'Survey_ans'=>$array
+                ]);
+
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey_Answer', $bulk, $writeConcern);
+}
+
+if (isset($_POST['surveyform2']))
+{
+  $Survey_id = $_POST['Survey_id'];
+  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+  $array = [];
+  for ($i = 0; $i < 50; $i++)
+  {
+    $arraycount =
+    [
+      'Q'=>$_POST['q'.$i]
+
+    ];
+    array_push($array, $arraycount);
+  }
+  
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert([
+                  'School_id'=>$School_id,
+                  'Survey_id' => $Survey_id,
+                  'Created_by'=>$Created_by,
+                  'Created_date'=>$Created_date,
+                  'Survey_ans'=>$array
+                ]);
+
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey_Answer', $bulk, $writeConcern);
+}
+
+if (isset($_POST['surveyform3']))
+{
+  $Survey_id = $_POST['Survey_id'];
+  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+  $array = [];
+  for ($i = 0; $i < 26; $i++)
+  {
+    $arraycount =
+    [
+      'Q'=>$_POST['q'.$i]
+
+    ];
+    array_push($array, $arraycount);
+  }
+  
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert([
+                  'School_id'=>$School_id,
+                  'Survey_id' => $Survey_id,
+                  'Created_by'=>$Created_by,
+                  'Created_date'=>$Created_date,
+                  'Survey_ans'=>$array
+                ]);
+
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey_Answer', $bulk, $writeConcern);
+}
+
 if (isset($_POST['surveyform4']))
 {
   $Survey_id = $_POST['Survey_id'];
@@ -96,7 +189,36 @@ if (isset($_POST['surveyform4']))
   {
     $arraycount =
     [
-      'Q'.$i=>$_POST['q'.$i]
+      'Q'=>$_POST['q'.$i]
+    ];
+    array_push($array, $arraycount);
+  }
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert([
+                  'School_id'=>$School_id,
+                  'Survey_id' => $Survey_id,
+                  'Created_by'=>$Created_by,
+                  'Created_date'=>$Created_date,
+                  'Survey_ans'=>$array
+                ]);
+
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey_Answer', $bulk, $writeConcern);
+}
+
+if (isset($_POST['surveyform5']))
+{
+  $Survey_id = $_POST['Survey_id'];
+  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+  $array = [];
+  for ($i = 0; $i < 5; $i++)
+  {
+    $arraycount =
+    [
+      'Q'=>$_POST['q'.$i]
     ];
     array_push($array, $arraycount);
   }

@@ -238,7 +238,7 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>">
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_survey&id=<?php echo $Survey_id; ?>">
                                 <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
                                 </a>
                             </div>

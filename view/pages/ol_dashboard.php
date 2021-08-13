@@ -305,7 +305,7 @@
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  class="text-success" href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>">
+                            <a  class="text-success" href="index.php?page=ol_submit_survey&id=<?php echo $Survey_id; ?>">
                             <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
                             </a>
                         </div>

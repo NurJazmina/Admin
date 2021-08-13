@@ -97,6 +97,7 @@ function time_elapsed($date){
             foreach ($cursor as $document)
             {
                 $Survey_id =strval($document->_id);
+                $type = $document->type;
                 $Title = $document->Title;
                 $Created_date = $document->Created_date;
                 $Availability = $document->Availability;
@@ -109,7 +110,7 @@ function time_elapsed($date){
                 ?>
                 <h3 class="text-dark-600 mb-8">SURVEY : <?php echo $Title; ?></h3>
 
-                <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4 mb-10">
+                <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white p-8 mb-10">
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Created date </h6></div>
                         <div class="col-sm-10 text-left"><h6><?php echo ": ".$Created_date; ?></h6></div>
@@ -279,11 +280,30 @@ function time_elapsed($date){
                                             <td>
                                                 <div class="bg-warning text-white text-center"><?php echo "submitted"; ?></div>   
                                             </td>
+                                            <?php
+                                            if ($type == '5')
+                                            {
+                                            ?>
                                             <td>
-                                                <a type="button" class="btn" href="#">
-                                                    <i  class="flaticon2-list-1"></i>
-                                                </a>
+                                            <form name="detail" action="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=survey5" method="post">
+                                                <input type="hidden" name="survey_answer_id" value="<?= $Answer_id; ?>"></input>
+                                                <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" name="detail"></button>
+                                            </form>
                                             </td>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                            <td>
+                                            <form name="detail" action="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=survey" method="post">
+                                                <input type="hidden" name="survey_answer_id" value="<?= $Answer_id; ?>"></input>
+                                                <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" name="detail"></button>
+                                            </form>
+                                            </td>
+                                            <?php
+                                            }
+                                            ?>
                                             <?php
                                         } 
                                         ?>
@@ -296,9 +316,7 @@ function time_elapsed($date){
                                             <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
                                         </td>
                                         <td>
-                                            <a type="button" class="btn" href="#">
-                                                <i  class="flaticon2-list-1"></i>
-                                            </a>
+                                            <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" disabled></button>
                                         </td>
                                         <?php
                                     } 
@@ -314,7 +332,110 @@ function time_elapsed($date){
                             </div>
                         </div>
                     <?php
-                    }    
+                    }
+                    elseif($action == 'survey')
+                    {
+                        $survey_answer_id = $_POST['survey_answer_id'];
+
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($survey_answer_id)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey_Answer',$query);
+
+                        foreach ($cursor as $document3)
+                        {
+                            $Survey_ans = strval($document3->_id);
+                            $Survey_Answer = $document3->Survey_ans;
+                            $Total_Answer = count((array)$Survey_Answer);
+                        }
+                        for ($i = 0; $i < $Total_Answer; $i++)
+                        {
+                            $Q.$i = $Quiz[$i]->Q;
+                        }
+                        ?>
+                        <div class="content d-flex flex-column flex-column-fluid">
+                            <div class="card card-custom gutter-b px-5">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <form action="index.php?page=ol_submit_survey&id=<?= $_GET['id']; ?>" name="surveyform5" method="post">
+                                                <p><b>While thinking about recent events in this class, answer the questions below. All questions are required and must be answered.</b></p>
+                                                <ol class="mt-10 mb-3">
+                                                    <div class="form-group row ">
+                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                        </div>
+                                                    </div>
+                                                </ol>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    elseif($action == 'survey5')
+                    {
+                        $survey_answer_id = $_POST['survey_answer_id'];
+
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($survey_answer_id)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey_Answer',$query);
+
+                        foreach ($cursor as $document3)
+                        {
+                            $Survey_ans = strval($document3->_id);
+                            $Survey_Answer = $document3->Survey_ans;
+                            $Total_Answer = count((array)$Survey_Answer);
+                            $Q0 = $Survey_Answer[0]->Q;
+                            $Q1 = $Survey_Answer[1]->Q;
+                            $Q2 = $Survey_Answer[2]->Q;
+                            $Q3 = $Survey_Answer[3]->Q;
+                            $Q4 = $Survey_Answer[4]->Q;
+                        }
+                        ?>
+                        <div class="content d-flex flex-column flex-column-fluid">
+                            <div class="card card-custom gutter-b px-5">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <form action="index.php?page=ol_submit_survey&id=<?= $_GET['id']; ?>" name="surveyform5" method="post">
+                                                <p><b>While thinking about recent events in this class, answer the questions below. All questions are required and must be answered.</b></p>
+                                                <ol class="mt-10 mb-3">
+                                                    <div class="form-group row ">
+                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                            <li>At what moment in class were you most engaged as a learner?</li>
+                                                        </div>
+                                                        <a href=""><?= $Q0 ?></a>
+                                                    </div>
+                                                    <div class="form-group row ">
+                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                            <li>At what moment in class were you most distanced as a learner?</li>
+                                                        </div>
+                                                        <a href=""><?= $Q1 ?></a>
+                                                    </div>
+                                                    <div class="form-group row ">
+                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                            <li>What action from anyone in the forums did you find most affirming or helpful?</li>
+                                                        </div>
+                                                        <a href=""><?= $Q2 ?></a>
+                                                    </div>
+                                                    <div class="form-group row ">
+                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                            <li>What action from anyone in the forums did you find most puzzling or confusing?</li>
+                                                        </div>
+                                                        <a href=""><?= $Q3 ?></a>
+                                                    </div>
+                                                    <div class="form-group row ">
+                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                            <li>What event surprised you most?</li>
+                                                        </div>
+                                                        <a href=""><?= $Q4 ?></a>
+                                                    </div>
+                                                </ol>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
                 }
                 if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                 {

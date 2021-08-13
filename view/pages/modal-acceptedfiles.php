@@ -1,6 +1,5 @@
 <div class="modal-content" id="yui_3_17_2_1_1624346687730_1631">
             <div class="modal-header " data-region="header" id="yui_3_17_2_1_1624346687730_1630">
-
                     <h5 id="9-modal-title" class="modal-title" data-region="title">Accepted file types</h5>
                 <button type="button" class="close" data-action="hide" aria-label="Close" id="yui_3_17_2_1_1624346687730_1629">
                   <span aria-hidden="true" id="yui_3_17_2_1_1624346687730_1637">×</span>

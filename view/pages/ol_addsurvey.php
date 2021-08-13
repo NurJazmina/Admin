@@ -173,8 +173,8 @@ input[aria-invalid='true'] {
                                                 <option value="4">ATTLS (20 ITEM VERSION)</option>
                                                 <option value="5">CRITICAL INCIDENTS</option>
                                                 <option value="1">COLLES (ACTUAL)</option>
-                                                <option value="3">COLLES (PREFFERED & ACTUAL)</option>
-                                                <option value="2">COLLES (PREFFERED)</option>
+                                                <option value="2">COLLES (PREFFERED & ACTUAL)</option>
+                                                <option value="3">COLLES (PREFFERED)</option>
                                             </select>
                                             <div class="error" id="titleErrorMessage" aria-hidden="true" role="alert" tabindex="1">
                                                 <p> - You must supply a value here !</p>
