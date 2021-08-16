@@ -18,8 +18,7 @@ alert(javavar2);
 }
 </script> 
 <body>
-  <div id="rslt">
-  </div>
+  <div id="rslt"></div>
   <input type="text" id="text"/>
   <button onClick="jstophp()">Convert js to php</button>
   <button onClick="phptojs()">Convert php to js</button>

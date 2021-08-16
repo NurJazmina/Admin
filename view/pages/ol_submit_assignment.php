@@ -288,24 +288,107 @@ function time_elapsed($date){
                                         </div>
                                         <!--end::Dropdown-->
                                         <!--begin::button-->
-                                        <a type="button" class="btn btn-light font-weight-bolder" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grades">
-                                        <span class="svg-icon svg-icon-primary svg-icon-2x">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"/>
-                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
-                                                <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
-                                                <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
-                                                <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
-                                            </g>
-                                        </svg>
-                                        </span>Student Grades</a>
-                                        <form class="form1" name="detail" method="post" action="">
-                                            <input type="text" id="mark" name="mark" value="1">
-                                            <input type="text" id="totalmark" name="totalmark" value="2">
-                                            <button class="submit" id="login" name="detail">graph</button>
+                                        <form name="myForm">
+                                            <?php
+                                            for ($x = 1; $x <= 4; $x++)
+                                            {
+                                                ?>
+                                                <input type="text" name="mark<?= $x; ?>" value="1">
+                                                <?php
+                                            }
+                                            ?>
+                                            <input type="text" name="totalmark" value="10">
+                                            <input type="text" name="totalstudent" value="4">
+                                            <a class="btn btn-light font-weight-bolder" onmouseover="myFunction()">
+                                            <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                    <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                    <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                    <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                                </g>
+                                            </svg>
+                                            </span>Student Grades</a>
                                         </form>
-                                        <!--end::button-->
+                                        <p id="demo"></p>
+                                        <script>
+                                        function myFunction() {
+                                        let totalmark = document.forms["myForm"]["totalmark"].value;
+                                        var totalstudent = document.forms["myForm"]["totalstudent"].value;
+                                        let text = "";
+                                        let z = totalmark / 10; //10/10=1
+
+                                        for (let count = 1; count <= totalstudent; count++) {
+                                            // 'staff.'.$varobject
+                                            var mark'+'count = 0;
+                                            let mark = document.forms["myForm"]["mark"+count].value;
+                                        }
+                                        if (one === 0) 
+                                        {
+                                            var one = 5;
+                                        } 
+                                        let a = 0 + " - " + z ; //0-1
+                                        let aa = z + z; //2
+                                        
+                                        let b = z + " - " + aa ; //1-2
+                                        var bb = aa + z; //3
+
+                                        let c = aa + " - " + bb ; //2-3
+                                        let cc = bb + z;
+
+                                        let d = bb + " - " + cc ; //3-4
+                                        let dd = cc + z;
+
+                                        let e = cc + " - " + dd ; //4-5
+                                        let ee = dd + z;
+
+                                        let f = dd + " - " + ee ; //5-6
+                                        let ff = ee + z;
+
+                                        let g = ee + " - " + ff ; //6-7
+                                        let gg = ff + z;
+
+                                        let h = ff + " - " + gg ; //7-8
+                                        let hh = gg + z;
+
+                                        let i = gg + " - " + hh ; //8-9
+                                        let ii = hh + z;
+
+                                        let j = hh + " - " + ii ; //9-10
+
+                                        document.getElementById("demo").innerHTML = text;
+                                        var ctx = document.getElementById('myChart').getContext('2d');
+                                        var myChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                //label : total mark divide by 10
+                                                labels: [a , b, c, d, e, f, g, h, i, j],
+                                                //data : marks
+                                                datasets: [{
+                                                    label: 'Students',
+                                                    data: [mark1, mark2, mark3, mark4],
+                                                    backgroundColor: [
+                                                        'rgba(54, 162, 235, 0.2)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(54, 162, 235, 1)'
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                        }
+                                        </script>
+                                        <!--end::button
                                     </div>
                                 </div>
                                 <!--end::Search Form-->
@@ -531,6 +614,46 @@ function time_elapsed($date){
                                 ?>
                                 </tbody>
                                 </table>
+                                </div>
+                                <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8"> 
+                                            <canvas id="myChart"></canvas>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <script>
+                                    var test = '10';
+                                    // var Mark = $("#Mark").val();
+                                    var ctx = document.getElementById('myChart').getContext('2d');
+                                    var myChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            //label : total mark divide by 10
+                                            labels: ['0-1', '1-2', '2-3', '3-4', '4-5', '5-6','6-7', '7-8', '8-9', '9-10'],
+                                            //data : marks
+                                            datasets: [{
+                                                label: 'Students',
+                                                data: [ mark, 22],
+                                                backgroundColor: [
+                                                    'rgba(54, 162, 235, 0.2)'
+                                                ],
+                                                borderColor: [
+                                                    'rgba(54, 162, 235, 1)'
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                    </script>
                                 </div>
                                 <!--end: Datatable-->
                             </div>
@@ -844,15 +967,12 @@ function time_elapsed($date){
                         foreach ($cursor2 as $document2)
                         {
                             $Mark = $document2->Mark;
-                        
                             ?>
                             <!--begin::Card-->
-                            
                             <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
                                 <div class="row">
                                     <div class="col-2"></div>
                                     <div class="col-8"> 
-                                        <input type="text" id="Mark" name="Mark" value="<?= $Mark; ?>"> 
                                         <canvas id="myChart"></canvas>
                                     </div>
                                     <div class="col-2"></div>
@@ -869,7 +989,7 @@ function time_elapsed($date){
                                         //data : marks
                                         datasets: [{
                                             label: 'Students',
-                                            data: [12, 20, 3, 5, 2, 3],
+                                            data: [ 5, 22],
                                             backgroundColor: [
                                                 'rgba(54, 162, 235, 0.2)'
                                             ],
