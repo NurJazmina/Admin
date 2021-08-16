@@ -13,7 +13,7 @@
         width: 400px;
         height: 570px;
         padding:10px;
-        margin: 7em auto;
+        margin: 9em auto;
         border-radius: 1.5em;
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
     

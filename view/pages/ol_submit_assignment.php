@@ -300,6 +300,11 @@ function time_elapsed($date){
                                             </g>
                                         </svg>
                                         </span>Student Grades</a>
+                                        <form class="form1" name="detail" method="post" action="">
+                                            <input type="text" id="mark" name="mark" value="1">
+                                            <input type="text" id="totalmark" name="totalmark" value="2">
+                                            <button class="submit" id="login" name="detail">graph</button>
+                                        </form>
                                         <!--end::button-->
                                     </div>
                                 </div>
