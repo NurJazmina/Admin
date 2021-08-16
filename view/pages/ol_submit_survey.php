@@ -217,7 +217,7 @@ function time_elapsed($date){
                                                         </a>
                                                     </li>
                                                     <li class="navi-item">
-                                                        <a href="index.php?page=ol_submit_assignment&id=<?= $Assignment_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
+                                                        <a href="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
                                                             <span class="navi-icon">
                                                                 <i class="la la-file-excel-o"></i>
                                                             </span>
@@ -347,24 +347,52 @@ function time_elapsed($date){
                             $Survey_Answer = $document3->Survey_ans;
                             $Total_Answer = count((array)$Survey_Answer);
                         }
-                        for ($i = 0; $i < $Total_Answer; $i++)
-                        {
-                            $Q.$i = $Quiz[$i]->Q;
-                        }
                         ?>
                         <div class="content d-flex flex-column flex-column-fluid">
                             <div class="card card-custom gutter-b px-5">
                                 <div class="card-body">
                                     <div class="row">
-                                        <form action="index.php?page=ol_submit_survey&id=<?= $_GET['id']; ?>" name="surveyform5" method="post">
-                                                <p><b>While thinking about recent events in this class, answer the questions below. All questions are required and must be answered.</b></p>
-                                                <ol class="mt-10 mb-3">
-                                                    <div class="form-group row ">
-                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                        </div>
-                                                    </div>
-                                                </ol>
-                                        </form>
+                                        <?php
+                                        for ($i = 0; $i < $Total_Answer; $i++)
+                                        {
+                                            $Q[$i]= $Survey_Answer[$i]->Q;
+                                            echo $Q[$i];
+                                        }
+                                        ?>
+                                        <!-- <div>
+                                            <canvas id="myChart"></canvas>
+                                        </div>
+                                        
+                                        <script>
+                                        const labels = [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        ];
+                                        const data = {
+                                            labels: labels,
+                                            datasets: [{
+                                            label: 'My First dataset',
+                                            backgroundColor: 'rgb(255, 99, 132)',
+                                            borderColor: 'rgb(255, 99, 132)',
+                                            data: [0, 10, 5, 2, 20, 30, 45],
+                                            }]
+                                        };
+
+                                        const config = {
+                                        type: 'line',
+                                        data,
+                                        options: {}
+                                        };
+
+                                        var myChart = new Chart(
+                                            document.getElementById('myChart'),
+                                            config
+                                        );
+                                        </script> -->
                                     </div>
                                 </div>
                             </div>
@@ -395,41 +423,39 @@ function time_elapsed($date){
                             <div class="card card-custom gutter-b px-5">
                                 <div class="card-body">
                                     <div class="row">
-                                        <form action="index.php?page=ol_submit_survey&id=<?= $_GET['id']; ?>" name="surveyform5" method="post">
-                                                <p><b>While thinking about recent events in this class, answer the questions below. All questions are required and must be answered.</b></p>
-                                                <ol class="mt-10 mb-3">
-                                                    <div class="form-group row ">
-                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                            <li>At what moment in class were you most engaged as a learner?</li>
-                                                        </div>
-                                                        <a href=""><?= $Q0 ?></a>
-                                                    </div>
-                                                    <div class="form-group row ">
-                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                            <li>At what moment in class were you most distanced as a learner?</li>
-                                                        </div>
-                                                        <a href=""><?= $Q1 ?></a>
-                                                    </div>
-                                                    <div class="form-group row ">
-                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                            <li>What action from anyone in the forums did you find most affirming or helpful?</li>
-                                                        </div>
-                                                        <a href=""><?= $Q2 ?></a>
-                                                    </div>
-                                                    <div class="form-group row ">
-                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                            <li>What action from anyone in the forums did you find most puzzling or confusing?</li>
-                                                        </div>
-                                                        <a href=""><?= $Q3 ?></a>
-                                                    </div>
-                                                    <div class="form-group row ">
-                                                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                                                            <li>What event surprised you most?</li>
-                                                        </div>
-                                                        <a href=""><?= $Q4 ?></a>
-                                                    </div>
-                                                </ol>
-                                        </form>
+                                        <p><b>While thinking about recent events in this class, answer the questions below. All questions are required and must be answered.</b></p>
+                                        <ol class="mt-10 mb-3">
+                                            <div class="form-group row ">
+                                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                    <li>At what moment in class were you most engaged as a learner?</li>
+                                                </div>
+                                                <a href=""><?= $Q0 ?></a>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                    <li>At what moment in class were you most distanced as a learner?</li>
+                                                </div>
+                                                <a href=""><?= $Q1 ?></a>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                    <li>What action from anyone in the forums did you find most affirming or helpful?</li>
+                                                </div>
+                                                <a href=""><?= $Q2 ?></a>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                    <li>What action from anyone in the forums did you find most puzzling or confusing?</li>
+                                                </div>
+                                                <a href=""><?= $Q3 ?></a>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                                    <li>What event surprised you most?</li>
+                                                </div>
+                                                <a href=""><?= $Q4 ?></a>
+                                            </div>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>
@@ -443,7 +469,7 @@ function time_elapsed($date){
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Survey Attempts</a>
+                                <a href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview survey now</a>
                                 <a href="index.php?page=ol_submit_survey&id=<?php echo $Survey_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
                             </div>
                         </div>

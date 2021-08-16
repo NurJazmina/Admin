@@ -16,40 +16,40 @@ $(document).ready(function() {
 
     $("#ipclear").click(function() {
 
-            if  ($("#ip").val() == '1') 
-            {
-                toggleText = $("#ip").val();
+        if  ($("#ip").val() == '1') 
+        {
+            toggleText = $("#ip").val();
 
-                $.post("model/likes.php", {
-                like: '1',
-                Consumer_id: name,
-                url_likes: url_likes
-                },
-                function(data, status){
-                    $("#test").html(data);
-                },
-                );
-                $("#ip").val('2');
-                $("#ip").prop("disabled", false);
-                $(this).removeClass('btn-light').addClass('btn-success');
-            }
-            else if ($("#ip").val() == '2') 
-            {
-                $("#ip").val(toggleText);
+            $.post("model/likes.php", {
+            like: '1',
+            Consumer_id: name,
+            url_likes: url_likes
+            },
+            function(data, status){
+                $("#test").html(data);
+            },
+            );
+            $("#ip").val('2');
+            $("#ip").prop("disabled", false);
+            $(this).removeClass('btn-light').addClass('btn-success');
+        }
+        else if ($("#ip").val() == '2') 
+        {
+            $("#ip").val(toggleText);
 
-                $.post("model/likes.php", {
-                like: '0',
-                Consumer_id: name,
-                url_likes: url_likes
-                }, 
-                function(data, status){
-                    $("#test").html(data);
-                });
-                $("#ip").val('1');
-                $("#ip").prop("disabled", false);
-                $(this).removeClass('btn-success').addClass('btn-light');
-            }
-        });
+            $.post("model/likes.php", {
+            like: '0',
+            Consumer_id: name,
+            url_likes: url_likes
+            }, 
+            function(data, status){
+                $("#test").html(data);
+            });
+            $("#ip").val('1');
+            $("#ip").prop("disabled", false);
+            $(this).removeClass('btn-success').addClass('btn-light');
+        }
+    });
 
 });
 </script>

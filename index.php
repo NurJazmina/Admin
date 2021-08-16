@@ -87,6 +87,12 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="stylesheet" type="text/css" href="resources/default.css">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#ffffff">
+
+		<!--begin::Chart-->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+		<!--end::Chart-->
+		
 	</head>
 
 	<!--end::Head-->
@@ -133,7 +139,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--end::Main-->
             <?php
 		    }
-			elseif(isset($_SESSION['api_session'])) {
+			elseif(isset($_SESSION['api_session'])) 
+			{
 				?>
 				<!--begin::Main-->
 				<?php include 'view/partials/_header-mobile.html'; ?>
@@ -167,7 +174,6 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--end::Main-->
 				<?php
 			}
-
 			else 
 			{
 			?>

@@ -249,7 +249,7 @@ function time_elapsed($date){
                                         <!--begin::Dropdown-->
                                         <div class="dropdown dropdown-inline mr-2">
                                             <button type="button" class="btn btn-light font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="svg-icon svg-icon-md">
+                                            <span class="svg-icon svg-icon-primary svg-icon-md">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -287,6 +287,20 @@ function time_elapsed($date){
                                             <!--end::Dropdown Menu-->
                                         </div>
                                         <!--end::Dropdown-->
+                                        <!--begin::button-->
+                                        <a type="button" class="btn btn-light font-weight-bolder" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grades">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                            </g>
+                                        </svg>
+                                        </span>Student Grades</a>
+                                        <!--end::button-->
                                     </div>
                                 </div>
                                 <!--end::Search Form-->
@@ -816,15 +830,72 @@ function time_elapsed($date){
                         <!--end::Card-->
                         <?php
                     }
-                }
+                    elseif ($action == 'grades')
+                    {
+                        $filter2 = ['Assignment_id'=>$Assignment_id];
+                        $query2 = new MongoDB\Driver\Query($filter2);
+                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
+                        foreach ($cursor2 as $document2)
+                        {
+                            $Mark = $document2->Mark;
+                        
+                            ?>
+                            <!--begin::Card-->
+                            
+                            <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8"> 
+                                        <input type="text" id="Mark" name="Mark" value="<?= $Mark; ?>"> 
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                    <div class="col-2"></div>
+                                </div>
+                                <script>
+                                var test = '10';
+                                // var Mark = $("#Mark").val();
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        //label : total mark divide by 10
+                                        labels: ['0-1', '1-2', '2-3', '3-4', '4-5', '5-6','6-7', '7-8', '8-9', '9-10'],
+                                        //data : marks
+                                        datasets: [{
+                                            label: 'Students',
+                                            data: [12, 20, 3, 5, 2, 3],
+                                            backgroundColor: [
+                                                'rgba(54, 162, 235, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(54, 162, 235, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+                                </script>
+                            </div>
+                            <!--end::Card-->
+                            <?php
+                        }
+                    }
+                }
                 if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                 {
                     ?>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_assignment&id=<?php echo $Assignment_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Assignment Attempts</a>
+                                <a href="index.php?page=ol_assignment&id=<?php echo $Assignment_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview assignment now</a>
                                 <a href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
                                 <a href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grader"><button type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Grade</button></a>
                             </div>

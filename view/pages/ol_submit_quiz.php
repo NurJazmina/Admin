@@ -964,7 +964,7 @@ function time_elapsed($date){
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_quiz&id=<?php echo $Quiz_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Quiz Attempts</a>
+                                <a href="index.php?page=ol_quiz&id=<?php echo $Quiz_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview quiz now</a>
                                 <a href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
                                 <a href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>&action=grader"><button type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Grade</button></a>
                             </div>
