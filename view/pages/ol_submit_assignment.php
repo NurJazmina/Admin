@@ -337,7 +337,6 @@ function time_elapsed($date){
                                                 <input type="hidden" name="totalstudent" value="<?= $total; ?>">
                                             </form>
                                         </div>
-                                        <p id="demo"></p>
                                         <!--end::button
                                     </div>
                                 </div>
@@ -564,15 +563,12 @@ function time_elapsed($date){
                                 </tbody>
                                 </table>
                                 </div>
-                                <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8"> 
-                                            <h3 align="center">Student Grades</h3>
-                                            <canvas id="myChart"></canvas>
-                                        </div>
-                                        <div class="col-2"></div>
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8"> 
+                                        <canvas id="myChart"></canvas>
                                     </div>
+                                    <div class="col-2"></div>
                                 </div>
                                 <!--end: Datatable-->
                             </div>
@@ -911,18 +907,8 @@ function time_elapsed($date){
 </div>
 <?php include ('view/pages/ol_modal-grade.php'); ?>
 <script>
-$(document).ready(function(){
- $('#click').click(function(){
-        alert('button clicked');
-    });
-  // set time out 5 sec
-     setTimeout(function(){
-        $('#click').trigger('click');
-    }, 4000);
-});
 function myFunction() {
 var totalstudent = document.forms["myForm"]["totalstudent"].value;
-let text = "";
 let z = 100 / 10; //eg 10/10=1
 
 let a = 0 + " - " + z ; //0-1
@@ -1081,7 +1067,6 @@ for (let count = 1; count <= totalstudent; count++) {
 
 }
 
-document.getElementById("demo").innerHTML = text;
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',

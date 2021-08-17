@@ -240,11 +240,12 @@ function time_elapsed($date){
                                     <th scope="col">Name</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Answer</th>
+                                    <th scope="col">Chart</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-secondary">
-
                                 <?php
+                                $total = 0;
                                 $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
@@ -265,7 +266,6 @@ function time_elapsed($date){
                                         <tr bgcolor="white" class="text-center">
                                         <td><?php echo $Consumer_FName; ?></td>
                                         <?php
-
                                         $Answer_Created_by = '';
                                         $filter2 = ['Created_by'=>$consumer_id,'Survey_id'=>$Survey_id];
                                         $query2 = new MongoDB\Driver\Query($filter2);
@@ -273,9 +273,12 @@ function time_elapsed($date){
 
                                         foreach ($cursor2 as $document2)
                                         {
+                                            $total = $total + 1;
                                             $Answer_id = strval($document2->_id);
                                             $Answer_Created_by = $document2->Created_by;
                                             $Created_date = $document2->Created_date;
+                                            $Survey_ans = $document2->Survey_ans;
+                                            $Total_Answer = count((array)$Survey_ans);
                                             ?>
                                             <td>
                                                 <div class="bg-warning text-white text-center"><?php echo "submitted"; ?></div>   
@@ -290,21 +293,124 @@ function time_elapsed($date){
                                                 <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" name="detail"></button>
                                             </form>
                                             </td>
+                                            <td>
+                                                <button class="btn btn-light btn-sm font-weight-bolder" disabled>
+                                                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"/>
+                                                        <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                        <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                        <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                        <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                                    </g>
+                                                </svg>
+                                                </span>Student Grades</button>
+                                            </td>
                                             <?php
                                             }
                                             else
                                             {
                                             ?>
                                             <td>
-                                            <form name="detail" action="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=survey" method="post">
-                                                <input type="hidden" name="survey_answer_id" value="<?= $Answer_id; ?>"></input>
-                                                <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" name="detail"></button>
-                                            </form>
+                                                <form name="detail" action="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=survey" method="post">
+                                                    <input type="hidden" name="survey_answer_id" value="<?= $Answer_id; ?>"></input>
+                                                    <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" name="detail"></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                            <?php
+                                            if($type == 2)
+                                            {
+                                                ?>
+                                                <form name="myForm">
+                                                    <a class="btn btn-light btn-sm font-weight-bolder" onclick="myFunction2()">
+                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"/>
+                                                            <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                            <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                            <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                            <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                                        </g>
+                                                    </svg>
+                                                    </span>Student Grades</a>
+                                                    <?php
+                                                    for ($i = 0; $i < $Total_Answer; $i++)
+                                                    {
+                                                        $Q = $Survey_ans[$i]->Q;
+                                                        ?>
+                                                        <input type="hidden" name="q<?= $i; ?>" value="<?= $Q; ?>">
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <input type="hidden" name="student" value="<?= $Consumer_FName; ?>">
+                                                </form>
+                                                <?php
+                                            }
+                                            elseif($type == 1 || $type == 3)
+                                            {
+                                                ?>
+                                                <form name="myForm">
+                                                    <a class="btn btn-light btn-sm font-weight-bolder" onclick="myFunction3()">
+                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"/>
+                                                            <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                            <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                            <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                            <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                                        </g>
+                                                    </svg>
+                                                    </span>Student Grades</a>
+                                                    <?php
+                                                    for ($i = 0; $i < $Total_Answer; $i++)
+                                                    {
+                                                        $Q = $Survey_ans[$i]->Q;
+                                                        ?>
+                                                        <input type="hidden" name="q<?= $i; ?>" value="<?= $Q; ?>">
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <input type="hidden" name="student" value="<?= $Consumer_FName; ?>">
+                                                </form>
+                                                <?php
+                                            }
+                                            elseif($type == 4)
+                                            {
+                                                ?>
+                                                <form name="myForm">
+                                                    <a class="btn btn-light btn-sm font-weight-bolder" onclick="myFunction4()">
+                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"/>
+                                                            <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                            <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                            <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                            <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                                        </g>
+                                                    </svg>
+                                                    </span>Student Grades</a>
+                                                    <?php
+                                                    for ($i = 0; $i < $Total_Answer; $i++)
+                                                    {
+                                                        $Q = $Survey_ans[$i]->Q;
+                                                        ?>
+                                                        <input type="hidden" name="q<?= $i; ?>" value="<?= $Q; ?>">
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <input type="hidden" name="student" value="<?= $Consumer_FName; ?>">
+                                                </form>
+                                                <?php
+                                            }
+                                            ?>
                                             </td>
                                             <?php
                                             }
-                                            ?>
-                                            <?php
                                         } 
                                         ?>
                                     <?php 
@@ -318,6 +424,20 @@ function time_elapsed($date){
                                         <td>
                                             <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" disabled></button>
                                         </td>
+                                        <td>
+                                            <button class="btn btn-light btn-sm font-weight-bolder" disabled>
+                                            <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                    <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                    <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                    <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
+                                                </g>
+                                            </svg>
+                                            </span>Student Grades</button>
+                                        </td>
                                         <?php
                                     } 
                                     ?>
@@ -327,6 +447,13 @@ function time_elapsed($date){
                                 ?>
                                 </tbody>
                                 </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8"> 
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                    <div class="col-2"></div>
                                 </div>
                                 <!--end: Datatable-->
                             </div>
@@ -493,6 +620,138 @@ function time_elapsed($date){
         </div>
     </div>
 </div>
-<?php
-include ('view/pages/ol_modal-grade.php'); 
-?>
+<?php include ('view/pages/ol_modal-grade.php'); ?>
+<script>
+function myFunction2() {
+    var student = document.forms["myForm"]["student"].value;
+
+    var k = 'q';
+    for (let count = 0; count < 49; count++) {
+        var question = document.forms["myForm"]["q"+count].value;
+        eval('var ' + k + count + '= ' + question + ';');
+    }
+    
+    const labels = 
+    [
+        'Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10',
+        'Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19',
+        'Q20','Q21','Q22','Q23','Q24','Q25','Q26','Q27','Q28','Q29',
+        'Q30','Q31','Q32','Q33','Q34','Q35','Q36','Q37','Q38','Q39',
+        'Q40','Q41','Q42','Q43','Q44','Q45','Q46','Q47','Q48','Q49'
+    ];
+
+    const data = {
+    labels: labels,
+    datasets: [
+    {
+        label: student,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(75, 192, 192)',
+        data: 
+        [
+            q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,
+            q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,
+            q21,q22,q23,q24,q25,q26,q27,q28,q29,
+            q30,q31,q32,q33,q34,q35,q36,q37,q38,q39,
+            q40,q41,q42,q43,q44,q45,q46,q47,q48
+        ],
+    }]
+    };
+
+    const config = {
+    type: 'line',
+    data,
+    options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+}
+function myFunction3() {
+    var student = document.forms["myForm"]["student"].value;
+
+    var k = 'q';
+    for (let count = 0; count < 25; count++) {
+        var question = document.forms["myForm"]["q"+count].value;
+        eval('var ' + k + count + '= ' + question + ';');
+    }
+    
+    const labels = 
+    [
+        'Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9',
+        'Q10','Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19',
+        'Q20','Q21','Q22','Q23','Q24','Q25'
+    ];
+    const data = {
+    labels: labels,
+    datasets: [
+    {
+        label: student,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(75, 192, 192)',
+        data: 
+        [
+            q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,
+            q11,q12,q13,q14,q15,q16,q17,q18,q19,
+            q20,q21,q22,q23,q24
+        ],
+    }]
+    };
+
+    const config = {
+    type: 'line',
+    data,
+    options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+}
+function myFunction4() {
+    var student = document.forms["myForm"]["student"].value;
+
+    var k = 'q';
+    for (let count = 0; count < 20; count++) {
+        var question = document.forms["myForm"]["q"+count].value;
+        eval('var ' + k + count + '= ' + question + ';');
+    }
+    
+    const labels = 
+    [
+        'Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10',
+        'Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19','Q20'
+    ];
+    const data = {
+    labels: labels,
+    datasets: [
+    {
+        label: student,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(75, 192, 192)',
+        data: 
+        [
+            q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,
+            q11,q12,q13,q14,q15,q16,q17,q18,q19
+        ],
+    }]
+    };
+
+    const config = {
+    type: 'line',
+    data,
+    options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+}
+</script>

@@ -23,7 +23,6 @@ foreach ($cursor as $document)
     $Subject_id = $document->Subject_id;
     $Notes_id = $document->Notes_id;
 }
-echo $type;
 if($type == "1")
 {
 ?>
@@ -1000,10 +999,10 @@ elseif($type == "4")
                                 <tr>
                                     <th scope="colgroup" colspan="7" style="color:#3F4254">In discussion ...</th>
                                 </tr>
-                                <tr class="bg-secondary"><th scope="row"><b>1</b> &nbsp; In evaluating what someone says, I focus on the quality of their argument, not on the person who's presenting it.</th>
+                                <tr class="bg-secondary"><th scope="row"><b>0</b> &nbsp; In evaluating what someone says, I focus on the quality of their argument, not on the person who's presenting it.</th>
                                 <td class="whitecell"><label for="q0"><input type="radio" name="q0" value="0" checked="checked" data-survey-default="true"></label></td><td><label for="q45_1"><input type="radio" name="q0" id="q45_1" value="1"></label></td><td><label for="q45_2"><input type="radio" name="q0" id="q45_2" value="2"></label></td><td><label for="q45_3"><input type="radio" name="q0" id="q45_3" value="3"></label></td><td><label for="q45_4"><input type="radio" name="q0" id="q45_4" value="4"></label></td><td><label for="q45_5"><input type="radio" name="q0" id="q45_5" value="5"></label></td></tr>
                                 
-                                <tr class="table-light"><th scope="row" style="color:#3F4254" class="optioncell"><b class="qnumtopcell">20</b> &nbsp; I spend time figuring out what's 'wrong' with things. For example, I'll look for something in a literary interpretation that isn't argued well enough.</th>
+                                <tr class="table-light"><th scope="row" style="color:#3F4254" class="optioncell"><b class="qnumtopcell">1</b> &nbsp; I spend time figuring out what's 'wrong' with things. For example, I'll look for something in a literary interpretation that isn't argued well enough.</th>
                                 <td class="whitecell"><label for="q1"><input type="radio" name="q1" value="0" checked="checked" data-survey-default="true"></label></td><td><label for="q64_1"><input type="radio" name="q1" id="q64_1" value="1"></label></td><td><label for="q64_2"><input type="radio" name="q1" id="q64_2" value="2"></label></td><td><label for="q64_3"><input type="radio" name="q1" id="q64_3" value="3"></label></td><td><label for="q64_4"><input type="radio" name="q1" id="q64_4" value="4"></label></td><td><label for="q64_5"><input type="radio" name="q1" id="q64_5" value="5"></label></td></tr>
                             
                                 <tr class="table-light" ><th scope="row" style="color:#3F4254" class="optioncell"><b class="qnumtopcell">2</b> &nbsp; I like playing devil's advocate - arguing the opposite of what someone is saying.</th>
