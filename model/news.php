@@ -1,18 +1,9 @@
 <?php
-
-require '../vendor/autoload.php';
-
+require 'vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-<<<<<<< HEAD
 use Kreait\Firebase;
 use Kreait\Firebase\Messaging\CloudMessage;
-=======
-use Kreait\Firebase\Factory;
-
->>>>>>> 3019b3c99431af06a95fddfb47db6f7e5203eacb
-require_once "vendor/autoload.php";
-
 if (isset($_POST['AddNews'])) 
 {
     $varaccess = $_POST['access'];
