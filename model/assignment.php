@@ -127,7 +127,7 @@ if (isset($_POST['assignment_answer']))
                   'Created_date'=>$Created_date,
                   'Answer'=>$Answer,
                   'File_submission'=>'',
-                  'Mark'=>'',
+                  'Mark'=>'0',
                   'comment'=>''
                 ]);
 

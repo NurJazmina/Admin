@@ -911,6 +911,15 @@ function time_elapsed($date){
 </div>
 <?php include ('view/pages/ol_modal-grade.php'); ?>
 <script>
+$(document).ready(function(){
+ $('#click').click(function(){
+        alert('button clicked');
+    });
+  // set time out 5 sec
+     setTimeout(function(){
+        $('#click').trigger('click');
+    }, 4000);
+});
 function myFunction() {
 var totalstudent = document.forms["myForm"]["totalstudent"].value;
 let text = "";
