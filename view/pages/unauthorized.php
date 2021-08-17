@@ -5,10 +5,7 @@
         <p class="text-secondary"> <span>ERROR POSSIBLY CAUSED BY</span>: [<b class="text-primary">You do not have permission to modify the following pages : Staff, Student, Parent, News, Event, Department, Subject and Class</b>...]</p>
 
         <p class="text-secondary"> <span>REDIRECT TO OUR PAGE</span>: 
-        [
-            <a href="index.php?page=dashboard">Home Page</a>, 
-            <a href="index.php?page=schoolabout">About Us</a>, 
-        ...]
+        [<a href="index.php?page=dashboard">Home Page</a>, <a href="index.php?page=schoolabout">About Us</a>, ...]
         </p>
 
         <p><span>HAVE A NICE DAY  <?php echo $_SESSION["loggeduser_consumerFName"]; ?> :-)</span></p>
