@@ -64,13 +64,13 @@ include 'view/partials/_subheader/subheader-v1.php';
   </div>
 </form>
 <script>
-    function SelecttxtStaffdepartment() {
-      var d = document.getElementById("txtStaffdepartment").value;
-      var dTypeA = document.getElementById("teacherbox");
-      if(d == "TEACHER")
-        dTypeA.style.display = "block";
-      else
-        dTypeA.style.display = "none";
-    }
-    SelecttxtStaffdepartment();
+  function SelecttxtStaffdepartment() {
+    var d = document.getElementById("txtStaffdepartment").value;
+    var dTypeA = document.getElementById("teacherbox");
+    if(d == "TEACHER")
+      dTypeA.style.display = "block";
+    else
+      dTypeA.style.display = "none";
+  }
+  SelecttxtStaffdepartment();
 </script>
