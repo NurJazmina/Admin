@@ -277,7 +277,7 @@ function todoMain() {
     calendar = new FullCalendar.Calendar(calendarEl, {
       themeSystem: 'bootstrap',
       initialView: 'dayGridMonth',
-      initialDate: '2021-06-04',
+      initialDate: '2021-08-17',
 
       headerToolbar: {
         left: 'prev,next today',

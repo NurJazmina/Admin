@@ -88,7 +88,7 @@ $calendar = new Calendar();
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo ""; ?></span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"></span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -146,7 +146,7 @@ $calendar = new Calendar();
                             </div>
                             <div class="col-lg-10 mt-2">
                                 <button id="addBtn" class="btn btn-success btn-sm btn-block" name="">Add</button>
-                                <button id="sortBtn" class="btn btn-secondary btn-sm btn-block" >Sort by date</button>
+                                <button id="sortBtn" class="btn btn-secondary btn-sm btn-block">Sort by date</button>
                                 <div class="checkbox-inline">
                                     <label class="checkbox checkbox-success mt-3"><input type="checkbox" id="shortlistBtn" name="Checkboxes5"/>
                                     <span> </span> 
@@ -193,8 +193,8 @@ $calendar = new Calendar();
                             ' week'      => $date  / 604800 % 52,
                             ' day'       => $date  / 86400 % 7,
                             ' hour'      => $date  / 3600 % 24,
-                            //' minute'    => $date  / 60 % 60,
-                            //' second'    => $date  % 60
+                            ' minute'    => $date  / 60 % 60,
+                            ' second'    => $date  % 60
                             );
                         foreach($bit as $k => $v){
                             if($v > 1)$ret[] = $v . $k . 's';
@@ -248,7 +248,7 @@ $calendar = new Calendar();
                     <div class="todo-overlay" id="todo-overlay">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <div class="card" id="todo-modal" style="background-color:#E4E6EF;">
+                        <div class="card" id="todo-modal">
                             <div class="todo-modal-close-btn" id="todo-modal-close-btn">X</div>
                             <div class="card-body">
                                 <div class="form-group row">
