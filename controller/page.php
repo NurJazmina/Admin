@@ -136,19 +136,87 @@
                                 //rujukan mira
                                 "suggestions",
                                 "mira",
-                                "likes",
-                                "test",
-                                "ask",
-
-                                //in progress//
                                 "simplecalendar",
-                                "notes",
                                 "save",
                                 "send",
                                 "fetch",
-                                "exercises",
-                                "alertexample",
                                 );
+
+
+        $studentallowedaccess = array("dashboard",
+                                    "news",
+                                    "event",
+                                    "stafflist",
+                                    "parentlist",
+                                    "studentlist",
+                                    "timetablelist",
+                                    //"classroomlist",
+                                    //"subjectlist",
+                                    //"departmentlist",
+                                    "profile",
+                                    "personal-information",
+                                    "change-password",
+                                    "departmentinfo",
+                                    "classroominfo",
+                                    "schoolabout",
+                                    "forums",
+                                    "schoolforum",
+                                    "publicforum",
+                                    
+                                    //"modal-news",
+                                    //"modal-event",
+                                    //"modal-forums",
+                                    //"modal-recheckstafflist",
+                                    //"modal-recheckstudentlist",
+                                    //"modal-recheckparentlist",
+                                    //"modal-rechecktimetablelist",
+                                    //"modal-recheckclassroomlist",
+
+                                    "staffdetail",
+                                    "studentdetail",
+                                    "eventdetail",
+                                    "newsdetail",
+                                    //"departmentdetail",
+                                    "subjectdetail",
+                                    "classdetail",
+                                    "schoolforumdetail",
+                                    "publicforumdetail",
+
+                                    //"addstaff",
+                                    //"addstudent",
+                                    //"addparent",
+                                    //"adddepartment",
+                                    //"addsubject",
+                                    //"addclass",
+
+                                    //"departmentattendance",
+                                    //"classattendance",
+                                    //"exportstaffattendance",
+                                    //"exportstudentattendance",
+                                    //"exportclassattendance",
+                                    //"testing",
+                                    //"duplicate",
+
+                                    //online learning//
+                                    "ol_dashboard",
+                                    "ol_calendar",
+                                    "ol_modal-recheckquiz",
+                                    "ol_addannouncement",
+                                    "ol_addglossary",
+                                    "ol_addquiz",
+                                    "ol_addassignment",
+                                    "ol_addurl",
+                                    "ol_addsurvey",
+                                    "ol_survey",
+                                    "ol_subject",
+                                    "ol_notes",
+                                    "ol_submit_assignment",
+                                    "ol_submit_quiz",
+                                    "ol_submit_survey",
+                                    "ol_quiz",
+                                    "ol_announcement",
+                                    "ol_assignment",
+                                    );
 
     if(!isset($_SESSION['loggeduser_id']) && empty($_SESSION['loggeduser_id'])) 
     {
@@ -186,6 +254,14 @@
                 elseif ($_SESSION["loggeduser_ACCESS"]=="STAFF")
                 {
                     if (in_array($_GET['page'], $staffallowedaccess)){
+                        include 'view/pages/'. $_GET['page'] . ".php";
+                    } else {
+                        include 'view/pages/unauthorized.php';
+                    }
+                }
+                elseif ($_SESSION["loggeduser_ACCESS"]=="STUDENT")
+                {
+                    if (in_array($_GET['page'], $studentallowedaccess)){
                         include 'view/pages/'. $_GET['page'] . ".php";
                     } else {
                         include 'view/pages/unauthorized.php';
