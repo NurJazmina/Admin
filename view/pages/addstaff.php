@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Staff";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div  id="recheckaddstaff" tabindex="-1" aria-labelledby="AddStaffModalLabel" aria-hidden="true">

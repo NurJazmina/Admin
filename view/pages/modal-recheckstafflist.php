@@ -7,7 +7,6 @@ if (isset($_POST['AddStaffFormSubmit']))
     $varClasscategory = $_POST['txtClasscategory'];
     $varaccesslevel = $_POST['txtaccesslevel'];
 
-
     $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"], 'DepartmentName'=>$varStaffdepartment];
     $query = new MongoDB\Driver\Query($filter);
     $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
