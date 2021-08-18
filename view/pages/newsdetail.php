@@ -69,19 +69,19 @@ foreach ($cursor as $document)
 
     foreach ($cursor2 as $document2)
     {
-    $total = $total + 1;
+        $total = $total + 1;
     }
 }
 ?>
 
-<div><br><br><br><h1 style="color:#696969; text-align:center"><?php echo $NewsTitle; ?></h1></div><br>
+<div><h1 style="color:#696969; text-align:center"><?php echo $NewsTitle; ?></h1></div><br>
 <div class="row" >
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
   <div class="col-md-10 section-1-box wow fadeInUp">
-    <div class="card">
-      <div class = "mt-2 px-2" style="text-align:right;">
-          <h5 class="btn btn-light-success font-weight-bolder btn-sm">Views : <?php echo $count; ?></h5>
-      </div>
+    <div class="card ribbon ribbon-clip ribbon-right">
+        <div class="ribbon-target bg-warning" style="top: 12px;">
+            <span class="ribbon-inner"></span>Views : <?php echo $count; ?>
+        </div>
       <div class="card-body">
         <div class="table-responsive-sm">
             <table class="table">

@@ -1,5 +1,9 @@
+<?php
+$_SESSION["title"] = "News";
+include 'view/partials/_subheader/subheader-v1.php';
+include ('model/news.php'); 
+?>
 <style>
-
   .text4.eventdate {
     
     font-weight: bold;
@@ -45,13 +49,7 @@
     }
 } 
 </style>
-
-<?php
-$_SESSION["title"] = "News";
-include 'view/partials/_subheader/subheader-v1.php';
-include ('model/news.php'); 
-?>
-<div><br><br><br><h1 style="color:#696969; text-align:center">News</h1></div><br>
+<div><h1 style="color:#696969; text-align:center">News</h1></div><br>
 <div class="row">
   <?php
   $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
@@ -172,10 +170,7 @@ include ('model/news.php');
       ?>
       <div class="col-lg-4">
         <div class="card card-custom gutter-b">
-            <div class="card-header ribbon ribbon-clip ribbon-right">
-              <div class="ribbon-target" style="top: 12px;">
-              <span class="ribbon-inner bg-warning"></span>Views : 
-              </div>
+            <div class="card-header">
               <div class="card-title">
                 <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $NewsTitle; ?></a></strong>
               </div>

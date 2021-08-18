@@ -3,7 +3,7 @@ $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/event.php'); 
 ?>
-<div><br><br><br><h1 style="color:#696969; text-align:center">Upcoming Event</h1></div><br>
+<div><h1 style="color:#696969; text-align:center">Upcoming Event</h1></div><br>
 <div class="row" >
   <div class="col-md-0 section-1-box wow fadeInUp"></div>
   <div class="col-md-12 section-1-box wow fadeInUp">
@@ -62,10 +62,7 @@ include ('model/event.php');
     }
     ?>
   <div class="card">
-  <div class="card-header ribbon ribbon-clip ribbon-right">
-  <div class="ribbon-target" style="top: 12px;">
-    <span class="ribbon-inner bg-warning"></span>Views : 
-  </div>
+  <div class="card-header">
     <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" ><?php echo $EventTitle; ?></a></strong>
   </div>
   <div class="card-body">
@@ -158,10 +155,7 @@ include ('model/event.php');
     }
     ?>
   <div class="card">
-<div class="card-header ribbon ribbon-clip ribbon-right">
-<div class="ribbon-target" style="top: 12px;">
-  <span class="ribbon-inner bg-warning"></span>Views : 
-</div>
+<div class="card-header">
 <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid ; ?>"><?php echo $EventTitle; ?></a></strong><br><br>
 </div>
 <div class="card-body">
