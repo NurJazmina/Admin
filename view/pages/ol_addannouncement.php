@@ -6,6 +6,7 @@ $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
     $Subject_id = strval($document->Subject_id);
+    $Note_sort = strval($document->Note_sort);
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
@@ -157,71 +158,4 @@ tinymce.init({
   toolbar: false,
   height:50,
 });
-
-//invalid input
-(function(win, undefined) {
- $(function() {
-    var rules = {
-      email: function(node) {
-        var inputText = node.value,
-		inputRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-		return inputRegex.test(inputText);
-      },
-      title: function(node) {
-        var inputText = node.value,
-		inputRegex = /^\s*[a-zA-Z0-9,\s]+\s*$/;
-		return inputRegex.test(inputText);
-      }
-    };
-    
-    function onFocusOut() {
-      validate(this);
-    }
-    
-    function validate(node) { 
-     var valid = isValid(node),
-         $error = $(node).next('.error'); 
-      
-      if (valid) 
-      {
-        $(node).attr('aria-invalid', false);
-        $error
-          .attr('aria-hidden', true)
-          .hide();
-        $(node).attr('aria-describedby', '');
-      } 
-      else 
-      {
-        $(node).attr('aria-invalid', true);
-        $error
-          .attr('aria-hidden', false)
-          .show();
-        $(node).attr('aria-describedby', $error.attr('id'));
-      }
-    }
-    
-    function isValid(node) {
-      return rules[node.dataset.rule](node);
-    }
-    
-    $('[aria-invalid]').on('focusout', onFocusOut);
-  });
-}(window));
-
-//popover
-$(function () {
-  $('[data-bs-toggle="popover"]').popover()
-})
-
-//groupclass
-function Selectgroupmode() {
-    var group = document.getElementById("groupmode").value;
-    var box = document.getElementById("groupbox");
-    if(group == "SEPARATE" || group == "HIDE")
-    box.style.display = "block";
-    else
-    box.style.display = "none";
-}
-Selectgroupmode();
-
 </script>

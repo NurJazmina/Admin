@@ -1060,6 +1060,7 @@ function time_elapsed($date){
 </div>
 <?php include ('view/pages/ol_modal-grade.php'); ?>
 <script>
+
 function myFunction() {
 var totalmark = document.forms["myForm"]["totalmark"].value;
 var totalstudent = document.forms["myForm"]["totalstudent"].value;
