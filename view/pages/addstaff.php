@@ -2,7 +2,6 @@
 $_SESSION["title"] = "Staff";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-
 <form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
   <div  id="recheckaddstaff" tabindex="-1" aria-labelledby="AddStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -22,7 +21,7 @@ include 'view/partials/_subheader/subheader-v1.php';
           <div class="form-group row">
             <label for="txtStaffdepartment" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
-              <select class="form-control" id="txtStaffdepartment" name="txtStaffdepartment" onchange="SelecttxtStaffdepartment(this.value);">
+              <select class="form-control" id="txtStaffdepartment" name="txtStaffdepartment">
                 <?php
                 $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
                 $query = new MongoDB\Driver\Query($filter);
@@ -36,6 +35,16 @@ include 'view/partials/_subheader/subheader-v1.php';
                   <?php
                 }
                 ?>
+              </select>
+            </div>
+          </div>
+          <!--Add department-->
+          <div class="form-group row">
+            <label for="Stafflevel" class="col-sm-2 col-form-label">Staff level</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="Stafflevel" name="Stafflevel" onchange="SelecttxtStaffdepartment(this.value);">
+                <option value="1">STAFF</option>
+                <option value="0">TEACHER</option>
               </select>
             </div>
           </div>
@@ -55,7 +64,6 @@ include 'view/partials/_subheader/subheader-v1.php';
           </div>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" name="AddStaffFormSubmit">Re-Checking</button>
         </div>
         </div>
@@ -65,9 +73,9 @@ include 'view/partials/_subheader/subheader-v1.php';
 </form>
 <script>
   function SelecttxtStaffdepartment() {
-    var d = document.getElementById("txtStaffdepartment").value;
+    var d = document.getElementById("Stafflevel").value;
     var dTypeA = document.getElementById("teacherbox");
-    if(d == "TEACHER")
+    if(d == "0")
       dTypeA.style.display = "block";
     else
       dTypeA.style.display = "none";
