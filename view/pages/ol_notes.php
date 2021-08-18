@@ -1,4 +1,5 @@
 <?php
+include ('model/notes.php');
 include ('model/subject.php');
 include ('model/assignment.php');
 include ('model/quiz.php');
@@ -192,26 +193,24 @@ foreach ($cursor as $document)
                         <div class="col-sm text-right">
                             <i class="fas fa-pencil-alt text-success" type="button" data-bs-toggle="dropdown"></i>
                             <div class="dropdown-menu dropdown-menu-md py-5">
-                                <ul class="navi navi-hover">
-                                    <li class="navi-item">
-                                        <a class="navi-link" href="#">
-                                            <span class="navi-icon"><i class="icon fa fa-cog fa-fw text-success"></i></span>
-                                            <span class="navi-text">Edit Topic</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a class="navi-link" href="#">
-                                            <span class="navi-icon"><i class="far fa-eye text-success"></i></span>
-                                            <span class="navi-text">Hide Topic</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a class="navi-link" href="#">
-                                            <span class="navi-icon"><i class="fas fa-trash-alt text-success"></i></span>
-                                            <span class="navi-text">Delete Topic</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit" data-bs-whatever="<?= $Notes_id; ?>">
+                                    <span class="navi-icon"><i class="icon fa fa-cog fa-fw text-success"></i></span>
+                                    <span class="navi-text">Edit Topic</span>
+                                </button>
+                                <form name="hidenotes" action="#" method="post">
+                                    <input type="hidden" name="notes_id" value="<?= $Notes_id; ?>">
+                                    <button type="submit" name="hidenotes" class="btn">
+                                        <span class="navi-icon"><i class="far fa-eye text-success"></i></span>
+                                        <span class="navi-text">Hide Topic</span>
+                                    </button>
+                                </form>
+                                <form name="deletenotes" action="#" method="post">
+                                    <input type="hidden" name="notes_id" value="<?= $Notes_id; ?>">
+                                    <button type="submit" name="deletenotes" class="btn">
+                                        <span class="navi-icon"><i class="fas fa-trash-alt text-success"></i></span>
+                                        <span class="navi-text">Delete Topic</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -314,4 +313,5 @@ foreach ($cursor as $document)
 </div>
 <?php 
 include ('view/pages/ol_modal-activity.php'); 
+include ('view/pages/ol_modal-notes.php'); 
 ?>
