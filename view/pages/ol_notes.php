@@ -62,7 +62,7 @@ foreach ($cursor as $document)
 			</div>
 			<!--end::Info-->
 			<!--begin::Toolbar-->
-			<div class="align-items-center">
+			<!-- <div class="align-items-center">
                 <div class="text-right">
                 <div class="row">
                     <div class="input-group input-group-sm " style="width:25%">
@@ -167,7 +167,7 @@ foreach ($cursor as $document)
                     <button type="submit" style="width:75%;" class="btn btn-white font-weight-bolder text-lightsecondary btn-sm" name="editing">Turn Editing On</button>
                 </div>
             </div>
-		</div>
+		 </div> -->
 		<!--end::Toolbar-->
 	</div>
 </div>
