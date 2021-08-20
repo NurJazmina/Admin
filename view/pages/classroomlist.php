@@ -32,12 +32,9 @@ border:1px solid #ffffff;
                   {
                   ?>
                     <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
-                    <input  type="text" style="width:50%";  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
+                    <input  type="text" style="width:50%";  class="form-control" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
                     <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" name="searchclass" >Search</button>
                   <?php
-                  } 
-                  else
-                  {
                   }
                   ?>
                   </div>
