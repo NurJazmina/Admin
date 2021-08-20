@@ -1,6 +1,4 @@
-<?php
-//avoid put any gap in this page.Error behaviour due to gap.
-?>
+<!-- avoid put any gap in this page.Error behaviour due to gap. -->
 <style>
 .highlight td {
 background:#FFE2E5;
@@ -155,13 +153,10 @@ else
                                         $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
                                         $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                                         $varcounting = $varcounting +1;
-                                    if ($varcounting % 2)
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    } 
-                                    else
-                                    {
-                                    }
+                                        if ($varcounting % 2)
+                                        {
+                                            echo date_format($AttendanceDate,"H:i:s")."<br>";
+                                        }
                                     }
                                     ?></td>
                                     <td><?php
@@ -192,20 +187,22 @@ else
                             ?>
                     </tbody>
                     </table>
-                    <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportclassattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+                    <button type="button" style="font-size:15px width:25%" class="btn btn-success">
+                        <a href="index.php?page=exportclassattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a>
+                    </button>
                 </div>             
         </div>
         </div>         
         </div>
     </div>    
-<script type="text/javascript">
-var rows = document.querySelectorAll('tr');
+    <script type="text/javascript">
+    var rows = document.querySelectorAll('tr');
 
-[...rows].forEach((r) => {
-if (r.querySelectorAll('td:empty').length > 0) {
-r.classList.add('highlight');
-}
-})
-</script>
-<?php
+    [...rows].forEach((r) => {
+    if (r.querySelectorAll('td:empty').length > 0) {
+    r.classList.add('highlight');
+    }
+    })
+    </script>
+    <?php
 }

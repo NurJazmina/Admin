@@ -1,14 +1,14 @@
 <?php
 $_SESSION["title"] = "Subject";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form id="AddSubjectFormSubmit" name="AddSubjectFormSubmit" action="index.php?page=subjectlist" method="post">
   <div  id="AddSubjectModal" tabindex="-1" aria-labelledby="AddSubjectModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="AddSubjectModalLabel">Add Subject</h5>=
+          <h5 class="modal-title" id="AddSubjectModalLabel">Add Subject</h5>
         </div>
         <div class="modal-body">
           <div class="form-group row">

@@ -16,12 +16,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end">
                             <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-
-                                </div>
+                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right"></div>
                             </div>
                         </div>
                         <!--end::Toolbar-->
@@ -389,24 +385,21 @@ include 'view/partials/_subheader/subheader-v1.php';
 								</tr>
 						</tbody>
 						</table>
-						<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=profile&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+						<button type="button" style="font-size:15px width:25%" class="btn btn-success btn-sm"><a href="index.php?page=profile&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
 						<?php
 						}
-						if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-						{
-						}
-						else
+						if (isset($_GET['attendance']) && !empty($_GET['attendance']))
 						{
                             $attendance = ($_GET['attendance']);
-						?>
-						<script>
-						$(document).ready(function () {
-							$("#attendance").table2excel({
-								filename: "attendance.xls"
-							});
-						});
-						</script>
-						<?php
+                            ?>
+                            <script>
+                            $(document).ready(function () {
+                                $("#attendance").table2excel({
+                                    filename: "attendance.xls"
+                                });
+                            });
+                            </script>
+                            <?php
 						}
 						?>
 					</div>

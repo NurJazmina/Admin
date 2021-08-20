@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Parent";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form id="AddParentFormSubmit" name="AddParentFormSubmit" action="index.php?page=modal-recheckparentlist" method="post">
   <div  id="recheckaddparent" tabindex="-1" aria-labelledby="AddParentModalLabel" aria-hidden="true">
@@ -37,7 +37,6 @@ $_SESSION["title"] = "Parent";
             </div>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" name="AddParentFormSubmit">Re-Checking</button>
         </div>
         </div>

@@ -41,55 +41,55 @@ border:1px solid #ffffff;
                   <?php 
                   if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
-                  ?>
-                    <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
-                    <button type="button" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
-                    <div class="input-group input-group-sm input-group-solid" style="width:40%">
-                      <input  type="text" style="";  id="kt_subheader_search_form"  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <span class="svg-icon">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"></rect>
-                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
-                              </g>
-                            </svg>
-                            <!--end::Svg Icon-->
+                    ?>
+                      <button type="button" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm"><a href="index.php?page=exportstaffattendance" style="color:#FFFFFF; text-decoration: none;">ATTENDANCE</a></button>
+                      <button type="button" style="width:15%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddstaff" >Add</button>
+                      <div class="input-group input-group-sm input-group-solid" style="width:40%">
+                        <input  type="text" style="";  id="kt_subheader_search_form"  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <span class="svg-icon">
+                              <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                  <rect x="0" y="0" width="24" height="24"></rect>
+                                  <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                  <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
+                                </g>
+                              </svg>
+                              <!--end::Svg Icon-->
+                            </span>
+                            <!--<i class="flaticon2-search-1 icon-sm"></i>-->
                           </span>
-                          <!--<i class="flaticon2-search-1 icon-sm"></i>-->
-                        </span>
+                        </div>
                       </div>
-                    </div>
-                    <button type="submit" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstaff" >Search</button>
-                  <?php
+                      <button type="submit" style="width:20%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstaff" >Search</button>
+                    <?php
                   } 
                   else
                   {
-                  ?>
-                    <div class="input-group input-group-sm input-group-solid" style="width:75%">
-                      <input  type="text" style="";  id="kt_subheader_search_form"  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <span class="svg-icon">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"></rect>
-                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
-                              </g>
-                            </svg>
-                            <!--end::Svg Icon-->
+                    ?>
+                      <div class="input-group input-group-sm input-group-solid" style="width:75%">
+                        <input  type="text" style="";  id="kt_subheader_search_form"  class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <span class="svg-icon">
+                              <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                  <rect x="0" y="0" width="24" height="24"></rect>
+                                  <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                  <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
+                                </g>
+                              </svg>
+                              <!--end::Svg Icon-->
+                            </span>
+                            <!--<i class="flaticon2-search-1 icon-sm"></i>-->
                           </span>
-                          <!--<i class="flaticon2-search-1 icon-sm"></i>-->
-                        </span>
+                        </div>
                       </div>
-                    </div>
-                    <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstaff" >Search</button>
-                  <?php
+                      <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" name="searchstaff" >Search</button>
+                    <?php
                   }
                   ?>
                   </div>
@@ -101,7 +101,6 @@ border:1px solid #ffffff;
 		</div>
 	</div>
 	<!--end::Subheader-->
-
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">
@@ -166,7 +165,7 @@ border:1px solid #ffffff;
                   <tr bgcolor="white">
                     <td><a href="index.php?page=staffdetail&id=<?php echo $varconsumerid; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a>
                     <div class="table-responsive">
-                    <table class="table table-striped table-sm" width="100%" cellspacing="0" style= "text-align: center;">
+                    <table class="table table-sm bg-light" width="100%" cellspacing="0" style= "text-align: center;">
                     <td>
                     <table>
                     <tr>
@@ -225,9 +224,9 @@ border:1px solid #ffffff;
                         <?php
                         if($_SESSION["loggeduser_ACCESS"] =='TEACHER') 
                         {
-                        ?>
-                        <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
-                        <?php
+                          ?>
+                          <button type="button" style="font-size:15px width:25%" class="btn btn-success btn-sm"><a href="index.php?page=exportstaffattendance&id=<?php echo $varconsumerid; ?>" style="color:#FFFFFF; text-decoration: none;"> More >></a></button>
+                          <?php
                         }
                         ?>
                         </td>
@@ -270,11 +269,11 @@ border:1px solid #ffffff;
                             <?php
                             if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
-                            ?>
-                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff">
-                                <i class="fa fa-edit" style="font-size:15px"></i>
-                              </button>
-                            <?php
+                              ?>
+                                <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#recheckeditstaff">
+                                  <i class="fa fa-edit" style="font-size:15px"></i>
+                                </button>
+                              <?php
                             }
                             ?>
                             </td>
@@ -293,21 +292,21 @@ border:1px solid #ffffff;
                           {
                             if ($StaffLevel == "0")
                             {
-                            ?>
-                            <td></td>
-                            <td>
-                            <?php
-                            if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-                            {
-                            ?>
-                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
-                                <i class="fa fa-edit" style="font-size:15px"></i>
-                              </button>
-                            <?php
-                            }
-                            ?>
-                            </td>
-                            <?php
+                              ?>
+                              <td></td>
+                              <td>
+                              <?php
+                              if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                              {
+                              ?>
+                                <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#recheckeditstaff" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                                  <i class="fa fa-edit" style="font-size:15px"></i>
+                                </button>
+                              <?php
+                              }
+                              ?>
+                              </td>
+                              <?php
                             }
                             else
                             {
@@ -323,11 +322,11 @@ border:1px solid #ffffff;
                             <?php
                             if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                             {
-                            ?>
-                            <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
-                                <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
-                            </button>
-                            <?php
+                              ?>
+                              <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#StatusStaffModal" data-bs-whatever="<?php echo $varconsumerid; ?>">
+                                  <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
+                              </button>
+                              <?php
                             }
                             ?>
                             </td>
@@ -347,14 +346,14 @@ border:1px solid #ffffff;
                             if ($_GET['paging'] == 0) 
                             {
                               ?>
-                              <span class="btn btn-secondary">Previous</span>
-                            <?php
+                              <span class="btn btn-light">Previous</span>
+                              <?php
                             } 
                             else 
                             {
-                            ?>
-                              <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
-                            <?php
+                              ?>
+                                <a href="index.php?page=stafflist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
+                              <?php
                             }
                           }
                           ?>
@@ -375,7 +374,6 @@ border:1px solid #ffffff;
                         <div class="row">
                           <div class="col-7">
                             <div class="tab-content" id="v-pills-tabContent">
-                            
                               <!--tab all department -->
                               <div class="tab-pane fade show active" id="v-pills-staff" role="tabpanel" aria-labelledby="v-pills-staff-tab">
                                 <div class="box" >
@@ -559,7 +557,7 @@ border:1px solid #ffffff;
                               <!-- end tab -->
                             </div>
                           </div>
-                          <div class="col-5" style="border-left: solid 1px #eee;">
+                          <div class="col-5">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                               <a class="nav-link bg-success font-weight-bolder btn-sm" id="v-pills-staff-tab"  data-bs-toggle="pill" href="#v-pills-staff" role="tab" aria-controls="v-pills-staff" aria-selected="true">STAFF</a>
                               <?php

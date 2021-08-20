@@ -24,29 +24,28 @@ border:1px solid #ffffff;
 			<!--begin::Toolbar-->
 			<div class="d-flex align-items-center">
         <div class="col-12 col-sm-12 col-sm-12">
-              <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
-                <div class="col-12 col-sm-12 col-lg-12 text-right">
-                  <div class="row">
-                  <?php 
-                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-                  {
-                  ?>
-                    <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
-                    <input  type="text" style="width:50%";  class="form-control" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
-                    <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" name="searchclass" >Search</button>
-                  <?php
-                  }
-                  ?>
-                  </div>
-                </div>
-              </form>
+          <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
+            <div class="col-12 col-sm-12 col-lg-12 text-right">
+              <div class="row">
+              <?php 
+              if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+              {
+              ?>
+                <button type="button" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass" >Add</button>
+                <input  type="text" style="width:50%";  class="form-control" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
+                <button type="submit" style="width:25%; color:#FFFFFF;" class="btn btn-success font-weight-bolder btn-sm" name="searchclass" >Search</button>
+              <?php
+              }
+              ?>
+              </div>
+            </div>
+          </form>
         </div>
 			</div>
 			<!--end::Toolbar-->
 		</div>
 	</div>
 	<!--end::Subheader-->
-
 <div class="row">
   <div class="col-12 col-sm-12 col-lg-6">
     <div class="col-12 col-sm-6 col-lg-6">

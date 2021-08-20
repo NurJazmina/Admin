@@ -3,9 +3,7 @@ $_SESSION["title"] = "Subject";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/subjectlist.php'); 
 ?>
-<div class="myDiv" style="color:#696969;text-align:center">
-<br><br><br><h1>Subjects</h1>
-</div>
+<h1 class="myDiv" style="color:#696969;text-align:center">Subjects</h1>
 <br>
 <div class="table-responsive">
 <table class="table table-bordered table-sm" style="background-color:#ffffff; text-align:center;">
@@ -49,26 +47,26 @@ include ('model/subjectlist.php');
         $calc = $calc + 1;
         $subjectid = strval($document->_id);
         $SubjectName = strval($document->SubjectName);
-    ?>
-    <tr>
-    <th scope="row"><?php echo $calc; ?></th>
-    <td><a href="index.php?page=subjectdetail&id=<?php echo $subjectid ; ?>" style="color:#076d79; text-decoration: none;"><?php echo $SubjectName; ?></a></td>
-    <td>
-      <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#EditSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
-        <i class="fa fa-edit" style="font-size:15px"></i>
-      </button>
-      <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#DeleteSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
-        <i class="fas fa-trash" style="font-size:15px"></i>
-      </button>
-    </td>
-    </tr>
-    <?php
+        ?>
+        <tr>
+        <th scope="row"><?php echo $calc; ?></th>
+        <td><a href="index.php?page=subjectdetail&id=<?php echo $subjectid ; ?>" style="color:#076d79; text-decoration: none;"><?php echo $SubjectName; ?></a></td>
+        <td>
+          <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success" data-bs-toggle="modal" data-bs-target="#EditSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
+            <i class="fa fa-edit" style="font-size:15px"></i>
+          </button>
+          <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success" data-bs-toggle="modal" data-bs-target="#DeleteSubjectModal" data-bs-whatever="<?php echo $subjectid; ?>">
+            <i class="fas fa-trash" style="font-size:15px"></i>
+          </button>
+        </td>
+        </tr>
+        <?php
     }
     ?>
     <tr>
       <th scope="row">Add</th>
       <td colspan="2">
-        <button style="font-size:10px" type="button"  class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#AddSubjectModal">
+        <button style="font-size:10px" type="button"  class="btn btn-light btn-hover-success" data-bs-toggle="modal" data-bs-target="#AddSubjectModal">
          <i class="fas fa-plus" style="font-size:15px"></i>
         </button>
       </td>

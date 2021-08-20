@@ -505,29 +505,27 @@ function time_elapsed($date){
 							$eventid = ($document->_id);
 							$eventid2 = new \MongoDB\BSON\ObjectId($eventid);
 						}
-
 						if(!$eventid2 == "")
 						{
-						$filter1 = ['_id'=>$eventid2];
-						$query1 = new MongoDB\Driver\Query($filter1);
-						$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query1);
-						foreach ($cursor1 as $document1)
-						{
-							$EventDateStart = ($document1->EventDateStart);
-
-							$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($EventDateStart));
-							$datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-							$dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-							$date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+							$filter1 = ['_id'=>$eventid2];
+							$query1 = new MongoDB\Driver\Query($filter1);
+							$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query1);
+							foreach ($cursor1 as $document1)
+							{
+								$EventDateStart = ($document1->EventDateStart);
+								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($EventDateStart));
+								$datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								$dateforum = date_format($datetime,"Y-m-d\TH:i:s");
+								$date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
 						
-							$nowtimeEvent2 = time();
-							$timeEvent2 = strval($date);
-							$time2 = time_elapsed($timeEvent2-$nowtimeEvent2);
-						}
-						?>
-						<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
-						<span class="text-primary"><?php echo " ".$time2." \n";  ?></span></span>
-						<?php
+								$nowtimeEvent2 = time();
+								$timeEvent2 = strval($date);
+								$time2 = time_elapsed($timeEvent2-$nowtimeEvent2);
+							}
+							?>
+							<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
+							<span class="text-primary"><?php echo " ".$time2." \n";  ?></span></span>
+							<?php
 						}
 						?>
 						</span>
@@ -1229,9 +1227,9 @@ function time_elapsed($date){
 									</tr>
 								</tbody>
 								<?php
-									}
 								}
-									?>
+								}
+								?>
 								<!--end::Tbody-->
 							</table>
 							<footer>
@@ -1248,4 +1246,3 @@ function time_elapsed($date){
 		</div>
 	</div>
 </div>
-<?php

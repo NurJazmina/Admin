@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Classroom";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form  id="AddclassFormSubmit" name="AddclassFormSubmit" action="index.php?page=modal-recheckclassroomlist" method="post">
   <div  id="recheckaddclass" tabindex="-1" aria-labelledby="AddclassModalLabel" aria-hidden="true">
@@ -54,8 +54,7 @@ $_SESSION["title"] = "Classroom";
           </div>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="AddclassFormSubmit">Re-Checking</button>
+          <button type="submit" class="btn btn-success" name="AddclassFormSubmit">Re-Checking</button>
         </div>
       </div>
     </div>

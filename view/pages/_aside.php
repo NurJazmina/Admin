@@ -83,11 +83,7 @@
 									{
 										$latestnews = $latestnews + 1;
 									}
-									if($latestnews == 0)
-									{
-
-									}
-									else
+									if($latestnews !== 0)
 									{
 										?>
 										<span class="label label-rounded label-warning"><?php echo $latestnews; ?></span>
@@ -159,11 +155,7 @@
 									{
 										$latestevent = $latestevent + 1;
 									}
-									if($latestevent == 0)
-									{
-
-									}
-									else
+									if($latestevent !== 0)
 									{
 										?>
 										<span class="label label-rounded label-warning"><?php echo $latestevent; ?></span>
@@ -194,7 +186,6 @@
 				<li class="menu-item menu-item" aria-haspopup="true" style="border-top: 1px solid #eceef7;; margin-top: 12px; padding-top: 12px;">
 					<a href="index.php?page=dashboard" class="menu-link">
 						<span class="svg-icon menu-icon">
-
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -203,8 +194,6 @@
 									<path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3" />
 								</g>
 							</svg>
-
-							<!--end::Svg Icon-->
 						</span>
 						<span class="menu-text">Dashboard</span>
 					</a>
@@ -212,16 +201,13 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<rect x="0" y="0" width="24" height="24"/>
 									<path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">School</span>
 						<i class="menu-arrow"></i>
@@ -256,7 +242,6 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -264,9 +249,7 @@
 									<path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000"/>
 									<path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">Forum</span>
 						<i class="menu-arrow"></i>
@@ -298,15 +281,11 @@
 									{
 										$latestforum = $latestforum + 1;
 									}
-									if($latestforum == 0)
+									if($latestforum !== 0)
 									{
-
-									}
-									else
-									{
-									?>
-									<span class="label label-rounded label-warning"><?php echo $latestforum; ?></span>
-									<?php
+										?>
+										<span class="label label-rounded label-warning"><?php echo $latestevent; ?></span>
+										<?php
 									}
 									?>
 									</span>
@@ -338,9 +317,7 @@
 									<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"/>
 									<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">Department</span>
 						<i class="menu-arrow"></i>
@@ -447,7 +424,6 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -455,9 +431,7 @@
 									<polygon fill="#000000" fill-rule="nonzero" opacity="0.3" points="7 4.89473684 7 21 5 21 5 3 11 3 11 4.89473684"/>
 									<path d="M10.1782982,2.24743315 L18.1782982,3.6970464 C18.6540619,3.78325557 19,4.19751166 19,4.68102291 L19,19.3190064 C19,19.8025177 18.6540619,20.2167738 18.1782982,20.3029829 L10.1782982,21.7525962 C9.63486295,21.8510675 9.11449486,21.4903531 9.0160235,20.9469179 C9.00536265,20.8880837 9,20.8284119 9,20.7686197 L9,3.23140966 C9,2.67912491 9.44771525,2.23140966 10,2.23140966 C10.0597922,2.23140966 10.119464,2.2367723 10.1782982,2.24743315 Z M11.9166667,12.9060229 C12.6070226,12.9060229 13.1666667,12.2975724 13.1666667,11.5470105 C13.1666667,10.7964487 12.6070226,10.1879981 11.9166667,10.1879981 C11.2263107,10.1879981 10.6666667,10.7964487 10.6666667,11.5470105 C10.6666667,12.2975724 11.2263107,12.9060229 11.9166667,12.9060229 Z" fill="#000000"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">Classroom</span>
 						<i class="menu-arrow"></i>
@@ -473,24 +447,24 @@
 							<?php
 							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 							{
-							?>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=classroomlist" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">List classroom</span>
-								</a>
-							</li>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=addclass" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Add Classroom</span>
-								</a>
-							</li>
-							<?php
+								?>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="index.php?page=classroomlist" class="menu-link menu-toggle">
+										<i class="menu-bullet menu-bullet-dot">
+											<span></span>
+										</i>
+										<span class="menu-text">List classroom</span>
+									</a>
+								</li>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="index.php?page=addclass" class="menu-link menu-toggle">
+										<i class="menu-bullet menu-bullet-dot">
+											<span></span>
+										</i>
+										<span class="menu-text">Add Classroom</span>
+									</a>
+								</li>
+								<?php
 							}
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -529,9 +503,7 @@
 									<rect fill="#000000" opacity="0.3" x="7" y="17" width="2" height="2" rx="1"/>
 									<rect fill="#000000" opacity="0.3" x="10" y="17" width="7" height="2" rx="1"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">Timetable</span>
 						<i class="menu-arrow"></i>
@@ -696,20 +668,18 @@
 								</a>
 							</li>
 							<?php
-							//filter by::Group::school
-							//available for staff/teacher
-							if ($_SESSION["loggeduser_ConsumerGroup_id"] == '601b4cfd97728c027c01f187' ||  $_SESSION["loggeduser_ConsumerGroup_id"] =='601b4f1697728c027c01f188')
+							if ($_SESSION["loggeduser_ACCESS"] == 'STAFF' ||  $_SESSION["loggeduser_ACCESS"] == 'TEACHER')
 							{
-							?>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=addstudent" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Add Student</span>
-								</a>
-							</li>
-							<?php
+								?>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="index.php?page=addstudent" class="menu-link menu-toggle">
+										<i class="menu-bullet menu-bullet-dot">
+											<span></span>
+										</i>
+										<span class="menu-text">Add Student</span>
+									</a>
+								</li>
+								<?php
 							}
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -750,16 +720,16 @@
 							<?php
 							if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
 							{
-							?>
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=addparent" class="menu-link menu-toggle">
-									<i class="menu-bullet menu-bullet-dot">
-										<span></span>
-									</i>
-									<span class="menu-text">Add Parent</span>
-								</a>
-							</li>
-							<?php
+								?>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="index.php?page=addparent" class="menu-link menu-toggle">
+										<i class="menu-bullet menu-bullet-dot">
+											<span></span>
+										</i>
+										<span class="menu-text">Add Parent</span>
+									</a>
+								</li>
+								<?php
 							}
 							?>
 						</ul>
@@ -768,11 +738,8 @@
 			</ul>
 			<!--end::Menu Nav-->
 		</div>
-
 		<!--end::Menu Container-->
 	</div>
-
 	<!--end::Aside Menu-->
 </div>
 <!--end::Aside-->
-<!--testing-->

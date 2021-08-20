@@ -1,7 +1,6 @@
-<?php
-$_SESSION["title"] = "Department";
-//avoid put any gap in this page.Error behaviour due to gap.
-?>
+<!-- avoid put any gap in this page.Error behaviour due to gap. -->
+
+<?php $_SESSION["title"] = "Department"; ?>
 <style>
 .highlight td {
 background:#FFE2E5;
@@ -45,27 +44,27 @@ color:#F64E60 ;
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="width:250%;">
                             <!--begin::Navigation-->
                             <li class="dropdown-item">Choose an option:</li>
-                                    <?php 
-                                    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
-                                    $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                            <?php 
+                            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
 
-                                    foreach ($cursor as $document)
-                                    {
-                                        $Departmentid = ($document->_id);
-                                        $DepartmentName = ($document->DepartmentName);
-                                        ?>
-                                        <li class="dropdown-item">
-                                            <a href="index.php?page=departmentattendance&id=<?php echo $Departmentid; ?>" class="navi-link">
-                                                <span class="navi-icon">
-                                                    <i class="la la-user"></i>
-                                                </span>
-                                                <span class="navi-text"><?php echo $DepartmentName; ?></span>
-                                            </a>
-                                        </li>
-                                    <?php 
-                                    } 
+                            foreach ($cursor as $document)
+                            {
+                                $Departmentid = ($document->_id);
+                                $DepartmentName = ($document->DepartmentName);
                                 ?>
+                                <li class="dropdown-item">
+                                    <a href="index.php?page=departmentattendance&id=<?php echo $Departmentid; ?>" class="navi-link">
+                                        <span class="navi-icon">
+                                            <i class="la la-user"></i>
+                                        </span>
+                                        <span class="navi-text"><?php echo $DepartmentName; ?></span>
+                                    </a>
+                                </li>
+                                <?php 
+                            } 
+                            ?>
                             <!--end::Navigation-->
                         </div>
                         <!--end::Dropdown Menu-->
@@ -81,13 +80,13 @@ color:#F64E60 ;
 if (!isset($_GET['id']) && empty($_GET['id']))
 {
     ?>
-    <div><br><br><br><h1 style="color:#696969; text-align:center">Department - Attendance</h1></div><br>
+    <div><h1 style="color:#696969; text-align:center">Department - Attendance</h1></div><br>
     <?php
 }
 else
 {
     ?>
-    <div><br><br><br><h1 style="color:#696969; text-align:center">Department - Attendance</h1></div><br>
+    <div><h1 style="color:#696969; text-align:center">Department - Attendance</h1></div><br>
     <div class="row">
     <div class="col-md-1 section-1-box wow fadeInUp"></div>
     <div class="col-md-10 section-1-box wow fadeInUp">
@@ -155,13 +154,10 @@ else
                         $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
                         $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                         $varcounting = $varcounting +1;
-                    if ($varcounting % 2)
-                    {
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";
-                    } 
-                    else
-                    {
-                    }
+                        if ($varcounting % 2)
+                        {
+                            echo date_format($AttendanceDate,"H:i:s")."<br>";
+                        } 
                     }
                     ?></td>
                     <td><?php
@@ -176,14 +172,13 @@ else
                         $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
                         $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                         $varcounting = $varcounting +1;
-
-                    if ($varcounting % 2)
-                    {
-                    } 
-                    else
-                    {
-                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                    }
+                        if ($varcounting % 2)
+                        {
+                        } 
+                        else
+                        {
+                            echo date_format($AttendanceDate,"H:i:s")."<br>";
+                        }
                     }
                     ?></td>
                     </tr>
@@ -192,9 +187,9 @@ else
                 }
             ?>
             </tbody>
-                    </table>
-                    <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=departmentattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
-                </div>             
+            </table>
+            <button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=departmentattendance&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+        </div>             
         </div>
         </div>         
         </div>

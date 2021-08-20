@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Profile";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
@@ -18,12 +18,8 @@ $_SESSION["title"] = "Profile";
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end">
                             <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-
-                                </div>
+                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right"></div>
                             </div>
                         </div>
                         <!--end::Toolbar-->
@@ -122,100 +118,92 @@ $_SESSION["title"] = "Profile";
                             <?php
                             if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                             {
-                            ?>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=classroominfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-                                                    <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
+                                ?>
+                                <div class="navi-item mb-2">
+                                    <a href="index.php?page=classroominfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
+                                        <span class="navi-icon mr-2">
+                                            <span class="svg-icon">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                        <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                        <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
+                                                        <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
                                         </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Classroom Info</span>
-                                    <span class="navi-label">
+                                        <span class="navi-text font-size-lg">Classroom Info</span>
+                                        <span class="navi-label">
+                                        <?php 
+                                        $latestremark = 0;
+                                        $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                        $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+                                        $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                        $query = new MongoDB\Driver\Query($filter);
+                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+                                        foreach ($cursor as $document)
+                                        {
+                                            $latestremark = $latestremark + 1;
+                                        }
+                                        if($latestremark !== 0)
+                                        {
+                                            ?>
+                                            <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
+                                            <?php
+                                        }
+                                        ?>
+                                        </span>
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
+                            {
+                                ?>
+                                <div class="navi-item mb-2">
+                                    <a href="index.php?page=departmentinfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
+                                        <span class="navi-icon mr-2">
+                                            <span class="svg-icon">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                        <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
+                                                        <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                        </span>
+                                        <span class="navi-text">Department Info</span>
+                                        <span class="navi-label">
                                     <?php 
-                                    $latestremark = 0;
+                                    $latestremark1 = 0;
                                     $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
                                     $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
 
-                                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                    $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
                                     $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
                                     foreach ($cursor as $document)
                                     {
-                                        $latestremark = $latestremark + 1;
+                                        $latestremark1 = $latestremark1 + 1;
                                     }
-                                    if($latestremark == 0)
-                                    {
-
-                                    }
-                                    else
+                                    if($latestremark1 !== 0)
                                     {
                                         ?>
-                                        <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
+                                        <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
                                         <?php
                                     }
                                     ?>
                                     </span>
-                                </a>
-                            </div>
-                            <?php
-                            }
-                            if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
-                            {
-                            ?>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=departmentinfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                    <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
-                                                    <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text">Department Info</span>
-                                    <span class="navi-label">
-                                <?php 
-                                $latestremark1 = 0;
-                                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
-
-                                $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
-                                foreach ($cursor as $document)
-                                {
-                                    $latestremark1 = $latestremark1 + 1;
-                                }
-                                if($latestremark1 == 0)
-                                {
-
-                                }
-                                else
-                                {
-                                    ?>
-                                    <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
-                                    <?php
-                                }
-                                ?>
-                                </span>
-                                </a>
-                            </div>
-                            <?php
+                                    </a>
+                                </div>
+                                <?php
                             }
                             ?>
                         </div>
@@ -241,100 +229,99 @@ $_SESSION["title"] = "Profile";
 					<!--begin::Form-->
 					<form class="form" name="ChangePasswordFormSubmit" action="model/change-password.php" method="post">
 						<div class="card-body">
-
                             <?php  
                             if (isset($_GET['password']) && !empty($_GET['password']))
                             {
-                            ?>
-							<!--begin::success-->
-							<div class="alert alert-custom alert-light-info fade show mb-10" role="alert">
-								<div class="alert-icon">
-                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
-                                        <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Shield-thunder.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"/>
-                                                <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"/>
-                                                <polygon fill="#000000" opacity="0.3" points="11.3333333 18 16 11.4 13.6666667 11.4 13.6666667 7 9 13.6 11.3333333 13.6"/>
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-								</div>
-								<div class="alert-text font-weight-bold">Your password was successfully changed. Your password has been hashed to enhanced security.!</div>
-								<div class="alert-close">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">
-											<i class="ki ki-close"></i>
-										</span>
-									</button>
-								</div>
-							</div>
-							<!--end::success-->
-                            <?php 
+                                ?>
+                                <!--begin::success-->
+                                <div class="alert alert-custom alert-light-info fade show mb-10" role="alert">
+                                    <div class="alert-icon">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                            <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Shield-thunder.svg-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"/>
+                                                    <polygon fill="#000000" opacity="0.3" points="11.3333333 18 16 11.4 13.6666667 11.4 13.6666667 7 9 13.6 11.3333333 13.6"/>
+                                                </g>
+                                            </svg>
+                                            <!--end::Svg Icon-->
+                                        </span>
+                                    </div>
+                                    <div class="alert-text font-weight-bold">Your password was successfully changed. Your password has been hashed to enhanced security.!</div>
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="ki ki-close"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--end::success-->
+                                <?php 
                             }
                             elseif (isset($_GET['ERROR']) && !empty($_GET['ERROR']))
                             {
-                            ?>
-                            <!--begin::Alert Password Not Matching-->
-							<div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
-								<div class="alert-icon">
-									<span class="svg-icon svg-icon-3x svg-icon-danger">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
-										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24" />
-												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-												<rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
-												<rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
-											</g>
-										</svg>
-										<!--end::Svg Icon-->
-									</span>
-								</div>
-								<div class="alert-text font-weight-bold">The password confirmation does not match!</div>
-								<div class="alert-close">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">
-											<i class="ki ki-close"></i>
-										</span>
-									</button>
-								</div>
-							</div>
-							<!--end::Alert Password Not Matching-->
-                            <?php  
+                                ?>
+                                <!--begin::Alert Password Not Matching-->
+                                <div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+                                    <div class="alert-icon">
+                                        <span class="svg-icon svg-icon-3x svg-icon-danger">
+                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24" />
+                                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                                    <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
+                                                    <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                                                </g>
+                                            </svg>
+                                            <!--end::Svg Icon-->
+                                        </span>
+                                    </div>
+                                    <div class="alert-text font-weight-bold">The password confirmation does not match!</div>
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="ki ki-close"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--end::Alert Password Not Matching-->
+                                <?php  
                             }
                             else
                             {
-                            ?>
-							<!--begin::Alert-->
-							<div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
-								<div class="alert-icon">
-									<span class="svg-icon svg-icon-3x svg-icon-danger">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
-										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24" />
-												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-												<rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
-												<rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
-											</g>
-										</svg>
-										<!--end::Svg Icon-->
-									</span>
-								</div>
-								<div class="alert-text font-weight-bold">Configure user passwords to expire periodically. Users will need warning that their passwords are going to expire,
-								<br />or they might inadvertently get locked out of the system!</div>
-								<div class="alert-close">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">
-											<i class="ki ki-close"></i>
-										</span>
-									</button>
-								</div>
-							</div>
-							<!--end::Alert-->
-                            <?php
+                                ?>
+                                <!--begin::Alert-->
+                                <div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+                                    <div class="alert-icon">
+                                        <span class="svg-icon svg-icon-3x svg-icon-danger">
+                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24" />
+                                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                                    <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
+                                                    <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                                                </g>
+                                            </svg>
+                                            <!--end::Svg Icon-->
+                                        </span>
+                                    </div>
+                                    <div class="alert-text font-weight-bold">Configure user passwords to expire periodically. Users will need warning that their passwords are going to expire,
+                                    <br />or they might inadvertently get locked out of the system!</div>
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="ki ki-close"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--end::Alert-->
+                                <?php
                             }
                             ?>
 							<div class="form-group row">

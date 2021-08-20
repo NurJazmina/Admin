@@ -2,7 +2,6 @@
 $_SESSION["title"] = "Profile";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->
@@ -18,12 +17,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end">
                             <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-
-                                </div>
+                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right"></div>
                             </div>
                         </div>
                         <!--end::Toolbar-->
@@ -201,13 +196,9 @@ include 'view/partials/_subheader/subheader-v1.php';
                                 {
                                     $latestremark1 = $latestremark1 + 1;
                                 }
-                                if($latestremark1 == 0)
+                                if($latestremark1 !== 0)
                                 {
-
-                                }
-                                else
-                                {
-                                    ?>
+									?>
                                     <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
                                     <?php
                                 }
@@ -759,13 +750,10 @@ include 'view/partials/_subheader/subheader-v1.php';
 													$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
 													$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 													$varcounting = $varcounting +1;
-												if ($varcounting % 2)
-												{
-												echo date_format($AttendanceDate,"H:i:s")."<br>";
-												} 
-												else
-												{
-												}
+													if ($varcounting % 2)
+													{
+														echo date_format($AttendanceDate,"H:i:s")."<br>";
+													} 
 												}
 												?></td>
 												<td class="default"><?php
@@ -780,14 +768,10 @@ include 'view/partials/_subheader/subheader-v1.php';
 													$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
 													$AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 													$varcounting = $varcounting +1;
-
-												if ($varcounting % 2)
-												{
-													echo date_format($AttendanceDate,"H:i:s")."<br>";
-												} 
-												else
-												{
-												}
+													if ($varcounting % 2)
+													{
+														echo date_format($AttendanceDate,"H:i:s")."<br>";
+													}
 												}
 												?></td>
 												<?php
@@ -798,23 +782,19 @@ include 'view/partials/_subheader/subheader-v1.php';
 											</table>
 											<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=classdetail&id=<?php echo $_GET['id']; ?>&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
 										<?php
-										if (!isset($_GET['attendance']) && empty($_GET['attendance']))
+										if (isset($_GET['attendance']) && !empty($_GET['attendance']))
 										{
-
-										}
-										else
-										{
-										$attendance = ($_GET['attendance']);
-										?>
-										<script>
-											$(document).ready(function () {
-											$("#attendance").table2excel({
-												filename: "attendanceclass.xls"
-											});
-											});
-											
-										</script>
-										<?php
+											$attendance = ($_GET['attendance']);
+											?>
+											<script>
+												$(document).ready(function () {
+												$("#attendance").table2excel({
+													filename: "attendanceclass.xls"
+												});
+												});
+												
+											</script>
+											<?php
 										}
 										?>
 										<script type="text/javascript">
@@ -851,4 +831,6 @@ tinymce.init({
   height:100,
 });
 </script>
-<?php include ('view/pages/modal-updateclassremark.php'); ?>
+<?php 
+include ('view/pages/modal-updateclassremark.php'); 
+?>

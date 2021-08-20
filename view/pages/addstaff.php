@@ -50,22 +50,22 @@ include 'view/partials/_subheader/subheader-v1.php';
           </div>
           <div id="teacherbox">
             <div class="form-group row">
-            <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="txtClasscategory">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
+              <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="txtClasscategory">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
             </div>
           </div>
-          </div>
+        </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success" name="AddStaffFormSubmit">Re-Checking</button>
-        </div>
         </div>
       </div>
     </div>

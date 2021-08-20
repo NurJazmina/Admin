@@ -18,14 +18,6 @@ $_SESSION["title"] = "Profile";
                     <div class="card-body pt-4">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end">
-                            <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-
-                                </div>
-                            </div>
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::User-->
@@ -306,7 +298,6 @@ $_SESSION["title"] = "Profile";
 									</div>
 								</div>
 							</div>
-                            
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
 								<div class="col-lg-9 col-xl-6">
@@ -354,7 +345,7 @@ $_SESSION["title"] = "Profile";
 								</div>
 							</div>
                             <div class="card-toolbar" style="text-align:right;">
-                                <button type="submit" class="btn btn-success mr-2" name="EditPersonalInformation" id="EditPersonalInformation" >Save Changes</button>
+                                <button type="submit" class="btn btn-success mr-2" name="EditPersonalInformation" id="EditPersonalInformation">Save Changes</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
 						</div>

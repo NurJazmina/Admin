@@ -36,7 +36,7 @@
                   if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
                   ?>
-                    <button type="button" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
+                    <button type="button" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent">Add</button>
                     <div class="input-group input-group-sm input-group-solid" style="width:50%">
                       <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
                       <div class="input-group-append">
@@ -200,10 +200,10 @@
                   if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                   {
                   ?>
-                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">
+                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">
                       <i class="fa fa-edit" style="font-size:15px"></i>
                     </button>
-                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusParentModal" data-bs-whatever="<?php echo $ConsumerID; ?>">
+                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#StatusParentModal" data-bs-whatever="<?php echo $ConsumerID; ?>">
                       <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
                     </button>
                   <?php

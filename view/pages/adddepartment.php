@@ -1,7 +1,7 @@
 <?php
 $_SESSION["title"] = "Department";
+include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<?php include 'view/partials/_subheader/subheader-v1.php'; ?>
 
 <form id="AddDepartmentFormSubmit" name="AddDepartmentFormSubmit" action="index.php?page=departmentlist" method="post">
   <div id="AddDepartmentModal" tabindex="-1" aria-labelledby="AddDepartmentModalLabel" aria-hidden="true">
@@ -19,7 +19,6 @@ $_SESSION["title"] = "Department";
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" name="AddDepartmentFormSubmit">Save changes</button>
         </div>
     </div>
