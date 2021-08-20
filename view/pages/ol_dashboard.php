@@ -1,4 +1,6 @@
-<!-- testt -->
+<?php
+include ('model/ol_dashboard.php'); 
+?>
 <style>
 .show>.btn-outline-secondary.dropdown-toggle {
     color: #fff;
@@ -68,11 +70,8 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu" role="menu" data-show-active-item="" data-skip-active-class="true" data-active-item-text="" aria-labelledby="groupingdropdown" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <li class="dropdown-divider" role="presentation">
-                        <span class="filler">&nbsp;</span>
-                    </li>
                     <li>
-                        <a class="dropdown-item" href="#" data-filter="grouping" data-value="all" data-pref="all" aria-label="Show all courses except courses removed from view" aria-controls="courses-view-60b064e42666060b064e36ba2c3" role="menuitem" aria-current="true">
+                        <a class="dropdown-item" href="index.php?page=ol_dashboard&status=all">
                             All (except removed from view)
                         </a>
                     </li>
@@ -80,32 +79,14 @@
                         <span class="filler">&nbsp;</span>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#" data-filter="grouping" data-value="inprogress" data-pref="inprogress" aria-label="Show courses in progress" aria-controls="courses-view-60b064e42666060b064e36ba2c3" role="menuitem">
-                            In progress
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#" data-filter="grouping" data-value="future" data-pref="future" aria-label="Show future courses" aria-controls="courses-view-60b064e42666060b064e36ba2c3" role="menuitem">
-                            Future
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#" data-filter="grouping" data-value="past" data-pref="past" aria-label="Show past courses" aria-controls="courses-view-60b064e42666060b064e36ba2c3" role="menuitem">
-                            Past
-                        </a>
-                    </li>
-                    <li class="dropdown-divider" role="presentation">
-                        <span class="filler">&nbsp;</span>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#" data-filter="grouping" data-value="favourites" data-pref="favourites" aria-label="Show starred courses" aria-controls="courses-view-60b064e42666060b064e36ba2c3" role="menuitem">
+                        <a class="dropdown-item" href="index.php?page=ol_dashboard&status=favourites">
                             Starred
                         </a>
                     </li><li class="dropdown-divider" role="presentation">
                         <span class="filler">&nbsp;</span>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#" data-filter="grouping" data-value="hidden" data-pref="hidden" aria-label="Show courses removed from view" aria-controls="courses-view-60b064e42666060b064e36ba2c3" role="menuitem">
+                        <a class="dropdown-item" href="index.php?page=ol_dashboard&status=hidden">
                             Removed from view
                         </a>
                     </li>
@@ -149,62 +130,149 @@
         foreach ($cursor as $document)
         {
             $SubjectName = $document->SubjectName;
-        }
-        ?>
-        <section class="" x-bind:class="{'col-sm': layout === 'list', 'col-sm-3 px-5 py-2': layout === 'grid'}">
-                <div x-show="layout === 'grid'" x-cloak>
-                    <article class="bg-white p-4 shadow">
-                        <div class="card dashboard-card">
-                        <div class="card card-custom wave wave-animate-slow wave-purple mb-8 mb-lg-0">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center p-5">
+            $status = $document->status;
+
+            if(isset($_GET['status']) && !empty($_GET['status']))
+            {
+                $select_status = $_GET['status'];
+                if($status == $select_status)
+                {
+                    ?>
+                    <section class="" x-bind:class="{'col-sm': layout === 'list', 'col-sm-3 px-5 py-2': layout === 'grid'}">
+                            <div x-show="layout === 'grid'" x-cloak>
+                                <article class="bg-white p-4 shadow">
+                                    <div class="card dashboard-card">
+                                    <div class="card card-custom wave wave-animate-slow wave-purple mb-8 mb-lg-0">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center p-5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white" style="height:50px;">
+                                        <p class="font-size-h4 text-center mt-3">
+                                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                        </p>
+                                    </div>
+                                    <div class="dropdown text-right bg-white" >
+                                        <button type="button" class="btn btn-sm btn-light btn-icon m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="ki ki-bold-more-hor text-lightsecondary"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <form id="editstatus" name="editstatus" action="" method="post">
+                                                <input type="hidden" value="<?= $Subjectid ?>" name="subjectid">
+                                                <input type="hidden" value="all" name="status">
+                                                <button class="dropdown-item" type="submit" name="editstatus">
+                                                Unstar this subject
+                                                </button>
+                                            </form>
+                                            <form id="editstatus" name="editstatus" action="" method="post">
+                                                <input type="hidden" value="<?= $Subjectid ?>" name="subjectid">
+                                                <input type="hidden" value="all" name="status">
+                                                <button class="dropdown-item" type="submit" name="editstatus">
+                                                Restore from view
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div x-show="layout === 'list'" x-cloak>
+                                <div class="list-group-item mt-1 mb-1">
+                                    <p class="font-size-h4 mt-3">
+                                    <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                    </p>
+                                    <?php
+                                    $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningNotes',$query);
+                                    foreach ($cursor as $document)
+                                    {
+                                        $Subject_id = $document->Subject_id;
+                                        $Title = $document->Title;
+                                        $Detail = $document->Detail;
+                                        $Created_by = $document->Created_by;
+                                        $Edited_by = $document->Edited_by;
+                                        $y=substr($Detail,0,500) . '...';
+                                        echo $y;
+                                    }
+                                    ?>
+                                    <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
                                 </div>
                             </div>
+                    </section>
+                    <?php
+                }
+            }
+            else if(!isset($_GET['status']) && empty($_GET['status']))
+            {
+                ?>
+                <section class="" x-bind:class="{'col-sm': layout === 'list', 'col-sm-3 px-5 py-2': layout === 'grid'}">
+                        <div x-show="layout === 'grid'" x-cloak>
+                            <article class="bg-white p-4 shadow">
+                                <div class="card dashboard-card">
+                                <div class="card card-custom wave wave-animate-slow wave-purple mb-8 mb-lg-0">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center p-5">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white" style="height:50px;">
+                                    <p class="font-size-h4 text-center mt-3">
+                                    <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                    </p>
+                                </div>
+                                <div class="dropdown text-right bg-white" >
+                                    <button type="button" class="btn btn-sm btn-light btn-icon m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ki ki-bold-more-hor text-lightsecondary"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <form id="editstatus" name="editstatus" action="" method="post">
+                                            <input type="hidden" value="<?= $Subjectid ?>" name="subjectid">
+                                            <input type="hidden" value="favourites" name="status">
+                                            <button class="dropdown-item" type="submit" name="editstatus">
+                                            Star this subject
+                                            </button>
+                                        </form>
+                                        <form id="editstatus" name="editstatus" action="" method="post">
+                                            <input type="hidden" value="<?= $Subjectid ?>" name="subjectid">
+                                            <input type="hidden" value="hidden" name="status">
+                                            <button class="dropdown-item" type="submit" name="editstatus">
+                                            Remove from view
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </article>
                         </div>
-                        <div class="bg-white" style="height:50px;">
-                            <p class="font-size-h4 text-center mt-3">
-                            <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
-                            </p>
-                        </div>
-                        <div class="dropdown text-right bg-white" >
-                            <button type="button" class="btn btn-sm btn-light btn-icon m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-bold-more-hor text-lightsecondary"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Star this subject</a>
-                                <a class="dropdown-item" href="#">Remove from view</a>
-                                <a class="dropdown-item" href="#">Unstar this subject</a>
-                                <a class="dropdown-item" href="#">Remove from view</a>
+                        <div x-show="layout === 'list'" x-cloak>
+                            <div class="list-group-item mt-1 mb-1">
+                                <p class="font-size-h4 mt-3">
+                                <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                </p>
+                                <?php
+                                $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningNotes',$query);
+                                foreach ($cursor as $document)
+                                {
+                                    $Subject_id = $document->Subject_id;
+                                    $Title = $document->Title;
+                                    $Detail = $document->Detail;
+                                    $Created_by = $document->Created_by;
+                                    $Edited_by = $document->Edited_by;
+                                    $y=substr($Detail,0,500) . '...';
+                                    echo $y;
+                                }
+                                ?>
+                                <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
                             </div>
                         </div>
-                        </div>
-                    </article>
-                </div>
-                <div x-show="layout === 'list'" x-cloak>
-                    <div class="list-group-item mt-1 mb-1">
-                        <p class="font-size-h4 mt-3">
-                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
-                        </p>
-                        <?php
-                        $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OnlineLearningNotes',$query);
-                        foreach ($cursor as $document)
-                        {
-                            $Subject_id = $document->Subject_id;
-                            $Title = $document->Title;
-                            $Detail = $document->Detail;
-                            $Created_by = $document->Created_by;
-                            $Edited_by = $document->Edited_by;
-                            $y=substr($Detail,0,500) . '...';
-                            echo $y;
-                        }
-                        ?>
-                        <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
-                    </div>
-                </div>
-        </section>
-        <?php
+                </section>
+                <?php
+            }
+        }
     }
     ?>
     </div>

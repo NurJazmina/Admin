@@ -9,7 +9,8 @@ if (isset($_POST['AddSubjectFormSubmit']))
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert(['School_id'=>$varschoolID,
                 'SubjectName'=> $varsubject,
-                'Class_category'=>$varClasscategory
+                'Class_category'=>$varClasscategory,
+                'status'=>'all',
                 ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
