@@ -49,43 +49,48 @@ include ('model/news.php');
     }
 } 
 </style>
-<div><h1 style="color:#696969; text-align:center">News</h1></div><br>
+<div>
+  <h1 style="color:#696969; text-align:center">News</h1>
+</div><br>
+
 <div class="row">
   <?php
-  $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
-  $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
-  $queryA = new MongoDB\Driver\Query($filterA,$optionA );
-  $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
-  foreach ($cursorA as $documentA)
+  $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
+  $option = ['limit'=>100,'sort' => ['_id' => -1]];
+  $query = new MongoDB\Driver\Query($filter,$option);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+  foreach ($cursor as $document0)
   {
-    $Newsid = strval($documentA->_id);
-    $NewsStaff_id = ($documentA->NewsStaff_id);
-    $NewsTitle = ($documentA->NewsTitle);
-    $NewsDetails = ($documentA->NewsDetails);
-    $NewsDate = ($documentA->NewsDate);
-    $NewsStatus = ($documentA->NewsStatus);
-    $Access = ($documentA->NewsAccess);
+    $Newsid = strval($document0->_id);
+    $NewsStaff_id = ($document0->NewsStaff_id);
+    $NewsTitle = ($document0->NewsTitle);
+    $NewsDetails = ($document0->NewsDetails);
+    $NewsDate = ($document0->NewsDate);
+    $NewsStatus = ($document0->NewsStatus);
+    $Access = ($document0->NewsAccess);
     
     $id = new \MongoDB\BSON\ObjectId($NewsStaff_id);
-    $filter1 = ['_id' => $id];
-    $query1 = new MongoDB\Driver\Query($filter1);
-    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-    foreach ($cursor1 as $document1)
+    $filter = ['_id' => $id];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+    foreach ($cursor as $document1)
     {
       $consumerid = strval($document1->_id);
       $ConsumerFName = ($document1->ConsumerFName);
       $ConsumerLName = ($document1->ConsumerLName);
-      $filter2 = ['ConsumerID'=>$consumerid];
-      $query2 = new MongoDB\Driver\Query($filter2);
-      $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-      foreach ($cursor2 as $document2)
+
+      $filter = ['ConsumerID'=>$consumerid];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+      foreach ($cursor as $document2)
       {
         $Staffdepartment = ($document2->Staffdepartment);
         $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-        $filter3 = ['_id'=>$departmentid];
-        $query3 = new MongoDB\Driver\Query($filter3);
-        $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-        foreach ($cursor3 as $document3)
+
+        $filter = ['_id'=>$departmentid];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+        foreach ($cursor as $document3)
         {
             $DepartmentName = ($document3->DepartmentName);
         }
@@ -124,41 +129,42 @@ include ('model/news.php');
 
     <!--begin::public-->
     <?php
-    $filterA = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>'PUBLIC'];
-    $optionA = ['limit'=>100,'sort' => ['_id' => -1]];
-    $queryA = new MongoDB\Driver\Query($filterA,$optionA );
-    $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$queryA);
-    foreach ($cursorA as $documentA)
+    $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>'PUBLIC'];
+    $option = ['limit'=>100,'sort' => ['_id' => -1]];
+    $query = new MongoDB\Driver\Query($filter,$option);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+    foreach ($cursor as $document0)
     {
-      $Newsid = strval($documentA->_id);
-      $NewsStaff_id = ($documentA->NewsStaff_id);
-      $NewsTitle = ($documentA->NewsTitle);
-      $NewsDetails = ($documentA->NewsDetails);
-      $NewsDate = ($documentA->NewsDate);
-      $NewsStatus = ($documentA->NewsStatus);
-      $Access = ($documentA->NewsAccess);
+      $Newsid = strval($document0->_id);
+      $NewsStaff_id = ($document0->NewsStaff_id);
+      $NewsTitle = ($document0->NewsTitle);
+      $NewsDetails = ($document0->NewsDetails);
+      $NewsDate = ($document0->NewsDate);
+      $NewsStatus = ($document0->NewsStatus);
+      $Access = ($document0->NewsAccess);
 
       $id = new \MongoDB\BSON\ObjectId($NewsStaff_id);
-      $filter1 = ['_id' => $id];
-      $query1 = new MongoDB\Driver\Query($filter1);
-      $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-      foreach ($cursor1 as $document1)
+      $filter = ['_id' => $id];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+      foreach ($cursor as $document1)
       {
           $consumerid = strval($document1->_id);
           $ConsumerFName = ($document1->ConsumerFName);
           $ConsumerLName = ($document1->ConsumerLName);
-          $filter2 = ['ConsumerID'=>$consumerid];
-          $query2 = new MongoDB\Driver\Query($filter2);
-          $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-          foreach ($cursor2 as $document2)
+
+          $filter = ['ConsumerID'=>$consumerid];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+          foreach ($cursor as $document2)
           {
               $Staffdepartment = ($document2->Staffdepartment);
               $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
 
-              $filter3 = ['_id'=>$departmentid];
-              $query3 = new MongoDB\Driver\Query($filter3);
-              $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-              foreach ($cursor3 as $document3)
+              $filter = ['_id'=>$departmentid];
+              $query = new MongoDB\Driver\Query($filter);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+              foreach ($cursor as $document3)
               {
                   $DepartmentName = ($document3->DepartmentName);
               }
@@ -193,5 +199,5 @@ include ('model/news.php');
     <?php
     }
     ?>
-  </div>
+</div>
   <!--filter::end::public-->

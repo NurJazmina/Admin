@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Kreait\Firebase;
 use Kreait\Firebase\Messaging\CloudMessage;
+
 if (isset($_POST['AddNews'])) 
 {
     $varaccess = $_POST['access'];
@@ -327,7 +328,6 @@ if (isset($_POST['AddNews']))
                     catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
 
                     //firebase notification//
-                   
                     $factory = (new Factory)
                         ->withServiceAccount('/path/to/firebase_credentials.json')
                         ->withDatabaseUri('https://my-project-default-rtdb.firebaseio.com');
@@ -1082,11 +1082,12 @@ if (isset($_POST['AddNews']))
         foreach ($cursor as $document)
         {
             $ConsumerID = strval($document->ConsumerID);
-            $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
-            $query1 = new MongoDB\Driver\Query($filter1);
-            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+            
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
-            foreach ($cursor1 as $document1)
+            foreach ($cursor as $document1)
             {
                 $ConsumerIDNo = strval($document1->ConsumerIDNo);
                 $ConsumerFName = strval($document1->ConsumerFName);

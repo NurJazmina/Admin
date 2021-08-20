@@ -36,9 +36,9 @@ include 'view/partials/_subheader/subheader-v1.php';
               </select>
             </div>
           </div>
+        </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success" name="AddParentFormSubmit">Re-Checking</button>
-        </div>
         </div>
       </div>
     </div>

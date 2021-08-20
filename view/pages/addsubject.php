@@ -2,7 +2,6 @@
 $_SESSION["title"] = "Subject";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-
 <form id="AddSubjectFormSubmit" name="AddSubjectFormSubmit" action="index.php?page=subjectlist" method="post">
   <div  id="AddSubjectModal" tabindex="-1" aria-labelledby="AddSubjectModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -24,5 +23,4 @@ include 'view/partials/_subheader/subheader-v1.php';
         </div>
     </div>
   </div>
-</div>
 </form>

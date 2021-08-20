@@ -40,7 +40,6 @@ include 'view/partials/_subheader/subheader-v1.php';
         <div class="modal-footer">
           <button type="submit" class="btn btn-success" name="AddStudentFormSubmit">Re-Checking</button>
         </div>
-        </div>
       </div>
     </div>
   </div>

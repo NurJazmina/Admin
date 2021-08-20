@@ -6,14 +6,12 @@ include 'view/partials/_subheader/subheader-v1.php';
     <div class="card card-custom gutter-b example example-compact">
         <div class="card-header">
             <h3 class="card-title">Add News</h3>
-            <div class="card-toolbar">
-            </div>
         </div>
-        <form class="form" id="kt_form" action="index.php?page=news" method="post" name="AddNews">
+        <form class="form" action="index.php?page=news" method="post" name="AddNews">
             <div class="card card-custom gutter-b">
                 <div class="card-body">
                     <div class="form-group">
-                        <div class="alert alert-light-primary d-none mb-15" role="alert" id="kt_form_msg">
+                        <div class="alert alert-light-primary d-none mb-15" role="alert">
                             <div class="alert-icon">
                                 <i class="la la-warning"></i>
                             </div>
@@ -38,7 +36,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                     <div class="form-group row">
                         <label class="col-form-label col-lg-3 col-sm-12 text-right">Access Type</label>
                         <div class="col-lg-4 col-md-9 col-sm-12">
-                            <select class="form-control" id="kt_bootstrap_select" name="access" required>
+                            <select class="form-control" name="access" required>
                                 <option value="PUBLIC">PUBLIC</option>
                                 <option value="STAFF">STAFFS</option>
                                 <option value="TEACHER">TEACHERS</option>

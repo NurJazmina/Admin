@@ -12,8 +12,7 @@ foreach ($cursor as $document)
     $count = strval($document->count);
 }
 
-$id = new \MongoDB\BSON\ObjectId($_GET['id']);
-$filter = ['_id'=>$id];
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
 foreach ($cursor as $document)
@@ -28,11 +27,10 @@ foreach ($cursor as $document)
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
     $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-    $staffid = new \MongoDB\BSON\ObjectId($NewsStaff_id);
-    $filter1 = ['_id' => $staffid];
-    $query1 = new MongoDB\Driver\Query($filter1);
-    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
-    foreach ($cursor1 as $document1)
+    $filter = ['_id' => new \MongoDB\BSON\ObjectId($NewsStaff_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+    foreach ($cursor as $document1)
     {
         $consumerid = strval($document1->_id);
         $ConsumerFName = ($document1->ConsumerFName);
@@ -44,30 +42,30 @@ foreach ($cursor as $document)
         $ConsumerAddress = ($document1->ConsumerAddress);
         $ConsumerStatus = ($document1->ConsumerStatus);
 
-        $filter2 = ['ConsumerID'=>$consumerid];
-        $query2 = new MongoDB\Driver\Query($filter2);
-        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query2);
-        foreach ($cursor2 as $document2)
+        $filter = ['ConsumerID'=>$consumerid];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+        foreach ($cursor as $document2)
         {
             $Staffdepartment = ($document2->Staffdepartment);
             $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
 
-            $filter3 = ['_id'=>$departmentid];
-            $query3 = new MongoDB\Driver\Query($filter3);
-            $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query3);
-            foreach ($cursor3 as $document3)
+            $filter = ['_id'=>$departmentid];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+            foreach ($cursor as $document3)
             {
                 $DepartmentName = ($document3->DepartmentName);
             }
         }
     }
     $total=0;
-    $filter2 = ['school_id'=>$_SESSION["loggeduser_schoolID"],'news_id'=>$_GET['id'], 'news'=>'0'];
-    $option2 = ['sort' => ['_id' => 1]];
-    $query2 = new MongoDB\Driver\Query($filter2,$option2);
-    $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNewsComment',$query2);
+    $filter = ['news_id'=>$_GET['id'], 'news'=>'0'];
+    $option = ['sort' => ['_id' => 1]];
+    $query = new MongoDB\Driver\Query($filter,$option);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNewsComment',$query);
 
-    foreach ($cursor2 as $document2)
+    foreach ($cursor as $document2)
     {
         $total = $total + 1;
     }
@@ -138,7 +136,6 @@ foreach ($cursor as $document)
     </div>
   <div class="col-md-1 section-1-box wow fadeInUp"></div>
 </div>
-
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
