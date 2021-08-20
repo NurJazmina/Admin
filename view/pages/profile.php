@@ -221,21 +221,8 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
             <!--end::Aside-->
             <!--begin::Content-->
-            <div class="flex-row-fluid ml-lg-8">
-                <!--begin::Row-->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!--begin::List Widget 14-->
-                        <!--end::List Widget 14-->
-                    </div>
-                    <div class="col-lg-6">
-                        <!--begin::List Widget 10-->
-                        <!--end: List Widget 10-->
-                    </div>
-                </div>
-                <!--end::Row-->
+            <div class="flex-row-fluid ml-lg-8 bg-white">
                 <!--begin::Advance Table: Widget 7-->
-                <div class="card card-custom gutter-b">
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
                         <h3 class="card-title align-items-start flex-column">
@@ -409,7 +396,6 @@ include 'view/partials/_subheader/subheader-v1.php';
                 </div>
                 <br><br>
                 <!--end::Advance Table Widget 7-->
-            </div>
             <!--end::Content-->
         </div>
         <!--end::Profile Overview-->

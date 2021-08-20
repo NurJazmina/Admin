@@ -318,7 +318,7 @@ include ('model/ol_dashboard.php');
                             </article>
                         </div>
                         <div x-show="layout === 'list'" x-cloak>
-                            <div class="list-group-item mt-1 mb-1">
+                            <div class="list-group-item mt-1 mb-1 bg-light-info">
                                 <p class="font-size-h4 mt-3">
                                 <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
                                 </p>
@@ -337,7 +337,7 @@ include ('model/ol_dashboard.php');
                                     echo $y;
                                 }
                                 ?>
-                                <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
+                                <!-- <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p> -->
                             </div>
                         </div>
                 </section>
