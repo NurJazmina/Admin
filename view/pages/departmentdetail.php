@@ -1022,8 +1022,8 @@ else
                             </h6>
                             <div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <?php 
-                            $filter4 = ['department_id'=>$department_id,'SubRemarks'=>$remarkid1,'departmentRemarksStatus'=>'COMPLETED'];
-                            $option4 = ['sort' => ['_id' => -1],'limit'=>10];
+                            $filter = ['department_id'=>$department_id,'SubRemarks'=>$remarkid1,'departmentRemarksStatus'=>'COMPLETED'];
+                            $option = ['sort' => ['_id' => -1],'limit'=>10];
                             $query4 = new MongoDB\Driver\Query($filter4, $option4);
                             $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
                             foreach ($cursor4 as $document4)
