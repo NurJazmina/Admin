@@ -55,7 +55,6 @@ if (isset($_POST['AddNews']))
       exit;
     }
     printf("Inserted %d document(s)\n", $result->getInsertedCount());
-    printf("Updated  %d document(s)\n", $result->getModifiedCount());
 
     $NewsDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
     $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
@@ -310,35 +309,9 @@ if (isset($_POST['AddNews']))
                     ";
                     $mail->AltBody = "This is the plain text version of the email content";
 
-                    try { 
-                      
-                      $mail->send();
-                      $messaging = (new Firebase\Factory())
-                        ->withServiceAccount('go-n-getz-298607-firebase-adminsdk-idlfu-c52841d0d9.json')
-                        ->createMessaging();
-
-                        $message = CloudMessage::withTarget(/* see sections below */)
-                            ->withNotification(Notification::create('Title', 'Body'))
-                            ->withData(['key' => 'value']);
-
-                        $messaging->send($message);
-                    
-                    } 
+                    try { $mail->send();} 
 
                     catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
-
-                    //firebase notification//
-                    $factory = (new Factory)
-                        ->withServiceAccount('/path/to/firebase_credentials.json')
-                        ->withDatabaseUri('https://my-project-default-rtdb.firebaseio.com');
-
-                    $auth = $factory->createAuth();
-                    $realtimeDatabase = $factory->createDatabase();
-                    $cloudMessaging = $factory->createMessaging();
-                    $remoteConfig = $factory->createRemoteConfig();
-                    $cloudStorage = $factory->createStorage();
-                    $firestore = $factory->createFirestore();
-
                     }
     
                 }

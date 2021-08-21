@@ -185,12 +185,12 @@ border:1px solid #ffffff;
                   ?>
                   </td>
                   <td><?php echo $totalstudent; ?></td>
-                  <td><button type="button" style="font-size:15px width:25%" class="btn btn-light btn-hover-secondary"><a href="index.php?page=exportclassattendance&id=<?php echo $idclass; ?>">more >></a></button></td>
+                  <td><button type="button" style="font-size:15px width:25%" class="btn btn-success btn-sm"><a class="text-white" href="index.php?page=exportclassattendance&id=<?php echo $idclass; ?>">more >></a></button></td>
                   <td>
-                  <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?php echo $idclass; ?>">
+                  <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?php echo $idclass; ?>">
                     <i class="fa fa-edit" style="font-size:15px"></i>
                   </button>
-                  <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#DeleteclassModal" data-bs-whatever="<?php echo $idclass; ?>">
+                  <button style="font-size:10px" type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteclassModal" data-bs-whatever="<?php echo $idclass; ?>">
                     <i class="fas fa-trash" style="font-size:15px"></i>
                   </button>
                 </td>
