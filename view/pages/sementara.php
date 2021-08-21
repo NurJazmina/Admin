@@ -666,7 +666,6 @@ else
     {
       $department_id = strval($document->_id);
       $DepartmentName = ($document->DepartmentName);
-      $_SESSION["departmentremarkid"] = strval($document->_id);
 
       $totalstaff = 0;
       $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$department_id];
@@ -749,25 +748,34 @@ else
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div class="box">
                       <form name="AddDepartmentRemarkFormSubmit" action="model/adddepartmentremark.php" method="POST">
+                      <div class="row">
+                      <div class="col">
                         <textarea class="department" name="txtdepartmentRemark" rows="3"></textarea>
-                        <div class="mt-3 text-right">
-                            <input type="hidden" value="<?php echo $department_id; ?>" name="txtdepartmentid">
-                            <button type="submit" class="btn btn-success" name="AddDepartmentRemarkFormSubmit">Add remark</button>
+                        <br>
+                        <div class="row">
+                          <div class="col text-right">
+                          <input type="hidden" value="<?php echo $department_id; ?>" name="txtdepartmentid">
+                          <button type="submit" class="btn btn-success" name="AddDepartmentRemarkFormSubmit">Add remark</button>
+                          </div>
                         </div>
-                      </form>
+                        </div>
+                      </div>
+                    </form>
                     </div>
                     <div class="box">
-                      <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                          <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Active</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
-                        </li>
-                      </ul>
+                    <strong></strong>
+                    <br>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Active</a>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+                      </li>
+                    </ul>
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
                         <table class="table table-striped table-sm ">
@@ -780,17 +788,17 @@ else
                         </thead>
                         </table>
                         <?php
-                        $filter = ['department_id'=>$department_id,'SubRemarks'=>'0','departmentRemarksStatus'=>'ACTIVE'];
-                        $option = ['sort' => ['_id' => -1],'limit'=>10];
-                        $query = new MongoDB\Driver\Query($filter, $option);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                        $filter2 = ['department_id'=>$department_id,'SubRemarks'=>'0','departmentRemarksStatus'=>'ACTIVE'];
+                        $option2 = ['sort' => ['_id' => -1],'limit'=>10];
+                        $query2 = new MongoDB\Driver\Query($filter2, $option2);
+                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
   
-                        foreach ($cursor as $document2)
+                        foreach ($cursor2 as $document2)
                         {
+                          $_SESSION["departmentparent"] = strval($document2->_id);
                           $remarkid1 = strval($document2->_id);
                           $remark1 = ($document2->departmentRemarksDetails);
                           $remarkdate1 = ($document2->departmentRemarksDate);
-
                           $utcdatetime1 = new MongoDB\BSON\UTCDateTime(strval($remarkdate1));
                           $datetime1 = $utcdatetime1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                           $remarkstaffid1 = ($document2->departmentRemarksStaff_id);
@@ -804,13 +812,13 @@ else
                               <td><?php print_r($datetime1->format('r')); ?></td>
                               <td>
                                 <?php
-                                $filter = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-                                foreach ($cursor as $document1)
+                                $filter1 = ['_id' => new \MongoDB\BSON\ObjectId($remarkstaffid1)];
+                                $query1 = new MongoDB\Driver\Query($filter1);
+                                $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query1);
+                                foreach ($cursor1 as $document1)
                                 {
-                                  $ConsumerFName = ($document1->ConsumerFName);
-                                  echo $ConsumerFName;
+                                $ConsumerFName = ($document1->ConsumerFName);
+                                echo $ConsumerFName;
                                 ?>
                               </td>
                               <td><?php echo $remark1;?></td>
@@ -820,11 +828,11 @@ else
                             </h6>
                             <div  id="flush-collapse<?php echo $remarkid1; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $remarkid1; ?>" data-bs-parent="#accordionFlushExample">
                             <?php 
-                            $filter = ['department_id'=>$department_id,'SubRemarks'=>$remarkid1,'departmentRemarksStatus'=>'ACTIVE'];
-                            $option = ['sort' => ['_id' => -1],'limit'=>10];
-                            $query = new MongoDB\Driver\Query($filter, $option);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
-                            foreach ($cursor as $document4)
+                            $filter4 = ['department_id'=>$department_id,'SubRemarks'=>$remarkid1,'departmentRemarksStatus'=>'ACTIVE'];
+                            $option4 = ['sort' => ['_id' => -1],'limit'=>10];
+                            $query4 = new MongoDB\Driver\Query($filter4, $option4);
+                            $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+                            foreach ($cursor4 as $document4)
                             {
                               $remarkid2 = strval($document4->_id);
                               $remark2 = ($document4->departmentRemarksDetails);
@@ -882,13 +890,14 @@ else
                         </thead>
                         </table>
                         <?php
-                        $filter = ['department_id'=>$department_id,'SubRemarks'=>'0','departmentRemarksStatus'=>'PENDING'];
-                        $option = ['sort' => ['_id' => -1],'limit'=>10];
-                        $query = new MongoDB\Driver\Query($filter, $option);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                        $filter2 = ['department_id'=>$department_id,'SubRemarks'=>'0','departmentRemarksStatus'=>'PENDING'];
+                        $option2 = ['sort' => ['_id' => -1],'limit'=>10];
+                        $query2 = new MongoDB\Driver\Query($filter2, $option2);
+                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
   
-                        foreach ($cursor as $document2)
+                        foreach ($cursor2 as $document2)
                         {
+                          $_SESSION["departmentparent"] = strval($document2->_id);
                           $remarkid1 = strval($document2->_id);
                           $remark1 = ($document2->departmentRemarksDetails);
                           $remarkdate1 = ($document2->departmentRemarksDate);
@@ -921,11 +930,11 @@ else
                             </h6>
                             <div  id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <?php 
-                            $filter = ['department_id'=>$department_id,'SubRemarks'=>$remarkid1,'departmentRemarksStatus'=>'PENDING'];
-                            $option = ['sort' => ['_id' => -1],'limit'=>10];
-                            $query = new MongoDB\Driver\Query($filter, $option);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
-                            foreach ($cursor as $document4)
+                            $filter4 = ['department_id'=>$department_id,'SubRemarks'=>$remarkid1,'departmentRemarksStatus'=>'PENDING'];
+                            $option4 = ['sort' => ['_id' => -1],'limit'=>10];
+                            $query4 = new MongoDB\Driver\Query($filter4, $option4);
+                            $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query4);
+                            foreach ($cursor4 as $document4)
                             {
                               $remarkid2 = strval($document4->_id);
                               $remark2 = ($document4->departmentRemarksDetails);
@@ -983,13 +992,14 @@ else
                         </thead>
                         </table>
                         <?php
-                        $filter = ['department_id'=>$department_id,'SubRemarks'=>'0','departmentRemarksStatus'=>'COMPLETED'];
-                        $option = ['sort' => ['_id' => -1],'limit'=>10];
-                        $query = new MongoDB\Driver\Query($filter, $option);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                        $filter2 = ['department_id'=>$department_id,'SubRemarks'=>'0','departmentRemarksStatus'=>'COMPLETED'];
+                        $option2 = ['sort' => ['_id' => -1],'limit'=>10];
+                        $query2 = new MongoDB\Driver\Query($filter2, $option2);
+                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query2);
   
-                        foreach ($cursor as $document2)
+                        foreach ($cursor2 as $document2)
                         {
+                          $_SESSION["departmentparent"] = strval($document2->_id);
                           $remarkid1 = strval($document2->_id);
                           $remark1 = ($document2->departmentRemarksDetails);
                           $remarkdate1 = ($document2->departmentRemarksDate);
