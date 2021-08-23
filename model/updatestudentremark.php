@@ -4,14 +4,15 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include '../connections/db.php';
 
-if (isset($_POST['UpdateStudentRemarkFormSubmit'])) {
+if (isset($_POST['UpdateStudentRemark'])) {
   session_start();
   $id = strval($_SESSION["studentremarkid"]);
-  $varremarkid = $_POST['txtremarkid'];
-  $varConsumerRemarksStatus= $_POST['txtConsumerRemarksStatus'];
+  $remark_id = $_POST['id'];
+  $status = $_POST['status'];
+  
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id'=> new \MongoDB\BSON\ObjectID($varremarkid)],
-                ['$set' => ['ConsumerRemarksStatus'=>$varConsumerRemarksStatus]],
+  $bulk->update(['_id'=> new \MongoDB\BSON\ObjectID($remark_id)],
+                ['$set' => ['Status'=>$status]],
                 ['upsert' => TRUE]
                );
    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
@@ -46,8 +47,8 @@ if (isset($_POST['UpdateStudentRemarkFormSubmit'])) {
      exit;
    }
    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-   $bulk->update(['SubRemarks'=>$varremarkid],
-                ['$set' => ['ConsumerRemarksStatus'=>$varConsumerRemarksStatus]],
+   $bulk->update(['SubRemarks'=>$remark_id],
+                ['$set' => ['Status'=>$status]],
                 ['multi' => TRUE,'upsert' => TRUE]
                );
    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);

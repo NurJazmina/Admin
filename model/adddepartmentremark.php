@@ -4,25 +4,25 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include '../connections/db.php';
-if (isset($_POST['AddDepartmentRemarkFormSubmit'])) {
+if (isset($_POST['AddDepartmentRemark'])) {
 
   session_start();
-  $vardepartmentid = $_POST['txtdepartmentid'];
-  $vardepartmentRemark = $_POST['txtdepartmentRemark'];
-  $vardepartmentremark = $_POST['txtdepartmentRemark'];
-  $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
+  $id = strval ($_SESSION["departmentremarkid"] );
+  $department_id = $_POST['id'];
+  $Remark = $_POST['remark'];
+  $staff_id = strval($_SESSION["loggeduser_id"]);
+  $school_id = strval($_SESSION["loggeduser_schoolID"]);
 
-  $vardepartmentremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'SubRemarks'=>'0',
-    'department_id'=>$vardepartmentid,
-    'departmentRemarksDetails'=>$vardepartmentremark,
-    'departmentRemarksStaff_id'=>$varstaffid,
-    'school_id'=>$varschoolid,
-    'departmentRemarksDate'=>$vardepartmentremarkdate,
-    'departmentRemarksStatus'=>'ACTIVE']);
+    'Department_id'=>$department_id,
+    'Details'=>$Remark,
+    'Staff_id'=>$staff_id,
+    'School_id'=>$school_id,
+    'Date'=>$date,
+    'Status'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -54,6 +54,6 @@ if (isset($_POST['AddDepartmentRemarkFormSubmit'])) {
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
- header ('location: ../index.php?page=departmentdetail&id=' . $vardepartmentid);
+ header ('location: ../index.php?page=departmentdetail&id=' . $id);
 }
 ?>
