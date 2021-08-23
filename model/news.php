@@ -307,6 +307,26 @@ if (isset($_POST['AddNews']))
                       </body>
                     </html>
                     ";
+
+                    // $mail->AltBody = "This is the plain text version of the email content";
+
+                    // try { $mail->send();} 
+
+                    // catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+
+                    // //firebase notification//
+                   
+                    // $factory = (new Factory)
+                    //     ->withServiceAccount('/path/to/firebase_credentials.json')
+                    //     ->withDatabaseUri('https://my-project-default-rtdb.firebaseio.com');
+
+                    // $auth = $factory->createAuth();
+                    // $realtimeDatabase = $factory->createDatabase();
+                    // $cloudMessaging = $factory->createMessaging();
+                    // $remoteConfig = $factory->createRemoteConfig();
+                    // $cloudStorage = $factory->createStorage();
+                    // $firestore = $factory->createFirestore();
+
                     $mail->AltBody = "This is the plain text version of the email content";
 
                     try { $mail->send();} 
