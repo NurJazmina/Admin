@@ -1,16 +1,15 @@
 <?php
 //Add school subject
-if (isset($_POST['AddSubjectFormSubmit']))
+if (isset($_POST['AddSubject']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $varsubject = $_POST['txtsubject'];
-  $varClasscategory = $_POST['txtClasscategory'];
+  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+  $subject_name = $_POST['subject_name'];
+  $class_category = $_POST['class_category'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['School_id'=>$varschoolID,
-                'SubjectName'=> $varsubject,
-                'Class_category'=>$varClasscategory,
-                'status'=>'all',
+  $bulk->insert(['School_id'=>$school_id,
+                'SubjectName'=> $subject_name,
+                'Class_category'=>$class_category
                 ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
@@ -44,19 +43,18 @@ if (isset($_POST['AddSubjectFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
 
 //Edit school subject
-if (isset($_POST['EditSubjectFormSubmit']))
+if (isset($_POST['EditSubject']))
 {
-  $varsubjectid = $_POST['txtsubjectid'];
-  $varsubjectname = $_POST['txtsubjectname'];
+  $subject_id = $_POST['subject_id'];
+  $subject_name = $_POST['subject_name'];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varsubjectid)],
-                ['$set' => ['SubjectName'=>$varsubjectname]]
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($subject_id)],
+                ['$set' => ['SubjectName'=>$subject_name]]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
@@ -95,11 +93,11 @@ if (isset($_POST['EditSubjectFormSubmit']))
 }
 
 //delete school subject
-if (isset($_POST['DeleteSubjectFormSubmit']))
+if (isset($_POST['DeleteSubject']))
 {
-  $varsubjectid = $_POST['txtsubjectid'];
+  $subject_id = $_POST['subject_id'];
   $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($varsubjectid)], ['limit' => 1]);
+  $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($subject_id)], ['limit' => 1]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -132,7 +130,5 @@ if (isset($_POST['DeleteSubjectFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Deleted  %d document(s)\n", $result->getModifiedCount());
 }
 ?>

@@ -16,7 +16,7 @@
 			<!--end::Info-->
 			<!--begin::Toolbar-->
 			<div class="d-flex align-items-center">
-            <div class="card-toolbar" style="text-align:right;">
+            <div class="card-toolbar text-right">
                     <!--begin::Dropdown-->
                     <div class="dropdown dropdown-inline mr-2">
                         <button type="button" class="btn btn-light-success font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
                         </span>
                         Sort By</button>
                         <!--begin::Dropdown Menu-->
-                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="width:250%;">
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                             <!--begin::Navigation-->
                             <ul class="navi flex-column navi-hover py-2">
                                 <li class="dropdown-item">Choose an option:</li>
@@ -47,12 +47,9 @@
                                   $ClassName = strval($document->ClassName);
                                   $ClassCategory = strval($document->ClassCategory);
                                   ?>
-                                  <li style="padding:5px;">
-                                      <a href="index.php?page=classdetail&id=<?php echo $classid; ?>" class="navi-link">
-                                          <span class="navi-icon">
-                                              <i class="la la-user"></i>
-                                          </span>
-                                          <span class="navi-text"><?php echo $ClassCategory." ".$ClassName; ?></span>
+                                  <li class="dropdown-item">
+                                      <a href="index.php?page=classdetail&id=<?= $classid; ?>" class="navi-link">
+                                        <?php echo $ClassCategory." ".$ClassName; ?>
                                       </a>
                                   </li>
                                   <?php 

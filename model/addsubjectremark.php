@@ -2,29 +2,28 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 include '../connections/db.php';
 
-if (isset($_POST['AddSubjectRemarkFormSubmit'])) {
-  
+if (isset($_POST['AddSubjectRemark'])) 
+{
   session_start();
-  $subjectid = $_POST['txtsubjectid'];
-  $subjectremark = $_POST['txtsubjectRemark'];
-  $staffid = strval($_SESSION["loggeduser_id"]);
-  $schoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $subjectremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $subject_id = $_POST['id'];
+  $remark = $_POST['remark'];
+  $staff_id = strval($_SESSION["loggeduser_id"]);
+  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'SubRemarks'=>'0',
-    'Subject_id'=>$subjectid,
-    'SubjectRemarksDetails'=>$subjectremark,
-    'SubjectRemarksStaff_id'=>$staffid,
-    'school_id'=>$schoolid,
-    'SubjectRemarksDate'=>$subjectremarkdate,
-    'SubjectRemarksStatus'=>'ACTIVE']);
+    'Subject_id'=>$subject_id,
+    'Details'=>$remark,
+    'Staff_id'=>$staff_id,
+    'School_id'=>$school_id,
+    'Date'=>$date,
+    'Status'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-
   try 
   {
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SubjectRemarks', $bulk, $writeConcern);
@@ -55,8 +54,7 @@ if (isset($_POST['AddSubjectRemarkFormSubmit'])) {
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-printf("Inserted %d document(s)\n", $result->getInsertedCount());
-printf("Updated  %d document(s)\n", $result->getModifiedCount());
-header ('location: ../index.php?page=subjectdetail&id=' . $subjectid);
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
+  header ('location: ../index.php?page=subjectdetail&id=' . $subject_id);
 }
 ?>

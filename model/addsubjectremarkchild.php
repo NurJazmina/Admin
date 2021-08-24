@@ -2,35 +2,35 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 include '../connections/db.php';
 
-if (isset($_POST['AddSubjectRemarkChildFormSubmit'])) {
+if (isset($_POST['AddSubjectRemarkChild'])) 
+{
   session_start();
-  $remarkid = $_POST['txtremarkid'];
-  $subjectid = $_POST['txtsubjectid'];
-  $subjectremark = $_POST['txtsubjectRemark'];
-  $staffid = strval($_SESSION["loggeduser_id"]);
-  $schoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $subjectremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $subject_id = $_POST['subject_id'];
+  $remark_id = $_POST['remark_id'];
+  $remark = $_POST['remark'];
+  $staffid = $_SESSION["loggeduser_id"];
+  $school_id = $_SESSION["loggeduser_schoolID"];
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($remarkid)];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($remark_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SubjectRemarks',$query);
   foreach ($cursor as $document)
   {
-    $SubjectRemarksStatus = ($document->SubjectRemarksStatus);
+    $status = ($document->Status);
   }
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
-    'SubRemarks'=>$remarkid,
-    'Subject_id'=>$subjectid,
-    'SubjectRemarksDetails'=>$subjectremark,
-    'SubjectRemarksStaff_id'=>$staffid,
-    'school_id'=>$schoolid,
-    'SubjectRemarksDate'=>$subjectremarkdate,
-    'SubjectRemarksStatus'=>$SubjectRemarksStatus ]);
+    'SubRemarks'=>$remark_id,
+    'Subject_id'=>$subject_id,
+    'Details'=>$remark,
+    'Staff_id'=>$staffid,
+    'School_id'=>$school_id,
+    'Date'=>$date,
+    'Status'=>$status ]);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
@@ -66,6 +66,6 @@ if (isset($_POST['AddSubjectRemarkChildFormSubmit'])) {
 
 printf("Inserted %d document(s)\n", $result->getInsertedCount());
 printf("Updated  %d document(s)\n", $result->getModifiedCount());
-header ('location: ../index.php?page=subjectdetail&id=' . $subjectid);
+header ('location: ../index.php?page=subjectdetail&id=' . $subject_id);
 }
 ?>

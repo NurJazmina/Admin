@@ -5,21 +5,6 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var AddDepartmentModal = document.getElementById('AddDepartmentModal')
-      AddDepartmentModal.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = AddDepartmentModal.querySelector('.modal-title')
-      var modalBodyInput = AddDepartmentModal.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      }) 
-
       var EditDepartmentModal = document.getElementById('EditDepartmentModal')
       EditDepartmentModal.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
@@ -71,21 +56,6 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-        var AddSubjectModal = document.getElementById('AddSubjectModal')
-        AddSubjectModal.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var recipient = button.getAttribute('data-bs-whatever')
-        // If necessary, you could initiate an AJAX request here
-        // and then do the updating in a callback.
-        //
-        // Update the modal's content.
-        var modalTitle = AddSubjectModal.querySelector('.modal-title')
-        var modalBodyInput = AddSubjectModal.querySelector('.modal-body input')
-        modalBodyInput.value = recipient
-        })
-
         var EditSubjectModal = document.getElementById('EditSubjectModal')
         EditSubjectModal.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal

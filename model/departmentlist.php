@@ -1,12 +1,14 @@
 <?php
-//Add school department
-if (isset($_POST['AddDepartmentFormSubmit']))
+if (isset($_POST['AddDepartment']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $vardepartment = $_POST['txtdepartment'];
+  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+  $department_name = $_POST['department_name'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['School_id'=>$varschoolID,'DepartmentName'=> $vardepartment]);
+  $bulk->insert([
+                'School_id'=>$school_id,
+                'DepartmentName'=> $department_name
+                ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -39,19 +41,17 @@ if (isset($_POST['AddDepartmentFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
-//Edit school department
-if (isset($_POST['EditDepartmentFormSubmit']))
+if (isset($_POST['EditDepartment']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $vardepartmentid = $_POST['txtdepartmentid'];
-  $vardepartmentname = $_POST['txtdepartmentname'];
+  $department_id = $_POST['department_id'];
+  $department_name = $_POST['department_name'];
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($vardepartmentid)],
-                ['$set' => ['DepartmentName'=>$vardepartmentname]]
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($department_id)],
+                ['$set' => ['DepartmentName'=>$department_name]]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
@@ -89,12 +89,15 @@ if (isset($_POST['EditDepartmentFormSubmit']))
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
-//Delete school department
-if (isset($_POST['DeleteDepartmentFormSubmit']))
+
+if (isset($_POST['DeleteDepartment']))
 {
-  $vardepartmentid = $_POST['txtdepartmentid'];
+  $department_id = $_POST['department_id'];
   $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($vardepartmentid)], ['limit' => 1]);
+  $bulk->delete([
+                  '_id'=>new \MongoDB\BSON\ObjectID($department_id)], 
+                  ['limit' => 1]
+                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -127,6 +130,4 @@ if (isset($_POST['DeleteDepartmentFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Deleted  %d document(s)\n", $result->getModifiedCount());
 }
