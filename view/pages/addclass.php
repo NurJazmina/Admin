@@ -2,20 +2,18 @@
 $_SESSION["title"] = "Classroom";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-
-<form  id="AddclassFormSubmit" name="AddclassFormSubmit" action="index.php?page=modal-recheckclassroomlist" method="post">
-  <div  id="recheckaddclass" tabindex="-1" aria-labelledby="AddclassModalLabel" aria-hidden="true">
+<form id="Addclass" name="Addclass" action="index.php?page=modal-recheckclassroomlist" method="post">
+  <div id="recheckaddclass" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="AddclassModalLabel">Add Class</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title">Add Class</h5>
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Teacher ID</label>
+            <label class="col-sm-2 col-form-label">Teacher ID</label>
             <div class="col-sm-10">
-              <select class="form-control" id="txtteachername" name="txtconsumerid">
+              <select class="form-control" name="consumer_id">
                 <?php
                 $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
                 $query = new MongoDB\Driver\Query($filter);
@@ -31,7 +29,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                   {
                     $ConsumerFName = strval($document1->ConsumerFName);
                     ?>
-                    <option value="<?=($document1->_id)?>"><?=($document1->ConsumerFName)?></option>
+                    <option value="<?=($document1->_id)?>"><?= $ConsumerFName; ?></option>
                     <?php
                   }
                 }
@@ -40,9 +38,9 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
           </div>
           <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
+            <label class="col-sm-2 col-form-label">Class Category</label>
             <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory" >
+              <select class="form-control" name="class_category" >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -52,9 +50,9 @@ include 'view/partials/_subheader/subheader-v1.php';
               </select>
             </div>
           </div>
-          </div>
+        </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success" name="AddclassFormSubmit">Re-Checking</button>
+          <button type="submit" class="btn btn-success btn-sm" name="Addclass">Re-Checking</button>
         </div>
       </div>
     </div>

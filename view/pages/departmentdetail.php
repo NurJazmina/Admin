@@ -88,7 +88,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
     $DepartmentName = ($document->DepartmentName);
   }
 ?>
-<div class="text-center m-5">
+<div class="text-dark-50 text-center m-5">
   <h1>Department Info</h1>
 </div>
 <div class="row">
@@ -663,7 +663,9 @@ else
     $DepartmentName = ($document->DepartmentName);
   }
 ?>
-<h1 class="text-center m-5">Department Info</h1><br>
+<div class="text-dark-50 text-center m-5">
+  <h1>Department Info</h1>
+</div>
 <div class="row">
   <div class="col-1"></div>
   <div class="col-10">

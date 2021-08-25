@@ -79,7 +79,7 @@ foreach ($cursor as $document)
   $subject_name = $document->SubjectName;
 }
 ?>
-<div class="text-center m-5"><h1>Subject Info</h1></div>
+<div class="text-dark-50 text-center m-5"><h1>Subject Info</h1></div>
 <div class="row">
   <div class="col-1"></div>
   <div class="col-10">
@@ -584,7 +584,7 @@ else
     $subject_name = $document->SubjectName;
   }
   ?>
-  <div class="text-center m-5"><h1>Subject Info</h1></div>
+  <div class="text-dark-50 text-center m-5"><h1>Subject Info</h1></div>
   <div class="row">
     <div class="col-1"></div>
     <div class="col-10">

@@ -1,13 +1,17 @@
 <?php
 if (isset($_POST['submitaddclass']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $varClasscategory = $_POST['txtClasscategory'];
-  $varClassName = $_POST['txtclassname'];
-  $varConsumerIDNo = $_POST['txtConsumerIDNo'];
-  $varconsumerid = $_POST['txtconsumerid'];
+  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+  $class_category = $_POST['class_category'];
+  $class_name = $_POST['class_name'];
+  $consumer_id = $_POST['consumer_id'];
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['SchoolID'=>$varschoolID,'ClassCategory'=> $varClasscategory,'ClassName'=>$varClassName]);
+  $bulk->insert([
+                'SchoolID'=>$school_id,
+                'ClassCategory'=> $class_category,
+                'ClassName'=>$class_name
+              ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -41,22 +45,19 @@ if (isset($_POST['submitaddclass']))
     exit;
   }
   //call back class id
-  $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varClasscategory ,'ClassName'=> $varClassName];
+  $filter = ['SchoolID' => $school_id, 'ClassCategory'=>$class_category,'ClassName'=> $class_name];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzSmartSchoolFrontEnd->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
   foreach ($cursor as $document)
   {
-    $idclass = strval($document->_id);
+    $class_id = strval($document->_id);
   }
-
   //insert class id into our staff database
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['ConsumerID'=> $varconsumerid],
-                ['$set' => ['ClassID'=> $idclass]],
+  $bulk->update(['ConsumerID'=> $consumer_id],
+                ['$set' => ['ClassID'=> $class_id]],
                 ['upsert' => TRUE]
                );
-
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -90,19 +91,16 @@ if (isset($_POST['submitaddclass']))
   }
 }
 
-
-//Edit Class
 if (isset($_POST['submiteditclass']))
 {
-  $varclassid = $_POST['txtclassid'];
-  $varclassname = $_POST['txtclassname'];
-  $varclasscategory = $_POST['txtclasscategory'];
-  $schoolid = strval($_SESSION["loggeduser_schoolID"]);
+  $class_id = $_POST['class_id'];
+  $class_name = $_POST['class_name'];
+  $class_category = $_POST['class_category'];
+  $school_id = $_SESSION["loggeduser_schoolID"];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->delete(['Class_id'=> $varclassid]);
+  $bulk->delete(['Class_id'=> $class_id]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-
   try
   {
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
@@ -134,18 +132,18 @@ if (isset($_POST['submiteditclass']))
     exit;
   }
 
-  $number = $_POST['txtnumber'];
+  $number = $_POST['number'];
   for ($x = 1; $x <= $number; $x++)
   { 
-    $varteacher[$x] = $_POST['teacher'.$x];
-    $varsubject[$x] = $_POST['subject'.$x];
+    $teacher[$x] = $_POST['teacher'.$x];
+    $subject[$x] = $_POST['subject'.$x];
 
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->insert([
-      'Class_id'=>$varclassid,
-      'School_id'=>$schoolid,
-      'Subject_id'=>$varsubject[$x],
-      'Teacher_id'=>$varteacher[$x] 
+      'Class_id'=>$class_id,
+      'School_id'=>$school_id,
+      'Subject_id'=>$subject[$x],
+      'Teacher_id'=>$teacher[$x] 
       ]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
@@ -182,71 +180,54 @@ if (isset($_POST['submiteditclass']))
   }
 }
 
-
-//Delete Class
-if (isset($_POST['DeleteclassFormSubmit']))
+if (isset($_POST['Deleteclass']))
 {
-  $varclassid = $_POST['txtclassid'];
+  $class_id = $_POST['class_id'];
+
   $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($varclassid)], ['limit' => 1]);
+  $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($class_id)], ['limit' => 1]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Classrooms', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
+  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Classrooms', $bulk, $writeConcern);
+
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $bulk->delete(['Class_id'=> $class_id]);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $bulk->update(['ClassID'=> $class_id],
+                ['$set' => ['ClassID'=> '']],
+                ['upsert' => TRUE]
+                );
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+
 }
 
-  if (isset($_GET['paging']) && !empty($_GET['paging']))
-  {
-    $datapaging = ($_GET['paging']*50);
-    $pagingprevious = $_GET['paging']-1;
-    $pagingnext = $_GET['paging']+1;
-  }
+if (isset($_GET['paging']) && !empty($_GET['paging']))
+{
+  $datapaging = ($_GET['paging']*50);
+  $pagingprevious = $_GET['paging']-1;
+  $pagingnext = $_GET['paging']+1;
+}
 else
-  {
-    $datapaging = 0;
-    $pagingnext = 1;
-    $pagingprevious = 0;
-  }
+{
+  $datapaging = 0;
+  $pagingnext = 1;
+  $pagingprevious = 0;
+}
 
-  if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
+if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
+{
+  if (!isset($_GET['level']) && empty($_GET['level']))
   {
-    if (!isset($_GET['level']) && empty($_GET['level']))
-    {
     $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"]];
     $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-    }
-    else
-    {
+  }
+  else
+  {
     $sort = ($_GET['level']);
     $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],
               'ClassCategory'=>$sort
@@ -254,13 +235,13 @@ else
     $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-    }
   }
-  else
-  {
-    $classname = ($_POST['classname']);
-    $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],'ClassName'=>$classname];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-  }
+}
+else
+{
+  $classname = ($_POST['classname']);
+  $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],'ClassName'=>$classname];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+}
 ?>

@@ -84,7 +84,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
       $DepartmentName = ($document->DepartmentName);
     }
     ?>
-    <div class="text-center m-5"><h1>Department - Attendance</h1></div>
+    <div class="text-dark-50 text-center m-5"><h1>Department - Attendance</h1></div>
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
@@ -213,7 +213,7 @@ if (!isset($_GET['id']) && empty($_GET['id']))
 else
 {
     ?>
-    <div class="text-center m-5"><h1>Department - Attendance</h1></div>
+    <div class="text-dark-50 text-center m-5"><h1>Department - Attendance</h1></div>
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">

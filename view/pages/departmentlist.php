@@ -3,7 +3,7 @@ $_SESSION["title"] = "Department";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/departmentlist.php'); 
 ?>
-<div class="text-center m-5">
+<div class="text-dark-50 text-center m-5">
   <h1>Departments</h1>
 </div>
 <div class="row">

@@ -23,10 +23,8 @@ border:1px solid #ffffff;
         <!--end::Separator-->
         <!--begin::Detail-->
         <div class="d-flex align-items-center" id="kt_subheader_search">
-        <?php 
-        $student = $_SESSION["totalstudent"];
-        ?>
-        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $student; ?> Total Student</span>
+        <?php $student = $_SESSION["totalstudent"];?>
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $student; ?> Total Student</span>
         </div>
         <!--end::Detail-->
 				<!--end::Page Heading-->
