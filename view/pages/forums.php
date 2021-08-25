@@ -38,7 +38,7 @@ include 'model/forums.php';
                 <!-- begin :: school -->
                 <div class="card-body">
                     <!-- begin :: general -->
-                    <a class="h5 text-dark-50" href="index.php?page=schoolforum&forum=1&topic=general">GENERAL</a>
+                    <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=1&topic=general">GENERAL</a>
                     <div class="card m-4 p-4">
                         <?php
                         $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'1'];
@@ -89,7 +89,7 @@ include 'model/forums.php';
                     </div>
                     <!-- end :: general-->
                     <!-- begin :: proposal -->
-                    <a class="h5 text-dark-50" href="index.php?page=schoolforum&forum=2&topic=proposal">PROPOSAL</a>
+                    <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=2&topic=proposal">PROPOSAL</a>
                     <div class="card m-4 p-4">
                         <?php
                         $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'2'];
@@ -144,7 +144,7 @@ include 'model/forums.php';
                     </div>
                     <!-- end :: proposal -->
                     <!-- begin :: short news -->
-                    <a class="h5 text-dark-50" href="index.php?page=schoolforum&forum=3&topic=short news / info">SHORT NEWS / INFO</a>
+                    <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=3&topic=short news / info">SHORT NEWS / INFO</a>
                     <div class="card m-4 p-4">
                         <?php
                         $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'3'];
@@ -207,7 +207,7 @@ include 'model/forums.php';
             </div>
             <div class="card-body">
                 <!-- begin :: general -->
-                <a class="h5 text-dark-50" href="index.php?page=publicforum&forum=4&topic=general">GENERAL</a>
+                <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=4&topic=general">GENERAL</a>
                 <div class="card m-4 p-4">
                     <?php
                     $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'4'];
@@ -263,7 +263,7 @@ include 'model/forums.php';
                 </div>
                 <!-- end :: general -->
                 <!-- begin :: proposal -->
-                <a class="h5 text-dark-50" href="index.php?page=publicforum&forum=5&topic=proposal">PROPOSAL</a>
+                <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=5&topic=proposal">PROPOSAL</a>
                 <div class="card m-4 p-4">
                     <?php
                     $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'5'];
@@ -319,7 +319,7 @@ include 'model/forums.php';
                 </div>
                 <!-- end :: proposal -->
                 <!-- begin :: short news -->
-                <a class="h5 text-dark-50" href="index.php?page=publicforum&forum=6&topic=short news / info">SHORT NEWS / INFO</a>
+                <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=6&topic=short news / info">SHORT NEWS / INFO</a>
                 <div class="card m-4 p-4">
                     <?php
                     $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'6'];
