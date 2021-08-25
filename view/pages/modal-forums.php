@@ -2,51 +2,48 @@
 $_SESSION["title"] = "Forum";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-
-<form action="index.php?page=forums" method="post" name="AddForums"><br><br>
-    <div class="table-responsive" style="width:100%; margin:0 auto; padding: 40px">
-        <div class="card card-custom gutter-b">
-            <div class="card-body">
-                <div class="form-group row">
-                    <label class="col-lg-2 col-form-label text-lg-left"><h5>TITLE</h5></label>
-                        <div class="col-lg-12">
-                            <input name="title" type="text" class="form-control" id="staticStaffNo" name="txttitle" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>   
-                        </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-form-label text-lg-left"><h5>ACCESS TYPE</h5></label>
-                            <div class="col-lg-12">
-                                <select class="form-control" id="staticStaffNo" style="height: auto;" name="access" required>
-                                <option value="SCHOOL">SCHOOL</option>
-                                <option value="PUBLIC">PUBLIC</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-form-label text-lg-left"><h5>CHANNEL TOPIC</h5></label>
-                            <div class="col-lg-12">
-                            <select class="form-control" id="staticStaffNo" style="height: auto;" name="topic" required>
-                                <option value="GENERAL">GENERAL</option>
-                                <option value="PROPOSAL">PROPOSAL</option>
-                                <option value="INFO">SHORT NEWS/INFO</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label><h5> FORUM </h5></label>
-                            <textarea class="forum" name="detail"></textarea>
-                        </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-lg-2"></div>
-                            <div class="text-right">
-                                <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-success" name="AddForums">Confirm</button>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
+<form action="index.php?page=forums" method="post" name="AddForums">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Forum</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input name="title" type="text" class="form-control" name="title" size="200" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
             </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Access Type</label>
+            <div class="col-sm-10">
+                <select class="form-control" name="access" required>
+                    <option value="SCHOOL">SCHOOL</option>
+                    <option value="PUBLIC">PUBLIC</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Channel Topic</label>
+            <div class="col-sm-10">
+                <select class="form-control" name="topic" required>
+                    <option value="GENERAL">GENERAL</option>
+                    <option value="PROPOSAL">PROPOSAL</option>
+                    <option value="INFO">SHORT NEWS/INFO</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Detail</label>
+            <div class="col-sm-10">
+                <textarea class="forum" name="detail"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success btn-sm" name="AddForums">Confirm</button>
         </div>
     </div>
 </form>
@@ -57,6 +54,6 @@ tinymce.init({
   menubar:false,
   statusbar: false,
   toolbar: false,
-  height:250,
+  height:200,
 });
 </script>

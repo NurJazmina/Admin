@@ -34,8 +34,7 @@
                                 "departmentdetail",
                                 "subjectdetail",
                                 "classdetail",
-                                "schoolforumdetail",
-                                "publicforumdetail",
+                                "forumdetail",
 
                                 "addstaff",
                                 "addstudent",
@@ -96,8 +95,7 @@
                                 //"departmentdetail",
                                 "subjectdetail",
                                 "classdetail",
-                                "schoolforumdetail",
-                                "publicforumdetail",
+                                "forumdetail",
 
                                 //"addstaff",
                                 //"addstudent",
