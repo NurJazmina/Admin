@@ -3,178 +3,195 @@ $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/event.php'); 
 ?>
-<div><h1 style="color:#696969; text-align:center">Upcoming Event</h1></div><br>
+<div class="text-dark-50 text-center m-5">
+  <h1>Upcoming Event</h1>
+</div>
 <div class="row">
-  <div class="col-md-0 section-1-box wow fadeInUp"></div>
-  <div class="col-md-12 section-1-box wow fadeInUp">
-    <!--begin::staff-->
-    <?php
-    $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventAccess'=>$_SESSION["loggeduser_ACCESS"]];
-    $option = ['limit'=>100,'sort' => ['EventDateStart' => 1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
-    foreach ($cursor as $document0)
-    {
-      $eventid = strval($document0->_id);
-      $EventStaff_id = ($document0->EventStaff_id);
-      $EventTitle = ($document0->EventTitle);
-      $EventVenue = ($document0->EventVenue);
-      $EventAddress = ($document0->EventAddress);
-      $EventLocation = ($document0->EventLocation);
-      $EventDateStart = ($document0->EventDateStart);
-      $EventDateEnd = ($document0->EventDateEnd);
-      $EventStatus = ($document0->EventStatus);
-
-      $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($EventDateStart));
-      $datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-      $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($EventDateEnd));
-      $datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-      
-      $filter = ['_id' => new \MongoDB\BSON\ObjectId($EventStaff_id)];
-      $query = new MongoDB\Driver\Query($filter);
-      $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-      foreach ($cursor as $document1)
-      {
-        $consumerid = strval($document1->_id);
-        $ConsumerFName = ($document1->ConsumerFName);
-        $ConsumerLName = ($document1->ConsumerLName);
-
-        $filter = ['ConsumerID'=>$consumerid];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-        foreach ($cursor as $document2)
-        {
-          $Staffdepartment = ($document2->Staffdepartment);
-
-          $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-          $filter = ['_id'=>$departmentid];
-          $query = new MongoDB\Driver\Query($filter);
-          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-          foreach ($cursor as $document3)
-          {
-              $DepartmentName = ($document3->DepartmentName);
-          }
-        }
-      }
-      ?>
-      <div class="card">
-      <div class="card-header">
-        <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid; ?>" ><?php echo $EventTitle; ?></a></strong>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive-sm">
-          <table class="table">
-              <div class="event-meta-wrap">
-                <div class="row event-duration">
-                  <div class="col-md-4 event-date"><h6 class="event-meta-tile">Date</h6><?php echo date_format($datetimeStart,"d M Y")." "; ?>to<?php echo " ".date_format($datetimeEnd,"d M Y"); ?></div>
-                    <div class="col-md-3 event-time"><h6 class="event-meta-tile">Time</h6><?php echo date_format($datetimeStart,"H:i"); ?></div>
-                    <div class="col-md-5 event-venue-wrap">
-                      <h6 class="event-meta-tile">Venue</h6>
-                      <span><?php echo $EventVenue; ?></span>
-                      <div class="event-address">
-                        <span><i class="fas fa-map-marker-alt"></i><?php echo $EventAddress; ?></span>
-                      </div>
-                      <br>
-                      <div class="table-responsive-sm">
-                        <?php echo $EventLocation; ?>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </table>
-        </div>
-      </div>
-      <div class="card-footer">
-        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-      </div>
-  </div><br>
-  <!--end::staff-->
-
-  <!--begin::public-->
+  <!-- begin::staff -->
   <?php
-  }
-  $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventAccess'=>'PUBLIC'];
-  $option = ['limit'=>100,'sort' => ['EventDateStart' => 1]];
+  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
+  $option = ['limit'=>100,'sort' => ['Date_start' => 1]];
   $query = new MongoDB\Driver\Query($filter,$option);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
-  foreach ($cursor as $document0)
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+  foreach ($cursor as $document)
   {
-    $eventid = strval($document0->_id);
-    $EventStaff_id = ($document0->EventStaff_id);
-    $EventTitle = ($document0->EventTitle);
-    $EventVenue = ($document0->EventVenue);
-    $EventLocation = ($document0->EventLocation);
-    $EventDateStart = ($document0->EventDateStart);
-    $EventDateEnd = ($document0->EventDateEnd);
-    $EventStatus = ($document0->EventStatus);
+    $event_id = strval($document->_id);
+    $Staff_id = $document->Staff_id;
+    $Title = $document->Title;
+    $Venue = $document->Venue;
+    $Address = $document->Address;
+    $Location = $document->Location;
+    $Date_start = $document->Date_start;
+    $Date_end = $document->Date_end;
+    $Status = $document->Status;
 
-    $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($EventDateStart));
-    $datetimeStart = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-    $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($EventDateEnd));
-    $datetimeEnd = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date_start = new MongoDB\BSON\UTCDateTime(strval($Date_start));
+    $Date_start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-    $filter = ['_id' => new \MongoDB\BSON\ObjectId($EventStaff_id)];
+    $Date_end = new MongoDB\BSON\UTCDateTime(strval($Date_end));
+    $Date_end = $Date_end->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+    $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
     foreach ($cursor as $document1)
     {
-        $consumerid = strval($document1->_id);
-        $ConsumerFName = ($document1->ConsumerFName);
-        $ConsumerLName = ($document1->ConsumerLName);
+      $staff_id = strval($document1->_id);
+      $ConsumerFName = $document1->ConsumerFName;
+      $ConsumerLName = $document1->ConsumerLName;
 
-        $filter = ['ConsumerID'=>$consumerid];
+      $filter = ['ConsumerID'=>$staff_id];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+      foreach ($cursor as $document2)
+      {
+        $Staffdepartment = ($document2->Staffdepartment);
+        $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+        $filter = ['_id'=>$departmentid];
         $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-        foreach ($cursor as $document2)
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+        foreach ($cursor as $document3)
         {
-            $Staffdepartment = ($document2->Staffdepartment);
-            $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-
-            $filter = ['_id'=>$departmentid];
-            $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-            foreach ($cursor as $document3)
-            {
-                $DepartmentName = ($document3->DepartmentName);
-            }
+            $DepartmentName = ($document3->DepartmentName);
         }
+      }
     }
     ?>
-    <div class="card">
-      <div class="card-header">
-      <strong><a href="index.php?page=eventdetail&id=<?php echo $eventid ; ?>"><?php echo $EventTitle; ?></a></strong><br><br>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive-sm">
-          <table class="table">
-            <div class="event-meta-wrap">
-              <div class="row event-duration">
-                <div class="col-md-4 event-date"><h6 class="event-meta-tile">Date</h6><?php echo date_format($datetimeStart,"d M Y")." "; ?>to<?php echo " ".date_format($datetimeEnd,"d M Y"); ?></div>
-                  <div class="col-md-3 event-time"><h6 class="event-meta-tile">Time</h6><?php echo date_format($datetimeStart,"H:i"); ?></div>
-                    <div class="col-md-5 event-venue-wrap">
-                      <h6 class="event-meta-tile">Venue</h6>
-                      <span><?php echo $EventVenue; ?></span>
-                      <div class="event-address">
-                      <span><i class="fas fa-map-marker-alt"></i><?php echo $EventAddress; ?></span>
-                      </div>
-                      <br>
-                      <div class="table-responsive-sm"><?php echo $EventLocation; ?></div>
-                    </div>
+    <div class="col-lg-4">
+      <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post">
+        <div class="card">
+          <button type="submit" class="btn btn-hover-light text-left">
+            <!-- begin :: display -->
+            <div class="p-5">
+              <div class="modal-title">
+                <label><?= $Title; ?></label>
+              </div>
+            </div>
+            <div class="separator separator-solid separator-border-1"></div>
+            <div class="p-5">
+              <div class="row">
+                <div class="col-sm-4">
+                  <a class="text-primary mb-1">Date</a>
+                  <p><?= date_format($Date_start,"d M Y")." "; ?>to<?= " ".date_format($Date_end,"d M Y"); ?></p>
+                </div>
+                <div class="col-sm-4">
+                  <a class="text-primary mb-1">Time</a>
+                  <p><?= date_format($Date_start,"H:i"); ?></p>
+                </div>
+                <div class="col-sm-4">
+                  <a class="text-primary mb-1">Venue</a>
+                  <p><?= $Venue; ?></p>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                 </div>
               </div>
             </div>
-          </table>
+            <div class="separator separator-solid separator-border-1"></div>
+            <div class="p-3 mx-2">
+              <div class="text-muted">
+                <small><?= " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+              </div>
+            </div>
+            <!-- end :: display -->
+          </button>
         </div>
-      </div>
-      <div class="card-footer">
-        <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-      </div>
-    </div><br>
+      </form>
+    </div>
     <?php
   }
   ?>
-  </div>
-  <!--begin::public-->
-  <div class="col-md-1 section-1-box wow fadeInUp"></div>
+  <!-- end::staff -->
+  <!-- begin::public -->
+  <?php
+  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>'PUBLIC'];
+  $option = ['limit'=>100,'sort' => ['Date_start' => 1]];
+  $query = new MongoDB\Driver\Query($filter,$option);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+  foreach ($cursor as $document)
+  {
+    $event_id = strval($document->_id);
+    $Staff_id = $document->Staff_id;
+    $Title = $document->Title;
+    $Venue = $document->Venue;
+    $Address = $document->Address;
+    $Location = $document->Location;
+    $Date_start = $document->Date_start;
+    $Date_end = $document->Date_end;
+    $Status = $document->Status;
+
+    $utcdatetimeStart = new MongoDB\BSON\UTCDateTime(strval($Date_start));
+    $Date_start = $utcdatetimeStart->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $utcdatetimeEnd = new MongoDB\BSON\UTCDateTime(strval($Date_end));
+    $Date_end = $utcdatetimeEnd->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+    $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+    foreach ($cursor as $document1)
+    {
+      $staff_id = strval($document1->_id);
+      $ConsumerFName = $document1->ConsumerFName;
+      $ConsumerLName = $document1->ConsumerLName;
+
+      $filter = ['ConsumerID'=>$staff_id];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+      foreach ($cursor as $document2)
+      {
+        $Staffdepartment = ($document2->Staffdepartment);
+        $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+        $filter = ['_id'=>$departmentid];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+        foreach ($cursor as $document3)
+        {
+            $DepartmentName = ($document3->DepartmentName);
+        }
+      }
+    }
+    ?>
+    <div class="col-lg-4">
+      <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post"> 
+        <div class="card">
+          <button type="submit" class="btn btn-hover-light text-left">
+            <!-- begin :: display -->
+            <div class="p-5">
+              <div class="modal-title">
+                <label><?= $Title; ?></label>
+              </div>
+            </div>
+            <div class="separator separator-solid separator-border-1"></div>
+            <div class="p-5">
+              <div class="row">
+                <div class="col-sm-4">
+                  <a class="text-primary mb-1">Date</a>
+                  <p><?= date_format($Date_start,"d M Y")." "; ?>to<?= " ".date_format($Date_end,"d M Y"); ?></p>
+                </div>
+                <div class="col-sm-4">
+                  <a class="text-primary mb-1">Time</a>
+                  <p><?= date_format($Date_start,"H:i"); ?></p>
+                </div>
+                <div class="col-sm-4">
+                  <a class="text-primary mb-1">Venue</a>
+                  <p><?= $Venue; ?></p>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
+                </div>
+              </div>
+            </div>
+            <div class="separator separator-solid separator-border-1"></div>
+            <div class="p-3 mx-2">
+              <div class="text-muted">
+                <small><?= " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
+              </div>
+            </div>
+            <!-- end :: display -->
+          </button>
+        </div>
+      </form>
+    </div>
+    <?php
+  }
+  ?>
+  <!-- end::public -->
 </div>

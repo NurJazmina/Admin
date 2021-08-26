@@ -11,68 +11,63 @@ if (isset($_POST['Staffmail']))
 {
     $subject = $_POST['compose_subject'];
     $message = $_POST['message'];
-    $FromName = strval($_SESSION["loggeduser_consumerFName"]);
-    $SchoolName = strval($_SESSION["loggeduser_schoolName"]);
-    $SchoolEmail = strval($_SESSION["loggeduser_SchoolsEmail"]);
+    $FromName = $_SESSION["loggeduser_consumerFName"];
+    $SchoolName = $_SESSION["loggeduser_schoolName"];
+    $SchoolEmail = $_SESSION["loggeduser_SchoolsEmail"];
     $Bcc = $_POST['compose_Bcc'];
 
     $Emails = array();
-
     if ($Bcc == 'staff')
     {
-        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-        foreach ($cursor as $document)
-        {
-          $staffid = strval($document->ConsumerID);
-          $StaffLevel = strval($document->StaffLevel);
-  
-          if ($StaffLevel == 1)
-          {
-            $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($staffid)];
-            $query1 = new MongoDB\Driver\Query($filter1);
-            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+      $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+      foreach ($cursor as $document)
+      {
+        $ConsumerID = $document->ConsumerID;
+        $StaffLevel = strval($document->StaffLevel);
 
-            foreach ($cursor1 as $document1)
+        if ($StaffLevel == 1)
+        {
+          $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+          foreach ($cursor as $document1)
+          {
+            $Email = $document1->ConsumerEmail;
+            if($Email !== "")
             {
-              $Email = strval($document1->ConsumerEmail);
-              if($Email !== "")
-              {
-                $Email = strval($document1->ConsumerEmail);
-                array_push($Emails, $Email);
-              }
+              array_push($Emails, $Email);
             }
           }
         }
+      }
     }
     elseif ($Bcc == 'teacher')
     {
-        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-        foreach ($cursor as $document)
-        {
-          $staffid = strval($document->ConsumerID);
-          $StaffLevel = strval($document->StaffLevel);
-  
-          if ($StaffLevel == 0)
-          {
-            $filter = ['_id'=>new \MongoDB\BSON\ObjectID($staffid)];
-            $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+      $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+      foreach ($cursor as $document)
+      {
+        $ConsumerID = $document->ConsumerID;
+        $StaffLevel = strval($document->StaffLevel);
 
-            foreach ($cursor as $document1)
+        if ($StaffLevel == 0)
+        {
+          $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+          foreach ($cursor as $document1)
+          {
+            $Email = $document1->ConsumerEmail;
+            if($Email !== "")
             {
-              $Email = strval($document1->ConsumerEmail);
-              if($Email !== "")
-              {
-                $Email = strval($document1->ConsumerEmail);
-                array_push($Emails, $Email);
-              }
+              array_push($Emails, $Email);
             }
           }
         }
+      }
     }
     elseif ($Bcc == 'school')
     {
@@ -81,19 +76,18 @@ if (isset($_POST['Staffmail']))
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document)
       {
-        $staffid = strval($document->ConsumerID);
+        $ConsumerID = $document->ConsumerID;
         $StaffLevel = strval($document->StaffLevel);
 
-        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($staffid)];
-        $query1 = new MongoDB\Driver\Query($filter1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
-        foreach ($cursor1 as $document1)
+        foreach ($cursor as $document1)
         {
-          $Email = strval($document1->ConsumerEmail);
+          $Email = $document1->ConsumerEmail;
           if($Email !== "")
           {
-            $Email = strval($document1->ConsumerEmail);
             array_push($Emails, $Email);
           }
         }
@@ -106,17 +100,16 @@ if (isset($_POST['Staffmail']))
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
       foreach ($cursor as $document)
       {
-        $ConsumerID = strval($document->ConsumerID);
-        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
-        $query1 = new MongoDB\Driver\Query($filter1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+        $ConsumerID = $document->ConsumerID;
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
-        foreach ($cursor1 as $document1)
+        foreach ($cursor as $document1)
         {
-          $Email = strval($document1->ConsumerEmail);
+          $Email = $document1->ConsumerEmail;
           if($Email == "")
           {
-            $Email = strval($document1->ConsumerEmail);
             array_push($Emails, $Email);
           }
         }
@@ -129,17 +122,16 @@ if (isset($_POST['Staffmail']))
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document)
       {
-        $staffid = strval($document->ConsumerID);
-        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($staffid)];
-        $query1 = new MongoDB\Driver\Query($filter1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+        $ConsumerID = $document->ConsumerID;
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
-        foreach ($cursor1 as $document1)
+        foreach ($cursor as $document1)
         {
-          $Email = strval($document1->ConsumerEmail);
+          $Email = $document1->ConsumerEmail;
           if($Email == "")
           {
-            $Email = strval($document1->ConsumerEmail);
             array_push($Emails, $Email);
           }
         }
@@ -149,17 +141,17 @@ if (isset($_POST['Staffmail']))
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parent',$query);
       foreach ($cursor as $document)
       {
-        $ConsumerID = strval($document->ConsumerID);
-        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
-        $query1 = new MongoDB\Driver\Query($filter1);
-        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+        $ConsumerID = $document->ConsumerID;
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
 
-        foreach ($cursor1 as $document1)
+        foreach ($cursor as $document1)
         {
-          $Email = strval($document1->ConsumerEmail);
+          $Email = $document1->ConsumerEmail;
           if($Email == "")
           {
-            $Email = strval($document1->ConsumerEmail);
+            $Email = $document1->ConsumerEmail;
             array_push($Emails, $Email);
           }
         }
@@ -385,9 +377,9 @@ if (isset($_POST['Teachermail']))
 {
     $subject = $_POST['compose_subject'];
     $message = $_POST['message'];
-    $FromName = strval($_SESSION["loggeduser_consumerFName"]);
-    $SchoolName = strval($_SESSION["loggeduser_schoolName"]);
-    $SchoolEmail = strval($_SESSION["loggeduser_SchoolsEmail"]);
+    $FromName = $_SESSION["loggeduser_consumerFName"];
+    $SchoolName = $_SESSION["loggeduser_schoolName"];
+    $SchoolEmail = $_SESSION["loggeduser_SchoolsEmail"];
     $Bcc = $_POST['compose_Bcc'];
 
     $Emails = array();
@@ -398,32 +390,31 @@ if (isset($_POST['Teachermail']))
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
       foreach ($cursor as $document)
       {
-        $studentid = strval($document->_id);
-        $Class_id = strval($document->Class_id);
+        $student_id = strval($document->_id);
+        $Class_id = $document->Class_id;
 
-        $filter = ['StudentID'=>$studentid];
+        $filter = ['StudentID'=>$student_id];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
         foreach ($cursor as $document)
         {
-          $ParentID = strval($document->ParentID);
+          $ParentID = $document->ParentID;
+
           $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ParentID)];
           $query = new MongoDB\Driver\Query($filter);
           $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
           foreach ($cursor as $document)
           {
-            $ConsumerID = strval($document->ConsumerID);
+            $ConsumerID = $document->ConsumerID;
 
-            $filter1 = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
-            $query1 = new MongoDB\Driver\Query($filter1);
-            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-
-            foreach ($cursor1 as $document1)
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectID($ConsumerID)];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+            foreach ($cursor as $document1)
             {
-              $Email = strval($document1->ConsumerEmail);
+              $Email = $document1->ConsumerEmail;
               if($Email !== "")
               {
-                $Email = strval($document1->ConsumerEmail);
                 array_push($Emails, $Email);
               }
             }

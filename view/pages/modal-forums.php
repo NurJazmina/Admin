@@ -38,6 +38,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             <label class="col-sm-2 col-form-label">Detail</label>
             <div class="col-sm-10">
                 <textarea class="forum" name="detail"></textarea>
+                <span class="form-text text-muted">Enter the description</span>
             </div>
           </div>
         </div>

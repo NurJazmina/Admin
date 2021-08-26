@@ -155,8 +155,6 @@ $Submitfrom = date_format($Submitfrom,"Y-m-d\TH:i:s");
 $Due = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
 $Due = $Due->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 $Due = date_format($Due,"Y-m-d\TH:i:s");
-
-//echo $Due;
 ?>
 <div class="d-flex flex-column-fluid">
     <div class="container">

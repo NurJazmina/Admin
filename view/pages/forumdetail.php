@@ -93,14 +93,14 @@ $(document).ready(function() {
         <?php
         if ($_SESSION["loggeduser_ConsumerGroupName"] =='SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] =='GONGETZ')
         {
-            function time_elapsed($date){
+            function time_elapsed($Date){
                 $bit = array(
-                    ' year'      => $date  / 31556926 % 12,
-                    ' week'      => $date  / 604800 % 52,
-                    ' day'       => $date  / 86400 % 7,
-                    ' hour'      => $date  / 3600 % 24,
-                    ' minute'    => $date  / 60 % 60,
-                    ' second'    => $date  % 60
+                    ' year'      => $Date  / 31556926 % 12,
+                    ' week'      => $Date  / 604800 % 52,
+                    ' day'       => $Date  / 86400 % 7,
+                    ' hour'      => $Date  / 3600 % 24,
+                    ' minute'    => $Date  / 60 % 60,
+                    ' second'    => $Date  % 60
                     );
                 foreach($bit as $k => $v){
                     if($v > 1)$ret[] = $v . $k . 's';
@@ -112,7 +112,7 @@ $(document).ready(function() {
                 return join(' ', $ret);
             }
             $id = $_GET['id'];
-            $nowtime = time();
+            $time_now = time();
             $ConsumerFName3 = " ";
             $filter = ['_id'=>new \MongoDB\BSON\ObjectId($id)];
             $query = new MongoDB\Driver\Query($filter);
@@ -126,11 +126,11 @@ $(document).ready(function() {
                 $Date = strval($document->Date);
                 $Consumer_id = $document->Consumer_id;
 
-                $utcdatetime = new MongoDB\BSON\UTCDateTime($Date);
-                $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
-                $time_strval = strval($date);
+                $Date = new MongoDB\BSON\UTCDateTime($Date);
+                $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+                $Date = strval($Date);
                 
                 $filter = ['_id' => new \MongoDB\BSON\ObjectId($Consumer_id)];
                 $query = new MongoDB\Driver\Query($filter);
@@ -149,7 +149,7 @@ $(document).ready(function() {
                         <div class="mt-5 mb-5">
                             <img class="img-round-xxxsm" src="assets/media/svg/avatars/032-boy-13.svg" alt="avatar">&nbsp;&nbsp;
                             <small class="text-muted"><?= $ConsumerFName." ".$ConsumerLName;?></small>&nbsp;&nbsp;
-                            <small class="text-muted"><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                            <small class="text-muted"><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                         </div>
                     </div>
                     <div class="card p-8">
@@ -289,7 +289,7 @@ $(document).ready(function() {
                                                     <div class="text-left">
                                                         <img class="img-round-xsm" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
                                                         <a href="index.php?page=staffdetail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName5." ".$ConsumerLName5;?></a>
-                                                        <small class="text-muted"><?= date_format($datetime4,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time4_strval)." ) \n"; ?></small>
+                                                        <small class="text-muted"><?= date_format($datetime4,"d/m/y"); echo " ( ".time_elapsed($time_now-$time4_strval)." ) \n"; ?></small>
                                                         <div style="border-left: 1px solid #eee; color:#687a86; padding-left:10px; text-align:left;"><?= $Details4; ?></div>
                                                     </div> 
                                                 </button>
@@ -325,7 +325,7 @@ $(document).ready(function() {
                                                         <div class="text-left">
                                                             <img class="img-round-xsm" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
                                                             <a href="index.php?page=staffdetail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName7." ".$ConsumerLName7;?></a>
-                                                            <small class="text-muted"><?= date_format($datetime6,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time6_strval)." ) \n"; ?></small>
+                                                            <small class="text-muted"><?= date_format($datetime6,"d/m/y"); echo " ( ".time_elapsed($time_now-$time6_strval)." ) \n"; ?></small>
                                                             <div style="border-left: 1px solid #eee; padding-left:10px; margin-left: 10px;"><?= $Details6; ?></div>
                                                         </div> 
                                                         <?php

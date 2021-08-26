@@ -3,124 +3,86 @@ $_SESSION["title"] = "News";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/news.php'); 
 ?>
-<style>
-  .text4.eventdate {
-    
-    font-weight: bold;
-    float: left;
-    width: 20%;
-    height: 140px;
-    padding-right:5px;
-  }
-
-  .eventtitle {
-    
-    float: right;
-    width: 80%;
-    height: 140px;
-  }
-
-  /* small devices */
-  @media only screen and (max-width: 600px) {
-  .card-body {
-    font-size: 14px;
-    }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .card-body {
-    font-size: 14px;
-  }
-
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .card-body {
-    font-size: 15px;
-    }
-} 
-
-/* Medium devices (landscape tablets, 1024px and up) */
-@media only screen and (min-width: 1024px) {
-  .card-body {
-    font-size: 14px;
-    }
-} 
-</style>
-<div>
-  <h1 style="color:#696969; text-align:center">News</h1>
-</div><br>
-
+<div class="text-dark-50 text-center m-5">
+  <h1>News</h1>
+</div>
 <div class="row">
   <?php
-  $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
+  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
   $option = ['limit'=>100,'sort' => ['_id' => -1]];
   $query = new MongoDB\Driver\Query($filter,$option);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
-  foreach ($cursor as $document0)
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.News',$query);
+  foreach ($cursor as $document)
   {
-    $Newsid = strval($document0->_id);
-    $NewsStaff_id = ($document0->NewsStaff_id);
-    $NewsTitle = ($document0->NewsTitle);
-    $NewsDetails = ($document0->NewsDetails);
-    $NewsDate = ($document0->NewsDate);
-    $NewsStatus = ($document0->NewsStatus);
-    $Access = ($document0->NewsAccess);
+    $news_id = strval($document->_id);
+    $Staff_id = $document->Staff_id;
+    $Title = $document->Title;
+    $Details = $document->Details;
+    $Date = strval($document->Date);
+    $Status = $document->Status;
+    $Access = $document->Access;
+
+    $Date = new MongoDB\BSON\UTCDateTime($Date);
+    $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+    $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+    $Date = strval($Date);
     
-    $id = new \MongoDB\BSON\ObjectId($NewsStaff_id);
-    $filter = ['_id' => $id];
+    $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
     foreach ($cursor as $document1)
     {
-      $consumerid = strval($document1->_id);
-      $ConsumerFName = ($document1->ConsumerFName);
-      $ConsumerLName = ($document1->ConsumerLName);
+      $consumer_id = strval($document1->_id);
+      $ConsumerFName = $document1->ConsumerFName;
+      $ConsumerLName = $document1->ConsumerLName;
 
-      $filter = ['ConsumerID'=>$consumerid];
+      $filter = ['ConsumerID'=>$consumer_id];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document2)
       {
-        $Staffdepartment = ($document2->Staffdepartment);
-        $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+        $Staffdepartment = $document2->Staffdepartment;
 
-        $filter = ['_id'=>$departmentid];
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
         foreach ($cursor as $document3)
         {
-            $DepartmentName = ($document3->DepartmentName);
+          $DepartmentName = $document3->DepartmentName;
         }
       }
     }
-    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
-    $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     ?>
-    <!--begin::staff-->
     <div class="col-lg-4">
-        <div class="card card-custom gutter-b">
-            <div class="card-header">
-              <div class="card-title">
-                <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $NewsTitle; ?></a></strong>
+      <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
+        <div class="card">
+          <button type="submit" class="btn btn-hover-light text-left">
+            <!-- begin :: display -->
+            <div class="p-5">
+              <div class="modal-title">
+                <label><?= $Title; ?></label>
               </div>
             </div>
-            <div class="card-body">
-              <div class="text4 eventdate">
-                <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-                <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span> 
+            <div class="separator separator-solid separator-border-1"></div>
+            <div class="p-5">
+                <a class="text-primary mb-1">Detail</a>
+                <?php echo mb_strimwidth($Details, 0,200, "..."); ?>
               </div>
-              <div class="eventtitle">
-                <span class="claimedRight" style="color:black"><?php echo $NewsDetails; ?></span><br>
-                </table>
+            <div class="separator separator-solid separator-border-1"></div>
+            <div class="p-3 mx-2">
+              <div class="text-muted text-lowercase">
+                  <small><?= $ConsumerFName; ?></small>
+                  <span>|</span>
+                  <small>Department : <?= $DepartmentName; ?></small>
+                  <span>|</span>
+                  <small><?= date_format($Date_time,"d/m/y"); ?></small>
               </div>
             </div>
-            <div class="card-footer">
-              <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-            </div>
+            <!-- begin :: display -->
+          </button>
         </div>
+      </form>
     </div>
     <?php
     }
@@ -129,75 +91,85 @@ include ('model/news.php');
 
     <!--begin::public-->
     <?php
-    $filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsAccess'=>'PUBLIC'];
+    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>'PUBLIC'];
     $option = ['limit'=>100,'sort' => ['_id' => -1]];
     $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
-    foreach ($cursor as $document0)
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.News',$query);
+    foreach ($cursor as $document)
     {
-      $Newsid = strval($document0->_id);
-      $NewsStaff_id = ($document0->NewsStaff_id);
-      $NewsTitle = ($document0->NewsTitle);
-      $NewsDetails = ($document0->NewsDetails);
-      $NewsDate = ($document0->NewsDate);
-      $NewsStatus = ($document0->NewsStatus);
-      $Access = ($document0->NewsAccess);
+      $news_id = strval($document->_id);
+      $Staff_id = $document->Staff_id;
+      $Title = $document->Title;
+      $Details = $document->Details;
+      $Date = strval($document->Date);
+      $Status = $document->Status;
+      $Access = $document->Access;
 
-      $id = new \MongoDB\BSON\ObjectId($NewsStaff_id);
-      $filter = ['_id' => $id];
+      $Date = new MongoDB\BSON\UTCDateTime($Date);
+      $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+      $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+      $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+      $Date = strval($Date);
+
+      $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id)];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
       foreach ($cursor as $document1)
       {
-          $consumerid = strval($document1->_id);
-          $ConsumerFName = ($document1->ConsumerFName);
-          $ConsumerLName = ($document1->ConsumerLName);
+        $consumer_id = strval($document1->_id);
+        $ConsumerFName = $document1->ConsumerFName;
+        $ConsumerLName = $document1->ConsumerLName;
 
-          $filter = ['ConsumerID'=>$consumerid];
+        $filter = ['ConsumerID'=>$consumer_id];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+        foreach ($cursor as $document2)
+        {
+          $Staffdepartment = ($document2->Staffdepartment);
+          $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+
+          $filter = ['_id'=>$departmentid];
           $query = new MongoDB\Driver\Query($filter);
-          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-          foreach ($cursor as $document2)
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+          foreach ($cursor as $document3)
           {
-              $Staffdepartment = ($document2->Staffdepartment);
-              $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
-
-              $filter = ['_id'=>$departmentid];
-              $query = new MongoDB\Driver\Query($filter);
-              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-              foreach ($cursor as $document3)
-              {
-                  $DepartmentName = ($document3->DepartmentName);
-              }
+            $DepartmentName = $document3->DepartmentName;
           }
+        }
       }
-      
-      $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
-      $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
       ?>
       <div class="col-lg-4">
-        <div class="card card-custom gutter-b">
-            <div class="card-header">
-              <div class="card-title">
-                <strong><a href="index.php?page=newsdetail&id=<?php echo $Newsid ; ?>"><?php echo $NewsTitle; ?></a></strong>
+        <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
+          <div class="card">
+            <button type="submit" class="btn btn-hover-light text-left">
+             <!-- begin :: display -->
+              <div class="p-5">
+                <div class="modal-title">
+                  <label><?= $Title; ?></label>
+                </div>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="text4 eventdate">
-                <span class="eventdate-day"><?php echo date_format($datetime,"d"); ?></span>
-                <span class="eventdate-month"><?php echo date_format($datetime,"M"); ?></span>
+              <div class="separator separator-solid separator-border-1"></div>
+              <div class="p-5">
+                <a class="text-primary mb-1">Detail</a>
+                <?php echo mb_strimwidth($Details, 0,200, "..."); ?>
               </div>
-              <div class="eventtitle">
-                <span class="claimedRight" style="color:black"><?php echo $NewsDetails; ?></span><br>
-                </table>
+              <div class="separator separator-solid separator-border-1"></div>
+              <div class="p-3 mx-2">
+                <div class="text-muted text-lowercase">
+                    <small><?= $ConsumerFName; ?></small>
+                    <span>|</span>
+                    <small>Department : <?= $DepartmentName; ?></small>
+                    <span>|</span>
+                    <small><?= date_format($Date_time,"d/m/y"); ?></small>
+                </div>
               </div>
-            </div>
-            <div class="card-footer">
-              <small><?php echo " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-            </div>
-        </div>
+               <!-- end :: display -->
+            </button>
+          </div>
+        </form>
       </div>
     <?php
     }
     ?>
+    <!-- end::public -->
 </div>
-  <!--filter::end::public-->

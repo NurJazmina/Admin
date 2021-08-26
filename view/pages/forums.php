@@ -10,14 +10,14 @@ include 'model/forums.php';
     <div class="col-1"></div>
     <div class="col-8">
         <?php
-        function time_elapsed($date){
+        function time_elapsed($Date){
             $bit = array(
-                ' year'      => $date  / 31556926 % 12,
-                ' week'      => $date  / 604800 % 52,
-                ' day'       => $date  / 86400 % 7,
-                ' hour'      => $date  / 3600 % 24,
-                ' minute'    => $date  / 60 % 60,
-                ' second'    => $date  % 60
+                ' year'      => $Date  / 31556926 % 12,
+                ' week'      => $Date  / 604800 % 52,
+                ' day'       => $Date  / 86400 % 7,
+                ' hour'      => $Date  / 3600 % 24,
+                ' minute'    => $Date  / 60 % 60,
+                ' second'    => $Date  % 60
                 );
             foreach($bit as $k => $v){
                 if($v > 1)$ret[] = $v . $k . 's';
@@ -28,7 +28,7 @@ include 'model/forums.php';
         
             return join(' ', $ret);
         }
-        $nowtime = time();
+        $time_now = time();
         if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
         {
             ?>
@@ -53,11 +53,11 @@ include 'model/forums.php';
                             $Date = strval($document->Date);
                             $Consumer_id = $document->Consumer_id;
                             
-                            $utcdatetime = new MongoDB\BSON\UTCDateTime($Date);
-                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
-                            $time_strval = strval($date);
+                            $Date = new MongoDB\BSON\UTCDateTime($Date);
+                            $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                            $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+                            $Date = strval($Date);
 
                             $filter = ['_id' => new \MongoDB\BSON\ObjectId($Consumer_id)];
                             $query = new MongoDB\Driver\Query($filter);
@@ -80,7 +80,7 @@ include 'model/forums.php';
                             <div class="mt-3 mb-3 text-muted">
                                 <small><?= $ConsumerFName; ?></small>
                                 <span>|</span>
-                                <small><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                                <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                                 <span>|</span>
                                 <small>Commenting : <?= $total; ?></small>
                             </div>
@@ -105,11 +105,11 @@ include 'model/forums.php';
                             $Date = strval($document->Date);
                             $Consumer_id = $document->Consumer_id;
                             
-                            $utcdatetime = new MongoDB\BSON\UTCDateTime($Date);
-                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
-                            $time_strval = strval($date);
+                            $Date = new MongoDB\BSON\UTCDateTime($Date);
+                            $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                            $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+                            $Date = strval($Date);
 
                             $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
                             $filter = ['_id' => $consumerid];
@@ -135,7 +135,7 @@ include 'model/forums.php';
                             <div class="mt-3 mb-3 text-muted">
                                 <small><?= $ConsumerFName; ?></small>
                                 <span>|</span>
-                                <small><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                                <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                                 <span>|</span>
                                 <small>Commenting : <?= $total; ?></small>
                             </div>
@@ -160,11 +160,11 @@ include 'model/forums.php';
                             $Date = strval($document->Date);
                             $Consumer_id = $document->Consumer_id;
                             
-                            $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($Date));
-                            $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                            $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                            $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
-                            $time_strval = strval($date);
+                            $Date = new MongoDB\BSON\UTCDateTime(strval($Date));
+                            $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                            $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                            $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+                            $Date = strval($Date);
 
                             $filter = ['_id' => new \MongoDB\BSON\ObjectId($Consumer_id)];
                             $query = new MongoDB\Driver\Query($filter);
@@ -187,7 +187,7 @@ include 'model/forums.php';
                             <div class="mt-3 mb-3 text-muted">
                                 <small><?= $ConsumerFName; ?></small>
                                 <span>|</span>
-                                <small><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                                <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                                 <span>|</span>
                                 <small>Commenting : <?= $total; ?></small>
                             </div>
@@ -223,12 +223,12 @@ include 'model/forums.php';
                         $Date = strval($document->Date);
                         $Consumer_id = $document->Consumer_id;
                         
-                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($Date));
-                        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                        $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                        $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        $Date = new MongoDB\BSON\UTCDateTime(strval($Date));
+                        $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                        $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                        $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
                     
-                        $time_strval = strval($date);
+                        $Date = strval($Date);
 
                         $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
                         $filter1 = ['_id' => $consumerid];
@@ -254,7 +254,7 @@ include 'model/forums.php';
                         <div class="mt-3 mb-3 text-muted">
                             <small><?= $ConsumerFName; ?></small>
                             <span>|</span>
-                            <small><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                            <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                             <span>|</span>
                             <small>Commenting : <?= $total; ?></small>
                         </div>
@@ -279,12 +279,12 @@ include 'model/forums.php';
                         $Date = strval($document->Date);
                         $Consumer_id = $document->Consumer_id;
                         
-                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($Date));
-                        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                        $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                        $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        $Date = new MongoDB\BSON\UTCDateTime(strval($Date));
+                        $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                        $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                        $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
                     
-                        $time_strval = strval($date);
+                        $Date = strval($Date);
 
                         $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
                         $filter1 = ['_id' => $consumerid];
@@ -310,7 +310,7 @@ include 'model/forums.php';
                         <div class="mt-3 mb-3 text-muted">
                             <small><?= $ConsumerFName; ?></small>
                             <span>|</span>
-                            <small><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                            <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                             <span>|</span>
                             <small>Commenting : <?= $total; ?></small>
                         </div>
@@ -335,12 +335,12 @@ include 'model/forums.php';
                         $Date = strval($document->Date);
                         $Consumer_id = $document->Consumer_id;
                         
-                        $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($Date));
-                        $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                        $dateforum = date_format($datetime,"Y-m-d\TH:i:s");
-                        $date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
+                        $Date = new MongoDB\BSON\UTCDateTime(strval($Date));
+                        $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                        $Date = date_format($Date_time,"Y-m-d\TH:i:s");
+                        $Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
                     
-                        $time_strval = strval($date);
+                        $Date = strval($Date);
 
                         $consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
                         $filter1 = ['_id' => $consumerid];
@@ -366,7 +366,7 @@ include 'model/forums.php';
                         <div class="mt-3 mb-3 text-muted">
                             <small><?= $ConsumerFName; ?></small>
                             <span>|</span>
-                            <small><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
+                            <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                             <span>|</span>
                             <small>Commenting : <?= $total; ?></small>
                         </div>

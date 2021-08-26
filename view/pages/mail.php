@@ -1,8 +1,10 @@
-<?php include 'model/mail.php'; ?>
+<?php
+$_SESSION["title"] = "Email Blaster";
+include 'view/partials/_subheader/subheader-v1.php'; 
+include 'model/mail.php';
+?>
 <!--begin::Compose-->
-<br><br><br>
-<div id="kt_inbox_compose" >
-<div role="document">
+<div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
         <?php 
         if ($_SESSION["loggeduser_StaffLevel"] == '1')
@@ -185,7 +187,6 @@
         }
         ?>
     </div>
-</div>
 </div>
 <!--end::Compose-->
 

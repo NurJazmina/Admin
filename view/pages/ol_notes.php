@@ -47,7 +47,7 @@ foreach ($cursor as $document)
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-white font-weight-bold my-1 mr-5"><?php echo $SubjectName; ?></h5>
+					<h5 class="text-white font-weight-bold my-1 mr-5"><?= $SubjectName; ?></h5>
 					<!--end::Page Title-->
 				</div>
                 <!--begin::Separator-->
@@ -55,7 +55,7 @@ foreach ($cursor as $document)
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo "SLOT ".$slot ?></span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?= "SLOT ".$slot ?></span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -190,7 +190,7 @@ foreach ($cursor as $document)
                     ?>
                     <div class="col-sm">
                     <div class="checkbox-inline">
-                        <h1  id="section0" contenteditable="false" style="color:#04ada5;">SLOT <?php echo $Note_sort." : ".$Title; ?> </h1>
+                        <h1  id="section0" contenteditable="false" style="color:#04ada5;">SLOT <?= $Note_sort." : ".$Title; ?> </h1>
                         <div class="col-sm text-right">
                             <i class="fas fa-pencil-alt text-success" type="button" data-bs-toggle="dropdown"></i>
                             <div class="dropdown-menu dropdown-menu-md py-5">
@@ -217,7 +217,7 @@ foreach ($cursor as $document)
                     </div>
                     </div>
                     <div class="px-10 mb-10" id="contentinfo">
-                        <a align="justify"><?php echo $Detail; ?></a>
+                        <a align="justify"><?= $Detail; ?></a>
                     </div>
                     <div class="px-5" id="assignment">
                         <?php
@@ -230,8 +230,8 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>">
-                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_assignment&id=<?= $Assignment_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?= " ".$Title; ?>
                                 </a>
                             </div>
                             <?php
@@ -245,8 +245,8 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>">
-                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?= " ".$Title; ?>
                                 </a>
                             </div>
                             <?php
@@ -261,8 +261,8 @@ foreach ($cursor as $document)
                             $Url = $document->Url;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="<?php echo $Url; ?>">
-                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
+                                <a  style="color:#04ada5;" href="<?= $Url; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?= " ".$Title; ?>
                                 </a>
                             </div>
                             <?php
@@ -276,8 +276,8 @@ foreach ($cursor as $document)
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_survey&id=<?php echo $Survey_id; ?>">
-                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
+                                <a  style="color:#04ada5;" href="index.php?page=ol_submit_survey&id=<?= $Survey_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?= " ".$Title; ?>
                                 </a>
                             </div>
                             <?php
@@ -292,8 +292,8 @@ foreach ($cursor as $document)
                             $Description = $document->Description;
                             ?>
                             <div class="checkbox-inline mb-5">
-                                <a  style="color:#04ada5;" href="index.php?page=ol_announcement&id=<?php echo $Announcement_id; ?>">
-                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?php echo " ".$Title; ?>
+                                <a  style="color:#04ada5;" href="index.php?page=ol_announcement&id=<?= $Announcement_id; ?>">
+                                <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?= " ".$Title; ?>
                                 </a>
                             </div>
                             <?php

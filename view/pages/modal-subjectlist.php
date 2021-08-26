@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">New Subject</label>
+            <label class="col-sm-2 col-form-label">Subject</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="subject_name" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
             </div>
