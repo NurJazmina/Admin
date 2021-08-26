@@ -379,7 +379,7 @@ include 'model/forums.php';
         </div>
     </div>
     <div class="col-2">
-        <div class="card">
+        <div class="card m-1">
             <div class="card-header">
                 <strong>DETAILS</strong>
             </div>

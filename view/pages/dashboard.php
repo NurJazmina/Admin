@@ -515,9 +515,9 @@ function time_elapsed($date){
 								$EventDateStart = ($document1->EventDateStart);
 								$utcdatetime = new MongoDB\BSON\UTCDateTime(strval($EventDateStart));
 								$datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
 								$dateforum = date_format($datetime,"Y-m-d\TH:i:s");
 								$date = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum))->getTimestamp());
-						
 								$nowtimeEvent2 = time();
 								$timeEvent2 = strval($date);
 								$time2 = time_elapsed($timeEvent2-$nowtimeEvent2);

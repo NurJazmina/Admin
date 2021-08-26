@@ -28,6 +28,61 @@ foreach ($cursor as $document)
     width: 15px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+    var toggleText = $("#ip").val();
+    var name = $("#loguser-id").val();
+    var url_likes = $("#url-likes").val();
+    var check = $("#check").val();
+
+    if ($("#ip").val() == '0') 
+    {
+       toggleText = $("#ip").val();
+       $("#test").html(check);
+       $("#ip").val('1');
+    }
+
+    $("#ipclear").click(function() {
+
+            if  ($("#ip").val() == '1') 
+            {
+                toggleText = $("#ip").val();
+
+                $.post("model/likes.php", {
+                like: '1',
+                Consumer_id: name,
+                url_likes: url_likes
+                },
+                function(data, status){
+                    $("#test").html(data);
+                },
+                );
+                $("#ip").val('2');
+                $("#ip").prop("disabled", false);
+                $(this).removeClass('btn-light').addClass('btn-warning');
+            }
+            else if ($("#ip").val() == '2') 
+            {
+                $("#ip").val(toggleText);
+
+                $.post("model/likes.php", {
+                like: '0',
+                Consumer_id: name,
+                url_likes: url_likes
+                }, 
+                function(data, status){
+                    $("#test").html(data);
+                });
+                $("#ip").val('1');
+                $("#ip").prop("disabled", false);
+                $(this).removeClass('btn-warning').addClass('btn-light');
+            }
+        });
+
+});
+</script>
 <div class="row">
     <div class="col-3"></div>		
     <div class="col-6">
@@ -85,7 +140,8 @@ foreach ($cursor as $document)
                     $ConsumerFName = $document1->ConsumerFName;
                     $ConsumerLName = $document1->ConsumerLName;
                     ?>
-                    <div class="bg-white p-8 mb-3">
+                    <div class="bg-white p-8 mb-3 ribbon ribbon-right">
+                    <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
                         <a class="h5"><?= $Title; ?></a>
                         <div class="mt-5">
                             <span align="justify"><?= $Details; ?></span>
@@ -96,8 +152,7 @@ foreach ($cursor as $document)
                             <small class="text-muted"><?= date_format($datetime,"d/m/y"); echo " ( ".time_elapsed($nowtime-$time_strval)." ) \n"; ?></small>
                         </div>
                     </div>
-                    <div class="card p-8 ribbon ribbon-left">
-                        <div class="ribbon-target bg-warning" style="top: 10px; left: -2px;">Views : <?= $count; ?></div>
+                    <div class="card p-8">
                             <?php
                             $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                             $query = new MongoDB\Driver\Query($filter);
@@ -121,21 +176,77 @@ foreach ($cursor as $document)
                             }
                             ?>
                             <div class="text-right">
-                                <a href="index.php?page=schoolforumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>">Newest</a>&nbsp;&nbsp;
-                                <a href="index.php?page=schoolforumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>&sort">Oldest</a>
+                                <div class="btn-group" role="group">
+                                    <form name="AddComment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                        <button type="submit" class="btn btn-light btn-hover-warning btn-sm">Newest</button>&nbsp;
+                                    </form>
+                                    <form name="AddComment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                        <input type="hidden" value="sort" name="sort">
+                                        <button type="submit" class="btn btn-light btn-hover-warning btn-sm">Oldest</button>
+                                    </form>
+                                </div>
+                                <!-- begin::like/unlike -->
+                                <?php
+                                $URL_LIKES = "$_SERVER[REQUEST_URI]";
+                                $havedata = 0;
+                                $total_likes = 0;
+                                $filter = ['url'=> $URL_LIKES];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Likes',$query);
+                                foreach ($cursor as $document4)
+                                {
+                                    $Consumer = $document4->Consumer;
+                                    $total_likes = count((array)$Consumer);
+                                }
+
+                                $filter = ['url'=> $URL_LIKES, 'Consumer.Consumer_id'=> $_SESSION["loggeduser_id"]];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Likes',$query);
+                                foreach ($cursor as $document5)
+                                {
+                                    $havedata = 1;
+                                    $Consumer = $document5->Consumer;
+                                    $total_likes = count((array)$Consumer);
+                                }
+                                ?>
+                                <input type="hidden" id="ip" value="0">
+                                <input type="hidden" id="loguser-id" value="<?= $_SESSION["loggeduser_id"]; ?>">
+                                <input type="hidden" id="url-likes" value="<?= $URL_LIKES; ?>">
+                                <input type="hidden" id="check" value="<?= $total_likes;?>">
+                                <?php 
+                                if ($havedata==0) 
+                                {
+                                    ?>
+                                    <button type="button" class="btn btn-sm btn-light btn-hover-warning" id="ipclear">
+                                        <i class="fas fa-heartbeat"></i>
+                                        <a id="test"></a>
+                                    </button>
+                                    <?php
+                                } 
+                                else 
+                                {
+                                    ?>
+                                    <button type="button" class="btn btn-sm btn-warning btn-hover-light" id="ipclear">
+                                        <i class="fas fa-heartbeat"></i>
+                                        <a id="test"></a>
+                                    </button>
+                                    <?php
+                                }
+                                ?>
+                                <!-- end::like/unlike -->
                             </div>
-                            <div class="mt-3">
+                            <div class="mb-1">
                                 <a class="text-dark-50"><?= "Comments &nbsp;&nbsp;".$total; ?></a>
                             </div>
-                            <form name="AddComment" action="index.php?page=schoolforumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                            <form name="AddComment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                 <textarea class="forum" name="detail"></textarea>
                                 <div class="text-right">
                                     <input type="hidden"  name="forum_id" value="<?= $Forum_id; ?>">
-                                    <button type="submit" class="btn btn-warning btn-hover-light btn-sm" name="AddComment">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                    <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="AddComment">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
                                 </div>
                             </form> 
                             <?php
-                            if (!isset($_GET['sort']) && empty($_GET['sort']))
+                            if (!isset($_POST['sort']) && empty($_POST['sort']))
                             {
                                 $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                                 $option = ['sort' => ['_id' => -1]];
@@ -171,7 +282,7 @@ foreach ($cursor as $document)
                                     $ConsumerFName5 = $document5->ConsumerFName;
                                     $ConsumerLName5 = $document5->ConsumerLName;
                                     ?>
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion accordion-flush mt-2" id="accordionFlushExample">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-heading<?= $_id4; ?>">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $_id4; ?>" aria-expanded="false" aria-controls="flush-collapse<?= $_id4; ?>">
@@ -221,13 +332,13 @@ foreach ($cursor as $document)
                                                     }
                                                 }
                                                 ?>
-                                                <form name="AddCommentChild" action="index.php?page=schoolforumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                                <form name="AddCommentChild" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                                     <div class="col-12">
                                                         <textarea class="forum" name="detail"></textarea>
                                                         <div class="text-right">
                                                             <input type="hidden" name="forum_id" value="<?=  $Forum_id; ?>">
                                                             <input type="hidden" name="parent_id" value="<?= $_id4; ?>">
-                                                            <button type="submit" class="btn btn-warning btn-hover-light btn-sm" name="AddCommentChild">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                                            <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="AddCommentChild">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
                                                         </div>
                                                     </div>
                                                 </form>
