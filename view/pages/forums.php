@@ -32,7 +32,7 @@ include 'model/forums.php';
         if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
         {
             ?>
-            <div class="card m-1">
+            <div class="card">
                 <div class="card-header">
                     <strong>SCHOOL</strong>
                 </div>
@@ -202,7 +202,7 @@ include 'model/forums.php';
             <?php
         }
         ?>
-        <div class="card m-1">
+        <div class="card mt-1">
             <div class="card-header">
                 <strong>PUBLIC</strong>
             </div>
@@ -379,7 +379,7 @@ include 'model/forums.php';
         </div>
     </div>
     <div class="col-2">
-        <div class="card m-1">
+        <div class="card">
             <div class="card-header">
                 <strong>DETAILS</strong>
             </div>

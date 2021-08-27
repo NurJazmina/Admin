@@ -367,9 +367,7 @@ if (isset($_POST['Staffmail']))
     </body>
   </html>";
   $mail->AltBody = "This is the plain text version of the email content";
-
   try { $mail->send(); echo "Message has been sent successfully";} 
-
   catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
 }
 

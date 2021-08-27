@@ -3,7 +3,9 @@ $_SESSION["title"] = "Subject";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/subjectlist.php'); 
 ?>
-<div class="text-dark-50 text-center m-5"><h1>Subjects</h1></div>
+<div class="text-dark-50 text-center mt-5">
+  <h1>Subjects</h1>
+</div>
 <div class="row">
   <div class="col-2"></div>
   <div class="col-8">
