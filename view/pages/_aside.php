@@ -86,7 +86,7 @@
 									if($latestnews !== 0)
 									{
 										?>
-										<span class="label label-rounded label-warning"><?php echo $latestnews; ?></span>
+										<span class="label label-rounded label-warning"><?= $latestnews; ?></span>
 										<?php
 									}
 									?>
@@ -98,7 +98,7 @@
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=modal-news" class="menu-link menu-toggle">
+								<a href="index.php?page=add_news" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
@@ -158,7 +158,7 @@
 									if($latestevent !== 0)
 									{
 										?>
-										<span class="label label-rounded label-warning"><?php echo $latestevent; ?></span>
+										<span class="label label-rounded label-warning"><?= $latestevent; ?></span>
 										<?php
 									}
 									?>
@@ -170,7 +170,7 @@
 							{
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=modal-event" class="menu-link menu-toggle">
+								<a href="index.php?page=add_event" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
@@ -284,7 +284,7 @@
 									if($latestforum !== 0)
 									{
 										?>
-										<span class="label label-rounded label-warning"><?php echo $latestevent; ?></span>
+										<span class="label label-rounded label-warning"><?= $latestevent; ?></span>
 										<?php
 									}
 									?>
@@ -292,7 +292,7 @@
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=modal-forums" class="menu-link menu-toggle">
+								<a href="index.php?page=add_forums" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
@@ -339,7 +339,7 @@
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=adddepartment" class="menu-link menu-toggle">
+								<a href="index.php?page=add_department" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
@@ -400,7 +400,7 @@
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=addsubject" class="menu-link menu-toggle">
+								<a href="index.php?page=add_subject" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
@@ -457,7 +457,7 @@
 									</a>
 								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=addclass" class="menu-link menu-toggle">
+									<a href="index.php?page=add_class" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -576,11 +576,11 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=ol_subject&id=<?php echo $Subject_id; ?>" class="menu-link menu-toggle">
+									<a href="index.php?page=ol_subject&id=<?= $Subject_id; ?>" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
-										<span class="menu-text"><?php echo $SubjectName; ?></span>
+										<span class="menu-text"><?= $SubjectName; ?></span>
 									</a>
 								</li>
 								<?php
@@ -622,7 +622,7 @@
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="index.php?page=addstaff" class="menu-link menu-toggle">
+								<a href="index.php?page=add_staff" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
 									</i>
@@ -672,7 +672,7 @@
 							{
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=addstudent" class="menu-link menu-toggle">
+									<a href="index.php?page=add_student" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -722,7 +722,7 @@
 							{
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=addparent" class="menu-link menu-toggle">
+									<a href="index.php?page=add_parent" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>

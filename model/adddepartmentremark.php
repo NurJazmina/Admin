@@ -17,10 +17,10 @@ if (isset($_POST['AddDepartmentRemark'])) {
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'SubRemarks'=>'0',
-    'Department_id'=>$department_id,
-    'Details'=>$Remark,
-    'Staff_id'=>$staff_id,
     'School_id'=>$school_id,
+    'Department_id'=>$department_id,
+    'Staff_id'=>$staff_id,
+    'Details'=>$Remark,
     'Date'=>$date,
     'Status'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);

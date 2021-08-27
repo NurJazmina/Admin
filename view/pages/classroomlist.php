@@ -16,8 +16,7 @@
     <!--begin::Toolbar-->
     <div class="d-flex align-items-center">
       <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
-        <div class="row">
-          <div class="col-12 text-right">
+        <div class="text-right">
           <?php 
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
@@ -28,7 +27,6 @@
             <?php
           }
           ?>
-          </div>
         </div>
       </form>
     </div>
@@ -171,7 +169,7 @@
                   ?>
                   </td>
                   <td><?= $totalstudent; ?></td>
-                  <td><button class="btn btn-light btn-hover-success btn-sm"><a class="text-dark-50 text-hover-white font-weight-bol" href="index.php?page=exportclassattendance&id=<?= $class_id; ?>">more >></a></button></td>
+                  <td><button class="btn btn-light btn-hover-success btn-sm"><a class="text-dark-50 text-hover-white font-weight-bold" href="index.php?page=exportclassattendance&id=<?= $class_id; ?>">more >></a></button></td>
                   <td>
                   <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?= $class_id; ?>">
                     <i class="fa fa-edit"></i>
@@ -416,7 +414,7 @@
                 </div>
                 <div class="col-4 p-1">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link bg-success text-white font-weight-bolder btn-sm mb-1" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">All Class</a>
+                    <a class="nav-link bg-success text-white font-weight-bolder btn-sm mb-1" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">ALL CLASS</a>
                     <?php
                     $calc = 0;
                     $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
