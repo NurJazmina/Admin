@@ -1,5 +1,5 @@
-<form name="UpdatedepartmentRemark" action="model/updatedepartmentremark.php" method="post">
-  <div class="modal fade" id="Updatedepartmentremark" aria-hidden="true">
+<form name="update_department_remark" action="model/department_remark.php" method="post">
+  <div class="modal fade" id="update_department_remark" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change this status?</p>
-          <input type="hidden" class="form-control" name="id">
+          <input type="hidden" class="form-control" name="remark_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
@@ -23,15 +23,15 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="UpdatedepartmentRemark">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="update_department_remark">Confirm</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="UpdateStaffRemark" action="model/updatestaffremark.php" method="post">
-  <div class="modal fade" id="UpdateStaffremark" aria-hidden="true">
+<form name="update_staff_remark" action="model/staff_remark.php" method="post">
+  <div class="modal fade" id="update_staff_remark" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -40,7 +40,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change this status?</p>
-          <input type="hidden" class="form-control" name="id">
+          <input type="hidden" class="form-control" name="remark_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
@@ -55,15 +55,15 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="UpdateStaffRemark">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="update_staff_remark">Confirm</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="UpdateStudentRemark" action="model/updatestudentremark.php" method="post">
-  <div class="modal fade" id="Updatestudentremark" aria-hidden="true">
+<form name="update_student_remark" action="model/student_remark.php" method="post">
+  <div class="modal fade" id="update_student_remark" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -72,7 +72,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change this status?</p>
-          <input type="hidden" class="form-control" name="id">
+          <input type="hidden" class="form-control" name="remark_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
@@ -87,15 +87,15 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="UpdateStudentRemark">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="update_student_remark">Confirm</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="UpdateParentRemark" action="model/updateparentremark.php" method="post">
-  <div class="modal fade" id="UpdateParentremark" aria-hidden="true">
+<form name="update_parent_remark" action="model/parent_remark.php" method="post">
+  <div class="modal fade" id="update_parent_remark" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -104,7 +104,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change this status?</p>
-          <input type="hidden" class="form-control" name="id">
+          <input type="hidden" class="form-control" name="remark_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
@@ -119,15 +119,15 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="UpdateParentRemark">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="update_parent_remark">Confirm</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="UpdateclassRemark" action="model/updateclassremark.php" method="post">
-  <div class="modal fade" id="UpdateClassremark" aria-hidden="true">
+<form name="update_class_remark" action="model/class_remark.php" method="post">
+  <div class="modal fade" id="update_class_remark" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -136,7 +136,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change this status?</p>
-          <input type="hidden" class="form-control" name="id">
+          <input type="hidden" class="form-control" name="remark_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
@@ -151,15 +151,15 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="UpdateclassRemark">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="update_class_remark">Confirm</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="UpdatesubjectRemark" action="model/updatesubjectremark.php" method="post">
-  <div class="modal fade" id="Updatesubjectremark" aria-hidden="true">
+<form name="update_subject_remark" action="model/subject_remark.php" method="post">
+  <div class="modal fade" id="update_subject_remark" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -168,7 +168,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change this status?</p>
-          <input type="hidden" class="form-control" name="id">
+          <input type="hidden" class="form-control" name="remark_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
@@ -183,7 +183,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="UpdatesubjectRemark">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="update_subject_remark">Confirm</button>
         </div>
       </div>
     </div>

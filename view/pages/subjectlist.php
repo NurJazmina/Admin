@@ -10,7 +10,7 @@ include ('model/subjectlist.php');
   <div class="col-2"></div>
   <div class="col-8">
     <div class="text-right">
-      <button class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="dropdown">Sort by &nbsp;<i class="fas fa-sort"></i></button>
+      <button class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="dropdown">Sort by &nbsp;&nbsp;<i class="fas fa-sort"></i></button>
       <ul class="dropdown-menu">
         <li class="dropdown-item"><a href="index.php?page=subjectlist">All</a></li>
         <li class="dropdown-item"><a href="index.php?page=subjectlist&level=1">category 1</a></li>
@@ -48,16 +48,16 @@ include ('model/subjectlist.php');
         {
           $calc = $calc + 1;
           $subject_id = strval($document->_id);
-          $Subject_name = strval($document->SubjectName);
+          $Subject_name = $document->SubjectName;
           ?>
           <tr class="bg-white">
           <td><?= $calc; ?></td>
-          <td><a href="index.php?page=subjectdetail&id=<?= $subject_id ; ?>"><?= $Subject_name; ?></a></td>
+          <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $Subject_name; ?></a></td>
           <td>
-            <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#EditSubjectModal" data-bs-whatever="<?= $subject_id; ?>">
+            <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_subject" data-bs-whatever="<?= $subject_id; ?>">
               <i class="fa fa-edit icon-md"></i>
             </button>
-            <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteSubjectModal" data-bs-whatever="<?= $subject_id; ?>">
+            <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#delete_subject" data-bs-whatever="<?= $subject_id; ?>">
               <i class="fas fa-trash icon-md"></i>
             </button>
           </td>
@@ -68,7 +68,7 @@ include ('model/subjectlist.php');
         <tr class="bg-white">
           <td>Add</td>
           <td colspan="2">
-            <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#AddSubjectModal">
+            <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_subject">
             <i class="fas fa-plus icon-md"></i>
             </button>
           </td>

@@ -22,7 +22,7 @@
                                 "modal-recheckstudentlist",
                                 "modal-recheckparentlist",
                                 "modal-rechecktimetablelist",
-                                "modal-recheckclassroomlist",
+                                "modal-recheck_class",
                              
                                 "staffdetail",
                                 "studentdetail",
@@ -83,7 +83,7 @@
                                 //"modal-recheckstudentlist",
                                 //"modal-recheckparentlist",
                                 "modal-rechecktimetablelist",
-                                //"modal-recheckclassroomlist",
+                                //"modal-recheck_class",
 
                                 "staffdetail",
                                 "studentdetail",

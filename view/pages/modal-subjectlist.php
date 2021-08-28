@@ -1,5 +1,5 @@
-<form id="AddSubject" name="AddSubject" action="index.php?page=subjectlist" method="post">
-  <div class="modal fade" id="AddSubjectModal" aria-hidden="true">
+<form name="add_subject" action="index.php?page=subjectlist" method="post">
+  <div class="modal fade" id="add_subject" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,15 +29,15 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-sm" name="AddSubject">Save changes</button>
+          <button type="submit" class="btn btn-success btn-sm" name="add_subject">Save changes</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form id="EditSubject"  name="EditSubject" action="index.php?page=subjectlist" method="post">
-  <div class="modal fade" id="EditSubjectModal" aria-hidden="true">
+<form  name="edit_subject" action="index.php?page=subjectlist" method="post">
+  <div class="modal fade" id="edit_subject" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -55,15 +55,15 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="EditSubject">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="edit_subject">Confirm</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form id="DeleteSubject" name="DeleteSubject" action="index.php?page=subjectlist" method="post">
-  <div class="modal fade" id="DeleteSubjectModal" aria-hidden="true">
+<form name="delete_subject" action="index.php?page=subjectlist" method="post">
+  <div class="modal fade" id="delete_subject" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -76,7 +76,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="DeleteSubject">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="delete_subject">Confirm</button>
         </div>
       </div>
     </div>

@@ -2,8 +2,8 @@
 $_SESSION["title"] = "Subject";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<form id="AddSubject" name="AddSubject" action="index.php?page=subjectlist" method="post">
-  <div  id="AddSubjectModal">
+<form name="add_subject" action="index.php?page=subjectlist" method="post">
+  <div  id="add_subject">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -31,7 +31,7 @@ include 'view/partials/_subheader/subheader-v1.php';
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success btn-sm" name="AddSubject">Save changes</button>
+          <button type="submit" class="btn btn-success btn-sm" name="add_subject">Save changes</button>
         </div>
     </div>
   </div>

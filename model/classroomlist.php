@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['submitaddclass']))
+if (isset($_POST['add_class']))
 {
   $school_id = strval($_SESSION["loggeduser_schoolID"]);
   $class_category = $_POST['class_category'];
@@ -91,7 +91,7 @@ if (isset($_POST['submitaddclass']))
   }
 }
 
-if (isset($_POST['submiteditclass']))
+if (isset($_POST['edit_class']))
 {
   $class_id = $_POST['class_id'];
   $class_name = $_POST['class_name'];
@@ -180,7 +180,7 @@ if (isset($_POST['submiteditclass']))
   }
 }
 
-if (isset($_POST['Deleteclass']))
+if (isset($_POST['delete_class']))
 {
   $class_id = $_POST['class_id'];
 

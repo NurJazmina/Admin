@@ -2,7 +2,7 @@
 $_SESSION["title"] = "Staff";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<form name="Add_staff" action="index.php?page=modal-recheckstafflist" method="post">
+<form name="recheck_add_staff" action="index.php?page=modal-recheck_staff" method="post">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,7 +10,7 @@ include 'view/partials/_subheader/subheader-v1.php';
       </div>
       <div class="modal-body">
           <div class="form-group">
-              <div class="alert alert-light-primary d-none mb-15" role="alert">
+              <div class="alert alert-light-primary staff_level-none mb-15" role="alert">
                   <div class="alert-icon">
                       <i class="la la-warning"></i>
                   </div>
@@ -78,19 +78,19 @@ include 'view/partials/_subheader/subheader-v1.php';
       </div>
       <div class="modal-footer">
           <button type="reset"  class="btn btn-light btn-hover-success btn-sm">Cancel</button>
-          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="Add_staff">Confirm</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="recheck_add_staff">Confirm</button>
       </div>
     </div>
   </div>
 </form>
 <script>
-  function select_staff_level() {
-    var d = document.getElementById("staff_level").value;
-    var dTypeA = document.getElementById("teacher_box");
-    if(d == "0")
-      dTypeA.style.display = "block";
-    else
-      dTypeA.style.display = "none";
-  }
-  select_staff_level();
+function select_staff_level() {
+  var staff_level = document.getElementById("staff_level").value;
+  var teacher_box = document.getElementById("teacher_box");
+  if(staff_level == "0")
+    teacher_box.style.display = "block";
+  else
+    teacher_box.style.display = "none";
+}
+select_staff_level();
 </script>

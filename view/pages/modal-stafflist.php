@@ -1,4 +1,4 @@
-<form name="Add_staff" action="index.php?page=modal-recheck_staff" method="post">
+<form name="recheck_add_staff" action="index.php?page=modal-recheck_staff" method="post">
   <div class="modal fade"  id="add_staff" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
@@ -61,7 +61,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="Add_staff">Confirm</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="recheck_add_staff">Confirm</button>
         </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
   select_staff_level();
 </script>
 
-<form id="Edit_staff" name="Edit_staff" action="index.php?page=modal-recheck_staff" method="post">
+<form name="recheck_edit_staff" action="index.php?page=modal-recheck_staff" method="post">
   <div class="modal fade" id="edit_staff" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
@@ -105,14 +105,14 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="Edit_staff">Edit</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="recheck_edit_staff">Edit</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="Status_staff" action="index.php?page=stafflist" method="post">
+<form name="status_staff" action="index.php?page=stafflist" method="post">
   <div class="modal fade" id="status_staff" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
@@ -143,7 +143,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="Status_staff">Confirm</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="status_staff">Confirm</button>
         </div>
     </div>
   </div>

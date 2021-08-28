@@ -1,5 +1,5 @@
 <?php  
-if (isset($_POST['Addclass'])) 
+if (isset($_POST['recheck_add_class'])) 
 {
   $school_id = $_SESSION["loggeduser_schoolID"];
   $consumer_id = $_POST['consumer_id'];
@@ -13,8 +13,9 @@ if (isset($_POST['Addclass']))
     $StaffLevel = 1;
     $count = 0;
     $end = 1;
-
     $consumer_id = strval($document->_id);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerIDNo = $document->ConsumerIDNo;
     $ConsumerGroup_id = $document->ConsumerGroup_id;
 
     $filter = ['SchoolID'=>$school_id, 'ConsumerID'=> $consumer_id, 'StaffLevel'=>'0'];
@@ -23,14 +24,12 @@ if (isset($_POST['Addclass']))
     foreach ($cursor as $document2) 
     {
       $count++;
-      $StaffLevel = strval($document2->StaffLevel);
-      $ConsumerFName = $document->ConsumerFName;
-      $ConsumerIDNo = $document->ConsumerIDNo;
+      $StaffLevel = $document2->StaffLevel;
       ?>
       <div class="text-dark-50 text-center m-10">
         <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
       </div>
-      <form id="submitaddclass" name="submitaddclass" action="index.php?page=classroomlist" method="post">
+      <form name="add_class" action="index.php?page=classroomlist" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -66,7 +65,7 @@ if (isset($_POST['Addclass']))
             <div class="modal-footer">
               <input type="hidden" name="consumer_id" value="<?= $consumer_id; ?>">
               <button onclick="index.php?page=classroomlist" class="btn btn-light btn-sm">Close</button>
-              <button type="submit" class="btn btn-success btn-sm" name="submitaddclass">Confirm</button>
+              <button type="submit" class="btn btn-success btn-sm" name="add_class">Confirm</button>
             </div>
           </div>
         </div>
@@ -80,7 +79,7 @@ if (isset($_POST['Addclass']))
       <div class="text-dark-50 text-center m-10" role="alert">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
-      <form id="submitstaff" name="submitstaff" action="index.php?page=classroomlist" method="post">
+      <form action="index.php?page=classroomlist" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -112,7 +111,7 @@ if (isset($_POST['Addclass']))
 }
 
 
-if (isset($_POST['Editclass']))
+if (isset($_POST['recheck_edit_class']))
 {
   $class_id = $_POST['class_id'];
   $number = $_POST['number'];
@@ -137,7 +136,7 @@ if (isset($_POST['Editclass']))
   <div class="text-dark-50 text-center m-10">
     <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
   </div>
-  <form id="submiteditclass" name="submiteditclass" action="index.php?page=classroomlist" method="post">
+  <form name="edit_class" action="index.php?page=classroomlist" method="post">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -236,7 +235,7 @@ if (isset($_POST['Editclass']))
           <input type="hidden" name="class_category" value="<?= $class_category; ?>">
           <input type="hidden" name="class_id" value="<?= $class_id; ?>">
           <button onclick="index.php?page=classroomlist" class="btn btn-light btn-sm">Close</button>
-          <button type="submit" class="btn btn-success btn-sm" name="submiteditclass">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="edit_class">Confirm</button>
         </div>
       </div>
     </div>

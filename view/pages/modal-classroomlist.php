@@ -1,6 +1,6 @@
-<form id="Addclass" name="Addclass" action="index.php?page=modal-recheckclassroomlist" method="post">
-  <div class="modal fade" id="recheckaddclass" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<form name="recheck_add_class" action="index.php?page=modal-recheck_class" method="post">
+  <div class="modal fade" id="add_class" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="AddclassModalLabel">Add Class</h5>
@@ -8,8 +8,8 @@
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Teacher ID</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 col-form-label">Teacher ID</label>
+            <div class="col-sm-9">
               <select class="form-control" name="consumer_id">
                 <?php
                 $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
@@ -36,8 +36,8 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Class Category</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 col-form-label">Class Category</label>
+            <div class="col-sm-9">
               <select class="form-control" name="class_category">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -51,16 +51,16 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-sm" name="Addclass">Re-Checking</button>
+          <button type="submit" class="btn btn-success btn-sm" name="recheck_add_class">Re-Checking</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form id="Editclass"  name="Editclass" action="index.php?page=modal-recheckclassroomlist" method="post">
-  <div class="modal fade" id="recheckeditclass" tabindex="-1" aria-labelledby="EditclassModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<form  name="recheck_edit_class" action="index.php?page=modal-recheck_class" method="post">
+  <div class="modal fade" id="edit_class" tabindex="-1" aria-labelledby="EditclassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit Class</h5>
@@ -69,7 +69,7 @@
         <div class="modal-body">
           <input type="hidden" name="class_id">
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Number of Subject</label>
+            <label class="col-sm-3 col-form-label">Total Subject</label>
             <div class="col-sm-9">
               <input type="number" class="form-control" name="number">
             </div>
@@ -90,15 +90,15 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success btn-sm" name="Editclass">Edit</button>
+          <button type="submit" class="btn btn-success btn-sm" name="recheck_edit_class">Edit</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<form name="Deleteclass" action="index.php?page=classroomlist" method="post">
-  <div class="modal fade" id="DeleteclassModal" aria-hidden="true">
+<form name="delete_class" action="index.php?page=classroomlist" method="post">
+  <div class="modal fade" id="delete_class" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -110,7 +110,7 @@
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success btn-sm" name="Deleteclass">Confirm</button>
+          <button type="submit" class="btn btn-success btn-sm" name="delete_class">Confirm</button>
         </div>
       </div>
     </div>

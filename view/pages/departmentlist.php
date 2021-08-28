@@ -31,10 +31,10 @@ include ('model/departmentlist.php');
             <td><?= $calc; ?></td>
             <td><a href="index.php?page=departmentdetail&id=<?= $Department_id; ?>"><?= $DepartmentName; ?></a></td>
             <td>
-              <button type="button" class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#EditDepartmentModal" data-bs-whatever="<?= $Department_id; ?>">
+              <button type="button" class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_department" data-bs-whatever="<?= $Department_id; ?>">
                 <i class="fa fa-edit icon-md"></i>
               </button>
-              <button type="button" class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteDepartmentModal" data-bs-whatever="<?= $Department_id; ?>">
+              <button type="button" class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#delete_department" data-bs-whatever="<?= $Department_id; ?>">
                 <i class="fas fa-trash icon-md"></i>
               </button>
             </td>
@@ -45,7 +45,7 @@ include ('model/departmentlist.php');
         <tr class="bg-white">
           <td>Add</td>
           <td colspan="2">
-            <button type="button" class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#AddDepartmentModal">
+            <button type="button" class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_department">
             <i class="fas fa-plus icon-md"></i>
             </button>
           </td>

@@ -21,7 +21,7 @@
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
             ?>
-            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddclass">Add</button>
+            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_class">Add</button>
             <input  type="text" class="form-control" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
             <button type="submit" class="btn btn-success btn-sm" name="searchclass">Search</button>
             <?php
@@ -99,7 +99,7 @@
                   }
                   ?>
                   </td>
-                  <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory; echo "  "; print_r($document->ClassName);?></a></td>
+                  <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                   <?php
                   $totalstudent = 0;
                   $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"], 'Class_id'=>$class_id];
@@ -161,7 +161,7 @@
                         $ConsumerFName = $document->ConsumerFName;
                         ?>
                         <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>">
-                        <?= "TEACHER ".$ConsumerFName."<br>"; ?></a>
+                        <?= $ConsumerFName."<br>"; ?></a>
                         <?php
                       }
                     }
@@ -171,10 +171,10 @@
                   <td><?= $totalstudent; ?></td>
                   <td><button class="btn btn-light btn-hover-success btn-sm"><a class="text-dark-50 text-hover-white font-weight-bold" href="index.php?page=exportclassattendance&id=<?= $class_id; ?>">more >></a></button></td>
                   <td>
-                  <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#recheckeditclass" data-bs-whatever="<?= $class_id; ?>">
+                  <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_class" data-bs-whatever="<?= $class_id; ?>">
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteclassModal" data-bs-whatever="<?= $class_id; ?>">
+                  <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#delete_class" data-bs-whatever="<?= $class_id; ?>">
                     <i class="fas fa-trash"></i>
                   </button>
                 </td>
@@ -322,8 +322,8 @@
                     foreach ($cursor as $document)
                     {
                       $class_id = strval($document->_id);
-                      $ClassCategory = strval($document->ClassCategory);
-                      $ClassName = strval($document->ClassName);
+                      $ClassCategory = $document->ClassCategory;
+                      $ClassName = $document->ClassName;
                       ?>
                       <div class="tab-pane fade" id="v-pills-<?= $class_id;?>" role="tabpanel" aria-labelledby="v-pills-<?= $ClassName; echo $ClassCategory;?>-tab">
                         <div class="box" >

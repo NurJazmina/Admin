@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['AddDepartment']))
+if (isset($_POST['add_department']))
 {
   $school_id = strval($_SESSION["loggeduser_schoolID"]);
   $department_name = $_POST['department_name'];
@@ -44,7 +44,7 @@ if (isset($_POST['AddDepartment']))
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
-if (isset($_POST['EditDepartment']))
+if (isset($_POST['edit_department']))
 {
   $department_id = $_POST['department_id'];
   $department_name = $_POST['department_name'];
@@ -90,7 +90,7 @@ if (isset($_POST['EditDepartment']))
 }
 
 
-if (isset($_POST['DeleteDepartment']))
+if (isset($_POST['delete_department']))
 {
   $department_id = $_POST['department_id'];
   $bulk = new MongoDB\Driver\BulkWrite;

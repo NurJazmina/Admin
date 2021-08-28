@@ -1,6 +1,6 @@
 <?php
 //Add school subject
-if (isset($_POST['AddSubject']))
+if (isset($_POST['add_subject']))
 {
   $school_id = strval($_SESSION["loggeduser_schoolID"]);
   $subject_name = $_POST['subject_name'];
@@ -48,7 +48,7 @@ if (isset($_POST['AddSubject']))
 
 
 //Edit school subject
-if (isset($_POST['EditSubject']))
+if (isset($_POST['edit_subject']))
 {
   $subject_id = $_POST['subject_id'];
   $subject_name = $_POST['subject_name'];
@@ -93,7 +93,7 @@ if (isset($_POST['EditSubject']))
 }
 
 //delete school subject
-if (isset($_POST['DeleteSubject']))
+if (isset($_POST['delete_subject']))
 {
   $subject_id = $_POST['subject_id'];
   $bulk = new MongoDB\Driver\BulkWrite;

@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-if (isset($_POST['Add_staff']))
+if (isset($_POST['recheck_add_staff']))
 {
   $consumer_idno = $_POST['consumer_idno'];
   $department_id = $_POST['department_id'];
@@ -341,7 +341,7 @@ if (isset($_POST['Add_staff']))
       <div class="text-dark-50 text-center m-5">
         <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
       </div>
-      <form name="Add_staff" action="index.php?page=stafflist" method="post">
+      <form name="add_staff" action="index.php?page=stafflist" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -429,7 +429,7 @@ if (isset($_POST['Add_staff']))
               <input type="hidden" name="department_id" value="<?=  $department_id; ?>">
               <input type="hidden" name="staff_level" value="<?=  $staff_level; ?>">
               <button onclick="index.php?page=stafflist" class="btn btn-light btn-sm">Cancel</button>
-              <button type="submit" class="btn btn-success btn-sm" name="Add_staff">Confirm</button>
+              <button type="submit" class="btn btn-success btn-sm" name="add_staff">Confirm</button>
             </div>
           </div>
         </div>
@@ -482,7 +482,7 @@ if (isset($_POST['Add_staff']))
   }
 }
 
-if (isset($_POST['Edit_staff']))
+if (isset($_POST['recheck_edit_staff']))
 {
   $class_category = $_POST['class_category'];
   $consumer_id = $_POST['consumer_id'];
@@ -501,7 +501,7 @@ if (isset($_POST['Edit_staff']))
     <div class="text-dark-50 text-center m-5">
       <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
     </div>
-    <form name="Edit_staff" action="index.php?page=stafflist" method="post">
+    <form name="edit_staff" action="index.php?page=stafflist" method="post">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -550,7 +550,7 @@ if (isset($_POST['Edit_staff']))
           <div class="modal-footer">
             <input type="hidden" name="consumer_id" value="<?=  $consumer_id; ?>">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-success btn-sm" name="Edit_staff">Confirm</button>
+            <button type="submit" class="btn btn-success btn-sm" name="edit_staff">Confirm</button>
           </div>
         </div>
       </div>

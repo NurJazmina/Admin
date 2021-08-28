@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
 //Add school staff
-if (isset($_POST['Add_staff']))
+if (isset($_POST['add_staff']))
 {
   $school_id = $_SESSION["loggeduser_schoolID"];
   $consumer_id = $_POST['consumer_id'];
@@ -315,7 +315,7 @@ if (isset($_POST['Add_staff']))
 }
 
 //Edit school staff
-if (isset($_POST['Edit_staff']))
+if (isset($_POST['edit_staff']))
 {
   $class_id = $_POST['class_id'];
   $consumer_id = $_POST['consumer_id'];

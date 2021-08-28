@@ -2,8 +2,8 @@
 $_SESSION["title"] = "Classroom";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<form id="Addclass" name="Addclass" action="index.php?page=modal-recheckclassroomlist" method="post">
-  <div id="recheckaddclass" aria-hidden="true">
+<form name="recheck_add_class" action="index.php?page=modal-recheck_class" method="post">
+  <div id="add_class" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -27,7 +27,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                   $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
                   foreach ($cursor1 as $document1)
                   {
-                    $ConsumerFName = strval($document1->ConsumerFName);
+                    $ConsumerFName = $document1->ConsumerFName;
                     ?>
                     <option value="<?=($document1->_id)?>"><?= $ConsumerFName; ?></option>
                     <?php
@@ -52,7 +52,7 @@ include 'view/partials/_subheader/subheader-v1.php';
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success btn-sm" name="Addclass">Re-Checking</button>
+          <button type="submit" class="btn btn-success btn-sm" name="recheck_add_class">Re-Checking</button>
         </div>
       </div>
     </div>
