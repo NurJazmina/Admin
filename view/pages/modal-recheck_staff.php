@@ -1,7 +1,6 @@
 <?php
 $_SESSION["title"] = "Re-checking";
 include 'view/partials/_subheader/subheader-v1.php';
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";

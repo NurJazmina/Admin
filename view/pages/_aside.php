@@ -42,16 +42,12 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<polygon points="0 0 24 0 24 24 0 24"/>
 									<path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">News</span>
 						<i class="menu-arrow"></i>
@@ -114,16 +110,12 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<rect x="0" y="0" width="24" height="24"/>
 									<path d="M14,7 C13.6666667,10.3333333 12.6666667,12.1167764 11,12.3503292 C11,12.3503292 12.5,6.5 10.5,3.5 C10.5,3.5 10.287918,6.71444735 8.14498739,10.5717225 C7.14049032,12.3798172 6,13.5986793 6,16 C6,19.428689 9.51143904,21.2006583 12.0057195,21.2006583 C14.5,21.2006583 18,20.0006172 18,15.8004732 C18,14.0733981 16.6666667,11.1399071 14,7 Z" fill="#000000"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">Events</span>
 						<i class="menu-arrow"></i>
@@ -309,8 +301,6 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<rect x="0" y="0" width="24" height="24"/>
@@ -368,17 +358,13 @@
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon">
-
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<rect x="0" y="0" width="24" height="24"/>
 									<path d="M5.5,2 L18.5,2 C19.3284271,2 20,2.67157288 20,3.5 L20,6.5 C20,7.32842712 19.3284271,8 18.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,3.5 C4,2.67157288 4.67157288,2 5.5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L13,6 C13.5522847,6 14,5.55228475 14,5 C14,4.44771525 13.5522847,4 13,4 L11,4 Z" fill="#000000" opacity="0.3"/>
 									<path d="M5.5,9 L18.5,9 C19.3284271,9 20,9.67157288 20,10.5 L20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 L4,10.5 C4,9.67157288 4.67157288,9 5.5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L13,13 C13.5522847,13 14,12.5522847 14,12 C14,11.4477153 13.5522847,11 13,11 L11,11 Z M5.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,20.5 C20,21.3284271 19.3284271,22 18.5,22 L5.5,22 C4.67157288,22 4,21.3284271 4,20.5 L4,17.5 C4,16.6715729 4.67157288,16 5.5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L13,20 C13.5522847,20 14,19.5522847 14,19 C14,18.4477153 13.5522847,18 13,18 L11,18 Z" fill="#000000"/>
 								</g>
-							</svg><!--end::Svg Icon--></span>
-
-							<!--end::Svg Icon-->
+							</svg>
 						</span>
 						<span class="menu-text">Subject</span>
 						<i class="menu-arrow"></i>
@@ -547,48 +533,6 @@
 						<span class="menu-text">Calendar</span>
 					</a>
 				</li>
-				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-					<a href="javascript:;" class="menu-link menu-toggle">
-					<span class="svg-icon menu-icon">
-						<i class="flaticon2-open-text-book icon-l"></i>
-					</span>
-					<span class="menu-text">Subject</span>
-					<i class="menu-arrow"></i>
-					</a>
-					<div class="menu-submenu">
-						<i class="menu-arrow"></i>
-						<ul class="menu-subnav">
-							<li class="menu-item menu-item-parent" aria-haspopup="true">
-							</li>
-							<?php 
-							$filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
-							$query = new MongoDB\Driver\Query($filter);
-							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
-							foreach ($cursor as $document)
-							{
-								$Subject_id = $document->Subject_id;
-								$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
-								$query = new MongoDB\Driver\Query($filter);
-								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
-								foreach ($cursor as $document)
-								{
-									$SubjectName = $document->SubjectName;
-								}
-								?>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=ol_subject&id=<?= $Subject_id; ?>" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text"><?= $SubjectName; ?></span>
-									</a>
-								</li>
-								<?php
-							}
-							?>
-						</ul>
-					</div>
-				</li>
 				<li class="menu-section" style="border-top: 1px solid #eceef7;; margin-top: 12px; padding-top: 12px;">
 					<h4 class="menu-text">Directory</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -627,6 +571,14 @@
 										<span></span>
 									</i>
 									<span class="menu-text">Add Staff</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=staffdetail" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Staff Info</span>
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -683,6 +635,14 @@
 							}
 							?>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=studentdetail" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Student Info</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="index.php?page=exportstudentattendance" class="menu-link menu-toggle">
 									<i class="menu-bullet menu-bullet-dot">
 										<span></span>
@@ -732,6 +692,14 @@
 								<?php
 							}
 							?>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=parentdetail" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Parent Info</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>

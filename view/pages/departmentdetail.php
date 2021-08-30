@@ -27,7 +27,7 @@
         <div class="card-toolbar text-right">
           <!--begin::Dropdown-->
           <div class="dropdown dropdown-inline mr-2">
-            <button type="button" class="btn btn-light-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-light btn-hover-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="svg-icon svg-icon-md">
                   <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -111,14 +111,14 @@ else
           <!-- begin::department detail -->
           <div class="col-sm">
             <div class="table-responsive">
-              <table class="table table-bordered text-primary">
+              <table class="table table-bordered">
                 <tbody>
-                  <tr class="bg-light-primary">
-                    <th>Department</th>
-                    <td><?= $DepartmentName; ?> </td>
+                  <tr class="bg-light text-dark-50">
+                    <td>Department</td>
+                    <td><?= $DepartmentName; ?></td>
                   </tr>
                   <tr>
-                    <th>Staff List</th>
+                    <td>Staff List</td>
                     <td>
                     <?php
                     $ConsumerFName = '';
@@ -140,7 +140,7 @@ else
                         $ConsumerFName = $document->ConsumerFName;
                         $ConsumerLName = $document->ConsumerLName;
                         ?>
-                          <a class="text-primary" href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a><br>
+                          <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a><br>
                         <?php
                       }
                     }
@@ -148,7 +148,7 @@ else
                     </td>
                   </tr>
                   <tr>
-                    <th>Number of Staff</th>
+                    <td>Number of Staff</td>
                     <td><?= $totalstaff; ?></td>
                   </tr>
                 </tbody>
@@ -159,8 +159,8 @@ else
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light-primary text-primary">
-                <strong>Remarks</strong>
+              <div class="card-header bg-light text-dark-50">
+                <a>Remarks</a>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="v-pills-tabContent">
@@ -168,9 +168,9 @@ else
                     <div class="box">
                       <form name="add_remark" action="model/department_remark.php" method="POST">
                         <textarea class="department" name="remark"></textarea>
-                        <div class="m-3 text-right">
+                        <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $department_id; ?>" name="department_id">
-                          <button type="submit" class="btn btn-primary btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -279,7 +279,7 @@ else
                                           <input type="hidden" value="<?= $department_id; ?>" name="department_id">
                                           <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                           <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -319,7 +319,6 @@ else
                             foreach ($cursor as $document1)
                             {
                               $ConsumerFName = ($document1->ConsumerFName);
-                              echo $ConsumerFName;
                             }
                             ?>
                               <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -382,7 +381,7 @@ else
                                         <input type="hidden" value="<?= $department_id; ?>" name="department_id">
                                         <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                         <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                        <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                       </div>
                                     </form>
                                   </div>
@@ -484,7 +483,7 @@ else
                                           <input type="hidden" value="<?= $department_id; ?>" name="department_id">
                                           <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                           <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                         </div>
                                       </form>
                                   </div>
@@ -514,9 +513,9 @@ else
   <div class="col-10">
     <div class="card">
       <div class="card-body text-right">
-        <a href="index.php?page=departmentdetail&id=<?= $department_id; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+        <a href="index.php?page=departmentdetail&id=<?= $department_id; ?>&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
         <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-          <thead class="bg-white text-danger">
+          <thead class="bg-white text-dark-50">
               <tr>
                 <th>Staff ID</th>
                 <th>Staff Name</th>
@@ -528,69 +527,73 @@ else
           <tbody>
           <?php
           $Cards_id ='';
+          $date_now = date("d-m-Y");
+          $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
+
           $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$department_id];
           $query = new MongoDB\Driver\Query($filter);
           $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
           foreach ($cursor as $document)
           {
-            $ConsumerID = strval($document->ConsumerID);
+            $ConsumerID = $document->ConsumerID;
+
             $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
             foreach ($cursor as $document)
             {
-              $consumerid = strval($document->_id);
+              $consumer_id = strval($document->_id);
               $ConsumerFName = $document->ConsumerFName;
               $ConsumerLName = $document->ConsumerLName;
               $ConsumerIDNo = $document->ConsumerIDNo;
 
               $Cards_id ='';
-              $filter = ['Consumer_id'=>$consumerid];
+              $filter = ['Consumer_id'=>$consumer_id];
               $query = new MongoDB\Driver\Query($filter);
               $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
               foreach ($cursor as $document1)
               {
                 $Cards_id = strval($document1->Cards_id);
               }
-              $varnow = date("d-m-Y");
-              $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
               ?>
               <tr>
                 <td class="default"><?= $ConsumerIDNo; ?></td>
                 <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                <td class="default"><?= $varnow."<br>"; ?></td>
+                <td class="default"><?= $date_now."<br>"; ?></td>
                 <td class="default"><?php
-                $varcounting = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                $count = 0;
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
                 $option = ['sort' => ['_id' => 1]];
                 $query = new MongoDB\Driver\Query($filter,$option);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                foreach ($cursor as $documentA)
+                foreach ($cursor as $document)
                 {
-                  $AttendanceDate = ($documentA->AttendanceDate);
-                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                  $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $varcounting = $varcounting +1;
-                  if ($varcounting % 2){
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";}
+                  $date = strval($document->AttendanceDate);
+                  $date = new MongoDB\BSON\UTCDateTime($date);
+                  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                  $count = $count +1;
+                  if ($count % 2){
+                    echo date_format($date,"H:i:s")."<br>";}
                 }
                 ?></td>
                 <td class="default"><?php
-                $varcounting = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                $count = 0;
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
                 $option = ['sort' => ['_id' => 1]];
                 $query = new MongoDB\Driver\Query($filter,$option);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                foreach ($cursor as $documentA)
+                foreach ($cursor as $document)
                 {
-                  $AttendanceDate = ($documentA->AttendanceDate);
-                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                  $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $varcounting = $varcounting +1;
-                  if ($varcounting % 2){
+                  $date = strval($document->AttendanceDate);
+                  $date = new MongoDB\BSON\UTCDateTime($date);
+                  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                  $count = $count +1;
+                  if ($count % 2){
                   }
                   else{
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";}
+                    echo date_format($date,"H:i:s")."<br>";}
                 }
                 ?></td>
               </tr>

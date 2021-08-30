@@ -1,3 +1,11 @@
+<style>
+.highlight td.default 
+{
+  background:#ff8795;
+  color:#ffff ;
+  border-color:#ffff;
+}
+</style>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
@@ -8,7 +16,7 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Classroom</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Class info</h5>
 					<!--end::Page Title-->
 				</div>
 				<!--end::Page Heading-->
@@ -19,7 +27,7 @@
         <div class="card-toolbar text-right">
           <!--begin::Dropdown-->
           <div class="dropdown dropdown-inline mr-2">
-            <button type="button" class="btn btn-light-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-light btn-hover-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="svg-icon svg-icon-md">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -109,6 +117,14 @@ foreach ($cursor as $document)
     $ConsumerLName = $document->ConsumerLName;
   }
 }
+$totalstudent = 0;
+$filter = ['Class_id'=>$class_id];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+foreach ($cursor as $document)
+{
+  $totalstudent = $totalstudent + 1;
+}
 ?>
 <div class="text-dark-50 text-center m-5"><h1>Class Info</h1></div>
 <div class="row">
@@ -119,20 +135,18 @@ foreach ($cursor as $document)
         <div class="row">
           <!-- begin::Subject/class detail -->
           <div class="col-sm">
-            <table class="table table-bordered text-primary">
+            <table class="table table-bordered">
               <tbody>
-                <tr class="bg-light-primary">
-                  <th>Class</th>
+                <tr class="bg-light text-dark-50">
+                  <td>Class</td>
                   <td><?= $ClassName; ?> </td>
                 </tr>
                 <tr>
-                  <th>Teacher</th>
-                  <td>
-                  <a class="text-primary" href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a>
-                  </td>
+                  <td>Teacher</td>
+                  <td><a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
                 </tr>
                 <tr>
-                  <th>Subject</th>
+                  <td>Subject</td>
                   <td>
                   <?php
                     $totalsubject = 0;
@@ -152,7 +166,7 @@ foreach ($cursor as $document)
                         $totalsubject = $totalsubject + 1;
                         $subject_name = $document->SubjectName;
                         ?>
-                        <a class="text-primary" href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>">
+                        <a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>">
                         <?= $subject_name."<br>";
                       }
                     }
@@ -160,16 +174,20 @@ foreach ($cursor as $document)
                 </td>
                 </tr>
                 <tr>
-                  <th>Number of Subject</th>
+                  <td>Number of Subject</td>
                   <td><?= $totalsubject; ?></td>
+                </tr>
+                <tr>
+                  <td>Number of Student</td>
+                  <td><?= $totalstudent; ?></td>
                 </tr>
               </tbody>
             </table>
-            <table class="table table-bordered text-primary">
+            <table class="table table-bordered">
               <tbody>
-                <tr class="bg-light-primary">
-                  <th>Teacher</th>
-                  <th>Subject</th>
+                <tr class="bg-light text-dark-50">
+                  <td>Teacher</td>
+                  <td>Subject</td>
                 </tr>
                 <?php
                 $filter = ['Class_id'=>$class_id];
@@ -206,12 +224,8 @@ foreach ($cursor as $document)
                   }
                   ?>
                   <tr>
-                    <td>
-                      <a class="text-primary" href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></th>
-                    </td>
-                    <td>
-                      <a class="text-primary" href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $subject_name;?>
-                    </td>
+                    <td><a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></th></td>
+                    <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $subject_name;?></td>
                   </tr>
                   <?php
                 }
@@ -223,18 +237,18 @@ foreach ($cursor as $document)
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light-primary text-primary">
-                <strong>Remarks</strong>
+              <div class="card-header bg-light text-dark-50">
+                <a>Remarks</a>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div class="box">
                       <form name="add_remark" action="model/class_remark.php" method="POST">
-                        <textarea class="subject" name="remark"></textarea>
-                        <div class="m-3 text-right">
+                        <textarea class="class" name="remark"></textarea>
+                        <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $class_id; ?>" name="class_id">
-                          <button type="submit" class="btn btn-primary btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -337,13 +351,13 @@ foreach ($cursor as $document)
                                 ?>
                                 <form name="add_remark_child" action="model/class_remark.php" method="POST">
                                   <div class="m-3">
-                                    <textarea class="subject" name="remark"></textarea>
+                                    <textarea class="class" name="remark"></textarea>
                                   </div>
                                   <div class="m-3 text-right">
                                     <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                     <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                     <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                    <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                   </div>
                                 </form>
                               </div>
@@ -439,13 +453,13 @@ foreach ($cursor as $document)
                                   ?>
                                   <form name="add_remark_child" action="model/class_remark.php" method="POST">
                                     <div class="m-3">
-                                      <textarea class="subject" name="remark"></textarea>
+                                      <textarea class="class" name="remark"></textarea>
                                     </div>
                                     <div class="m-3 text-right">
                                       <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -541,13 +555,13 @@ foreach ($cursor as $document)
                                   ?>
                                   <form name="add_remark_child" action="model/class_remark.php" method="POST">
                                     <div class="m-3">
-                                      <textarea class="subject" name="remark"></textarea>
+                                      <textarea class="class" name="remark"></textarea>
                                     </div>
                                     <div class="m-3 text-right">
                                       <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -571,10 +585,155 @@ foreach ($cursor as $document)
   </div>
   <div class="col-1"></div>
 </div>
+<!-- begin::attendance -->
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="card">
+      <div class="card-body text-right">
+        <a href="index.php?page=classdetail&id=<?= $class_id; ?>&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+        <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
+          <thead class="bg-white text-dark-50">
+              <tr>
+                <th>Staff ID</th>
+                <th>Staff Name</th>
+                <th>Date</th>
+                <th>IN</th>
+                <th>OUT</th>
+              </tr>
+          </thead>
+          <tbody>
+          <?php
+          $Cards_id ='';
+          $date_now = date("d-m-Y");
+          $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
+
+          if (isset($_GET['id']) && !empty($_GET['id']))
+          {
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+            foreach ($cursor as $document)
+            {
+              $class_id = strval($document->_id);
+            }
+          }
+          else
+          {
+            $filter = [null];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+            foreach ($cursor as $document)
+            {
+              $class_id = strval($document->_id);
+            }
+          }
+          $filter = ['Class_id'=>$class_id];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+          foreach ($cursor as $document)
+          {
+            $Consumer_id = $document->Consumer_id;
+
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+            foreach ($cursor as $document)
+            {
+              $consumer_id = strval($document->_id);
+              $ConsumerFName = $document->ConsumerFName;
+              $ConsumerLName = $document->ConsumerLName;
+              $ConsumerIDNo = $document->ConsumerIDNo;
+
+              $filter = ['Consumer_id'=>$consumer_id];
+              $query = new MongoDB\Driver\Query($filter);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
+              foreach ($cursor as $document)
+              {
+                $Cards_id = strval($document->Cards_id);
+              }
+              ?>
+              <tr>
+                <td class="default"><?= $ConsumerIDNo; ?></td>
+                <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
+                <td class="default"><?= $date_now."<br>"; ?></td>
+                <td class="default"><?php
+                $count = 0;
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                $option = ['sort' => ['_id' => 1]];
+                $query = new MongoDB\Driver\Query($filter,$option);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                foreach ($cursor as $document)
+                {
+                  $date = strval($document->AttendanceDate);
+                  $date = new MongoDB\BSON\UTCDateTime($date);
+                  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                  $count = $count +1;
+                  if ($count % 2){
+                    echo date_format($date,"H:i:s")."<br>";}
+                }
+                ?></td>
+                <td class="default"><?php
+                $count = 0;
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                $option = ['sort' => ['_id' => 1]];
+                $query = new MongoDB\Driver\Query($filter,$option);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                foreach ($cursor as $document)
+                {
+                  $date = strval($document->AttendanceDate);
+                  $date = new MongoDB\BSON\UTCDateTime($date);
+                  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                  $count = $count +1;
+                  if ($count % 2){
+                  }
+                  else{
+                    echo date_format($date,"H:i:s")."<br>";}
+                }
+                ?></td>
+              </tr>
+              <?php
+            }
+          }
+          ?>
+          </tbody>
+        </table>
+          <?php
+          if (isset($_GET['attendance']) && !empty($_GET['attendance']))
+          {
+            $attendance = ($_GET['attendance']);
+            ?>
+            <script>
+              $(document).ready(function () {
+                $("#attendance").table2excel({
+                    filename: "attendanceclass.xls"
+                });
+              });
+              
+            </script>
+            <?php
+          }?>
+          <script type="text/javascript">
+          var rows = document.querySelectorAll('tr');
+
+          [...rows].forEach((r) => {
+          if (r.querySelectorAll('td:empty').length > 0) {
+          r.classList.add('highlight');
+          }
+          })
+          </script>
+      </div>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>
+<!-- end::attendance -->
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
-  selector: '.subject',
+  selector: '.class',
   menubar:false,
   statusbar: false,
   toolbar: false,

@@ -65,8 +65,7 @@ foreach ($cursor as $document)
     <h1><?= $Title; ?></h1>
 </div>
 <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
+    <div class="col-12">
         <div class="card ribbon ribbon-right shadow rounded">
             <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
             <div class="p-5 mt-5 mx-5">
@@ -74,11 +73,14 @@ foreach ($cursor as $document)
                     <div class="col-sm-6">
                         <a class="text-primary mb-1">Date</a>
                         <p><?= date_format($Date_start,"d M Y H:i")." "; ?>to<?= " ".date_format($Date_end,"d M Y H:i"); ?></p>
-                    </div>
-                    <div class="col-sm-6">
+                        <br>
                         <a class="text-primary mb-1">Venue</a>
                         <p><?= $Venue; ?></p>
+                        <br>
+                        <a class="text-primary mb-1">Address</a>
                         <p class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
+                    </div>
+                    <div class="col-sm-6">
                         <?= $Location; ?>
                     </div>
                 </div>
@@ -124,5 +126,5 @@ foreach ($cursor as $document)
                 </div>
             </div>
         </div>
-    <div class="col-2"></div>
+    </div>
 </div>

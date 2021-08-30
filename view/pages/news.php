@@ -64,22 +64,20 @@ include ('model/news.php');
                 <label><?= $Title; ?></label>
               </div>
             </div>
-            <div class="separator separator-solid separator-border-1"></div>
-            <div class="p-5">
-                <a class="text-primary mb-1">Detail</a>
-                <?php echo mb_strimwidth($Details, 0,200, "..."); ?>
-              </div>
-            <div class="separator separator-solid separator-border-1"></div>
+            <div class="card p-5">
+              <a class="text-primary mb-1">Detail</a>
+              <?= mb_strimwidth($Details, 0,80, "..."); ?>
+            </div>
             <div class="p-3 mx-2">
               <div class="text-muted text-lowercase">
-                  <small><?= $ConsumerFName; ?></small>
-                  <span>|</span>
-                  <small>Department : <?= $DepartmentName; ?></small>
-                  <span>|</span>
-                  <small><?= date_format($Date_time,"d/m/y"); ?></small>
+                <small><?= $ConsumerFName; ?></small>
+                <span>|</span>
+                <small>Department : <?= $DepartmentName; ?></small>
+                <span>|</span>
+                <small><?= date_format($Date_time,"d/m/y"); ?></small>
               </div>
             </div>
-            <!-- begin :: display -->
+            <!-- end :: display -->
           </button>
         </div>
       </form>
@@ -148,12 +146,10 @@ include ('model/news.php');
                   <label><?= $Title; ?></label>
                 </div>
               </div>
-              <div class="separator separator-solid separator-border-1"></div>
-              <div class="p-5">
+              <div class="card p-5">
                 <a class="text-primary mb-1">Detail</a>
-                <?php echo mb_strimwidth($Details, 0,200, "..."); ?>
+                <?= mb_strimwidth($Details, 0,80, "..."); ?>
               </div>
-              <div class="separator separator-solid separator-border-1"></div>
               <div class="p-3 mx-2">
                 <div class="text-muted text-lowercase">
                     <small><?= $ConsumerFName; ?></small>

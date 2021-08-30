@@ -14,8 +14,8 @@
       <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
       <!--end::Separator-->
       <!--begin::Detail-->
-      <div class="d-flex align-items-center" id="kt_subheader_search"><?php $school = $_SESSION["totalstaff"] + $_SESSION["totalteacher"];?>
-      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $school; ?> Total Staff</span>
+      <div class="d-flex align-items-center" id="kt_subheader_search">
+      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $school = $_SESSION["totalstaff"] + $_SESSION["totalteacher"]; ?> Total Staff</span>
       </div>
       <!--end::Detail-->
       <!--end::Page Heading-->
@@ -73,7 +73,6 @@
               <tr class="text-center">
                 <th scope="col">Name</th>
                 <th scope="col">IC</th>
-                <th scope="col">Address</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Department</th>
                 <th colspan="2">Class Name</th>
@@ -123,28 +122,15 @@
                   $department_id = strval($document->_id);
                   $DepartmentName = $document->DepartmentName;
                 }
-                
-                if($ClassID !== '')
-                {
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ClassID)];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-                  foreach ($cursor as $document)
-                  {
-                    $class_id = strval($document->_id);
-                    $ClassName = $document->ClassName;
-                  }
-                }
                 ?>
                 <tr>
                   <td><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
                   <td><?= $ConsumerIDNo; ?></td>
-                  <td><?= $ConsumerAddress; ?></td>
                   <td><?= $ConsumerPhone; ?></td>
                   <td><a href="index.php?page=departmentdetail&id=<?= $department_id; ?>"><?= $DepartmentName; ?></a></td>
                   <td>
                   <?php
-                   if($class_id == '') 
+                   if($ClassID == '') 
                    {
                     ?>
                     <a></a>
@@ -152,9 +138,20 @@
                    }
                    else
                    {
-                    ?>
-                    <a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassName; ?></a>
-                    <?php
+                    if($ClassID !== '')
+                    {
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ClassID)];
+                      $query = new MongoDB\Driver\Query($filter);
+                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                      foreach ($cursor as $document)
+                      {
+                        $class_id = strval($document->_id);
+                        $ClassName = $document->ClassName;
+                        ?>
+                        <a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassName; ?></a>
+                        <?php
+                      }
+                    }
                    }
                   ?>
                   </td>

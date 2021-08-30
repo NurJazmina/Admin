@@ -21,10 +21,9 @@ include ('model/forums.php');
     width: 25px;
 }
 </style>
-<div class="row ">
-    <div class="col-1"></div>
-    <div class="col-sm-2">
-        <div class="m-2">
+<div class="row">
+    <div class="col-sm-2 mb-5">
+        <div>
             <h6 class="text-dark-50 font-weight-bold">Channel topics</h6>
         </div>
         <div class="bg-white mt-3 p-5 rounded">
@@ -33,9 +32,9 @@ include ('model/forums.php');
             <a href="index.php?page=schoolforum&forum=3&topic=Short News / Info" class="btn btn-outline-green btn-sm font-weight-bold btn-pill mb-3">Short News / Info </a><br>
         </div>
     </div>
-    <div class="col-sm-8">
-        <div class="forum mt-3 mb-3 p-4 rounded">
-            <strong>Channel Topic &nbsp;&nbsp;:&nbsp;&nbsp; </strong>
+    <div class="col-sm-8 mb-5">
+        <div class="forum p-4 rounded">
+            <strong>Channel Topic &nbsp;&nbsp;:&nbsp;&nbsp;</strong>
             <span class="btn btn-outline-white btn-sm font-weight-bold btn-pill">Forum</span>
             &nbsp;/&nbsp;
             <span class="btn btn-outline-white btn-sm font-weight-bold btn-pill"><?= $_GET['topic']; ?></span>
@@ -63,9 +62,9 @@ include ('model/forums.php');
                 return join(' ', $ret);
             }
 
-            $ConsumerFName3=" ";
-            $ConsumerLName3=" ";
-            $ForumDetails2=" ";
+            $ConsumerFName3 = " ";
+            $ConsumerLName3 = " ";
+            $ForumDetails2 = " ";
             $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>$category];
             $option = ['sort' => ['_id' => -1]];
             $query = new MongoDB\Driver\Query($filter,$option);
@@ -96,7 +95,7 @@ include ('model/forums.php');
                     $ConsumerFName = $document1->ConsumerFName;
                     $ConsumerLName = $document1->ConsumerLName;
                     ?>
-                    <div class="card mb-3 p-5">
+                    <div class="card mt-2 p-5">
                         <div class="mt-3 mb-3">
                             <div class="checkbox-inline">
                                 <img class="img-round-sm" src="assets/media/svg/avatars/032-boy-13.svg" alt="avatar">&nbsp;&nbsp;
@@ -152,5 +151,56 @@ include ('model/forums.php');
         }
         ?>
     </div>
-    <div class="col-1"></div>
+    <div class="col-sm-2">
+        <div class="bg-white p-5 rounded">
+            <h6 class="text-dark-50 font-weight-bold">Details</h6>
+        </div>
+        <div class="bg-white mt-2 p-5 rounded">
+            <div class="spacing-right">
+                <div class="padding-gutter">
+                    <div class="guidelines expanded" data-role="guidelines">
+                        <p class="spacing-bottom">The following are not allowed on SmartSchool:</p>
+                        <ol class="list-num spacing-bottom">
+                            <li>Targeted harassment or encouraging others</li>
+                            <li>Spam</li>
+                            <li>Impersonation</li>
+                            <li>Direct threat of harm</li>
+                            <li>Posting personally identifiable information</li>
+                            <li>Inappropriate profile content</li>
+                        </ol>
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <a class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Show guidelines
+                                    </button>
+                                </a>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p><strong>Targeted harassment or encouraging others to do so</strong></p>
+                                        <p class="spacing-bottom">The targeted and systematic harassment of people has no place on SmartSchool, nor do we tolerate communities dedicated to fostering harassing behavior.</p>
+
+                                        <p><strong>Spam</strong></p>
+                                        <p class="spacing-bottom">Examples include 1) comments posted in large quantities to promote a product or service, 2) the exact same comment posted repeatedly to disrupt a thread. 3) following users multiple times</p>
+
+                                        <p><strong>Impersonation</strong></p>
+                                        <p class="spacing-bottom">You may not impersonate others in a manner that does or is intended to mislead, confuse, or deceive others.</p>
+
+                                        <p><strong>Direct threat of harm</strong></p>
+                                        <p class="spacing-bottom">This covers active threats of harm directed towards a specific person or defined group of individuals. Contact local authorities if you feel a crime has been committed or is imminent.</p>
+
+                                        <p><strong>Posting personally identifiable information</strong></p>
+                                        <p class="spacing-bottom">Examples of protected information: credit card number, home/work address, phone number, email address, social security number. Real name isn't currently covered.</p>
+
+                                        <p><strong>Inappropriate profile content</strong></p>
+                                        <p class="spacing-bottom">Graphic media containing violence and pornographic content are not allowed. Profile content allowed by SmartSchool may not be allowed on all communitie, so report such profiles to the site moderator.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

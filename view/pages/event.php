@@ -68,25 +68,22 @@ include ('model/event.php');
                 <label><?= $Title; ?></label>
               </div>
             </div>
-            <div class="separator separator-solid separator-border-1"></div>
-            <div class="p-5">
+            <div class="card p-5">
               <div class="row">
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Date</a>
                   <p><?= date_format($Date_start,"d M Y")." "; ?>to<?= " ".date_format($Date_end,"d M Y"); ?></p>
                 </div>
                 <div class="col-sm-4">
-                  <a class="text-primary mb-1">Time</a>
-                  <p><?= date_format($Date_start,"H:i"); ?></p>
+                  <a class="text-primary mb-1">Address</a>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Venue</a>
                   <p><?= $Venue; ?></p>
-                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                 </div>
               </div>
             </div>
-            <div class="separator separator-solid separator-border-1"></div>
             <div class="p-3 mx-2">
               <div class="text-muted">
                 <small><?= " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
@@ -161,25 +158,22 @@ include ('model/event.php');
                 <label><?= $Title; ?></label>
               </div>
             </div>
-            <div class="separator separator-solid separator-border-1"></div>
-            <div class="p-5">
+            <div class="card p-5">
               <div class="row">
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Date</a>
                   <p><?= date_format($Date_start,"d M Y")." "; ?>to<?= " ".date_format($Date_end,"d M Y"); ?></p>
                 </div>
                 <div class="col-sm-4">
-                  <a class="text-primary mb-1">Time</a>
-                  <p><?= date_format($Date_start,"H:i"); ?></p>
+                  <a class="text-primary mb-1">Address</a>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Venue</a>
                   <p><?= $Venue; ?></p>
-                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                 </div>
               </div>
             </div>
-            <div class="separator separator-solid separator-border-1"></div>
             <div class="p-3 mx-2">
               <div class="text-muted">
                 <small><?= " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>

@@ -3,24 +3,31 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-/* ------------------------------------------- begin:add parent,student,relation -----------------------------------------------------------*/
-if (isset($_POST['submitaddstudent']))
+$FromNameF = $_SESSION["loggeduser_consumerFName"];
+$FromNameL = $_SESSION["loggeduser_consumerLName"];
+$SchoolName = $_SESSION["loggeduser_schoolName"];
+$SchoolEmail = $_SESSION["loggeduser_SchoolsEmail"];
+$SchoolPhone = $_SESSION["loggeduser_schoolsPhoneNo"];
+$SchoolAddress = $_SESSION["loggeduser_schoolsAddress"];
+
+$school_id = strval($_SESSION["loggeduser_schoolID"]);
+
+//Add school student
+if (isset($_POST['add_student']))
 {
   //add parent
-  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $ConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
+  $parent_idno = $_POST['parent_idno'];
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-  $filter = ['ConsumerIDNo'=>$ConsumerIDNoParent];
+  $filter = ['ConsumerIDNo'=>$parent_idno];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
   foreach ($cursor as $document)
   {
-    $ID = strval($document->_id);
-    $ConsumerFName = strval($document->ConsumerFName);
-    $varParentRegDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+    $consumer_parent_id = strval($document->_id);
+  
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert(['ConsumerID'=>$ID,'Schools_id'=> $schoolID,'ParentStatus'=> "ACTIVE",'ParentAddDate'=>$varParentRegDate]);
+    $bulk->insert(['ConsumerID'=>$consumer_id,'Schools_id'=> $school_id,'ParentStatus'=> "ACTIVE",'ParentAddDate'=>$date]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
@@ -54,21 +61,20 @@ if (isset($_POST['submitaddstudent']))
       exit;
     }
   }
-  //add student
-  $ConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
-  $studentclass = $_POST['txtstudentclass'];
 
-  $filter = ['ConsumerIDNo'=>$ConsumerIDNoChild];
+  //add student
+  $student_idno = $_POST['student_idno'];
+  $class = $_POST['class'];
+
+  $filter = ['ConsumerIDNo'=>$student_idno];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
   {
-    $studentID = strval($document->_id);
-    $ConsumerFNameChild = strval($document->ConsumerFName);
-    $ConsumerLNameChild = strval($document->ConsumerLName);
+    $consumer_student_id = strval($document->_id);
 
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert(['Consumer_id'=>$studentID,'Schools_id'=> $schoolID,'Class_id'=>$studentclass,'StudentsStatus'=>"ACTIVE"]);
+    $bulk->insert(['Consumer_id'=>$consumer_student_id,'Schools_id'=> $school_id,'Class_id'=>$class,'StudentsStatus'=>"ACTIVE"]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
@@ -102,38 +108,27 @@ if (isset($_POST['submitaddstudent']))
       exit;
     }
   }
+
   //add relation
-  $relation = $_POST['txtrelation'];
-  $filter = ['ConsumerIDNo'=>$ConsumerIDNoParent];
+  $relation = $_POST['relation'];
+  $filter = ['ConsumerID'=>$consumer_parent_id];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
   foreach ($cursor as $document)
   {
-    $Parentid = strval($document->_id);
-    $filter1 = ['ConsumerID'=>$Parentid];
-    $query1 = new MongoDB\Driver\Query($filter1);
-    $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query1);
-    foreach ($cursor1 as $document1)
-    {
-      $parentid = strval($document1->_id);
-    }
+    $parent_id = strval($document->_id);
   }
-  $filter = ['ConsumerIDNo'=>$ConsumerIDNoChild];
+
+  $filter = ['Consumer_id'=>$consumer_student_id];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
   foreach ($cursor as $document)
   {
-    $childid = strval($document->_id);
-    $filter1 = ['Consumer_id'=>$childid];
-    $query1 = new MongoDB\Driver\Query($filter1);
-    $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query1);
-    foreach ($cursor1 as $document1)
-    {
-      $studentid = strval($document1->_id);
-    }
+    $consumer_student_id = strval($document->_id);
   }
+
   $bulk1 = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk1->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk1->insert(['ParentID'=>$parent_id,'StudentID'=>$consumer_student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -167,34 +162,24 @@ if (isset($_POST['submitaddstudent']))
     exit;
   }
 
-  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  $date = date_format($datetime,"d M Y");
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime(strval($date));
+  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($date,"d M Y");
 
-  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
-
-  $filter = ['ConsumerIDNo'=>$ConsumerIDNoParent];
+  $filter = ['ConsumerIDNo'=>$parent_idno];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerFName = strval($document->ConsumerFName);
-    $ConsumerLName = strval($document->ConsumerLName);
-    $ConsumerIDType = strval($document->ConsumerIDType);
-    $ConsumerIDNo = strval($document->ConsumerIDNo);
-    $Email = strval($document->ConsumerEmail);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $Email = $document->ConsumerEmail;
 
     if($Email != "")
     {
-      $Email = strval($document->ConsumerEmail);
-
       //PHPMailer Object
       $mail = new PHPMailer(true);
       $mail->SMTPOptions = array(
@@ -238,224 +223,214 @@ if (isset($_POST['submitaddstudent']))
       $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
-      <head>
-        <meta name='viewport' content='width=device-width'>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-        <title>Simple Transactional Email</title>
-        <style>
-        /* -------------------------------------
-            INLINED WITH htmlemail.io/inline
-        ------------------------------------- */
-        /* -------------------------------------
-            RESPONSIVE AND MOBILE FRIENDLY STYLES
-        ------------------------------------- */
-        @media only screen and (max-width: 620px) {
-          table[class=body] h1 {
-            font-size: 28px !important;
-            margin-bottom: 10px !important;
+        <head>
+          <meta name='viewport' content='width=device-width'>
+          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+          <title>Simple Transactional Email</title>
+          <style>
+          /* -------------------------------------
+              INLINED WITH htmlemail.io/inline
+          ------------------------------------- */
+          /* -------------------------------------
+              RESPONSIVE AND MOBILE FRIENDLY STYLES
+          ------------------------------------- */
+          @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+              font-size: 28px !important;
+              margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+              font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                  table[class=body] .article {
+              padding: 10px !important;
+            }
+            table[class=body] .content {
+              padding: 0 !important;
+            }
+            table[class=body] .container {
+              padding: 0 !important;
+              width: 100% !important;
+            }
+            table[class=body] .main {
+              border-left-width: 0 !important;
+              border-radius: 0 !important;
+              border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+              width: 100% !important;
+            }
+            table[class=body] .btn a {
+              width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+              height: auto !important;
+              max-width: 100% !important;
+              width: auto !important;
+            }
           }
-          table[class=body] p,
-                table[class=body] ul,
-                table[class=body] ol,
-                table[class=body] td,
-                table[class=body] span,
-                table[class=body] a {
-            font-size: 16px !important;
-          }
-          table[class=body] .wrapper,
-                table[class=body] .article {
-            padding: 10px !important;
-          }
-          table[class=body] .content {
-            padding: 0 !important;
-          }
-          table[class=body] .container {
-            padding: 0 !important;
-            width: 100% !important;
-          }
-          table[class=body] .main {
-            border-left-width: 0 !important;
-            border-radius: 0 !important;
-            border-right-width: 0 !important;
-          }
-          table[class=body] .btn table {
-            width: 100% !important;
-          }
-          table[class=body] .btn a {
-            width: 100% !important;
-          }
-          table[class=body] .img-responsive {
-            height: auto !important;
-            max-width: 100% !important;
-            width: auto !important;
-          }
-        }
 
-        /* -------------------------------------
-            PRESERVE THESE STYLES IN THE HEAD
-        ------------------------------------- */
-        @media all {
-          .ExternalClass {
-            width: 100%;
+          /* -------------------------------------
+              PRESERVE THESE STYLES IN THE HEAD
+          ------------------------------------- */
+          @media all {
+            .ExternalClass {
+              width: 100%;
+            }
+            .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+              line-height: 100%;
+            }
+            .apple-link a {
+              color: inherit !important;
+              font-family: inherit !important;
+              font-size: inherit !important;
+              font-weight: inherit !important;
+              line-height: inherit !important;
+              text-decoration: none !important;
+            }
+            #MessageViewBody a {
+              color: inherit;
+              text-decoration: none;
+              font-size: inherit;
+              font-family: inherit;
+              font-weight: inherit;
+              line-height: inherit;
+            }
+            .btn-primary table td:hover {
+              background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+              background-color: #34495e !important;
+              border-color: #34495e !important;
+            }
           }
-          .ExternalClass,
-                .ExternalClass p,
-                .ExternalClass span,
-                .ExternalClass font,
-                .ExternalClass td,
-                .ExternalClass div {
-            line-height: 100%;
-          }
-          .apple-link a {
-            color: inherit !important;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-            text-decoration: none !important;
-          }
-          #MessageViewBody a {
-            color: inherit;
-            text-decoration: none;
-            font-size: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-          }
-          .btn-primary table td:hover {
-            background-color: #34495e !important;
-          }
-          .btn-primary a:hover {
-            background-color: #34495e !important;
-            border-color: #34495e !important;
-          }
-        }
-        </style>
-      </head>
-      <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-        <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
-        <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
-          <tr>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-            <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-              <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
+          </style>
+        </head>
+        <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+          <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
+          <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+            <tr>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+              <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
+                <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
+                  <!-- START CENTERED WHITE CONTAINER -->
+                  <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
 
-                  <!-- START MAIN CONTENT AREA -->
-                  <tr>
-                    <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                        <tr>
-                          <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                            <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                <p><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a> and $ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                  <ul>
-                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
-                                    <li>Phone: $SchoolPhone</li>
-                                    <li>Email: $SchoolEmail</li>
-                                    <li>Address: $SchoolAddress</li>
-                                </ul>
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                      <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
+                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                          <tr>
+                            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                  <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                  <p><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a> and $ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                    <ul>
+                                      <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
+                                      <li>Phone: $SchoolPhone</li>
+                                      <li>Email: $SchoolEmail</li>
+                                      <li>Address: $SchoolAddress</li>
+                                  </ul>
+                                </p>
+                                <p>Thanks,<br/>
+                                <p>Go N Getz</p>
+                                <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                               </p>
-                              <p>Thanks,<br/>
-                              <p>Go N Getz</p>
-                              <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
-                            </p>
-                            <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                              <tbody>
-                                <tr>
-                                  <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                      <tbody>
-                                        <tr>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
-                <!-- END MAIN CONTENT AREA -->
-                </table>
-
-                <!-- START FOOTER -->
-                <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                  <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                    <tr>
-                      <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                        <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                        <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                              <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                <tbody>
+                                  <tr>
+                                    <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                        <tbody>
+                                          <tr>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
-                    <tr>
-                      <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                      <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                      </td>
-                    </tr>
+
+                  <!-- END MAIN CONTENT AREA -->
                   </table>
+
+                  <!-- START FOOTER -->
+                  <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                      <tr>
+                        <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                          <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
+                          <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                        <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- END FOOTER -->
+
+                <!-- END CENTERED WHITE CONTAINER -->
                 </div>
-                <!-- END FOOTER -->
-
-              <!-- END CENTERED WHITE CONTAINER -->
-              </div>
-            </td>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-          </tr>
-        </table>
-      </body>
-    </html>
-    ";
-    $mail->AltBody = "This is the plain text version of the email content";
-
-    try { $mail->send();} 
-
-    catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+              </td>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+            </tr>
+          </table>
+        </body>
+      </html>";
+      $mail->AltBody = "This is the plain text version of the email content";
+      try { $mail->send();} 
+      catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+    }
   }
 }
-}
-/* ------------------------------------------- end:add parent,student,relation ---------------------------------------------------------------*/
 
-
-/* ------------------------------------------- begin:add relation -----------------------------------------------------------------------------*/
-if (isset($_POST['addrelation']))
+if (isset($_POST['add_relation']))
 {
-  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $parentid = $_POST['txtparentid'];
-  $studentid = $_POST['txtstudentid'];
-  $relation = $_POST['txtParentStudentRelation'];
+  $school_id = $_SESSION["loggeduser_schoolID"];
+  $parent_id = $_POST['parent_id'];
+  $student_id = $_POST['student_id'];
+  $relation = $_POST['relation'];
 
-  $Studentid = new \MongoDB\BSON\ObjectId($studentid);
-  $filter = ['_id'=>$Studentid];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($student_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
   foreach ($cursor as $document)
   {
-    $Consumer_id = strval($document->Consumer_id);
-    $Consumer_id = new \MongoDB\BSON\ObjectId($Consumer_id);
+    $Consumer_id = $document->Consumer_id;
 
-    $filter = ['_id'=>$Consumer_id];
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-  
     foreach ($cursor as $document)
     {
-      $ConsumerFNameChild = strval($document->ConsumerFName);
-      $ConsumerLNameChild = strval($document->ConsumerLName);
+      $ConsumerFNameChild = $document->ConsumerFName;
+      $ConsumerLNameChild = $document->ConsumerLName;
     }
   }
 
   //add relation
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk->insert(['ParentID'=>$parent_id,'StudentID'=>$student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -490,45 +465,32 @@ if (isset($_POST['addrelation']))
     exit;
   }
 
-  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  $date = date_format($datetime,"d M Y");
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime(strval($date));
+  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($date,"d M Y");
 
-  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
-
-  $parentid = new \MongoDB\BSON\ObjectId($parentid);
-  $filter = ['_id'=>$parentid];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($parent_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerID = strval($document->ConsumerID);
-    $ConsumerID = new \MongoDB\BSON\ObjectId($ConsumerID);
+    $ConsumerID = $document->ConsumerID;
   }
 
-  $filter = ['_id'=>$ConsumerID];
+  $filter = ['_id'=> new \MongoDB\BSON\ObjectId($ConsumerID)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerFName = strval($document->ConsumerFName);
-    $ConsumerLName = strval($document->ConsumerLName);
-    $ConsumerIDType = strval($document->ConsumerIDType);
-    $ConsumerIDNo = strval($document->ConsumerIDNo);
-    $Email = strval($document->ConsumerEmail);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $Email = $document->ConsumerEmail;
 
     if($Email != "")
     {
-      $Email = strval($document->ConsumerEmail);
-
       //PHPMailer Object
       $mail = new PHPMailer(true);
       $mail->SMTPOptions = array(
@@ -572,215 +534,207 @@ if (isset($_POST['addrelation']))
       $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
-      <head>
-        <meta name='viewport' content='width=device-width'>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-        <title>Simple Transactional Email</title>
-        <style>
-        /* -------------------------------------
-            INLINED WITH htmlemail.io/inline
-        ------------------------------------- */
-        /* -------------------------------------
-            RESPONSIVE AND MOBILE FRIENDLY STYLES
-        ------------------------------------- */
-        @media only screen and (max-width: 620px) {
-          table[class=body] h1 {
-            font-size: 28px !important;
-            margin-bottom: 10px !important;
+        <head>
+          <meta name='viewport' content='width=device-width'>
+          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+          <title>Simple Transactional Email</title>
+          <style>
+          /* -------------------------------------
+              INLINED WITH htmlemail.io/inline
+          ------------------------------------- */
+          /* -------------------------------------
+              RESPONSIVE AND MOBILE FRIENDLY STYLES
+          ------------------------------------- */
+          @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+              font-size: 28px !important;
+              margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+              font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                  table[class=body] .article {
+              padding: 10px !important;
+            }
+            table[class=body] .content {
+              padding: 0 !important;
+            }
+            table[class=body] .container {
+              padding: 0 !important;
+              width: 100% !important;
+            }
+            table[class=body] .main {
+              border-left-width: 0 !important;
+              border-radius: 0 !important;
+              border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+              width: 100% !important;
+            }
+            table[class=body] .btn a {
+              width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+              height: auto !important;
+              max-width: 100% !important;
+              width: auto !important;
+            }
           }
-          table[class=body] p,
-                table[class=body] ul,
-                table[class=body] ol,
-                table[class=body] td,
-                table[class=body] span,
-                table[class=body] a {
-            font-size: 16px !important;
-          }
-          table[class=body] .wrapper,
-                table[class=body] .article {
-            padding: 10px !important;
-          }
-          table[class=body] .content {
-            padding: 0 !important;
-          }
-          table[class=body] .container {
-            padding: 0 !important;
-            width: 100% !important;
-          }
-          table[class=body] .main {
-            border-left-width: 0 !important;
-            border-radius: 0 !important;
-            border-right-width: 0 !important;
-          }
-          table[class=body] .btn table {
-            width: 100% !important;
-          }
-          table[class=body] .btn a {
-            width: 100% !important;
-          }
-          table[class=body] .img-responsive {
-            height: auto !important;
-            max-width: 100% !important;
-            width: auto !important;
-          }
-        }
 
-        /* -------------------------------------
-            PRESERVE THESE STYLES IN THE HEAD
-        ------------------------------------- */
-        @media all {
-          .ExternalClass {
-            width: 100%;
+          /* -------------------------------------
+              PRESERVE THESE STYLES IN THE HEAD
+          ------------------------------------- */
+          @media all {
+            .ExternalClass {
+              width: 100%;
+            }
+            .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+              line-height: 100%;
+            }
+            .apple-link a {
+              color: inherit !important;
+              font-family: inherit !important;
+              font-size: inherit !important;
+              font-weight: inherit !important;
+              line-height: inherit !important;
+              text-decoration: none !important;
+            }
+            #MessageViewBody a {
+              color: inherit;
+              text-decoration: none;
+              font-size: inherit;
+              font-family: inherit;
+              font-weight: inherit;
+              line-height: inherit;
+            }
+            .btn-primary table td:hover {
+              background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+              background-color: #34495e !important;
+              border-color: #34495e !important;
+            }
           }
-          .ExternalClass,
-                .ExternalClass p,
-                .ExternalClass span,
-                .ExternalClass font,
-                .ExternalClass td,
-                .ExternalClass div {
-            line-height: 100%;
-          }
-          .apple-link a {
-            color: inherit !important;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-            text-decoration: none !important;
-          }
-          #MessageViewBody a {
-            color: inherit;
-            text-decoration: none;
-            font-size: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-          }
-          .btn-primary table td:hover {
-            background-color: #34495e !important;
-          }
-          .btn-primary a:hover {
-            background-color: #34495e !important;
-            border-color: #34495e !important;
-          }
-        }
-        </style>
-      </head>
-      <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-        <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
-        <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
-          <tr>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-            <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-              <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
+          </style>
+        </head>
+        <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+          <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
+          <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+            <tr>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+              <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
+                <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
+                  <!-- START CENTERED WHITE CONTAINER -->
+                  <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
 
-                  <!-- START MAIN CONTENT AREA -->
-                  <tr>
-                    <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                        <tr>
-                          <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                            <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                              <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                              <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                <ul>
-                                  <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
-                                  <li>Phone: $SchoolPhone</li>
-                                  <li>Email: $SchoolEmail</li>
-                                  <li>Address: $SchoolAddress</li>
-                              </ul>
-                            </p>
-                              <p>Thanks,<br/>
-                              <p>Go N Getz</p>
-                              <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
-                            </p>
-                            <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                              <tbody>
-                                <tr>
-                                  <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                      <tbody>
-                                        <tr>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
-                <!-- END MAIN CONTENT AREA -->
-                </table>
-
-                <!-- START FOOTER -->
-                <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                  <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                    <!-- START MAIN CONTENT AREA -->
                     <tr>
-                      <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                        <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                        <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                      <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
+                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                          <tr>
+                            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                  <ul>
+                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
+                                    <li>Phone: $SchoolPhone</li>
+                                    <li>Email: $SchoolEmail</li>
+                                    <li>Address: $SchoolAddress</li>
+                                </ul>
+                              </p>
+                                <p>Thanks,<br/>
+                                <p>Go N Getz</p>
+                                <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
+                              </p>
+                              <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                <tbody>
+                                  <tr>
+                                    <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                        <tbody>
+                                          <tr>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
-                    <tr>
-                      <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                      <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                      </td>
-                    </tr>
+
+                  <!-- END MAIN CONTENT AREA -->
                   </table>
+
+                  <!-- START FOOTER -->
+                  <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                      <tr>
+                        <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                          <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
+                          <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                        <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- END FOOTER -->
+
+                <!-- END CENTERED WHITE CONTAINER -->
                 </div>
-                <!-- END FOOTER -->
-
-              <!-- END CENTERED WHITE CONTAINER -->
-              </div>
-            </td>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-          </tr>
-        </table>
-      </body>
-    </html>
-    ";
-    $mail->AltBody = "This is the plain text version of the email content";
-
-    try { $mail->send();} 
-
-    catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+              </td>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+            </tr>
+          </table>
+        </body>
+      </html>";
+      $mail->AltBody = "This is the plain text version of the email content";
+      try { $mail->send();} 
+      catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+    }
   }
 }
-}
-/* ------------------------------------------- end:edit relation -------------------------------------------------------------------*/
 
-
-/* ------------------------------------------- begin:add student,relation ----------------------------------------------------------*/
-if (isset($_POST['addrelationstudent']))
+if (isset($_POST['add_relation_student']))
 {
-  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $parentid = $_POST['txtparentid'];
-  $childconsumerid = $_POST['txtchildconsumerid'];
-  $relation = $_POST['txtParentStudentRelation'];
-  $studentclass = $_POST['txtstudentclass'];
+  $school_id = $_SESSION["loggeduser_schoolID"];
+  $parent_id = $_POST['parent_id'];
+  $consumer_student_id = $_POST['consumer_student_id'];
+  $relation = $_POST['relation'];
+  $class = $_POST['class'];
 
-  $Childconsumerid = new \MongoDB\BSON\ObjectId($childconsumerid);
-  $filter = ['_id'=>$Childconsumerid];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_student_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerFNameChild = strval($document->ConsumerFName);
-    $ConsumerLNameChild = strval($document->ConsumerLName);
+    $ConsumerFNameChild = $document->ConsumerFName;
+    $ConsumerLNameChild = $document->ConsumerLName;
   }
 
   //adding student
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['Consumer_id'=>$childconsumerid,'Schools_id'=>$schoolID,'Class_id'=>$studentclass,'StudentsStatus'=>"ACTIVE"]);
+  $bulk->insert(['Consumer_id'=>$consumer_student_id,'Schools_id'=>$school_id,'Class_id'=>$class,'StudentsStatus'=>"ACTIVE"]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -814,17 +768,17 @@ if (isset($_POST['addrelationstudent']))
     exit;
   }
 
-  $filter = ['Consumer_id'=>$childconsumerid];
+  $filter = ['Consumer_id'=>$consumer_student_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
   foreach ($cursor as $document) 
   {
-    $studentid = strval($document->_id);
+    $student_id = strval($document->_id);
   }
 
   //adding relation
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk->insert(['ParentID'=>$parent_id,'StudentID'=>$student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -859,45 +813,32 @@ if (isset($_POST['addrelationstudent']))
     exit;
   }
 
-  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  $date = date_format($datetime,"d M Y");
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime(strval($date));
+  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($date,"d M Y");
 
-  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
-
-  $parentid = new \MongoDB\BSON\ObjectId($parentid);
-  $filter = ['_id'=>$parentid];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($parent_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerID = strval($document->ConsumerID);
-    $ConsumerID = new \MongoDB\BSON\ObjectId($ConsumerID);
+    $ConsumerID = $document->ConsumerID;
   }
 
-  $filter = ['_id'=>$ConsumerID];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerFName = strval($document->ConsumerFName);
-    $ConsumerLName = strval($document->ConsumerLName);
-    $ConsumerIDType = strval($document->ConsumerIDType);
-    $ConsumerIDNo = strval($document->ConsumerIDNo);
-    $Email = strval($document->ConsumerEmail);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $Email = $document->ConsumerEmail;
 
     if($Email != "")
     {
-      $Email = strval($document->ConsumerEmail);
-
       //PHPMailer Object
       $mail = new PHPMailer(true);
       $mail->SMTPOptions = array(
@@ -941,205 +882,198 @@ if (isset($_POST['addrelationstudent']))
       $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
-      <head>
-        <meta name='viewport' content='width=device-width'>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-        <title>Simple Transactional Email</title>
-        <style>
-        /* -------------------------------------
-            INLINED WITH htmlemail.io/inline
-        ------------------------------------- */
-        /* -------------------------------------
-            RESPONSIVE AND MOBILE FRIENDLY STYLES
-        ------------------------------------- */
-        @media only screen and (max-width: 620px) {
-          table[class=body] h1 {
-            font-size: 28px !important;
-            margin-bottom: 10px !important;
+        <head>
+          <meta name='viewport' content='width=device-width'>
+          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+          <title>Simple Transactional Email</title>
+          <style>
+          /* -------------------------------------
+              INLINED WITH htmlemail.io/inline
+          ------------------------------------- */
+          /* -------------------------------------
+              RESPONSIVE AND MOBILE FRIENDLY STYLES
+          ------------------------------------- */
+          @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+              font-size: 28px !important;
+              margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+              font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                  table[class=body] .article {
+              padding: 10px !important;
+            }
+            table[class=body] .content {
+              padding: 0 !important;
+            }
+            table[class=body] .container {
+              padding: 0 !important;
+              width: 100% !important;
+            }
+            table[class=body] .main {
+              border-left-width: 0 !important;
+              border-radius: 0 !important;
+              border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+              width: 100% !important;
+            }
+            table[class=body] .btn a {
+              width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+              height: auto !important;
+              max-width: 100% !important;
+              width: auto !important;
+            }
           }
-          table[class=body] p,
-                table[class=body] ul,
-                table[class=body] ol,
-                table[class=body] td,
-                table[class=body] span,
-                table[class=body] a {
-            font-size: 16px !important;
-          }
-          table[class=body] .wrapper,
-                table[class=body] .article {
-            padding: 10px !important;
-          }
-          table[class=body] .content {
-            padding: 0 !important;
-          }
-          table[class=body] .container {
-            padding: 0 !important;
-            width: 100% !important;
-          }
-          table[class=body] .main {
-            border-left-width: 0 !important;
-            border-radius: 0 !important;
-            border-right-width: 0 !important;
-          }
-          table[class=body] .btn table {
-            width: 100% !important;
-          }
-          table[class=body] .btn a {
-            width: 100% !important;
-          }
-          table[class=body] .img-responsive {
-            height: auto !important;
-            max-width: 100% !important;
-            width: auto !important;
-          }
-        }
 
-        /* -------------------------------------
-            PRESERVE THESE STYLES IN THE HEAD
-        ------------------------------------- */
-        @media all {
-          .ExternalClass {
-            width: 100%;
+          /* -------------------------------------
+              PRESERVE THESE STYLES IN THE HEAD
+          ------------------------------------- */
+          @media all {
+            .ExternalClass {
+              width: 100%;
+            }
+            .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+              line-height: 100%;
+            }
+            .apple-link a {
+              color: inherit !important;
+              font-family: inherit !important;
+              font-size: inherit !important;
+              font-weight: inherit !important;
+              line-height: inherit !important;
+              text-decoration: none !important;
+            }
+            #MessageViewBody a {
+              color: inherit;
+              text-decoration: none;
+              font-size: inherit;
+              font-family: inherit;
+              font-weight: inherit;
+              line-height: inherit;
+            }
+            .btn-primary table td:hover {
+              background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+              background-color: #34495e !important;
+              border-color: #34495e !important;
+            }
           }
-          .ExternalClass,
-                .ExternalClass p,
-                .ExternalClass span,
-                .ExternalClass font,
-                .ExternalClass td,
-                .ExternalClass div {
-            line-height: 100%;
-          }
-          .apple-link a {
-            color: inherit !important;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-            text-decoration: none !important;
-          }
-          #MessageViewBody a {
-            color: inherit;
-            text-decoration: none;
-            font-size: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-          }
-          .btn-primary table td:hover {
-            background-color: #34495e !important;
-          }
-          .btn-primary a:hover {
-            background-color: #34495e !important;
-            border-color: #34495e !important;
-          }
-        }
-        </style>
-      </head>
-      <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-        <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
-        <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
-          <tr>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-            <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-              <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
+          </style>
+        </head>
+        <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+          <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
+          <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+            <tr>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+              <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
+                <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
+                  <!-- START CENTERED WHITE CONTAINER -->
+                  <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
 
-                  <!-- START MAIN CONTENT AREA -->
-                  <tr>
-                    <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                        <tr>
-                          <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                  <ul>
-                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
-                                    <li>Phone: $SchoolPhone</li>
-                                    <li>Email: $SchoolEmail</li>
-                                    <li>Address: $SchoolAddress</li>
-                                </ul>
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                      <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
+                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                          <tr>
+                            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                                <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                  <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                  <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                    <ul>
+                                      <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
+                                      <li>Phone: $SchoolPhone</li>
+                                      <li>Email: $SchoolEmail</li>
+                                      <li>Address: $SchoolAddress</li>
+                                  </ul>
+                                </p>
+                                <p>Thanks,<br/>
+                                <p>Go N Getz</p>
+                                <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                               </p>
-                              <p>Thanks,<br/>
-                              <p>Go N Getz</p>
-                              <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
-                            </p>
-                            <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                              <tbody>
-                                <tr>
-                                  <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                      <tbody>
-                                        <tr>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
-                <!-- END MAIN CONTENT AREA -->
-                </table>
-
-                <!-- START FOOTER -->
-                <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                  <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                    <tr>
-                      <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                        <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                        <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                              <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                <tbody>
+                                  <tr>
+                                    <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                        <tbody>
+                                          <tr>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
-                    <tr>
-                      <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                      <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                      </td>
-                    </tr>
+
+                  <!-- END MAIN CONTENT AREA -->
                   </table>
+
+                  <!-- START FOOTER -->
+                  <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                      <tr>
+                        <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                          <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
+                          <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                        <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- END FOOTER -->
+
+                <!-- END CENTERED WHITE CONTAINER -->
                 </div>
-                <!-- END FOOTER -->
-
-              <!-- END CENTERED WHITE CONTAINER -->
-              </div>
-            </td>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-          </tr>
-        </table>
-      </body>
-    </html>
-    ";
-    $mail->AltBody = "This is the plain text version of the email content";
-
-    try { $mail->send();} 
-
-    catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+              </td>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+            </tr>
+          </table>
+        </body>
+      </html>";
+      $mail->AltBody = "This is the plain text version of the email content";
+      try { $mail->send();} 
+      catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+    }
   }
 }
-}
-/* ------------------------------------------- end:add student,relation ------------------------------------------------------*/
 
 
-/* ------------------------------------------- begin:add parent,relation ------------------------------------------------------*/
-if (isset($_POST['addrelationparent']))
+if (isset($_POST['add_relation_parent']))
 {
-  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $parentconsumerid = $_POST['txtparentconsumerid'];
-  $studentid = $_POST['txtstudentid'];
+  $consumer_parent_id = $_POST['consumer_parent_id'];
+  $student_id = $_POST['student_id'];
   $relation = $_POST['txtParentStudentRelation'];
-
-  $ParentRegDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   //adding parent
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ConsumerID'=>$parentconsumerid,'Schools_id'=>$schoolID,'ParentStatus'=>"ACTIVE",'ParentAddDate'=>$ParentRegDate]);
+  $bulk->insert(['ConsumerID'=>$consumer_parent_id,'Schools_id'=>$school_id,'ParentStatus'=>"ACTIVE",'ParentAddDate'=>$date]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -1173,17 +1107,17 @@ if (isset($_POST['addrelationparent']))
     exit;
   }
 
-  $filter = ['ConsumerID'=>$parentconsumerid];
+  $filter = ['ConsumerID'=>$consumer_parent_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
   foreach ($cursor as $document) 
   {
-    $parentid = strval($document->_id);
+    $parent_id = strval($document->_id);
   }
 
   //adding relation
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ParentID'=>$parentid,'StudentID'=>$studentid,'ParentStudentRelation'=>$relation,'Schools_id'=>$schoolID,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk->insert(['ParentID'=>$parent_id,'StudentID'=>$student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -1218,36 +1152,24 @@ if (isset($_POST['addrelationparent']))
     exit;
   }
 
-  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  $date = date_format($datetime,"d M Y");
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime(strval($date));
+  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($date,"d M Y");
 
-  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
-
-
-  $parentconsumerid = new \MongoDB\BSON\ObjectId($parentconsumerid);
-  $filter = ['_id'=>$parentconsumerid];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_parent_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
   foreach ($cursor as $document)
   {
-    $ConsumerFName = strval($document->ConsumerFName);
-    $ConsumerLName = strval($document->ConsumerLName);
-    $ConsumerIDType = strval($document->ConsumerIDType);
-    $ConsumerIDNo = strval($document->ConsumerIDNo);
-    $Email = strval($document->ConsumerEmail);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $Email = $document->ConsumerEmail;
 
     if($Email != "")
     {
-      $Email = strval($document->ConsumerEmail);
-
       //PHPMailer Object
       $mail = new PHPMailer(true);
       $mail->SMTPOptions = array(
@@ -1291,200 +1213,195 @@ if (isset($_POST['addrelationparent']))
       $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
-      <head>
-        <meta name='viewport' content='width=device-width'>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-        <title>Simple Transactional Email</title>
-        <style>
-        /* -------------------------------------
-            INLINED WITH htmlemail.io/inline
-        ------------------------------------- */
-        /* -------------------------------------
-            RESPONSIVE AND MOBILE FRIENDLY STYLES
-        ------------------------------------- */
-        @media only screen and (max-width: 620px) {
-          table[class=body] h1 {
-            font-size: 28px !important;
-            margin-bottom: 10px !important;
+        <head>
+          <meta name='viewport' content='width=device-width'>
+          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+          <title>Simple Transactional Email</title>
+          <style>
+          /* -------------------------------------
+              INLINED WITH htmlemail.io/inline
+          ------------------------------------- */
+          /* -------------------------------------
+              RESPONSIVE AND MOBILE FRIENDLY STYLES
+          ------------------------------------- */
+          @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+              font-size: 28px !important;
+              margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+              font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                  table[class=body] .article {
+              padding: 10px !important;
+            }
+            table[class=body] .content {
+              padding: 0 !important;
+            }
+            table[class=body] .container {
+              padding: 0 !important;
+              width: 100% !important;
+            }
+            table[class=body] .main {
+              border-left-width: 0 !important;
+              border-radius: 0 !important;
+              border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+              width: 100% !important;
+            }
+            table[class=body] .btn a {
+              width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+              height: auto !important;
+              max-width: 100% !important;
+              width: auto !important;
+            }
           }
-          table[class=body] p,
-                table[class=body] ul,
-                table[class=body] ol,
-                table[class=body] td,
-                table[class=body] span,
-                table[class=body] a {
-            font-size: 16px !important;
-          }
-          table[class=body] .wrapper,
-                table[class=body] .article {
-            padding: 10px !important;
-          }
-          table[class=body] .content {
-            padding: 0 !important;
-          }
-          table[class=body] .container {
-            padding: 0 !important;
-            width: 100% !important;
-          }
-          table[class=body] .main {
-            border-left-width: 0 !important;
-            border-radius: 0 !important;
-            border-right-width: 0 !important;
-          }
-          table[class=body] .btn table {
-            width: 100% !important;
-          }
-          table[class=body] .btn a {
-            width: 100% !important;
-          }
-          table[class=body] .img-responsive {
-            height: auto !important;
-            max-width: 100% !important;
-            width: auto !important;
-          }
-        }
 
-        /* -------------------------------------
-            PRESERVE THESE STYLES IN THE HEAD
-        ------------------------------------- */
-        @media all {
-          .ExternalClass {
-            width: 100%;
+          /* -------------------------------------
+              PRESERVE THESE STYLES IN THE HEAD
+          ------------------------------------- */
+          @media all {
+            .ExternalClass {
+              width: 100%;
+            }
+            .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+              line-height: 100%;
+            }
+            .apple-link a {
+              color: inherit !important;
+              font-family: inherit !important;
+              font-size: inherit !important;
+              font-weight: inherit !important;
+              line-height: inherit !important;
+              text-decoration: none !important;
+            }
+            #MessageViewBody a {
+              color: inherit;
+              text-decoration: none;
+              font-size: inherit;
+              font-family: inherit;
+              font-weight: inherit;
+              line-height: inherit;
+            }
+            .btn-primary table td:hover {
+              background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+              background-color: #34495e !important;
+              border-color: #34495e !important;
+            }
           }
-          .ExternalClass,
-                .ExternalClass p,
-                .ExternalClass span,
-                .ExternalClass font,
-                .ExternalClass td,
-                .ExternalClass div {
-            line-height: 100%;
-          }
-          .apple-link a {
-            color: inherit !important;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-            text-decoration: none !important;
-          }
-          #MessageViewBody a {
-            color: inherit;
-            text-decoration: none;
-            font-size: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-          }
-          .btn-primary table td:hover {
-            background-color: #34495e !important;
-          }
-          .btn-primary a:hover {
-            background-color: #34495e !important;
-            border-color: #34495e !important;
-          }
-        }
-        </style>
-      </head>
-      <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-        <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
-        <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
-          <tr>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-            <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-              <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
+          </style>
+        </head>
+        <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+          <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
+          <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+            <tr>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+              <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
+                <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
+                  <!-- START CENTERED WHITE CONTAINER -->
+                  <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
 
-                  <!-- START MAIN CONTENT AREA -->
-                  <tr>
-                    <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                        <tr>
-                          <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                  <ul>
-                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
-                                    <li>Phone: $SchoolPhone</li>
-                                    <li>Email: $SchoolEmail</li>
-                                    <li>Address: $SchoolAddress</li>
-                                </ul>
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                      <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
+                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                          <tr>
+                            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                                <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                  <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                  <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                    <ul>
+                                      <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
+                                      <li>Phone: $SchoolPhone</li>
+                                      <li>Email: $SchoolEmail</li>
+                                      <li>Address: $SchoolAddress</li>
+                                  </ul>
+                                </p>
+                                <p>Thanks,<br/>
+                                <p>Go N Getz</p>
+                                <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                               </p>
-                              <p>Thanks,<br/>
-                              <p>Go N Getz</p>
-                              <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
-                            </p>
-                            <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                              <tbody>
-                                <tr>
-                                  <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                      <tbody>
-                                        <tr>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
-                <!-- END MAIN CONTENT AREA -->
-                </table>
-
-                <!-- START FOOTER -->
-                <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                  <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                    <tr>
-                      <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                        <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                        <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                              <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                <tbody>
+                                  <tr>
+                                    <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                        <tbody>
+                                          <tr>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
-                    <tr>
-                      <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                      <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                      </td>
-                    </tr>
+
+                  <!-- END MAIN CONTENT AREA -->
                   </table>
+
+                  <!-- START FOOTER -->
+                  <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                      <tr>
+                        <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                          <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
+                          <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                        <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- END FOOTER -->
+
+                <!-- END CENTERED WHITE CONTAINER -->
                 </div>
-                <!-- END FOOTER -->
-
-              <!-- END CENTERED WHITE CONTAINER -->
-              </div>
-            </td>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-          </tr>
-        </table>
-      </body>
-    </html>
-    ";
-    $mail->AltBody = "This is the plain text version of the email content";
-
-    try { $mail->send();} 
-
-    catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+              </td>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+            </tr>
+          </table>
+        </body>
+      </html>";
+      $mail->AltBody = "This is the plain text version of the email content";
+      try { $mail->send();} 
+      catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+    }
   }
 }
-}
-/* ------------------------------------------- begin:add parent,relation ----------------------------------------------------------------*/
 
 
-/* ------------------------------------------- begin:edit class ------------------------------------------------------------------------------*/
-if (isset($_POST['submiteditstudent']))
+if (isset($_POST['edit_student']))
 {
-  $studentclass = $_POST['txtstudentclass'];
-  $studentid = $_POST['studentid'];
+  $class = $_POST['class'];
+  $consumer_student_id = $_POST['consumer_student_id'];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update( ['Consumer_id' => new \MongoDB\BSON\ObjectID($studentid)],
-                ['$set' => ['Class_id'=>$studentclass]],
+  $bulk->update( ['Consumer_id' => new \MongoDB\BSON\ObjectID($consumer_student_id)],
+                ['$set' => ['Class_id'=>$class]],
                 ['upsert' => TRUE]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
@@ -1523,44 +1440,33 @@ if (isset($_POST['submiteditstudent']))
   printf("Matched: %d\n", $result->getMatchedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 
-  $studentclass = new \MongoDB\BSON\ObjectId($studentclass);
-  $filter1 = ['_id'=>$studentclass];
-  $query1 = new MongoDB\Driver\Query($filter1);
-  $cursor1 =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
-  foreach ($cursor1 as $document1)
-  {
-    $ClassCategoryNew = strval($document1->ClassCategory);
-    $ClassNameNew = strval($document1->ClassName);
-  }
-  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  $date = date_format($datetime,"d M Y");
-
-  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
-
-  $studentid = new \MongoDB\BSON\ObjectId($studentid);
-  $filter = ['_id'=>$studentid];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($class)];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
+  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
   foreach ($cursor as $document)
   {
-    $ConsumerFName = strval($document->ConsumerFName);
-    $ConsumerLName = strval($document->ConsumerLName);
-    $ConsumerIDType = strval($document->ConsumerIDType);
-    $ConsumerIDNo = strval($document->ConsumerIDNo);
-    $Email = strval($document->ConsumerEmail);
+    $ClassCategoryNew = $document->ClassCategory;
+    $ClassNameNew = $document->ClassName;
+  }
+
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime(strval($date));
+  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($date,"d M Y");
+
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_student_id)];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  foreach ($cursor as $document)
+  {
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $Email = $document->ConsumerEmail;
 
     if($Email != "")
     {
-      $Email = strval($document->ConsumerEmail);
-
       //PHPMailer Object
       $mail = new PHPMailer(true);
       $mail->SMTPOptions = array(
@@ -1604,210 +1510,196 @@ if (isset($_POST['submiteditstudent']))
       $mail->Subject = "$SchoolName";
       $mail->Body ="
       <html>
-      <head>
-        <meta name='viewport' content='width=device-width'>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-        <title>Simple Transactional Email</title>
-        <style>
-        /* -------------------------------------
-            INLINED WITH htmlemail.io/inline
-        ------------------------------------- */
-        /* -------------------------------------
-            RESPONSIVE AND MOBILE FRIENDLY STYLES
-        ------------------------------------- */
-        @media only screen and (max-width: 620px) {
-          table[class=body] h1 {
-            font-size: 28px !important;
-            margin-bottom: 10px !important;
+        <head>
+          <meta name='viewport' content='width=device-width'>
+          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+          <title>Simple Transactional Email</title>
+          <style>
+          /* -------------------------------------
+              INLINED WITH htmlemail.io/inline
+          ------------------------------------- */
+          /* -------------------------------------
+              RESPONSIVE AND MOBILE FRIENDLY STYLES
+          ------------------------------------- */
+          @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+              font-size: 28px !important;
+              margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+              font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                  table[class=body] .article {
+              padding: 10px !important;
+            }
+            table[class=body] .content {
+              padding: 0 !important;
+            }
+            table[class=body] .container {
+              padding: 0 !important;
+              width: 100% !important;
+            }
+            table[class=body] .main {
+              border-left-width: 0 !important;
+              border-radius: 0 !important;
+              border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+              width: 100% !important;
+            }
+            table[class=body] .btn a {
+              width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+              height: auto !important;
+              max-width: 100% !important;
+              width: auto !important;
+            }
           }
-          table[class=body] p,
-                table[class=body] ul,
-                table[class=body] ol,
-                table[class=body] td,
-                table[class=body] span,
-                table[class=body] a {
-            font-size: 16px !important;
-          }
-          table[class=body] .wrapper,
-                table[class=body] .article {
-            padding: 10px !important;
-          }
-          table[class=body] .content {
-            padding: 0 !important;
-          }
-          table[class=body] .container {
-            padding: 0 !important;
-            width: 100% !important;
-          }
-          table[class=body] .main {
-            border-left-width: 0 !important;
-            border-radius: 0 !important;
-            border-right-width: 0 !important;
-          }
-          table[class=body] .btn table {
-            width: 100% !important;
-          }
-          table[class=body] .btn a {
-            width: 100% !important;
-          }
-          table[class=body] .img-responsive {
-            height: auto !important;
-            max-width: 100% !important;
-            width: auto !important;
-          }
-        }
 
-        /* -------------------------------------
-            PRESERVE THESE STYLES IN THE HEAD
-        ------------------------------------- */
-        @media all {
-          .ExternalClass {
-            width: 100%;
+          /* -------------------------------------
+              PRESERVE THESE STYLES IN THE HEAD
+          ------------------------------------- */
+          @media all {
+            .ExternalClass {
+              width: 100%;
+            }
+            .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+              line-height: 100%;
+            }
+            .apple-link a {
+              color: inherit !important;
+              font-family: inherit !important;
+              font-size: inherit !important;
+              font-weight: inherit !important;
+              line-height: inherit !important;
+              text-decoration: none !important;
+            }
+            #MessageViewBody a {
+              color: inherit;
+              text-decoration: none;
+              font-size: inherit;
+              font-family: inherit;
+              font-weight: inherit;
+              line-height: inherit;
+            }
+            .btn-primary table td:hover {
+              background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+              background-color: #34495e !important;
+              border-color: #34495e !important;
+            }
           }
-          .ExternalClass,
-                .ExternalClass p,
-                .ExternalClass span,
-                .ExternalClass font,
-                .ExternalClass td,
-                .ExternalClass div {
-            line-height: 100%;
-          }
-          .apple-link a {
-            color: inherit !important;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-            text-decoration: none !important;
-          }
-          #MessageViewBody a {
-            color: inherit;
-            text-decoration: none;
-            font-size: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-          }
-          .btn-primary table td:hover {
-            background-color: #34495e !important;
-          }
-          .btn-primary a:hover {
-            background-color: #34495e !important;
-            border-color: #34495e !important;
-          }
-        }
-        </style>
-      </head>
-      <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-        <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
-        <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
-          <tr>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-            <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-              <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
+          </style>
+        </head>
+        <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+          <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
+          <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+            <tr>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+              <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
+                <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
+                  <!-- START CENTERED WHITE CONTAINER -->
+                  <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
 
-                  <!-- START MAIN CONTENT AREA -->
-                  <tr>
-                    <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                        <tr>
-                          <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                <p>$ClassCategoryNew $ClassNameNew succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
-                                  <ul>
-                                    <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
-                                    <li>Phone: $SchoolPhone</li>
-                                    <li>Email: $SchoolEmail</li>
-                                    <li>Address: $SchoolAddress</li>
-                                </ul>
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                      <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
+                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                          <tr>
+                            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                                <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                  <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                  <p>$ClassCategoryNew $ClassNameNew succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                    <ul>
+                                      <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
+                                      <li>Phone: $SchoolPhone</li>
+                                      <li>Email: $SchoolEmail</li>
+                                      <li>Address: $SchoolAddress</li>
+                                  </ul>
+                                </p>
+                                <p>Thanks,<br/>
+                                <p>Go N Getz</p>
+                                <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                               </p>
-                              <p>Thanks,<br/>
-                              <p>Go N Getz</p>
-                              <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
-                            </p>
-                            <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                              <tbody>
-                                <tr>
-                                  <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                      <tbody>
-                                        <tr>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
-                <!-- END MAIN CONTENT AREA -->
-                </table>
-
-                <!-- START FOOTER -->
-                <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                  <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                    <tr>
-                      <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                        <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                        <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                              <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                <tbody>
+                                  <tr>
+                                    <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                        <tbody>
+                                          <tr>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
-                    <tr>
-                      <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                      <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                      </td>
-                    </tr>
+
+                  <!-- END MAIN CONTENT AREA -->
                   </table>
+
+                  <!-- START FOOTER -->
+                  <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                    <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                      <tr>
+                        <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                          <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
+                          <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                        <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- END FOOTER -->
+
+                <!-- END CENTERED WHITE CONTAINER -->
                 </div>
-                <!-- END FOOTER -->
-
-              <!-- END CENTERED WHITE CONTAINER -->
-              </div>
-            </td>
-            <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-          </tr>
-        </table>
-      </body>
-    </html>
-    ";
-    $mail->AltBody = "This is the plain text version of the email content";
-
-    try { $mail->send();} 
-
-    catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+              </td>
+              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+            </tr>
+          </table>
+        </body>
+      </html>";
+      $mail->AltBody = "This is the plain text version of the email content";
+      try { $mail->send();} 
+      catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+    }
   }
 }
-}
-/* ------------------------------------------- end:edit class --------------------------------------------------------------------------------------*/
 
-
-/* ------------------------------------------- begin:Change status for student ---------------------------------------------------------------------*/
-if (isset($_POST['StatusStudentFormSubmit']))
+if (isset($_POST['status']))
 {
-  $varstudentid = $_POST['txtstudentid'];
-  $varStudentStatus = $_POST['txtStudentStatus'];
-  $varConsumerRemarksDetails = $_POST['txtConsumerRemarksDetails'];
-
-  $filter = ['Consumer_id'=>$varstudentid];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-  foreach ($cursor as $document)
-  {
-    $consumerid = strval($document->Consumer_id);
-  }
+  $consumer_student_id = $_POST['consumer_student_id'];
+  $status = $_POST['status'];
+  $details = $_POST['details'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['Consumer_id' => $varstudentid],
-                ['$set' => ['StudentsStatus'=>$varStudentStatus]],
+  $bulk->update(['Consumer_id' => $consumer_student_id],
+                ['$set' => ['StudentsStatus'=>$status]],
                 ['upsert' => TRUE]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
@@ -1843,22 +1735,27 @@ if (isset($_POST['StatusStudentFormSubmit']))
     exit;
   }
 
-  $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
-  $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $staff_id = $_SESSION["loggeduser_id"];
+  $school_id = $_SESSION["loggeduser_schoolID"];
+
+  $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+  $date = new MongoDB\BSON\UTCDateTime(strval($date));
+  $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+  $date = date_format($date,"d M Y");
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([
     'SubRemarks'=>'0',
+    'School_id'=>$school_id,
     'Consumer_id'=>$consumerid,
-    'ConsumerRemarksDetails'=>$varConsumerRemarksDetails,
-    'ConsumerRemarksStaff_id'=>$varstaffid,
-    'school_id'=>$varschoolid,
-    'ConsumerRemarksDate'=>$varconsumerremarkdate,
-    'ConsumerRemarksStatus'=>'ACTIVE']);
+    'Staff_id'=>$staff_id,
+    'Details'=>$details,
+    'Date'=>$date,
+    'Status'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.StudentRemarks', $bulk, $writeConcern);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Student_Remarks', $bulk, $writeConcern);
   }
   catch (MongoDB\Driver\Exception\BulkWriteException $e)
   {
@@ -1887,50 +1784,33 @@ if (isset($_POST['StatusStudentFormSubmit']))
     exit;
   }
 
-  $AddDate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AddDate));
-  $datetime = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-  $date = date_format($datetime,"d M Y");
-
-  $FromNameF = ($_SESSION["loggeduser_consumerFName"]);
-  $FromNameL = ($_SESSION["loggeduser_consumerLName"]);
-  $SchoolName = ($_SESSION["loggeduser_schoolName"]);
-  $SchoolEmail = ($_SESSION["loggeduser_SchoolsEmail"]);
-  $SchoolPhone = ($_SESSION["loggeduser_schoolsPhoneNo"]);
-  $SchoolAddress = ($_SESSION["loggeduser_schoolsAddress"]);
-
-  $filter = ['StudentID'=>$varstudentid];
+  $filter = ['StudentID'=>$consumer_student_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
   foreach ($cursor as $document)
   {
-    $ParentID = strval($document->ParentID);
-    $ParentID = new \MongoDB\BSON\ObjectId($ParentID);
+    $ParentID = $document->ParentID;
 
-    $filter = ['_id'=>$ParentID];
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ParentID)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
     foreach ($cursor as $document)
     {
-      $ConsumerID = strval($document->ConsumerID);
-      $ConsumerID = new \MongoDB\BSON\ObjectId($ConsumerID);
+      $ConsumerID = $document->ConsumerID;
 
-      $filter = ['_id'=>$ConsumerID];
+      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-
       foreach ($cursor as $document)
       {
-        $ConsumerFName = strval($document->ConsumerFName);
-        $ConsumerLName = strval($document->ConsumerLName);
-        $ConsumerIDType = strval($document->ConsumerIDType);
-        $ConsumerIDNo = strval($document->ConsumerIDNo);
-        $Email = strval($document->ConsumerEmail);
+        $ConsumerFName = $document->ConsumerFName;
+        $ConsumerLName = $document->ConsumerLName;
+        $ConsumerIDType = $document->ConsumerIDType;
+        $ConsumerIDNo = $document->ConsumerIDNo;
+        $Email = $document->ConsumerEmail;
 
         if($Email != "")
         {
-          $Email = strval($document->ConsumerEmail);
-
           //PHPMailer Object
           $mail = new PHPMailer(true);
           $mail->SMTPOptions = array(
@@ -1974,192 +1854,188 @@ if (isset($_POST['StatusStudentFormSubmit']))
           $mail->Subject = "$SchoolName";
           $mail->Body ="
           <html>
-          <head>
-            <meta name='viewport' content='width=device-width'>
-            <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-            <title>Simple Transactional Email</title>
-            <style>
-            /* -------------------------------------
-                INLINED WITH htmlemail.io/inline
-            ------------------------------------- */
-            /* -------------------------------------
-                RESPONSIVE AND MOBILE FRIENDLY STYLES
-            ------------------------------------- */
-            @media only screen and (max-width: 620px) {
-              table[class=body] h1 {
-                font-size: 28px !important;
-                margin-bottom: 10px !important;
+            <head>
+              <meta name='viewport' content='width=device-width'>
+              <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+              <title>Simple Transactional Email</title>
+              <style>
+              /* -------------------------------------
+                  INLINED WITH htmlemail.io/inline
+              ------------------------------------- */
+              /* -------------------------------------
+                  RESPONSIVE AND MOBILE FRIENDLY STYLES
+              ------------------------------------- */
+              @media only screen and (max-width: 620px) {
+                table[class=body] h1 {
+                  font-size: 28px !important;
+                  margin-bottom: 10px !important;
+                }
+                table[class=body] p,
+                      table[class=body] ul,
+                      table[class=body] ol,
+                      table[class=body] td,
+                      table[class=body] span,
+                      table[class=body] a {
+                  font-size: 16px !important;
+                }
+                table[class=body] .wrapper,
+                      table[class=body] .article {
+                  padding: 10px !important;
+                }
+                table[class=body] .content {
+                  padding: 0 !important;
+                }
+                table[class=body] .container {
+                  padding: 0 !important;
+                  width: 100% !important;
+                }
+                table[class=body] .main {
+                  border-left-width: 0 !important;
+                  border-radius: 0 !important;
+                  border-right-width: 0 !important;
+                }
+                table[class=body] .btn table {
+                  width: 100% !important;
+                }
+                table[class=body] .btn a {
+                  width: 100% !important;
+                }
+                table[class=body] .img-responsive {
+                  height: auto !important;
+                  max-width: 100% !important;
+                  width: auto !important;
+                }
               }
-              table[class=body] p,
-                    table[class=body] ul,
-                    table[class=body] ol,
-                    table[class=body] td,
-                    table[class=body] span,
-                    table[class=body] a {
-                font-size: 16px !important;
-              }
-              table[class=body] .wrapper,
-                    table[class=body] .article {
-                padding: 10px !important;
-              }
-              table[class=body] .content {
-                padding: 0 !important;
-              }
-              table[class=body] .container {
-                padding: 0 !important;
-                width: 100% !important;
-              }
-              table[class=body] .main {
-                border-left-width: 0 !important;
-                border-radius: 0 !important;
-                border-right-width: 0 !important;
-              }
-              table[class=body] .btn table {
-                width: 100% !important;
-              }
-              table[class=body] .btn a {
-                width: 100% !important;
-              }
-              table[class=body] .img-responsive {
-                height: auto !important;
-                max-width: 100% !important;
-                width: auto !important;
-              }
-            }
 
-            /* -------------------------------------
-                PRESERVE THESE STYLES IN THE HEAD
-            ------------------------------------- */
-            @media all {
-              .ExternalClass {
-                width: 100%;
+              /* -------------------------------------
+                  PRESERVE THESE STYLES IN THE HEAD
+              ------------------------------------- */
+              @media all {
+                .ExternalClass {
+                  width: 100%;
+                }
+                .ExternalClass,
+                      .ExternalClass p,
+                      .ExternalClass span,
+                      .ExternalClass font,
+                      .ExternalClass td,
+                      .ExternalClass div {
+                  line-height: 100%;
+                }
+                .apple-link a {
+                  color: inherit !important;
+                  font-family: inherit !important;
+                  font-size: inherit !important;
+                  font-weight: inherit !important;
+                  line-height: inherit !important;
+                  text-decoration: none !important;
+                }
+                #MessageViewBody a {
+                  color: inherit;
+                  text-decoration: none;
+                  font-size: inherit;
+                  font-family: inherit;
+                  font-weight: inherit;
+                  line-height: inherit;
+                }
+                .btn-primary table td:hover {
+                  background-color: #34495e !important;
+                }
+                .btn-primary a:hover {
+                  background-color: #34495e !important;
+                  border-color: #34495e !important;
+                }
               }
-              .ExternalClass,
-                    .ExternalClass p,
-                    .ExternalClass span,
-                    .ExternalClass font,
-                    .ExternalClass td,
-                    .ExternalClass div {
-                line-height: 100%;
-              }
-              .apple-link a {
-                color: inherit !important;
-                font-family: inherit !important;
-                font-size: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-                text-decoration: none !important;
-              }
-              #MessageViewBody a {
-                color: inherit;
-                text-decoration: none;
-                font-size: inherit;
-                font-family: inherit;
-                font-weight: inherit;
-                line-height: inherit;
-              }
-              .btn-primary table td:hover {
-                background-color: #34495e !important;
-              }
-              .btn-primary a:hover {
-                background-color: #34495e !important;
-                border-color: #34495e !important;
-              }
-            }
-            </style>
-          </head>
-          <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
-            <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
-            <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
-              <tr>
-                <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-                <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
-                  <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
+              </style>
+            </head>
+            <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+              <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'> You got this email because you're a member of.. </span>
+              <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+                <tr>
+                  <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+                  <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>
+                    <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>
 
-                    <!-- START CENTERED WHITE CONTAINER -->
-                    <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
+                      <!-- START CENTERED WHITE CONTAINER -->
+                      <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>
 
-                      <!-- START MAIN CONTENT AREA -->
-                      <tr>
-                        <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
-                          <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                            <tr>
-                              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
-                                  <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
-                                    <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                    <p>Status for <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date has been change to $varStaffStatus. If you found out this is an error, kindly contact:
-                                      <ul>
-                                        <li><a href='https://smartschool.gongetz.com/school.php?id=$schoolID'>$SchoolName</a></li>
-                                        <li>Phone: $SchoolPhone</li>
-                                        <li>Email: $SchoolEmail</li>
-                                        <li>Address: $SchoolAddress</li>
-                                    </ul>
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                          <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>
+                            <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                              <tr>
+                                <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                                    <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
+                                      <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
+                                      <p>Status for <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date has been change to $varStaffStatus. If you found out this is an error, kindly contact:
+                                        <ul>
+                                          <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
+                                          <li>Phone: $SchoolPhone</li>
+                                          <li>Email: $SchoolEmail</li>
+                                          <li>Address: $SchoolAddress</li>
+                                      </ul>
+                                    </p>
+                                    <p>Thanks,<br/>
+                                    <p>Go N Getz</p>
+                                    <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
                                   </p>
-                                  <p>Thanks,<br/>
-                                  <p>Go N Getz</p>
-                                  <p><small>Please don't reply to this email, it won't go anyway except to our great black hole.</small></p>
-                                </p>
-                                <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
-                                  <tbody>
-                                    <tr>
-                                      <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
-                                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
-                                          <tbody>
-                                            <tr>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-
-                    <!-- END MAIN CONTENT AREA -->
-                    </table>
-
-                    <!-- START FOOTER -->
-                    <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
-                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
-                        <tr>
-                          <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                            <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
-                            <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                                  <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                    <tbody>
+                                      <tr>
+                                        <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                          <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                            <tbody>
+                                              <tr>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
                           </td>
                         </tr>
-                        <tr>
-                          <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
-                          <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
-                          </td>
-                        </tr>
+
+                      <!-- END MAIN CONTENT AREA -->
                       </table>
+
+                      <!-- START FOOTER -->
+                      <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                          <tr>
+                            <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                              <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>G&G Softech Sdn Bhd, 75-1, jalan pudu lama, 50200, wilayah persekutuan, kuala lumpur</span>
+                              <br> Don't like these emails? <a href='mailto:care@gongetz.com' class='btn btn-danger btn-sm'>Report Spam</a>.
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>
+                            <a href='' style='color: #999999; font-size: 12px; text-align: center; text-decoration: none;'>gongetz.com</a>.
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
                     </div>
-                    <!-- END FOOTER -->
-
-                  <!-- END CENTERED WHITE CONTAINER -->
-                  </div>
-                </td>
-                <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
-              </tr>
-            </table>
-          </body>
-        </html>
-        ";
-        $mail->AltBody = "This is the plain text version of the email content";
-
-        try { $mail->send();} 
-
-        catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+                  </td>
+                  <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+                </tr>
+              </table>
+              </body>
+          </html>";
+          $mail->AltBody = "This is the plain text version of the email content";
+          try { $mail->send();} 
+          catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+        }
       }
     }
   }
 }
-}
-/* ------------------------------------------- end:Change status for student ---------------------------------------------------------------------*/
 
 
 /* ------------------------------------------- begin:paging --------------------------------------------------------------------------------------*/
@@ -2175,31 +2051,31 @@ if (isset($_POST['StatusStudentFormSubmit']))
     $pagingnext = 1;
     $pagingprevious = 0;
   }
-  if (!isset($_POST['searchstudent']) && empty($_POST['searchstudent']))
+  if (!isset($_POST['search_student']) && empty($_POST['search_student']))
   {
     if (!isset($_GET['level']) && empty($_GET['level']))
     {
-    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+      $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+      $query = new MongoDB\Driver\Query($filter,$option);
+      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
     }
     else
     {
-    $sort = ($_GET['level']);
-    $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],
-              'ClassCategory'=>$sort
-              ];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-    foreach ($cursor as $document)
-    {
-    $classid = strval($document->_id);
-    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'Class_id'=>$classid];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-    }
+      $sort = ($_GET['level']);
+
+      $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],'ClassCategory'=>$sort];
+      $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+      $query = new MongoDB\Driver\Query($filter,$option);
+      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+      foreach ($cursor as $document)
+      {
+        $class_id = strval($document->_id);
+
+        $filter = ['Class_id'=>$class_id];
+        $query = new MongoDB\Driver\Query($filter);
+        $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+      }
     }
   }
   else
@@ -2210,13 +2086,12 @@ if (isset($_POST['StatusStudentFormSubmit']))
     $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
     foreach ($cursor as $document)
     {
-      $idx = strval($document->_id);
-      $ConsumerIDNox = strval($document->ConsumerIDNo);
-      $ConsumerFNamex = strval($document->ConsumerFName);
-
-      if ($ConsumerIDNox==$IDnumber || $ConsumerFNamex==$IDnumber)
+      $consumer_id = strval($document->_id);
+      $ConsumerIDNo = $document->ConsumerIDNo;
+      $ConsumerFName = $document->ConsumerFName;
+      if ($ConsumerIDNo==$IDnumber || $ConsumerFName==$IDnumber)
       {
-        $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"],'Consumer_id'=>$idx];
+        $filter = ['Consumer_id'=>$consumer_id];
         $query = new MongoDB\Driver\Query($filter);
         $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
       }

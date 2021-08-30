@@ -27,7 +27,7 @@
         <div class="card-toolbar text-right">
           <!--begin::Dropdown-->
           <div class="dropdown dropdown-inline mr-2">
-            <button type="button" class="btn btn-light-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-light btn-hover-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="svg-icon svg-icon-md">
                   <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -55,10 +55,10 @@
                   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                  foreach ($cursor as $document1)
+                  foreach ($cursor as $document)
                   {
-                    $ConsumerFName = $document1->ConsumerFName;
-                    $ConsumerLName = $document1->ConsumerLName;
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
                   }
                   ?>
                   <li class="dropdown-item">
@@ -84,6 +84,7 @@
 <?php
 if (isset($_GET['id']) && !empty($_GET['id']))
 {
+  // group : school
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -103,7 +104,8 @@ if (isset($_GET['id']) && !empty($_GET['id']))
 }
 else
 {
-  $filter = [null];
+  // group : school
+  $filter = ['ConsumerGroup_id'=>'601b4cfd97728c027c01f187'];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -139,106 +141,102 @@ foreach ($cursor as $document)
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <!-- begin::department detail -->
+          <!-- begin::staff detail -->
           <div class="col-sm">
-            <table class="table table-bordered text-primary">
+            <table class="table table-bordered">
               <tbody>
-                <tr class="bg-light-primary">
-                  <th scope="row">Name</th>
+                <tr class="bg-light text-dark-50">
+                  <td>Name</td>
                   <td><?= $ConsumerFName." ".$ConsumerLName; ?> </td>
                 </tr>
                 <tr>
-                <th scope="row">ID Type</th>
-                <td><?= $ConsumerIDType; ?></td>
+                  <td>ID Type</td>
+                  <td><?= $ConsumerIDType; ?></td>
                 </tr>
                 <tr>
-                  <th scope="row">ID Number</th>
-                    <td><?= $ConsumerIDNo; ?></td>
+                  <td>ID Number</td>
+                  <td><?= $ConsumerIDNo; ?></td>
                 </tr>
                 <tr>
-                  <th scope="row">Email</th>
-                <td><?= $ConsumerEmail; ?></td>
+                  <td>Email</td>
+                  <td><?= $ConsumerEmail; ?></td>
                 </tr>
                 <tr>
-                  <th scope="row">Phone Number</th>
+                  <td>Phone Number</td>
                   <td><?= $ConsumerPhone; ?></td>
                 </tr>
                 <tr>
-                  <th scope="row">Address</th>
+                  <td>Address</td>
                   <td><?= $ConsumerAddress; ?></td>
                 </tr>
                 <tr>
-                  <th scope="row">Status</th>
+                  <td>Status</td>
                   <td><?= $ConsumerStatus; ?></td>
                 </tr>
               </tbody>
             </table>
             <!-- teacher -->
             <?php
-            if($StaffLevel == '0')
+            if($StaffLevel == '0' && $ClassID !== '')
             {
-              ?>
-              <table class="table table-bordered text-primary">
-                <tr>
-                  <th scope="row">Class</th>
-                  <th scope="row">Subject</th>
-                </tr>
-                <tbody>
-                  <?php
-                  $filter = ['Teacher_id'=>$consumer_id];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
-                  foreach ($cursor as $document)
-                  {
-                    $Class_id = $document->Class_id;
-                    $Subject_id = $document->Subject_id;
-                  
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-                    foreach ($cursor as $document)
-                    {
-                      $ClassName = $document->ClassName;
-                    }
+              $filter = ['Teacher_id'=>$staff_id];
+              $query = new MongoDB\Driver\Query($filter);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+              foreach ($cursor as $document)
+              {
+                $Class_id = $document->Class_id;
+                $Subject_id = $document->Subject_id;
+              
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                foreach ($cursor as $document)
+                {
+                  $ClassName = $document->ClassName;
+                }
 
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
-                    foreach ($cursor as $document)
-                    {
-                      $SubjectName = $document->SubjectName;
-                    }
-                    ?>
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                foreach ($cursor as $document)
+                {
+                  $SubjectName = $document->SubjectName;
+                }
+                ?>
+                <table class="table table-bordered">
+                  <tr class="bg-light text-dark-50">
+                    <td>Class</td>
+                    <td>Subject</td>
+                  </tr>
+                  <tbody>
                     <tr>
-                      <td><?= $ClassName; ?></td>
-                      <td><?= $SubjectName; ?></td>
+                      <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
+                      <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                     </tr>
-                    <?php
-                  }
-                  ?>
-                </tbody>
-              </table>
-              <?php
+                  </tbody>
+                </table>
+                <?php
+              }
             }
             ?>
             <!-- teacher -->
           </div>
-          <!-- end::department detail -->
+          <!-- end::staff detail -->
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light-primary text-primary">
-                <strong>Remarks</strong>
+              <div class="card-header bg-light text-dark-50">
+                <a>Remarks</a>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div class="box">
                       <form name="add_remark" action="model/staff_remark.php" method="POST">
-                        <textarea class="department" name="remark"></textarea>
-                        <div class="m-3 text-right">
+                        <textarea class="staff" name="remark"></textarea>
+                        <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
-                          <button type="submit" class="btn btn-primary btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -270,21 +268,21 @@ foreach ($cursor as $document)
                           $option = ['sort' => ['_id' => -1],'limit'=>10];
                           $query = new MongoDB\Driver\Query($filter, $option);
                           $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
-                          foreach ($cursor as $document1)
+                          foreach ($cursor as $document)
                           {
-                            $remark_id1 = strval($document1->_id);
-                            $Details1 = $document1->Details;
-                            $Staff_id1 = $document1->Staff_id;
-                            $Date1 = strval($document1->Date);
+                            $remark_id1 = strval($document->_id);
+                            $Details1 = $document->Details;
+                            $Staff_id1 = $document->Staff_id;
+                            $Date1 = strval($document->Date);
                             $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
                             $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
                             $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id1)];
                             $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-                            foreach ($cursor as $document1)
+                            foreach ($cursor as $document)
                             {
-                              $ConsumerFName = $document1->ConsumerFName;
+                              $ConsumerFName = $document->ConsumerFName;
                             }
                             ?>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -341,13 +339,13 @@ foreach ($cursor as $document)
                                     ?>
                                     <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                         <div class="m-3">
-                                          <textarea class="department" name="remark"></textarea>
+                                          <textarea class="staff" name="remark"></textarea>
                                         </div>
                                         <div class="m-3 text-right">
                                           <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                           <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                           <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -372,12 +370,12 @@ foreach ($cursor as $document)
                           $option = ['sort' => ['_id' => -1],'limit'=>10];
                           $query = new MongoDB\Driver\Query($filter, $option);
                           $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
-                          foreach ($cursor as $document1)
+                          foreach ($cursor as $document)
                           {
-                            $remark_id1 = strval($document1->_id);
-                            $Details1 = $document1->Details;
-                            $Staff_id1 = $document1->Staff_id;
-                            $Date1 = strval($document1->Date);
+                            $remark_id1 = strval($document->_id);
+                            $Details1 = $document->Details;
+                            $Staff_id1 = $document->Staff_id;
+                            $Date1 = strval($document->Date);
                             $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
                             $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
@@ -443,13 +441,13 @@ foreach ($cursor as $document)
                                     ?>
                                     <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                       <div class="m-3">
-                                        <textarea class="department" name="remark"></textarea>
+                                        <textarea class="staff" name="remark"></textarea>
                                       </div>
                                       <div class="m-3 text-right">
                                         <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                         <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                         <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                        <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                       </div>
                                     </form>
                                   </div>
@@ -474,12 +472,12 @@ foreach ($cursor as $document)
                           $option = ['sort' => ['_id' => -1],'limit'=>10];
                           $query = new MongoDB\Driver\Query($filter, $option);
                           $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
-                          foreach ($cursor as $document1)
+                          foreach ($cursor as $document)
                           {
-                            $remark_id1 = strval($document1->_id);
-                            $Staff_id1 = $document1->Staff_id;
-                            $Details1 = $document1->Details;
-                            $Date1 = strval($document1->Date);
+                            $remark_id1 = strval($document->_id);
+                            $Staff_id1 = $document->Staff_id;
+                            $Details1 = $document->Details;
+                            $Date1 = strval($document->Date);
                             $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
                             $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                             
@@ -545,13 +543,13 @@ foreach ($cursor as $document)
                                       ?>
                                       <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                         <div class="m-3">
-                                          <textarea class="department" name="remark"></textarea>
+                                          <textarea class="staff" name="remark"></textarea>
                                         </div>
                                         <div class="m-3 text-right">
                                           <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                           <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                           <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                         </div>
                                       </form>
                                   </div>
@@ -581,9 +579,9 @@ foreach ($cursor as $document)
   <div class="col-10">
     <div class="card">
       <div class="card-body text-right">
-        <a href="index.php?page=departmentdetail&id=<?= $consumer_id; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+        <a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
         <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-          <thead class="bg-white text-danger">
+          <thead class="bg-white text-dark-50">
               <tr>
                 <th>Staff ID</th>
                 <th>Staff Name</th>
@@ -593,78 +591,87 @@ foreach ($cursor as $document)
               </tr>
           </thead>
           <tbody>
-          <?php
-          $Cards_id ='';
-          $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$consumer_id];
-          $query = new MongoDB\Driver\Query($filter);
-          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-          foreach ($cursor as $document)
-          {
-            $ConsumerID = strval($document->ConsumerID);
-            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+            <?php
+            $Cards_id ='';
+            $date_now = date("d-m-Y");
+            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
+            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+
+            if (isset($_GET['id']) && !empty($_GET['id']))
+            {
+              $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
+              $query = new MongoDB\Driver\Query($filter);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+              foreach ($cursor as $document)
+              {
+                $consumer_id = strval($document->_id);
+                $ConsumerFName = $document->ConsumerFName;
+                $ConsumerLName = $document->ConsumerLName;
+                $ConsumerIDNo = $document->ConsumerIDNo;
+              }
+            }
+            else
+            {
+              $filter = ['ConsumerGroup_id'=>'601b4cfd97728c027c01f187'];
+              $query = new MongoDB\Driver\Query($filter);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+              foreach ($cursor as $document)
+              {
+                $consumer_id = strval($document->_id);
+                $ConsumerFName = $document->ConsumerFName;
+                $ConsumerLName = $document->ConsumerLName;
+                $ConsumerIDNo = $document->ConsumerIDNo;
+              }
+            }
+            $filter = ['Consumer_id'=>$consumer_id];
             $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
             foreach ($cursor as $document)
             {
-              $consumerid = strval($document->_id);
-              $ConsumerFName = $document->ConsumerFName;
-              $ConsumerLName = $document->ConsumerLName;
-              $ConsumerIDNo = $document->ConsumerIDNo;
-
-              $Cards_id ='';
-              $filter = ['Consumer_id'=>$consumerid];
-              $query = new MongoDB\Driver\Query($filter);
-              $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
-              foreach ($cursor as $document1)
-              {
-                $Cards_id = strval($document1->Cards_id);
-              }
-              $varnow = date("d-m-Y");
-              $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
-              ?>
-              <tr>
-                <td class="default"><?= $ConsumerIDNo; ?></td>
-                <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                <td class="default"><?= $varnow."<br>"; ?></td>
-                <td class="default"><?php
-                $varcounting = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                $option = ['sort' => ['_id' => 1]];
-                $query = new MongoDB\Driver\Query($filter,$option);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                foreach ($cursor as $documentA)
-                {
-                  $AttendanceDate = ($documentA->AttendanceDate);
-                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                  $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $varcounting = $varcounting +1;
-                  if ($varcounting % 2){
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";}
-                }
-                ?></td>
-                <td class="default"><?php
-                $varcounting = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                $option = ['sort' => ['_id' => 1]];
-                $query = new MongoDB\Driver\Query($filter,$option);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                foreach ($cursor as $documentA)
-                {
-                  $AttendanceDate = ($documentA->AttendanceDate);
-                  $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                  $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $varcounting = $varcounting +1;
-                  if ($varcounting % 2){
-                  }
-                  else{
-                    echo date_format($AttendanceDate,"H:i:s")."<br>";}
-                }
-                ?></td>
-              </tr>
-              <?php
+              $Cards_id = strval($document->Cards_id);
             }
-          }
-          ?>
+            ?>
+            <tr>
+              <td class="default"><?= $ConsumerIDNo; ?></td>
+              <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
+              <td class="default"><?= $date_now."<br>"; ?></td>
+              <td class="default"><?php
+              $count = 0;
+              $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+              $option = ['sort' => ['_id' => 1]];
+              $query = new MongoDB\Driver\Query($filter,$option);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+              foreach ($cursor as $document)
+              {
+                $date = strval($document->AttendanceDate);
+                $date = new MongoDB\BSON\UTCDateTime($date);
+                $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                $count = $count +1;
+                if ($count % 2){
+                  echo date_format($date,"H:i:s")."<br>";}
+              }
+              ?></td>
+              <td class="default"><?php
+              $count = 0;
+              $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+              $option = ['sort' => ['_id' => 1]];
+              $query = new MongoDB\Driver\Query($filter,$option);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+              foreach ($cursor as $document)
+              {
+                $date = strval($document->AttendanceDate);
+                $date = new MongoDB\BSON\UTCDateTime($date);
+                $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                
+                $count = $count +1;
+                if ($count % 2){
+                }
+                else{
+                  echo date_format($date,"H:i:s")."<br>";}
+              }
+              ?></td>
+            </tr>
           </tbody>
         </table>
           <?php
@@ -675,7 +682,7 @@ foreach ($cursor as $document)
             <script>
               $(document).ready(function () {
                 $("#attendance").table2excel({
-                    filename: "attendancedepartment.xls"
+                    filename: "attendancestaff.xls"
                 });
               });
               
@@ -700,7 +707,7 @@ foreach ($cursor as $document)
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
-  selector: '.department',
+  selector: '.staff',
   menubar:false,
   statusbar: false,
   toolbar: false,

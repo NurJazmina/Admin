@@ -36,7 +36,7 @@ include ('model/ol_dashboard.php');
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo ""; ?></span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?= ""; ?></span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -152,7 +152,7 @@ include ('model/ol_dashboard.php');
                                         </div>
                                         <div class="bg-white" style="height:50px;">
                                             <p class="font-size-h4 text-center mt-3">
-                                            <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                            <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?= $Subjectid ; ?>"><?= $SubjectName; ?></a>
                                             </p>
                                         </div>
                                         <div class="dropdown text-right bg-white" >
@@ -182,7 +182,7 @@ include ('model/ol_dashboard.php');
                                 <div x-show="layout === 'list'" x-cloak>
                                     <div class="list-group-item mt-1 mb-1">
                                         <p class="font-size-h4 mt-3">
-                                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?= $Subjectid ; ?>"><?= $SubjectName; ?></a>
                                         </p>
                                         <?php
                                         $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
@@ -199,7 +199,7 @@ include ('model/ol_dashboard.php');
                                             echo $y;
                                         }
                                         ?>
-                                        <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
+                                        <p class="text-right"><a href="index.php?page=ol_subject&id=<?= $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
                                     </div>
                                 </div>
                         </section>
@@ -221,7 +221,7 @@ include ('model/ol_dashboard.php');
                                     </div>
                                     <div class="bg-white" style="height:50px;">
                                         <p class="font-size-h4 text-center mt-3">
-                                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                        <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?= $Subjectid ; ?>"><?= $SubjectName; ?></a>
                                         </p>
                                     </div>
                                     <div class="dropdown text-right bg-white" >
@@ -251,7 +251,7 @@ include ('model/ol_dashboard.php');
                             <div x-show="layout === 'list'" x-cloak>
                                 <div class="list-group-item mt-1 mb-1">
                                     <p class="font-size-h4 mt-3">
-                                    <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                    <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?= $Subjectid ; ?>"><?= $SubjectName; ?></a>
                                     </p>
                                     <?php
                                     $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
@@ -268,7 +268,7 @@ include ('model/ol_dashboard.php');
                                         echo $y;
                                     }
                                     ?>
-                                    <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
+                                    <p class="text-right"><a href="index.php?page=ol_subject&id=<?= $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p>
                                 </div>
                             </div>
                     </section>
@@ -290,7 +290,7 @@ include ('model/ol_dashboard.php');
                                 </div>
                                 <div class="bg-white" style="height:50px;">
                                     <p class="font-size-h4 text-center mt-3">
-                                    <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                    <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?= $Subjectid ; ?>"><?= $SubjectName; ?></a>
                                     </p>
                                 </div>
                                 <div class="dropdown text-right bg-white" >
@@ -320,7 +320,7 @@ include ('model/ol_dashboard.php');
                         <div x-show="layout === 'list'" x-cloak>
                             <div class="list-group-item mt-1 mb-1 bg-light-info">
                                 <p class="font-size-h4 mt-3">
-                                <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?php echo $Subjectid ; ?>"><?php echo $SubjectName; ?></a>
+                                <a class="text-lightsecondary text-hover-primary" href="index.php?page=ol_subject&id=<?= $Subjectid ; ?>"><?= $SubjectName; ?></a>
                                 </p>
                                 <?php
                                 $filter = ['Subject_id'=>$Subjectid,'Note_sort'=>1];
@@ -337,7 +337,7 @@ include ('model/ol_dashboard.php');
                                     echo $y;
                                 }
                                 ?>
-                                <!-- <p class="text-right"><a href="index.php?page=ol_subject&id=<?php echo $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p> -->
+                                <!-- <p class="text-right"><a href="index.php?page=ol_subject&id=<?= $Subjectid; ?>" class="uppercase text-base text-gray-600 hover:text-black">Read more →</a></p> -->
                             </div>
                         </div>
                 </section>
@@ -378,7 +378,7 @@ include ('model/ol_dashboard.php');
             <div class="card card-custom card-stretch bg-white p-4 shadow">
             <article class="bg-white">
                 <p class="font-size-h4 text-center mt-3">
-                <a  class="text-lightsecondary text-hover-primary"><?php echo $SubjectName; ?></a>
+                <a  class="text-lightsecondary text-hover-primary"><?= $SubjectName; ?></a>
                 </p>
                 <div class="separator separator-solid separator-border-3 separator-secondary"></div><br>
                 <?php
@@ -398,8 +398,8 @@ include ('model/ol_dashboard.php');
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  class="text-success" href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?php echo " ".$Title; ?>
+                            <a  class="text-success" href="index.php?page=ol_submit_assignment&id=<?= $Assignment_id; ?>">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/handgiving.svg"><?= " ".$Title; ?>
                             </a>
                         </div>
                         <?php
@@ -413,8 +413,8 @@ include ('model/ol_dashboard.php');
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  class="text-success" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?php echo " ".$Title; ?>
+                            <a  class="text-success" href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id; ?>">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/quiz.svg"><?= " ".$Title; ?>
                             </a>
                         </div>
                         <?php
@@ -429,8 +429,8 @@ include ('model/ol_dashboard.php');
                         $Url = $document->Url;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  class="text-success" href="<?php echo $Url; ?>">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?php echo " ".$Title; ?>
+                            <a  class="text-success" href="<?= $Url; ?>">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/url.svg"><?= " ".$Title; ?>
                             </a>
                         </div>
                         <?php
@@ -444,8 +444,8 @@ include ('model/ol_dashboard.php');
                         $Title = $document->Title;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  class="text-success" href="index.php?page=ol_submit_survey&id=<?php echo $Survey_id; ?>">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?php echo " ".$Title; ?>
+                            <a  class="text-success" href="index.php?page=ol_submit_survey&id=<?= $Survey_id; ?>">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/survey.svg"><?= " ".$Title; ?>
                             </a>
                         </div>
                         <?php
@@ -460,8 +460,8 @@ include ('model/ol_dashboard.php');
                         $Description = $document->Description;
                         ?>
                         <div class="checkbox-inline mb-5">
-                            <a  class="text-success" href="index.php?page=ol_announcement&id=<?php echo $Announcement_id; ?>">
-                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?php echo " ".$Title; ?>
+                            <a  class="text-success" href="index.php?page=ol_announcement&id=<?= $Announcement_id; ?>">
+                            <img class="icon icon px-5" alt="" aria-hidden="true" src="assets/media/svg/social-icons/forum.svg"><?= " ".$Title; ?>
                             </a>
                         </div>
                         <?php

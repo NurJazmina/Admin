@@ -90,8 +90,7 @@ foreach ($cursor as $document)
     <h1><?= $Title; ?></h1>
 </div>
 <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
+    <div class="col-12">
         <div class="card ribbon ribbon-right shadow rounded">
             <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
             <div class="p-8 mt-5">
@@ -142,5 +141,5 @@ foreach ($cursor as $document)
                 </div>
             </div>
         </div>
-    <div class="col-2"></div>
+    </div>
 </div>

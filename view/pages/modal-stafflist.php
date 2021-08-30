@@ -145,7 +145,7 @@
           <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="status_staff">Confirm</button>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </form>

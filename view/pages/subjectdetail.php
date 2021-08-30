@@ -8,7 +8,7 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Subject</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Subject detail</h5>
 					<!--end::Page Title-->
 				</div>
 				<!--end::Page Heading-->
@@ -19,7 +19,7 @@
         <div class="card-toolbar text-right">
           <!--begin::Dropdown-->
           <div class="dropdown dropdown-inline mr-2">
-            <button type="button" class="btn btn-light-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-light btn-hover-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="svg-icon svg-icon-md">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -100,14 +100,14 @@ else
         <div class="row">
           <!-- begin::Subject/class detail -->
           <div class="col-sm">
-            <table class="table table-bordered text-primary">
+            <table class="table table-bordered">
               <tbody>
-                <tr class="bg-light-primary">
-                  <th>Subject</th>
+                <tr class="bg-light text-dark-50">
+                  <td>Subject</td>
                   <td><?= $subject_name; ?> </td>
                 </tr>
                 <tr>
-                  <th>Class List</th>
+                  <td>Class List</td>
                   <td>
                   <?php
                   $totalclass = 0;
@@ -127,7 +127,7 @@ else
                       $totalclass = $totalclass + 1;
                       $ClassName = $document->ClassName;
                       ?>
-                      <a class="text-primary" href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName;?></a><br>
+                      <a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName;?></a><br>
                       <?php
                     }
                   }
@@ -135,16 +135,16 @@ else
                   </td>
                 </tr>
                 <tr>
-                  <th>Number of Class</th>
+                  <td>Number of Class</td>
                   <td><?= $totalclass; ?></td>
                 </tr>
               </tbody>
             </table>
-            <table class="table table-bordered text-primary">
+            <table class="table table-bordered">
               <tbody>
-                <tr class="bg-light-primary">
-                  <th>Teacher</th>
-                  <th>Class</th>
+                <tr class="bg-light text-dark-50">
+                  <td>Teacher</td>
+                  <td>Class</td>
                 </tr>
                 <?php
                 $totalstudent = 0;
@@ -183,10 +183,10 @@ else
                   ?>
                   <tr>
                     <td>
-                      <a class="text-primary" href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a>
+                      <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a>
                     </td>
                     <td>
-                      <a class="text-primary" href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName;?></a>
+                      <a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName;?></a>
                     </td>
                   </tr>
                   <?php
@@ -199,8 +199,8 @@ else
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light-primary text-primary">
-                <strong>Remarks</strong>
+              <div class="card-header bg-light text-dark-50">
+                <a>Remarks</a>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="v-pills-tabContent">
@@ -208,9 +208,9 @@ else
                     <div class="box">
                       <form name="add_remark" action="model/subject_remark.php" method="POST">
                         <textarea class="subject" name="remark"></textarea>
-                        <div class="m-3 text-right">
+                        <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $subject_id; ?>" name="subject_id">
-                          <button type="submit" class="btn btn-primary btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -319,7 +319,7 @@ else
                                     <input type="hidden" value="<?= $subject_id; ?>" name="subject_id">
                                     <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                     <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_subject_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                    <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_subject_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                   </div>
                                 </form>
                               </div>
@@ -421,7 +421,7 @@ else
                                       <input type="hidden" value="<?= $subject_id; ?>" name="subject_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_subject_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_subject_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -523,7 +523,7 @@ else
                                       <input type="hidden" value="<?= $subject_id; ?>" name="subject_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update_subject_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_subject_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>

@@ -84,9 +84,8 @@ $(document).ready(function() {
 });
 </script>
 <div class="row">
-    <div class="col-3"></div>		
-    <div class="col-6">
-        <div class="mt-3 mb-3 p-4 rounded" style="color: #5e9164; background-color: #8bcf93;">
+    <div class="col-sm mb-5">
+        <div class="p-4 rounded" style="color: #5e9164; background-color: #8bcf93;">
             <strong>Channel Topic &nbsp;&nbsp;:&nbsp;&nbsp; </strong>
             <span class="btn btn-outline-white btn-sm font-weight-bold btn-pill"><?= $_GET['topic']; ?></span>
         </div>
@@ -140,19 +139,19 @@ $(document).ready(function() {
                     $ConsumerFName = $document1->ConsumerFName;
                     $ConsumerLName = $document1->ConsumerLName;
                     ?>
-                    <div class="bg-white p-8 mb-3 ribbon ribbon-right">
-                    <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
-                        <a class="h5"><?= $Title; ?></a>
-                        <div class="mt-5">
-                            <span align="justify"><?= $Details; ?></span>
+                    <div class="bg-white mt-2 p-8 mb-3 ribbon ribbon-right">
+                        <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
+                            <a class="h5"><?= $Title; ?></a>
+                            <div class="mt-5">
+                                <span align="justify"><?= $Details; ?></span>
+                            </div>
+                            <div class="mt-5 mb-5">
+                                <img class="img-round-xxxsm" src="assets/media/svg/avatars/032-boy-13.svg" alt="avatar">&nbsp;&nbsp;
+                                <small class="text-muted"><?= $ConsumerFName." ".$ConsumerLName;?></small>&nbsp;&nbsp;
+                                <small class="text-muted"><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
+                            </div>
                         </div>
-                        <div class="mt-5 mb-5">
-                            <img class="img-round-xxxsm" src="assets/media/svg/avatars/032-boy-13.svg" alt="avatar">&nbsp;&nbsp;
-                            <small class="text-muted"><?= $ConsumerFName." ".$ConsumerLName;?></small>&nbsp;&nbsp;
-                            <small class="text-muted"><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
-                        </div>
-                    </div>
-                    <div class="card p-8">
+                        <div class="card p-8">
                             <?php
                             $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                             $query = new MongoDB\Driver\Query($filter);
@@ -296,59 +295,61 @@ $(document).ready(function() {
                                             </h2>
                                             <div id="flush-collapse<?= $_id4; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?= $_id4; ?>" data-bs-parent="#accordionFlushExample">
                                                 <div class="accordion-body commentline">
-                                                <?php
-                                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>$_id4];
-                                                $option = ['sort' => ['_id' => 1]];
-                                                $query = new MongoDB\Driver\Query($filter,$option);
-                                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
+                                                    <?php
+                                                    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>$_id4];
+                                                    $option = ['sort' => ['_id' => 1]];
+                                                    $query = new MongoDB\Driver\Query($filter,$option);
+                                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
 
-                                                foreach ($cursor as $document6)
-                                                {
-                                                    $Details6 = $document6->Details;
-                                                    $Staff_id6 = $document6->Staff_id;
-                                                    $Date6 = strval($document6->Date);
-
-                                                    $utcdatetime6 = new MongoDB\BSON\UTCDateTime($Date6);
-                                                    $datetime6 = $utcdatetime6->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                                    $dateforum6 = date_format($datetime6,"Y-m-d\TH:i:s");
-                                                    $date6 = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum6))->getTimestamp());
-                                                    $time6_strval = strval($date6);
-
-                                                    $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id6)];
-                                                    $query = new MongoDB\Driver\Query($filter);
-                                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-                                                    foreach ($cursor as $document7)
+                                                    foreach ($cursor as $document6)
                                                     {
-                                                        $ConsumerFName7 = $document7->ConsumerFName;
-                                                        $ConsumerLName7 = $document7->ConsumerLName;
-                                                        ?>
-                                                        <div class="text-left">
-                                                            <img class="img-round-xsm" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
-                                                            <a href="index.php?page=staffdetail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName7." ".$ConsumerLName7;?></a>
-                                                            <small class="text-muted"><?= date_format($datetime6,"d/m/y"); echo " ( ".time_elapsed($time_now-$time6_strval)." ) \n"; ?></small>
-                                                            <div style="border-left: 1px solid #eee; padding-left:10px; margin-left: 10px;"><?= $Details6; ?></div>
-                                                        </div> 
-                                                        <?php
+                                                        $Details6 = $document6->Details;
+                                                        $Staff_id6 = $document6->Staff_id;
+                                                        $Date6 = strval($document6->Date);
+
+                                                        $utcdatetime6 = new MongoDB\BSON\UTCDateTime($Date6);
+                                                        $datetime6 = $utcdatetime6->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                                        $dateforum6 = date_format($datetime6,"Y-m-d\TH:i:s");
+                                                        $date6 = new MongoDB\BSON\UTCDateTime((new DateTime($dateforum6))->getTimestamp());
+                                                        $time6_strval = strval($date6);
+
+                                                        $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id6)];
+                                                        $query = new MongoDB\Driver\Query($filter);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+                                                        foreach ($cursor as $document7)
+                                                        {
+                                                            $ConsumerFName7 = $document7->ConsumerFName;
+                                                            $ConsumerLName7 = $document7->ConsumerLName;
+                                                            ?>
+                                                            <div class="text-left">
+                                                                <img class="img-round-xsm" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
+                                                                <a href="index.php?page=staffdetail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName7." ".$ConsumerLName7;?></a>
+                                                                <small class="text-muted"><?= date_format($datetime6,"d/m/y"); echo " ( ".time_elapsed($time_now-$time6_strval)." ) \n"; ?></small>
+                                                                <div style="border-left: 1px solid #eee; padding-left:10px; margin-left: 10px;"><?= $Details6; ?></div>
+                                                            </div> 
+                                                            <?php
+                                                        }
                                                     }
-                                                }
-                                                ?>
-                                                <form name="AddCommentChild" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
-                                                    <div class="col-12">
-                                                        <textarea class="forum" name="detail"></textarea>
-                                                        <div class="text-right">
-                                                            <input type="hidden" name="forum_id" value="<?=  $Forum_id; ?>">
-                                                            <input type="hidden" name="parent_id" value="<?= $_id4; ?>">
-                                                            <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="AddCommentChild">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                                    ?>
+                                                    <form name="AddCommentChild" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                                        <div class="col-12">
+                                                            <textarea class="forum" name="detail"></textarea>
+                                                            <div class="text-right">
+                                                                <input type="hidden" name="forum_id" value="<?=  $Forum_id; ?>">
+                                                                <input type="hidden" name="parent_id" value="<?= $_id4; ?>">
+                                                                <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="AddCommentChild">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <?php
                                 }
                             }
-                        ?>
+                            ?>
+                        </div>
                     </div>
                     <?php
                 }
@@ -356,8 +357,7 @@ $(document).ready(function() {
         }
         ?>
     </div>
-    <div class="col-3"></div>
-</div>					
+</div>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
