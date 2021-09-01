@@ -77,264 +77,146 @@ if (!isset($_GET['id']) && empty($_GET['id']))
     $filter = [null];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-  
     foreach ($cursor as $document)
     {
-      $Department_id = strval($document->_id);
-      $DepartmentName = ($document->DepartmentName);
+      $department_id = strval($document->_id);
+      $DepartmentName = $document->DepartmentName;
     }
-    ?>
-    <div class="text-dark-50 text-center m-5"><h1>Department - Attendance</h1></div>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-            <div class="card">
-            <div class="card-body text-right">
-                <a href="index.php?page=departmentattendance&id=<?= $Department_id; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
-                <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-                <thead class="bg-white text-danger">
-                    <tr>
-                        <th>Staff ID</th>
-                        <th>Staff Name</th>
-                        <th>Date</th>
-                        <th>IN</th>
-                        <th>OUT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$Department_id];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                foreach ($cursor as $document)
-                {
-                    $ConsumerID = strval($document->ConsumerID);
-
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                    foreach ($cursor as $document)
-                    {
-                        $_SESSION["staffremarkid"] = strval($document->_id);
-                        $ConsumerFName = $document->ConsumerFName;
-                        $ConsumerLName = $document->ConsumerLName;
-                        $ConsumerIDNo = $document->ConsumerIDNo;
-                        $consumerid = strval($document->_id);
-                        $varnow = date("d-m-Y");
-                        ?>
-                        <tr>
-                            <td class="default"><?= $ConsumerIDNo; ?></td>
-                            <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                            <?php
-                            $Cards_id ='';
-                            $filter = ['Consumer_id'=>$consumerid];
-                            $query = new MongoDB\Driver\Query($filter);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
-                            foreach ($cursor as $document1)
-                            {
-                                $Cards_id = strval($document1->Cards_id);
-                            }
-                            $varnow = date("d-m-Y");
-                            $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
-                            ?>
-                            <td class="default"><?= $varnow."<br>"; ?></td>
-                            <td class="default"><?php
-                            $varcounting = 0;
-                            $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                            $option = ['sort' => ['_id' => 1]];
-                            $query = new MongoDB\Driver\Query($filter,$option);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                            foreach ($cursor as $documentA)
-                            {
-                                $AttendanceDate = ($documentA->AttendanceDate);
-                                $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                $varcounting = $varcounting +1;
-                                if ($varcounting % 2){
-                                echo date_format($AttendanceDate,"H:i:s")."<br>";}
-                            }
-                            ?></td>
-                            <td class="default"><?php
-                            $varcounting = 0;
-                            $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                            $option = ['sort' => ['_id' => 1]];
-                            $query = new MongoDB\Driver\Query($filter,$option);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                            foreach ($cursor as $documentA)
-                            {
-                                $AttendanceDate = ($documentA->AttendanceDate);
-                                $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                $varcounting = $varcounting +1;
-                                if ($varcounting % 2){
-                                }
-                                else{
-                                    echo date_format($AttendanceDate,"H:i:s")."<br>";}
-                            }
-                            ?></td>
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
-                </tbody>
-                </table>
-                <?php
-                if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-                {
-                    $attendance = ($_GET['attendance']);
-                    ?>
-                    <script>
-                    $(document).ready(function () {
-                        $("#attendance").table2excel({
-                            filename: "attendancedepartment.xls"
-                        });
-                    });
-                    
-                    </script>
-                    <?php
-                }?>
-                <script type="text/javascript">
-                var rows = document.querySelectorAll('tr');
-
-                [...rows].forEach((r) => {
-                if (r.querySelectorAll('td:empty').length > 0) {
-                r.classList.add('highlight');
-                }
-                })
-                </script>
-            </div>
-            </div>
-        </div>
-        <div class="col-1"></div>
-    </div>
-    <?php
 }
 else
 {
-    ?>
-    <div class="text-dark-50 text-center m-5"><h1>Department - Attendance</h1></div>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-            <div class="card">
-                <div class="card-body text-right">
-                    <a href="index.php?page=departmentattendance&id=<?= $_GET['id']; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
-                    <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-                        <thead class="bg-white text-danger">
-                            <tr>
-                                <th>Staff ID</th>
-                                <th>Staff Name</th>
-                                <th>Date</th>
-                                <th>IN</th>
-                                <th>OUT</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+
+    foreach ($cursor as $document)
+    {
+      $department_id = strval($document->_id);
+      $DepartmentName = $document->DepartmentName;
+    }
+}
+?>
+<div class="text-dark-50 text-center m-5"><h1>Department - Attendance</h1></div>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="card">
+        <div class="card-body text-right">
+            <a href="index.php?page=departmentattendance&id=<?= $department_id; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+            <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
+            <thead class="bg-white text-danger">
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Staff Name</th>
+                    <th>Date</th>
+                    <th>IN</th>
+                    <th>OUT</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$department_id];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+            foreach ($cursor as $document)
+            {
+                $ConsumerID = $document->ConsumerID;
+
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                foreach ($cursor as $document)
+                {
+                    $consumer_id = strval($document->_id);
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
+                    $ConsumerIDNo = $document->ConsumerIDNo;
+                    $varnow = date("d-m-Y");
+                    ?>
+                    <tr>
+                        <td class="default"><?= $ConsumerIDNo; ?></td>
+                        <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
                         <?php
-                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$_GET['id']];
+                        $Cards_id ='';
+                        $filter = ['Consumer_id'=>$consumer_id];
                         $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
+                        foreach ($cursor as $document1)
+                        {
+                            $Cards_id = strval($document1->Cards_id);
+                        }
+                        $varnow = date("d-m-Y");
+                        $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
+                        ?>
+                        <td class="default"><?= $varnow."<br>"; ?></td>
+                        <td class="default"><?php
+                        $varcounting = 0;
+                        $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                        $option = ['sort' => ['_id' => 1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
                         foreach ($cursor as $document)
                         {
-                            $ConsumerID = strval($document->ConsumerID);
-                            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
-                            $query = new MongoDB\Driver\Query($filter);
-                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                            foreach ($cursor as $document)
-                            {
-                            $_SESSION["staffremarkid"] = strval($document->_id);
-                            $ConsumerFName = ($document->ConsumerFName);
-                            $ConsumerLName = ($document->ConsumerLName);
-                            $ConsumerIDNo = ($document->ConsumerIDNo);
-                            $consumerid = strval($document->_id);
-                            $varnow = date("d-m-Y");
-                            ?>
-                            <tr>
-                                <td class="default"><?= $ConsumerIDNo; ?></td>
-                                <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                                <?php
-                                $Cards_id ='';
-                                $filter = ['Consumer_id'=>$consumerid];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
-                                foreach ($cursor as $document1)
-                                {
-                                    $Cards_id = strval($document1->Cards_id);
-                                }
-                                $varnow = date("d-m-Y");
-                                $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
-                                ?>
-                                <td class="default"><?= $varnow."<br>"; ?></td>
-                                <td class="default"><?php
-                                $varcounting = 0;
-                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                                $option = ['sort' => ['_id' => 1]];
-                                $query = new MongoDB\Driver\Query($filter,$option);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                                foreach ($cursor as $documentA)
-                                {
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2){
-                                    echo date_format($AttendanceDate,"H:i:s")."<br>";}
-                                }
-                                ?></td>
-                                <td class="default"><?php
-                                $varcounting = 0;
-                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                                $option = ['sort' => ['_id' => 1]];
-                                $query = new MongoDB\Driver\Query($filter,$option);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                                foreach ($cursor as $documentA)
-                                {
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2){
-                                    }
-                                    else{
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";}
-                                }
-                                ?></td>
-                            </tr>
-                            <?php
-                            }
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                    <?php
-                    if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-                    {
-                        $attendance = ($_GET['attendance']);
-                        ?>
-                        <script>
-                        $(document).ready(function () {
-                            $("#attendance").table2excel({
-                                filename: "attendancedepartment.xls"
-                            });
-                        });
-                        
-                        </script>
-                        <?php
-                    }?>
-                    <script type="text/javascript">
-                    var rows = document.querySelectorAll('tr');
+                            $date = strval($document->AttendanceDate);
+                            $date = new MongoDB\BSON\UTCDateTime($date);
+                            $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-                    [...rows].forEach((r) => {
-                    if (r.querySelectorAll('td:empty').length > 0) {
-                    r.classList.add('highlight');
-                    }
-                    })
-                    </script>
-                </div>
-            </div>
+                            $varcounting = $varcounting +1;
+                            if ($varcounting % 2){
+                            echo date_format($date,"H:i:s")."<br>";}
+                        }
+                        ?></td>
+                        <td class="default"><?php
+                        $varcounting = 0;
+                        $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                        $option = ['sort' => ['_id' => 1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $date = strval($document->AttendanceDate);
+                            $date = new MongoDB\BSON\UTCDateTime($date);
+                            $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                            $varcounting = $varcounting +1;
+                            if ($varcounting % 2){
+                            }
+                            else{
+                                echo date_format($date,"H:i:s")."<br>";}
+                        }
+                        ?></td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+            </tbody>
+            </table>
+            <?php
+            if (isset($_GET['attendance']) && !empty($_GET['attendance']))
+            {
+                $attendance = ($_GET['attendance']);
+                ?>
+                <script>
+                $(document).ready(function () {
+                    $("#attendance").table2excel({
+                        filename: "attendancedepartment.xls"
+                    });
+                });
+                </script>
+                <?php
+            }?>
+            <script type="text/javascript">
+            var rows = document.querySelectorAll('tr');
+            [...rows].forEach((r) => {
+            if (r.querySelectorAll('td:empty').length > 0) {
+            r.classList.add('highlight');
+            }
+            })
+            </script>
         </div>
-        <div class="col-1"></div>
+        </div>
     </div>
-    <?php
-}
+    <div class="col-1"></div>
+</div>
+<?php

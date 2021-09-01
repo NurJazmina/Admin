@@ -18,9 +18,9 @@
                                 "publicforum",
                                 
                                 "modal-recheck_staff",
-                                "modal-recheckstudentlist",
-                                "modal-recheckparentlist",
-                                "modal-rechecktimetablelist",
+                                "modal-recheck_student",
+                                "modal-recheck_parent",
+                                "modal-recheck_timetable",
                                 "modal-recheck_class",
                              
                                 "staffdetail",
@@ -77,9 +77,9 @@
                                 "publicforum",
                                 
                                 //"modal-recheck_staff",
-                                //"modal-recheckstudentlist",
-                                //"modal-recheckparentlist",
-                                "modal-rechecktimetablelist",
+                                //"modal-recheck_student",
+                                //"modal-recheck_parent",
+                                "modal-recheck_timetable",
                                 //"modal-recheck_class",
 
                                 "staffdetail",
@@ -158,9 +158,9 @@
                                 "publicforum",
                                 
                                 //"modal-recheck_staff",
-                                //"modal-recheckstudentlist",
-                                //"modal-recheckparentlist",
-                                //"modal-rechecktimetablelist",
+                                //"modal-recheck_student",
+                                //"modal-recheck_parent",
+                                //"modal-recheck_timetable",
                                 //"modal-recheck_class",
 
                                 //"staffdetail",

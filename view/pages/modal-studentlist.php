@@ -10,20 +10,19 @@
           <div class="form-group row">
               <label class="col-sm-3 col-form-label">Parent ID</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="parent_consumer_idno" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
+                <input type="text" class="form-control" name="parent_idno" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
               </div>
           </div>
           <div class="form-group row">
               <label class="col-sm-3 col-form-label">Child ID</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="student_consumer_idno" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
+                <input type="text" class="form-control" name="student_idno" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
               </div>
           </div>
           <div class="form-group row">
               <label class="col-sm-3 col-form-label">Class Category</label>
               <div class="col-sm-9">
                 <select class="form-control" name="class_category">
-                  <option value="" selected>NULL</option>
                     <option value="1">1</option>
                     <option value="3">3</option>
                     <option value="3">3</option>

@@ -9,14 +9,16 @@ $SchoolName = $_SESSION["loggeduser_schoolName"];
 $SchoolEmail = $_SESSION["loggeduser_SchoolsEmail"];
 $SchoolPhone = $_SESSION["loggeduser_schoolsPhoneNo"];
 $SchoolAddress = $_SESSION["loggeduser_schoolsAddress"];
-
-$school_id = strval($_SESSION["loggeduser_schoolID"]);
+$school_id = $_SESSION["loggeduser_schoolID"];
 
 //Add school student
 if (isset($_POST['add_student']))
 {
   //add parent
   $parent_idno = $_POST['parent_idno'];
+  $student_idno = $_POST['student_idno'];
+  $class = $_POST['class'];
+  $relation = $_POST['relation'];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $filter = ['ConsumerIDNo'=>$parent_idno];
@@ -27,7 +29,12 @@ if (isset($_POST['add_student']))
     $consumer_parent_id = strval($document->_id);
   
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert(['ConsumerID'=>$consumer_id,'Schools_id'=> $school_id,'ParentStatus'=> "ACTIVE",'ParentAddDate'=>$date]);
+    $bulk->insert([
+      'Schools_id'=> $school_id,
+      'ConsumerID'=>$consumer_parent_id,
+      'ParentStatus'=> "ACTIVE",
+      'ParentAddDate'=>$date
+      ]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
@@ -63,18 +70,22 @@ if (isset($_POST['add_student']))
   }
 
   //add student
-  $student_idno = $_POST['student_idno'];
-  $class = $_POST['class'];
-
   $filter = ['ConsumerIDNo'=>$student_idno];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
   {
-    $consumer_student_id = strval($document->_id);
+    $student_consumer_id = strval($document->_id);
+    $ConsumerFNameChild = $document->ConsumerFName;
+    $ConsumerLNameChild = $document->ConsumerLName;
 
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert(['Consumer_id'=>$consumer_student_id,'Schools_id'=> $school_id,'Class_id'=>$class,'StudentsStatus'=>"ACTIVE"]);
+    $bulk->insert([
+      'Schools_id'=> $school_id,
+      'Consumer_id'=>$student_consumer_id,
+      'Class_id'=>$class,
+      'StudentsStatus'=>"ACTIVE"
+    ]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     try
     {
@@ -110,7 +121,6 @@ if (isset($_POST['add_student']))
   }
 
   //add relation
-  $relation = $_POST['relation'];
   $filter = ['ConsumerID'=>$consumer_parent_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
@@ -119,16 +129,21 @@ if (isset($_POST['add_student']))
     $parent_id = strval($document->_id);
   }
 
-  $filter = ['Consumer_id'=>$consumer_student_id];
+  $filter = ['Consumer_id'=>$student_consumer_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
   foreach ($cursor as $document)
   {
-    $consumer_student_id = strval($document->_id);
+    $student_id = strval($document->_id);
   }
 
   $bulk1 = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk1->insert(['ParentID'=>$parent_id,'StudentID'=>$consumer_student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk1->insert([
+    'Schools_id'=>$school_id,
+    'ParentID'=>$parent_id,
+    'StudentID'=>$student_id,
+    'ParentStudentRelation'=>$relation,
+    'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -425,12 +440,18 @@ if (isset($_POST['add_relation']))
     {
       $ConsumerFNameChild = $document->ConsumerFName;
       $ConsumerLNameChild = $document->ConsumerLName;
+      $ConsumerIDNoChild = $document->ConsumerIDNo;
     }
   }
 
   //add relation
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ParentID'=>$parent_id,'StudentID'=>$student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk->insert([
+    'Schools_id'=>$school_id,
+    'ParentID'=>$parent_id,
+    'StudentID'=>$student_id,
+    'ParentStudentRelation'=>$relation,
+    'ParentStudentRelationStatus'=>'ACTIVE']);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -719,11 +740,11 @@ if (isset($_POST['add_relation_student']))
 {
   $school_id = $_SESSION["loggeduser_schoolID"];
   $parent_id = $_POST['parent_id'];
-  $consumer_student_id = $_POST['consumer_student_id'];
+  $student_consumer_id = $_POST['student_consumer_id'];
   $relation = $_POST['relation'];
   $class = $_POST['class'];
 
-  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_student_id)];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($student_consumer_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -734,7 +755,11 @@ if (isset($_POST['add_relation_student']))
 
   //adding student
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['Consumer_id'=>$consumer_student_id,'Schools_id'=>$school_id,'Class_id'=>$class,'StudentsStatus'=>"ACTIVE"]);
+  $bulk->insert([
+    'Schools_id'=>$school_id,
+    'Consumer_id'=>$student_consumer_id,
+    'Class_id'=>$class,
+    'StudentsStatus'=>"ACTIVE"]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -768,7 +793,7 @@ if (isset($_POST['add_relation_student']))
     exit;
   }
 
-  $filter = ['Consumer_id'=>$consumer_student_id];
+  $filter = ['Consumer_id'=>$student_consumer_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
   foreach ($cursor as $document) 
@@ -995,7 +1020,7 @@ if (isset($_POST['add_relation_student']))
                             <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                 <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                   <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                  <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                  <p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNoChild'>$ConsumerFNameChild $ConsumerLNameChild</a> succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                     <ul>
                                       <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
                                       <li>Phone: $SchoolPhone</li>
@@ -1066,14 +1091,19 @@ if (isset($_POST['add_relation_student']))
 
 if (isset($_POST['add_relation_parent']))
 {
-  $consumer_parent_id = $_POST['consumer_parent_id'];
+  $parent_consumer_id = $_POST['parent_consumer_id'];
   $student_id = $_POST['student_id'];
-  $relation = $_POST['txtParentStudentRelation'];
+  $relation = $_POST['relation'];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   //adding parent
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ConsumerID'=>$consumer_parent_id,'Schools_id'=>$school_id,'ParentStatus'=>"ACTIVE",'ParentAddDate'=>$date]);
+  $bulk->insert([
+    'Schools_id'=>$school_id,
+    'ConsumerID'=>$parent_consumer_id,
+    'ParentStatus'=>"ACTIVE",
+    'ParentAddDate'=>$date
+  ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -1107,7 +1137,7 @@ if (isset($_POST['add_relation_parent']))
     exit;
   }
 
-  $filter = ['ConsumerID'=>$consumer_parent_id];
+  $filter = ['ConsumerID'=>$parent_consumer_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
   foreach ($cursor as $document) 
@@ -1117,7 +1147,13 @@ if (isset($_POST['add_relation_parent']))
 
   //adding relation
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['ParentID'=>$parent_id,'StudentID'=>$student_id,'ParentStudentRelation'=>$relation,'Schools_id'=>$school_id,'ParentStudentRelationStatus'=>'ACTIVE']);
+  $bulk->insert([
+    'Schools_id'=>$school_id,
+    'ParentID'=>$parent_id,
+    'StudentID'=>$student_id,
+    'ParentStudentRelation'=>$relation,
+    'ParentStudentRelationStatus'=>'ACTIVE'
+  ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -1152,12 +1188,30 @@ if (isset($_POST['add_relation_parent']))
     exit;
   }
 
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($student_id)];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+  foreach ($cursor as $document) 
+  {
+    $Consumer_id = $document->Consumer_id;
+
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+    foreach ($cursor as $document)
+    {
+      $ConsumerFNameChild = $document->ConsumerFName;
+      $ConsumerLNameChild = $document->ConsumerLName;
+      $ConsumerIDNoChild = $document->ConsumerIDNo;
+    }
+  }
+
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $date = new MongoDB\BSON\UTCDateTime(strval($date));
   $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
   $date = date_format($date,"d M Y");
 
-  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_parent_id)];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($parent_consumer_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -1326,7 +1380,7 @@ if (isset($_POST['add_relation_parent']))
                             <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
                                 <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'> 
                                   <p>Hi </p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a>,
-                                  <p>$ConsumerFNameChild $ConsumerLNameChild succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
+                                  <p><a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNoChild'>$ConsumerFNameChild $ConsumerLNameChild</a> succesfully link with <a href='https://smartschool.gongetz.com/profile.php?id=$ConsumerIDNo'>$ConsumerFName $ConsumerLName</a> with $ConsumerIDType $ConsumerIDNo on $date. If you found out this is an error, kindly contact:
                                     <ul>
                                       <li><a href='https://smartschool.gongetz.com/school.php?id=$school_id'>$SchoolName</a></li>
                                       <li>Phone: $SchoolPhone</li>
@@ -1398,9 +1452,9 @@ if (isset($_POST['add_relation_parent']))
 if (isset($_POST['edit_student']))
 {
   $class = $_POST['class'];
-  $consumer_student_id = $_POST['consumer_student_id'];
+  $student_consumer_id = $_POST['student_consumer_id'];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update( ['Consumer_id' => new \MongoDB\BSON\ObjectID($consumer_student_id)],
+  $bulk->update( ['Consumer_id' => new \MongoDB\BSON\ObjectID($student_consumer_id)],
                 ['$set' => ['Class_id'=>$class]],
                 ['upsert' => TRUE]
                );
@@ -1454,7 +1508,7 @@ if (isset($_POST['edit_student']))
   $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
   $date = date_format($date,"d M Y");
 
-  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_student_id)];
+  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($student_consumer_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
@@ -1693,12 +1747,12 @@ if (isset($_POST['edit_student']))
 
 if (isset($_POST['status']))
 {
-  $consumer_student_id = $_POST['consumer_student_id'];
+  $student_consumer_id = $_POST['student_consumer_id'];
   $status = $_POST['status'];
   $details = $_POST['details'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['Consumer_id' => $consumer_student_id],
+  $bulk->update(['Consumer_id' => $student_consumer_id],
                 ['$set' => ['StudentsStatus'=>$status]],
                 ['upsert' => TRUE]
                );
@@ -1784,7 +1838,7 @@ if (isset($_POST['status']))
     exit;
   }
 
-  $filter = ['StudentID'=>$consumer_student_id];
+  $filter = ['StudentID'=>$student_consumer_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
   foreach ($cursor as $document)
@@ -2080,7 +2134,7 @@ if (isset($_POST['status']))
   }
   else
   {
-    $IDnumber = ($_POST['IDnumber']);
+    $consumer = ($_POST['consumer']);
     $filter = [NULL];
     $query = new MongoDB\Driver\Query($filter);
     $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -2089,7 +2143,7 @@ if (isset($_POST['status']))
       $consumer_id = strval($document->_id);
       $ConsumerIDNo = $document->ConsumerIDNo;
       $ConsumerFName = $document->ConsumerFName;
-      if ($ConsumerIDNo==$IDnumber || $ConsumerFName==$IDnumber)
+      if ($ConsumerIDNo==$consumer || $ConsumerFName==$consumer)
       {
         $filter = ['Consumer_id'=>$consumer_id];
         $query = new MongoDB\Driver\Query($filter);

@@ -13,7 +13,7 @@ if(isset($_GET['action']) && !empty($_GET['action']))
   elseif ($_GET['action']=="invalidlogin")
   {
     ?>
-    <div class="alert alert-alert alert-dismissible fade show text-center" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
       Login error! Please check your email and password!
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

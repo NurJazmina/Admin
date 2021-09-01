@@ -29,7 +29,7 @@
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
             ?>
-            <button type="button" class="btn btn-success btn-sm"><a class="text-white" href="index.php?page=exportstaffattendance">ATTENDANCE</a></button>
+            <button type="button" class="btn btn-success btn-sm"><a class="text-white" href="index.php?page=departmentattendance">ATTENDANCE</a></button>
             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_staff">Add</button>
             <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
             <button type="submit" class="btn btn-success btn-sm" name="search_staff">Search</button>
@@ -129,31 +129,31 @@
                   <td><?= $ConsumerPhone; ?></td>
                   <td><a href="index.php?page=departmentdetail&id=<?= $department_id; ?>"><?= $DepartmentName; ?></a></td>
                   <td>
-                  <?php
-                   if($ClassID == '') 
-                   {
-                    ?>
-                    <a></a>
                     <?php
-                   }
-                   else
-                   {
-                    if($ClassID !== '')
+                    if($ClassID == '') 
                     {
-                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ClassID)];
-                      $query = new MongoDB\Driver\Query($filter);
-                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-                      foreach ($cursor as $document)
+                      ?>
+                      <a></a>
+                      <?php
+                    }
+                    else
+                    {
+                      if($ClassID !== '')
                       {
-                        $class_id = strval($document->_id);
-                        $ClassName = $document->ClassName;
-                        ?>
-                        <a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassName; ?></a>
-                        <?php
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ClassID)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                        foreach ($cursor as $document)
+                        {
+                          $class_id = strval($document->_id);
+                          $ClassName = $document->ClassName;
+                          ?>
+                          <a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassName; ?></a>
+                          <?php
+                        }
                       }
                     }
-                   }
-                  ?>
+                    ?>
                   </td>
                   <td class="text-center">
                     <?php
@@ -161,7 +161,7 @@
                     {
                       ?>
                       <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_staff">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit icon-nm"></i>
                       </button>
                       <?php
                     }
@@ -169,33 +169,33 @@
                     {
                       ?>
                       <button class="btn btn-light btn-hover-success btn-sm" disabled>
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit icon-nm"></i>
                       </button>
                       <?php
                     }
                     ?>
                   </td>
-                  <?php
-                   if($StaffStatus == "ACTIVE")
-                   {
-                    ?>
-                    <td class="text-primary"><?= $StaffStatus; ?></td>
                     <?php
-                   }
-                   else
-                   {
+                    if($StaffStatus == "ACTIVE")
+                    {
+                      ?>
+                      <td class="text-warning"><?= $StaffStatus; ?></td>
+                      <?php
+                    }
+                    else
+                    {
+                      ?>
+                      <td class="text-danger"><?= $StaffStatus; ?></td>
+                      <?php
+                    }
                     ?>
-                    <td class="text-danger"><?= $StaffStatus; ?></td>
-                    <?php
-                   }
-                  ?>
                   <td class="text-center">
                     <?php
                     if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                     {
                       ?>
                       <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#status_staff">
-                        <i class="fas fa-exchange-alt"></i>
+                        <i class="fas fa-exchange-alt icon-nm"></i>
                       </button>
                       <?php
                     }
@@ -203,7 +203,7 @@
                     {
                       ?>
                       <button class="btn btn-light btn-hover-success btn-sm" disabled>
-                        <i class="fas fa-exchange-alt"></i>
+                        <i class="fas fa-exchange-alt icon-nm"></i>
                       </button>
                       <?php
                     }

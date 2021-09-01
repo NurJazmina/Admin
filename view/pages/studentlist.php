@@ -29,7 +29,7 @@
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
             ?>
-            <button type="button" class="btn btn-success btn-sm"><a class="text-white" href="index.php?page=exportstudentattendance">ATTENDANCE</a></button>
+            <button type="button" class="btn btn-success btn-sm"><a class="text-white" href="index.php?page=classattendance">ATTENDANCE</a></button>
             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
             <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
             <button type="submit" class="btn btn-success btn-sm" name="search_student">Search</button>
@@ -74,13 +74,13 @@
         <div class="table-responsive">
           <table class="table table-sm text-left table-bordered">
             <thead class="bg-success text-white">
-              <tr>
+              <tr class="text-center">
                 <th scope="col">Name</th>
                 <th scope="col">ID Type</th>
                 <th scope="col">ID No</th>
-                <th scope="col">Parent</th>
+                <th colspan="2">Parent</th>
                 <th colspan="2">Class Name</th>
-                <th scope="col">Student Status</th>
+                <th scope="col">Status</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
@@ -106,18 +106,109 @@
                   $ConsumerLName = $document->ConsumerLName;
                   $ConsumerIDType = $document->ConsumerIDType;
                   $ConsumerIDNo = $document->ConsumerIDNo;
-                  ?>
-                  <tr>
-                    <td><a href="index.php?page=studentdetail&id=<?=$Consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
-                    <td><?= $ConsumerIDType; ?></td>
-                    <td><?= $ConsumerIDNo; ?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  <?php
                 }
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                foreach ($cursor as $document)
+                {
+                  $ClassName = $document->ClassName;
+                  $ClassCategory = $document->ClassCategory;
+                }
+                ?>
+                <tr>
+                  <td><a href="index.php?page=studentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
+                  <td><?= $ConsumerIDType; ?></td>
+                  <td><?= $ConsumerIDNo; ?></td>
+                  <td>
+                    <?php
+                    $filter = ['StudentID'=>$student_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $ParentStudentRelation = $document->ParentStudentRelation;
+                      ?>
+                      <a class="text-primary"><?=$ParentStudentRelation;?></a><br>
+                      <?php
+                    }
+                    ?>
+                  </td>
+                  <td>
+                    <?php
+                    $filter = ['StudentID'=>$student_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $relation_id = strval($document->_id);
+                      $ParentID = $document->ParentID;
+                      $ParentStudentRelation = $document->ParentStudentRelation;
+
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ParentID)];
+                      $query = new MongoDB\Driver\Query($filter);
+                      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+                      foreach ($cursor as $document)
+                      {
+                        $ConsumerID = $document->ConsumerID;
+
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                        foreach ($cursor as $document)
+                        {
+                          $consumer_id = strval($document->_id);
+                          $ConsumerFName = $document->ConsumerFName;
+                          $ConsumerLName = $document->ConsumerLName;
+                        }
+                      }
+                      ?>
+                      <a href="index.php?page=parentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                      <?php
+                    }
+                    ?>
+                  </td>
+                  <td><a href="index.php?page=classdetail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
+                  <td>
+                    <?php
+                    if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                    {
+                      ?>
+                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_student" data-bs-whatever="<?= $consumer_id; ?>">
+                        <i class="fa fa-edit icon-nm"></i>
+                      </button>
+                      <?php
+                    }
+                    ?>
+                  </td>
+                  <?php
+                  if($StudentsStatus == "ACTIVE")
+                  {
+                    ?>
+                    <td class="text-warning"><?= $StudentsStatus; ?></td>
+                    <?php
+                  }
+                  else
+                  {
+                    ?>
+                    <td class="text-danger"><?= $StudentsStatus; ?></td>
+                    <?php
+                  }
+                  ?> 
+                  <td>
+                  <?php
+                    if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                    {
+                      ?>
+                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#status_student" data-bs-whatever="<?= $consumer_id; ?>">
+                        <i class="fas fa-exchange-alt icon-nm"></i>
+                      </button>
+                      <?php
+                    }
+                  ?>
+                  </td>
+                </tr>
+                <?php
               }
               ?>
             </tbody>

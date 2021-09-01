@@ -114,7 +114,7 @@
        }
        else
        {
-       header ('location: index.php?action=invalidlogin');
+        header ('location: index.php?action=invalidlogin');
        }
       }
     }
