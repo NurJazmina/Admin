@@ -3,14 +3,14 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-if (isset($_POST['AddEvent'])) 
+if (isset($_POST['add_event'])) 
 {
   $title = $_POST['title'];
   $access = $_POST['access'];
   $venue = $_POST['venue'];
   $address = $_POST['address'];
   $location = $_POST['location'];
-  $staff_id = strval($_SESSION["loggeduser_id"]);
+  $staff_id = $_SESSION["loggeduser_id"];
   $school_id = $_SESSION["loggeduser_schoolID"];
   $date_start = $_POST['date_start'];
   $date_end = $_POST['date_end'];
@@ -19,7 +19,7 @@ if (isset($_POST['AddEvent']))
   list($maps1, $maps2) = explode("pb", $location);
   list($maps3, $maps4) = explode(" ", $maps2);
   $mapsA = '<iframe src="https://www.google.com/maps/embed?pb';
-  $mapsB = ' width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+  $mapsB = ' ></iframe>';
   $eventmaps = $mapsA.$maps3.$mapsB;
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);

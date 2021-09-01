@@ -83,8 +83,9 @@ $(document).ready(function() {
 
 });
 </script>
-<div class="row">
-    <div class="col-sm mb-5">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
         <div class="p-4 rounded" style="color: #5e9164; background-color: #8bcf93;">
             <strong>Channel Topic &nbsp;&nbsp;:&nbsp;&nbsp; </strong>
             <span class="btn btn-outline-white btn-sm font-weight-bold btn-pill"><?= $_GET['topic']; ?></span>
@@ -176,10 +177,10 @@ $(document).ready(function() {
                             ?>
                             <div class="text-right">
                                 <div class="btn-group" role="group">
-                                    <form name="AddComment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                    <form name="add_comment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                         <button type="submit" class="btn btn-light btn-hover-warning btn-sm">Newest</button>&nbsp;
                                     </form>
-                                    <form name="AddComment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                    <form name="add_comment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                         <input type="hidden" value="sort" name="sort">
                                         <button type="submit" class="btn btn-light btn-hover-warning btn-sm">Oldest</button>
                                     </form>
@@ -237,11 +238,11 @@ $(document).ready(function() {
                             <div class="mb-1">
                                 <a class="text-dark-50"><?= "Comments &nbsp;&nbsp;".$total; ?></a>
                             </div>
-                            <form name="AddComment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                            <form name="add_comment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                 <textarea class="forum" name="detail"></textarea>
                                 <div class="text-right">
                                     <input type="hidden"  name="forum_id" value="<?= $Forum_id; ?>">
-                                    <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="AddComment">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                    <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="add_comment">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
                                 </div>
                             </form> 
                             <?php
@@ -331,13 +332,13 @@ $(document).ready(function() {
                                                         }
                                                     }
                                                     ?>
-                                                    <form name="AddCommentChild" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                                    <form name="add_comment_child" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                                         <div class="col-12">
                                                             <textarea class="forum" name="detail"></textarea>
                                                             <div class="text-right">
                                                                 <input type="hidden" name="forum_id" value="<?=  $Forum_id; ?>">
                                                                 <input type="hidden" name="parent_id" value="<?= $_id4; ?>">
-                                                                <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="AddCommentChild">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
+                                                                <button type="submit" class="btn btn-light btn-hover-warning btn-sm" name="add_comment_child">Post as <?= $_SESSION["loggeduser_consumerFName"];  ?></button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -356,6 +357,7 @@ $(document).ready(function() {
             }
         }
         ?>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>

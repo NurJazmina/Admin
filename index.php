@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <?php
-// Start the session
 session_start();
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+include 'connections/db.php';
+require 'vendor/autoload.php'; 
+include 'model/login.php'; 
 ?>
-<?php include 'connections/db.php';?>
-<?php require 'vendor/autoload.php'; ?>
-<?php include 'model/login.php'; ?>
 <!-- live chat start-->
 <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="688d97be-cab6-4cc7-9458-e78b5df8cba4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 <!-- live chat end-->
@@ -106,7 +104,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <?php 
 			if (isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id']))  //(isset($_POST['LoginFormSubmit']))
 			{
-			?>
+				?>
 				<!--begin::Main-->
 				<?php include 'view/partials/_header-mobile.html'; ?>
 				<div class="d-flex flex-column flex-root"> 
@@ -137,7 +135,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!--end::Page-->
 				</div>
 				<!--end::Main-->
-            <?php
+				<?php
 		    }
 			elseif(isset($_SESSION['api_session'])) 
 			{
@@ -179,7 +177,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			?>
             <div class="container-fluid">
 			    <div class="row" style="height:100vh;">
-				<?php include 'view/pages/login.php'; ?>
+					<?php include 'view/pages/login.php'; ?>
 			    </div>
             </div>
 			<?php

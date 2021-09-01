@@ -2,7 +2,7 @@
 $_SESSION["title"] = "News";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<form class="form" action="index.php?page=news" method="post" name="AddNews">
+<form name="add_news" action="index.php?page=news" method="post">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -53,7 +53,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
             <div class="modal-footer">
                 <button type="reset"  class="btn btn-light btn-hover-success btn-sm">Cancel</button>
-                <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="AddNews">Confirm</button>
+                <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_news">Confirm</button>
             </div>
         </div>
     </div>

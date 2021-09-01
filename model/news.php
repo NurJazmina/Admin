@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use Kreait\Firebase;
 use Kreait\Firebase\Messaging\CloudMessage;
 
-if (isset($_POST['AddNews'])) 
+if (isset($_POST['add_news'])) 
 {
   $access = $_POST['access'];
   $title = $_POST['title'];

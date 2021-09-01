@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-if (isset($_POST['Staffmail']))
+if (isset($_POST['staff_mail']))
 {
     $subject = $_POST['compose_subject'];
     $message = $_POST['message'];
@@ -371,7 +371,7 @@ if (isset($_POST['Staffmail']))
   catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
 }
 
-if (isset($_POST['Teachermail']))
+if (isset($_POST['teacher_mail']))
 {
     $subject = $_POST['compose_subject'];
     $message = $_POST['message'];
@@ -635,5 +635,5 @@ if (isset($_POST['Teachermail']))
   </html>";
   $mail->AltBody = "This is the plain text version of the email content";
   try { $mail->send(); echo "Message has been sent successfully";} 
-  catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
+  catch (Exception $e) { echo "Mailer Error: ".$mail->ErrorInfo;}
 }

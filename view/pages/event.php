@@ -45,15 +45,14 @@ include ('model/event.php');
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document2)
       {
-        $Staffdepartment = ($document2->Staffdepartment);
-        $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+        $Staffdepartment = $document2->Staffdepartment;
 
-        $filter = ['_id'=>$departmentid];
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
         foreach ($cursor as $document3)
         {
-            $DepartmentName = ($document3->DepartmentName);
+          $DepartmentName = ($document3->DepartmentName);
         }
       }
     }
@@ -76,7 +75,7 @@ include ('model/event.php');
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Address</a>
-                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= mb_strimwidth($Address, 0,30, "..."); ?></p>
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Venue</a>
@@ -135,15 +134,14 @@ include ('model/event.php');
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document2)
       {
-        $Staffdepartment = ($document2->Staffdepartment);
-        $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+        $Staffdepartment = $document2->Staffdepartment;
 
-        $filter = ['_id'=>$departmentid];
+        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
         $query = new MongoDB\Driver\Query($filter);
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
         foreach ($cursor as $document3)
         {
-            $DepartmentName = ($document3->DepartmentName);
+          $DepartmentName = ($document3->DepartmentName);
         }
       }
     }
@@ -166,7 +164,7 @@ include ('model/event.php');
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Address</a>
-                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= mb_strimwidth($Address, 0,30, "..."); ?></p>
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Venue</a>

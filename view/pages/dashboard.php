@@ -84,10 +84,10 @@ function time_elapsed($date){
 							<div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url(assets/media/stock-600x400/img-70.jpg)"></div>
 							<!--end::Image-->
 							<!--begin::Title-->
-							<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1"><?php echo $_SESSION["loggeduser_schoolName"]; ?></a>
+							<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1"><?= $_SESSION["loggeduser_schoolName"]; ?></a>
 							<!--end::Title-->
 							<!--begin::Text-->
-							<div class="font-weight-bold text-dark-50 font-size-sm pb-7"><?php echo $_SESSION["loggeduser_schoolsAddress"]; ?></div>
+							<div class="font-weight-bold text-dark-50 font-size-sm pb-7"><?= $_SESSION["loggeduser_schoolsAddress"]; ?></div>
 							<!--end::Text-->
 						</div>
 						<!--end::Header-->
@@ -113,7 +113,7 @@ function time_elapsed($date){
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
-								<span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalstaff"] ?></span>
+								<span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalstaff"] ?></span>
 								<!--end::label-->
 							</div>
 							<!--end::Item-->
@@ -137,7 +137,7 @@ function time_elapsed($date){
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
-								<span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalteacher"] ?></span>
+								<span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalteacher"] ?></span>
 								<!--end::label-->
 							</div>
 							<!--end::Item-->
@@ -161,7 +161,7 @@ function time_elapsed($date){
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
-								<span class="font-weight-bolder label label-xl label-light-primary label-inline py-5 min-w-45px"><?php echo $_SESSION["totalstudent"] ?></span>
+								<span class="font-weight-bolder label label-xl label-light-primary label-inline py-5 min-w-45px"><?= $_SESSION["totalstudent"] ?></span>
 								<!--end::label-->
 							</div>
 							<!--end::Item-->
@@ -185,7 +185,7 @@ function time_elapsed($date){
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
-								<span class="font-weight-bolder label label-xl label-light-info label-inline px-3 py-5 min-w-45px"><?php echo $_SESSION["totalparent"] ?></span>
+								<span class="font-weight-bolder label label-xl label-light-info label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalparent"] ?></span>
 								<!--end::label-->
 							</div>
 							<!--end::Item-->

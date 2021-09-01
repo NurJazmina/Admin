@@ -61,14 +61,34 @@ foreach ($cursor as $document)
 
 }
 ?>
+<style>
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 50%;
+  background: lightgrey;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #7E8299;
+  border-radius: 5px;
+}
+</style>
 <div class="text-dark-50 text-center m-5">
     <h1><?= $Title; ?></h1>
 </div>
-<div class="row">
-    <div class="col-12">
-        <div class="card ribbon ribbon-right shadow rounded">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body ribbon ribbon-right rounded">
             <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
-            <div class="p-5 mt-5 mx-5">
+            <div class="mt-6 mx-5">
                 <div class="row">
                     <div class="col-sm-6">
                         <a class="text-primary mb-1">Date</a>
@@ -80,18 +100,14 @@ foreach ($cursor as $document)
                         <a class="text-primary mb-1">Address</a>
                         <p class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 iframe-container">
                         <?= $Location; ?>
                     </div>
                 </div>
             </div>
-            <div class="mx-5 mb-3">
-                <div class="text-muted">
-                <small><?= " BY : ".$ConsumerFName." ".$ConsumerLName.",DEPARTMENT : ".$DepartmentName;?></small>
-                </div>
-            </div>
-            <div class="separator separator-solid separator-border-1"></div>
-            <div class="p-5 text-center text-dark-50">
+        </div>
+        <div class="modal-footer">
+            <div class="text-center text-dark-50">
                 <div class="row" style="margin:0;">
                     <h1 class="title">Coming Soon!</h1>
                     <h3 class="intro">

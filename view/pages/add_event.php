@@ -10,7 +10,7 @@ $Due = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp(
 $Due = $Due->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 $Due = date_format($Due,"Y-m-d\TH:i:s");
 ?>
-<form class="form" action="index.php?page=event" method="post" name="AddEvent">
+<form name="add_event" action="index.php?page=event" method="post">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -84,7 +84,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
             </div>
             <div class="modal-footer">
                 <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-success btn-sm" name="AddEvent">Confirm</button>
+                <button type="submit" class="btn btn-success btn-sm" name="add_event">Confirm</button>
             </div>
         </div>
     </div>

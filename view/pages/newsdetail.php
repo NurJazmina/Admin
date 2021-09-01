@@ -89,24 +89,23 @@ foreach ($cursor as $document)
 <div class="text-dark-50 text-center m-5">
     <h1><?= $Title; ?></h1>
 </div>
-<div class="row">
-    <div class="col-12">
-        <div class="card ribbon ribbon-right shadow rounded">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body ribbon ribbon-right rounded">
             <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
-            <div class="p-8 mt-5">
+            <div class="mt-6">
                 <a align="justify"><?= $Details; ?></a>
             </div>
-            <div class="mx-5 mb-3">
-                <div class="text-muted">
-                    <small><?= $ConsumerFName; ?></small>
-                    <span>|</span>
-                    <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
-                    <span>|</span>
-                    <small>Commenting : <?= $total; ?></small>
-                </div>
+            <div class="text-muted">
+                <small><?= $ConsumerFName; ?></small>
+                <span>|</span>
+                <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
+                <span>|</span>
+                <small>Commenting : <?= $total; ?></small>
             </div>
-            <div class="separator separator-solid separator-border-1"></div>
-            <div class="p-5 text-center text-dark-50">
+        </div>
+        <div class="modal-footer">
+            <div class="text-center text-dark-50">
                 <div class="row" style="margin:0;">
                     <h1 class="title">Coming Soon!</h1>
                     <h3 class="intro">

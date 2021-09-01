@@ -1,9 +1,9 @@
 <form name="recheck_add_class" action="index.php?page=modal-recheck_class" method="post">
-  <div class="modal fade" id="add_class" aria-hidden="true">
+  <div class="modal fade" id="add_class">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="AddclassModalLabel">Add Class</h5>
+          <h5 class="modal-title">Add Class</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -22,10 +22,10 @@
                   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                  foreach ($cursor as $document1)
+                  foreach ($cursor as $document)
                   {
-                    $consumer_id = $document1->_id;
-                    $ConsumerFName = $document1->ConsumerFName;
+                    $consumer_id = strval($document->_id);
+                    $ConsumerFName = $document->ConsumerFName;
                     ?>
                     <option value="<?= $consumer_id; ?>"><?= $ConsumerFName; ?></option>
                     <?php
@@ -59,7 +59,7 @@
 </form>
 
 <form  name="recheck_edit_class" action="index.php?page=modal-recheck_class" method="post">
-  <div class="modal fade" id="edit_class" tabindex="-1" aria-labelledby="EditclassModalLabel" aria-hidden="true">
+  <div class="modal fade" id="edit_class">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -98,11 +98,12 @@
 </form>
 
 <form name="delete_class" action="index.php?page=classroomlist" method="post">
-  <div class="modal fade" id="delete_class" aria-hidden="true">
+  <div class="modal fade" id="delete_class">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5>Delete Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>Are you sure you want to delete this account?</p>

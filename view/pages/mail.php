@@ -9,7 +9,7 @@ if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
 {
     ?>
     <!-- begin::form staff -->
-    <form name="Staffmail" action="index.php?page=mail" method="post">
+    <form name="staff_mail" action="index.php?page=mail" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -76,7 +76,7 @@ if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
                 </div>
                 <div class="modal-footer">
                     <button type="reset"  class="btn btn-light btn-hover-success btn-sm">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="Staffmail">Send</button>
+                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="staff_mail">Send</button>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@ else
 {
     ?>
     <!-- begin::form teacher -->
-    <form name="Teachermail" action="index.php?page=mail" method="post">
+    <form name="teacher_mail" action="index.php?page=mail" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -193,7 +193,7 @@ else
                 </div>
                 <div class="modal-footer">
                     <button type="reset"  class="btn btn-light btn-hover-success btn-sm">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="Teachermail">Send</button>
+                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="teacher_mail">Send</button>
                 </div>
             </div>
         </div>

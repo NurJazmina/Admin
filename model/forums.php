@@ -4,13 +4,14 @@ use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
 $school_id = $_SESSION["loggeduser_schoolID"];
-if (isset($_POST['AddForums'])) 
+
+if (isset($_POST['add_forums'])) 
 {
   $title = $_POST['title'];
   $type = $_POST['access'];
   $topic = $_POST['topic'];
   $detail = $_POST['detail'];
-  $staff_id = strval($_SESSION["loggeduser_id"]);
+  $staff_id = $_SESSION["loggeduser_id"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   if ($type == 'SCHOOL' && $topic == 'GENERAL')
@@ -810,12 +811,12 @@ if (isset($_POST['AddForums']))
   }
 }
 
-if (isset($_POST['AddComment'])) 
+if (isset($_POST['add_comment'])) 
 {
   $forum_id = $_POST['forum_id'];
   $detail = $_POST['detail'];
-  $staff_id = strval($_SESSION["loggeduser_id"]);
-  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+  $staff_id = $_SESSION["loggeduser_id"];
+  $school_id = $_SESSION["loggeduser_schoolID"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
@@ -862,12 +863,12 @@ if (isset($_POST['AddComment']))
 }
 
 
-if (isset($_POST['AddCommentChild'])) 
+if (isset($_POST['add_comment_child'])) 
 {
   $forum_id = $_POST['forum_id'];
   $parent_id = $_POST['parent_id'];
   $detail = $_POST['detail'];
-  $staff_id = strval($_SESSION["loggeduser_id"]);
+  $staff_id = $_SESSION["loggeduser_id"];
   $school_id = $_SESSION["loggeduser_schoolID"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 

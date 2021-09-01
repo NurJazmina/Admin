@@ -2,7 +2,7 @@
 $_SESSION["title"] = "Department";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
-<form id="AddDepartment" name="AddDepartment" action="index.php?page=departmentlist" method="post">
+<form name="add_department" action="index.php?page=departmentlist" method="post">
   <div id="AddDepartmentModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -18,7 +18,7 @@ include 'view/partials/_subheader/subheader-v1.php';
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success btn-sm" name="AddDepartment">Save changes</button>
+          <button type="submit" class="btn btn-success btn-sm" name="add_department">Save changes</button>
         </div>
     </div>
   </div>
