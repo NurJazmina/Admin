@@ -3,6 +3,28 @@ $_SESSION["title"] = "Department";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/departmentlist.php'); 
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+    var calc = $("#calc").val();
+    var q = [];
+    for (let count = 1; count <= calc; count++) {
+
+      q[count] = $("#DepartmentName2").val();
+      $("#submit").click(function() {
+        $.post("model/submit.php", {
+          DepartmentName: q[count]
+        },
+        function(data, status){
+            $("#test1").html(data);
+            $("#test2").html(data);
+        },
+        );
+      });
+    }
+});
+</script>
 <div class="text-dark-50 text-center m-5">
   <h1>Departments</h1>
 </div>
@@ -31,10 +53,11 @@ include ('model/departmentlist.php');
                 <td><?= $calc; ?></td>
                 <td><a href="index.php?page=departmentdetail&id=<?= $Department_id; ?>"><?= $DepartmentName; ?></a></td>
                 <td>
+                  <input type="hidden" id="DepartmentName<?= $calc; ?>" value="<?= $DepartmentName; ?>">
                   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_department" data-bs-whatever="<?= $Department_id; ?>">
                     <i class="flaticon2-edit icon-md text-hover-success"></i>
                   </button>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_department" data-bs-whatever="<?= $Department_id; ?>">
+                  <button id="submit" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_department" data-bs-whatever="<?= $Department_id; ?>">
                     <i class="flaticon2-trash icon-md text-hover-success"></i>
                   </button>
                 </td>
@@ -42,6 +65,7 @@ include ('model/departmentlist.php');
               <?php
             }
             ?>
+            <input type="hidden" id="calc" value="<?= $calc; ?>">
             <tr class="bg-white">
               <td colspan="3">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#add_department">

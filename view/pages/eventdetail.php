@@ -77,8 +77,6 @@ foreach ($cursor as $document)
   left: 0;
   right: 0;
   bottom: 0;
-  border: 2px solid #7E8299;
-  border-radius: 5px;
 }
 </style>
 <div class="text-dark-50 text-center m-5">
@@ -100,7 +98,7 @@ foreach ($cursor as $document)
                         <a class="text-primary mb-1">Address</a>
                         <p class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                     </div>
-                    <div class="col-sm-6 iframe-container">
+                    <div class="col-sm-6 iframe-container shadow">
                         <?= $Location; ?>
                     </div>
                 </div>

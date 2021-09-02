@@ -7,24 +7,20 @@
 		?>
 		<!--begin::Symbol-->
 		<div class="symbol bg-white-o-15 mr-3">
-			<span class="symbol-label text-success font-weight-bold font-size-h4"><?php echo $firstCharacter; ?></span>
+			<span class="symbol-label text-success font-weight-bold font-size-h4"><?= $firstCharacter; ?></span>
 		</div>
-
 		<!--end::Symbol-->
 
 		<!--begin::Text-->
-		<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></div>
-
+		<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?= $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></div>
 		<!--end::Text-->
 	</div>
 	<!--<span class="label label-success label-lg font-weight-bold label-inline">3 messages</span>-->
 </div>
-
 <!--end::Header-->
 
 <!--begin::Nav-->
 <div class="navi navi-spacer-x-0 pt-5">
-
 	<!--begin::Item-->
 	<a href="index.php?page=profile" class="navi-item px-8">
 		<div class="navi-link">
@@ -39,9 +35,7 @@
 			</div>
 		</div>
 	</a>
-
 	<!--end::Item-->
-
 
 	<!--begin::Item
 	<a href="custom/apps/user/profile-3.html" class="navi-item px-8">
@@ -77,23 +71,19 @@
 			</div>
 		</div>
 	</a>
---end::Item-->
-
+	--end::Item-->
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>
 	<?php
-		if(!isset($_SESSION['is_mobile']))
-		{
+	if(!isset($_SESSION['is_mobile']))
+	{
+		?>
+		<div class="navi-footer px-8 py-5" >
+		<a href="model/logout.php" class="btn btn-light-success font-weight-bold">Sign Out</a>
+		</div>
+		<?php
+	}
 	?>
-			<div class="navi-footer px-8 py-5" >
-			<a href="model/logout.php" class="btn btn-light-success font-weight-bold">Sign Out</a>
-			</div>
-	<?php
-		}
-	?>
-	
-
 	<!--end::Footer-->
 </div>
-
 <!--end::Nav-->
