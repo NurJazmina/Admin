@@ -22,18 +22,18 @@ if (isset($_POST['add_remark']))
     'Details'=>$remark,
     'Date'=>$date,
     'Status'=>'ACTIVE']);
-
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
+
+  try 
   {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff_Remarks', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Student_Remarks', $bulk, $writeConcern);
+  } 
+  catch (MongoDB\Driver\Exception\BulkWriteException $e) 
   {
     $result = $e->getWriteResult();
 
     // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
+    if ($writeConcernError = $result->getWriteConcernError()) 
     {
         printf("%s (%d): %s\n",
             $writeConcernError->getMessage(),
@@ -50,34 +50,33 @@ if (isset($_POST['add_remark']))
             $writeError->getCode()
         );
     }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
+  } 
+  catch (MongoDB\Driver\Exception\Exception $e) 
   {
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-
-printf("Inserted %d document(s)\n", $result->getInsertedCount());
-printf("Updated  %d document(s)\n", $result->getModifiedCount());
-header ('location: ../index.php?page=staffdetail&id='.$consumer_id);
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
+  printf("Updated  %d document(s)\n", $result->getModifiedCount());
+  header ('location: ../index.php?page=studentdetail&id='.$consumer_id);
 }
 
 if (isset($_POST['add_remark_child'])) 
 {
   session_start();
-  $consumer_id = $_POST['consumer_id'];
   $remark_id = $_POST['remark_id'];
+  $consumer_id = $_POST['consumer_id'];
   $remark = $_POST['remark'];
-  $staff_id = strval($_SESSION["loggeduser_id"]);
+  $staff_id = $_SESSION["loggeduser_id"];
   $school_id = $_SESSION["loggeduser_schoolID"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($remark_id)];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.StudentRemarks',$query);
   foreach ($cursor as $document)
   {
-    $Status = ($document->Status);
+    $Status = $document->Status;
   }
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
@@ -85,15 +84,15 @@ if (isset($_POST['add_remark_child']))
     'SubRemarks'=>$remark_id,
     'School_id'=>$school_id,
     'Consumer_id'=>$consumer_id,
-    'Staff_id'=>$staff_id,
     'Details'=>$remark,
+    'Staff_id'=>$staff_id,
     'Date'=>$date,
     'Status'=>$Status]);
 
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff_Remarks', $bulk, $writeConcern);
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Student_Remarks', $bulk, $writeConcern);
   }
   catch (MongoDB\Driver\Exception\BulkWriteException $e)
   {
@@ -125,13 +124,14 @@ if (isset($_POST['add_remark_child']))
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=staffdetail&id='.$consumer_id);
+  header ('location: ../index.php?page=studentdetail&id='.$consumer_id);
 }
 
-if (isset($_POST['update_staff_remark'])) 
+
+if (isset($_POST['update_student_remark'])) 
 {
   session_start();
-  $consumer_id = strval($_SESSION["consumer_id"]);
+  $consumer_id = $_SESSION["consumer_id"];
   $remark_id = $_POST['remark_id'];
   $status = $_POST['status'];
   
@@ -143,7 +143,7 @@ if (isset($_POST['update_staff_remark']))
    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
    try
    {
-     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff_Remarks',$bulk,$writeConcern);
+     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Student_Remarks',$bulk,$writeConcern);
    }
    catch (MongoDB\Driver\Exception\BulkWriteException $e)
    {
@@ -180,7 +180,7 @@ if (isset($_POST['update_staff_remark']))
    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
    try
    {
-     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff_Remarks',$bulk,$writeConcern);
+     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Student_Remarks',$bulk,$writeConcern);
    }
    catch (MongoDB\Driver\Exception\BulkWriteException $e)
    {
@@ -208,6 +208,6 @@ if (isset($_POST['update_staff_remark']))
      printf("Other error: %s\n", $e->getMessage());
      exit;
    }
-   header ('location: ../index.php?page=staffdetail&id='.$consumer_id);
+   header ('location: ../index.php?page=studentdetail&id='.$consumer_id);
 }
 ?>

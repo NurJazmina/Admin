@@ -80,12 +80,12 @@
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Account Activation/Deactivation</h5>
+          <h5 class="text-danger"><i class="flaticon2-information icon-md text-danger"></i>&nbsp;&nbsp;Account Activation/Deactivation</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>Are you sure you want to active/deactive this account?</p>
-          <input type="hidden" class="form-control" name="student_id">
+          <input type="hidden" class="form-control" name="student_consumer_id">
           <!--Change Status-->
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Status</label>
@@ -107,6 +107,45 @@
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="status_student">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<form name="status_parent" action="index.php?page=parentlist" method="post">
+  <div class="modal fade" id="status_parent" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="text-danger"><i class="flaticon2-information icon-md text-danger"></i>&nbsp;&nbsp;Account Activation/Deactivation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to active/deactive this account?</p>
+          <input type="hidden" class="form-control" name="parent_consumer_id">
+          <!--Change Status-->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Status</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="status">
+                <option value="ACTIVE">ACTIVATE</option>
+                <option value="INACTIVE">DEACTIVATE</option>
+              </select>
+            </div>
+          </div>
+          <!--Reason-->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Reason</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="detail" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="status_parent">Confirm</button>
         </div>
       </div>
     </div>

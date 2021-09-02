@@ -25,6 +25,7 @@
                              
                                 "staffdetail",
                                 "studentdetail",
+                                "parentdetail",
                                 "eventdetail",
                                 "newsdetail",
                                 "departmentdetail",
@@ -44,9 +45,6 @@
                                 
                                 "departmentattendance",
                                 "classattendance",
-                                "exportstaffattendance",
-                                "exportstudentattendance",
-                                "exportclassattendance",
                                 "mail",
 
                                 "addrelationstudentforstudent",
@@ -84,6 +82,7 @@
 
                                 "staffdetail",
                                 "studentdetail",
+                                "parentdetail",
                                 "eventdetail",
                                 "newsdetail",
                                 "departmentdetail",
@@ -104,9 +103,6 @@
                                 
                                 //"departmentattendance",
                                 "classattendance",
-                                //"exportstaffattendance",
-                                //"exportstudentattendance",
-                                //"exportclassattendance",
                                 "mail",
 
                                 //online learning//
@@ -185,9 +181,6 @@
                                 
                                 //"departmentattendance",
                                 //"classattendance",
-                                //"exportstaffattendance",
-                                //"exportstudentattendance",
-                                //"exportclassattendance",
                                 //"mail",
 
                                 //online learning//

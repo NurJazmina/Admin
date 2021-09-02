@@ -160,16 +160,16 @@
                     if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                     {
                       ?>
-                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_staff">
-                        <i class="fa fa-edit icon-nm"></i>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_staff">
+                        <i class="flaticon2-edit icon-md text-hover-success"></i>
                       </button>
                       <?php
                     }
                     else
                     {
                       ?>
-                      <button class="btn btn-light btn-hover-success btn-sm" disabled>
-                        <i class="fa fa-edit icon-nm"></i>
+                      <button class="btn" disabled>
+                        <i class="flaticon2-edit icon-md text-hover-success"></i>
                       </button>
                       <?php
                     }
@@ -194,16 +194,16 @@
                     if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                     {
                       ?>
-                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#status_staff">
-                        <i class="fas fa-exchange-alt icon-nm"></i>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#status_staff">
+                        <i class="flaticon2-reload icon-md text-hover-success"></i>
                       </button>
                       <?php
                     }
                     else
                     {
                       ?>
-                      <button class="btn btn-light btn-hover-success btn-sm" disabled>
-                        <i class="fas fa-exchange-alt icon-nm"></i>
+                      <button class="btn" disabled>
+                        <i class="flaticon2-reload icon-md text-hover-success"></i>
                       </button>
                       <?php
                     }

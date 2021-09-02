@@ -54,11 +54,11 @@ include ('model/subjectlist.php');
               <td><?= $calc; ?></td>
               <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $Subject_name; ?></a></td>
               <td>
-                <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_subject" data-bs-whatever="<?= $subject_id; ?>">
-                  <i class="fa fa-edit icon-md"></i>
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#edit_subject" data-bs-whatever="<?= $subject_id; ?>">
+                  <i class="flaticon2-edit icon-md text-hover-success"></i>
                 </button>
-                <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#delete_subject" data-bs-whatever="<?= $subject_id; ?>">
-                  <i class="fas fa-trash icon-md"></i>
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#delete_subject" data-bs-whatever="<?= $subject_id; ?>">
+                  <i class="flaticon2-trash icon-md text-hover-success"></i>
                 </button>
               </td>
               </tr>
@@ -66,10 +66,9 @@ include ('model/subjectlist.php');
             }
             ?>
             <tr class="bg-white">
-              <td>Add</td>
-              <td colspan="2">
-                <button class="btn btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_subject">
-                <i class="fas fa-plus icon-md"></i>
+              <td colspan="3">
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#add_subject">
+                <i class="flaticon2-plus-1 icon-md text-hover-success"></i>
                 </button>
               </td>
             </tr>

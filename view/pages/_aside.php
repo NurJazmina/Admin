@@ -610,14 +610,6 @@
 										<span class="menu-text">Add Staff</span>
 									</a>
 								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=exportstaffattendance" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Attendance</span>
-									</a>
-								</li>
 								<?php
 								}
 								?>
@@ -663,14 +655,6 @@
 								<?php
 								}
 								?>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=exportstudentattendance" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Attendance</span>
-									</a>
-								</li>
 							</ul>
 						</div>
 					</li>

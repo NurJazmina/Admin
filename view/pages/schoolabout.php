@@ -32,7 +32,7 @@ include ('model/schoolabout.php');
                 </g>
             </svg>
           </span>
-          <a href="#" class="text-warning font-weight-bold font-size-h6"><?php echo $_SESSION["loggeduser_schoolName"] ?></a>
+          <a href="#" class="text-warning font-weight-bold font-size-h6"><?= $_SESSION["loggeduser_schoolName"] ?></a>
         </div>
         <div class="col bg-light-primary px-6 py-8 rounded-xl mr-7 mb-7">
           <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
@@ -44,11 +44,18 @@ include ('model/schoolabout.php');
                 </g>
             </svg>
           </span>
-          <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?php print_r($SchoolsPhoneNo); ?>
-            <button type="button" style="vertical-align: inherit;" class="btn" data-bs-toggle="modal" data-bs-target="#EditSchoolModal">
-             <i class="fa fa-edit text-primary" style="vertical-align: inherit;"></i>
+          <?php
+          if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
+          {
+          ?>
+          <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?= $SchoolsPhoneNo; ?>
+            <button type="button" style="vertical-align: inherit;" class="btn" data-bs-toggle="modal" data-bs-target="#edit_school">
+              <i class="flaticon2-edit icon-md text-primary" style="vertical-align: inherit;"></i>
             </button>
           </a>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <!--end::Row-->
@@ -64,7 +71,7 @@ include ('model/schoolabout.php');
               </g>
             </svg>
           </span>
-          <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2"><?php echo $_SESSION["loggeduser_schoolsAddress"] ?></a>
+          <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2"><?= $_SESSION["loggeduser_schoolsAddress"] ?></a>
         </div>
         <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
           <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
@@ -76,7 +83,7 @@ include ('model/schoolabout.php');
               </g>
             </svg>
           </span>
-          <a href="#" class="text-success font-weight-bold font-size-h6 mt-2"><?php echo $_SESSION["loggeduser_SchoolsEmail"] ?></a>
+          <a href="#" class="text-success font-weight-bold font-size-h6 mt-2"><?= $_SESSION["loggeduser_SchoolsEmail"] ?></a>
         </div>
       </div>
       <!--end::Row-->

@@ -1,4 +1,65 @@
-<?php include ('model/studentlist.php'); ?>
+<?php 
+include ('model/studentlist.php'); 
+
+if (isset($_GET['paging']) && !empty($_GET['paging']))
+{
+  $datapaging = ($_GET['paging']*50);
+  $pagingprevious = $_GET['paging']-1;
+  $pagingnext = $_GET['paging']+1;
+} 
+else
+{
+  $datapaging = 0;
+  $pagingnext = 1;
+  $pagingprevious = 0;
+}
+if (!isset($_POST['search_student']) && empty($_POST['search_student']))
+{
+  if (!isset($_GET['level']) && empty($_GET['level']))
+  {
+    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+    $query = new MongoDB\Driver\Query($filter,$option);
+    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+  }
+  else
+  {
+    $sort = ($_GET['level']);
+
+    $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],'ClassCategory'=>$sort];
+    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+    $query = new MongoDB\Driver\Query($filter,$option);
+    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+    foreach ($cursor as $document)
+    {
+      $class_id = strval($document->_id);
+
+      $filter = ['Class_id'=>$class_id];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+    }
+  }
+}
+else
+{
+  $consumer = ($_POST['consumer']);
+  $filter = [NULL];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  foreach ($cursor as $document)
+  {
+    $consumer_id = strval($document->_id);
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $ConsumerFName = $document->ConsumerFName;
+    if ($ConsumerIDNo==$consumer || $ConsumerFName==$consumer)
+    {
+      $filter = ['Consumer_id'=>$consumer_id];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+    }
+  }
+}
+?>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
   <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -81,7 +142,7 @@
                 <th colspan="2">Parent</th>
                 <th colspan="2">Class Name</th>
                 <th scope="col">Status</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
               </tr>
             </thead>
             <tbody>
@@ -174,8 +235,8 @@
                     if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                     {
                       ?>
-                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_student" data-bs-whatever="<?= $consumer_id; ?>">
-                        <i class="fa fa-edit icon-nm"></i>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_student" data-bs-whatever="<?= $consumer_id; ?>">
+                        <i class="flaticon2-edit icon-md text-hover-success"></i>
                       </button>
                       <?php
                     }
@@ -200,8 +261,8 @@
                     if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
                     {
                       ?>
-                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#status_student" data-bs-whatever="<?= $consumer_id; ?>">
-                        <i class="fas fa-exchange-alt icon-nm"></i>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#status_student" data-bs-whatever="<?= $consumer_id; ?>">
+                        <i class="flaticon2-reload icon-md text-hover-success"></i>
                       </button>
                       <?php
                     }

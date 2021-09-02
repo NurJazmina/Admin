@@ -135,7 +135,7 @@
                   }
                   ?>
                   </td>
-                  <td>
+                  <td class="text-left">
                   <?php
                   $filter = ['Class_id' => $class_id];
                   $query = new MongoDB\Driver\Query($filter);
@@ -169,13 +169,19 @@
                   ?>
                   </td>
                   <td><?= $totalstudent; ?></td>
-                  <td><button class="btn btn-light btn-hover-success btn-sm"><a class="text-dark-50 text-hover-white font-weight-bold" href="index.php?page=exportclassattendance&id=<?= $class_id; ?>">more >></a></button></td>
                   <td>
-                  <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_class" data-bs-whatever="<?= $class_id; ?>">
-                    <i class="fa fa-edit"></i>
+                    <button class="btn">
+                      <a class="text-dark-50 text-hover-success font-weight-bold" href="index.php?page=classattendance&id=<?= $class_id; ?>">
+                        <i class="flaticon2-list-2 icon-md text-hover-success"></i>
+                      </a>
+                    </button>
+                  </td>
+                  <td>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_class" data-bs-whatever="<?= $class_id; ?>">
+                    <i class="flaticon2-edit icon-md text-hover-success"></i>
                   </button>
-                  <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#delete_class" data-bs-whatever="<?= $class_id; ?>">
-                    <i class="fas fa-trash"></i>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_class" data-bs-whatever="<?= $class_id; ?>">
+                    <i class="flaticon2-trash icon-md text-hover-success"></i>
                   </button>
                 </td>
               </tr>

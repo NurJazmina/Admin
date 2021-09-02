@@ -1,11 +1,11 @@
 <?php
-if (isset($_POST['EditSchoolFormSubmit']))
+if (isset($_POST['edit_school']))
 {
-  $varSchoolsPhoneNo = $_POST['txtSchoolsPhoneNo'];
-  $varschoolid = $_SESSION["loggeduser_schoolID"];
+  $no_phone = $_POST['no_phone'];
+  $school_id = $_SESSION["loggeduser_schoolID"];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varschoolid)],
-                ['$set' => ['SchoolsPhoneNo'=>$varSchoolsPhoneNo]],
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($school_id)],
+                ['$set' => ['SchoolsPhoneNo'=>$no_phone]],
                 ['upsert' => TRUE]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
