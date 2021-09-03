@@ -17,18 +17,19 @@
        {
          //$_SESSION["api_session"] = $_GET['api_session'];
          $_SESSION["loggeduser_id"] = strval($document->_id);
-         $_SESSION["loggeduser_consumerFName"] = ($document->ConsumerFName);
-         $_SESSION["loggeduser_consumerLName"] = ($document->ConsumerLName);
-         $_SESSION["loggeduser_consumerIDType"] = ($document->ConsumerIDType);
-         $_SESSION["loggeduser_consumerIDNo"] = ($document->ConsumerIDNo);
-         $_SESSION["loggeduser_consumerEmail"] = ($document->ConsumerEmail);
-         $_SESSION["loggeduser_consumerPhone"] = ($document->ConsumerPhone);
-         $_SESSION["loggeduser_consumerAddress"] = ($document->ConsumerAddress);
-         $_SESSION["loggeduser_consumerPostcode"] = ($document->ConsumerPostcode);
-         $_SESSION["loggeduser_consumerCity"] = ($document->ConsumerCity);
-         $_SESSION["loggeduser_consumerState"] = ($document->ConsumerState);
-         $_SESSION["loggeduser_consumerStatus"] = ($document->ConsumerStatus);
-         $_SESSION["loggeduser_ConsumerGroup_id"] = ($document->ConsumerGroup_id);
+         $_SESSION["loggeduser_consumerFName"] = $document->ConsumerFName;
+         $_SESSION["loggeduser_consumerLName"] = $document->ConsumerLName;
+         $_SESSION["loggeduser_consumerIDType"] = $document->ConsumerIDType;
+         $_SESSION["loggeduser_consumerIDNo"] = $document->ConsumerIDNo;
+         $_SESSION["loggeduser_consumerEmail"] = $document->ConsumerEmail;
+         $_SESSION["loggeduser_consumerPhone"] = $document->ConsumerPhone;
+         $_SESSION["loggeduser_consumerAddress"] = $document->ConsumerAddress;
+         $_SESSION["loggeduser_consumerPostcode"] = $document->ConsumerPostcode;
+         $_SESSION["loggeduser_consumerCity"] = $document->ConsumerCit;
+         $_SESSION["loggeduser_consumerState"] = $document->ConsumerState;
+         $_SESSION["loggeduser_consumerStatus"] = $document->ConsumerStatus;
+         $_SESSION["loggeduser_ConsumerGroup_id"] = $document->ConsumerGroup_id;
+         $_SESSION["loggeduser_ConsumerPassword"] = $document->ConsumerPassword;
 
           $Groupid = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"]);
           $filter = ['_id'=>$Groupid];

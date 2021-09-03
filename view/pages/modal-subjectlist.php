@@ -71,8 +71,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         <div class="modal-body">
-          <p>Are you sure you want to delete this Subject?</p>
+          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>Subject</b> type your <b>password</b>.</a><br>
           <input type="hidden" class="form-control" name="subject_id">
+          <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div class="modal-footer">
           <button class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>

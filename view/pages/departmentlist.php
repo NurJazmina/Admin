@@ -2,29 +2,39 @@
 $_SESSION["title"] = "Department";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/departmentlist.php'); 
+
+if (isset($_GET['ERROR']) && !empty($_GET['ERROR']))
+{
+    ?>
+    <!--begin::Alert Password Not Matching-->
+    <div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+        <div class="alert-icon">
+            <span class="svg-icon svg-icon-3x svg-icon-danger">
+                <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                        <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
+                        <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                    </g>
+                </svg>
+                <!--end::Svg Icon-->
+            </span>
+        </div>
+        <div class="alert-text font-weight-bold">The password confirmation does not match!</div>
+        <div class="alert-close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="ki ki-close"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+    <!--end::Alert Password Not Matching-->
+    <?php  
+}
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-
-    var calc = $("#calc").val();
-    var q = [];
-    for (let count = 1; count <= calc; count++) {
-
-      q[count] = $("#DepartmentName2").val();
-      $("#submit").click(function() {
-        $.post("model/submit.php", {
-          DepartmentName: q[count]
-        },
-        function(data, status){
-            $("#test1").html(data);
-            $("#test2").html(data);
-        },
-        );
-      });
-    }
-});
-</script>
 <div class="text-dark-50 text-center m-5">
   <h1>Departments</h1>
 </div>
@@ -53,7 +63,6 @@ $(document).ready(function() {
                 <td><?= $calc; ?></td>
                 <td><a href="index.php?page=departmentdetail&id=<?= $Department_id; ?>"><?= $DepartmentName; ?></a></td>
                 <td>
-                  <input type="hidden" id="DepartmentName<?= $calc; ?>" value="<?= $DepartmentName; ?>">
                   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_department" data-bs-whatever="<?= $Department_id; ?>">
                     <i class="flaticon2-edit icon-md text-hover-success"></i>
                   </button>
@@ -65,7 +74,6 @@ $(document).ready(function() {
               <?php
             }
             ?>
-            <input type="hidden" id="calc" value="<?= $calc; ?>">
             <tr class="bg-white">
               <td colspan="3">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#add_department">

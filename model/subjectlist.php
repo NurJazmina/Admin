@@ -1,5 +1,4 @@
 <?php
-//Add school subject
 if (isset($_POST['add_subject']))
 {
   $school_id = strval($_SESSION["loggeduser_schoolID"]);
@@ -46,8 +45,6 @@ if (isset($_POST['add_subject']))
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
-
-//Edit school subject
 if (isset($_POST['edit_subject']))
 {
   $subject_id = $_POST['subject_id'];
@@ -92,43 +89,48 @@ if (isset($_POST['edit_subject']))
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
-//delete school subject
 if (isset($_POST['delete_subject']))
 {
   $subject_id = $_POST['subject_id'];
-  $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($subject_id)], ['limit' => 1]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
+  $password = $_POST['password'];
+  $password_hash = $_SESSION["loggeduser_ConsumerPassword"];
+
+  if (password_verify($password, $password_hash))
   {
-    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolsSubject', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($subject_id)], ['limit' => 1]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    try
     {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
+      $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolsSubject', $bulk, $writeConcern);
     }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
+    catch (MongoDB\Driver\Exception\BulkWriteException $e)
     {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
+      $result = $e->getWriteResult();
+      // Check if the write concern could not be fulfilled
+      if ($writeConcernError = $result->getWriteConcernError())
+      {
+          printf("%s (%d): %s\n",
+              $writeConcernError->getMessage(),
+              $writeConcernError->getCode(),
+              var_export($writeConcernError->getInfo(), true)
+          );
+      }
+      // Check if any write operations did not complete at all
+      foreach ($result->getWriteErrors() as $writeError)
+      {
+          printf("Operation#%d: %s (%d)\n",
+              $writeError->getIndex(),
+              $writeError->getMessage(),
+              $writeError->getCode()
+          );
+      }
     }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
+    catch (MongoDB\Driver\Exception\Exception $e)
+    {
+      printf("Other error: %s\n", $e->getMessage());
+      exit;
+    }
   }
 }
 ?>

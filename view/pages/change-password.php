@@ -29,8 +29,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                                  <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
                             </div> -->
                             <div>
-                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
-                                <div class="text-muted"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
+                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?= $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
+                                <div class="text-muted"><?= $_SESSION["loggeduser_DepartmentName"]; ?></div>
                             </div>
                         </div>
                         <!--end::User-->
@@ -38,23 +38,23 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <div class="py-9">
 						    <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">ID Type:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerIDType"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerIDType"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Email:</span>
-                                <a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerEmail"]; ?></a>
+                                <a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerEmail"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Phone:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerPhone"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerPhone"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Location:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Status:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerStatus"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerStatus"]; ?></a>
                             </div>
                         </div>
                         <!--end::Contact-->
@@ -152,7 +152,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                                         if($latestremark !== 0)
                                         {
                                             ?>
-                                            <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
+                                            <span class="label label-light-warning label-inline font-weight-bold"><?= "new remark (".$latestremark.")";?></span>
                                             <?php
                                         }
                                         ?>
@@ -196,7 +196,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                                     if($latestremark1 !== 0)
                                     {
                                         ?>
-                                        <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
+                                        <span class="label label-light-warning label-inline font-weight-bold"><?= "new remark (".$latestremark1.")";?></span>
                                         <?php
                                     }
                                     ?>
@@ -227,7 +227,7 @@ include 'view/partials/_subheader/subheader-v1.php';
 					</div>
 					<!--end::Header-->
 					<!--begin::Form-->
-					<form class="form" name="ChangePasswordFormSubmit" action="model/change-password.php" method="post">
+					<form class="form" name="change_password" action="model/change-password.php" method="post">
 						<div class="card-body">
                             <?php  
                             if (isset($_GET['password']) && !empty($_GET['password']))
@@ -333,13 +333,13 @@ include 'view/partials/_subheader/subheader-v1.php';
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label text-alert">Confirm Password</label>
 								<div class="col-lg-9 col-xl-6">
-									<input type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' class="form-control form-control-lg form-control-solid" placeholder="Confirm password" />
+									<input type="password" name="confirm_password" id="confirm_password" onkeyup='check();' class="form-control form-control-lg form-control-solid" placeholder="Confirm password">
                                     <span id='message'></span>
                                 </div>
 							</div>
                             <div class="card-toolbar" style="text-align:right;">
-                                <input type="hidden" name="txtid" value="<?php echo $_SESSION["loggeduser_id"]; ?>">
-                                <button type="submit" class="btn btn-success mr-2" name="ChangePasswordFormSubmit">Save Changes</button>
+                                <input type="hidden" name="id" value="<?= $_SESSION["loggeduser_id"]; ?>">
+                                <button type="submit" class="btn btn-success mr-2" name="change_password">Save Changes</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
 						</div>

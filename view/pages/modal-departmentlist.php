@@ -58,10 +58,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <a>To delete <i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b><a id="test1"></a></b> type the department name <b><a id="test2"></a></b>.</a><br>
-          <!-- <a>This process cannot be undone</a> -->
+          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>department</b> type your <b>password</b>.</a><br>
           <input type="hidden" class="form-control" name="department_id">
-          <input type="type" class="form-control" name="name">
+          <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>

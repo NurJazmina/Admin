@@ -12,7 +12,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <!--begin::Profile Card-->
                 <div class="card card-custom card-stretch">
                     <!--begin::Body-->
-                    <div class="card-body pt-4">
+                    <div class="card-body">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end">
                             <div class="dropdown dropdown-inline">
@@ -27,8 +27,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                                  <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
                             </div> -->
                             <div>
-                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
-                                <div class="text-muted"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
+                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?= $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
+                                <div class="text-muted"><?= $_SESSION["loggeduser_DepartmentName"]; ?></div>
                             </div>
                         </div>
                         <!--end::User-->
@@ -36,30 +36,30 @@ include 'view/partials/_subheader/subheader-v1.php';
                         <div class="py-9">
 						    <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">ID Type:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerIDType"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerIDType"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Email:</span>
-                                <a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerEmail"]; ?></a>
+                                <a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerEmail"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Phone:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerPhone"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerPhone"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Location:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Status:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerStatus"]; ?></a>
+								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerStatus"]; ?></a>
                             </div>
                         </div>
                         <!--end::Contact-->
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=profile" class="navi-link py-4">
+                            <div class="navi-item">
+                                <a href="index.php?page=profile" class="navi-link">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -76,8 +76,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                                     <span class="navi-text font-size-lg">Profile Overview</span>
                                 </a>
                             </div>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=personal-information" class="navi-link py-4">
+                            <div class="navi-item">
+                                <a href="index.php?page=personal-information" class="navi-link">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
@@ -94,8 +94,8 @@ include 'view/partials/_subheader/subheader-v1.php';
                                     <span class="navi-text font-size-lg">Personal Information</span>
                                 </a>
                             </div>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=change-password" class="navi-link py-4">
+                            <div class="navi-item">
+                                <a href="index.php?page=change-password" class="navi-link">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg-->
@@ -116,100 +116,100 @@ include 'view/partials/_subheader/subheader-v1.php';
                             <?php
                             if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                             {
-                            ?>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=classroominfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-                                                    <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
+                                ?>
+                                <div class="navi-item">
+                                    <a href="index.php?page=classroominfo" class="navi-link" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
+                                        <span class="navi-icon mr-2">
+                                            <span class="svg-icon">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                        <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                        <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
+                                                        <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
                                         </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Classroom Info</span>
-                                    <span class="navi-label">
-                                    <?php 
-                                    $latestremark = 0;
-                                    $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+                                        <span class="navi-text font-size-lg">Classroom Info</span>
+                                        <span class="navi-label">
+                                            <?php 
+                                            $latestremark = 0;
+                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
 
-                                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                    $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
-                                    foreach ($cursor as $document)
-                                    {
-                                        $latestremark = $latestremark + 1;
-                                    }
-                                    if($latestremark == 0)
-                                    {
+                                            $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $latestremark = $latestremark + 1;
+                                            }
+                                            if($latestremark == 0)
+                                            {
 
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                        <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
-                                        <?php
-                                    }
-                                    ?>
-                                    </span>
-                                </a>
-                            </div>
-                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                            <span class="label label-light-warning label-inline font-weight-bold"><?= "new remark (".$latestremark.")";?></span>
+                                            <?php
+                                            }
+                                            ?>
+                                        </span>
+                                    </a>
+                                </div>
+                                <?php
                             }
                             if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
                             {
-                            ?>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=departmentinfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                    <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
-                                                    <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text">Department Info</span>
-                                    <span class="navi-label">
-                                <?php 
-                                $latestremark1 = 0;
-                                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
-
-                                $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
-                                foreach ($cursor as $document)
-                                {
-                                    $latestremark1 = $latestremark1 + 1;
-                                }
-                                if($latestremark1 == 0)
-                                {
-
-                                }
-                                else
-                                {
-                                    ?>
-                                    <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
-                                    <?php
-                                }
                                 ?>
-                                </span>
-                                </a>
-                            </div>
-                            <?php
+                                <div class="navi-item">
+                                    <a href="index.php?page=departmentinfo" class="navi-link" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
+                                        <span class="navi-icon mr-2">
+                                            <span class="svg-icon">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                        <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
+                                                        <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                        </span>
+                                        <span class="navi-text">Department Info</span>
+                                        <span class="navi-label">
+                                            <?php 
+                                            $latestremark1 = 0;
+                                            $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                                            $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+
+                                            $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $latestremark1 = $latestremark1 + 1;
+                                            }
+                                            if($latestremark1 == 0)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                            <span class="label label-light-warning label-inline font-weight-bold"><?= "new remark (".$latestremark1.")";?></span>
+                                            <?php
+                                        }
+                                            ?>
+                                        </span>
+                                    </a>
+                                </div>
+                                <?php
                             }
                             ?>
                         </div>
@@ -221,181 +221,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             </div>
             <!--end::Aside-->
             <!--begin::Content-->
-            <div class="flex-row-fluid ml-lg-8 bg-white">
-                <!--begin::Advance Table: Widget 7-->
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label font-weight-bolder text-dark">Attendance</span>
-                        </h3>
-                        <div class="card-toolbar">
-                            <ul class="nav nav-pills nav-pills-sm nav-success">
-                                <li class="nav-item">
-                                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_1">Month</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_2">Week</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_12_3">Day</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body pt-2 pb-0 mt-n3">
-                    <div class="w-100"></div>
-					<div class="col-sm">
-					<div class="row">
-					<div class="col-12 col-lg-12">
-						<div class="card">
-						<div class="card-body">
-							<div class="row">
-							<div class="col-sm-12">
-								<?php
-								$id = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_id"]);
-								$filter = ['_id'=>$id];
-								$query = new MongoDB\Driver\Query($filter);
-								$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-								foreach ($cursor as $document){
-									$ConsumerFName = ($document->ConsumerFName);
-									$ConsumerLName = ($document->ConsumerLName);
-									$ConsumerIDNo = ($document->ConsumerIDNo);
-								?>
-								<table id="attendance" class="table table-bordered ">
-								<thead class="table-light">
-									<tr>
-									<th scope="col" style="color:#696969; text-align:center">Staff ID</th>
-									<th scope="col" style="color:#696969; text-align:center">Staff Name</th>
-									<th scope="col" style="color:#696969; text-align:center">Date</th>
-									<th scope="col" style="color:#696969; text-align:center">IN</th>
-									<th scope="col" style="color:#696969; text-align:center">OUT</th>
-									</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
-									<td style="text-align:center"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-									<td style="text-align:center">
-								<?php
-								$Cards_id ='';
-								$filter1 = ['Consumer_id'=>$_SESSION["loggeduser_id"]];
-								$query1 = new MongoDB\Driver\Query($filter1);
-								$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
-								foreach ($cursor1 as $document1)
-								{
-                                    $Cards_id = strval($document1->Cards_id);
-								}
-								/*
-								check date
-								$convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								echo "<br>to_date: ".$to_date."<br>";
-								echo "from_date: ".$from_date."<br>";
-								$display = date_format($convert,"d/m/Y");
-								echo $display;
-								*/
-								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
 
-								$filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$query2 = new MongoDB\Driver\Query($filter2);
-								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
-								$varcounting = 0;
-								
-								foreach ($cursor2 as $document2)
-								{
-                                    $AttendanceDate = ($document2->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2)
-                                    {
-                                    } 
-                                    else 
-                                    {
-                                        echo date_format($AttendanceDate,"d-m-Y")."<br>";
-                                    }
-								}
-								?>
-								</td>
-								<td style="text-align:center">
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-
-                                    if ($varcounting % 2)
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    } 
-                                    else
-                                    {
-                                    }
-								}
-								?>
-								</td>
-								<td style="text-align:center">
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-
-                                    if ($varcounting % 2)
-                                    {
-                                    } 
-                                    else
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    }
-								}
-								?>
-								</td>
-								</tr>
-						</tbody>
-						</table>
-						<button type="button" style="font-size:15px width:25%" class="btn btn-success btn-sm"><a href="index.php?page=profile&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
-						<?php
-						}
-						if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-						{
-                            $attendance = ($_GET['attendance']);
-                            ?>
-                            <script>
-                            $(document).ready(function () {
-                                $("#attendance").table2excel({
-                                    filename: "attendance.xls"
-                                });
-                            });
-                            </script>
-                            <?php
-						}
-						?>
-					</div>
-					</div>
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <br><br>
-                <!--end::Advance Table Widget 7-->
             <!--end::Content-->
         </div>
         <!--end::Profile Overview-->
