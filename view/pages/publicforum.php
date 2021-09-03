@@ -66,7 +66,7 @@ include ('model/forums.php');
             $ConsumerFName3=" ";
             $ConsumerLName3=" ";
             $ForumDetails2=" ";
-            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>$category];
+            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>$category];
             $option = ['sort' => ['_id' => -1]];
             $query = new MongoDB\Driver\Query($filter,$option);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -113,7 +113,7 @@ include ('model/forums.php');
                         </div>
                         <?php
                         $Details = "";
-                        $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forumid,'Parent_id'=>'0'];
+                        $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forumid,'Parent_id'=>'0'];
                         $query = new MongoDB\Driver\Query($filter);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
 

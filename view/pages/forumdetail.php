@@ -154,7 +154,7 @@ $(document).ready(function() {
                         </div>
                         <div class="card p-8">
                             <?php
-                            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                             $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
 
@@ -248,14 +248,14 @@ $(document).ready(function() {
                             <?php
                             if (!isset($_POST['sort']) && empty($_POST['sort']))
                             {
-                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                                 $option = ['sort' => ['_id' => -1]];
                                 $query = new MongoDB\Driver\Query($filter,$option);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
                             }
                             else
                             {
-                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                                 $option = ['sort' => ['_id' => 1]];
                                 $query = new MongoDB\Driver\Query($filter,$option);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
@@ -297,7 +297,7 @@ $(document).ready(function() {
                                             <div id="flush-collapse<?= $_id4; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?= $_id4; ?>" data-bs-parent="#accordionFlushExample">
                                                 <div class="accordion-body commentline">
                                                     <?php
-                                                    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>$_id4];
+                                                    $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>$_id4];
                                                     $option = ['sort' => ['_id' => 1]];
                                                     $query = new MongoDB\Driver\Query($filter,$option);
                                                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);

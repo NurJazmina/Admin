@@ -11,7 +11,7 @@ if (isset($_POST['add_event']))
   $address = $_POST['address'];
   $location = $_POST['location'];
   $staff_id = $_SESSION["loggeduser_id"];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $date_start = $_POST['date_start'];
   $date_end = $_POST['date_end'];
 
@@ -81,7 +81,7 @@ if (isset($_POST['add_event']))
   $Emails = array();
   if ($Bcc == 'STAFF')
   {
-    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+    $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
     foreach ($cursor as $document)
@@ -324,7 +324,7 @@ if (isset($_POST['add_event']))
   }
   elseif ($Bcc == 'TEACHER')
   {
-    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+    $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
     foreach ($cursor as $document)
@@ -567,7 +567,7 @@ if (isset($_POST['add_event']))
   }
   elseif ($Bcc == 'VIP')
   {
-    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+    $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
     foreach ($cursor as $document)
@@ -806,7 +806,7 @@ if (isset($_POST['add_event']))
   }
   else
   {
-    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+    $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
     foreach ($cursor as $document)
@@ -1043,7 +1043,7 @@ if (isset($_POST['add_event']))
         }
       }
     }
-    $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+    $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parent',$query);
     foreach ($cursor as $document)

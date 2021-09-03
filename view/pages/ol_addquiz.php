@@ -44,7 +44,7 @@ html {
 <?php
 if (isset($_POST['recheckquiz']))
 {
-  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
+  $schoolID = strval($_SESSION["loggeduser_school_id"]);
   $totalobj = $_POST['totalobj'];
   $totalsub = $_POST['totalsub'];
   $Subject_id = $_POST['Subject_id'];

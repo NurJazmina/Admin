@@ -9,7 +9,7 @@ include ('model/event.php');
 <div class="row">
   <!-- begin::staff -->
   <?php
-  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
+  $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
   $option = ['limit'=>100,'sort' => ['Date_start' => 1]];
   $query = new MongoDB\Driver\Query($filter,$option);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
@@ -99,7 +99,7 @@ include ('model/event.php');
   <!-- end::staff -->
   <!-- begin::public -->
   <?php
-  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>'PUBLIC'];
+  $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC'];
   $option = ['limit'=>100,'sort' => ['Date_start' => 1]];
   $query = new MongoDB\Driver\Query($filter,$option);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);

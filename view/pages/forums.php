@@ -43,7 +43,7 @@ $time_now = time();
                         <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=1&topic=General">GENERAL</a>
                         <div class="card m-4 p-4">
                             <?php
-                            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'1'];
+                            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'1'];
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
                             $query = new MongoDB\Driver\Query($filter,$option);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -68,7 +68,7 @@ $time_now = time();
                                     $ConsumerFName = ($document1->ConsumerFName);
                                 }
                                 $total = 0;
-                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
                                 foreach ($cursor as $document2)
@@ -94,7 +94,7 @@ $time_now = time();
                         <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=2&topic=Proposal">PROPOSAL</a>
                         <div class="card m-4 p-4">
                             <?php
-                            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'2'];
+                            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'2'];
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
                             $query = new MongoDB\Driver\Query($filter,$option);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -123,7 +123,7 @@ $time_now = time();
                                 }
 
                                 $total = 0;
-                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
                                 foreach ($cursor as $document2)
@@ -149,7 +149,7 @@ $time_now = time();
                         <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=3&topic=Short News / Info">SHORT NEWS / INFO</a>
                         <div class="card m-4 p-4">
                             <?php
-                            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'3'];
+                            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'3'];
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
                             $query = new MongoDB\Driver\Query($filter,$option);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -175,7 +175,7 @@ $time_now = time();
                                     $ConsumerFName = ($document1->ConsumerFName);
                                 }
                                 $total = 0;
-                                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
                                 foreach ($cursor as $document2)
@@ -212,7 +212,7 @@ $time_now = time();
                     <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=4&topic=General">GENERAL</a>
                     <div class="card m-4 p-4">
                         <?php
-                        $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'4'];
+                        $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'4'];
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
                         $query = new MongoDB\Driver\Query($filter,$option);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -242,7 +242,7 @@ $time_now = time();
                             }
 
                             $total = 0;
-                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query2);
                             foreach ($cursor2 as $document2)
@@ -268,7 +268,7 @@ $time_now = time();
                     <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=5&topic=Proposal">PROPOSAL</a>
                     <div class="card m-4 p-4">
                         <?php
-                        $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'5'];
+                        $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'5'];
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
                         $query = new MongoDB\Driver\Query($filter,$option);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -298,7 +298,7 @@ $time_now = time();
                             }
 
                             $total = 0;
-                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query2);
                             foreach ($cursor2 as $document2)
@@ -324,7 +324,7 @@ $time_now = time();
                     <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=6&topic=Short News / Info">SHORT NEWS / INFO</a>
                     <div class="card m-4 p-4">
                         <?php
-                        $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum'=>'6'];
+                        $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'6'];
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
                         $query = new MongoDB\Driver\Query($filter,$option);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
@@ -354,7 +354,7 @@ $time_now = time();
                             }
 
                             $total = 0;
-                            $filter2 = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
+                            $filter2 = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query2);
                             foreach ($cursor2 as $document2)

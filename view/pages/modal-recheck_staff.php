@@ -17,7 +17,7 @@ if (isset($_POST['recheck_add_staff']))
   $Date_time = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
   $Date = date_format($Date_time,"d M Y");
 
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $FromNameF = $_SESSION["loggeduser_consumerFName"];
   $FromNameL = $_SESSION["loggeduser_consumerLName"];
   $FromconsumerIDNo = $_SESSION["loggeduser_consumerIDNo"];
@@ -485,7 +485,7 @@ if (isset($_POST['recheck_edit_staff']))
 {
   $class_category = $_POST['class_category'];
   $consumer_id = $_POST['consumer_id'];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
 
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($consumer_id)];
   $query = new MongoDB\Driver\Query($filter);

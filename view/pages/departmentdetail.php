@@ -45,7 +45,7 @@
               <ul class="navi flex-column navi-hover">
                 <li class="dropdown-item">Choose an option :</li>
                 <?php 
-                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
                 foreach ($cursor as $document)
@@ -530,7 +530,7 @@ else
           $date_now = date("d-m-Y");
           $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
 
-          $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$department_id];
+          $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$department_id];
           $query = new MongoDB\Driver\Query($filter);
           $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
           foreach ($cursor as $document)

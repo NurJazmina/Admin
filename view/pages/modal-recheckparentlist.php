@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['AddParentFormSubmit']))
 {
-  $schoolID = strval($_SESSION["loggeduser_schoolID"]);
+  $schoolID = strval($_SESSION["loggeduser_school_id"]);
   $ConsumerIDNoParent = $_POST['txtConsumerIDNoParent'];
   $ConsumerIDNoChild = $_POST['txtConsumerIDNoChild'];
   $Classcategory = $_POST['txtClasscategory'];
@@ -198,7 +198,7 @@ if (isset($_POST['AddParentFormSubmit']))
                         <div class="col-sm-10">
                           <select class="form-control" id="txtstudentclass" name="txtstudentclass">
                             <?php
-                            $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$Classcategory];
+                            $filter1 = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassCategory'=>$Classcategory];
                             $query1 = new MongoDB\Driver\Query($filter1);
                             $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query1);
                             foreach ($cursor1 as $document1):

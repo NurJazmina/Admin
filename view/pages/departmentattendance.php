@@ -45,7 +45,7 @@ border-color:#ffff;
                             <!--begin::Navigation-->
                             <li class="dropdown-item">Choose an option:</li>
                             <?php 
-                            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
                             $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
 
@@ -115,7 +115,7 @@ else
             </thead>
             <tbody>
             <?php
-            $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'Staffdepartment'=>$department_id];
+            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$department_id];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
             foreach ($cursor as $document)

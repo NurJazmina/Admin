@@ -19,7 +19,7 @@ if (isset($_POST['staff_mail']))
     $Emails = array();
     if ($Bcc == 'staff')
     {
-      $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+      $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document)
@@ -45,7 +45,7 @@ if (isset($_POST['staff_mail']))
     }
     elseif ($Bcc == 'teacher')
     {
-      $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+      $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document)
@@ -71,7 +71,7 @@ if (isset($_POST['staff_mail']))
     }
     elseif ($Bcc == 'school')
     {
-      $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+      $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document)
@@ -95,7 +95,7 @@ if (isset($_POST['staff_mail']))
     }
     elseif ($Bcc == 'parent')
     {
-      $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
       foreach ($cursor as $document)
@@ -117,7 +117,7 @@ if (isset($_POST['staff_mail']))
     }
     else
     {
-      $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+      $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
       foreach ($cursor as $document)
@@ -136,7 +136,7 @@ if (isset($_POST['staff_mail']))
           }
         }
       }
-      $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parent',$query);
       foreach ($cursor as $document)
@@ -383,7 +383,7 @@ if (isset($_POST['teacher_mail']))
     $Emails = array();
     if ($Bcc == 'all')
     {
-      $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
       foreach ($cursor as $document)

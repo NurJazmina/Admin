@@ -9,7 +9,7 @@ $SchoolName = $_SESSION["loggeduser_schoolName"];
 $SchoolEmail = $_SESSION["loggeduser_SchoolsEmail"];
 $SchoolPhone = $_SESSION["loggeduser_schoolsPhoneNo"];
 $SchoolAddress = $_SESSION["loggeduser_schoolsAddress"];
-$school_id = $_SESSION["loggeduser_schoolID"];
+$school_id = $_SESSION["loggeduser_school_id"];
 
 //Add school student
 if (isset($_POST['add_student']))
@@ -421,7 +421,7 @@ if (isset($_POST['add_student']))
 
 if (isset($_POST['add_relation']))
 {
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $parent_id = $_POST['parent_id'];
   $student_id = $_POST['student_id'];
   $relation = $_POST['relation'];
@@ -738,7 +738,7 @@ if (isset($_POST['add_relation']))
 
 if (isset($_POST['add_relation_student']))
 {
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $parent_id = $_POST['parent_id'];
   $student_consumer_id = $_POST['student_consumer_id'];
   $relation = $_POST['relation'];
@@ -1791,7 +1791,7 @@ if (isset($_POST['status_student']))
   }
 
   $staff_id = $_SESSION["loggeduser_id"];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
 
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
@@ -2143,7 +2143,7 @@ if (isset($_POST['status_parent']))
   }
 
   $staff_id = $_SESSION["loggeduser_id"];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
 
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);

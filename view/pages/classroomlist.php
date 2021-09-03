@@ -76,7 +76,7 @@
                 <tr>
                   <td class="text-left">
                   <?php
-                  $filter = ['StaffLevel'=>'0','SchoolID'=> $_SESSION["loggeduser_schoolID"],'ClassID' => $class_id];
+                  $filter = ['StaffLevel'=>'0','SchoolID'=> $_SESSION["loggeduser_school_id"],'ClassID' => $class_id];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                   foreach ($cursor as $document1)
@@ -102,7 +102,7 @@
                   <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                   <?php
                   $totalstudent = 0;
-                  $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"], 'Class_id'=>$class_id];
+                  $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"], 'Class_id'=>$class_id];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                   foreach ($cursor as $document)
@@ -247,7 +247,7 @@
                               <th>Total</th>
                               <td>
                               <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                               $totalstudent = 0;
@@ -263,7 +263,7 @@
                               <th>Active</th>
                               <td>
                               <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'StudentsStatus'=>'ACTIVE'];
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'StudentsStatus'=>'ACTIVE'];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                               $totalstudent = 0;
@@ -279,7 +279,7 @@
                               <th>Inactive</th>
                               <td>
                               <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'StudentsStatus'=>'INACTIVE'];
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'StudentsStatus'=>'INACTIVE'];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                               $totalstudent = 0;
@@ -321,7 +321,7 @@
                     <!-- End tab -->
                     <!--Tab by department -->
                     <?php
-                    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],];
+                    $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],];
                     $options = ['sort' => ['ClassCategory' => 1]];
                     $query = new MongoDB\Driver\Query($filter,$options);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
@@ -340,7 +340,7 @@
                                 <th>Total</th>
                                 <td>
                                 <?php
-                                $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'Class_id'=>$class_id];
+                                $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                                 $totalstudent = 0;
@@ -356,7 +356,7 @@
                                 <th>Active</th>
                                 <td>
                                   <?php
-                                  $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'Class_id'=>$class_id, 'StudentsStatus'=>'ACTIVE'];
+                                  $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id, 'StudentsStatus'=>'ACTIVE'];
                                   $query = new MongoDB\Driver\Query($filter);
                                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                                   $totalstudent = 0;
@@ -372,7 +372,7 @@
                                 <th>Inactive</th>
                                 <td>
                                   <?php
-                                  $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'Class_id'=>$class_id, 'StudentsStatus'=>'INACTIVE'];
+                                  $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id, 'StudentsStatus'=>'INACTIVE'];
                                   $query = new MongoDB\Driver\Query($filter);
                                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                                   $totalstudent = 0;
@@ -423,7 +423,7 @@
                     <a class="nav-link bg-success text-white font-weight-bolder btn-sm mb-1" id="v-pills-class-tab" data-bs-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-class" aria-selected="true">ALL CLASS</a>
                     <?php
                     $calc = 0;
-                    $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+                    $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
                     $options = ['sort' => ['ClassCategory' => 1]];
                     $query = new MongoDB\Driver\Query($filter,$options);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);

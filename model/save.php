@@ -3,7 +3,7 @@ if (isset($_POST['savequiz'])) {
 
   $URL = $_POST['URL'];
   $Consumer_id = strval($_SESSION["loggeduser_id"]);
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
 
   $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);

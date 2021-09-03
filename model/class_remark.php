@@ -10,7 +10,7 @@ if (isset($_POST['add_remark']))
   $class_id = $_POST['class_id'];
   $remark = $_POST['remark'];
   $staff_id = strval($_SESSION["loggeduser_id"]);
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
@@ -65,7 +65,7 @@ if (isset($_POST['add_remark_child']))
   $remark_id = $_POST['remark_id'];
   $remark = $_POST['remark'];
   $staff_id = strval($_SESSION["loggeduser_id"]);
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($remark_id)];

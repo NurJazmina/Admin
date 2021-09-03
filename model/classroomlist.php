@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['add_class']))
 {
-  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+  $school_id = strval($_SESSION["loggeduser_school_id"]);
   $class_category = $_POST['class_category'];
   $class_name = $_POST['class_name'];
   $consumer_id = $_POST['consumer_id'];
@@ -96,7 +96,7 @@ if (isset($_POST['edit_class']))
   $class_id = $_POST['class_id'];
   $class_name = $_POST['class_name'];
   $class_category = $_POST['class_category'];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->delete(['Class_id'=> $class_id]);
@@ -183,25 +183,29 @@ if (isset($_POST['edit_class']))
 if (isset($_POST['delete_class']))
 {
   $class_id = $_POST['class_id'];
+  $password = $_POST['password'];
+  $password_hash = $_SESSION["loggeduser_ConsumerPassword"];
 
-  $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($class_id)], ['limit' => 1]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Classrooms', $bulk, $writeConcern);
+  if (password_verify($password, $password_hash))
+  {
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($class_id)], ['limit' => 1]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Classrooms', $bulk, $writeConcern);
 
-  $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['Class_id'=> $class_id]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Class_id'=> $class_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
 
-  $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->update(['ClassID'=> $class_id],
-                ['$set' => ['ClassID'=> '']],
-                ['upsert' => TRUE]
-                );
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
-
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->update(['ClassID'=> $class_id],
+                  ['$set' => ['ClassID'=> '']],
+                  ['upsert' => TRUE]
+                  );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+  }
 }
 
 if (isset($_GET['paging']) && !empty($_GET['paging']))
@@ -221,7 +225,7 @@ if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
 {
   if (!isset($_GET['level']) && empty($_GET['level']))
   {
-    $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"]];
+    $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"]];
     $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
@@ -229,7 +233,7 @@ if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
   else
   {
     $sort = ($_GET['level']);
-    $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],
+    $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],
               'ClassCategory'=>$sort
               ];
     $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
@@ -240,7 +244,7 @@ if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
 else
 {
   $classname = ($_POST['classname']);
-  $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],'ClassName'=>$classname];
+  $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],'ClassName'=>$classname];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
 }

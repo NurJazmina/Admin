@@ -2,7 +2,7 @@
 //Add Quiz
 if (isset($_POST['add_quiz_return_notes']))
 {
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Subject_id = $_POST['Subject_id'];
   $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);
@@ -129,7 +129,7 @@ if (isset($_POST['answer']))
 {
   $Quiz_id = $_POST['id'];
   $Total_Question = $_POST['Total_Question'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 

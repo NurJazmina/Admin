@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['add_subject']))
 {
-  $school_id = strval($_SESSION["loggeduser_schoolID"]);
+  $school_id = strval($_SESSION["loggeduser_school_id"]);
   $subject_name = $_POST['subject_name'];
   $class_category = $_POST['class_category'];
 

@@ -1,7 +1,7 @@
 <?php  
 if (isset($_POST['recheck_add_class'])) 
 {
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $consumer_id = $_POST['consumer_id'];
   $class_category = $_POST['class_category'];
     
@@ -117,7 +117,7 @@ if (isset($_POST['recheck_edit_class']))
   $number = $_POST['number'];
   $class_category = $_POST['class_category'];
 
-  $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassID'=>$class_id];
+  $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassID'=>$class_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
   foreach ($cursor as $document)
@@ -160,7 +160,7 @@ if (isset($_POST['recheck_edit_class']))
             <div class="col-sm-10">
               <select class="form-control" name="class_name">
               <?php
-              $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$class_category];
+              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassCategory'=>$class_category];
               $query = new MongoDB\Driver\Query($filter);
               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
               foreach ($cursor as $document)
@@ -184,7 +184,7 @@ if (isset($_POST['recheck_edit_class']))
               <div class="col-sm-10">
                 <select class="form-control" name="teacher<?= $x; ?>">
                 <?php
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                 foreach ($cursor as $document1)
@@ -211,7 +211,7 @@ if (isset($_POST['recheck_edit_class']))
               <div class="col-sm-10">
                 <select class="form-control" name="subject<?= $x; ?>">
                 <?php
-                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"], 'Class_category'=>$class_category];
+                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"], 'Class_category'=>$class_category];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
                 foreach ($cursor as $document)

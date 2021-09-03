@@ -2,7 +2,7 @@
 //Add Quiz
 if (isset($_POST['add_survey_return_notes']))
 {
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Subject_id = $_POST['Subject_id'];
   $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);
@@ -87,7 +87,7 @@ if (isset($_POST['add_survey_return_notes']))
 if (isset($_POST['surveyform1']))
 {
   $Survey_id = $_POST['Survey_id'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -118,7 +118,7 @@ if (isset($_POST['surveyform1']))
 if (isset($_POST['surveyform2']))
 {
   $Survey_id = $_POST['Survey_id'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -149,7 +149,7 @@ if (isset($_POST['surveyform2']))
 if (isset($_POST['surveyform3']))
 {
   $Survey_id = $_POST['Survey_id'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -180,7 +180,7 @@ if (isset($_POST['surveyform3']))
 if (isset($_POST['surveyform4']))
 {
   $Survey_id = $_POST['Survey_id'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
@@ -209,7 +209,7 @@ if (isset($_POST['surveyform4']))
 if (isset($_POST['surveyform5']))
 {
   $Survey_id = $_POST['Survey_id'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 

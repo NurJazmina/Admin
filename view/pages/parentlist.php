@@ -14,7 +14,7 @@ if (isset($_GET['paging']) && !empty($_GET['paging']))
 }
 if (!isset($_POST['search_parent']) && empty($_POST['search_parent']))
 {
-  $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+  $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
   $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
   $query = new MongoDB\Driver\Query($filter,$option);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
@@ -33,7 +33,7 @@ else
     
     if ($ConsumerIDNo == $consumer || $ConsumerFName == $consumer)
     {
-      $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'ConsumerID'=>$consumer_id];
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"], 'ConsumerID'=>$consumer_id];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
     }
@@ -294,7 +294,7 @@ else
                               <td>
                               <?php
                               $totalparent = 0;
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
                               foreach ($cursor as $document)
@@ -310,7 +310,7 @@ else
                               <td>
                               <?php
                               $totalparent = 0;
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'ParentStatus'=>'ACTIVE'];
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"], 'ParentStatus'=>'ACTIVE'];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
                               foreach ($cursor as $document)
@@ -326,7 +326,7 @@ else
                               <td>
                               <?php
                               $totalparent = 0;
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'ParentStatus'=>'INACTIVE'];
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"], 'ParentStatus'=>'INACTIVE'];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
                               foreach ($cursor as $document)

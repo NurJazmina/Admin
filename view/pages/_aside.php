@@ -70,7 +70,7 @@
 									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
 
-									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'NewsDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$filter = ['school_id'=>$_SESSION["loggeduser_school_id"],'NewsDate' => ['$gte' => $from_date,'$lte' => $to_date]];
 									$query = new MongoDB\Driver\Query($filter);
 									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
 									foreach ($cursor as $document)
@@ -138,7 +138,7 @@
 									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 week'))->getTimestamp()*1000);
 									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
-									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'EventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$filter = ['school_id'=>$_SESSION["loggeduser_school_id"],'EventDateStart' => ['$gte' => $from_date,'$lte' => $to_date]];
 									$query = new MongoDB\Driver\Query($filter);
 									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolEvent',$query);
 									foreach ($cursor as $document)
@@ -271,7 +271,7 @@
 									$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 									$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
 
-									$filter = ['school_id'=>$_SESSION["loggeduser_schoolID"],'ForumDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+									$filter = ['school_id'=>$_SESSION["loggeduser_school_id"],'ForumDate' => ['$gte' => $from_date,'$lte' => $to_date]];
 									$query = new MongoDB\Driver\Query($filter);
 									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
 									foreach ($cursor as $document)

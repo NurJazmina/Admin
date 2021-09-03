@@ -6,7 +6,7 @@ require_once "vendor/autoload.php";
 //Add school staff
 if (isset($_POST['add_staff']))
 {
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $consumer_id = $_POST['consumer_id'];
   $department_id = $_POST['department_id'];
   $staff_level = $_POST['staff_level'];
@@ -319,7 +319,7 @@ if (isset($_POST['edit_staff']))
 {
   $class_id = $_POST['class_id'];
   $consumer_id = $_POST['consumer_id'];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['ConsumerID'=> $consumer_id],
@@ -623,7 +623,7 @@ if (isset($_POST['Status_staff']))
   $status = $_POST['status'];
   $detail = $_POST['detail'];
   $staff_remark = strval($_SESSION["loggeduser_id"]);
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $Date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
@@ -935,7 +935,7 @@ else
 
 if (!isset($_POST['search_staff']) && empty($_POST['search_staff']))
 {
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   //sorting by category
   if (!isset($_GET['level']) && empty($_GET['level']))
   {

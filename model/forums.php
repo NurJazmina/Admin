@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "vendor/autoload.php";
 
-$school_id = $_SESSION["loggeduser_schoolID"];
+$school_id = $_SESSION["loggeduser_school_id"];
 
 if (isset($_POST['add_forums'])) 
 {
@@ -816,7 +816,7 @@ if (isset($_POST['add_comment']))
   $forum_id = $_POST['forum_id'];
   $detail = $_POST['detail'];
   $staff_id = $_SESSION["loggeduser_id"];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
@@ -869,7 +869,7 @@ if (isset($_POST['add_comment_child']))
   $parent_id = $_POST['parent_id'];
   $detail = $_POST['detail'];
   $staff_id = $_SESSION["loggeduser_id"];
-  $school_id = $_SESSION["loggeduser_schoolID"];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);

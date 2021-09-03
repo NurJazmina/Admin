@@ -43,7 +43,7 @@ border-color:#ffff;
                         <!--begin::Navigation-->
                         <li class="dropdown-item">Choose an option:</li>
                         <?php 
-                        $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],];
+                        $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],];
                         $query = new MongoDB\Driver\Query($filter);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                         foreach ($cursor as $document)
@@ -95,7 +95,7 @@ border-color:#ffff;
                     <a href="index.php?page=classattendance&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
                     <?php
 
-                    $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"]];
+                    $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                     foreach ($cursor as $document)
@@ -176,7 +176,7 @@ border-color:#ffff;
                     <a href="index.php?page=classattendance&id=<?= $_GET['id']; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
                     <?php
                     
-                    $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"],'Class_id'=>$_GET['id']];
+                    $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"],'Class_id'=>$_GET['id']];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                     foreach ($cursor as $document)

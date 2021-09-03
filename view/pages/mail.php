@@ -134,7 +134,7 @@ else
                                 <div class="flex-grow-1" >
                                     <select class="form-control form-control-lg" name="compose_Bcc">
                                         <?php
-                                        $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                        $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
                                         $query = new MongoDB\Driver\Query($filter);
                                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                                         foreach ($cursor as $document)

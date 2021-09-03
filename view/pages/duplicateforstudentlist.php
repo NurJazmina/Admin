@@ -136,7 +136,7 @@ if (isset($_POST['add_relation_student']))
             <div class="col-sm-10">
               <select class="form-control" name="class">
                 <?php
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"],'ClassCategory'=>$class_category];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'ClassCategory'=>$class_category];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                 foreach ($cursor as $document)

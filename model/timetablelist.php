@@ -2,7 +2,7 @@
 //Add timetablelist
 if (isset($_POST['submitaddtimetable']))
 {
-  $varschoolid =  strval($_SESSION["loggeduser_schoolID"]);
+  $varschoolid =  strval($_SESSION["loggeduser_school_id"]);
   $varclassid = $_POST['txtclassid'];
   $varteacherid = $_POST['txtteacherid'];
   $varsubject = $_POST['txtsubject'];
@@ -54,7 +54,7 @@ if (isset($_POST['submitaddtimetable']))
 //Edit timetable
 if (isset($_POST['submitedittimetable']))
 {
-  $varschoolid =  strval($_SESSION["loggeduser_schoolID"]);
+  $varschoolid =  strval($_SESSION["loggeduser_school_id"]);
   $vartimetableid = $_POST['txttimetableid'];
   $varclassid = $_POST['txtclassid'];
   $varteacherid = $_POST['txtteacherid'];

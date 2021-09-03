@@ -18,7 +18,7 @@
                 <div class="col-sm-9">
                   <select class="form-control" name="department_id">
                     <?php
-                    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                    $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
                     foreach ($cursor as $document)

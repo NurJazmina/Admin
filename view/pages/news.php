@@ -8,7 +8,7 @@ include ('model/news.php');
 </div>
 <div class="row">
   <?php
-  $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
+  $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
   $option = ['limit'=>100,'sort' => ['_id' => -1]];
   $query = new MongoDB\Driver\Query($filter,$option);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.News',$query);
@@ -89,7 +89,7 @@ include ('model/news.php');
 
     <!--begin::public-->
     <?php
-    $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Access'=>'PUBLIC'];
+    $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC'];
     $option = ['limit'=>100,'sort' => ['_id' => -1]];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.News',$query);

@@ -21,7 +21,7 @@ if (isset($_POST['AddStaffRemarkFormSubmit'])) {
   $varconsumersid = strval($_SESSION["loggeduser_id"]);
   $vartxtconsumerremark = $_POST['txtconsumerRemark'];
   $varstaffid = strval($_SESSION["loggeduser_id"]);
-  $varschoolid = strval($_SESSION["loggeduser_schoolID"]);
+  $varschoolid = strval($_SESSION["loggeduser_school_id"]);
   $varconsumerremarkdate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
   $bulk->insert([

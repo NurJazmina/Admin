@@ -1,5 +1,5 @@
 <?php
-$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'1'];
+$filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'1'];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
 $totalstaff = 0;
@@ -9,7 +9,7 @@ foreach ($cursor as $document)
 }
 $_SESSION["totalstaff"] = $totalstaff;
 
-$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+$filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
 $totalteacher= 0;
@@ -19,7 +19,7 @@ foreach ($cursor as $document)
 }
 $_SESSION["totalteacher"] = $totalteacher;
 
-$filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"]];
+$filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 $totalstudent = 0;
@@ -29,7 +29,7 @@ foreach ($cursor as $document)
 }
 $_SESSION["totalstudent"] = $totalstudent;
 
-$filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+$filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
 $totalparent = 0;

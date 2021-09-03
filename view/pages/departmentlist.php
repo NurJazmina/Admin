@@ -50,7 +50,7 @@ if (isset($_GET['ERROR']) && !empty($_GET['ERROR']))
             </tr>
             <?php
             $calc = 0;
-            $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+            $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
             foreach ($cursor as $document)

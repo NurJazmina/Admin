@@ -32,14 +32,14 @@ include ('model/subjectlist.php');
             $calc = 0;
             if (!isset($_GET['level']) && empty($_GET['level']))
             {
-              $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+              $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
               $query = new MongoDB\Driver\Query($filter);
               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
             }
             else
             {
               $sort = ($_GET['level']);
-              $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"],'Class_category'=>$sort];
+              $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Class_category'=>$sort];
               $query = new MongoDB\Driver\Query($filter);
               $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
             }

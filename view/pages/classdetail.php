@@ -45,7 +45,7 @@
               <ul class="navi flex-column navi-hover py-2">
                 <li class="dropdown-item">Choose an option:</li>
                 <?php 
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"]];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                 foreach ($cursor as $document)

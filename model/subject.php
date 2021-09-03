@@ -17,7 +17,7 @@ if (isset($_POST['addtopic']))
     }
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->insert([
-                    'School_id'=>$_SESSION["loggeduser_schoolID"],
+                    'School_id'=>$_SESSION["loggeduser_school_id"],
                     'Subject_id'=> $Subject_id,
                     'Created_by'=> $_SESSION["loggeduser_id"],
                     'Created_date'=>$Created_date,

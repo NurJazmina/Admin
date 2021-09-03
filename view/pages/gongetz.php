@@ -29,7 +29,7 @@
             <div class="col-sm-10">
               <select class="form-control" id="txtStaffdepartment" name="txtStaffdepartment" style="height: auto; width: 70%" onchange="SelecttxtStaffdepartment(this.value);">
                 <?php
-                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
                 foreach ($cursor as $document)

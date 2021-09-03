@@ -19,7 +19,7 @@ if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
     if (!isset($_GET['level']) && empty($_GET['level']))
     {
       $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-      $filter = ['School_id' => $_SESSION["loggeduser_schoolID"],
+      $filter = ['School_id' => $_SESSION["loggeduser_school_id"],
                '$or' => [
                  ['TimetableStart' => ['$gte' => $vardate]],
                  ['TimetableEnd' => ['$gte' => $vardate]]
@@ -32,7 +32,7 @@ if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
     else
     {
       $sort = ($_GET['level']);
-      $filter = ['SchoolID' => $_SESSION["loggeduser_schoolID"],
+      $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],
                 'ClassCategory'=>$sort
                 ];
       $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
@@ -42,7 +42,7 @@ if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
       {
         $class = strval($document->_id);
         $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-        $filter = ['School_id' => $_SESSION["loggeduser_schoolID"],
+        $filter = ['School_id' => $_SESSION["loggeduser_school_id"],
                    '$or' => [
                      ['TimetableStart' => ['$gte' => $vardate]],
                      ['TimetableEnd' => ['$gte' => $vardate]]
@@ -72,7 +72,7 @@ if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
       foreach ($cursor as $document)
       {
         $teacher = strval($document->_id);
-        $filter = ['School_id' => $_SESSION["loggeduser_schoolID"],
+        $filter = ['School_id' => $_SESSION["loggeduser_school_id"],
                   '$or' => [
                     ['TimetableStart' => ['$gte' => $vardate]],
                     ['TimetableEnd' => ['$gte' => $vardate]]
@@ -202,7 +202,7 @@ if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
                 $Teachers_id = $document->Teachers_id;
                 $bid = new \MongoDB\BSON\ObjectId($Teachers_id);
 
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], '_id'=>$bid];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], '_id'=>$bid];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                 foreach ($cursor as $document3)
@@ -232,7 +232,7 @@ if ($_SESSION["loggeduser_ACCESS"] =='STAFF')
                   <td><a href="index.php?page=classdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php print_r($document5->ClassCategory); echo"  "; print_r($document5->ClassName); ?></a></td>
                   <?php
                 }
-                $filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"], 'Class_id'=>$Classroom_id];
+                $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"], 'Class_id'=>$Classroom_id];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                 $totalstudent = 0;
@@ -339,7 +339,7 @@ elseif ($_SESSION["loggeduser_ACCESS"] =='TEACHER')
                 <tbody>
                   <?php
                     $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                    $filter5 = ['School_id' => $_SESSION["loggeduser_schoolID"],'Teachers_id'=>strval($_SESSION["loggeduser_teacherid"])];
+                    $filter5 = ['School_id' => $_SESSION["loggeduser_school_id"],'Teachers_id'=>strval($_SESSION["loggeduser_teacherid"])];
                     $option5 = ['sort' => ['_id' => -1]];
                     $query5 = new MongoDB\Driver\Query($filter5,$option5);
                     $cursor5 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query5);
@@ -474,7 +474,7 @@ elseif ($_SESSION["loggeduser_ACCESS"] =='TEACHER')
                 <tbody>
                   <?php
                   $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                  $filterA = ['School_id' => $_SESSION["loggeduser_schoolID"],'Classroom_id'=>$_SESSION["loggeduser_ClassID"]];
+                  $filterA = ['School_id' => $_SESSION["loggeduser_school_id"],'Classroom_id'=>$_SESSION["loggeduser_ClassID"]];
                   $optionA = ['sort' => ['_id' => -1]];
                   $queryA = new MongoDB\Driver\Query($filterA,$optionA);
                   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$queryA);

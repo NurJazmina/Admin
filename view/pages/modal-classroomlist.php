@@ -12,7 +12,7 @@
             <div class="col-sm-9">
               <select class="form-control" name="consumer_id">
                 <?php
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                 foreach ($cursor as $document)
@@ -106,8 +106,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to delete this account?</p>
+          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>Classroom</b> type your <b>password</b>.</a><br>
           <input type="hidden" class="form-control" name="class_id">
+          <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div class="modal-footer">
           <button type="button"  class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>

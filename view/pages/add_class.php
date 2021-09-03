@@ -15,7 +15,7 @@ include 'view/partials/_subheader/subheader-v1.php';
             <div class="col-sm-10">
               <select class="form-control" name="consumer_id">
                 <?php
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                 foreach ($cursor as $document)
