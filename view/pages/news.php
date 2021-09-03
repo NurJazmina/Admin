@@ -123,7 +123,7 @@ include ('model/news.php');
         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
         foreach ($cursor as $document2)
         {
-          $Staffdepartment = ($document2->Staffdepartment);
+          $Staffdepartment = $document2->Staffdepartment;
           $departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
 
           $filter = ['_id'=>$departmentid];
@@ -165,7 +165,7 @@ include ('model/news.php');
         </form>
       </div>
     <?php
-    }
-    ?>
-    <!-- end::public -->
+  }
+  ?>
+  <!-- end::public -->
 </div>

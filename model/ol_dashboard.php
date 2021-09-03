@@ -1,12 +1,12 @@
 <?php
 //Edit school subject
-if (isset($_POST['editstatus']))
+if (isset($_POST['edit_status']))
 {
-  $subjectid = $_POST['subjectid'];
+  $subject_id = $_POST['subject_id'];
   $status = $_POST['status'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($subjectid)],
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($subject_id)],
                 ['$set' => ['status'=>$status]]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
