@@ -474,7 +474,7 @@ elseif ($_SESSION["loggeduser_ACCESS"] =='TEACHER')
                 <tbody>
                   <?php
                   $vardate = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                  $filterA = ['School_id' => $_SESSION["loggeduser_school_id"],'Classroom_id'=>$_SESSION["loggeduser_ClassID"]];
+                  $filterA = ['School_id' => $_SESSION["loggeduser_school_id"],'Classroom_id'=>$_SESSION["loggeduser_class_id"]];
                   $optionA = ['sort' => ['_id' => -1]];
                   $queryA = new MongoDB\Driver\Query($filterA,$optionA);
                   $cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$queryA);
@@ -507,7 +507,7 @@ elseif ($_SESSION["loggeduser_ACCESS"] =='TEACHER')
                       <tr>
                       <td><?php print_r($documentC->ConsumerFName); ?></td>
                       <?php
-                        $filterD = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ClassID"])];
+                        $filterD = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_class_id"])];
                         $queryD = new MongoDB\Driver\Query($filterD);
                         $cursorD = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$queryD);
                         foreach ($cursorD as $documentD)

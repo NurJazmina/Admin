@@ -3,9 +3,8 @@ $_SESSION["title"] = "School";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/schoolabout.php'); 
 ?>
-<div class="col-lg-12 col-xxl-12">
 <!--begin::Mixed Widget 1-->
-<div class="card card-custom bg-gray-100 card-stretch gutter-b">
+<div class="card">
   <!--begin::Header-->
   <div class="card-header border-0 bg-danger py-5">
     <h3 class="card-title font-weight-bolder text-white">About us</h3>
@@ -44,15 +43,14 @@ include ('model/schoolabout.php');
                 </g>
             </svg>
           </span>
+          <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?= $SchoolsPhoneNo; ?></a>
           <?php
           if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
           {
           ?>
-          <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2"><?= $SchoolsPhoneNo; ?>
-            <button type="button" style="vertical-align: inherit;" class="btn" data-bs-toggle="modal" data-bs-target="#edit_school">
-              <i class="flaticon2-edit icon-md text-primary" style="vertical-align: inherit;"></i>
-            </button>
-          </a>
+          <button type="button" style="vertical-align: inherit;" class="btn" data-bs-toggle="modal" data-bs-target="#edit_school">
+            <i class="flaticon2-edit icon-md text-primary" style="vertical-align: inherit;"></i>
+          </button>
           <?php
           }
           ?>
@@ -91,7 +89,5 @@ include ('model/schoolabout.php');
     <!--end::Stats-->
   <div class="resize-triggers"><div class="expand-trigger"><div style="width: 875px; height: 429px;"></div></div><div class="contract-trigger"></div></div></div>
   <!--end::Body-->
-</div>
-<!--end::Mixed Widget 1-->
 </div>
 <?php include ('view/pages/modal-schoolabout.php'); ?>

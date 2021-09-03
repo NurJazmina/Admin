@@ -161,7 +161,7 @@ function time_elapsed($date){
                     $total_submission = 0;
                     $not_graded = 0;
                     $graded = 0;
-                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                    $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -346,7 +346,7 @@ function time_elapsed($date){
                                                 </span>Student Grades</a>
                                                 <?php
                                                 $total = 0;
-                                                $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                                 $query = new MongoDB\Driver\Query($filter);
                                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                             
@@ -409,7 +409,7 @@ function time_elapsed($date){
                                 <tbody class="text-secondary">
 
                                 <?php
-                                $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -639,7 +639,7 @@ function time_elapsed($date){
                         <!--begin::Card-->
                         <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
                             <?php
-                            $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                            $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                             $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -654,7 +654,7 @@ function time_elapsed($date){
                                     <button class="btn btn-secondary font-weight-bolder btn-sm mb-2" type="button" data-bs-toggle="dropdown">Change User &nbsp; <i class="fas fa-sort"></i></button>
                                     <ul class="dropdown-menu">
                                     <?php
-                                        $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                        $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                         $query = new MongoDB\Driver\Query($filter);
                                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 

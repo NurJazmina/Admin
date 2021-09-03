@@ -570,139 +570,132 @@
 					<h4 class="menu-text">Directory</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
-				<?php
-				if ($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' || $_SESSION["loggeduser_ConsumerGroupName"] == 'GONGETZ')
-				{
-					?>
-					<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-						<a href="javascript:;" class="menu-link menu-toggle">
-							<span class="svg-icon menu-icon">
-								<i class="fas fa-user-tie"></i>
-							</span>
-							<span class="menu-text">Staff</span>
-							<i class="menu-arrow"></i>
-						</a>
-						<div class="menu-submenu">
-							<i class="menu-arrow"></i>
-							<ul class="menu-subnav">
-								<li class="menu-item menu-item-parent" aria-haspopup="true">
-									<span class="menu-link">
-										<span class="menu-text">Staff</span>
-									</span>
-								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=stafflist" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">List Staff</span>
-									</a>
-								</li>
-								<?php
-								if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
-								{
-								?>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=add_staff" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Add Staff</span>
-									</a>
-								</li>
-								<?php
-								}
-								?>
-							</ul>
-						</div>
-					</li>
-					<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-						<a href="javascript:;" class="menu-link menu-toggle">
-							<span class="svg-icon menu-icon">
-									<i class="fas fa-user-graduate"></i>
-							</span>
-							<span class="menu-text">Student</span>
-							<i class="menu-arrow"></i>
-						</a>
-						<div class="menu-submenu">
-							<i class="menu-arrow"></i>
-							<ul class="menu-subnav">
-								<li class="menu-item menu-item-parent" aria-haspopup="true">
-									<span class="menu-link">
-										<span class="menu-text">Student</span>
-									</span>
-								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=studentlist" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">List Student</span>
-									</a>
-								</li>
-								<?php
-								if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
-								{
-								?>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=add_student" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Add Student</span>
-									</a>
-								</li>
-								<?php
-								}
-								?>
-							</ul>
-						</div>
-					</li>
-					<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-						<a href="javascript:;" class="menu-link menu-toggle">
-							<span class="svg-icon menu-icon">
-									<i class="fas fa-user-alt"></i>
-							</span>
-							<span class="menu-text">Parent</span>
-							<i class="menu-arrow"></i>
-						</a>
-						<div class="menu-submenu">
-							<i class="menu-arrow"></i>
-							<ul class="menu-subnav">
-								<li class="menu-item menu-item-parent" aria-haspopup="true">
-									<span class="menu-link">
-										<span class="menu-text">Parent</span>
-									</span>
-								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=parentlist" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">List Parent</span>
-									</a>
-								</li>
-								<?php
-								if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
-								{
-								?>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=add_parent" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Add Parent</span>
-									</a>
-								</li>
-								<?php
-								}
-								?>
-							</ul>
-						</div>
-					</li>
-				<?php
-				}
-				?>
+				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+					<a href="javascript:;" class="menu-link menu-toggle">
+						<span class="svg-icon menu-icon">
+							<i class="fas fa-user-tie"></i>
+						</span>
+						<span class="menu-text">Staff</span>
+						<i class="menu-arrow"></i>
+					</a>
+					<div class="menu-submenu">
+						<i class="menu-arrow"></i>
+						<ul class="menu-subnav">
+							<li class="menu-item menu-item-parent" aria-haspopup="true">
+								<span class="menu-link">
+									<span class="menu-text">Staff</span>
+								</span>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=stafflist" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">List Staff</span>
+								</a>
+							</li>
+							<?php
+							if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
+							{
+							?>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=add_staff" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Add Staff</span>
+								</a>
+							</li>
+							<?php
+							}
+							?>
+						</ul>
+					</div>
+				</li>
+				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+					<a href="javascript:;" class="menu-link menu-toggle">
+						<span class="svg-icon menu-icon">
+								<i class="fas fa-user-graduate"></i>
+						</span>
+						<span class="menu-text">Student</span>
+						<i class="menu-arrow"></i>
+					</a>
+					<div class="menu-submenu">
+						<i class="menu-arrow"></i>
+						<ul class="menu-subnav">
+							<li class="menu-item menu-item-parent" aria-haspopup="true">
+								<span class="menu-link">
+									<span class="menu-text">Student</span>
+								</span>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=studentlist" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">List Student</span>
+								</a>
+							</li>
+							<?php
+							if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
+							{
+							?>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=add_student" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Add Student</span>
+								</a>
+							</li>
+							<?php
+							}
+							?>
+						</ul>
+					</div>
+				</li>
+				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+					<a href="javascript:;" class="menu-link menu-toggle">
+						<span class="svg-icon menu-icon">
+								<i class="fas fa-user-alt"></i>
+						</span>
+						<span class="menu-text">Parent</span>
+						<i class="menu-arrow"></i>
+					</a>
+					<div class="menu-submenu">
+						<i class="menu-arrow"></i>
+						<ul class="menu-subnav">
+							<li class="menu-item menu-item-parent" aria-haspopup="true">
+								<span class="menu-link">
+									<span class="menu-text">Parent</span>
+								</span>
+							</li>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=parentlist" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">List Parent</span>
+								</a>
+							</li>
+							<?php
+							if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
+							{
+							?>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="index.php?page=add_parent" class="menu-link menu-toggle">
+									<i class="menu-bullet menu-bullet-dot">
+										<span></span>
+									</i>
+									<span class="menu-text">Add Parent</span>
+								</a>
+							</li>
+							<?php
+							}
+							?>
+						</ul>
+					</div>
+				</li>
 			</ul>
 			<!--end::Menu Nav-->
 		</div>

@@ -49,7 +49,7 @@
             $_SESSION["loggeduser_school_id"] = $document->SchoolID;
             $_SESSION["loggeduser_StaffLevel"] = $document->StaffLevel;
             $_SESSION["loggeduser_ConsumerID"] = $document->ConsumerID;
-            $_SESSION["loggeduser_ClassID"] = $document->ClassID;
+            $_SESSION["loggeduser_class_id"] = $document->ClassID;
             $_SESSION["loggeduser_Staffdepartment"] = $document->Staffdepartment;
             
             $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_school_id"])];
@@ -80,7 +80,7 @@
           {
             $_SESSION["loggeduser_studentid"] = strval($document->_id);
             $_SESSION["loggeduser_Schools_id"] = $document->Schools_id;
-            $_SESSION["loggeduser_Class_id"] = $document->Class_id;
+            $_SESSION["loggeduser_class_id"] = $document->Class_id;
 
             $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_Schools_id"])];
             $query = new MongoDB\Driver\Query($filter);
@@ -94,12 +94,12 @@
               $_SESSION["loggeduser_SchoolsEmail"] = $document->SchoolsEmail;
             }
             
-            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_Class_id"])];
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_class_id"])];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
             foreach ($cursor as $document)
             {
-              $_SESSION["loggeduser_class_id"] = $document->_id;
+              $_SESSION["loggeduser_class_id"] = strval($document->_id);
               $_SESSION["loggeduser_ClassCategory"] = $document->ClassCategory;
               $_SESSION["loggeduser_ClassName"] = $document->ClassName;
             }
@@ -140,7 +140,7 @@
             $_SESSION["loggeduser_teacherid"] = '';
             $_SESSION["loggeduser_StaffLevel"] = '';
             $_SESSION["loggeduser_ConsumerID"] = '';
-            $_SESSION["loggeduser_ClassID"] = '';
+            $_SESSION["loggeduser_class_id"] = '';
             $_SESSION["loggeduser_Staffdepartment"] = '';
             $_SESSION["loggeduser_schoolName"] = '';
             $_SESSION["loggeduser_schoolsPhoneNo"] = '';

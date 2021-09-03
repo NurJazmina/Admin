@@ -98,7 +98,7 @@ foreach ($cursor as $document)
                         <a class="text-primary mb-1">Address</a>
                         <p class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= $Address; ?></p>
                     </div>
-                    <div class="col-sm-6 iframe-container shadow">
+                    <div class="col-sm-6 iframe-container border border-white">
                         <?= $Location; ?>
                     </div>
                 </div>

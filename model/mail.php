@@ -383,7 +383,7 @@ if (isset($_POST['teacher_mail']))
     $Emails = array();
     if ($Bcc == 'all')
     {
-      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$_SESSION["loggeduser_ClassID"]];
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$_SESSION["loggeduser_class_id"]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
       foreach ($cursor as $document)

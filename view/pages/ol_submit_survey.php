@@ -122,7 +122,7 @@ function time_elapsed($date){
                 {
                     $total = 0;
                     $total_submission = 0;
-                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                    $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -246,7 +246,7 @@ function time_elapsed($date){
                                 <tbody class="text-secondary">
                                 <?php
                                 $total = 0;
-                                $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 

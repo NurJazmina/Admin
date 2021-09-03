@@ -80,7 +80,7 @@ foreach ($cursor as $document)
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
                         foreach ($cursor as $document)
                         {
-                            $Assignment_id = $document->_id;
+                            $Assignment_id = strval($document->_id);
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
@@ -95,7 +95,7 @@ foreach ($cursor as $document)
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
                         foreach ($cursor as $document)
                         {
-                            $Quiz_id = $document->_id;
+                            $Quiz_id = strval($document->_id);
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
@@ -110,7 +110,7 @@ foreach ($cursor as $document)
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_URL',$query);
                         foreach ($cursor as $document)
                         {
-                            $URL_id = $document->_id;
+                            $URL_id = strval($document->_id);
                             $Title = $document->Title;
                             $Url = $document->Url;
                             ?>
@@ -126,7 +126,7 @@ foreach ($cursor as $document)
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
                         foreach ($cursor as $document)
                         {
-                            $Survey_id = $document->_id;
+                            $Survey_id = strval($document->_id);
                             $Title = $document->Title;
                             ?>
                             <div class="checkbox-inline mb-5">
@@ -141,7 +141,7 @@ foreach ($cursor as $document)
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Announcement',$query);
                         foreach ($cursor as $document)
                         {
-                            $Announcement_id = $document->_id;
+                            $Announcement_id = strval($document->_id);
                             $Title = $document->Title;
                             $Description = $document->Description;
                             ?>
@@ -159,6 +159,10 @@ foreach ($cursor as $document)
                 }
                 ?>
             </div>
+            <?php
+            if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+            {
+            ?>
             <div class="row">
                 <div class="col-sm text-right">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#topic" data-bs-whatever="<?php echo $Notes_id; ?>">
@@ -166,6 +170,9 @@ foreach ($cursor as $document)
                     </button>
                 </div>
             </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>

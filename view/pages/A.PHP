@@ -140,7 +140,7 @@ include 'view/partials/_subheader/subheader-v1.php';
                                     $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
                                     $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
 
-                                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                                    $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
                                     $query = new MongoDB\Driver\Query($filter);
                                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
                                     foreach ($cursor as $document)

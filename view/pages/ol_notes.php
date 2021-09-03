@@ -191,6 +191,10 @@ foreach ($cursor as $document)
                     <div class="col-sm">
                     <div class="checkbox-inline">
                         <h1  id="section0" contenteditable="false" style="color:#04ada5;">SLOT <?= $Note_sort." : ".$Title; ?> </h1>
+                        <?php
+                        if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+                        {
+                        ?>
                         <div class="col-sm text-right">
                             <i class="fas fa-pencil-alt text-success" type="button" data-bs-toggle="dropdown"></i>
                             <div class="dropdown-menu dropdown-menu-md py-5">
@@ -214,6 +218,9 @@ foreach ($cursor as $document)
                                 </form>
                             </div>
                         </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     </div>
                     <div class="px-10 mb-10" id="contentinfo">
@@ -300,12 +307,17 @@ foreach ($cursor as $document)
                         }
                         ?>
                     </div>
+                    <?php
+                    if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+                    {
+                    ?>
                     <div class="col-sm text-right">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#activity">
                             <i class="icon fa fa-plus fa-fw text-light-success"></i>  Add an activity or resource
                         </button>
                     </div>
                     <?php
+                    }
                 }
                 ?>
             </div>
