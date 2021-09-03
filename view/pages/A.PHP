@@ -1,391 +1,1240 @@
 <?php
-$_SESSION["title"] = "Profile";
-include 'view/partials/_subheader/subheader-v1.php'; 
+$_SESSION["title"] = "Dashboard";
+include 'view/partials/_subheader/subheader-v1.php';
+include ('model/home.php'); 
+
+function time_elapsed($date){
+	$bit = array(
+		' year'      => $date  / 31556926 % 12,
+		' week'      => $date  / 604800 % 52,
+		' day'       => $date  / 86400 % 7,
+		' hour'      => $date  / 3600 % 24,
+		' minute'    => $date  / 60 % 60,
+		' second'    => $date  % 60
+		);
+	foreach($bit as $k => $v){
+		if($v > 1)$ret[] = $v . $k . 's';
+		if($v == 1)$ret[] = $v . $k;
+		}
+	array_splice($ret, count($ret)-1, 0, '');
+	$ret[] = '';
+
+	return join(' ', $ret);
+}
+
 ?>
-<div class="d-flex flex-column-fluid">
-    <!--begin::Container-->
-    <div class="container">
-        <!--begin::Profile Overview-->
-        <div class="d-flex flex-row">
-            <!--begin::Aside-->
-            <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
-                <!--begin::Profile Card-->
-                <div class="card card-custom card-stretch">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end">
-                            <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right"></div>
-                            </div>
-                        </div>
-                        <!--end::Toolbar-->
-                        <!--begin::User-->
-                        <div class="d-flex align-items-center">
-                            <!-- <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                 <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
-                            </div> -->
-                            <div>
-                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?= $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
-                                <div class="text-muted"><?= $_SESSION["loggeduser_DepartmentName"]; ?></div>
-                            </div>
-                        </div>
-                        <!--end::User-->
-                        <!--begin::Contact-->
-                        <div class="py-9">
-						    <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">ID Type:</span>
-								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerIDType"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Email:</span>
-                                <a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerEmail"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Phone:</span>
-								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerPhone"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Location:</span>
-								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Status:</span>
-								<a href="#" class="text-muted text-hover-primary"><?= $_SESSION["loggeduser_consumerStatus"]; ?></a>
-                            </div>
-                        </div>
-                        <!--end::Contact-->
-                        <!--begin::Nav-->
-                        <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
-                            <div class="navi-item">
-                                <a href="index.php?page=profile" class="navi-link">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero"></path>
-                                                    <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Profile Overview</span>
-                                </a>
-                            </div>
-                            <div class="navi-item">
-                                <a href="index.php?page=personal-information" class="navi-link">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Personal Information</span>
-                                </a>
-                            </div>
-                            <div class="navi-item">
-                                <a href="index.php?page=change-password" class="navi-link">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                    <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"></path>
-                                                    <path d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z" fill="#000000" opacity="0.3"></path>
-                                                    <path d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Change Password</span>
-                                </a>
-                            </div>
-                            <?php
-                            if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
-                            {
-                            ?>
-                            <div class="navi-item">
-                                <a href="index.php?page=classroominfo" class="navi-link" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-                                                    <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Classroom Info</span>
-                                    <span class="navi-label">
-                                    <?php 
-                                    $latestremark = 0;
-                                    $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+<style>
+.construction {
+    font-size: 1rem;
+    line-height: 1.65;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #41c5bd 50%, #ffffff 50%);
+    color: #ffffff;
+}
 
-                                    $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                    $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
-                                    foreach ($cursor as $document)
-                                    {
-                                        $latestremark = $latestremark + 1;
-                                    }
-                                    if($latestremark == 0)
-                                    {
+.uc__wrapper {
+	padding-top: 10%;
+	padding-bottom: 10%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
 
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                        <span class="label label-light-warning label-inline font-weight-bold"><?= "new remark (".$latestremark.")";?></span>
-                                        <?php
-                                    }
-                                    ?>
-                                    </span>
-                                </a>
-                            </div>
-                            <?php
-                            }
-                            if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
-                            {
-                            ?>
-                            <div class="navi-item">
-                                <a href="index.php?page=departmentinfo" class="navi-link" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                    <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
-                                                    <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text">Department Info</span>
-                                    <span class="navi-label">
-                                <?php 
-                                $latestremark1 = 0;
-                                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
+.uc__details {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    align-items: flex-start;
+    justify-content: center;
+}
 
-                                $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
-                                foreach ($cursor as $document)
-                                {
-                                    $latestremark1 = $latestremark1 + 1;
-                                }
-                                if($latestremark1 == 0)
-                                {
+.uc__art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-                                }
-                                else
-                                {
-                                    ?>
-                                    <span class="label label-light-warning label-inline font-weight-bold"><?= "new remark (".$latestremark1.")";?></span>
-                                    <?php
-                                }
-                                ?>
-                                </span>
-                                </a>
-                            </div>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <!--end::Nav-->
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <!--end::Profile Card-->
-            </div>
-            <!--end::Aside-->
-            <!--begin::Content-->
-            <div class="flex-row-fluid ml-lg-8 bg-white">
-                <!--begin::Advance Table: Widget 7-->
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label font-weight-bolder text-dark">Attendance</span>
-                        </h3>
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body pt-2 pb-0 mt-n3">
-                    <div class="w-100"></div>
-					<div class="col-sm">
-					<div class="row">
-					<div class="col-12 col-lg-12">
-						<div class="card">
-						<div class="card-body">
-							<div class="row">
-							<div class="col-sm-12">
-								<?php
-								$filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_id"])];
-								$query = new MongoDB\Driver\Query($filter);
-								$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-								foreach ($cursor as $document)
-                                {
-									$ConsumerFName = $document->ConsumerFName;
-									$ConsumerLName = $document->ConsumerLName;
-									$ConsumerIDNo = $document->ConsumerIDNo;
-								?>
-								<table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-								<thead class="bg-white text-dark-50">
-									<tr class="bg-success text-white">
-									<th>Staff ID</th>
-									<th>Staff Name</th>
-									<th>Date</th>
-									<th>IN</th>
-									<th>OUT</th>
-									</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td><?= $ConsumerIDNo; ?></td>
-									<td><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-									<td>
-								<?php
-								$Cards_id ='';
-								$filter1 = ['Consumer_id'=>$_SESSION["loggeduser_id"]];
-								$query1 = new MongoDB\Driver\Query($filter1);
-								$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
-								foreach ($cursor1 as $document1)
-								{
-                                    $Cards_id = strval($document1->Cards_id);
-								}
-								/*
-								check date
-								$convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								echo "<br>to_date: ".$to_date."<br>";
-								echo "from_date: ".$from_date."<br>";
-								$display = date_format($convert,"d/m/Y");
-								echo $display;
-								*/
-								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
+.comingsoon{
+    display: inline-block;
+    font-size: 40px;
+    position: relative;
+    margin-bottom: 1rem;
+}
 
-								$filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$query2 = new MongoDB\Driver\Query($filter2);
-								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
-								$varcounting = 0;
-								
-								foreach ($cursor2 as $document2)
-								{
-                                    $AttendanceDate = ($document2->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2)
-                                    {
-                                    } 
-                                    else 
-                                    {
-                                        echo date_format($AttendanceDate,"d-m-Y")."<br>";
-                                    }
-								}
-								?>
-								</td>
-								<td>
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-
-                                    if ($varcounting % 2)
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    } 
-                                    else
-                                    {
-                                    }
-								}
-								?>
-								</td>
-								<td>
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-
-                                    if ($varcounting % 2)
-                                    {
-                                    } 
-                                    else
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    }
-								}
-								?>
-								</td>
-								</tr>
-						</tbody>
-						</table>
-						<button type="button" style="font-size:15px width:25%" class="btn btn-success btn-sm"><a href="index.php?page=profile&attendance=<?= "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
+.intro {
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+</style>
+<div class="row">
+	<div class="col">
+		<div class="card card-custom gutter-b">
+			<!--begin::Body-->
+			<div class="card-body">
+				<!--begin::Wrapper-->
+				<div class="d-flex justify-content-between flex-column h-100">
+					<!--begin::Container-->
+					<div class="h-100">
+						<!--begin::Header-->
+						<div class="d-flex flex-column flex-center">
+							<!--begin::Image-->
+							<div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url(assets/media/stock-600x400/img-70.jpg)"></div>
+							<!--end::Image-->
+							<!--begin::Title-->
+							<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1"><?= $_SESSION["loggeduser_schoolName"]; ?></a>
+							<!--end::Title-->
+							<!--begin::Text-->
+							<div class="font-weight-bold text-dark-50 font-size-sm pb-7"><?= $_SESSION["loggeduser_schoolsAddress"]; ?></div>
+							<!--end::Text-->
+						</div>
+						<!--end::Header-->
+						<!--begin::Body-->
+						<div class="pt-1">
+							<!--begin::Item-->
+							<div class="d-flex align-items-center pb-9">
+								<!--begin::Symbol-->
+								<div class="symbol symbol-45 symbol-light mr-4">
+									<span class="symbol-label">
+										<span class="svg-icon svg-icon-2x svg-icon-dark-50">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
+											<i class="fas fa-user-tie fa-2x"></i>
+											<!--end::Svg Icon-->
+										</span>
+									</span>
+								</div>
+								<!--end::Symbol-->
+								<!--begin::Text-->
+								<div class="d-flex flex-column flex-grow-1">
+									<a href="index.php?page=stafflist&level=1" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Staff</a>
+									<span class="text-muted font-weight-bold">Good Fellas</span>
+								</div>
+								<!--end::Text-->
+								<!--begin::label-->
+								<span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalstaff"] ?></span>
+								<!--end::label-->
+							</div>
+							<!--end::Item-->
+							<!--begin::Item-->
+							<div class="d-flex align-items-center pb-9">
+								<!--begin::Symbol-->
+								<div class="symbol symbol-45 symbol-light mr-4">
+									<span class="symbol-label">
+										<span class="svg-icon svg-icon-2x svg-icon-dark-50">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+											<i class="fas fa-chalkboard-teacher fa-2x"></i>
+											<!--end::Svg Icon-->
+										</span>
+									</span>
+								</div>
+								<!--end::Symbol-->
+								<!--begin::Text-->
+								<div class="d-flex flex-column flex-grow-1">
+									<a href="index.php?page=stafflist&level=0" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Teacher</a>
+									<span class="text-muted font-weight-bold">Successful Fellas</span>
+								</div>
+								<!--end::Text-->
+								<!--begin::label-->
+								<span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalteacher"] ?></span>
+								<!--end::label-->
+							</div>
+							<!--end::Item-->
+							<!--begin::Item-->
+							<div class="d-flex align-items-center pb-9">
+								<!--begin::Symbol-->
+								<div class="symbol symbol-45 symbol-light mr-4">
+									<span class="symbol-label">
+										<span class="svg-icon svg-icon-2x svg-icon-dark-50">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
+											<i class="fas fa-user-graduate fa-2x"></i>
+											<!--end::Svg Icon-->
+										</span>
+									</span>
+								</div>
+								<!--end::Symbol-->
+								<!--begin::Text-->
+								<div class="d-flex flex-column flex-grow-1">
+									<a href="index.php?page=studentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Students</a>
+									<span class="text-muted font-weight-bold">Creative Fellas</span>
+								</div>
+								<!--end::Text-->
+								<!--begin::label-->
+								<span class="font-weight-bolder label label-xl label-light-primary label-inline py-5 min-w-45px"><?= $_SESSION["totalstudent"] ?></span>
+								<!--end::label-->
+							</div>
+							<!--end::Item-->
+							<!--begin::Item-->
+							<div class="d-flex align-items-center pb-9">
+								<!--begin::Symbol-->
+								<div class="symbol symbol-45 symbol-light mr-4">
+									<span class="symbol-label">
+										<span class="svg-icon svg-icon-2x svg-icon-dark-50">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+											<i class="fas fa-user-friends fa-2x"></i>
+											<!--end::Svg Icon-->
+										</span>
+									</span>
+								</div>
+								<!--end::Symbol-->
+								<!--begin::Text-->
+								<div class="d-flex flex-column flex-grow-1">
+									<a href="index.php?page=parentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Parent</a>
+									<span class="text-muted font-weight-bold">Productive Fellas</span>
+								</div>
+								<!--end::Text-->
+								<!--begin::label-->
+								<span class="font-weight-bolder label label-xl label-light-info label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalparent"] ?></span>
+								<!--end::label-->
+							</div>
+							<!--end::Item-->
+						</div>
+						<!--end::Body-->
+					</div>
+					<!--eng::Container-->
+					<!--begin::Footer-->
+					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+						<button class="btn btn-success font-weight-bolder font-size-sm py-3 px-14" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
+					</div>
+					<!--end::Footer-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--
+		<div class="card card-custom gutter-b">
+			<div class="card-body">
+				<div class="d-flex justify-content-between flex-column h-100">
+					<div class="h-100">
+						<div class="d-flex flex-column flex-center">
+						aaaaa
+						</div>
+						<div class="pt-1">
+						bbbb
+						</div>
+					</div>
+					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+					ccccc
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+	</div>
+	<div class="col">
+		<div class="card card-custom gutter-b">
+		    <div class="construction">
+				<div class="uc__wrapper">
+					<div class="uc__details">
+						<h1 class="comingsoon">Coming Soon!</h1>
+						<h3 class="intro">
+							We are working hard to give you a better experience.
+						</h3>
+						<p class="uc__description">
+							Features
+							<span class="svg-icon svg-icon-light svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Forward.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<path d="M12.6571817,10 L12.6571817,5.67013288 C12.6571817,5.25591932 12.3213953,4.92013288 11.9071817,4.92013288 C11.7234961,4.92013288 11.5461972,4.98754181 11.4089088,5.10957589 L4.25168161,11.4715556 C3.94209454,11.7467441 3.91420899,12.2207984 4.1893975,12.5303855 C4.19915701,12.541365 4.209237,12.5520553 4.21962441,12.5624427 L11.3768516,19.7196699 C11.6697448,20.0125631 12.1446186,20.0125631 12.4375118,19.7196699 C12.5781641,19.5790176 12.6571817,19.3882522 12.6571817,19.1893398 L12.6571817,15 C14.004369,14.9188289 16.83481,14.9157978 21.1485046,14.9909069 L21.1485051,14.9908794 C21.4245904,14.9956866 21.6522988,14.7757721 21.6571059,14.4996868 C21.6571564,14.4967857 21.6571817,14.4938842 21.6571817,14.4909827 L21.6572352,10.5050185 C21.6572352,10.2288465 21.4333536,10.0049649 21.1571817,10.0049649 C21.1555649,10.0049649 21.1539481,10.0049728 21.1523314,10.0049884 C16.0215539,10.0547574 13.1898373,10.0530946 12.6571817,10 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.828591, 12.429736) scale(-1, 1) translate(-12.828591, -12.429736) "/>
+								</g>
+							</svg><!--end::Svg Icon--></span>
+						    Library<br>We promise, it will be worth the wait!
+						</p>
+						<!--
+						<div class="uc__subscribe">
+							<h3>Get Notified When We Go Live</h3>
+							<div class="uc__form">
+								<form action="#">
+									<input type="email" class="email" placeholder="Email Address..">
+									<input type="submit" class="submit" value="Get Notified">
+								</form>
+							</div>
+						</div>
+						-->
+					</div>
+					<div class="uc__art">
+						<img style="width: 85%;" src="assets/media/svg/construction/under_construction.svg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card card-custom gutter-b">
+		    <div class="construction">
+				<div class="uc__wrapper">
+					<div class="uc__details">
+						<h1 class="title">Coming Soon!</h1> 
+						<h3 class="intro">
+							We are working hard to give you a better experience.
+						</h3>
+						<p class="uc__description">
+							Features
+							<span class="svg-icon svg-icon-light svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Forward.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<path d="M12.6571817,10 L12.6571817,5.67013288 C12.6571817,5.25591932 12.3213953,4.92013288 11.9071817,4.92013288 C11.7234961,4.92013288 11.5461972,4.98754181 11.4089088,5.10957589 L4.25168161,11.4715556 C3.94209454,11.7467441 3.91420899,12.2207984 4.1893975,12.5303855 C4.19915701,12.541365 4.209237,12.5520553 4.21962441,12.5624427 L11.3768516,19.7196699 C11.6697448,20.0125631 12.1446186,20.0125631 12.4375118,19.7196699 C12.5781641,19.5790176 12.6571817,19.3882522 12.6571817,19.1893398 L12.6571817,15 C14.004369,14.9188289 16.83481,14.9157978 21.1485046,14.9909069 L21.1485051,14.9908794 C21.4245904,14.9956866 21.6522988,14.7757721 21.6571059,14.4996868 C21.6571564,14.4967857 21.6571817,14.4938842 21.6571817,14.4909827 L21.6572352,10.5050185 C21.6572352,10.2288465 21.4333536,10.0049649 21.1571817,10.0049649 C21.1555649,10.0049649 21.1539481,10.0049728 21.1523314,10.0049884 C16.0215539,10.0547574 13.1898373,10.0530946 12.6571817,10 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.828591, 12.429736) scale(-1, 1) translate(-12.828591, -12.429736) "/>
+								</g>
+							</svg><!--end::Svg Icon--></span>
+							User Activity<br>We promise, it will be worth the wait!
+						</p>
+						<!--
+						<div class="uc__subscribe">
+							<h3>Get Notified When We Go Live</h3>
+							<div class="uc__form">
+								<form action="#">
+									<input type="email" class="email" placeholder="Email Address..">
+									<input type="submit" class="submit" value="Get Notified">
+								</form>
+							</div>
+						</div>
+						-->
+					</div>
+					<div class="uc__art">
+						<img style="width: 85%;" src="assets/media/svg/construction/under_construction.svg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+	    <div class="card card-custom gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-7">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">Upcoming Events</span>
+				</h3>
+				<div class="card-toolbar">
+					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_3"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_4">PUBLIC</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body pt-1">
+				<div class="tab-content mt-5" id="myTabTables10">
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade" id="kt_tab_pane_10_3" role="tabpanel" aria-labelledby="kt_tab_pane_10_3">
+					<span class="menu-label">
 						<?php
-						}
-						if (isset($_GET['attendance']) && !empty($_GET['attendance']))
+						$eventid1="";
+						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>$_SESSION["loggeduser_ACCESS"],'Date_start' => ['$gte' => $from_date,'$lte' => $to_date]];
+						$option = ['sort' => ['Date_start' => -1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+						foreach ($cursor as $document)
 						{
-                            $attendance = ($_GET['attendance']);
-                            ?>
-                            <script>
-                            $(document).ready(function () {
-                                $("#attendance").table2excel({
-                                    filename: "attendance.xls"
-                                });
-                            });
-                            </script>
-                            <?php
+							$event_id = strval($document->_id);
+							$eventid1 = new \MongoDB\BSON\ObjectId($event_id);
+						}
+						
+						if(!$eventid1 == "")
+						{
+						$filter = ['_id'=>$eventid1];
+						$query = new MongoDB\Driver\Query($filter);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+						foreach ($cursor as $document)
+						{
+							$Date_start = strval($document->Date_start);
+
+							$date = new MongoDB\BSON\UTCDateTime($Date_start);
+							$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$date = date_format($date,"Y-m-d\TH:i:s");
+							$date = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp());
+						
+							$nowtimeEvent1 = time();
+							$timeEvent1 = strval($date);
 						}
 						?>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
+						<span class="text-primary"><?= " ".time_elapsed($timeEvent1-$nowtimeEvent1)." \n";  ?></span></span>
+						<?php
+						}
+						?>
+						</span>
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th class="p-0 w-50px"></th>
+										<th class="p-0 w-100 min-w-100px"></th>
+										<th class="p-0"></th>
+										<th class="p-0 min-w-130px w-100"></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000); 
+
+								$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Date_start' => ['$gte' => $from_date,'$lte' => $to_date],'Access'=>$_SESSION["loggeduser_ACCESS"]];
+								$option = ['limit'=>5,'sort' => ['Date_start' => 1]];
+								$query = new MongoDB\Driver\Query($filter,$option);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+								foreach ($cursor as $document)
+								{
+									$event_id = strval($document->_id);
+									$Staff_id = $document->Staff_id;
+									$Title = $document->Title;
+									$Venue = $document->Venue;
+									$Location = $document->Location;
+									$Date_start = $document->Date_start;
+									$Date_end= $document->Date_end;
+									$Status = $document->Status;
+								
+									$date = new MongoDB\BSON\UTCDateTime(strval($Date_start));
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									$date = new MongoDB\BSON\UTCDateTime($Date_end);
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								
+									$id = new \MongoDB\BSON\ObjectId($Staff_id);
+									$filter = ['_id' => $id];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+									foreach ($cursor as $document)
+									{
+										$consumerid = strval($document->_id);
+										$ConsumerFName = $document->ConsumerFName;
+										$ConsumerLName = $document->ConsumerLName;
+
+										$filter = ['ConsumerID'=>$consumerid];
+										$query = new MongoDB\Driver\Query($filter);
+										$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+										foreach ($cursor as $document)
+										{
+											$Staffdepartment = $document->Staffdepartment;
+								
+											$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+											foreach ($cursor as $document)
+											{
+												$DepartmentName = $document->DepartmentName;
+											}
+										}
+									}
+									?>
+									<tbody>
+										<tr>
+											<td class="pl-0 py-5">
+												<div class="symbol symbol-45 symbol-light-info mr-2">
+													<span class="symbol-label">
+														<span class="svg-icon svg-icon-2x svg-icon-info">
+															<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Color-profile.svg-->
+															<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																	<rect x="0" y="0" width="24" height="24" />
+																	<path d="M12,10.9996338 C12.8356605,10.3719448 13.8743941,10 15,10 C17.7614237,10 20,12.2385763 20,15 C20,17.7614237 17.7614237,20 15,20 C13.8743941,20 12.8356605,19.6280552 12,19.0003662 C11.1643395,19.6280552 10.1256059,20 9,20 C6.23857625,20 4,17.7614237 4,15 C4,12.2385763 6.23857625,10 9,10 C10.1256059,10 11.1643395,10.3719448 12,10.9996338 Z M13.3336047,12.504354 C13.757474,13.2388026 14,14.0910788 14,15 C14,15.9088933 13.7574889,16.761145 13.3336438,17.4955783 C13.8188886,17.8206693 14.3938466,18 15,18 C16.6568542,18 18,16.6568542 18,15 C18,13.3431458 16.6568542,12 15,12 C14.3930587,12 13.8175971,12.18044 13.3336047,12.504354 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+																	<circle fill="#000000" cx="12" cy="9" r="5" />
+																</g>
+															</svg>
+															<!--end::Svg Icon-->
+														</span>
+													</span>
+												</div>
+											</td>
+											<td class="pl-0">
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
+												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+											</td>
+											<td></td>
+											<td class="text-left">
+												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($date,"d M, H:i")." "; ?></span>
+												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+											</td>
+											<td class="text-right pr-0">
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank" class="btn btn-icon btn-light btn-sm">
+													<span class="svg-icon svg-icon-md svg-icon-success">
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<polygon points="0 0 24 0 24 24 0 24" />
+																<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
+																<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								<?php
+								}
+								?>
+								<!--end::Tbody-->
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more Event</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
 					</div>
+					<!--end::Tap pane-->
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade show active" id="kt_tab_pane_10_4" role="tabpanel" aria-labelledby="kt_tab_pane_10_4">
+						<span class="menu-label">
+						<?php 
+						$eventid2="";
+						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC','Date_start' => ['$gte' => $from_date,'$lte' => $to_date]];
+						$option = ['limit'=>5,'sort' => ['Date_start' => -1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+						foreach ($cursor as $document)
+						{
+							$event_id = ($document->_id);
+							$eventid2 = new \MongoDB\BSON\ObjectId($event_id);
+						}
+
+						if(!$eventid2 == "")
+						{
+						$filter = ['_id'=>$eventid2];
+						$query = new MongoDB\Driver\Query($filter);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+						foreach ($cursor as $document)
+						{
+							$Date_start = ($document->Date_start);
+
+							$date = new MongoDB\BSON\UTCDateTime(strval($Date_start));
+							$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$date = date_format($date,"Y-m-d\TH:i:s");
+							$date = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp());
+						
+							$nowtimeEvent2 = time();
+							$timeEvent2 = strval($date);
+						}
+						?>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
+						<span class="text-primary"><?= " ".time_elapsed($timeEvent2-$nowtimeEvent2)." \n";  ?></span></span>
+						<?php
+						}
+						?>
+						</span>
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th class="p-0 w-50px"></th>
+										<th class="p-0 w-100 min-w-100px"></th>
+										<th class="p-0"></th>
+										<th class="p-0 min-w-130px w-100"></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000); 
+								
+								$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Date_start' => ['$gte' => $from_date,'$lte' => $to_date],'Access'=>'PUBLIC'];
+								$option = ['limit'=>5,'sort' => ['Date_start' => 1]];
+								$query = new MongoDB\Driver\Query($filter,$option);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+								foreach ($cursor as $document)
+								{
+									$event_id = strval($document->_id);
+									$Staff_id = $document->Staff_id;
+									$Title = $document->Title;
+									$Venue = $document->Venue;
+									$Location = $document->Location;
+									$Date_start = $document->Date_start;
+									$Date_end= $document->Date_end;
+									$Status = $document->Status;
+								
+									$date = new MongoDB\BSON\UTCDateTime(strval($Date_start));
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									$date = new MongoDB\BSON\UTCDateTime($Date_end);
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								
+									$id = new \MongoDB\BSON\ObjectId($Staff_id);
+									$filter = ['_id' => $id];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+									foreach ($cursor as $document)
+									{
+										$consumerid = strval($document->_id);
+										$ConsumerFName = $document->ConsumerFName;
+										$ConsumerLName = $document->ConsumerLName;
+
+										$filter = ['ConsumerID'=>$consumerid];
+										$query = new MongoDB\Driver\Query($filter);
+										$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+										foreach ($cursor as $document)
+										{
+											$Staffdepartment = $document->Staffdepartment;
+								
+											$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+											foreach ($cursor as $document)
+											{
+												$DepartmentName = ($document->DepartmentName);
+											}
+										}
+									}
+									?>
+									<tbody>
+										<tr>
+											<td class="pl-0 py-5">
+											<div class="symbol symbol-45 symbol-light-warning mr-2">
+												<span class="symbol-label">
+													<span class="svg-icon svg-icon-2x svg-icon-warning">
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<rect x="0" y="0" width="24" height="24"></rect>
+																<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
+																<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+												</span>
+											</div>
+											</td>
+											<td class="pl-0">
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
+												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+											</td>
+											<td></td>
+											<td class="text-left">
+												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($date,"d M, H:i")." "; ?></span>
+												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+											</td>
+											<td class="text-right pr-0">
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="btn btn-icon btn-light btn-sm">
+													<span class="svg-icon svg-icon-md svg-icon-success">
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<polygon points="0 0 24 0 24 24 0 24" />
+																<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
+																<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								<?php
+								}
+								?>
+								<!--end::Tbody-->
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more Event</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
 					</div>
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <br><br>
-                <!--end::Advance Table Widget 7-->
-            <!--end::Content-->
-        </div>
-        <!--end::Profile Overview-->
-    </div>
-    <!--end::Container-->
+					<!--end::Tap pane-->
+				</div>
+			</div>
+			<!--end::Body-->
+		</div>
+		<div class="card card-custom gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-7">
+				<h3 class="card-title align-items-start flex-column">
+				<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Latest News</span>
+				</h3>
+				<div class="card-toolbar">
+					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_1"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_2">PUBLIC</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body--> 
+			<div class="card-body pt-1">
+				<div class="tab-content mt-5" id="myTabTables10">
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade" id="kt_tab_pane_10_1" role="tabpanel" aria-labelledby="kt_tab_pane_10_1">
+						<span class="menu-label">
+						<?php
+						$newsid="";
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
+						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+						foreach ($cursor as $document)
+						{
+							$newsid = ($document->_id);
+							$newsid = new \MongoDB\BSON\ObjectId($newsid);
+						}
+						if(!$newsid == "")
+						{
+							$filter = ['_id'=>$newsid];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+							foreach ($cursor as $document)
+							{
+								$NewsDate = ($document->NewsDate);
+								$date = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+								$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								$datenew = date_format($date,"Y-m-d\TH:i:s");
+								$date = new MongoDB\BSON\UTCDateTime((new DateTime($datenew))->getTimestamp());
+						
+								$nowtimeNew = time();
+								$timeNew = strval($date);
+							}
+					    }
+						?>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
+						<span class="text-primary"><?= "".time_elapsed($nowtimeNew-$timeNew)." ago \n";  ?></span></span>
+						</span>
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
+								$option = ['limit'=>5,'sort' => ['NewsDate' => -1]];
+								$query = new MongoDB\Driver\Query($filter,$option);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+								foreach ($cursor as $document)
+								{
+									$Newsid = strval($document->_id);
+									$NewsStaff_id = ($document->NewsStaff_id);
+									$NewsTitle = ($document->NewsTitle);
+									$NewsDetails = ($document->NewsDetails);
+									$NewsDate = ($document->NewsDate);
+									$NewsStatus = ($document->NewsStatus);
+									$Access = ($document->NewsAccess);
+								
+									$id = new \MongoDB\BSON\ObjectId($NewsStaff_id);
+									$filter = ['_id' => $id];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+									foreach ($cursor as $document)
+									{
+										$consumerid = strval($document->_id);
+										$ConsumerFName = ($document->ConsumerFName);
+										$ConsumerLName = ($document->ConsumerLName);
+										$filter = ['ConsumerID'=>$consumerid];
+										$query = new MongoDB\Driver\Query($filter);
+										$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+										foreach ($cursor as $document)
+										{
+											$Staffdepartment = ($document->Staffdepartment);
+											$departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+								
+											$filter = ['_id'=>$departmentid];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+											foreach ($cursor as $document)
+											{
+												$DepartmentName = ($document->DepartmentName);
+											}
+										}
+									}
+									$date = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									?>
+									<tbody>
+										<tr>
+											<td class="pl-0 py-5">
+											<div class="symbol symbol-45 symbol-light-success mr-2">
+												<span class="symbol-label">
+													<span class="svg-icon svg-icon-2x svg-icon-success">
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Playlist1.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<rect x="0" y="0" width="24" height="24"></rect>
+																<path d="M8.97852058,18.8007059 C8.80029331,20.0396328 7.53473012,21 6,21 C4.34314575,21 3,19.8807119 3,18.5 C3,17.1192881 4.34314575,16 6,16 C6.35063542,16 6.68722107,16.0501285 7,16.1422548 L7,5.93171093 C7,5.41893942 7.31978104,4.96566617 7.78944063,4.81271925 L13.5394406,3.05418311 C14.2638626,2.81827161 15,3.38225531 15,4.1731748 C15,4.95474642 15,5.54092513 15,5.93171093 C15,6.51788965 14.4511634,6.89225606 14,7 C13.3508668,7.15502181 11.6842001,7.48835515 9,8 L9,18.5512168 C9,18.6409956 8.9927193,18.7241187 8.97852058,18.8007059 Z" fill="#000000" fill-rule="nonzero"></path>
+																<path d="M16,9 L20,9 C20.5522847,9 21,9.44771525 21,10 C21,10.5522847 20.5522847,11 20,11 L16,11 C15.4477153,11 15,10.5522847 15,10 C15,9.44771525 15.4477153,9 16,9 Z M14,13 L20,13 C20.5522847,13 21,13.4477153 21,14 C21,14.5522847 20.5522847,15 20,15 L14,15 C13.4477153,15 13,14.5522847 13,14 C13,13.4477153 13.4477153,13 14,13 Z M14,17 L20,17 C20.5522847,17 21,17.4477153 21,18 C21,18.5522847 20.5522847,19 20,19 L14,19 C13.4477153,19 13,18.5522847 13,18 C13,17.4477153 13.4477153,17 14,17 Z" fill="#000000" opacity="0.3"></path>
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+												</span>
+											</div>
+											</td>
+											<td class="pl-0">
+												<a href="index.php?page=newsdetail&id=<?= $Newsid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $NewsTitle; ?></a>
+												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<span class="text-muted font-weight-bold d-block"><?= date_format($date,"d M, H:i")." "; ?></span>
+											</td>
+										</tr>
+									</tbody>
+									<!--end::Tbody-->
+									<?php
+									}
+								?>
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=news" class="btn btn-success">See more News</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Tap pane-->
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade show active" id="kt_tab_pane_10_2" role="tabpanel" aria-labelledby="kt_tab_pane_10_2">
+						<span class="menu-label">
+						<?php 
+						$newsid1="";
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'NewsAccess'=>'PUBLIC'];
+						$option = ['limit'=>5,'sort' => ['NewsDate' => 1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+						foreach ($cursor as $document)
+						{
+							$newsid = ($document->_id);
+							$newsid1 = new \MongoDB\BSON\ObjectId($newsid);
+						}
+						if(!$newsid1 == "")
+						{
+							$filter = ['_id'=>$newsid1];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+							foreach ($cursor as $document)
+							{
+								$NewsDate = ($document->NewsDate);
+
+								$date = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+								$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								$datenew = date_format($date,"Y-m-d\TH:i:s");
+								$date = new MongoDB\BSON\UTCDateTime((new DateTime($datenew))->getTimestamp());
+							
+								$nowtimeNew1 = time();
+								$timeNew1 = strval($date);
+							}
+							?>
+							<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
+							<span class="text-primary"><?= "".time_elapsed($nowtimeNew1-$timeNew1)." ago \n";  ?></span></span>
+						    <?php
+						}
+						?>
+						</span>
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'NewsAccess'=>'PUBLIC'];
+								$option = ['limit'=>5,'sort' => ['NewsDate' => -1]];
+								$query = new MongoDB\Driver\Query($filter,$option);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolNews',$query);
+								foreach ($cursor as $document)
+								{
+									$Newsid = strval($document->_id);
+									$NewsStaff_id = ($document->NewsStaff_id);
+									$NewsTitle = ($document->NewsTitle);
+									$NewsDetails = ($document->NewsDetails);
+									$NewsDate = ($document->NewsDate);
+									$NewsStatus = ($document->NewsStatus);
+									$Access = ($document->NewsAccess);
+								
+									$id = new \MongoDB\BSON\ObjectId($NewsStaff_id);
+									$filter = ['_id' => $id];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+									foreach ($cursor as $document)
+									{
+										$consumerid = strval($document->_id);
+										$ConsumerFName = ($document->ConsumerFName);
+										$ConsumerLName = ($document->ConsumerLName);
+										$filter = ['ConsumerID'=>$consumerid];
+										$query = new MongoDB\Driver\Query($filter);
+										$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+										foreach ($cursor as $document)
+										{
+											$Staffdepartment = ($document->Staffdepartment);
+											$departmentid = new \MongoDB\BSON\ObjectId($Staffdepartment);
+								
+											$filter = ['_id'=>$departmentid];
+											$query = new MongoDB\Driver\Query($filter);
+											$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+											foreach ($cursor as $document)
+											{
+												$DepartmentName = ($document->DepartmentName);
+											}
+										}
+									}
+									$date = new MongoDB\BSON\UTCDateTime(strval($NewsDate));
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									?>
+								<tbody>
+									<tr>
+										<td class="pl-0 py-5">
+										<div class="symbol symbol-45 symbol-light-danger mr-2">
+											<span class="symbol-label">
+												<span class="svg-icon svg-icon-2x svg-icon-danger">
+													<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<rect x="0" y="0" width="24" height="24"></rect>
+															<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+															<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+											</span>
+										</div>
+										</td>
+										<td class="pl-0">
+											<a href="index.php?page=newsdetail&id=<?= $Newsid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $NewsTitle; ?></a>
+											<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+											<span class="text-muted font-weight-bold d-block"><?= date_format($date,"d M, H:i")." "; ?></span>
+										</td>
+									</tr>
+								</tbody>
+								<?php
+								}
+								?>
+								<!--end::Tbody-->
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=news" class="btn btn-success">See more News</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Tap pane-->
+				</div>
+			</div>
+			<!--end::Body-->
+		</div>
+		<div class="card card-custom gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-7">
+				<h3 class="card-title align-items-start flex-column">
+				<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Latest Forum</span>
+				</h3>
+				<div class="card-toolbar">
+					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_5"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_6">PUBLIC</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body--> 
+			<div class="card-body pt-1">
+				<div class="tab-content mt-5" id="myTabTables10">
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade" id="kt_tab_pane_10_5" role="tabpanel" aria-labelledby="kt_tab_pane_10_5">
+						<span class="menu-label">
+						<?php
+						$Forumid=" ";
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'NewsAccess'=>$_SESSION["loggeduser_ACCESS"]];
+						$option = ['limit'=>10,'sort' => ['ForumDate' => 1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+						foreach ($cursor as $document)
+						{
+							$Forumid = ($document->_id);
+							$Forumid = new \MongoDB\BSON\ObjectId($Forumid);
+						}
+						if(!$Forumid == "")
+						{
+							$filter = ['_id'=>$Forumid];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+							foreach ($cursor as $document)
+							{
+								$ForumDate = ($document->ForumDate);
+								$date = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+								$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+								$datenew = date_format($date,"Y-m-d\TH:i:s");
+								$date = new MongoDB\BSON\UTCDateTime((new DateTime($datenew))->getTimestamp());
+						
+								$nowtimeNew = time();
+								$timeNew = strval($date);
+							}
+					    }
+						?>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest Forum update 
+						
+						</span>
+						<!--begin::Table-->
+						<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
+								$option = ['limit'=>10,'sort' => ['_id' => -1]];
+								$query = new MongoDB\Driver\Query($filter,$option);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+								foreach ($cursor as $document)
+								{
+									$Forum = ($document->Forum);
+									
+									if ($Forum == '1' || $Forum == '2' || $Forum == '3')
+									{
+
+									$Forumid = ($document->_id);
+									$ForumTitle = ($document->ForumTitle);
+									$ForumDate = ($document->ForumDate);
+									$Consumer_id = ($document->Consumer_id);
+
+									$date = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									$date = date_format($date,"Y-m-d\TH:i:s");
+									$date = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp());
+								
+									$oldtime = strval($date);
+
+									$consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+									$filter = ['_id' => $consumerid];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+					
+									foreach ($cursor as $document)
+									{
+									$ConsumerFName = ($document->ConsumerFName);
+									}
+
+									$total = 0;
+									$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query);
+									foreach ($cursor as $document)
+									{
+										$total = $total + 1;
+									}
+									?>	
+									<tbody>
+										<tr>
+										<td class="pl-0 py-2">
+											<div class="symbol symbol-45 symbol-light-success mr-2">
+												<span class="symbol-label">
+												<span class="svg-icon svg-icon-2x svg-icon-success">
+												<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Playlist1.svg-->
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24"></rect>
+												<path d="M8.97852058,18.8007059 C8.80029331,20.0396328 7.53473012,21 6,21 C4.34314575,21 3,19.8807119 3,18.5 C3,17.1192881 4.34314575,16 6,16 C6.35063542,16 6.68722107,16.0501285 7,16.1422548 L7,5.93171093 C7,5.41893942 7.31978104,4.96566617 7.78944063,4.81271925 L13.5394406,3.05418311 C14.2638626,2.81827161 15,3.38225531 15,4.1731748 C15,4.95474642 15,5.54092513 15,5.93171093 C15,6.51788965 14.4511634,6.89225606 14,7 C13.3508668,7.15502181 11.6842001,7.48835515 9,8 L9,18.5512168 C9,18.6409956 8.9927193,18.7241187 8.97852058,18.8007059 Z" fill="#000000" fill-rule="nonzero"></path>
+												<path d="M16,9 L20,9 C20.5522847,9 21,9.44771525 21,10 C21,10.5522847 20.5522847,11 20,11 L16,11 C15.4477153,11 15,10.5522847 15,10 C15,9.44771525 15.4477153,9 16,9 Z M14,13 L20,13 C20.5522847,13 21,13.4477153 21,14 C21,14.5522847 20.5522847,15 20,15 L14,15 C13.4477153,15 13,14.5522847 13,14 C13,13.4477153 13.4477153,13 14,13 Z M14,17 L20,17 C20.5522847,17 21,17.4477153 21,18 C21,18.5522847 20.5522847,19 20,19 L14,19 C13.4477153,19 13,18.5522847 13,18 C13,17.4477153 13.4477153,17 14,17 Z" fill="#000000" opacity="0.3"></path>
+												</g>
+												</svg>
+												<!--end::Svg Icon-->
+												</span>
+												</span>
+											</div>
+										</td>
+										<td class="pl-0">
+											<a href="index.php?page=schoolforumdetail&forum=1&topic=general&id=<?= $Forumid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $ForumTitle; ?></a>
+											<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+											<span class="text-muted font-weight-bold d-block"><?= date_format($date,"d M, H:i")." "; ?></span>
+										</td>
+										</tr>
+									</tbody>
+									<?php
+									}
+									}
+								   ?>
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=forums" class="btn btn-success">See More Forums</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Tap pane-->
+					<!--begin::Tap pane-->
+					<div class="tab-pane fade show active" id="kt_tab_pane_10_6" role="tabpanel" aria-labelledby="kt_tab_pane_10_6">
+						<span class="menu-label">
+						<?php
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'4'];
+						$option = ['limit'=>10,'sort' => ['_id' => -1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+						foreach ($cursor as $document)
+						{
+							$Forumid = ($document->_id);
+							$ForumTitle = ($document->ForumTitle);
+							$ForumDate = ($document->ForumDate);
+							$Consumer_id = ($document->Consumer_id);
+							
+							$date = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+							$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$date = date_format($date,"Y-m-d\TH:i:s");
+							$date = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp());
+						
+							$oldtime = strval($date);
+
+							$consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+							$filter = ['_id' => $consumerid];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+
+							foreach ($cursor as $document)
+							{
+							$ConsumerFName = ($document->ConsumerFName);
+							}
+
+							$total = 0;
+							$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+							$query = new MongoDB\Driver\Query($filter);
+							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query);
+							foreach ($cursor as $document)
+							{
+								$total = $total + 1;
+							}
+							?>
+								<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest Forum update 
+								<?php
+							}
+							?>
+							</span>
+							<!--begin::Table-->
+							<div>
+							<table class="table table-borderless table-vertical-center">
+								<!--begin::Thead-->
+								<thead>
+									<tr>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<!--end::Thead-->
+								<!--begin::Tbody-->
+								<?php
+								$filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
+								$option = ['limit'=>10,'sort' => ['_id' => -1]];
+								$query = new MongoDB\Driver\Query($filter,$option);
+								$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForum',$query);
+
+								foreach ($cursor as $document)
+								{
+									$Forum = ($document->Forum);
+									
+									if ($Forum == '4' || $Forum == '5' || $Forum == '6')
+									{
+
+									$Forumid = ($document->_id);
+									$ForumTitle = ($document->ForumTitle);
+									$ForumDate = ($document->ForumDate);
+									$Consumer_id = ($document->Consumer_id);
+									
+									$date = new MongoDB\BSON\UTCDateTime(strval($ForumDate));
+									$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+									$date = date_format($date,"Y-m-d\TH:i:s");
+									$date = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp());
+								
+									$oldtime = strval($date);
+
+									$consumerid = new \MongoDB\BSON\ObjectId($Consumer_id);
+									$filter = ['_id' => $consumerid];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+					
+									foreach ($cursor as $document)
+									{
+									$ConsumerFName = ($document->ConsumerFName);
+									}
+
+									$total = 0;
+									$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forumid,'ForumParent_id'=>'0'];
+									$query = new MongoDB\Driver\Query($filter);
+									$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolForumComment',$query);
+									foreach ($cursor as $document)
+									{
+										$total = $total + 1;
+									}
+									?>
+								<tbody>
+									<tr>
+										<td class="pl-0 py-5">
+										<div class="symbol symbol-45 symbol-light-danger mr-2">
+											<span class="symbol-label">
+												<span class="svg-icon svg-icon-2x svg-icon-danger">
+													<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<rect x="0" y="0" width="24" height="24"></rect>
+															<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+															<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+											</span>
+										</div>
+										</td>
+										<td class="pl-0">
+											<a href="index.php?page=schoolforumdetail&forum=1&topic=general&id=<?= $Forumid; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $ForumTitle; ?></a>
+											<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+											<span class="text-muted font-weight-bold d-block"><?= date_format($date,"d M, H:i")." "; ?></span>
+										</td>
+									</tr>
+								</tbody>
+								<?php
+									}
+								}
+									?>
+								<!--end::Tbody-->
+							</table>
+							<footer>
+								<div class="text-center"><a href="index.php?page=forums" class="btn btn-success">See more Forums</a></div><br><br>
+							</footer>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Tap pane-->
+				</div>
+			</div>
+			<!--end::Body-->
+		</div>
+		</div>
+	</div>
 </div>
+<?php
