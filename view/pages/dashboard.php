@@ -72,7 +72,7 @@ function time_elapsed($date){
 							<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1"><?= $_SESSION["loggeduser_schoolName"]; ?></a>
 							<!--end::Title-->
 							<!--begin::Text-->
-							<div class="font-weight-bold text-dark-50 font-size-sm pb-7"><?= $_SESSION["loggeduser_schoolsAddress"]; ?></div>
+							<div class= text-dark-50 font-size-sm pb-7"><?= $_SESSION["loggeduser_schoolsAddress"]; ?></div>
 							<!--end::Text-->
 						</div>
 						<!--end::Header-->
@@ -94,7 +94,7 @@ function time_elapsed($date){
 								<!--begin::Text-->
 								<div class="d-flex flex-column flex-grow-1">
 									<a href="index.php?page=stafflist&level=1" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Staff</a>
-									<span class="text-muted font-weight-bold">Good Fellas</span>
+									<span class="text-muted">Good Fellas</span>
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
@@ -118,7 +118,7 @@ function time_elapsed($date){
 								<!--begin::Text-->
 								<div class="d-flex flex-column flex-grow-1">
 									<a href="index.php?page=stafflist&level=0" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Teacher</a>
-									<span class="text-muted font-weight-bold">Successful Fellas</span>
+									<span class="text-muted">Successful Fellas</span>
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
@@ -142,7 +142,7 @@ function time_elapsed($date){
 								<!--begin::Text-->
 								<div class="d-flex flex-column flex-grow-1">
 									<a href="index.php?page=studentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Students</a>
-									<span class="text-muted font-weight-bold">Creative Fellas</span>
+									<span class="text-muted">Creative Fellas</span>
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
@@ -166,7 +166,7 @@ function time_elapsed($date){
 								<!--begin::Text-->
 								<div class="d-flex flex-column flex-grow-1">
 									<a href="index.php?page=parentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Parent</a>
-									<span class="text-muted font-weight-bold">Productive Fellas</span>
+									<span class="text-muted">Productive Fellas</span>
 								</div>
 								<!--end::Text-->
 								<!--begin::label-->
@@ -179,9 +179,7 @@ function time_elapsed($date){
 					</div>
 					<!--eng::Container-->
 					<!--begin::Footer-->
-					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-						<button class="btn btn-light btn-sm font-weight-bolder font-size-sm py-3 px-14" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
-					</div>
+					<button class="btn btn-light btn-sm" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
 					<!--end::Footer-->
 				</div>
 				<!--end::Wrapper-->
@@ -285,7 +283,7 @@ function time_elapsed($date){
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
 				<h3 class="text-dark-50">Upcoming Events</h3>
-				<ul class="nav nav-light nav-pills nav-pills-sm">
+				<ul class="nav nav-light-success nav-pills nav-pills-sm">
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_10_3"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
 					</li>
@@ -300,28 +298,26 @@ function time_elapsed($date){
 				<div class="tab-content mt-5" id="myTabTables10">
 					<!--begin::Tap pane-->
 					<div class="tab-pane fade" id="kt_tab_pane_10_3" role="tabpanel" aria-labelledby="kt_tab_pane_10_3">
-						<span class="menu-label">
-							<?php
-							$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
-							$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-							$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>$_SESSION["loggeduser_ACCESS"],'Date_start' => ['$gte' => $from_date,'$lte' => $to_date]];
-							$option = ['sort' => ['Date_start' => -1]];
-							$query = new MongoDB\Driver\Query($filter,$option);
-							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
-							foreach ($cursor as $document)
-							{
-								$Date_start = strval($document->Date_start);
-								$Date_start = new MongoDB\BSON\UTCDateTime($Date_start);
-								$Date_start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$Date_start = date_format($Date_start,"Y-m-d\TH:i:s");
-								$Date_start = new MongoDB\BSON\UTCDateTime((new DateTime($Date_start))->getTimestamp());
-								$Date_start = strval($Date_start);
-								$time_now = time();
-							}
-							?>
-							<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
-							<span class="text-primary"><?= " ".time_elapsed($Date_start-$time_now)." \n";  ?></span></span>
-						</span>
+						<?php
+						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>$_SESSION["loggeduser_ACCESS"],'Date_start' => ['$gte' => $from_date,'$lte' => $to_date]];
+						$option = ['sort' => ['Date_start' => -1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+						foreach ($cursor as $document)
+						{
+							$Date_start = strval($document->Date_start);
+							$Date_start = new MongoDB\BSON\UTCDateTime($Date_start);
+							$Date_start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$Date_start = date_format($Date_start,"Y-m-d\TH:i:s");
+							$Date_start = new MongoDB\BSON\UTCDateTime((new DateTime($Date_start))->getTimestamp());
+							$Date_start = strval($Date_start);
+							$time_now = time();
+						}
+						?>
+						<span class="text-muted mt-3 font-size-sm">Next Event is in
+						<span class="text-primary"><?= " ".time_elapsed($Date_start-$time_now)." \n";  ?></span></span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -385,17 +381,17 @@ function time_elapsed($date){
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
-												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
 											<td class="text-left">
-												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($Date_start,"d M, H:i")." "; ?></span>
-												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+												<span class="d-block font-size-lg"><?= date_format($Date_start,"d M, H:i")." "; ?></span>
+												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank" class="btn btn-icon btn-light btn-sm">
-													<span class="svg-icon svg-icon-md svg-icon-success">
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank">
+													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -423,28 +419,26 @@ function time_elapsed($date){
 
 					<!--begin::Tap pane-->
 					<div class="tab-pane fade show active" id="kt_tab_pane_10_4" role="tabpanel" aria-labelledby="kt_tab_pane_10_4">
-						<span class="menu-label">
-							<?php
-							$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
-							$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-							$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC','Date_start' => ['$gte' => $from_date,'$lte' => $to_date]];
-							$option = ['sort' => ['Date_start' => -1]];
-							$query = new MongoDB\Driver\Query($filter,$option);
-							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
-							foreach ($cursor as $document)
-							{
-								$Date_start = strval($document->Date_start);
-								$Date_start = new MongoDB\BSON\UTCDateTime($Date_start);
-								$Date_start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$Date_start = date_format($Date_start,"Y-m-d\TH:i:s");
-								$Date_start = new MongoDB\BSON\UTCDateTime((new DateTime($Date_start))->getTimestamp());
-								$Date_start = strval($Date_start);
-								$time_now = time();
-							}
-							?>
-							<span class="text-muted mt-3 font-weight-bold font-size-sm">Next Event is in
-							<span class="text-primary"><?= " ".time_elapsed($Date_start-$time_now)." \n";  ?></span></span>
-						</span>
+						<?php
+						$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+						$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC','Date_start' => ['$gte' => $from_date,'$lte' => $to_date]];
+						$option = ['sort' => ['Date_start' => -1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Event',$query);
+						foreach ($cursor as $document)
+						{
+							$Date_start = strval($document->Date_start);
+							$Date_start = new MongoDB\BSON\UTCDateTime($Date_start);
+							$Date_start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$Date_start = date_format($Date_start,"Y-m-d\TH:i:s");
+							$Date_start = new MongoDB\BSON\UTCDateTime((new DateTime($Date_start))->getTimestamp());
+							$Date_start = strval($Date_start);
+							$time_now = time();
+						}
+						?>
+						<span class="text-muted mt-3 font-size-sm">Next Event is in
+						<span class="text-primary"><?= " ".time_elapsed($Date_start-$time_now)." \n";  ?></span></span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -508,17 +502,17 @@ function time_elapsed($date){
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
-												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
 											<td class="text-left">
-												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($Date_start,"d M, H:i")." "; ?></span>
-												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+												<span class="d-block font-size-lg"><?= date_format($Date_start,"d M, H:i")." "; ?></span>
+												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank" class="btn btn-icon btn-light btn-sm">
-													<span class="svg-icon svg-icon-md svg-icon-success">
+												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank">
+													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -552,7 +546,7 @@ function time_elapsed($date){
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
 				<h3 class="text-dark-50">Latest News</h3>
-				<ul class="nav nav-light nav-pills nav-pills-sm">
+				<ul class="nav nav-light-success nav-pills nav-pills-sm">
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_10_1"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
 					</li>
@@ -567,7 +561,6 @@ function time_elapsed($date){
 				<div class="tab-content mt-5" id="myTabTables10">
 					<!--begin::Tap pane-->
 					<div class="tab-pane fade" id="kt_tab_pane_10_1" role="tabpanel" aria-labelledby="kt_tab_pane_10_1">
-						<span class="menu-label">
 						<?php
 						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>$_SESSION["loggeduser_ACCESS"]];
 						$option = ['limit'=>5,'sort' => ['Date' => 1]];
@@ -584,9 +577,8 @@ function time_elapsed($date){
 							$time_now = time();
 						}
 						?>
-						<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
+						<span class="text-muted mt-3 font-size-sm">Latest News update 
 						<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
-						</span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -647,17 +639,17 @@ function time_elapsed($date){
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
-												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
 											<td class="text-left">
-												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
-												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+												<span class="d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
+												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="btn btn-icon btn-light btn-sm">
-													<span class="svg-icon svg-icon-md svg-icon-success">
+												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>">
+													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -685,26 +677,24 @@ function time_elapsed($date){
 					<!--end::Tap pane-->
 					<!--begin::Tap pane-->
 					<div class="tab-pane fade show active" id="kt_tab_pane_10_2" role="tabpanel" aria-labelledby="kt_tab_pane_10_2">
-						<span class="menu-label">
-							<?php 
-							$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC'];
-							$option = ['limit'=>5,'sort' => ['Date' => 1]];
-							$query = new MongoDB\Driver\Query($filter,$option);
-							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.News',$query);
-							foreach ($cursor as $document)
-							{
-								$Date = strval($document->Date);
-								$Date = new MongoDB\BSON\UTCDateTime($Date);
-								$Date = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$Date = date_format($Date,"Y-m-d\TH:i:s");
-								$Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
-								$Date = strval($Date);
-								$time_now = time();
-							}
-							?>
-							<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest News update 
-							<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
-						</span>
+						<?php 
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Access'=>'PUBLIC'];
+						$option = ['limit'=>5,'sort' => ['Date' => 1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.News',$query);
+						foreach ($cursor as $document)
+						{
+							$Date = strval($document->Date);
+							$Date = new MongoDB\BSON\UTCDateTime($Date);
+							$Date = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$Date = date_format($Date,"Y-m-d\TH:i:s");
+							$Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+							$Date = strval($Date);
+							$time_now = time();
+						}
+						?>
+						<span class="text-muted mt-3 font-size-sm">Latest News update 
+						<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -765,17 +755,17 @@ function time_elapsed($date){
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
-												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
 											<td class="text-left">
-												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
-												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+												<span class="d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
+												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="btn btn-icon btn-light btn-sm">
-													<span class="svg-icon svg-icon-md svg-icon-success">
+												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>">
+													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -809,7 +799,7 @@ function time_elapsed($date){
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
 				<h3 class="text-dark-50">Latest Forum</h3>
-				<ul class="nav nav-light nav-pills nav-pills-sm">
+				<ul class="nav nav-light-success nav-pills nav-pills-sm">
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_10_5">SCHOOL</a>
 					</li>
@@ -824,26 +814,24 @@ function time_elapsed($date){
 				<div class="tab-content mt-5" id="myTabTables10">
 					<!--begin::Tap pane-->
 					<div class="tab-pane fade" id="kt_tab_pane_10_5" role="tabpanel" aria-labelledby="kt_tab_pane_10_5">
-						<span class="menu-label">
-							<?php
-							$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'1','Forum'=>'2','Forum'=>'3'];
-							$option = ['limit'=>10,'sort' => ['Date' => 1]];
-							$query = new MongoDB\Driver\Query($filter,$option);
-							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-							foreach ($cursor as $document)
-							{
-								$Date = strval($document->Date);
-								$Date = new MongoDB\BSON\UTCDateTime($Date);
-								$Date = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$Date = date_format($Date,"Y-m-d\TH:i:s");
-								$Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
-								$Date = strval($Date);
-								$time_now = time();
-							}
-							?>
-							<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest forum update
-							<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
-						</span>
+						<?php
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'1','Forum'=>'2','Forum'=>'3'];
+						$option = ['limit'=>10,'sort' => ['Date' => 1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
+						foreach ($cursor as $document)
+						{
+							$Date = strval($document->Date);
+							$Date = new MongoDB\BSON\UTCDateTime($Date);
+							$Date = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$Date = date_format($Date,"Y-m-d\TH:i:s");
+							$Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+							$Date = strval($Date);
+							$time_now = time();
+						}
+						?>
+						<span class="text-muted mt-3 font-size-sm">Latest forum update
+						<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -895,17 +883,17 @@ function time_elapsed($date){
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
-												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
 											<td class="text-left">
-												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
-												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+												<span class="d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
+												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="btn btn-icon btn-light btn-sm">
-													<span class="svg-icon svg-icon-md svg-icon-success">
+												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>">
+													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -932,26 +920,24 @@ function time_elapsed($date){
 					<!--end::Tap pane-->
 					<!--begin::Tap pane-->
 					<div class="tab-pane fade show active" id="kt_tab_pane_10_6" role="tabpanel" aria-labelledby="kt_tab_pane_10_6">
-						<span class="menu-label">
-							<?php
-							$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'4','Forum'=>'5','Forum'=>'6'];
-							$option = ['limit'=>10,'sort' => ['Date' => 1]];
-							$query = new MongoDB\Driver\Query($filter,$option);
-							$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-							foreach ($cursor as $document)
-							{
-								$Date = strval($document->Date);
-								$Date = new MongoDB\BSON\UTCDateTime($Date);
-								$Date = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								$Date = date_format($Date,"Y-m-d\TH:i:s");
-								$Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
-								$Date = strval($Date);
-								$time_now = time();
-							}
-							?>
-							<span class="text-muted mt-3 font-weight-bold font-size-sm">Latest forum update
-							<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
-						</span>
+						<?php
+						$filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'4','Forum'=>'5','Forum'=>'6'];
+						$option = ['limit'=>10,'sort' => ['Date' => 1]];
+						$query = new MongoDB\Driver\Query($filter,$option);
+						$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
+						foreach ($cursor as $document)
+						{
+							$Date = strval($document->Date);
+							$Date = new MongoDB\BSON\UTCDateTime($Date);
+							$Date = $Date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+							$Date = date_format($Date,"Y-m-d\TH:i:s");
+							$Date = new MongoDB\BSON\UTCDateTime((new DateTime($Date))->getTimestamp());
+							$Date = strval($Date);
+							$time_now = time();
+						}
+						?>
+						<span class="text-muted mt-3 font-size-sm">Latest forum update
+						<span class="text-primary"><?= "".time_elapsed($time_now-$Date)." ago \n";  ?></span></span>
 						<!--begin::Table-->
 						<div>
 							<table class="table table-borderless table-vertical-center">
@@ -1003,17 +989,17 @@ function time_elapsed($date){
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
-												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
+												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
 											<td class="text-left">
-												<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
-												<span class="text-muted font-weight-bold d-block font-size-sm">Time</span>
+												<span class="d-block font-size-lg"><?= date_format($Date,"d M, H:i")." "; ?></span>
+												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="btn btn-icon btn-light btn-sm">
-													<span class="svg-icon svg-icon-md svg-icon-success">
+												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>">
+													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
