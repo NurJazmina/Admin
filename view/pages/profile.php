@@ -580,7 +580,7 @@ foreach ($cursor as $document)
                     <div class="card-body">
                         <!-- begin::attendance -->
                         <div class="text-right p-3">
-                            <a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
+                            <a href="index.php?page=profile&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
                             <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
                             <thead class="text-dark-50">
                                 <tr>
