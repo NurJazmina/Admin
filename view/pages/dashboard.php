@@ -180,7 +180,7 @@ function time_elapsed($date){
 					<!--eng::Container-->
 					<!--begin::Footer-->
 					<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-						<button class="btn btn-success font-weight-bolder font-size-sm py-3 px-14" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
+						<button class="btn btn-light btn-sm font-weight-bolder font-size-sm py-3 px-14" data-toggle="modal" data-target="#kt_chat_modal">Contact School</button>
 					</div>
 					<!--end::Footer-->
 				</div>
@@ -284,19 +284,15 @@ function time_elapsed($date){
 	    <div class="card card-custom gutter-b">
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
-				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Upcoming Events</span>
-				</h3>
-				<div class="card-toolbar">
-					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_3"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_4">PUBLIC</a>
-						</li>
-					</ul>
-				</div>
+				<h3 class="text-dark-50">Upcoming Events</h3>
+				<ul class="nav nav-light nav-pills nav-pills-sm">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_10_3"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_10_4">PUBLIC</a>
+					</li>
+				</ul>
 			</div>
 			<!--end::Header-->
 			<!--begin::Body-->
@@ -332,7 +328,6 @@ function time_elapsed($date){
 								<!--begin::Thead-->
 								<thead>
 									<tr>
-										<th class="p-0 w-50px"></th>
 										<th class="p-0 w-100 min-w-100px"></th>
 										<th class="p-0"></th>
 										<th class="p-0 min-w-130px w-100"></th>
@@ -389,23 +384,6 @@ function time_elapsed($date){
 									?>
 									<tbody>
 										<tr>
-											<td class="pl-0 py-5">
-												<div class="symbol symbol-45 symbol-light-info mr-2">
-													<span class="symbol-label">
-														<span class="svg-icon svg-icon-2x svg-icon-info">
-															<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Color-profile.svg-->
-															<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																	<rect x="0" y="0" width="24" height="24" />
-																	<path d="M12,10.9996338 C12.8356605,10.3719448 13.8743941,10 15,10 C17.7614237,10 20,12.2385763 20,15 C20,17.7614237 17.7614237,20 15,20 C13.8743941,20 12.8356605,19.6280552 12,19.0003662 C11.1643395,19.6280552 10.1256059,20 9,20 C6.23857625,20 4,17.7614237 4,15 C4,12.2385763 6.23857625,10 9,10 C10.1256059,10 11.1643395,10.3719448 12,10.9996338 Z M13.3336047,12.504354 C13.757474,13.2388026 14,14.0910788 14,15 C14,15.9088933 13.7574889,16.761145 13.3336438,17.4955783 C13.8188886,17.8206693 14.3938466,18 15,18 C16.6568542,18 18,16.6568542 18,15 C18,13.3431458 16.6568542,12 15,12 C14.3930587,12 13.8175971,12.18044 13.3336047,12.504354 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-																	<circle fill="#000000" cx="12" cy="9" r="5" />
-																</g>
-															</svg>
-															<!--end::Svg Icon-->
-														</span>
-													</span>
-												</div>
-											</td>
 											<td class="pl-0">
 												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
@@ -437,10 +415,9 @@ function time_elapsed($date){
 								?>
 								<!--end::Tbody-->
 							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more event</a></div><br><br>
-							</footer>
 						</div>
+						<div class="separator separator-solid mb-3"></div>
+						<div class="text-center"><a href="index.php?page=event" class="btn btn-light btn-sm">See more event</a></div>
 					</div>
 					<!--end::Tap pane-->
 
@@ -474,7 +451,6 @@ function time_elapsed($date){
 								<!--begin::Thead-->
 								<thead>
 									<tr>
-										<th class="p-0 w-50px"></th>
 										<th class="p-0 w-100 min-w-100px"></th>
 										<th class="p-0"></th>
 										<th class="p-0 min-w-130px w-100"></th>
@@ -531,23 +507,6 @@ function time_elapsed($date){
 									?>
 									<tbody>
 										<tr>
-											<td class="pl-0 py-5">
-												<div class="symbol symbol-45 symbol-light-info mr-2">
-													<span class="symbol-label">
-														<span class="svg-icon svg-icon-2x svg-icon-info">
-															<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Color-profile.svg-->
-															<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																	<rect x="0" y="0" width="24" height="24" />
-																	<path d="M12,10.9996338 C12.8356605,10.3719448 13.8743941,10 15,10 C17.7614237,10 20,12.2385763 20,15 C20,17.7614237 17.7614237,20 15,20 C13.8743941,20 12.8356605,19.6280552 12,19.0003662 C11.1643395,19.6280552 10.1256059,20 9,20 C6.23857625,20 4,17.7614237 4,15 C4,12.2385763 6.23857625,10 9,10 C10.1256059,10 11.1643395,10.3719448 12,10.9996338 Z M13.3336047,12.504354 C13.757474,13.2388026 14,14.0910788 14,15 C14,15.9088933 13.7574889,16.761145 13.3336438,17.4955783 C13.8188886,17.8206693 14.3938466,18 15,18 C16.6568542,18 18,16.6568542 18,15 C18,13.3431458 16.6568542,12 15,12 C14.3930587,12 13.8175971,12.18044 13.3336047,12.504354 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-																	<circle fill="#000000" cx="12" cy="9" r="5" />
-																</g>
-															</svg>
-															<!--end::Svg Icon-->
-														</span>
-													</span>
-												</div>
-											</td>
 											<td class="pl-0">
 												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
@@ -579,11 +538,10 @@ function time_elapsed($date){
 								?>
 								<!--end::Tbody-->
 							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=event" class="btn btn-success">See more event</a></div><br><br>
-							</footer>
 						</div>
 						<!--end::Table-->
+						<div class="separator separator-solid mb-3"></div>
+						<div class="text-center"><a href="index.php?page=event" class="btn btn-light btn-sm">See more event</a></div>
 					</div>
 					<!--end::Tap pane-->
 				</div>
@@ -593,19 +551,15 @@ function time_elapsed($date){
 		<div class="card card-custom gutter-b">
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
-				<h3 class="card-title align-items-start flex-column">
-				<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Latest News</span>
-				</h3>
-				<div class="card-toolbar">
-					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_1"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_2">PUBLIC</a>
-						</li>
-					</ul>
-				</div>
+				<h3 class="text-dark-50">Latest News</h3>
+				<ul class="nav nav-light nav-pills nav-pills-sm">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_10_1"><?= $_SESSION["loggeduser_ACCESS"]; ?></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_10_2">PUBLIC</a>
+					</li>
+				</ul>
 			</div>
 			<!--end::Header-->
 			<!--begin::Body--> 
@@ -639,7 +593,6 @@ function time_elapsed($date){
 								<!--begin::Thead-->
 								<thead>
 									<tr>
-										<th class="p-0 w-50px"></th>
 										<th class="p-0 w-100 min-w-100px"></th>
 										<th class="p-0"></th>
 										<th class="p-0 min-w-130px w-100"></th>
@@ -693,23 +646,6 @@ function time_elapsed($date){
 									?>
 									<tbody>
 										<tr>
-											<td class="pl-0 py-5">
-											<div class="symbol symbol-45 symbol-light-warning mr-2">
-												<span class="symbol-label">
-													<span class="svg-icon svg-icon-2x svg-icon-warning">
-														<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"></rect>
-																<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
-																<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
-															</g>
-														</svg>
-														<!--end::Svg Icon-->
-													</span>
-												</span>
-											</div>
-											</td>
 											<td class="pl-0">
 												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
@@ -741,11 +677,10 @@ function time_elapsed($date){
 								?>
 								<!--end::Tbody-->
 							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=news" class="btn btn-success">See more news</a></div><br><br>
-							</footer>
 						</div>
 						<!--end::Table-->
+						<div class="separator separator-solid mb-3"></div>
+						<div class="text-center"><a href="index.php?page=news" class="btn btn-light btn-sm">See more news</a></div>
 					</div>
 					<!--end::Tap pane-->
 					<!--begin::Tap pane-->
@@ -776,7 +711,6 @@ function time_elapsed($date){
 								<!--begin::Thead-->
 								<thead>
 									<tr>
-										<th class="p-0 w-50px"></th>
 										<th class="p-0 w-100 min-w-100px"></th>
 										<th class="p-0"></th>
 										<th class="p-0 min-w-130px w-100"></th>
@@ -830,23 +764,6 @@ function time_elapsed($date){
 									?>
 									<tbody>
 										<tr>
-											<td class="pl-0 py-5">
-											<div class="symbol symbol-45 symbol-light-warning mr-2">
-												<span class="symbol-label">
-													<span class="svg-icon svg-icon-2x svg-icon-warning">
-														<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"></rect>
-																<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
-																<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
-															</g>
-														</svg>
-														<!--end::Svg Icon-->
-													</span>
-												</span>
-											</div>
-											</td>
 											<td class="pl-0">
 												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
@@ -878,11 +795,10 @@ function time_elapsed($date){
 								?>
 								<!--end::Tbody-->
 							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=news" class="btn btn-success">See more news</a></div><br><br>
-							</footer>
 						</div>
 						<!--end::Table-->
+						<div class="separator separator-solid mb-3"></div>
+						<div class="text-center"><a href="index.php?page=news" class="btn btn-light btn-sm">See more news</a></div>
 					</div>
 					<!--end::Tap pane-->
 				</div>
@@ -892,19 +808,15 @@ function time_elapsed($date){
 		<div class="card card-custom gutter-b">
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-7">
-				<h3 class="card-title align-items-start flex-column">
-				<span class="card-label font-weight-bolder font-size-h4 text-dark-75">Latest Forum</span>
-				</h3>
-				<div class="card-toolbar">
-					<ul class="nav nav-light-success nav-pills nav-pills-sm nav-dark-75">
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_5">SCHOOL</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_6">PUBLIC</a>
-						</li>
-					</ul>
-				</div>
+				<h3 class="text-dark-50">Latest Forum</h3>
+				<ul class="nav nav-light nav-pills nav-pills-sm">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_10_5">SCHOOL</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_10_6">PUBLIC</a>
+					</li>
+				</ul>
 			</div>
 			<!--end::Header-->
 			<!--begin::Body--> 
@@ -938,7 +850,6 @@ function time_elapsed($date){
 								<!--begin::Thead-->
 								<thead>
 									<tr>
-										<th class="p-0 w-50px"></th>
 										<th class="p-0 w-100 min-w-100px"></th>
 										<th class="p-0"></th>
 										<th class="p-0 min-w-130px w-100"></th>
@@ -983,23 +894,6 @@ function time_elapsed($date){
 									?>
 									<tbody>
 										<tr>
-											<td class="pl-0 py-5">
-												<div class="symbol symbol-45 symbol-light-warning mr-2">
-													<span class="symbol-label">
-														<span class="svg-icon svg-icon-2x svg-icon-warning">
-															<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
-															<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																	<rect x="0" y="0" width="24" height="24"></rect>
-																	<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
-																	<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
-																</g>
-															</svg>
-															<!--end::Svg Icon-->
-														</span>
-													</span>
-												</div>
-											</td>
 											<td class="pl-0">
 												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
@@ -1030,11 +924,10 @@ function time_elapsed($date){
 								}
 								?>
 							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=schoolforum&forum=1&topic=General" class="btn btn-success">See More forums</a></div><br><br>
-							</footer>
 						</div>
 						<!--end::Table-->
+						<div class="separator separator-solid mb-3"></div>
+						<div class="text-center"><a href="index.php?page=schoolforum&forum=1&topic=General" class="btn btn-light btn-sm">See More forums</a></div>
 					</div>
 					<!--end::Tap pane-->
 					<!--begin::Tap pane-->
@@ -1065,7 +958,6 @@ function time_elapsed($date){
 								<!--begin::Thead-->
 								<thead>
 									<tr>
-										<th class="p-0 w-50px"></th>
 										<th class="p-0 w-100 min-w-100px"></th>
 										<th class="p-0"></th>
 										<th class="p-0 min-w-130px w-100"></th>
@@ -1110,23 +1002,6 @@ function time_elapsed($date){
 									?>
 									<tbody>
 										<tr>
-											<td class="pl-0 py-5">
-												<div class="symbol symbol-45 symbol-light-warning mr-2">
-													<span class="symbol-label">
-														<span class="svg-icon svg-icon-2x svg-icon-warning">
-															<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
-															<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																	<rect x="0" y="0" width="24" height="24"></rect>
-																	<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
-																	<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
-																</g>
-															</svg>
-															<!--end::Svg Icon-->
-														</span>
-													</span>
-												</div>
-											</td>
 											<td class="pl-0">
 												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
@@ -1157,11 +1032,10 @@ function time_elapsed($date){
 								}
 								?>
 							</table>
-							<footer>
-								<div class="text-center"><a href="index.php?page=publicforum&forum=4&topic=General" class="btn btn-success">See More forums</a></div><br><br>
-							</footer>
 						</div>
 						<!--end::Table-->
+						<div class="separator separator-solid mb-3"></div>
+						<div class="text-center"><a href="index.php?page=publicforum&forum=4&topic=General" class="btn btn-light btn-sm">See More forums</a></div>
 					</div>
 					<!--end::Tap pane-->
 				</div>
