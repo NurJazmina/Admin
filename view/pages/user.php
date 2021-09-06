@@ -35,20 +35,20 @@
 			</div>
 		</div>
 	</a>
-	<!--end::Item-->
-
-	<!--begin::Item
-	<a href="custom/apps/user/profile-3.html" class="navi-item px-8">
+	<a href="index.php?page=change-password" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
-				<i class="flaticon2-mail text-warning"></i>
+				<i class="flaticon2-lock text-warning"></i>
 			</div>
 			<div class="navi-text">
-				<div class="font-weight-bold">My Messages</div>
-				<div class="text-muted">Inbox and tasks</div>
+				<div class="font-weight-bold">Change password</div>
+				<div class="text-muted">Resetting your password</div>
 			</div>
 		</div>
 	</a>
+	<!--end::Item-->
+
+	<!--begin::Item
 	<a href="custom/apps/user/profile-2.html" class="navi-item px-8">
 		<div class="navi-link">
 			<div class="navi-icon mr-2">
@@ -79,7 +79,7 @@
 	{
 		?>
 		<div class="navi-footer px-8 py-5" >
-		<a href="model/logout.php" class="btn btn-light-success font-weight-bold">Sign Out</a>
+		<a href="model/logout.php" class="btn btn-warning btn-hover-light btn-block">Sign Out</a>
 		</div>
 		<?php
 	}
