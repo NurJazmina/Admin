@@ -25,7 +25,7 @@
          $_SESSION["loggeduser_consumerPhone"] = $document->ConsumerPhone;
          $_SESSION["loggeduser_consumerAddress"] = $document->ConsumerAddress;
          $_SESSION["loggeduser_consumerPostcode"] = $document->ConsumerPostcode;
-         $_SESSION["loggeduser_consumerCity"] = $document->ConsumerCit;
+         $_SESSION["loggeduser_consumerCity"] = $document->ConsumerCity;
          $_SESSION["loggeduser_consumerState"] = $document->ConsumerState;
          $_SESSION["loggeduser_consumerStatus"] = $document->ConsumerStatus;
          $_SESSION["loggeduser_ConsumerGroup_id"] = $document->ConsumerGroup_id;
@@ -99,7 +99,6 @@
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
             foreach ($cursor as $document)
             {
-              $_SESSION["loggeduser_class_id"] = strval($document->_id);
               $_SESSION["loggeduser_ClassCategory"] = $document->ClassCategory;
               $_SESSION["loggeduser_ClassName"] = $document->ClassName;
             }

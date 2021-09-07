@@ -2,7 +2,7 @@
 include 'model/quiz.php';
 function time_elapsed($date){
 	$bit = array(
-		//' year'      => $date  / 31556926 % 12,
+		' year'      => $date  / 31556926 % 12,
 		' week'      => $date  / 604800 % 52,
 		' day'       => $date  / 86400 % 7,
 		' hour'      => $date  / 3600 % 24,
@@ -164,15 +164,13 @@ function time_elapsed($date){
                     $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
                     foreach ($cursor as $document)
-                    {
+                    { 
                         $Consumer_id = $document->Consumer_id;
                         $total = $total + 1;
                         $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
                         $query1 = new MongoDB\Driver\Query($filter1);
                         $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                            
                         foreach ($cursor1 as $document1)
                         {
                             $consumer_id = strval($document1->_id);
@@ -180,7 +178,6 @@ function time_elapsed($date){
                             $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
-
                             foreach ($cursor2 as $document2)
                             {
                                 $total_submission = $total_submission + 1;
@@ -642,7 +639,6 @@ function time_elapsed($date){
                             $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                             $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
                             foreach ($cursor as $document)
                             {
                                 $Consumer_id = $document->Consumer_id;
@@ -653,11 +649,10 @@ function time_elapsed($date){
                                 <div class="col-sm-2 text-right">
                                     <button class="btn btn-secondary font-weight-bolder btn-sm mb-2" type="button" data-bs-toggle="dropdown">Change User &nbsp; <i class="fas fa-sort"></i></button>
                                     <ul class="dropdown-menu">
-                                    <?php
+                                        <?php
                                         $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                         $query = new MongoDB\Driver\Query($filter);
                                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
                                         foreach ($cursor as $document)
                                         {
                                             $Consumer_id = $document->Consumer_id;
@@ -665,7 +660,6 @@ function time_elapsed($date){
                                             $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
                                             $query1 = new MongoDB\Driver\Query($filter1);
                                             $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                                                
                                             foreach ($cursor1 as $document1)
                                             {
                                                 $consumer_id = strval($document1->_id);
