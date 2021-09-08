@@ -149,6 +149,17 @@ $(document).ready(function() {
                             <small class="text-muted"><?= $ConsumerFName." ".$ConsumerLName;?></small>&nbsp;&nbsp;
                             <small class="text-muted"><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
                         </div>
+                        <?php
+                        if($_SESSION["loggeduser_id"] == $Consumer_id)
+                        {
+                            ?>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-light btn-hover-warning btn-sm" data-bs-toggle="modal" data-bs-target="#edit_forum" data-bs-whatever="<?= $Forum_id; ?>"><i class="flaticon2-edit icon-md"></i></button>
+                                <button type="button" class="btn btn-light btn-hover-warning btn-sm" data-bs-toggle="modal" data-bs-target="#delete_forum" data-bs-whatever="<?= $Forum_id; ?>"><i class="flaticon2-trash icon-md"></i></button>     
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <div class="card p-8">
                         <?php
@@ -356,6 +367,7 @@ $(document).ready(function() {
         </div>
     </div>
 </div>
+<?php include ('view/pages/modal-forum.php'); ?>
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({

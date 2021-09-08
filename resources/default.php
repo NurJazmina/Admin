@@ -305,6 +305,42 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
+    if ($_GET['page']=="forumdetail") 
+    {
+      ?>
+      <script>
+      var edit_forum = document.getElementById('edit_forum')
+      edit_forum.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = edit_forum.querySelector('.modal-title')
+      var modalBodyInput = edit_forum.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+
+      var delete_forum = document.getElementById('delete_forum')
+      delete_forum.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = delete_forum.querySelector('.modal-title')
+      var modalBodyInput = delete_forum.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+      </script>
+      <?php
+    }
     if ($_GET['page']=="home") 
     {
       ?>
