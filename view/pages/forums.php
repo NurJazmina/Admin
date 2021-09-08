@@ -98,7 +98,6 @@ $time_now = time();
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
                             $query = new MongoDB\Driver\Query($filter,$option);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-
                             foreach ($cursor as $document)
                             {
                                 $Forum_id = strval($document->_id);
@@ -153,7 +152,6 @@ $time_now = time();
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
                             $query = new MongoDB\Driver\Query($filter,$option);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-
                             foreach ($cursor as $document)
                             {
                                 $Forum_id = strval($document->_id);
@@ -216,7 +214,6 @@ $time_now = time();
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
                         $query = new MongoDB\Driver\Query($filter,$option);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-
                         foreach ($cursor as $document)
                         {
                             $Forum_id = strval($document->_id);
@@ -272,7 +269,6 @@ $time_now = time();
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
                         $query = new MongoDB\Driver\Query($filter,$option);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-
                         foreach ($cursor as $document)
                         {   
                             $Forum_id = strval($document->_id);
@@ -328,7 +324,6 @@ $time_now = time();
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
                         $query = new MongoDB\Driver\Query($filter,$option);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Forum',$query);
-
                         foreach ($cursor as $document)
                         {
                             $Forum_id = strval($document->_id);

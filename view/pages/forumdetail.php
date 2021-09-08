@@ -155,7 +155,6 @@ $(document).ready(function() {
                         $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum_id'=>$Forum_id,'Parent_id'=>'0'];
                         $query = new MongoDB\Driver\Query($filter);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ForumComment',$query);
-
                         foreach ($cursor as $document2)
                         {
                             $total = $total + 1;

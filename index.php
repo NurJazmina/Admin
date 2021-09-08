@@ -88,6 +88,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Chart-->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="//s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
 		<!--end::Chart-->
 		
@@ -271,6 +274,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/widgets.js"></script>
 		<script src='assets/js/main.js'></script>
 		<script src="assets/js/todo.js" defer></script>
+		<script src="assets/js/calendar.js" defer></script>
 
 		<?php
 		include 'resources/default.php';
