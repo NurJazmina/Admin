@@ -287,11 +287,11 @@ section, .main {
 	z-index: -2;
 }
 .custom-header {
-	background: #ef4f69;
+	background: #a1896e;
 	padding: 5px 10px 10px 20px;
 	height: 70px;
 	position: relative;
-	border-top: 5px solid #ef4f69;
+	border-top: 5px solid #a1896e;
 	border-bottom: 1px solid #ddd;
 }
 .custom-header h2,.custom-header h3 {
@@ -360,7 +360,7 @@ section, .main {
 	width: 20px;
 	height: 20px;
 	text-align: center;
-	background: #ef4f69;
+	background: #a1896e;
 	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 	cursor: pointer;
 	line-height: 13px;
@@ -385,12 +385,12 @@ section, .main {
 	padding: 20px;
 	background: #fff;
 	border-bottom: 1px solid #ddd;
-	border-top: 5px solid #ef4f69;
+	border-top: 5px solid #a1896e;
 	box-shadow: 0 1px rgba(255,255,255,0.9);
 	margin-bottom: 30px;
 }
 .custom-content-reveal span {	color: #888;}
-.custom-content-reveal a {	color: #ef4f69;}
+.custom-content-reveal a {	color: #a1896e;}
 .custom-content-reveal a:hover {	color: #333;}
 
 /* Modifications */
@@ -403,7 +403,7 @@ section, .main {
 }
 .fc-calendar1 .fc-head {
 	background: transparent;
-	color: #ef4f69;
+	color: #a1896e;
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 12px;
@@ -425,7 +425,7 @@ section, .main {
 	pointer-events: none;
 }
 .fc-calendar1 .fc-row > div.fc-today {
-	background: #ef4f69;
+	background: #a1896e;
 	box-shadow: inset 0 -1px 1px rgba(0,0,0,0.1);
 }
 .fc-calendar1 .fc-row > div.fc-today > span.fc-date {
@@ -445,7 +445,7 @@ section, .main {
 	bottom: 3px;
 }
 .fc-calendar1 .fc-row > div.fc-today.fc-content:after {	color: #b02c42;}
-.fc-calendar1 .fc-row > div.fc-content:hover:after{	color: #ef4f69;}
+.fc-calendar1 .fc-row > div.fc-content:hover:after{	color: #a1896e;}
 .fc-calendar1 .fc-row > div.fc-today.fc-content:hover:after{	color: #fff;}
 .fc-calendar1 .fc-row > div > div a, .fc-calendar1 .fc-row > div > div span {
 	display: none;
