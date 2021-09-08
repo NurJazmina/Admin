@@ -67,6 +67,34 @@ if (isset($_GET['id']) && !empty($_GET['id']))
   {
     $totalstudent = $totalstudent + 1;
   }
+
+  $totalsubject = 0;
+  $filter = ['Class_id'=>$class_id];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+  foreach ($cursor as $document)
+  {
+    $Subject_id = $document->Subject_id;
+    $Teacher_id = $document->Teacher_id;
+
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+    foreach ($cursor as $document)
+    {
+      $ConsumerID = $document->ConsumerID;
+
+      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+      foreach ($cursor as $document)
+      {
+        $teacher_id = strval($document->_id);
+        $teacherF_name = $document->ConsumerFName;
+        $teacherL_name = $document->ConsumerLName;
+      }
+    }
+  }
   ?>
   <div class="text-dark-50 text-center m-5"><h1>Student Info</h1></div>
   <div class="row">
@@ -113,14 +141,13 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                   </tr>
                   <tr>
                     <td>Teacher</td>
-                    <td><a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                    <td><a href="index.php?page=staffdetail&id=<?= $teacher_id; ?>"><?= $teacherF_name." ".$teacherL_name;?></a></td>
                   </tr>
                   <tr>
                     <td>Subject</td>
                     <td>
                     <?php
-                      $totalsubject = 0;
-                      $filter = ['class_id'=>$class_id];
+                      $filter = ['Class_id'=>$class_id];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
                       foreach ($cursor as $document)
@@ -133,7 +160,6 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
                         foreach ($cursor as $document)
                         {
-                          $totalsubject = $totalsubject + 1;
                           $subject_name = $document->SubjectName;
                           ?>
                           <a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>">
