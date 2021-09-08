@@ -137,6 +137,10 @@ if (($h = fopen("{$deaths_malaysia}", "r")) !== FALSE)
 
 <style src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"></style>
 <style>
+
+.colornude{
+	color:#BDB76B;
+}
   @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 .clearfix:before,.clearfix:after {
@@ -287,11 +291,11 @@ section, .main {
 	z-index: -2;
 }
 .custom-header {
-	background: #a1896e;
+	background: #BDB76B;
 	padding: 5px 10px 10px 20px;
 	height: 70px;
 	position: relative;
-	border-top: 5px solid #a1896e;
+	border-top: 5px solid #BDB76B;
 	border-bottom: 1px solid #ddd;
 }
 .custom-header h2,.custom-header h3 {
@@ -360,7 +364,7 @@ section, .main {
 	width: 20px;
 	height: 20px;
 	text-align: center;
-	background: #a1896e;
+	background: #BDB76B;
 	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 	cursor: pointer;
 	line-height: 13px;
@@ -385,17 +389,17 @@ section, .main {
 	padding: 20px;
 	background: #fff;
 	border-bottom: 1px solid #ddd;
-	border-top: 5px solid #a1896e;
+	border-top: 5px solid #BDB76B;
 	box-shadow: 0 1px rgba(255,255,255,0.9);
 	margin-bottom: 30px;
 }
 .custom-content-reveal span {	color: #888;}
-.custom-content-reveal a {	color: #a1896e;}
+.custom-content-reveal a {	color: #BDB76B;}
 .custom-content-reveal a:hover {	color: #333;}
 
 /* Modifications */
 .fc-calendar1-container {
-	height: 300px;
+	height: 250px;
 	width: auto;
 	padding: 30px;
 	background: #f6f6f6;
@@ -403,7 +407,7 @@ section, .main {
 }
 .fc-calendar1 .fc-head {
 	background: transparent;
-	color: #a1896e;
+	color: #BDB76B;
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 12px;
@@ -425,7 +429,7 @@ section, .main {
 	pointer-events: none;
 }
 .fc-calendar1 .fc-row > div.fc-today {
-	background: #a1896e;
+	background: #BDB76B;
 	box-shadow: inset 0 -1px 1px rgba(0,0,0,0.1);
 }
 .fc-calendar1 .fc-row > div.fc-today > span.fc-date {
@@ -445,7 +449,7 @@ section, .main {
 	bottom: 3px;
 }
 .fc-calendar1 .fc-row > div.fc-today.fc-content:after {	color: #b02c42;}
-.fc-calendar1 .fc-row > div.fc-content:hover:after{	color: #a1896e;}
+.fc-calendar1 .fc-row > div.fc-content:hover:after{	color: #BDB76B;}
 .fc-calendar1 .fc-row > div.fc-today.fc-content:hover:after{	color: #fff;}
 .fc-calendar1 .fc-row > div > div a, .fc-calendar1 .fc-row > div > div span {
 	display: none;
@@ -483,7 +487,7 @@ section, .main {
 						<!--begin::Item-->
 						<div class="d-flex align-items-center pb-9">
 							<!--begin::Symbol-->
-							<div class="symbol symbol-45 symbol-light mr-4">
+							<div class="symbol symbol-45 symbol-light mr-4 ">
 								<span class="symbol-label bg-white">
 									<span class="svg-icon svg-icon-2x">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
@@ -500,7 +504,7 @@ section, .main {
 							</div>
 							<!--end::Text-->
 							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light-primary label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalstaff"] ?></span>
+							<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalstaff"] ?></span>
 							<!--end::label-->
 						</div>
 						<!--end::Item-->
@@ -524,7 +528,7 @@ section, .main {
 							</div>
 							<!--end::Text-->
 							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalteacher"] ?></span>
+							<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalteacher"] ?></span>
 							<!--end::label-->
 						</div>
 						<!--end::Item-->
@@ -548,7 +552,7 @@ section, .main {
 							</div>
 							<!--end::Text-->
 							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light-warning label-inline py-5 min-w-45px"><?= $_SESSION["totalstudent"] ?></span>
+							<span class="font-weight-bolder label label-xl label-light label-inline py-5 min-w-45px"><?= $_SESSION["totalstudent"] ?></span>
 							<!--end::label-->
 						</div>
 						<!--end::Item-->
@@ -572,7 +576,7 @@ section, .main {
 							</div>
 							<!--end::Text-->
 							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light-danger label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalparent"] ?></span>
+							<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalparent"] ?></span>
 							<!--end::label-->
 						</div>
 						<!--end::Item-->
@@ -600,16 +604,61 @@ section, .main {
 							<img src="assets/media/client-logos/malaysia.png" class="img-fluid" alt="...">
 						</div>
 						<div class="col-sm"></div>
-						<h1 class="mt-15">Coronavirus Cases :</h1>
+						<h1 class="mt-5">Coronavirus Cases :</h1>
 						<a class="h1 font-weight-boldest text-dark-50"><?= $cases_new1; ?></a>
 
-						<h1 class="mt-15">Death :</h1>
+						<h1 class="mt-10">Death :</h1>
 						<a class="h1 font-weight-boldest" style="color:#999 "><?= $deaths_new; ?></a>
 
-						<h1 class="mt-15">Recovered :</h1>
+						<h1 class="mt-10">Recovered :</h1>
 						<a class="h1 font-weight-boldest" style="color:#8ACA2B"><?= $cases_recovered2; ?></a>
 					</div>
 				</div>
+				<div class="text-dark-50 text-center m-1 mt-10"><h3>Cluster Covid19</h3></div>
+				<table class="table table-bordered table-sm">
+					<tbody>
+						<tr class="bg-success text-white">
+							<td>Date</td>
+							<td><?= $date2; ?></td>
+							<td><?= $date1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster import</td>
+							<td><?= $cluster_import2; ?></td>
+							<td><?= $cluster_import1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster religious</td>
+							<td><?= $cluster_religious2; ?></td>
+							<td><?= $cluster_religious1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster community</td>
+							<td><?= $cluster_community2; ?></td>
+							<td><?= $cluster_community1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster high risk</td>
+							<td><?= $cluster_highRisk2; ?></td>
+							<td><?= $cluster_highRisk1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster education</td>
+							<td><?= $cluster_education2; ?></td>
+							<td><?= $cluster_education1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster detention centre</td>
+							<td><?= $cluster_detentionCentre2; ?></td>
+							<td><?= $cluster_detentionCentre1; ?></td>
+						</tr>
+						<tr class="bg-white">
+							<td>Cluster workplace</td>
+							<td><?= $cluster_workplace2; ?></td>
+							<td><?= $cluster_workplace1; ?></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<!--end::Body-->
 		</div>
@@ -617,6 +666,15 @@ section, .main {
 	</div>
 	<div class="col-lg-6 col-xxl-4">
 		<!--begin::Stats Widget 11-->
+		<div class="card card-custom card-stretch card-stretch-half gutter-b">
+			<!--begin::Body-->
+			<div class="card-body">
+				<a class="twitter-timeline" href="https://twitter.com/gongetz?ref_src=twsrc%5Etfw">Tweets by gongetz</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::Stats Widget 11-->
+		<!--begin::Stats Widget 12-->
 		<div class="card card-custom card-stretch card-stretch-half gutter-b">
 			<!--begin::Body-->
 			<div class="card-body">
@@ -637,67 +695,6 @@ section, .main {
 						</div>
 					</div>
 				</section>
-			</div>
-			<!--end::Body-->
-		</div>
-		<!--end::Stats Widget 11-->
-		<!--begin::Stats Widget 12-->
-		<div class="card card-custom card-stretch card-stretch-half gutter-b">
-			<!--begin::Body-->
-			<div class="card-body d-flex flex-column">
-				<div class="text-dark-50 text-center m-1"><h3>Cluster Covid19</h3></div>
-				<table class="table table-bordered table-sm">
-					<tbody>
-						<tr class="bg-success text-white">
-							<td>Date</td>
-							<td><?= $date3; ?></td>
-							<td><?= $date2; ?></td>
-							<td><?= $date1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster import</td>
-							<td><?= $cluster_import3; ?></td>
-							<td><?= $cluster_import2; ?></td>
-							<td><?= $cluster_import1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster religious</td>
-							<td><?= $cluster_religious3; ?></td>
-							<td><?= $cluster_religious2; ?></td>
-							<td><?= $cluster_religious1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster community</td>
-							<td><?= $cluster_community3; ?></td>
-							<td><?= $cluster_community2; ?></td>
-							<td><?= $cluster_community1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster highRisk</td>
-							<td><?= $cluster_highRisk3; ?></td>
-							<td><?= $cluster_highRisk2; ?></td>
-							<td><?= $cluster_highRisk1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster education</td>
-							<td><?= $cluster_education3; ?></td>
-							<td><?= $cluster_education2; ?></td>
-							<td><?= $cluster_education1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster detention centre</td>
-							<td><?= $cluster_detentionCentre3; ?></td>
-							<td><?= $cluster_detentionCentre2; ?></td>
-							<td><?= $cluster_detentionCentre1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td>Cluster workplace</td>
-							<td><?= $cluster_workplace3; ?></td>
-							<td><?= $cluster_workplace2; ?></td>
-							<td><?= $cluster_workplace1; ?></td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 			<!--end::Body-->
 		</div>

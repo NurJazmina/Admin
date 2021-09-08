@@ -54,7 +54,7 @@ include ('model/news.php');
       }
     }
     ?>
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-8">
       <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
         <div class="card">
           <button type="submit" class="btn btn-hover-light text-left">
@@ -136,7 +136,7 @@ include ('model/news.php');
         }
       }
       ?>
-      <div class="col-lg-4">
+      <div class="col-lg-4 mb-8">
         <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
           <div class="card">
             <button type="submit" class="btn btn-hover-light text-left">

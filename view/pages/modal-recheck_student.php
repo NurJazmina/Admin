@@ -96,8 +96,8 @@ if (isset($_POST['recheck_add_student']))
                       <input type="hidden" name="parent_idno" value="<?= $parent_idno; ?>">
                       <input type="hidden" name="student_idno" value="<?= $student_idno; ?>">
                       <input type="hidden" name="class_category" value="<?= $class_category; ?>">
-                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-sm">return</button>
-                      <button type="submit" name="add_relation_student" class="btn btn-success">Proceed</a>
+                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-hover-success btn-sm">Student list</button>
+                      <button type="submit" name="add_relation_student" class="btn btn-success btn-hover-light">Proceed</a>
                     </div>
                   </div>
                 </div>
@@ -128,8 +128,8 @@ if (isset($_POST['recheck_add_student']))
                       <input type="hidden" name="parent_idno" value="<?= $parent_idno; ?>">
                       <input type="hidden" name="student_idno" value="<?= $student_idno; ?>">
                       <input type="hidden" name="class_category" value="<?= $class_category; ?>">
-                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-sm">return</button>
-                      <button name="duplicate_add_relation" type="submit" class="btn btn-success">Proceed</button>
+                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-hover-success btn-sm">Student list</button>
+                      <button name="duplicate_add_relation" type="submit" class="btn btn-success btn-hover-light">Proceed</button>
                     </div>
                   </div>
                 </div>
@@ -231,8 +231,8 @@ if (isset($_POST['recheck_add_student']))
                     <div class="modal-footer">
                       <input type="hidden" name="parent_idno" value="<?=  $parent_idno; ?>" >
                       <input type="hidden" name="student_idno" value="<?=  $student_idno; ?>">
-                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-sm">Close</button>
-                      <button type="submit" class="btn btn-success btn-sm" name="add_student">Confirm</button>
+                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-hover-success btn-sm">Close</button>
+                      <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_student">Confirm</button>
                     </div>
                   </div>
                 </div>
@@ -263,8 +263,8 @@ if (isset($_POST['recheck_add_student']))
                       <input type="hidden" name="parent_idno" value="<?= $parent_idno; ?>">
                       <input type="hidden" name="student_idno" value="<?= $student_idno; ?>">
                       <input type="hidden" name="class_category" value="<?= $class_category; ?>">
-                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-sm">return</button>
-                      <button name="add_relation_parent" type="submit" class="btn btn-success">Proceed</a>
+                      <button onclick="index.php?page=studentlist" class="btn btn-light btn-hover-success btn-sm">Student list</button>
+                      <button name="add_relation_parent" type="submit" class="btn btn-success btn-hover-light">Proceed</a>
                     </div>
                   </div>
                 </div>
@@ -276,8 +276,23 @@ if (isset($_POST['recheck_add_student']))
         }
         else
         {
+          if($ConsumerGroup_id == '601b4cfd97728c027c01f187')
+          {
+            //staff
+            $detail = 'staffdetail';
+          }
+          elseif ($ConsumerGroup_id == '6018c32b10184a751c102eb6')
+          {
+            //student
+            $detail = 'studentdetail';
+          }
+          else
+          {
+            //gongetz
+            $detail = 'studentlist';
+          }
           ?>
-          <!-- group : vip -->
+          <!-- group : staff/student/gongetz -->
           <div class="text-dark-50 text-center m-5">
             <h1>AUTHORIZED PERSONNEL ONLY</h1>
           </div>
@@ -308,7 +323,7 @@ if (isset($_POST['recheck_add_student']))
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button onclick="index.php?page=studentlist" class="btn btn-light btn-sm">return</button>
+                  <button class="btn btn-success btn-hover-light btn-hover-light btn-sm">Resume Consumer Detail</button>
                 </div>
               </div>
             </div>
@@ -320,12 +335,27 @@ if (isset($_POST['recheck_add_student']))
     }
     else
     {
+      if($ConsumerGroup_id == '601b4cfd97728c027c01f187')
+      {
+        //staff
+        $detail = 'staffdetail';
+      }
+      elseif ($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c')
+      {
+        //parent
+        $detail = 'parentdetail';
+      }
+      else
+      {
+        //gongetz
+        $detail = 'studentlist';
+      }
       ?>
-      <!-- group : vip -->
+      <!-- group : staff/vip/gongetz -->
       <div class="text-dark-50 text-center m-5">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
-      <form action="index.php?page=studentlist" method="post">
+      <form action="index.php?page=<?= $detail; ?>&id=<?= $consumer_student_id; ?>" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -352,12 +382,12 @@ if (isset($_POST['recheck_add_student']))
               </div>
             </div>
             <div class="modal-footer">
-              <button onclick="index.php?page=studentlist" class="btn btn-light btn-sm">return</button>
+              <button class="btn btn-success btn-hover-light btn-hover-light btn-sm">Resume Consumer Detail</button>
             </div>
           </div>
         </div>
       </form>
-      <!-- group : vip -->
+      <!-- group : staff/vip/gongetz -->
       <?php
     }
   }
@@ -436,8 +466,8 @@ if (isset($_POST['recheck_edit_student']))
             </div>
             <div class="modal-footer">
               <input type="hidden" name="consumer_student_id" value="<?=  $student_id; ?>">
-              <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-success btn-sm" name="edit_student">Confirm</button>
+              <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="edit_student">Confirm</button>
             </div>
           </div>
         </div>

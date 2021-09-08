@@ -290,7 +290,7 @@ if (isset($_POST['recheck_add_staff']))
     <div class="text-dark-50 text-center m-5">
       <h1>STAFF ALREADY EXIST</h1>
     </div>
-    <form action="index.php?page=stafflist" method="post">
+    <form action="index.php?page=staffdetail&id=<?= $consumer_id; ?>" method="post">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -323,7 +323,7 @@ if (isset($_POST['recheck_add_staff']))
             </div>
           </div>
           <div class="modal-footer">
-            <button onclick="index.php?page=stafflist" class="btn btn-light btn-sm">return</button>
+            <button class="btn btn-success btn-hover-light btn-sm">Resume Staff Detail</button>
           </div>
         </div>
       </div>
@@ -438,12 +438,27 @@ if (isset($_POST['recheck_add_staff']))
     }
     else 
     {
+      if($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c')
+      {
+        //vip
+        $detail = 'parentdetail';
+      }
+      elseif ($ConsumerGroup_id == '6018c32b10184a751c102eb6')
+      {
+        //student
+        $detail = 'studentdetail';
+      }
+      else
+      {
+        //student
+        $detail = 'stafflist';
+      }
       ?>
       <!-- group : vip/student/gongetz -->
       <div class="text-dark-50 text-center m-5">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
-      <form action="index.php?page=stafflist" method="post">
+      <form action="index.php?page=<?= $detail; ?>&id=<?= $consumer_id; ?>" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -470,7 +485,7 @@ if (isset($_POST['recheck_add_staff']))
               </div>
             </div>
             <div class="modal-footer">
-              <button onclick="index.php?page=stafflist" class="btn btn-light btn-sm">return</button>
+              <button class="btn btn-success btn-hover-light btn-sm">Resume Consumer Detail</button>
             </div>
           </div>
         </div>

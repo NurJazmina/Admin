@@ -57,7 +57,7 @@ include ('model/event.php');
       }
     }
     ?>
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-8">
       <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post">
         <div class="card">
           <button type="submit" class="btn btn-hover-light text-left">
@@ -146,7 +146,7 @@ include ('model/event.php');
       }
     }
     ?>
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-8">
       <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post"> 
         <div class="card">
           <button type="submit" class="btn btn-hover-light text-left">

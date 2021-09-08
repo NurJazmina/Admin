@@ -53,6 +53,7 @@
                                 "addrelationforparent",
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
+                                'a',
                                );
 
     $teacherallowedaccess = array("dashboard",
