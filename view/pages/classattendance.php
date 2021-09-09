@@ -26,7 +26,7 @@ border-color:#ffff;
             <div class="card-toolbar text-right">
                 <!--begin::Dropdown-->
                 <div class="dropdown dropdown-inline mr-2">
-                    <button class="btn btn-light-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-light-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -78,7 +78,7 @@ border-color:#ffff;
         <div class="card">
         <div class="card-body text-right">
             <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-                <thead class="bg-white text-danger">
+                <thead class="bg-white text-success">
                     <tr>
                         <th>Student ID</th>
                         <th>Student Name</th>
@@ -92,7 +92,7 @@ border-color:#ffff;
                 if (!isset($_GET['id']) && empty($_GET['id']))
                 {
                     ?>
-                    <a href="index.php?page=classattendance&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+                    <a href="index.php?page=classattendance&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
                     <?php
 
                     $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
@@ -173,7 +173,7 @@ border-color:#ffff;
                 else
                 {
                     ?>
-                    <a href="index.php?page=classattendance&id=<?= $_GET['id']; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+                    <a href="index.php?page=classattendance&id=<?= $_GET['id']; ?>&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
                     <?php
                     
                     $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"],'Class_id'=>$_GET['id']];

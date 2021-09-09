@@ -28,7 +28,7 @@ border-color:#ffff;
                 <div class="card-toolbar text-right">
                     <!--begin::Dropdown-->
                     <div class="dropdown dropdown-inline mr-2">
-                        <button class="btn btn-light-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-light-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -102,9 +102,9 @@ else
     <div class="col-10">
         <div class="card">
         <div class="card-body text-right">
-            <a href="index.php?page=departmentattendance&id=<?= $department_id; ?>&attendance=xls" class="btn btn-danger btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+            <a href="index.php?page=departmentattendance&id=<?= $department_id; ?>&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
             <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-            <thead class="bg-white text-danger">
+            <thead class="bg-white text-success">
                 <tr>
                     <th>Staff ID</th>
                     <th>Staff Name</th>

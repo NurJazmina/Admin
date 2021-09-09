@@ -60,6 +60,14 @@ else
   }
 }
 ?>
+<style>
+.highlight td.default 
+{
+background:#ff8795;
+color:#ffff ;
+border-color:#ffff;
+}
+</style>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
   <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -90,17 +98,17 @@ else
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
             ?>
-            <button type="button" class="btn btn-success btn-sm"><a class="text-white" href="index.php?page=classattendance">ATTENDANCE</a></button>
-            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=classattendance">ATTENDANCE</a></button>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
             <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-            <button type="submit" class="btn btn-success btn-sm" name="search_student">Search</button>
+            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_student">Search</button>
             <?php
           } 
           else
           {
             ?>
             <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-            <button type="submit" class="btn btn-success btn-sm" name="search_student">Search</button>
+            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_student">Search</button>
             <?php
           }
           ?>
@@ -132,176 +140,316 @@ else
       <!-- end :: card header -->
       <!-- begin :: card body -->
       <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-sm text-left table-bordered">
-            <thead class="bg-success text-white">
-              <tr class="text-center">
-                <th scope="col">Name</th>
-                <th scope="col">ID Type</th>
-                <th scope="col">ID No</th>
-                <th colspan="2">Parent</th>
-                <th colspan="2">Class Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Update</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach ($cursor as $document)
-              {
-                $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="List-tab" data-toggle="tab" href="#List">
+                    <span class="nav-icon">
+                        <i class="flaticon2-layers-1"></i>
+                    </span>
+                    <span class="nav-text">List</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Attendance-tab" data-toggle="tab" href="#Attendance" aria-controls="Attendance">
+                    <span class="nav-icon">
+                        <i class="flaticon2-list-2"></i>
+                    </span>
+                    <span class="nav-text">Attendance</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content mt-5" id="myTabContent">
+          <div class="tab-pane fade show active" id="List" role="tabpanel" aria-labelledby="List-tab">
+            <div class="table-responsive">
+              <table class="table table-sm text-left table-bordered">
+                <thead class="bg-success text-white">
+                  <tr class="text-center">
+                    <th scope="col">Name</th>
+                    <th scope="col">ID Type</th>
+                    <th scope="col">ID No</th>
+                    <th colspan="2">Parent</th>
+                    <th colspan="2">Class Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Update</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  foreach ($cursor as $document)
+                  {
+                    $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-                $student_id = strval($document->_id);
-                $Consumer_id = $document->Consumer_id;
-                $Class_id = $document->Class_id;
-                $StudentsStatus = $document->StudentsStatus;
+                    $student_id = strval($document->_id);
+                    $Consumer_id = $document->Consumer_id;
+                    $Class_id = $document->Class_id;
+                    $StudentsStatus = $document->StudentsStatus;
 
-                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                foreach ($cursor as $document)
-                {
-                  $consumer_id = strval($document->_id);
-                  $ConsumerFName = $document->ConsumerFName;
-                  $ConsumerLName = $document->ConsumerLName;
-                  $ConsumerIDType = $document->ConsumerIDType;
-                  $ConsumerIDNo = $document->ConsumerIDNo;
-                }
-                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-                foreach ($cursor as $document)
-                {
-                  $ClassName = $document->ClassName;
-                  $ClassCategory = $document->ClassCategory;
-                }
-                ?>
-                <tr>
-                  <td><a href="index.php?page=studentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
-                  <td><?= $ConsumerIDType; ?></td>
-                  <td><?= $ConsumerIDNo; ?></td>
-                  <td>
-                    <?php
-                    $filter = ['StudentID'=>$student_id];
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
                     $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                     foreach ($cursor as $document)
                     {
-                      $ParentStudentRelation = $document->ParentStudentRelation;
-                      ?>
-                      <a class="text-primary"><?=$ParentStudentRelation;?></a><br>
-                      <?php
+                      $consumer_id = strval($document->_id);
+                      $ConsumerFName = $document->ConsumerFName;
+                      $ConsumerLName = $document->ConsumerLName;
+                      $ConsumerIDType = $document->ConsumerIDType;
+                      $ConsumerIDNo = $document->ConsumerIDNo;
+                    }
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $ClassName = $document->ClassName;
+                      $ClassCategory = $document->ClassCategory;
                     }
                     ?>
-                  </td>
-                  <td>
-                    <?php
-                    $filter = ['StudentID'=>$student_id];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
-                    foreach ($cursor as $document)
-                    {
-                      $relation_id = strval($document->_id);
-                      $ParentID = $document->ParentID;
-                      $ParentStudentRelation = $document->ParentStudentRelation;
-
-                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ParentID)];
-                      $query = new MongoDB\Driver\Query($filter);
-                      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-                      foreach ($cursor as $document)
-                      {
-                        $ConsumerID = $document->ConsumerID;
-
-                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                    <tr>
+                      <td><a href="index.php?page=studentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
+                      <td><?= $ConsumerIDType; ?></td>
+                      <td><?= $ConsumerIDNo; ?></td>
+                      <td>
+                        <?php
+                        $filter = ['StudentID'=>$student_id];
                         $query = new MongoDB\Driver\Query($filter);
-                        $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                        $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
                         foreach ($cursor as $document)
                         {
-                          $consumer_id = strval($document->_id);
-                          $ConsumerFName = $document->ConsumerFName;
-                          $ConsumerLName = $document->ConsumerLName;
+                          $ParentStudentRelation = $document->ParentStudentRelation;
+                          ?>
+                          <a class="text-primary"><?=$ParentStudentRelation;?></a><br>
+                          <?php
                         }
+                        ?>
+                      </td>
+                      <td>
+                        <?php
+                        $filter = ['StudentID'=>$student_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                        foreach ($cursor as $document)
+                        {
+                          $relation_id = strval($document->_id);
+                          $ParentID = $document->ParentID;
+                          $ParentStudentRelation = $document->ParentStudentRelation;
+
+                          $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ParentID)];
+                          $query = new MongoDB\Driver\Query($filter);
+                          $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+                          foreach ($cursor as $document)
+                          {
+                            $ConsumerID = $document->ConsumerID;
+
+                            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                            foreach ($cursor as $document)
+                            {
+                              $consumer_id = strval($document->_id);
+                              $ConsumerFName = $document->ConsumerFName;
+                              $ConsumerLName = $document->ConsumerLName;
+                            }
+                          }
+                          ?>
+                          <a href="index.php?page=parentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                          <?php
+                        }
+                        ?>
+                      </td>
+                      <td><a href="index.php?page=classdetail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
+                      <td>
+                        <?php
+                        if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                        {
+                          ?>
+                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_student" data-bs-whatever="<?= $consumer_id; ?>">
+                            <i class="flaticon2-edit icon-md text-hover-success"></i>
+                          </button>
+                          <?php
+                        }
+                        ?>
+                      </td>
+                      <?php
+                      if($StudentsStatus == "ACTIVE")
+                      {
+                        ?>
+                        <td class="text-warning"><?= $StudentsStatus; ?></td>
+                        <?php
                       }
-                      ?>
-                      <a href="index.php?page=parentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                      else
+                      {
+                        ?>
+                        <td class="text-success"><?= $StudentsStatus; ?></td>
+                        <?php
+                      }
+                      ?> 
+                      <td>
                       <?php
-                    }
-                    ?>
-                  </td>
-                  <td><a href="index.php?page=classdetail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
-                  <td>
-                    <?php
-                    if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-                    {
+                        if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                        {
+                          ?>
+                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#status_student" data-bs-whatever="<?= $consumer_id; ?>">
+                            <i class="flaticon2-reload icon-md text-hover-success"></i>
+                          </button>
+                          <?php
+                        }
                       ?>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_student" data-bs-whatever="<?= $consumer_id; ?>">
-                        <i class="flaticon2-edit icon-md text-hover-success"></i>
-                      </button>
-                      <?php
-                    }
-                    ?>
-                  </td>
-                  <?php
-                  if($StudentsStatus == "ACTIVE")
-                  {
-                    ?>
-                    <td class="text-warning"><?= $StudentsStatus; ?></td>
+                      </td>
+                    </tr>
                     <?php
                   }
-                  else
-                  {
-                    ?>
-                    <td class="text-danger"><?= $StudentsStatus; ?></td>
-                    <?php
-                  }
-                  ?> 
-                  <td>
+                  ?>
+                </tbody>
+              </table>
+              <div class="col-12 text-right">
+                <div class="btn-group" role="group" aria-label="Basic example">
                   <?php
-                    if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                  if (isset($_GET['paging']) && !empty($_GET['paging']))
+                  {
+                    if ($_GET['paging'] == 0) 
                     {
                       ?>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#status_student" data-bs-whatever="<?= $consumer_id; ?>">
-                        <i class="flaticon2-reload icon-md text-hover-success"></i>
-                      </button>
+                      <a class="btn btn-light btn-hover-success btn-sm">Previous</a>
+                      <a href="index.php?page=studentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+                      <?php
+                    } 
+                    else
+                    {
+                      ?>
+                      <a href="index.php?page=studentlist&paging=<?= $pagingprevious;?>" class="btn btn-light btn-hover-success btn-sm">Previous</a>
+                      <a href="index.php?page=studentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
                       <?php
                     }
+                  }
+                  else if (!isset($_GET['paging']) && empty($_GET['paging']))
+                  {
+                    ?>
+                    <a class="btn btn-light btn-hover-success btn-sm">Previous</a>
+                    <a href="index.php?page=studentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+                    <?php
+                  }
                   ?>
-                  </td>
-                </tr>
-                <?php
-              }
-              ?>
-            </tbody>
-          </table>
-          <div class="col-12 text-right">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <?php
-              if (isset($_GET['paging']) && !empty($_GET['paging']))
-              {
-                if ($_GET['paging'] == 0) 
-                {
-                  ?>
-                  <a class="btn btn-light btn-hover-success btn-sm">Previous</a>
-                  <a href="index.php?page=studentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="Attendance" role="tabpanel" aria-labelledby="Attendance-tab">
+            <div class="card">
+              <div class="card-body text-right">
+                  <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
+                      <thead class="bg-white text-success">
+                          <tr>
+                              <th>Student ID</th>
+                              <th>Student Name</th>
+                              <th>Date</th>
+                              <th>IN</th>
+                              <th>OUT</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <a href="index.php?page=studentlist&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
+                        <?php
+                        $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                        foreach ($cursor as $document)
+                        {
+                          $student_id = $document->Consumer_id;
+
+                          $filter = ['_id'=>new \MongoDB\BSON\ObjectId($student_id)];
+                          $query = new MongoDB\Driver\Query($filter);
+                          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                          foreach ($cursor as $document)
+                          {
+                            $consumer_id = strval($document->_id);
+                            $ConsumerFName = $document->ConsumerFName;
+                            $ConsumerLName = $document->ConsumerLName;
+                            $ConsumerIDNo = $document->ConsumerIDNo;
+                            $varnow = date("d-m-Y");
+                            ?>
+                            <tr>
+                                <td class="default"><?= $ConsumerIDNo; ?></td>
+                                <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
+                                <?php
+                                $Cards_id ='';
+                                $filter = ['Consumer_id'=>$consumer_id];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
+                                foreach ($cursor as $document1)
+                                {
+                                    $Cards_id = strval($document1->Cards_id);
+                                }
+                                $varnow = date("d-m-Y");
+                                $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
+                                ?>
+                                <td class="default"><?= $varnow."<br>"; ?></td>
+                                <td class="default"><?php
+                                $varcounting = 0;
+                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                                $option = ['sort' => ['_id' => 1]];
+                                $query = new MongoDB\Driver\Query($filter,$option);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                                foreach ($cursor as $document)
+                                {
+                                    $date = strval($document->AttendanceDate);
+                                    $date = new MongoDB\BSON\UTCDateTime($date);
+                                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                                    $varcounting = $varcounting +1;
+                                    if ($varcounting % 2){
+                                    echo date_format($date,"H:i:s")."<br>";}
+                                }
+                                ?></td>
+                                <td class="default"><?php
+                                $varcounting = 0;
+                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                                $option = ['sort' => ['_id' => 1]];
+                                $query = new MongoDB\Driver\Query($filter,$option);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                                foreach ($cursor as $document)
+                                {
+                                    $date = strval($document->AttendanceDate);
+                                    $date = new MongoDB\BSON\UTCDateTime($date);
+                                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                                    $varcounting = $varcounting +1;
+                                    if ($varcounting % 2){
+                                    }
+                                    else{
+                                        echo date_format($date,"H:i:s")."<br>";}
+                                }
+                                ?></td>
+                            </tr>
+                            <?php
+                          }
+                        }
+                      ?>
+                      </tbody>
+                  </table>
                   <?php
-                } 
-                else
-                {
-                  ?>
-                  <a href="index.php?page=studentlist&paging=<?= $pagingprevious;?>" class="btn btn-light btn-hover-success btn-sm">Previous</a>
-                  <a href="index.php?page=studentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
-                  <?php
-                }
-              }
-              else if (!isset($_GET['paging']) && empty($_GET['paging']))
-              {
-                ?>
-                <a class="btn btn-light btn-hover-success btn-sm">Previous</a>
-                <a href="index.php?page=studentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
-                <?php
-              }
-              ?>
+                  if (isset($_GET['attendance']) && !empty($_GET['attendance']))
+                  {
+                    $attendance = ($_GET['attendance']);
+                    ?>
+                    <script>
+                    $(document).ready(function () {
+                        $("#attendance").table2excel({
+                            filename: "student_attendance.xls"
+                        });
+                    });
+                    </script>
+                    <?php
+                  }?>
+                  <script type="text/javascript">
+                  var rows = document.querySelectorAll('tr');
+                  [...rows].forEach((r) => {
+                  if (r.querySelectorAll('td:empty').length > 0) {
+                  r.classList.add('highlight');
+                  }
+                  })
+                  </script>
+              </div>
             </div>
           </div>
         </div>
