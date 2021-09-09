@@ -5,7 +5,6 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-
     $("#Date").click(function() {
     
     var date = $("#date").val();
@@ -21,7 +20,6 @@ $(document).ready(function() {
         );
         $(this).removeClass('btn-light').addClass('btn-success');
     });
-
 });
 </script>
 <div class="card">
