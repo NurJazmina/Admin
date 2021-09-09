@@ -1,4 +1,9 @@
-<?php include ('model/stafflist.php'); ?>
+<?php 
+include 'model/stafflist.php'; 
+$date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$date = date_format($date,"Y-m-d");
+?>
 <style>
 .highlight td.default 
 {
@@ -7,6 +12,7 @@ color:#ffff ;
 border-color:#ffff;
 }
 </style>
+</script>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
   <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -286,7 +292,15 @@ border-color:#ffff;
           <div class="tab-pane fade" id="Attendance" role="tabpanel" aria-labelledby="Attendance-tab">
             <div class="card">
               <div class="card-body text-right">
-                  <a href="index.php?page=stafflist&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <input type="date" class="form-control bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+                    </div>
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-3">
+                      <a href="index.php?page=stafflist&attendance=xls" class="btn btn-success btn-hover-light btn-sm">EXPORT ATTENDANCE TO XLS</a>
+                    </div>
+                  </div>
                   <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
                   <thead class="bg-white text-success">
                       <tr>
@@ -315,7 +329,6 @@ border-color:#ffff;
                           $ConsumerFName = $document->ConsumerFName;
                           $ConsumerLName = $document->ConsumerLName;
                           $ConsumerIDNo = $document->ConsumerIDNo;
-                          $varnow = date("d-m-Y");
                           ?>
                           <tr>
                               <td class="default"><?= $ConsumerIDNo; ?></td>
@@ -329,13 +342,13 @@ border-color:#ffff;
                               {
                                   $Cards_id = strval($document1->Cards_id);
                               }
-                              $varnow = date("d-m-Y");
-                              $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
                               ?>
-                              <td class="default"><?= $varnow."<br>"; ?></td>
+                              <td class="default"><?= $date."<br>"; ?></td>
                               <td class="default"><?php
                               $varcounting = 0;
-                              $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                              $da = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+                              
+                              $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $da]];
                               $option = ['sort' => ['_id' => 1]];
                               $query = new MongoDB\Driver\Query($filter,$option);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -352,12 +365,13 @@ border-color:#ffff;
                               ?></td>
                               <td class="default"><?php
                               $varcounting = 0;
-                              $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                              $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $da]];
                               $option = ['sort' => ['_id' => 1]];
                               $query = new MongoDB\Driver\Query($filter,$option);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
                               foreach ($cursor as $document)
                               {
+                                echo "asd";
                                   $date = strval($document->AttendanceDate);
                                   $date = new MongoDB\BSON\UTCDateTime($date);
                                   $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));

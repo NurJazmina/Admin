@@ -366,7 +366,6 @@ border-color:#ffff;
                             $ConsumerFName = $document->ConsumerFName;
                             $ConsumerLName = $document->ConsumerLName;
                             $ConsumerIDNo = $document->ConsumerIDNo;
-                            $varnow = date("d-m-Y");
                             ?>
                             <tr>
                                 <td class="default"><?= $ConsumerIDNo; ?></td>

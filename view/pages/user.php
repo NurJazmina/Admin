@@ -79,7 +79,7 @@
 	{
 		?>
 		<div class="navi-footer px-8 py-5" >
-		<a href="model/logout.php" class="btn btn-warning btn-hover-light btn-block">Sign Out</a>
+		<a href="model/logout.php" class="btn btn-success btn-hover-light btn-block">Sign Out</a>
 		</div>
 		<?php
 	}
