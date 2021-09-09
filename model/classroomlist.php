@@ -188,23 +188,33 @@ if (isset($_POST['delete_class']))
 
   if (password_verify($password, $password_hash))
   {
+    //database class
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($class_id)], ['limit' => 1]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Classrooms', $bulk, $writeConcern);
 
+    //database class and subject relation
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->delete(['Class_id'=> $class_id]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
 
-    $bulk = new MongoDB\Driver\BulkWrite;
-    $bulk->update(['ClassID'=> $class_id],
-                  ['$set' => ['ClassID'=> '']],
-                  ['upsert' => TRUE]
-                  );
+    //database staff
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['ClassID' => $class_id],
+                  ['$set' => ['ClassID'=>'']]
+                 );
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+
+    //database student
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['Class_id' => $class_id],
+                  ['$set' => ['Class_id'=>'']]
+                  );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Students', $bulk, $writeConcern);
   }
 }
 

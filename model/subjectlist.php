@@ -97,40 +97,90 @@ if (isset($_POST['delete_subject']))
 
   if (password_verify($password, $password_hash))
   {
+    //database subject
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($subject_id)], ['limit' => 1]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    try
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolsSubject', $bulk, $writeConcern);
+
+    //database class and subject relation
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Subject_id'=>$subject_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+
+    //database notes
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Subject_id'=>$subject_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Notes', $bulk, $writeConcern);
+
+    $filter = ['Subject_id'=>$subject_id];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
+    foreach ($cursor as $document)
     {
-      $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolsSubject', $bulk, $writeConcern);
+      $assignment_id = strval($document->_id);
+
+      //database assignmnet answer
+      $bulk = new MongoDB\Driver\BulkWrite;
+      $bulk->delete(['Assignment_id'=>$assignment_id]);
+      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+      $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Assignment_Answer', $bulk, $writeConcern);
     }
-    catch (MongoDB\Driver\Exception\BulkWriteException $e)
+    //database assignment
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Subject_id'=>$subject_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Assignment', $bulk, $writeConcern);
+
+
+    $filter = ['Subject_id'=>$subject_id];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
+    foreach ($cursor as $document)
     {
-      $result = $e->getWriteResult();
-      // Check if the write concern could not be fulfilled
-      if ($writeConcernError = $result->getWriteConcernError())
-      {
-          printf("%s (%d): %s\n",
-              $writeConcernError->getMessage(),
-              $writeConcernError->getCode(),
-              var_export($writeConcernError->getInfo(), true)
-          );
-      }
-      // Check if any write operations did not complete at all
-      foreach ($result->getWriteErrors() as $writeError)
-      {
-          printf("Operation#%d: %s (%d)\n",
-              $writeError->getIndex(),
-              $writeError->getMessage(),
-              $writeError->getCode()
-          );
-      }
+      $quiz_id = strval($document->_id);
+
+      //database quiz answer
+      $bulk = new MongoDB\Driver\BulkWrite;
+      $bulk->delete(['Quiz_id'=>$quiz_id]);
+      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+      $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
     }
-    catch (MongoDB\Driver\Exception\Exception $e)
+    //database quiz
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Subject_id'=>$subject_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz', $bulk, $writeConcern);
+
+    $filter = ['Subject_id'=>$subject_id];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey',$query);
+    foreach ($cursor as $document)
     {
-      printf("Other error: %s\n", $e->getMessage());
-      exit;
+      $survey_id = strval($document->_id);
+
+      //database survey answer
+      $bulk = new MongoDB\Driver\BulkWrite;
+      $bulk->delete(['Survey_id'=>$survey_id]);
+      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+      $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey_Answer', $bulk, $writeConcern);
     }
+    //database survey
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Subject_id'=>$subject_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Survey', $bulk, $writeConcern);
+
+    //database remarks
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['Subject_id'=>$subject_id]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result=$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Subject_Remarks', $bulk, $writeConcern);
+
+    
+
   }
 }
 ?>

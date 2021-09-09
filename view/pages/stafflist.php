@@ -113,6 +113,7 @@ border-color:#ffff;
                   $ClassID = '';
                   $class_id = '';
                   $Cards_id = '';
+                  $Staffdepartment = '';
                   foreach ($cursor as $document)
                   {
                     $ConsumerID = $document->ConsumerID;
@@ -142,13 +143,20 @@ border-color:#ffff;
                       }
                     }
 
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-                    foreach ($cursor as $document)
+                    if($Staffdepartment != '')
                     {
-                      $department_id = strval($document->_id);
-                      $DepartmentName = $document->DepartmentName;
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Staffdepartment)];
+                      $query = new MongoDB\Driver\Query($filter);
+                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                      foreach ($cursor as $document)
+                      {
+                        $department_id = strval($document->_id);
+                        $DepartmentName = $document->DepartmentName;
+                      }
+                    }
+                    else
+                    {
+                      $DepartmentName = '';
                     }
                     ?>
                     <tr>
