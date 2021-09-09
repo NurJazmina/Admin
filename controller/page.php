@@ -46,6 +46,7 @@
                                 "departmentattendance",
                                 "classattendance",
                                 "mail",
+                                "covid",
 
                                 "addrelationstudentforstudent",
                                 "addrelationforstudent",
@@ -53,7 +54,7 @@
                                 "addrelationforparent",
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
-                                'a',
+                                'standalone_attendance',
                                );
 
     $teacherallowedaccess = array("dashboard",
@@ -104,6 +105,7 @@
                                 //"departmentattendance",
                                 "classattendance",
                                 "mail",
+                                "covid",
 
                                 //online learning//
                                 "ol_dashboard",
@@ -182,6 +184,7 @@
                                 //"departmentattendance",
                                 //"classattendance",
                                 //"mail",
+                                "covid",
 
                                 //online learning//
                                 "ol_dashboard",
