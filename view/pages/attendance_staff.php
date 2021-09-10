@@ -17,7 +17,7 @@ border-color:#ffff;
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Department</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Staff</h5>
 					<!--end::Page Title-->
 				</div>
 				<!--end::Page Heading-->
@@ -72,29 +72,6 @@ border-color:#ffff;
 	</div>
 	<!--end::Subheader-->
 <?php
-if (!isset($_GET['id']) && empty($_GET['id']))
-{
-    $filter = [null];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-    foreach ($cursor as $document)
-    {
-      $department_id = strval($document->_id);
-      $DepartmentName = $document->DepartmentName;
-    }
-}
-else
-{
-    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
-    $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-
-    foreach ($cursor as $document)
-    {
-      $department_id = strval($document->_id);
-      $DepartmentName = $document->DepartmentName;
-    }
-}
 $date = date("Y-m-d");
 $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
 
@@ -102,21 +79,20 @@ if (isset($_POST['submit_date']))
 {
     $date = $_POST['date'];
 }
-
 ?>
-<div class="text-dark-50 text-center m-5"><h1>Department - Attendance</h1></div>
+<div class="text-dark-50 text-center m-5"><h1>Staff - Attendance</h1></div>
 <div class="row">
     <div class="col-1"></div>
     <div class="col-10">
         <div class="card">
         <div class="card-body text-right">
-            <form name="submit_date" action="index.php?page=departmentattendance&id=<?= $department_id; ?>" method="post">
+            <form name="submit_date" action="index.php?page=attendance_staff" method="post">
                 <div class="form-group row">
                     <div class="col-sm-3">
-                        <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+                        <input type="date" class="form-control bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
                     </div>
                     <div class="col-sm-1">
-                        <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+                        <button type="submit" name="submit_date" class="btn btn-md btn-success btn-hover-light">submit</button>
                     </div>
                     <div class="col-sm-5"></div>
                     <div class="col-sm-3">
@@ -136,7 +112,7 @@ if (isset($_POST['submit_date']))
             </thead>
             <tbody>
             <?php
-            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$department_id];
+            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
             foreach ($cursor as $document)
@@ -215,7 +191,7 @@ if (isset($_POST['submit_date']))
 
                 $("#submitted").click(function() {
                     $("#attendance").table2excel({
-                    filename: "attendance_department.xls"
+                    filename: "attendance_staff.xls"
                 });
                 });
 

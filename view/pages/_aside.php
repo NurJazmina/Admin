@@ -4,7 +4,7 @@
 	<div class="brand flex-column-auto" id="kt_brand">
 		<!--begin::Logo-->
 		<a href="index.php?page=dashboard" class="brand-logo">
-			<img alt="Logo" src="assets/media/logos/gongetz.png" width="150" height="150"/>
+			<img alt="Logo" src="assets/media/logos/gongetz2.png" width="150" height="150"/>
 
 		</a>
 		<!--end::Logo-->

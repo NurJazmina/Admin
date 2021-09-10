@@ -89,10 +89,30 @@ border-color:#ffff;
                 </thead>
                 <tbody>
                 <?php
+                $date = date("Y-m-d");
+                $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+                
+                if (isset($_POST['submit_date']))
+                {
+                    $date = $_POST['date'];
+                }
                 if (!isset($_GET['id']) && empty($_GET['id']))
                 {
                     ?>
-                    <a href="index.php?page=classattendance&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+                    <form name="submit_date" action="index.php?page=classattendance" method="post">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+                            </div>
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-3">
+                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</button>
+                            </div>
+                        </div>
+                    </form>
                     <?php
 
                     $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
@@ -111,7 +131,6 @@ border-color:#ffff;
                             $ConsumerFName = $document->ConsumerFName;
                             $ConsumerLName = $document->ConsumerLName;
                             $ConsumerIDNo = $document->ConsumerIDNo;
-                            $varnow = date("d-m-Y");
                             ?>
                             <tr>
                                 <td class="default"><?= $ConsumerIDNo; ?></td>
@@ -125,10 +144,8 @@ border-color:#ffff;
                                 {
                                     $Cards_id = strval($document1->Cards_id);
                                 }
-                                $varnow = date("d-m-Y");
-                                $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
                                 ?>
-                                <td class="default"><?= $varnow."<br>"; ?></td>
+                                <td class="default"><?= $date."<br>"; ?></td>
                                 <td class="default"><?php
                                 $varcounting = 0;
                                 $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
@@ -173,9 +190,21 @@ border-color:#ffff;
                 else
                 {
                     ?>
-                    <a href="index.php?page=classattendance&id=<?= $_GET['id']; ?>&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+                    <form name="submit_date" action="index.php?page=classattendance&id=<?= $_GET['id']; ?>" method="post">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+                            </div>
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-3">
+                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</button>
+                            </div>
+                        </div>
+                    </form>
                     <?php
-                    
                     $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"],'Class_id'=>$_GET['id']];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
@@ -192,7 +221,6 @@ border-color:#ffff;
                             $ConsumerFName = $document->ConsumerFName;
                             $ConsumerLName = $document->ConsumerLName;
                             $ConsumerIDNo = $document->ConsumerIDNo;
-                            $varnow = date("d-m-Y");
                             ?>
                                 <tr>
                                     <td class="default"><?= $ConsumerIDNo; ?></td>
@@ -206,10 +234,8 @@ border-color:#ffff;
                                     {
                                         $Cards_id = strval($document1->Cards_id);
                                     }
-                                    $varnow = date("d-m-Y");
-                                    $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
                                     ?>
-                                    <td class="default"><?= $varnow."<br>"; ?></td>
+                                    <td class="default"><?= $date."<br>"; ?></td>
                                     <td class="default"><?php
                                     $varcounting = 0;
                                     $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
@@ -254,20 +280,17 @@ border-color:#ffff;
                 ?>
                 </tbody>
             </table>
-            <?php
-            if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-            {
-                $attendance = ($_GET['attendance']);
-                ?>
-                <script>
-                $(document).ready(function () {
+            <script>
+            $(document).ready(function() {
+
+                $("#submitted").click(function() {
                     $("#attendance").table2excel({
-                        filename: "attendanceclass.xls"
-                    });
+                    filename: "attendance_department.xls"
                 });
-                </script>
-                <?php
-            }?>
+                });
+
+            });
+            </script>
             <script type="text/javascript">
             var rows = document.querySelectorAll('tr');
             [...rows].forEach((r) => {

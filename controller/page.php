@@ -54,7 +54,8 @@
                                 "addrelationforparent",
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
-                                'standalone_attendance',
+                                "attendance_staff",
+                                'test_loader',
                                );
 
     $teacherallowedaccess = array("dashboard",

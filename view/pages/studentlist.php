@@ -1,5 +1,7 @@
 <?php 
-include ('model/studentlist.php'); 
+include 'model/studentlist.php'; 
+$date_now = date("Y-m-d");
+$today = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
 
 if (isset($_GET['paging']) && !empty($_GET['paging']))
 {
@@ -67,7 +69,65 @@ background:#ff8795;
 color:#ffff ;
 border-color:#ffff;
 }
+
+#loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #1BC5BD;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+  
+@keyframes spin {
+  100% {
+      transform: rotate(360deg);
+  }
+}
+  
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+    $("#Date").click(function() {
+
+        var date = $("#date").val();
+        var school = $("#school").val();
+
+        $.post("attendance_student.php", {
+            date: date,
+            school:school,
+
+        beforeSend: function(){
+            // Show image container
+            $("#loader").hide();
+        },
+
+        complete:function(data){
+            // Hide image container
+            $("#loader").show();
+        }
+        
+        },
+        function(data, status){
+            $("#test").html(data);
+            $("#loader").hide();
+        },
+        );
+        $(this).removeClass('btn-light').addClass('btn-success');
+    });
+
+});
+</script>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
   <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -98,7 +158,7 @@ border-color:#ffff;
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
             ?>
-            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=classattendance">ATTENDANCE</a></button>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=classattendance" target="_blank">ATTENDANCE</a></button>
             <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
             <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
             <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_student">Search</button>
@@ -337,117 +397,21 @@ border-color:#ffff;
           <div class="tab-pane fade" id="Attendance" role="tabpanel" aria-labelledby="Attendance-tab">
             <div class="card">
               <div class="card-body text-right">
-                  <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-                      <thead class="bg-white text-success">
-                          <tr>
-                              <th>Student ID</th>
-                              <th>Student Name</th>
-                              <th>Date</th>
-                              <th>IN</th>
-                              <th>OUT</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <a href="index.php?page=studentlist&attendance=xls" class="btn btn-success btn-hover-light btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
-                        <?php
-                        $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                        foreach ($cursor as $document)
-                        {
-                          $student_id = $document->Consumer_id;
-
-                          $filter = ['_id'=>new \MongoDB\BSON\ObjectId($student_id)];
-                          $query = new MongoDB\Driver\Query($filter);
-                          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                          foreach ($cursor as $document)
-                          {
-                            $consumer_id = strval($document->_id);
-                            $ConsumerFName = $document->ConsumerFName;
-                            $ConsumerLName = $document->ConsumerLName;
-                            $ConsumerIDNo = $document->ConsumerIDNo;
-                            ?>
-                            <tr>
-                                <td class="default"><?= $ConsumerIDNo; ?></td>
-                                <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                                <?php
-                                $Cards_id ='';
-                                $filter = ['Consumer_id'=>$consumer_id];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
-                                foreach ($cursor as $document1)
-                                {
-                                    $Cards_id = strval($document1->Cards_id);
-                                }
-                                $varnow = date("d-m-Y");
-                                $today = new MongoDB\BSON\UTCDateTime((new DateTime($varnow))->getTimestamp()*1000);
-                                ?>
-                                <td class="default"><?= $varnow."<br>"; ?></td>
-                                <td class="default"><?php
-                                $varcounting = 0;
-                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                                $option = ['sort' => ['_id' => 1]];
-                                $query = new MongoDB\Driver\Query($filter,$option);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                                foreach ($cursor as $document)
-                                {
-                                    $date = strval($document->AttendanceDate);
-                                    $date = new MongoDB\BSON\UTCDateTime($date);
-                                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2){
-                                    echo date_format($date,"H:i:s")."<br>";}
-                                }
-                                ?></td>
-                                <td class="default"><?php
-                                $varcounting = 0;
-                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                                $option = ['sort' => ['_id' => 1]];
-                                $query = new MongoDB\Driver\Query($filter,$option);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                                foreach ($cursor as $document)
-                                {
-                                    $date = strval($document->AttendanceDate);
-                                    $date = new MongoDB\BSON\UTCDateTime($date);
-                                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2){
-                                    }
-                                    else{
-                                        echo date_format($date,"H:i:s")."<br>";}
-                                }
-                                ?></td>
-                            </tr>
-                            <?php
-                          }
-                        }
-                      ?>
-                      </tbody>
-                  </table>
-                  <?php
-                  if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-                  {
-                    $attendance = ($_GET['attendance']);
-                    ?>
-                    <script>
-                    $(document).ready(function () {
-                        $("#attendance").table2excel({
-                            filename: "student_attendance.xls"
-                        });
-                    });
-                    </script>
-                    <?php
-                  }?>
-                  <script type="text/javascript">
-                  var rows = document.querySelectorAll('tr');
-                  [...rows].forEach((r) => {
-                  if (r.querySelectorAll('td:empty').length > 0) {
-                  r.classList.add('highlight');
-                  }
-                  })
-                  </script>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <input type="hidden" id="school" value="<?= $_SESSION["loggeduser_school_id"]; ?>">
+                    <input type="date" class="form-control form-control-sm bg-white" name="date" id="date" placeholder="Select date" value="<?= $date_now; ?>"> 
+                  </div>
+                  <div class="col-sm-1">
+                  <button type="button" class="btn btn-sm btn-success btn-hover-light" id="Date">submit</button>
+                  </div>
+                  <div class="col-sm-5"></div>
+                  <div class="col-sm-3">
+                    <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mb-3">EXPORT ATTENDANCE TO XLS</button>
+                  </div>
+                </div>
+                <div id='loader' style='display: none;' class="center"></div>
+                <a id="test"></a>
               </div>
             </div>
           </div>
@@ -686,4 +650,15 @@ border-color:#ffff;
   </div>
   <!-- end::latest summary -->
 </div>
+<script>
+$(document).ready(function() {
+
+    $("#submitted").click(function() {
+        $("#attendance").table2excel({
+        filename: "attendance_student.xls"
+    });
+    });
+
+});
+</script>
 <?php include ('view/pages/modal-studentlist.php'); 
