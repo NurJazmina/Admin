@@ -56,6 +56,7 @@
                                 "duplicateforstudentlist",
                                 "attendance_staff",
                                 'test_loader',
+                                'a',
                                );
 
     $teacherallowedaccess = array("dashboard",

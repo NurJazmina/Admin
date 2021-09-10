@@ -4,11 +4,11 @@ include 'view/partials/_subheader/subheader-v1.php';
 ?>
 
 <form id="AddParentFormSubmit" name="AddParentFormSubmit" action="index.php?page=modal-recheckparentlist" method="post">
-  <div  id="recheckaddparent" tabindex="-1" aria-labelledby="AddParentModalLabel" aria-hidden="true">
+  <div  id="recheckaddparent" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="AddParentModalLabel">Add Parent</h5>
+          <h5 class="modal-title">Add Parent</h5>
         </div>
         <div class="modal-body">
           <div class="form-group row">

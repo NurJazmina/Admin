@@ -9,21 +9,6 @@ include 'view/partials/_subheader/subheader-v1.php';
                 <h5 class="modal-title">Add News</h5>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <div class="alert alert-light-primary d-none mb-15" role="alert">
-                        <div class="alert-icon">
-                            <i class="la la-warning"></i>
-                        </div>
-                        <div class="alert-text font-weight-bold">
-                            Oh snap! Change a few things up and try submitting again.
-                        </div>
-                        <div class="alert-close">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span><i class="ki ki-close "></i></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
