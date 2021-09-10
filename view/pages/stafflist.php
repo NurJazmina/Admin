@@ -99,7 +99,7 @@ $("#Date").click(function() {
           if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
           {
             ?>
-            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=staff_attendance" target="_blank">ATTENDANCE</a></button>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=attendance_staff" target="_blank">ATTENDANCE</a></button>
             <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_staff">Add</button>
             <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
             <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_staff">Search</button>
