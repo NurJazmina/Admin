@@ -1,8 +1,8 @@
 <?php
 //Add Quiz
-if (isset($_POST['addassignment']))
+if (isset($_POST['add_assignment_return_notes']))
 {
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION[""]);
   $Subject_id = $_POST['Subject_id'];
   $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);
@@ -111,6 +111,29 @@ if (isset($_POST['addassignment']))
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
+if (isset($_POST['assignment_answer']))
+{
+  $Assignment_id = $_POST['id'];
+  $Answer = $_POST['answer'];
+  $School_id = strval($_SESSION[""]);
+  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert([
+                  'School_id'=>$School_id,
+                  'Assignment_id' => $Assignment_id,
+                  'Created_by'=>$Created_by,
+                  'Created_date'=>$Created_date,
+                  'Answer'=>$Answer,
+                  'File_submission'=>'',
+                  'Mark'=>'0',
+                  'comment'=>''
+                ]);
+
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Assignment_Answer', $bulk, $writeConcern);
+}
 
 if (isset($_POST['EditGrade']))
 {

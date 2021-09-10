@@ -5,7 +5,7 @@ if (isset($_POST['AddtimetableFormSubmit']))
   $varcategory = $_POST['txtcategory'];
   $varsubject = $_POST['txtsubject'];
 
-  $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0', 'ConsumerID'=>$varconsumerid];
+  $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0', 'ConsumerID'=>$varconsumerid];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
   foreach ($cursor as $document)
@@ -61,7 +61,7 @@ if (isset($_POST['AddtimetableFormSubmit']))
                 <div class="col-sm-10">
                 <select class="form-control" id="txtteachername" name="txtclassid">
                     <?php
-                    $filter2 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varcategory];
+                    $filter2 = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassCategory'=>$varcategory];
                     $query2 = new MongoDB\Driver\Query($filter2);
                     $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query2);
                     foreach ($cursor2 as $document2)
@@ -140,7 +140,7 @@ if (isset($_POST['EditTimetableFormSubmit']))
             <div class="col-sm-10">
                <select class="form-control" id="txtteachername" name="txtteacherid">
               <?php
-              $filter1 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+              $filter1 = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
               $query1 = new MongoDB\Driver\Query($filter1);
               $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query1);
               foreach ($cursor1 as $document1)
@@ -169,7 +169,7 @@ if (isset($_POST['EditTimetableFormSubmit']))
             <div class="col-sm-10">
                <select class="form-control" id="txtsubjectid" name="txtsubject">
               <?php
-              $filter3 = ['School_id' =>$_SESSION["loggeduser_schoolID"]];
+              $filter3 = ['School_id' =>$_SESSION["loggeduser_school_id"]];
               $query3 = new MongoDB\Driver\Query($filter3);
               $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query3);
               foreach ($cursor3 as $document3)   
@@ -187,7 +187,7 @@ if (isset($_POST['EditTimetableFormSubmit']))
             <div class="col-sm-10">
               <select class="form-control" id="txtteachername" name="txtclassid">
                 <?php
-                $filter4 = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'ClassCategory'=>$varcategory];
+                $filter4 = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassCategory'=>$varcategory];
                 $query4 = new MongoDB\Driver\Query($filter4);
                 $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query4);
                 foreach ($cursor4 as $document4)

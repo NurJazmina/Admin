@@ -5,7 +5,7 @@ require_once "vendor/autoload.php";
 
 if (isset($_POST['sharequiz'])) {
 
-    $School_id = strval($_SESSION["loggeduser_schoolID"]);
+    $School_id = strval($_SESSION["loggeduser_school_id"]);
     $id = $_POST['id'];
     $Created_by = $_POST['Created_by'];
     $Report_by =  strval($_SESSION["loggeduser_id"]);

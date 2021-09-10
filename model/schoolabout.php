@@ -1,11 +1,11 @@
 <?php
-if (isset($_POST['EditSchoolFormSubmit']))
+if (isset($_POST['edit_school']))
 {
-  $varSchoolsPhoneNo = $_POST['txtSchoolsPhoneNo'];
-  $varschoolid = $_SESSION["loggeduser_schoolID"];
+  $no_phone = $_POST['no_phone'];
+  $school_id = $_SESSION["loggeduser_school_id"];
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varschoolid)],
-                ['$set' => ['SchoolsPhoneNo'=>$varSchoolsPhoneNo]],
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($school_id)],
+                ['$set' => ['SchoolsPhoneNo'=>$no_phone]],
                 ['upsert' => TRUE]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
@@ -44,10 +44,8 @@ if (isset($_POST['EditSchoolFormSubmit']))
   printf("Matched: %d\n", $result->getMatchedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
-?>
 
-<?php
-$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'1'];
+$filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'1'];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
 $totalstaff = 0;
@@ -56,10 +54,9 @@ foreach ($cursor as $document)
   $totalstaff = $totalstaff + 1;
 }
 $_SESSION["totalstaff"] = $totalstaff;
-?>
 
-<?php
-$filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+
+$filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
 $totalteacher= 0;
@@ -68,10 +65,9 @@ foreach ($cursor as $document)
   $totalteacher= $totalteacher + 1;
 }
 $_SESSION["totalteacher"] = $totalteacher;
-?>
 
-<?php
-$filter = ['Schools_id' => $_SESSION["loggeduser_schoolID"]];
+
+$filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 $totalstudent = 0;
@@ -81,10 +77,9 @@ foreach ($cursor as $document)
  $totalstudent = $totalstudent+ 1;
 }
 $_SESSION["totalstudent"] = $totalstudent;
-?>
 
-<?php
-$filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
+
+$filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
 $totalparent = 0;
@@ -93,10 +88,9 @@ foreach ($cursor as $document)
  $ParentID = array($document->ParentID);
 }
 $_SESSION["totalparent"] = $totalparent;
-?>
 
-<?php
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_schoolID"])];
+
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_school_id"])];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Schools',$query);
 foreach ($cursor as $document)

@@ -1,6 +1,5 @@
 <?php
 include '../connections/db.php';
-
 if (isset($_POST['like']))
 {
     $url = "";

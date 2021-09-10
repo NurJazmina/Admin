@@ -13,7 +13,7 @@
             <div class="col-sm-10">
               <select class="form-control" id="txtteachername" name="txtconsumerid">
                 <?php
-                $filter = ['SchoolID'=>$_SESSION["loggeduser_schoolID"], 'StaffLevel'=>'0'];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                 foreach ($cursor as $document)
@@ -57,7 +57,7 @@
             <div class="col-sm-10">
               <select class="form-control" id="txtsubject" name="txtsubject">
                 <?php
-                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
+                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
                 foreach ($cursor as $document)

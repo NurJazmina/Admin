@@ -13,12 +13,10 @@ if(!empty($_POST["keyword"]))
             <?php
             foreach($result as $name) 
             {
-                    ?>
-                    <li onClick="selectCountry('<?php echo $name ; ?>');"><?php echo  $name ; ?></li>
-                    <!-- <li onClick="selectCountry('<?php echo $country["country_name"]; ?>');"><?php echo $country["country_name"]; ?></li> -->
-                    <?php 
-
-                
+                ?>
+                <li onClick="selectCountry('<?php echo $name ; ?>');"><?php echo  $name ; ?></li>
+                <!-- <li onClick="selectCountry('<?php echo $country["country_name"]; ?>');"><?php echo $country["country_name"]; ?></li> -->
+                <?php 
             }
             ?>
         </ul>

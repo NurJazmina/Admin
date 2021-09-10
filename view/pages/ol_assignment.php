@@ -10,8 +10,8 @@ function time_elapsed($date){
 		' week'      => $date  / 604800 % 52,
 		' day'       => $date  / 86400 % 7,
 		' hour'      => $date  / 3600 % 24,
-		//' minute'    => $date  / 60 % 60,
-		//' second'    => $date  % 60
+		' minute'    => $date  / 60 % 60,
+		' second'    => $date  % 60
 		);
 	foreach($bit as $k => $v){
 		if($v > 1)$ret[] = $v . $k . 's';
@@ -119,6 +119,7 @@ $(document).ready(function() {
         <div class="modal-content">
             <div class="modal-body">
                 <?php
+                $Description = '';
                 $URL = "$_SERVER[REQUEST_URI]";
                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
                 $query = new MongoDB\Driver\Query($filter);
@@ -268,7 +269,7 @@ $(document).ready(function() {
                 }
                 ?>
             </div>
-            <form id="" name="answer" action="#" method="post">
+            <form name="assignment_answer" action="index.php?page=ol_submit_assignment&id=<?= $_GET['id']; ?>" method="post">
                 <div class="separator separator-dashed"></div>
                 <div class="modal-body">
                     <div class="row mb-10">
@@ -295,7 +296,7 @@ $(document).ready(function() {
                         <div class="col-lg-12 text-lg-right">
                             <input type="hidden" name="id" value="<?= $_id; ?>">
                             <button type="reset"  class="btn btn-sm btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-success mr-2" name="answer">Submit</button>
+                            <button type="submit" class="btn btn-sm btn-success mr-2" name="assignment_answer">Submit</button>
                         </div>
                     </div>
                 </div>

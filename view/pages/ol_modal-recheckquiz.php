@@ -1,11 +1,19 @@
 <?php
-$Subject_id = $_GET['Subject'];
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$Notes_id = strval($_GET['Notes']);
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
-    $SubjectName = $document->SubjectName;
+    $Subject_id = strval($document->Subject_id);
+    $Note_sort = strval($document->Note_sort);
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+    foreach ($cursor as $document1)
+    {
+        $SubjectName = $document1->SubjectName;
+    }
 }
 ?>
 <style>
@@ -74,7 +82,7 @@ li {
 </div>
 <!--end::Subheader-->
 <div class="card card-custom overflow-hidden position-relative mb-8">
-        <form class="form" id="recheckquiz" name="recheckquiz" action="index.php?page=ol_addquiz" method="post">
+        <form class="form" name="recheckquiz" action="index.php?page=ol_addquiz" method="post">
             <div class="card-body">
             <div class="row justify-content-around">
                     <div class="col-sm-6 border shadow p-3 mb-5 bg-white rounded">
@@ -113,7 +121,9 @@ li {
                             <div class="separator separator-dashed my-10"></div>
                             <div class="row">
                             <div class="col-lg-8 text-lg-right">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Note_sort" value="<?php echo $Note_sort; ?>">
                                 <button type="submit" class="btn btn-success mr-2" name="recheckquiz">Submit</button>
                             </div>
                         </div>

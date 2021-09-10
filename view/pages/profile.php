@@ -1,425 +1,699 @@
 <?php
 $_SESSION["title"] = "Profile";
 include 'view/partials/_subheader/subheader-v1.php'; 
+
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_id"])];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+foreach ($cursor as $document)
+{
+    $consumer_id = strval($document->_id);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $ConsumerEmail = $document->ConsumerEmail;
+    $ConsumerPhone = $document->ConsumerPhone;
+    $ConsumerAddress = $document->ConsumerAddress;
+    $ConsumerStatus = $document->ConsumerStatus;
+}
 ?>
+<style>
+.highlight td.default 
+{
+  background:#ff8795;
+  color:#ffff ;
+  border-color:#ffff;
+}
+
+.basic{
+    background-image: url('assets/media/svg/patterns/taieri.svg');
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+<!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container">
-        <!--begin::Profile Overview-->
-        <div class="d-flex flex-row">
-            <!--begin::Aside-->
-            <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
-                <!--begin::Profile Card-->
-                <div class="card card-custom card-stretch">
-                    <!--begin::Body-->
-                    <div class="card-body pt-4">
-                        <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end">
-                            <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b basic">
+            <div class="card-body">
+                <!--begin::Details-->
+                <div class="d-flex mb-9">
+                    <!--begin::Info-->
+                    <div class="flex-grow-1">
+                        <!--begin::Title-->
+                        <div class="d-flex justify-content-between flex-wrap mt-1">
+                            <div class="d-flex mr-3">
+                                <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3"><?= $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
+                                <a href="#">
+                                    <i class="flaticon2-correct text-success font-size-h5"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-
+                            </div>
+                            <div class="my-lg-0 my-3">
+                            </div>
+                        </div>
+                        <!--end::Title-->
+                        <!--begin::Content-->
+                        <div class="d-flex flex-wrap justify-content-between mt-1">
+                            <div class="d-flex flex-column flex-grow-1 pr-8">
+                                <div class="d-flex flex-wrap mb-4">
+                                    <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                                    <i class="flaticon2-new-email mr-2 font-size-lg"></i><?= $_SESSION["loggeduser_consumerEmail"]; ?></a>
+                                    <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 text-lowercase">
+                                    <i class="flaticon2-calendar-3 mr-2 font-size-lg"></i><?= $_SESSION["loggeduser_DepartmentName"]; ?></a>
+                                    <a href="#" class="text-dark-50 text-hover-primary font-weight-bold text-lowercase">
+                                    <i class="flaticon2-placeholder mr-2 font-size-lg"></i><?= $_SESSION["loggeduser_consumerState"]; ?></a>
                                 </div>
                             </div>
                         </div>
-                        <!--end::Toolbar-->
-                        <!--begin::User-->
-                        <div class="d-flex align-items-center">
-                            <!-- <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                 <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div> 
-                            </div> -->
-                            <div>
-                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?php echo $_SESSION["loggeduser_consumerFName"]." ".$_SESSION["loggeduser_consumerLName"] ?></a>
-                                <div class="text-muted"><?php echo $_SESSION["loggeduser_DepartmentName"]; ?></div>
-                            </div>
-                        </div>
-                        <!--end::User-->
-                        <!--begin::Contact-->
-                        <div class="py-9">
-						    <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">ID Type:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerIDType"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Email:</span>
-                                <a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerEmail"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Phone:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerPhone"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Location:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerCity"].",".$_SESSION["loggeduser_consumerState"]; ?></a>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold mr-2">Status:</span>
-								<a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION["loggeduser_consumerStatus"]; ?></a>
-                            </div>
-                        </div>
-                        <!--end::Contact-->
-                        <!--begin::Nav-->
-                        <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=profile" class="navi-link py-4">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero"></path>
-                                                    <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Profile Overview</span>
-                                </a>
-                            </div>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=personal-information" class="navi-link py-4">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Personal Information</span>
-                                </a>
-                            </div>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=change-password" class="navi-link py-4">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                    <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"></path>
-                                                    <path d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z" fill="#000000" opacity="0.3"></path>
-                                                    <path d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Change Password</span>
-                                </a>
-                            </div>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Info-->
+                </div>
+                <!--end::Details-->
+            </div>
+        </div>
+        <!--end::Card-->
+        <!--begin::Row-->
+        <div class="row">
+            <div class="col-lg-6">
+                <!--begin::Charts Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <div id="kt_charts_widget_4_chart">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr class="bg-light text-dark-50">
+                                        <td>Name</td>
+                                        <td><?= $ConsumerFName." ".$ConsumerLName; ?> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID Type</td>
+                                        <td><?= $ConsumerIDType; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID Number</td>
+                                        <td><?= $ConsumerIDNo; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td><?= $ConsumerEmail; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone Number</td>
+                                        <td><?= $ConsumerPhone; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td><?= $ConsumerAddress; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td><?= $ConsumerStatus; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <?php
-                            if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
-                            {
+                        if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' && $_SESSION["loggeduser_ConsumerGroupName"] !== 'GONGETZ')
+                        {
                             ?>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=classroominfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-                                                    <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">Classroom Info</span>
-                                    <span class="navi-label">
-                                    <?php 
-                                    $latestremark = 0;
-                                    $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
-
-                                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"],'ClassRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-                                    $query = new MongoDB\Driver\Query($filter);
-                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassRemarks',$query);
-                                    foreach ($cursor as $document)
-                                    {
-                                        $latestremark = $latestremark + 1;
-                                    }
-                                    if($latestremark == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                        <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark.")";?></span>
-                                        <?php
-                                    }
-                                    ?>
-                                    </span>
-                                </a>
-                            </div>
-                            <?php
-                            }
-                            if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
-                            {
-                            ?>
-                            <div class="navi-item mb-2">
-                                <a href="index.php?page=departmentinfo" class="navi-link py-4" data-toggle="tooltip" title="" data-placement="right" data-bs-original-title="Coming soon...">
-                                    <span class="navi-icon mr-2">
-                                        <span class="svg-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Article.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                    <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
-                                                    <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                    </span>
-                                    <span class="navi-text">Department Info</span>
-                                    <span class="navi-label">
-                                <?php 
-                                $latestremark1 = 0;
-                                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-                                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 week'))->getTimestamp()*1000);
-
-                                $filter = ['departmentRemarksDate'=>$_SESSION["loggeduser_Staffdepartment"],'departmentRemarksDate' => ['$gte' => $from_date,'$lte' => $to_date]];
+                            <table class="table table-bordered">
+                                <tr class="bg-light text-dark-50">
+                                    <td>Class</td>
+                                    <td>Subject</td>
+                                </tr>
+                                <tbody>
+                                <?php
+                                $filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
                                 $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.DepartmentRemarks',$query);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
                                 foreach ($cursor as $document)
                                 {
-                                    $latestremark1 = $latestremark1 + 1;
-                                }
-                                if($latestremark1 == 0)
-                                {
+                                    $Class_id = $document->Class_id;
+                                    $Subject_id = $document->Subject_id;
+                                
+                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                                    foreach ($cursor as $document)
+                                    {
+                                    $ClassName = $document->ClassName;
+                                    }
 
-                                }
-                                else
-                                {
+                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                                    foreach ($cursor as $document)
+                                    {
+                                    $SubjectName = $document->SubjectName;
+                                    }
                                     ?>
-                                    <span class="label label-light-warning label-inline font-weight-bold"><?php echo "new remark (".$latestremark1.")";?></span>
+                                    <tr>
+                                    <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
+                                    <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                                    </tr>
                                     <?php
                                 }
                                 ?>
-                                </span>
-                                </a>
-                            </div>
+                                </tbody>
+                            </table>
                             <?php
-                            }
+                        }
+                        elseif($_SESSION["loggeduser_ConsumerGroupName"] == 'STUDENT')
+                        {
                             ?>
+                            <table class="table table-bordered">
+                                <tr class="bg-light text-dark-50">
+                                    <td>Class</td>
+                                    <td>Subject</td>
+                                </tr>
+                                <tbody>
+                                <?php
+                                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+                                foreach ($cursor as $document)
+                                {
+                                    $Class_id = $document->Class_id;
+                                    $Subject_id = $document->Subject_id;
+                                
+                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                                    foreach ($cursor as $document)
+                                    {
+                                    $ClassName = $document->ClassName;
+                                    }
+
+                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                                    foreach ($cursor as $document)
+                                    {
+                                    $SubjectName = $document->SubjectName;
+                                    }
+                                    ?>
+                                    <tr>
+                                    <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
+                                    <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                            <?php
+                        }
+                        ?>
                         </div>
-                        <!--end::Nav-->
                     </div>
                     <!--end::Body-->
                 </div>
-                <!--end::Profile Card-->
+                <!--end::Charts Widget 4-->
             </div>
-            <!--end::Aside-->
-            <!--begin::Content-->
-            <div class="flex-row-fluid ml-lg-8">
-                <!--begin::Row-->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!--begin::List Widget 14-->
-                        <!--end::List Widget 14-->
-                    </div>
-                    <div class="col-lg-6">
-                        <!--begin::List Widget 10-->
-                        <!--end: List Widget 10-->
-                    </div>
-                </div>
-                <!--end::Row-->
-                <!--begin::Advance Table: Widget 7-->
-                <div class="card card-custom gutter-b">
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label font-weight-bolder text-dark">Attendance</span>
-                        </h3>
-                        <div class="card-toolbar">
-                            <ul class="nav nav-pills nav-pills-sm nav-success">
-                                <li class="nav-item">
-                                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_1">Month</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_2">Week</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_12_3">Day</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--end::Header-->
+            <div class="col-lg-6">
+                <!--begin::List Widget 11-->
+                <div class="card card-custom card-stretch gutter-b">
                     <!--begin::Body-->
-                    <div class="card-body pt-2 pb-0 mt-n3">
-                    <div class="w-100"></div>
-					<div class="col-sm">
-					<div class="row">
-					<div class="col-12 col-lg-12">
-						<div class="card">
-						<div class="card-body">
-							<div class="row">
-							<div class="col-sm-12">
-								<?php
-								$id = new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_id"]);
-								$filter = ['_id'=>$id];
-								$query = new MongoDB\Driver\Query($filter);
-								$cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-								foreach ($cursor as $document){
-									$ConsumerFName = ($document->ConsumerFName);
-									$ConsumerLName = ($document->ConsumerLName);
-									$ConsumerIDNo = ($document->ConsumerIDNo);
-								?>
-								<table id="attendance" class="table table-bordered ">
-								<thead class="table-light">
-									<tr>
-									<th scope="col" style="color:#696969; text-align:center">Staff ID</th>
-									<th scope="col" style="color:#696969; text-align:center">Staff Name</th>
-									<th scope="col" style="color:#696969; text-align:center">Date</th>
-									<th scope="col" style="color:#696969; text-align:center">IN</th>
-									<th scope="col" style="color:#696969; text-align:center">OUT</th>
-									</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td style="text-align:center"><?php echo $ConsumerIDNo; ?></td>
-									<td style="text-align:center"><?php echo $ConsumerFName." ".$ConsumerLName; ?></td>
-									<td style="text-align:center">
-								<?php
-								$Cards_id ='';
-								$filter1 = ['Consumer_id'=>$_SESSION["loggeduser_id"]];
-								$query1 = new MongoDB\Driver\Query($filter1);
-								$cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query1);
-								foreach ($cursor1 as $document1)
-								{
-                                    $Cards_id = strval($document1->Cards_id);
-								}
-								/*
-								check date
-								$convert = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-								echo "<br>to_date: ".$to_date."<br>";
-								echo "from_date: ".$from_date."<br>";
-								$display = date_format($convert,"d/m/Y");
-								echo $display;
-								*/
-								$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-								$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 month'))->getTimestamp()*1000);
+                    <div class="card-body">
+                        <div id="kt_charts_widget_4_chart">
+                            <div class="card">
+                                <div class="card-header bg-light text-dark-50">
+                                    <a>Remarks</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="box">
+                                        <form name="add_remark" action="model/staff_remark.php" method="POST">
+                                            <textarea class="staff" name="remark"></textarea>
+                                            <div class="mt-3 text-right">
+                                            <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
+                                            <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                        <div class="box">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                            <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Active</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
+                                            <table class="table mx-3">
+                                                <thead>
+                                                <tr class="row">
+                                                    <th class="col-2">Date</th>
+                                                    <th class="col-2">Staff</th>
+                                                    <th class="col">Details</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <?php
+                                            $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>'0','Status'=>'ACTIVE'];
+                                            $option = ['sort' => ['_id' => -1],'limit'=>10];
+                                            $query = new MongoDB\Driver\Query($filter, $option);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $remark_id1 = strval($document->_id);
+                                                $Details1 = $document->Details;
+                                                $Staff_id1 = $document->Staff_id;
+                                                $Date1 = strval($document->Date);
+                                                $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
+                                                $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-								$filter2 = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$query2 = new MongoDB\Driver\Query($filter2);
-								$cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query2);
-								$varcounting = 0;
-								
-								foreach ($cursor2 as $document2)
-								{
-                                    $AttendanceDate = ($document2->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
-                                    if ($varcounting % 2)
-                                    {
-                                    } 
-                                    else 
-                                    {
-                                        echo date_format($AttendanceDate,"d-m-Y")."<br>";
-                                    }
-								}
-								?>
-								</td>
-								<td style="text-align:center">
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
+                                                $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id1)];
+                                                $query = new MongoDB\Driver\Query($filter);
+                                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+                                                foreach ($cursor as $document)
+                                                {
+                                                $ConsumerFName = $document->ConsumerFName;
+                                                }
+                                                ?>
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <h6 class="accordion-header" id="flush-heading<?= $remark_id1; ?>">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $remark_id1; ?>" aria-expanded="false" aria-controls="flush-collapse<?= $remark_id1; ?>">
+                                                    <table class="table table-borderless text-left">
+                                                        <tbody>
+                                                        <tr class="row">
+                                                            <td class="col-2"><?= date_format($Date1,"D,d M Y H:i") ?></td>
+                                                            <td class="col-2"><?= $ConsumerFName; ?></td>
+                                                            <td class="col"><a align="justify"><?= $Details1; ?></a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                        </table>
+                                                    </button>
+                                                    </h6>
+                                                    <div  id="flush-collapse<?= $remark_id1; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?= $remark_id1; ?>" data-bs-parent="#accordionFlushExample">
+                                                    <?php 
+                                                    $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>$remark_id1];
+                                                    $option = ['sort' => ['_id' => -1],'limit'=>10];
+                                                    $query = new MongoDB\Driver\Query($filter, $option);
+                                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                                                    foreach ($cursor as $document2)
+                                                    {
+                                                        $remark_id2 = strval($document2->_id);
+                                                        $Details2 = $document2->Details;
+                                                        $Staff_id2 = $document2->Staff_id;
+                                                        $Date2 = strval($document2->Date);
+                                                        $Date2 = new MongoDB\BSON\UTCDateTime(strval($Date2));
+                                                        $Date2 = $Date2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-                                    if ($varcounting % 2)
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    } 
-                                    else
-                                    {
-                                    }
-								}
-								?>
-								</td>
-								<td style="text-align:center">
-								<?php
-								$varcounting = 0;
-								$filterA = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date,'$lte' => $to_date]];
-								$optionA = ['sort' => ['_id' => 1]];
-								$queryA = new MongoDB\Driver\Query($filterA,$optionA);
-								$cursorA = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$queryA);
-								
-								foreach ($cursorA as $documentA)
-								{
-                                    $AttendanceDate = ($documentA->AttendanceDate);
-                                    $utcdatetime = new MongoDB\BSON\UTCDateTime(strval($AttendanceDate));
-                                    $AttendanceDate = $utcdatetime->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                                    $varcounting = $varcounting +1;
+                                                        $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id2)];
+                                                        $query = new MongoDB\Driver\Query($filter);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+                                                        foreach ($cursor as $document)
+                                                        {
+                                                        $ConsumerFName = $document->ConsumerFName;
+                                                        }
+                                                        ?>
+                                                        <div class="accordion-body">
+                                                        <table class="table table-borderless text-left">
+                                                        <tbody>
+                                                            <tr class="row">
+                                                            <td class="col-2"><?= date_format($Date2,"D,d M Y H:i") ?></td>
+                                                            <td class="col-2"><?= $ConsumerFName; ?></td>
+                                                            <td class="col"><a align="justify"><?= $Details2;?></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        </table>
+                                                        </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <form name="add_remark_child" action="model/staff_remark.php" method="POST">
+                                                            <div class="m-3">
+                                                            <textarea class="staff" name="remark"></textarea>
+                                                            </div>
+                                                            <div class="m-3 text-right">
+                                                            <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
+                                                            <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
+                                                            <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
+                                                            <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            </div>
+                                            <div class="tab-pane fade show pending" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                            <table class="table">
+                                                <thead>
+                                                <tr class="row">
+                                                    <th class="col-2">Date</th>
+                                                    <th class="col-2">Staff</th>
+                                                    <th class="col">Details</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <?php
+                                            $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>'0','Status'=>'PENDING'];
+                                            $option = ['sort' => ['_id' => -1],'limit'=>10];
+                                            $query = new MongoDB\Driver\Query($filter, $option);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $remark_id1 = strval($document->_id);
+                                                $Details1 = $document->Details;
+                                                $Staff_id1 = $document->Staff_id;
+                                                $Date1 = strval($document->Date);
+                                                $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
+                                                $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-                                    if ($varcounting % 2)
-                                    {
-                                    } 
-                                    else
-                                    {
-                                        echo date_format($AttendanceDate,"H:i:s")."<br>";
-                                    }
-								}
-								?>
-								</td>
-								</tr>
-						</tbody>
-						</table>
-						<button type="button" style="font-size:15px width:25%" class="btn btn-success"><a href="index.php?page=profile&attendance=<?php echo "xls"; ?>" tabindex="-1" data-type="alpha" style="color:#FFFFFF; text-decoration: none;">EXPORT ATTENDANCE TO XLS</a></button>
-						<?php
-						}
-						if (!isset($_GET['attendance']) && empty($_GET['attendance']))
-						{
-						}
-						else
-						{
-                            $attendance = ($_GET['attendance']);
-						?>
-						<script>
-						$(document).ready(function () {
-							$("#attendance").table2excel({
-								filename: "attendance.xls"
-							});
-						});
-						</script>
-						<?php
-						}
-						?>
-					</div>
-					</div>
+                                                $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id1)];
+                                                $query = new MongoDB\Driver\Query($filter);
+                                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+                                                foreach ($cursor as $document)
+                                                {
+                                                $ConsumerFName = $document->ConsumerFName;
+                                                }
+                                                ?>
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item">
+                                                    <h6 class="accordion-header" id="flush-headingOne">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                        <table class="table table-borderless text-left">
+                                                            <tbody>
+                                                            <tr class="row">
+                                                                <td class="col-2"><?= date_format($Date1,"D,d M Y H:i") ?></td>
+                                                                <td class="col-2"><?= $ConsumerFName; ?></td>
+                                                                <td class="col"><a align="justify"><?= $Details1;?></a></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        </button>
+                                                    </h6>
+                                                    <div  id="flush-collapseOne" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                        <?php 
+                                                        $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>$remark_id1];
+                                                        $option = ['sort' => ['_id' => -1],'limit'=>10];
+                                                        $query = new MongoDB\Driver\Query($filter, $option);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                                                        foreach ($cursor as $document2)
+                                                        {
+                                                        $remark_id2 = strval($document2->_id);
+                                                        $Details2 = ($document2->Details);
+                                                        $Staff_id2 = ($document2->Staff_id);
+                                                        $Date2 = strval($document2->Date);
+                                                        $Date2 = new MongoDB\BSON\UTCDateTime($Date2);
+                                                        $Date2 = $Date2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                                                        $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id2)];
+                                                        $query = new MongoDB\Driver\Query($filter);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+                                                        foreach ($cursor as $document)
+                                                        {
+                                                            $ConsumerFName = $document->ConsumerFName;
+                                                        }
+                                                        ?>
+                                                        <div class="accordion-body">
+                                                            <table class="table table-borderless text-left">
+                                                            <tbody>
+                                                                <tr class="row">
+                                                                <td class="col-2"><?= date_format($Date2,"D,d M Y H:i") ?></td>
+                                                                <td class="col-2"><?= $ConsumerFName; ?></td>
+                                                                <td class="col"><a align="justify"><?= $Details2;?></a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <form name="add_remark_child" action="model/staff_remark.php" method="POST">
+                                                        <div class="m-3">
+                                                            <textarea class="staff" name="remark"></textarea>
+                                                        </div>
+                                                        <div class="m-3 text-right">
+                                                            <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
+                                                            <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
+                                                            <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
+                                                            <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            </div>
+                                            <div class="tab-pane fade show completed" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                                            <table class="table mx-3">
+                                                <thead>
+                                                <tr class="row">
+                                                    <th class="col-2">Date</th>
+                                                    <th class="col-2">Staff</th>
+                                                    <th class="col">Details</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <?php
+                                            $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>'0','Status'=>'COMPLETED'];
+                                            $option = ['sort' => ['_id' => -1],'limit'=>10];
+                                            $query = new MongoDB\Driver\Query($filter, $option);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                                            foreach ($cursor as $document)
+                                            {
+                                                $remark_id1 = strval($document->_id);
+                                                $Staff_id1 = $document->Staff_id;
+                                                $Details1 = $document->Details;
+                                                $Date1 = strval($document->Date);
+                                                $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
+                                                $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                                
+                                                $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id1)];
+                                                $query = new MongoDB\Driver\Query($filter);
+                                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                                foreach ($cursor as $document)
+                                                {
+                                                $ConsumerFName = $document->ConsumerFName;
+                                                }
+                                                ?>
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item">
+                                                    <h6 class="accordion-header" id="flush-headingOne">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                        <table class="table table-borderless text-left">
+                                                            <tbody>
+                                                                <tr class="row">
+                                                                <td class="col-2"><?= date_format($Date1,"D,d M Y H:i") ?></td>
+                                                                <td class="col-2"><?= $ConsumerFName;?></td>
+                                                                <td class="col"><a align="justify"><?= $Details1;?></a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        </button>
+                                                    </h6>
+                                                    <div  id="flush-collapseOne" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                        <?php 
+                                                        $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>$remark_id1];
+                                                        $option = ['sort' => ['_id' => -1],'limit'=>10];
+                                                        $query = new MongoDB\Driver\Query($filter,$option);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                                                        foreach ($cursor as $document2)
+                                                        {
+                                                        $remark_id2 = strval($document2->_id);
+                                                        $Details2 = $document2->Details;
+                                                        $Staff_id2 = $document2->Staff_id;
+                                                        $Date2 = $document2->Date;
+                                                        $Date2 = new MongoDB\BSON\UTCDateTime(strval($Date2));
+                                                        $Date2 = $Date2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                                                        $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id2)];
+                                                        $query = new MongoDB\Driver\Query($filter);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                                        foreach ($cursor as $document)
+                                                        {
+                                                            $ConsumerFName = $document->ConsumerFName;
+                                                        }
+                                                        ?>
+                                                        <div class="accordion-body">
+                                                            <table class="table table-borderless text-left">
+                                                            <tbody>
+                                                                <tr class="row">
+                                                                <td class="col-2"><?= date_format($Date2,"D,d M Y H:i") ?></td>
+                                                                <td class="col-2"><?= $ConsumerFName;?></td>
+                                                                <td class="col"><a align="justify"><?= $Details2;?></a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <form name="add_remark_child" action="model/staff_remark.php" method="POST">
+                                                            <div class="m-3">
+                                                            <textarea class="staff" name="remark"></textarea>
+                                                            </div>
+                                                            <div class="m-3 text-right">
+                                                            <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
+                                                            <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
+                                                            <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
+                                                            <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!--end::Body-->
                 </div>
-                <br><br>
-                <!--end::Advance Table Widget 7-->
+                <!--end::List Widget 11-->
             </div>
-            <!--end::Content-->
         </div>
-        <!--end::Profile Overview-->
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <!--begin::Advance Table Widget 2-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <!-- begin::attendance -->
+                        <div class="text-right p-3">
+                            <a href="index.php?page=profile&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
+                            <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
+                            <thead class="text-dark-50">
+                                <tr>
+                                    <th>Staff ID</th>
+                                    <th>Staff Name</th>
+                                    <th>Date</th>
+                                    <th>IN</th>
+                                    <th>OUT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $Cards_id ='';
+                                $date_now = date("d-m-Y");
+                                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
+                                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+
+                                $filter = ['Consumer_id'=>$consumer_id];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
+                                foreach ($cursor as $document)
+                                {
+                                $Cards_id = strval($document->Cards_id);
+                                }
+                                ?>
+                                <tr>
+                                <td class="default"><?= $ConsumerIDNo; ?></td>
+                                <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
+                                <td class="default"><?= $date_now."<br>"; ?></td>
+                                <td class="default"><?php
+                                $count = 0;
+                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                                $option = ['sort' => ['_id' => 1]];
+                                $query = new MongoDB\Driver\Query($filter,$option);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                                foreach ($cursor as $document)
+                                {
+                                    $date = strval($document->AttendanceDate);
+                                    $date = new MongoDB\BSON\UTCDateTime($date);
+                                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                                    $count = $count +1;
+                                    if ($count % 2){
+                                    echo date_format($date,"H:i:s")."<br>";}
+                                }
+                                ?></td>
+                                <td class="default"><?php
+                                $count = 0;
+                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                                $option = ['sort' => ['_id' => 1]];
+                                $query = new MongoDB\Driver\Query($filter,$option);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                                foreach ($cursor as $document)
+                                {
+                                    $date = strval($document->AttendanceDate);
+                                    $date = new MongoDB\BSON\UTCDateTime($date);
+                                    $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                    
+                                    $count = $count +1;
+                                    if ($count % 2){
+                                    }
+                                    else{
+                                    echo date_format($date,"H:i:s")."<br>";}
+                                }
+                                ?></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                            <?php
+                            if (isset($_GET['attendance']) && !empty($_GET['attendance']))
+                            {
+                                $attendance = ($_GET['attendance']);
+                                ?>
+                                <script>
+                                $(document).ready(function () {
+                                    $("#attendance").table2excel({
+                                        filename: "attendancestaff.xls"
+                                    });
+                                });
+                                
+                                </script>
+                                <?php
+                            }?>
+                            <script type="text/javascript">
+                            var rows = document.querySelectorAll('tr');
+
+                            [...rows].forEach((r) => {
+                            if (r.querySelectorAll('td:empty').length > 0) {
+                            r.classList.add('highlight');
+                            }
+                            })
+                            </script>
+                        </div>
+                        <!-- end::attendance -->
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Advance Table Widget 2-->
+            </div>
+        </div>
+        <!--end::Row-->
     </div>
     <!--end::Container-->
 </div>
+<!--end::Entry-->
+<script type="text/javascript" src='https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+  selector: '.staff',
+  menubar:false,
+  statusbar: false,
+  toolbar: false,
+  height:100,
+});
+</script>
+<?php include ('view/pages/modal-update_remark.php'); ?>

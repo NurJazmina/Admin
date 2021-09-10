@@ -1,12 +1,14 @@
 <?php
-//Add school department
-if (isset($_POST['AddDepartmentFormSubmit']))
+if (isset($_POST['add_department']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $vardepartment = $_POST['txtdepartment'];
+  $school_id = strval($_SESSION[""]);
+  $department_name = $_POST['department_name'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['School_id'=>$varschoolID,'DepartmentName'=> $vardepartment]);
+  $bulk->insert([
+                'School_id'=>$school_id,
+                'DepartmentName'=> $department_name
+                ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {
@@ -39,19 +41,17 @@ if (isset($_POST['AddDepartmentFormSubmit']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
 
-//Edit school department
-if (isset($_POST['EditDepartmentFormSubmit']))
+if (isset($_POST['edit_department']))
 {
-  $varschoolID = strval($_SESSION["loggeduser_schoolID"]);
-  $vardepartmentid = $_POST['txtdepartmentid'];
-  $vardepartmentname = $_POST['txtdepartmentname'];
+  $department_id = $_POST['department_id'];
+  $department_name = $_POST['department_name'];
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($vardepartmentid)],
-                ['$set' => ['DepartmentName'=>$vardepartmentname]]
+  $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($department_id)],
+                ['$set' => ['DepartmentName'=>$department_name]]
                );
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
@@ -89,44 +89,31 @@ if (isset($_POST['EditDepartmentFormSubmit']))
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
-//Delete school department
-if (isset($_POST['DeleteDepartmentFormSubmit']))
+
+if (isset($_POST['delete_department']))
 {
-  $vardepartmentid = $_POST['txtdepartmentid'];
-  $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($vardepartmentid)], ['limit' => 1]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
+  $department_id = $_POST['department_id'];
+  $password = $_POST['password'];
+  $password_hash = $_SESSION["loggeduser_ConsumerPassword"];
+
+  if (password_verify($password, $password_hash))
   {
+    //database department
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete([
+                    '_id'=>new \MongoDB\BSON\ObjectID($department_id)], 
+                    ['limit' => 1]
+                  );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.SchoolsDepartment', $bulk, $writeConcern);
+
+    //database staff
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['Staffdepartment' => $department_id],
+                  ['$set' => ['Staffdepartment'=>'']]
+                 );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+
   }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  printf("Matched: %d\n", $result->getMatchedCount());
-  printf("Deleted  %d document(s)\n", $result->getModifiedCount());
 }

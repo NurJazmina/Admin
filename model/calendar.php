@@ -16,7 +16,6 @@ class Calendar {
         $this->events[] = [$txt, $date, $days, $color,$link];
     }
 
-
     public function __toString() {
         $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
         $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
@@ -92,6 +91,5 @@ class Calendar {
         $html .= '</div>';
         return $html;
     }
-
 }
 ?>

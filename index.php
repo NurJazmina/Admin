@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <?php
-// Start the session
 session_start();
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+include 'connections/db.php';
+require 'vendor/autoload.php'; 
+include 'model/login.php'; 
 ?>
-<?php include 'connections/db.php';?>
-<?php require 'vendor/autoload.php'; ?>
-<?php include 'model/login.php'; ?>
 <!-- live chat start-->
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="688d97be-cab6-4cc7-9458-e78b5df8cba4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!-- <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="688d97be-cab6-4cc7-9458-e78b5df8cba4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script> -->
 <!-- live chat end-->
 
 <!--
@@ -87,8 +85,16 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="stylesheet" type="text/css" href="resources/default.css">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#ffffff">
-	</head>
 
+		<!--begin::Chart-->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="//s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+		<!--end::Chart-->
+		
+	</head>
 	<!--end::Head-->
 
 	<!--begin::Body-->
@@ -98,9 +104,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		
         <div class="page">
             <?php 
-			if (isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id']))  //(isset($_POST['LoginFormSubmit']))
+			if (isset($_SESSION['loggeduser_id']) && !empty($_SESSION['loggeduser_id']))
 			{
-			?>
+				?>
 				<!--begin::Main-->
 				<?php include 'view/partials/_header-mobile.html'; ?>
 				<div class="d-flex flex-column flex-root"> 
@@ -114,7 +120,6 @@ License: You must have a valid license purchased only from themeforest(the above
 							<!--begin::Content-->
 							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 							<?php include 'view/partials/navgongetz.php'; ?>
-							<?php //include 'view/partials/_subheader/subheader-v1.php'; ?>
 							<!--Content area here-->
 								<div class="content content-fixed">
 									<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
@@ -131,9 +136,10 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!--end::Page-->
 				</div>
 				<!--end::Main-->
-            <?php
+				<?php
 		    }
-			elseif(isset($_SESSION['api_session'])) {
+			elseif(isset($_SESSION['api_session'])) 
+			{
 				?>
 				<!--begin::Main-->
 				<?php include 'view/partials/_header-mobile.html'; ?>
@@ -167,83 +173,81 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--end::Main-->
 				<?php
 			}
-
 			else 
 			{
-			?>
-            <div class="container-fluid">
-			    <div class="row" style="height:100vh;">
-				<?php include 'view/pages/login.php'; ?>
-			    </div>
-            </div>
-			<?php
+				?>
+				<div class="container-fluid">
+					<div class="row" style="height:100vh;">
+						<?php include 'view/pages/login.php'; ?>
+					</div>
+				</div>
+				<?php
 		    }
 		    ?>
         </div>
 		<script>
-			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 		</script>
-
 		<!--begin::Global Config(global config for global JS scripts)-->
 		<script>
-			var KTAppSettings = {
-				"breakpoints": {
-					"sm": 576,
-					"md": 768,
-					"lg": 992,
-					"xl": 1200,
-					"xxl": 1400
-				},
-				"colors": {
-					"theme": {
-						"base": {
-							"white": "#ffffff",
-							"primary": "#3699FF",
-							"secondary": "#E5EAEE",
-							"success": "#1BC5BD",
-							"info": "#8950FC",
-							"warning": "#FFA800",
-							"danger": "#F64E60",
-							"light": "#E4E6EF",
-							"dark": "#181C32"
-						},
-						"light": {
-							"white": "#ffffff",
-							"primary": "#E1F0FF",
-							"secondary": "#EBEDF3",
-							"success": "#C9F7F5",
-							"info": "#EEE5FF",
-							"warning": "#FFF4DE",
-							"danger": "#FFE2E5",
-							"light": "#F3F6F9",
-							"dark": "#D6D6E0"
-						},
-						"inverse": {
-							"white": "#ffffff",
-							"primary": "#ffffff",
-							"secondary": "#3F4254",
-							"success": "#ffffff",
-							"info": "#ffffff",
-							"warning": "#ffffff",
-							"danger": "#ffffff",
-							"light": "#464E5F",
-							"dark": "#ffffff"
-						}
+		var KTAppSettings = {
+			"breakpoints": {
+				"sm": 576,
+				"md": 768,
+				"lg": 992,
+				"xl": 1200,
+				"xxl": 1400
+			},
+			"colors": {
+				"theme": {
+					"base": {
+						"white": "#ffffff",
+						"primary": "#3699FF",
+						"secondary": "#E5EAEE",
+						"success": "#1BC5BD",
+						"info": "#8950FC",
+						"warning": "#FFA800",
+						"danger": "#F64E60",
+						"light": "#E4E6EF",
+						"dark": "#181C32"
 					},
-					"gray": {
-						"gray-100": "#F3F6F9",
-						"gray-200": "#EBEDF3",
-						"gray-300": "#E4E6EF",
-						"gray-400": "#D1D3E0",
-						"gray-500": "#B5B5C3",
-						"gray-600": "#7E8299",
-						"gray-700": "#5E6278",
-						"gray-800": "#3F4254",
-						"gray-900": "#181C32"
+					"light": {
+						"white": "#ffffff",
+						"primary": "#E1F0FF",
+						"secondary": "#EBEDF3",
+						"success": "#C9F7F5",
+						"info": "#EEE5FF",
+						"warning": "#FFF4DE",
+						"danger": "#FFE2E5",
+						"light": "#F3F6F9",
+						"dark": "#D6D6E0"
+					},
+					"inverse": {
+						"white": "#ffffff",
+						"primary": "#ffffff",
+						"secondary": "#3F4254",
+						"success": "#ffffff",
+						"info": "#ffffff",
+						"warning": "#ffffff",
+						"danger": "#ffffff",
+						"light": "#464E5F",
+						"dark": "#ffffff"
 					}
 				},
-				"font-family": "Poppins"
-			};
+				"gray": {
+					"gray-100": "#F3F6F9",
+					"gray-200": "#EBEDF3",
+					"gray-300": "#E4E6EF",
+					"gray-400": "#D1D3E0",
+					"gray-500": "#B5B5C3",
+					"gray-600": "#7E8299",
+					"gray-700": "#5E6278",
+					"gray-800": "#3F4254",
+					"gray-900": "#181C32"
+				}
+			},
+			"font-family": "Poppins"
+		};
 		</script>
 		
 		<!--end::Global Config-->
@@ -270,9 +274,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/widgets.js"></script>
 		<script src='assets/js/main.js'></script>
 		<script src="assets/js/todo.js" defer></script>
+		<script src="assets/js/calendar.js" defer></script>
 
-		<?php include 'resources/default.php'; ?>
 		<?php
+		include 'resources/default.php';
 		if (isset($_GET['attendance']) && !empty($_GET['attendance']))
 		{
 			$attendance = ($_GET['attendance']);
@@ -301,18 +306,18 @@ License: You must have a valid license purchased only from themeforest(the above
 		}
 		?>
 		<script type="text/javascript">
-			var rows = document.querySelectorAll('tr');
+		var rows = document.querySelectorAll('tr');
 
-			[...rows].forEach((r) => {
-				if (r.querySelectorAll('td:empty').length > 0) {
-					r.classList.add('highlight');
-				}
-			})
+		[...rows].forEach((r) => {
+			if (r.querySelectorAll('td:empty').length > 0) {
+				r.classList.add('highlight');
+			}
+		})
 		</script>
 		<script>
-			if ( window.history.replaceState ) {
-				window.history.replaceState( null, null, window.location.href );
-			}
+		if ( window.history.replaceState ) {
+		window.history.replaceState( null, null, window.location.href );
+		}
 		</script>
 		<script>
 		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

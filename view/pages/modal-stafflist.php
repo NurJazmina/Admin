@@ -1,56 +1,100 @@
-<form id="AddStaffFormSubmit" name="AddStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
-  <div class="modal fade" id="recheckaddstaff" tabindex="-1" aria-labelledby="AddStaffModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<form name="recheck_add_staff" action="index.php?page=modal-recheck_staff" method="post">
+  <div class="modal fade"  id="add_staff" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="AddStaffModalLabel">Add Staff</h5>
+          <h5 class="modal-title">Add Staff</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <!--Add staff-->
-          <div class="form-group row">
-            <label for="txtteacherclass" class="col-sm-2 col-form-label">Staff</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerIDNo" >
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Staff ID</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="consumer_idno" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
+                </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="txtclasscategory" class="col-sm-2 col-form-label">Access Level</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="txtaccesslevel">
-                <option value="0">TEACHER</option>
-                <option value="1">OFFICE</option>
-              </select>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Department</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="department_id">
+                    <?php
+                    $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $id = strval($document->_id);
+                      $DepartmentName = strval($document->DepartmentName);
+                      ?>
+                      <option value="<?=$id?>"><?=$DepartmentName?></option>
+                      <?php
+                    }
+                    ?>
+                  </select>
+                </div>
             </div>
-          </div>
-          <!--Add department-->
-          <div class="form-group row">
-            <label for="txtStaffdepartment" class="col-sm-2 col-form-label">Department</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="txtStaffdepartment" name="txtStaffdepartment" onchange="SelecttxtStaffdepartment(this.value);" >
-                <?php
-                $filter = ['School_id'=>$_SESSION["loggeduser_schoolID"]];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-                foreach ($cursor as $document)
-                {
-                  $id = strval($document->_id);
-                  $DepartmentName = strval($document->DepartmentName);
-                  ?>
-                  <option value="<?=$DepartmentName?>"><?=$DepartmentName?></option>
-                  <?php
-                }
-                ?>
-              </select>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Staff Level</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="staff_level" id="staff_level" onchange="select_staff_level(this.value);">
+                    <option value="1">STAFF</option>
+                    <option value="0">TEACHER</option>
+                  </select>
+                </div>
             </div>
-          </div>
+            <div id="teacher_box">
+              <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Class category</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" name="class_category">
+                      <option value="" selected>NULL</option>
+                      <option value="1">1</option>
+                      <option value="3">3</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="recheck_add_staff">Confirm</button>
+        </div>
+        </div>
+    </div>
+  </div>
+</form>
+<script>
+  function select_staff_level() {
+    var staff_level = document.getElementById("staff_level").value;
+    var teacher = document.getElementById("teacher_box");
+    if(staff_level == "0")
+      teacher.style.display = "block";
+    else
+      teacher.style.display = "none";
+  }
+  select_staff_level();
+</script>
+
+<form name="recheck_edit_staff" action="index.php?page=modal-recheck_staff" method="post">
+  <div class="modal fade" id="edit_staff" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Teacher</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" class="form-control" name="consumer_id">
           <div class="form-group row">
-            <label for="txtclasscategory" class="col-sm-2 col-form-label">Class</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory">
-                <option value=""></option>
+            <label class="col-sm-3 col-form-label">Class Category</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="class_category">
                 <option value="1">1</option>
-                <option value="2">2</option>
+                <option value="3">3</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
@@ -58,64 +102,32 @@
               </select>
             </div>
           </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" name="AddStaffFormSubmit">Re-Checking</button>
         </div>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="recheck_edit_staff">Edit</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-<br><br><form id="EditStaffFormSubmit"  name="EditStaffFormSubmit" action="index.php?page=modal-recheckstafflist" method="post">
-  <div class="modal fade" id="recheckeditstaff" tabindex="-1" aria-labelledby="EditStaffModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<form name="status_staff" action="index.php?page=stafflist" method="post">
+  <div class="modal fade" id="status_staff" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="EditStaffModalLabel">Edit Teacher</h5>
+          <h5 class="text-danger"><i class="flaticon2-information icon-md text-danger"></i>&nbsp;&nbsp;Account Activation/Deactivation</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="teacherid">
-          <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Class Category</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="sltStatus" name="txtClasscategory">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" name="EditStaffFormSubmit">Edit</button>
-        </div>
-    </div>
-  </div>
-</div>
-</form>
-
-<br><br><form name="StatusStaffFormSubmit" action="index.php?page=stafflist" method="post">
-  <div class="modal fade" id="StatusStaffModal" tabindex="-1" aria-labelledby="StatusStaffModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1>Account Activation/Deactivation</h1>
-        </div>
-        <div class="modal-body">
           <p>Are you sure you want to active/deactive this account?</p>
-          <input type="hidden" class="form-control" name="txtstaffid">
+          <input type="hidden" class="form-control" name="staff_id">
           <!--Change Status-->
           <div class="form-group row">
-            <label for="txtStaffdepartment" class="col-sm-2 col-form-label">Status</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="txtStaffStatus">
+            <label class="col-sm-3 col-form-label">Status</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="status">
                 <option value="ACTIVE">ACTIVATE</option>
                 <option value="INACTIVE">DEACTIVATE</option>
               </select>
@@ -123,17 +135,17 @@
           </div>
           <!--Reason-->
           <div class="form-group row">
-            <label for="staticStaffNo" class="col-sm-2 col-form-label">Reason</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="staticStaffNo" name="txtConsumerRemarksDetails" required>
+            <label class="col-sm-3 col-form-label">Reason</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="detail" required>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success" name="StatusStaffFormSubmit">Confirm</button>
+          <button type="button"  class="btn btn-light btn-hover-success btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="status_staff">Confirm</button>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </form>

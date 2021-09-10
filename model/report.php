@@ -8,7 +8,7 @@ if (isset($_POST['report'])) {
     $Information = "Other";
     $Description = "None";
 
-    $School_id = strval($_SESSION["loggeduser_schoolID"]);
+    $School_id = strval($_SESSION["loggeduser_school_id"]);
     $id = $_POST['id'];
     $url = $_POST['url'];
     $Created_by = $_POST['Created_by'];

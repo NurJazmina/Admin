@@ -1,25 +1,26 @@
-<? ob_start(); ?>
 <?php
+ob_start();
 include '../connections/db.php';
-if (isset($_POST['ChangePasswordFormSubmit'])) {
-
+if (isset($_POST['change_password'])) 
+{
   if($_POST['password']==$_POST['confirm_password'])
   {
     $options = ['cost' => 4,];
-    $varstaffpassword = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
-    
-    $loggedinid = $_POST['txtid'];
-    $id = new \MongoDB\BSON\ObjectId($loggedinid);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->update(
-      ['_id' => $id],
-      ['$set' => ['ConsumerPassword' => $varstaffpassword]],
+      ['_id' => new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_id"])],
+      ['$set' => ['ConsumerPassword' => $password]],
       ['multi' => false, 'upsert' => false]
     );
     
-    try {
+    try 
+    {
       $result = $GoNGetzDatabase->executeBulkWrite('GoNGetz.Consumer',$bulk);
-    } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
+    } 
+    catch (MongoDB\Driver\Exception\BulkWriteException $e) 
+    {
       $result = $e->getWriteResult();
 
       // Check if the write concern could not be fulfilled
@@ -43,10 +44,11 @@ if (isset($_POST['ChangePasswordFormSubmit'])) {
       printf("Other error: %s\n", $e->getMessage());
       exit;
     }
-    header ('location: ../index.php?page=change-password&password='.$varstaffpassword);
+    header ('location: ../index.php?page=change-password&password='.$password);
   }
   else
-  header ('location: ../index.php?page=change-password&ERROR=NOTMATCHING');
+  {
+    header ('location: ../index.php?page=change-password&ERROR=NOTMATCHING');
+  }
 }
-?>
-<? ob_flush(); ?>
+ob_flush();

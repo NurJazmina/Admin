@@ -1,249 +1,279 @@
-<?php include ('model/parentlist.php'); ?>
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-			<!--begin::Info-->
-			<div class="d-flex align-items-center flex-wrap mr-1">
-				<!--begin::Page Heading-->
-				<div class="d-flex align-items-baseline flex-wrap mr-5">
-					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Parent</h5>
-					<!--end::Page Title-->
-				</div>
-        <!--begin::Separator-->
-        <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-        <!--end::Separator-->
-        <!--begin::Detail-->
-        <div class="d-flex align-items-center" id="kt_subheader_search">
-        <?php 
-        $parent = $_SESSION["totalparent"];
-        ?>
-        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo $parent; ?> Total Parent</span>
-        </div>
-        <!--end::Detail-->
-				<!--end::Page Heading-->
-			</div>
-			<!--end::Info-->
-			<!--begin::Toolbar-->
-			<div class="d-flex align-items-center">
-        <div class="col-12 col-sm-12 col-sm-12">
-              <form name="searchparent" class="form-inline" action="index.php?page=parentlist" method="post">
-                <div class="col-12 col-sm-12 col-lg-12 text-right">
-                  <div class="row">
-                  <?php 
-                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-                  {
-                  ?>
-                    <button type="button" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" data-bs-toggle="modal" data-bs-target="#recheckaddparent" >Add</button>
-                    <div class="input-group input-group-sm input-group-solid" style="width:50%">
-                      <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <span class="svg-icon">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"></rect>
-                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
-                              </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                          </span>
-                          <!--<i class="flaticon2-search-1 icon-sm"></i>-->
-                        </span>
-                      </div>
-                    </div>
-                    <button type="submit" style="width:25%; " class="btn btn-success font-weight-bolder btn-sm"" name="searchname">Search</button>
-                  <?php
-                  } 
-                  else
-                  {
-                  ?>
-                    <div class="input-group input-group-sm input-group-solid" style="width:75%">
-                      <input  type="text" class="form-control" name="IDnumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Search by ID/Name">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <span class="svg-icon">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"></rect>
-                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
-                              </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                          </span>
-                          <!--<i class="flaticon2-search-1 icon-sm"></i>-->
-                        </span>
-                      </div>
-                    </div>
-                    <button type="submit" style="width:25%;" class="btn btn-success font-weight-bolder btn-sm" name="searchname">Search</button>
-                  <?php
-                  } 
-                  ?>
-                  </div>
-                </div>
-              </form>
-        </div>
-			</div>
-			<!--end::Toolbar-->
-		</div>
-	</div>
-	<!--end::Subheader-->
+<?php 
+include ('model/studentlist.php'); 
 
-<div class="row">
-  <div class="col-12 col-sm-12 col-lg-6">
-    <div class="col-12 col-sm-6 col-lg-6">
-      <br><h1 style="color:#404040;">Parent List</h1>
+if (isset($_GET['paging']) && !empty($_GET['paging']))
+{
+  $datapaging = ($_GET['paging']*50);
+  $pagingprevious = $_GET['paging']-1;
+  $pagingnext = $_GET['paging']+1;
+} else
+{
+  $datapaging = 0;
+  $pagingnext = 1;
+  $pagingprevious = 0;
+}
+if (!isset($_POST['search_parent']) && empty($_POST['search_parent']))
+{
+  $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
+  $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+  $query = new MongoDB\Driver\Query($filter,$option);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+}
+else
+{
+  $consumer = ($_POST['consumer']);
+  $filter = [NULL];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+  foreach ($cursor as $document)
+  {
+    $consumer_id = strval($document->_id);
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $ConsumerFName = $document->ConsumerFName;
+    
+    if ($ConsumerIDNo == $consumer || $ConsumerFName == $consumer)
+    {
+      $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"], 'ConsumerID'=>$consumer_id];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+    }
+  }
+}
+?>
+<!--begin::Subheader-->
+<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+  <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+    <!--begin::Info-->
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <!--begin::Page Heading-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <!--begin::Page Title-->
+        <h5 class="text-dark font-weight-bold my-1 mr-5">Parent</h5>
+        <!--end::Page Title-->
+      </div>
+      <!--begin::Separator-->
+      <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+      <!--end::Separator-->
+      <!--begin::Detail-->
+      <div class="d-flex align-items-center" id="kt_subheader_search">
+      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $school = $_SESSION["totalparent"]; ?> Total Student</span>
+      </div>
+      <!--end::Detail-->
+      <!--end::Page Heading-->
     </div>
+    <!--end::Info-->
+    <!--begin::Toolbar-->
+    <div class="d-flex align-items-center">
+      <form name="search_parent" class="form-inline" action="index.php?page=parentlist" method="post">
+        <div class="text-right">
+          <?php 
+          if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+          {
+            ?>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
+            <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_parent">Search</button>
+            <?php
+          } 
+          else
+          {
+            ?>
+            <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_parent">Search</button>
+            <?php
+          }
+          ?>
+        </div>
+      </form>
+    </div>
+    <!--end::Toolbar-->
   </div>
 </div>
+<!--end::Subheader-->
 <div class="row">
-  <div class="col-12 col-lg-9">
+  <!-- begin::staff list -->
+  <div class="col-12 col-lg-8">
     <div class="card">
-        <div class="card-header">
-          <strong>List</strong>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive" style="width:100%; margin:0 auto;">
-            <table id="demoGrid" class="table table-bordered dt-responsive nowrap table-sm" width="100%" cellspacing="0" style= "text-align: center;">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Phone</th>
-                  <th scope="col">ID Type</th>
-                  <th scope="col">IC No</th>
-                  <th scope="col">Son/Daughter</th>
-                  <th scope="col">Total Child</th>
-                  <th scope="col">Relation</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Update</th>
-                </tr>
-              </thead>
-              <tbody>
+      <!-- begin :: card header -->
+      <div class="modal-header">
+        <strong>List</strong>
+        <button class="btn btn-light btn-hover-success bolder btn-sm" type="button" data-bs-toggle="dropdown">Sort by &nbsp;&nbsp;&nbsp;<i class="fas fa-sort"></i></button>
+        <ul class="dropdown-menu">
+        <li class="dropdown-item"><a href="index.php?page=parentlist">All</a></li>
+            <li class="dropdown-item"><a href="index.php?page=parentlist&level=1">category 1</a></li>
+            <li class="dropdown-item"><a href="index.php?page=parentlist&level=2">category 2</a></li>
+            <li class="dropdown-item"><a href="index.php?page=parentlist&level=3">category 3</a></li>
+            <li class="dropdown-item"><a href="index.php?page=parentlist&level=4">category 4</a></li>
+            <li class="dropdown-item"><a href="index.php?page=parentlist&level=5">category 5</a></li>
+            <li class="dropdown-item"><a href="index.php?page=parentlist&level=6">category 6</a></li>
+        </ul>
+      </div>
+      <!-- end :: card header -->
+      <!-- begin :: card body -->
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm text-left table-bordered">
+            <thead class="bg-success text-white">
+              <tr class="text-center">
+                <th scope="col">Name</th>
+                <th scope="col">ID Type</th>
+                <th scope="col">ID No</th>
+                <th scope="col">Relation</th>
+                <th scope="col">Son/Daughter</th>
+                <th scope="col">Total Child</th>
+                <th scope="col">Status</th>
+                <th scope="col">Update</th>
+              </tr>
+            </thead>
+            <tbody>
               <?php
+              foreach ($cursor as $document)
+              {
+                $date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+                $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                $parent_id = strval($document->_id);
+                $ConsumerID = $document->ConsumerID;
+                $ParentStatus = $document->ParentStatus;
+
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                 foreach ($cursor as $document)
                 {
-                  $count = 0;
-                  $parentid = strval($document->_id);
-                  $ConsumerID = strval($document->ConsumerID);
-                  $ParentStatus = strval($document->ParentStatus);
-                  $consumeridparent = new \MongoDB\BSON\ObjectId($ConsumerID);
-                  $filter1 = ['_id'=>$consumeridparent];
-                  $query1 = new MongoDB\Driver\Query($filter1);
-                  $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                  foreach ($cursor1 as $document1)
-                  {
-                    $ConsumerFName = $document1->ConsumerFName;
-                    $ConsumerLName = $document1->ConsumerLName;
-                    $ConsumerIDType = $document1->ConsumerIDType;
-                    $ConsumerIDNoParent = $document1->ConsumerIDNo;
-                    $ConsumerEmail = $document1->ConsumerEmail;
-                    $ConsumerPhone = $document1->ConsumerPhone;
+                  $parent_consumer_id = strval($document->_id);
+                  $ConsumerFName = $document->ConsumerFName;
+                  $ConsumerLName = $document->ConsumerLName;
+                  $ConsumerIDType = $document->ConsumerIDType;
+                  $ConsumerIDNo = $document->ConsumerIDNo;
+                }
+                ?>
+                <tr>
+                  <td><a href="index.php?page=parentdetail&id=<?=$parent_consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
+                  <td><?= $ConsumerIDType; ?></td>
+                  <td><?= $ConsumerIDNo; ?></td>
+                  <td>
+                    <?php
+                    $filter = ['ParentID'=>$parent_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $ParentStudentRelation = $document->ParentStudentRelation;
+                      ?>
+                      <a class="text-primary"><?=$ParentStudentRelation;?></a><br>
+                      <?php
+                    }
                     ?>
-                    <tr>
-                    <td><a href="index.php?page=parentdetail&id=<?php echo $ConsumerID; ?>" style="color:#076d79; text-decoration: none;"><?php echo $ConsumerFName." ".$ConsumerLName;?></a></td>
-                    <td><?php print_r($ConsumerPhone);?></td>
-                    <td><?php print_r($ConsumerIDType);?></td>
-                    <td><?php print_r($ConsumerIDNoParent);?></td>
-                    <td>
+                  </td>
+                  <td>
+                    <?php
+                    $count = 0;
+                    $filter = ['ParentID'=>$parent_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $relation_id = strval($document->_id);
+                      $StudentID = $document->StudentID;
+                      $ParentStudentRelation = $document->ParentStudentRelation;
+
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($StudentID)];
+                      $query = new MongoDB\Driver\Query($filter);
+                      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                      foreach ($cursor as $document)
+                      {
+                        $count = $count + 1;
+                        $Consumer_id = $document->Consumer_id;
+
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                        foreach ($cursor as $document)
+                        {
+                          $student_consumer_id = strval($document->_id);
+                          $ConsumerFName = $document->ConsumerFName;
+                          $ConsumerLName = $document->ConsumerLName;
+                        }
+                      }
+                      ?>
+                      <a href="index.php?page=studentdetail&id=<?=$student_consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                      <?php
+                    }
+                    ?>
+                  </td>
+                  <td class="text-center"><?= $count; ?></td>
+                  <?php
+                  if($ParentStatus == "ACTIVE")
+                  {
+                    ?>
+                    <td class="text-warning"><?= $ParentStatus; ?></td>
                     <?php
                   }
-                  $filter2 = ['Schools_id'=>$_SESSION["loggeduser_schoolID"], 'ParentID'=>$parentid];
-                  $query2 = new MongoDB\Driver\Query($filter2);
-                  $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query2);
-                  foreach ($cursor2 as $document2)
+                  else
                   {
-                    $totalchild = $count + 1;
-                    $ParentID = strval($document2->ParentID);
-                    $StudentID = strval($document2->StudentID);
-                    $ParentStudentRelation = strval($document2->ParentStudentRelation);
-                    $studentid = new \MongoDB\BSON\ObjectId($StudentID);
-                    $filter3 = ['_id'=>$studentid];
-                    $query3 = new MongoDB\Driver\Query($filter3);
-                    $cursor3 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query3);
-
-                    foreach ($cursor3 as $document3)
-                    {
-                      $Consumer_id = strval($document3->Consumer_id);
-                      $consumeridstudent = new \MongoDB\BSON\ObjectId($Consumer_id);
-                      $filter4 = ['_id'=>$consumeridstudent];
-                      $query4 = new MongoDB\Driver\Query($filter4);
-                      $cursor4 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query4);
-                      foreach ($cursor4 as $document4)
-                      {
-                        $studentid = $document4->_id;
-                        $studentFName = $document4->ConsumerFName;
-                        $studentLName = $document4->ConsumerLName;
-                        ?>
-                        <a href="index.php?page=studentdetail&id=<?php echo $studentid; ?>" style="color:#076d79; text-decoration: none;">
-                        <?php
-                        echo $studentFName." ".$studentLName;
-                        ?>
-                        </a>
-                        <?php
-                        echo "<br>";
-                      }
-                    }
+                    ?>
+                    <td class="text-danger"><?= $ParentStatus; ?></td>
+                    <?php
                   }
-                  ?>
-                  </td>
-                  <td><?php print_r($totalchild);?></td>
-                  <td><?php print_r($ParentStudentRelation);?></td>
-                  <td><?php if(($ParentStatus) == "ACTIVE") {echo " <font color=green> ACTIVE";} else {echo " <font color=red> INACTIVE";}; ?></td>
+                  ?> 
                   <td>
                   <?php
-                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-                  {
-                  ?>
-                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#RecheckEditParent" data-bs-whatever="<?php echo $ConsumerIDNoParent; ?>">
-                      <i class="fa fa-edit" style="font-size:15px"></i>
-                    </button>
-                    <button style="font-size:10px" type="button" class="btn btn-light btn-hover-primary" data-bs-toggle="modal" data-bs-target="#StatusParentModal" data-bs-whatever="<?php echo $ConsumerID; ?>">
-                      <i class="fas fa-exchange-alt" style="font-size:15px" ></i>
-                    </button>
-                  <?php
-                  }
+                    if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                    {
+                      ?>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#status_parent" data-bs-whatever="<?= $parent_consumer_id; ?>">
+                        <i class="flaticon2-reload icon-md text-hover-success"></i>
+                      </button>
+                      <?php
+                    }
                   ?>
                   </td>
                 </tr>
                 <?php
-                }
-                ?>
-              </tbody>
-            </table>
-            <div class="col-12 text-right">
-              <div class="btn-group" role="group" aria-label="Basic example">
+              }
+              ?>
+            </tbody>
+          </table>
+          <div class="col-12 text-right">
+            <div class="btn-group" role="group" aria-label="Basic example">
               <?php
-                if (isset($_GET['paging']) && !empty($_GET['paging']))
+              if (isset($_GET['paging']) && !empty($_GET['paging']))
+              {
+                if ($_GET['paging'] == 0) 
                 {
-                  if ($_GET['paging'] == 0) 
-                  {
-                    ?>
-                    <span class="btn btn-secondary">Previous</span>
-                    <?php
-                  } 
-                  else 
-                  {
-                    ?>
-                    <a href="index.php?page=parentlist&paging=<?php echo $pagingprevious;?>" class="btn btn-success font-weight-bolder btn-sm">Previous</a>
-                    <?php
-                  }
+                  ?>
+                  <a class="btn btn-light btn-hover-success btn-sm">Previous</a>
+                  <a href="index.php?page=parentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+                  <?php
+                } 
+                else
+                {
+                  ?>
+                  <a href="index.php?page=parentlist&paging=<?= $pagingprevious;?>" class="btn btn-light btn-hover-success btn-sm">Previous</a>
+                  <a href="index.php?page=parentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+                  <?php
                 }
+              }
+              else if (!isset($_GET['paging']) && empty($_GET['paging']))
+              {
                 ?>
-                <a href="index.php?page=parentlist&paging=<?php echo $pagingnext;?>" class="btn btn-success font-weight-bolder btn-sm">Next</a>
-              </div>
+                <a class="btn btn-light btn-hover-success btn-sm">Previous</a>
+                <a href="index.php?page=parentlist&paging=<?= $pagingnext;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+                <?php
+              }
+              ?>
             </div>
           </div>
         </div>
       </div>
+      <!-- end :: card body -->
     </div>
-    <div class="col-12 col-lg-3">
-      <div class="row">
+  </div>
+  <!-- end::staff list -->
+    <!-- begin::latest summary -->
+    <div class="col-12 col-lg-4">
+    <div class="row">
         <div class="col-12 col-lg-12">
           <div class="card">
             <div class="card-header">
@@ -253,87 +283,87 @@
               <div class="row">
                 <div class="col-12">
                   <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-staff" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <!--Tab by all class -->
+                    <div class="tab-pane fade show active" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
                       <div class="box">
                         <strong>Total</strong>
                         <div class="table-responsive">
-                        <table class="table table-sm">
-                          <tr>
-                            <th>Total</th>
-                            <td>
-                              <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"]];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-                              $totalparent = 0;
-                              foreach ($cursor as $document)
-                              {
-                                $totalparent = $totalparent + 1;
-                              }
-                              echo $totalparent;
-                              ?>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th>Active</th>
-                            <td>
-                              <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],'ParentStatus'=>'ACTIVE'];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-                              $totalparent = 0;
-                              foreach ($cursor as $document)
-                              {
-                                $totalparent = $totalparent + 1;
-                              }
-                              echo $totalparent;
-                              ?>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th>Inactive</th>
-                            <td>
-                              <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_schoolID"],  'ParentStatus'=>'INACTIVE'];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
-                              $totalparent = 0;
-                              foreach ($cursor as $document)
-                              {
-                                $totalparent = $totalparent + 1;
-                              }
-                              echo $totalparent;
-                              ?>
-                            </td>
-                          </tr>
-                        </table>
-                     </div>
-                   </div>
-                   <div class="box">
-                        <strong>Remarks</strong>
-                        <div class="table-responsive">
-                        <table class="table table-sm">
-                          <thead>
+                          <table class="table table-sm">
                             <tr>
-                              <th>Category</th>
-                              <th>Subject</th>
-                              <th>Parent</th>
-                              <th>Status</th>
+                              <th>Total</th>
+                              <td>
+                              <?php
+                              $totalparent = 0;
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $totalparent = $totalparent+ 1;
+                              }
+                              echo $totalparent;
+                              ?>
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
                             <tr>
-                              <td>No data</td>
-                              <td>No data</td>
-                              <td>No data</td>
-                              <td>No data</td>
+                              <th>Active</th>
+                              <td>
+                              <?php
+                              $totalparent = 0;
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"], 'ParentStatus'=>'ACTIVE'];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $totalparent = $totalparent + 1;
+                              }
+                              echo $totalparent;
+                              ?>
+                              </td>
                             </tr>
-                          </tbody>
-                        </table>
+                            <tr>
+                              <th>Inactive</th>
+                              <td>
+                              <?php
+                              $totalparent = 0;
+                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"], 'ParentStatus'=>'INACTIVE'];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Parents',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $totalparent = $totalparent + 1;
+                              }
+                              echo $totalparent;
+                              ?>
+                              </td>
+                            </tr>
+                          </table>
                         </div>
                       </div>
-                  </div>
-                    <div class="tab-pane fade" id="v-pills-department" role="tabpanel" aria-labelledby="v-pills-department-tab">...</div>
+                      <div class="box">
+                        <strong>Remarks</strong>
+                        <div class="table-responsive">
+                          <table class="table table-sm">
+                            <thead>
+                              <tr>
+                                <th>School</th>
+                                <th>Subject</th>
+                                <th>Students</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody class="bg-light">
+                              <tr>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>No data</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -341,6 +371,8 @@
           </div>
         </div>
       </div>
-     </div>
     </div>
-<?php include ('view/pages/modal-parentlist.php'); ?>
+  </div>
+  <!-- end::latest summary -->
+</div>
+<?php include ('view/pages/modal-studentlist.php'); 

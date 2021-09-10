@@ -5,8 +5,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var AddDepartmentModal = document.getElementById('AddDepartmentModal')
-      AddDepartmentModal.addEventListener('show.bs.modal', function (event) {
+      var add_department = document.getElementById('add_department')
+      add_department.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -15,28 +15,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = AddDepartmentModal.querySelector('.modal-title')
-      var modalBodyInput = AddDepartmentModal.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      }) 
-
-      var EditDepartmentModal = document.getElementById('EditDepartmentModal')
-      EditDepartmentModal.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = EditDepartmentModal.querySelector('.modal-title')
-      var modalBodyInput = EditDepartmentModal.querySelector('.modal-body input')
+      var modalTitle = add_department.querySelector('.modal-title')
+      var modalBodyInput = add_department.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
 
-      var DeleteDepartmentModal = document.getElementById('DeleteDepartmentModal')
-      DeleteDepartmentModal.addEventListener('show.bs.modal', function (event) {
+      var edit_department = document.getElementById('edit_department')
+      edit_department.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -45,8 +30,23 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = DeleteDepartmentModal.querySelector('.modal-title')
-      var modalBodyInput = DeleteDepartmentModal.querySelector('.modal-body input')
+      var modalTitle = edit_department.querySelector('.modal-title')
+      var modalBodyInput = edit_department.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+
+      var delete_department = document.getElementById('delete_department')
+      delete_department.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = delete_department.querySelector('.modal-title')
+      var modalBodyInput = delete_department.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -71,8 +71,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-        var AddSubjectModal = document.getElementById('AddSubjectModal')
-        AddSubjectModal.addEventListener('show.bs.modal', function (event) {
+        var add_subject = document.getElementById('add_subject')
+        add_subject.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -81,13 +81,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = AddSubjectModal.querySelector('.modal-title')
-        var modalBodyInput = AddSubjectModal.querySelector('.modal-body input')
+        var modalTitle = add_subject.querySelector('.modal-title')
+        var modalBodyInput = add_subject.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
 
-        var EditSubjectModal = document.getElementById('EditSubjectModal')
-        EditSubjectModal.addEventListener('show.bs.modal', function (event) {
+        var edit_subject = document.getElementById('edit_subject')
+        edit_subject.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -96,13 +96,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = EditSubjectModal.querySelector('.modal-title')
-        var modalBodyInput = EditSubjectModal.querySelector('.modal-body input')
+        var modalTitle = edit_subject.querySelector('.modal-title')
+        var modalBodyInput = edit_subject.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
 
-        var DeleteSubjectModal = document.getElementById('DeleteSubjectModal')
-        DeleteSubjectModal.addEventListener('show.bs.modal', function (event) {
+        var delete_subject = document.getElementById('delete_subject')
+        delete_subject.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -111,8 +111,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = DeleteSubjectModal.querySelector('.modal-title')
-        var modalBodyInput = DeleteSubjectModal.querySelector('.modal-body input')
+        var modalTitle = delete_subject.querySelector('.modal-title')
+        var modalBodyInput = delete_subject.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
       </script>
@@ -122,8 +122,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var recheckaddstaff = document.getElementById('recheckaddstaff')
-      recheckaddstaff.addEventListener('show.bs.modal', function (event) {
+      var edit_staff = document.getElementById('edit_staff')
+      edit_staff.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -132,13 +132,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = recheckaddstaff.querySelector('.modal-title')
-      var modalBodyInput = recheckaddstaff.querySelector('.modal-body input')
+      var modalTitle = edit_staff.querySelector('.modal-title')
+      var modalBodyInput = edit_staff.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
 
-      var recheckeditstaff = document.getElementById('recheckeditstaff')
-      recheckeditstaff.addEventListener('show.bs.modal', function (event) {
+      var status_staff = document.getElementById('status_staff')
+      status_staff.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -147,31 +147,16 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = recheckeditstaff.querySelector('.modal-title')
-      var modalBodyInput = recheckeditstaff.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      })
-
-      var StatusStaffModal = document.getElementById('StatusStaffModal')
-      StatusStaffModal.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = StatusStaffModal.querySelector('.modal-title')
-      var modalBodyInput = StatusStaffModal.querySelector('.modal-body input')
+      var modalTitle = status_staff.querySelector('.modal-title')
+      var modalBodyInput = status_staff.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       
-    $(document).ready(function () {
-        $("#staffattendance").table2excel({
-            filename: "Staffattendance.xls"
-        });
-    });
+      $(document).ready(function () {
+          $("#staffattendance").table2excel({
+              filename: "Staffattendance.xls"
+          });
+      });
       </script>
       <?php
     }
@@ -179,8 +164,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var recheckaddstudent = document.getElementById('recheckaddstudent')
-      recheckaddstudent.addEventListener('show.bs.modal', function (event) {
+      var edit_student = document.getElementById('edit_student')
+      edit_student.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -189,13 +174,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = recheckaddstudent.querySelector('.modal-title')
-      var modalBodyInput = recheckaddstudent.querySelector('.modal-body input')
+      var modalTitle = edit_student.querySelector('.modal-title')
+      var modalBodyInput = edit_student.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
 
-      var recheckeditstudent = document.getElementById('recheckeditstudent')
-      recheckeditstudent.addEventListener('show.bs.modal', function (event) {
+      var status_student = document.getElementById('status_student')
+      status_student.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -204,23 +189,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = recheckeditstudent.querySelector('.modal-title')
-      var modalBodyInput = recheckeditstudent.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      })
-
-      var StatusStudentModal = document.getElementById('StatusStudentModal')
-      StatusStudentModal.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = StatusStudentModal.querySelector('.modal-title')
-      var modalBodyInput = StatusStudentModal.querySelector('.modal-body input')
+      var modalTitle = status_student.querySelector('.modal-title')
+      var modalBodyInput = status_student.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -230,8 +200,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-        var recheckaddparent = document.getElementById('recheckaddparent')
-        recheckaddparent.addEventListener('show.bs.modal', function (event) {
+        var status_parent = document.getElementById('status_parent')
+        status_parent.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -240,38 +210,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = recheckaddparent.querySelector('.modal-title')
-        var modalBodyInput = recheckaddparent.querySelector('.modal-body input')
-        modalBodyInput.value = recipient
-        })
-
-        var RecheckEditParent = document.getElementById('RecheckEditParent')
-        RecheckEditParent.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var recipient = button.getAttribute('data-bs-whatever')
-        // If necessary, you could initiate an AJAX request here
-        // and then do the updating in a callback.
-        //
-        // Update the modal's content.
-        var modalTitle = RecheckEditParent.querySelector('.modal-title')
-        var modalBodyInput = RecheckEditParent.querySelector('.modal-body input')
-        modalBodyInput.value = recipient
-        })
-
-        var StatusParentModal = document.getElementById('StatusParentModal')
-        StatusParentModal.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var recipient = button.getAttribute('data-bs-whatever')
-        // If necessary, you could initiate an AJAX request here
-        // and then do the updating in a callback.
-        //
-        // Update the modal's content.
-        var modalTitle = StatusParentModal.querySelector('.modal-title')
-        var modalBodyInput = StatusParentModal.querySelector('.modal-body input')
+        var modalTitle = status_parent.querySelector('.modal-title')
+        var modalBodyInput = status_parent.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
       </script>
@@ -281,8 +221,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-        var recheckaddclass = document.getElementById('recheckaddclass')
-        recheckaddclass.addEventListener('show.bs.modal', function (event) {
+        var add_class = document.getElementById('add_class')
+        add_class.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -291,13 +231,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = recheckaddclass.querySelector('.modal-title')
-        var modalBodyInput = recheckaddclass.querySelector('.modal-body input')
+        var modalTitle = add_class.querySelector('.modal-title')
+        var modalBodyInput = add_class.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
 
-        var recheckeditclass = document.getElementById('recheckeditclass')
-        recheckeditclass.addEventListener('show.bs.modal', function (event) {
+        var edit_class = document.getElementById('edit_class')
+        edit_class.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -306,13 +246,13 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = recheckeditclass.querySelector('.modal-title')
-        var modalBodyInput = recheckeditclass.querySelector('.modal-body input')
+        var modalTitle = edit_class.querySelector('.modal-title')
+        var modalBodyInput = edit_class.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
 
-        var DeleteclassModal = document.getElementById('DeleteclassModal')
-        DeleteclassModal.addEventListener('show.bs.modal', function (event) {
+        var delete_class = document.getElementById('delete_class')
+        delete_class.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         var button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -321,8 +261,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        var modalTitle = DeleteclassModal.querySelector('.modal-title')
-        var modalBodyInput = DeleteclassModal.querySelector('.modal-body input')
+        var modalTitle = delete_class.querySelector('.modal-title')
+        var modalBodyInput = delete_class.querySelector('.modal-body input')
         modalBodyInput.value = recipient
         })
       </script>
@@ -360,6 +300,42 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // Update the modal's content.
       var modalTitle = StatusTimetableModal.querySelector('.modal-title')
       var modalBodyInput = StatusTimetableModal.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+      </script>
+      <?php
+    }
+    if ($_GET['page']=="forumdetail") 
+    {
+      ?>
+      <script>
+      var edit_forum = document.getElementById('edit_forum')
+      edit_forum.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = edit_forum.querySelector('.modal-title')
+      var modalBodyInput = edit_forum.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+
+      var delete_forum = document.getElementById('delete_forum')
+      delete_forum.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = delete_forum.querySelector('.modal-title')
+      var modalBodyInput = delete_forum.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -404,8 +380,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var UpdateStaffremark = document.getElementById('UpdateStaffremark')
-      UpdateStaffremark.addEventListener('show.bs.modal', function (event) {
+      var update_staff_remark = document.getElementById('update_staff_remark')
+      update_staff_remark.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -414,8 +390,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = UpdateStaffremark.querySelector('.modal-title')
-      var modalBodyInput = UpdateStaffremark.querySelector('.modal-body input')
+      var modalTitle = update_staff_remark.querySelector('.modal-title')
+      var modalBodyInput = update_staff_remark.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -425,8 +401,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var Updatestudentremark = document.getElementById('Updatestudentremark')
-      Updatestudentremark.addEventListener('show.bs.modal', function (event) {
+      var update_student_remark = document.getElementById('update_student_remark')
+      update_student_remark.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -435,8 +411,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = Updatestudentremark.querySelector('.modal-title')
-      var modalBodyInput = Updatestudentremark.querySelector('.modal-body input')
+      var modalTitle = update_student_remark.querySelector('.modal-title')
+      var modalBodyInput = update_student_remark.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -446,29 +422,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var UpdateParentremark = document.getElementById('UpdateParentremark')
-      UpdateParentremark.addEventListener('show.bs.modal', function(event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var recipient = button.getAttribute('data-bs-whatever')
-        // If necessary, you could initiate an AJAX request here
-        // and then do the updating in a callback.
-        //
-        // Update the modal's content.
-        var modalTitle = UpdateParentremark.querySelector('.modal-title')
-        var modalBodyInput = UpdateParentremark.querySelector('.modal-body input')
-        modalBodyInput.value = recipient
-      })
-      </script>
-      <?php
-    }
-    if ($_GET['page']=="departmentdetail") 
-    {
-      ?>
-      <script>
-      var Updatedepartmentremark = document.getElementById('Updatedepartmentremark')
-      Updatedepartmentremark.addEventListener('show.bs.modal', function (event) {
+      var update_parent_remark = document.getElementById('update_parent_remark')
+      update_parent_remark.addEventListener('show.bs.modal', function(event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -477,8 +432,29 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = Updatedepartmentremark.querySelector('.modal-title')
-      var modalBodyInput = Updatedepartmentremark.querySelector('.modal-body input')
+      var modalTitle = update_parent_remark.querySelector('.modal-title')
+      var modalBodyInput = update_parent_remark.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+      </script>
+      <?php
+    }
+    if ($_GET['page']=="departmentdetail") 
+    {
+      ?>
+      <script>
+      var update_department_remark = document.getElementById('update_department_remark')
+      update_department_remark.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = update_department_remark.querySelector('.modal-title')
+      var modalBodyInput = update_department_remark.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -488,8 +464,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var UpdateClassremark = document.getElementById('UpdateClassremark')
-      UpdateClassremark.addEventListener('show.bs.modal', function (event) {
+      var update_class_remark = document.getElementById('update_class_remark')
+      update_class_remark.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -498,8 +474,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = UpdateClassremark.querySelector('.modal-title')
-      var modalBodyInput = UpdateClassremark.querySelector('.modal-body input')
+      var modalTitle = update_class_remark.querySelector('.modal-title')
+      var modalBodyInput = update_class_remark.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -509,8 +485,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var Updatesubjectremark = document.getElementById('Updatesubjectremark')
-      Updatesubjectremark.addEventListener('show.bs.modal', function (event) {
+      var update_subject_remark = document.getElementById('update_subject_remark')
+      update_subject_remark.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -519,8 +495,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = Updatesubjectremark.querySelector('.modal-title')
-      var modalBodyInput = Updatesubjectremark.querySelector('.modal-body input')
+      var modalTitle = update_subject_remark.querySelector('.modal-title')
+      var modalBodyInput = update_subject_remark.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
@@ -603,12 +579,57 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         </script>
         <?php
       }
-      if ($_GET['page']=="subject") 
+      if ($_GET['page']=="ol_subject") 
       {
         ?>
           <script>
-          $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
+          var topic = document.getElementById('topic')
+          topic.addEventListener('show.bs.modal', function (event) {
+          // Button that triggered the modal
+          var button = event.relatedTarget
+          // Extract info from data-bs-* attributes
+          var recipient = button.getAttribute('data-bs-whatever')
+          // If necessary, you could initiate an AJAX request here
+          // and then do the updating in a callback.
+          //
+          // Update the modal's content.
+          var modalTitle = topic.querySelector('.modal-title')
+          var modalBodyInput = topic.querySelector('.modal-body input')
+          modalBodyInput.value = recipient
+          })
+          </script>
+          <?php
+      }
+      if ($_GET['page']=="ol_notes") 
+      {
+        ?>
+          <script>
+          var activity = document.getElementById('activity')
+          activity.addEventListener('show.bs.modal', function (event) {
+          // Button that triggered the modal
+          var button = event.relatedTarget
+          // Extract info from data-bs-* attributes
+          var recipient = button.getAttribute('data-bs-whatever')
+          // If necessary, you could initiate an AJAX request here
+          // and then do the updating in a callback.
+          // Update the modal's content.
+          var modalTitle = activity.querySelector('.modal-title')
+          var modalBodyInput = activity.querySelector('.modal-body input')
+          modalBodyInput.value = recipient
+          })
+
+          var edit = document.getElementById('edit')
+          edit.addEventListener('show.bs.modal', function (event) {
+          // Button that triggered the modal
+          var button = event.relatedTarget
+          // Extract info from data-bs-* attributes
+          var recipient = button.getAttribute('data-bs-whatever')
+          // If necessary, you could initiate an AJAX request here
+          // and then do the updating in a callback.
+          // Update the modal's content.
+          var modalTitle = edit.querySelector('.modal-title')
+          var modalBodyInput = edit.querySelector('.modal-body input')
+          modalBodyInput.value = recipient
           })
           </script>
           <?php

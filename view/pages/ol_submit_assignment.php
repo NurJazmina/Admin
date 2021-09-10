@@ -96,7 +96,7 @@ function time_elapsed($date){
             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment',$query);
             foreach ($cursor as $document)
             {
-                $Assignment_id = $document->_id;
+                $Assignment_id =strval($document->_id);
                 $Title = $document->Title;
                 $Submitfrom = $document->Submitfrom;
                 $Duedate = $document->Duedate;
@@ -143,7 +143,7 @@ function time_elapsed($date){
                     $total_submission = 0;
                     $not_graded = 0;
                     $graded = 0;
-                    $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                    $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -159,7 +159,7 @@ function time_elapsed($date){
                         {
                             $consumer_id = strval($document1->_id);
 
-                            $filter2 = ['Created_by'=>$consumer_id];
+                            $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
                             $query2 = new MongoDB\Driver\Query($filter2);
                             $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
@@ -183,7 +183,7 @@ function time_elapsed($date){
                     <table class="table table-hover table-borderless">
                         <tbody>
                             <tr class="bg-gray-300 text-dark-50">
-                                <th>Hidden from students</th>
+                                <th class="col-6">Hidden from students</th>
                                 <td><?php
                                 if($Availability == 'SHOW')
                                 {
@@ -194,35 +194,23 @@ function time_elapsed($date){
                                     echo "Yes";
                                 }
                                 ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="text-dark-50">
-                                <th>Participants</th>
+                                <th class="col-6">Participants</th>
                                 <td>
                                 <?php echo $total; ?>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
-                                <th>Submitted</th>
+                                <th class="col-6">Submitted</th>
                                 <td><?php echo $total_submission; ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="text-dark-50">
-                                <th>Needs grading</th>
+                                <th class="col-6">Needs grading</th>
                                 <td><?php echo $not_graded; ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
-                                <th>Time remaining</th>
+                                <th class="col-6">Time remaining</th>
                                 <td>
                                 <?php
                                 $due = date_format($Duetimezone,"Y-m-d\TH:i:s");
@@ -241,9 +229,6 @@ function time_elapsed($date){
                                 }
                                 ?>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -261,47 +246,98 @@ function time_elapsed($date){
                                 <!--begin::Search Form-->
                                 <div class="mb-7">
                                     <div class="noprint text-right">
-                                        <!--begin::Dropdown-->
-                                        <div class="dropdown dropdown-inline mr-2">
-                                            <button type="button" class="btn btn-light font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="svg-icon svg-icon-md">
-                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
+                                        <div class="checkbox-inline">
+                                            <!--begin::Dropdown-->
+                                            <div class="dropdown dropdown-inline mr-2">
+                                                <button type="button" class="btn btn-light font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="svg-icon svg-icon-primary svg-icon-md">
+                                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24" />
+                                                            <path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3" />
+                                                            <path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000" />
+                                                        </g>
+                                                    </svg>
+                                                    <!--end::Svg Icon-->
+                                                </span>Export</button>
+                                                <!--begin::Dropdown Menu-->
+                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                                    <!--begin::Navigation-->
+                                                    <ul class="navi flex-column navi-hover py-2">
+                                                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-secondary pb-2">Choose an option:</li>
+                                                        <li class="navi-item">
+                                                            <a type="button" class="navi-link" onclick="window.print()">
+                                                                <span class="navi-icon">
+                                                                    <i class="la la-print"></i>
+                                                                </span>
+                                                                <span class="navi-text">Print</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="navi-item">
+                                                            <a href="index.php?page=ol_submit_assignment&id=<?= $Assignment_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
+                                                                <span class="navi-icon">
+                                                                    <i class="la la-file-excel-o"></i>
+                                                                </span>
+                                                                <span class="navi-text">Excel</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <!--end::Navigation-->
+                                                </div>
+                                                <!--end::Dropdown Menu-->
+                                            </div>
+                                            <!--end::Dropdown-->
+                                            <form name="myForm">
+                                                <a class="btn btn-light btn-sm font-weight-bolder" onclick="myFunction()">
+                                                <span class="svg-icon svg-icon-primary svg-icon-2x">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24" />
-                                                        <path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3" />
-                                                        <path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000" />
+                                                        <rect x="0" y="0" width="24" height="24"/>
+                                                        <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
+                                                        <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
+                                                        <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
+                                                        <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
                                                     </g>
                                                 </svg>
-                                                <!--end::Svg Icon-->
-                                            </span>Export</button>
-                                            <!--begin::Dropdown Menu-->
-                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                                <!--begin::Navigation-->
-                                                <ul class="navi flex-column navi-hover py-2">
-                                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-secondary pb-2">Choose an option:</li>
-                                                    <li class="navi-item">
-                                                        <a type="button" class="navi-link" onclick="window.print()">
-                                                            <span class="navi-icon">
-                                                                <i class="la la-print"></i>
-                                                            </span>
-                                                            <span class="navi-text">Print</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="index.php?page=ol_submit_assignment&id=<?= $Assignment_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
-                                                            <span class="navi-icon">
-                                                                <i class="la la-file-excel-o"></i>
-                                                            </span>
-                                                            <span class="navi-text">Excel</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <!--end::Navigation-->
-                                            </div>
-                                            <!--end::Dropdown Menu-->
+                                                </span>Student Grades</a>
+                                                <?php
+                                                $total = 0;
+                                                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
+                                                $query = new MongoDB\Driver\Query($filter);
+                                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                            
+                                                foreach ($cursor as $document)
+                                                {
+                                                    $Consumer_id = $document->Consumer_id;
+                                                    
+                                                    $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                                    $query1 = new MongoDB\Driver\Query($filter1);
+                                                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                                                        
+                                                    foreach ($cursor1 as $document1)
+                                                    {
+                                                        $consumer_id = strval($document1->_id);
+                            
+                                                        $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
+                                                        $query2 = new MongoDB\Driver\Query($filter2);
+                                                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
+                            
+                                                        foreach ($cursor2 as $document2)
+                                                        {
+                                                            $total = $total + 1;
+                                                            $Mark = $document2->Mark;
+                                                            ?>
+                                                            <input type="hidden" name="mark<?= $total; ?>" value="<?= $Mark; ?>">
+                                                            <?php
+                                                        }
+                                                    }
+                                                }
+                                                ?>
+                                                <input type="hidden" name="totalstudent" value="<?= $total; ?>">
+                                            </form>
                                         </div>
-                                        <!--end::Dropdown-->
+                                        <!--end::button
                                     </div>
                                 </div>
                                 <!--end::Search Form-->
@@ -317,9 +353,8 @@ function time_elapsed($date){
                                     </tr>
                                 </thead>
                                 <tbody class="text-secondary">
-
                                 <?php
-                                $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -351,7 +386,7 @@ function time_elapsed($date){
                                         $due = strval($due);
                                         $time_elapsed = 0;
 
-                                        $filter2 = ['Created_by'=>$consumer_id];
+                                        $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
                                         $query2 = new MongoDB\Driver\Query($filter2);
                                         $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
@@ -528,6 +563,13 @@ function time_elapsed($date){
                                 </tbody>
                                 </table>
                                 </div>
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8"> 
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                    <div class="col-2"></div>
+                                </div>
                                 <!--end: Datatable-->
                             </div>
                         </div>
@@ -539,7 +581,7 @@ function time_elapsed($date){
                         <!--begin::Card-->
                         <div class="card card-custom shadow p-3 mb-10 bg-white rounded">
                             <?php
-                            $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                            $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                             $query = new MongoDB\Driver\Query($filter);
                             $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -554,7 +596,7 @@ function time_elapsed($date){
                                     <button class="btn btn-secondary font-weight-bolder btn-sm mb-2" type="button" data-bs-toggle="dropdown">Change User &nbsp; <i class="fas fa-sort"></i></button>
                                     <ul class="dropdown-menu">
                                     <?php
-                                        $filter = ['Class_id'=>$_SESSION["loggeduser_ClassID"]];
+                                        $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                         $query = new MongoDB\Driver\Query($filter);
                                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 
@@ -581,7 +623,6 @@ function time_elapsed($date){
                                 </div>
                             </div>
                             <?php
-
                             if (!isset($_GET['user']) && empty($_GET['user']))
                             {
                                 $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
@@ -626,7 +667,7 @@ function time_elapsed($date){
                                     $due = strval($due);
                                     $time_elapsed = 0;
 
-                                    $filter2 = ['Created_by'=>$consumer_id];
+                                    $filter2 = ['Created_by'=>$consumer_id,'Assignment_id'=>$Assignment_id];
                                     $query2 = new MongoDB\Driver\Query($filter2);
                                     $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Assignment_Answer',$query2);
 
@@ -635,6 +676,7 @@ function time_elapsed($date){
                                         $Answer_id = strval($document2->_id);
                                         $Answer_Created_by = $document2->Created_by;
                                         $Created_date = $document2->Created_date;
+                                        $Answer = $document2->Answer;
                                         $Mark = $document2->Mark;
                                         $File_submission = $document2->File_submission;
                                         $comment = $document2->comment;
@@ -783,6 +825,20 @@ function time_elapsed($date){
                                             <form name="EditGrade" action="" method="post">
                                                 <div class="modal-body">
                                                     <input type="hidden" name="answer_id" value="<?php echo $Answer_id; ?>">
+                                                    <?php
+                                                    if($Answer != '')
+                                                    {
+                                                        ?>
+                                                        <div class="row mb-5"> 
+                                                            <div class="col-sm">
+                                                                <label>Answer</label>
+                                                                <label align="justify"><?php echo $Answer; ?></label>
+                                                            </div>  
+                                                            <div class="col-sm"></div>  
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     <div class="row mb-5"> 
                                                         <div class="col-sm">
                                                             <label>Grade out of 100</label>
@@ -818,14 +874,13 @@ function time_elapsed($date){
                         <?php
                     }
                 }
-
                 if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                 {
                     ?>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_assignment&id=<?php echo $Assignment_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Assignment Attempts</a>
+                                <a href="index.php?page=ol_assignment&id=<?php echo $Assignment_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview assignment now</a>
                                 <a href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
                                 <a href="index.php?page=ol_submit_assignment&id=<?php echo $Assignment_id; ?>&action=grader"><button type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Grade</button></a>
                             </div>
@@ -833,7 +888,7 @@ function time_elapsed($date){
                     </div>
                     <?php
                 } 
-                elseif($_SESSION["loggeduser_ConsumerGroup_id"] == '6018c32b10184a751c102eb6') //student
+                elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT')
                 {
                     ?>
                     <div class="card-footer">
@@ -850,6 +905,215 @@ function time_elapsed($date){
         </div>
     </div>
 </div>
-<?php
-include ('view/pages/ol_modal-grade.php'); 
-?>
+<?php include ('view/pages/ol_modal-grade.php'); ?>
+<script>
+function myFunction() {
+var totalstudent = document.forms["myForm"]["totalstudent"].value;
+let z = 100 / 10; //eg 10/10=1
+
+let a = 0 + " - " + z ; //0-1
+let aa = z + z; 
+
+let b = z + " - " + aa ; //1-2
+var bb = aa + z;
+
+let c = aa + " - " + bb ; //2-3
+let cc = bb + z;
+
+let d = bb + " - " + cc ; //3-4
+let dd = cc + z;
+
+let e = cc + " - " + dd ; //4-5
+let ee = dd + z;
+
+let f = dd + " - " + ee ; //5-6
+let ff = ee + z;
+
+let g = ee + " - " + ff ; //6-7
+let gg = ff + z;
+
+let h = ff + " - " + gg ; //7-8
+let hh = gg + z;
+
+let i = gg + " - " + hh ; //8-9
+let ii = hh + z;
+
+let j = hh + " - " + ii ; //9-10
+
+var one =  0;
+var two = 0;
+var three = 0;
+var four = 0;
+var five = 0;
+var six = 0;
+var seven = 0;
+var eight = 0;
+var nine = 0;
+var ten = 0;
+for (let count = 1; count <= totalstudent; count++) {
+    
+    var mark = document.forms["myForm"]["mark"+count].value;
+
+    if (mark >= 0 && mark <= z) 
+    {
+        if (one === 0)
+        {
+            var one =  1;
+        }
+        else if (one !== 0)
+        {
+            var one =  one + 1;
+        }
+    }
+    else if (mark >= z && mark <= aa) 
+    {
+        if (two === 0)
+        {
+            var two =  1;
+        }
+        else if (two !== 0)
+        {
+            var two =  two + 1;
+        }
+    }
+    else if (mark >= aa && mark <= bb) 
+    {
+        if (three === 0)
+        {
+            var three =  1;
+        }
+        else if (three !== 0)
+        {
+            var three =  three + 1;
+        }
+    } 
+    else if (mark >= bb && mark <= cc) 
+    {
+        if (four === 0)
+        {
+            var four =  1;
+        }
+        else if (four !== 0)
+        {
+            var four =  four + 1;
+        }
+    } 
+    else if (mark >= cc && mark <= dd) 
+    {
+        if (five === 0)
+        {
+            var five =  1;
+        }
+        else if (five !== 0)
+        {
+            var five =  five + 1;
+        }
+    } 
+    else if (mark >= dd && mark <= ee) 
+    {
+        if (six === 0)
+        {
+            var six =  1;
+        }
+        else if (six !== 0)
+        {
+            var six =  six + 1;
+        }
+    } 
+    else if (mark >= ee && mark <= ff) 
+    {
+        if (seven === 0)
+        {
+            var seven =  1;
+        }
+        else if (seven !== 0)
+        {
+            var seven =  seven + 1;
+        }
+    } 
+    else if (mark >= ff && mark <= gg) 
+    {
+        if (eight === 0)
+        {
+            var eight =  1;
+        }
+        else if (eight !== 0)
+        {
+            var eight =  eight + 1;
+        }
+    } 
+    else if (mark >= gg && mark <= hh) 
+    {
+        if (nine === 0)
+        {
+            var nine =  1;
+        }
+        else if (nine !== 0)
+        {
+            var nine =  nine + 1;
+        }
+    }
+    else //(mark >= hh && mark <= ii) 
+    {
+        if (ten === 0)
+        {
+            var ten =  1;
+        }
+        else if(ten !== 0)
+        {
+            var ten =  ten + 1;
+        }
+    }
+
+}
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        //label : total mark divide by 10
+        labels: [a , b, c, d, e, f, g, h, i, j],
+        //data : marks
+        datasets: [{
+            label: 'Students',
+            data: 
+            [
+                one, two , three, four, five, six, seven, eight, nine, ten
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 205, 86)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(75, 192, 192)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+}
+</script>

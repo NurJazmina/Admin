@@ -1,6 +1,7 @@
 {
     "require": {
-        "phpmailer/phpmailer": "^6.4",
-        "kreait/firebase-php": "^5.20"
+        "phpmailer/phpmailer": "^6.5",
+        "kreait/firebase-php": "^5.22",
+        "mongodb/mongodb": "^1.8"
     }
 }

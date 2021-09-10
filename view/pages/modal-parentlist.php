@@ -78,7 +78,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1>Account Activation/Deactivation</h1>
+          <h5 class="text-danger"><i class="flaticon2-information icon-md text-danger"></i>&nbsp;&nbsp;Account Activation/Deactivation</h5>
         </div>
         <div class="modal-body">
           <p>Are you sure you want to active/deactive this account?</p>

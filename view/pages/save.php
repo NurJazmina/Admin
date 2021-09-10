@@ -129,7 +129,7 @@ function myevent(action)
             }  
             else 
             {
-            $(".box").hide();
+                $(".box").hide();
             }
         });
 

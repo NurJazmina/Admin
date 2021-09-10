@@ -6,12 +6,12 @@ include ('model/save.php');
 
 function time_elapsed($date){
 	$bit = array(
-		//' year'      => $date  / 31556926 % 12,
+		' year'      => $date  / 31556926 % 12,
 		' week'      => $date  / 604800 % 52,
 		' day'       => $date  / 86400 % 7,
 		' hour'      => $date  / 3600 % 24,
-		//' minute'    => $date  / 60 % 60,
-		//' second'    => $date  % 60
+		' minute'    => $date  / 60 % 60,
+		' second'    => $date  % 60
 		);
 	foreach($bit as $k => $v){
 		if($v > 1)$ret[] = $v . $k . 's';
@@ -19,7 +19,6 @@ function time_elapsed($date){
 		}
 	array_splice($ret, count($ret)-1, 0, '');
 	$ret[] = '';
-
 	return join(' ', $ret);
 }
 ?>
@@ -37,7 +36,6 @@ function time_elapsed($date){
     position: relative;
     margin: 30px 0px;
 }
-
 .separator::before {
     content: "answer choices";
     position: absolute;
@@ -46,7 +44,6 @@ function time_elapsed($date){
     background-color: #fff;
     padding: 0px 10px;
 }
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
@@ -66,40 +63,40 @@ $(document).ready(function() {
 
     $("#ipclear").click(function() {
 
-            if  ($("#ip").val() == '1') 
-            {
-                toggleText = $("#ip").val();
+    if  ($("#ip").val() == '1') 
+    {
+        toggleText = $("#ip").val();
 
-                $.post("model/likes.php", {
-                like: '1',
-                Consumer_id: name,
-                url_likes: url_likes
-                },
-                function(data, status){
-                    $("#test").html(data);
-                },
-                );
-                $("#ip").val('2');
-                $("#ip").prop("disabled", false);
-                $(this).removeClass('btn-light').addClass('btn-success');
-            }
-            else if ($("#ip").val() == '2') 
-            {
-                $("#ip").val(toggleText);
+        $.post("model/likes.php", {
+        like: '1',
+        Consumer_id: name,
+        url_likes: url_likes
+        },
+        function(data, status){
+            $("#test").html(data);
+        },
+        );
+        $("#ip").val('2');
+        $("#ip").prop("disabled", false);
+        $(this).removeClass('btn-light').addClass('btn-success');
+    }
+    else if ($("#ip").val() == '2') 
+    {
+        $("#ip").val(toggleText);
 
-                $.post("model/likes.php", {
-                like: '0',
-                Consumer_id: name,
-                url_likes: url_likes
-                }, 
-                function(data, status){
-                    $("#test").html(data);
-                });
-                $("#ip").val('1');
-                $("#ip").prop("disabled", false);
-                $(this).removeClass('btn-success').addClass('btn-light');
-            }
+        $.post("model/likes.php", {
+        like: '0',
+        Consumer_id: name,
+        url_likes: url_likes
+        }, 
+        function(data, status){
+            $("#test").html(data);
         });
+        $("#ip").val('1');
+        $("#ip").prop("disabled", false);
+        $(this).removeClass('btn-success').addClass('btn-light');
+    }
+});
 
 });
 </script>
@@ -198,19 +195,19 @@ $(document).ready(function() {
                             </div>
                             <div class="mx-5">
                                 <p class="text-muted font-weight-bold mb-5">QUIZ</p>
-                                <h4 class="mb-4"><?php echo $Title; ?></h4>
+                                <h4 class="mb-4"><?= $Title; ?></h4>
                                 <div>
-                                    <small class="text-muted"><i class="fas fa-user-graduate icon-s mx-2"></i>Category <?php echo $Class_category; ?></small>
+                                    <small class="text-muted"><i class="fas fa-user-graduate icon-s mx-2"></i>Category <?= $Class_category; ?></small>
                                     <small class="dot text-muted mx-2"></small>
-                                    <small class="text-muted"><?php echo $SubjectName; ?></small>
+                                    <small class="text-muted"><?= $SubjectName; ?></small>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 text-right">
-                            <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?php echo $Created_by; ?>">
+                            <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?= $Created_by; ?>">
                                 <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Report an issue"><i class="fas fa-exclamation-triangle icon-md"></i></a>    
                             </button>
-                            <!-- <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?php echo $Created_by; ?>">
+                            <!-- <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#report" data-bs-whatever="<?= $Created_by; ?>">
                                 <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Copy and edit"><i class="flaticon-doc icon-md"></i></a>
                             </button> -->
                             <button type="button" class="btn btn-sm btn-light" onclick="window.print()">
@@ -220,7 +217,7 @@ $(document).ready(function() {
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-6 checkbox-inline">
-                            <a href="index.php?page=staffdetail&id=<?php echo $Created_by; ?>" class="d-flex align-items-center">
+                            <a href="index.php?page=staffdetail&id=<?= $Created_by; ?>" class="d-flex align-items-center">
                                 <?php
                                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
                                 $query = new MongoDB\Driver\Query($filter);
@@ -232,10 +229,10 @@ $(document).ready(function() {
                                     $firstCharacter = $name[0];
                                 }
                                 ?>
-                                <button class="btn btn-light rounded-circle"><?php echo $firstCharacter; ?></button>
+                                <button class="btn btn-light rounded-circle"><?= $firstCharacter; ?></button>
                                 <div class="col">
-                                    <div class="row"><small class="text-muted font-weight-bold mr-1"><?php echo " ".time_elapsed($nowtime-$time)." ago\n";  ?></small></div>
-                                    <div class="row"><small class="text-dark-75 font-weight-bold">by <?php echo $ConsumerFName; ?></small></div>
+                                    <div class="row"><small class="text-muted font-weight-bold mr-1"><?= " ".time_elapsed($nowtime-$time)." ago\n";  ?></small></div>
+                                    <div class="row"><small class="text-dark-75 font-weight-bold">by <?= $ConsumerFName; ?></small></div>
                                 </div>
                             </a>
                         </div>
@@ -267,9 +264,9 @@ $(document).ready(function() {
                             }
                             ?>
                             <input type="hidden" id="ip" value="0">
-                            <input type="hidden" id="loguser-id" value="<?php echo $_SESSION["loggeduser_id"]; ?>">
-                            <input type="hidden" id="url-likes" value="<?php echo $URL_LIKES; ?>">
-                            <input type="hidden" id="check" value="<?php echo $total_likes;?>">
+                            <input type="hidden" id="loguser-id" value="<?= $_SESSION["loggeduser_id"]; ?>">
+                            <input type="hidden" id="url-likes" value="<?= $URL_LIKES; ?>">
+                            <input type="hidden" id="check" value="<?= $total_likes;?>">
                             <?php 
                             if ($havedata==0) 
                             {
@@ -325,9 +322,9 @@ $(document).ready(function() {
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Objective</button> 
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?= " ".$i ?> : Objective</button> 
                         <div class="row mx-0 mt-1">
-                            <label class="col-lg-12 col-form-label" align="justify"><h5><?php echo $Question; ?></h5></label>
+                            <label class="col-lg-12 col-form-label" align="justify"><h5><?= $Question; ?></h5></label>
                         </div>
                         <div class="separator separator-solid"></div>
                         <div class="row">
@@ -336,14 +333,14 @@ $(document).ready(function() {
                                     <label class="radio radio-outline radio-success">
                                         <input type="radio" name="ans<?= $id ?>" value="A">
                                         <span></span>
-                                        <?php echo $Option_A; ?>
+                                        <?= $Option_A; ?>
                                     </label>
                                 </div>
                                 <div class="col">
                                     <label class="radio radio-outline radio-success">
                                         <input type="radio" name="ans<?= $id ?>" value="B">
                                         <span></span>
-                                        <?php echo $Option_B; ?>
+                                        <?= $Option_B; ?>
                                     </label>
                                 </div>
                             </div>
@@ -354,14 +351,14 @@ $(document).ready(function() {
                                     <label class="radio radio-outline radio-success">
                                         <input type="radio" name="ans<?= $id ?>" value="C">
                                         <span></span>
-                                        <?php echo $Option_C; ?>
+                                        <?= $Option_C; ?>
                                     </label>
                                 </div>
                                 <div class="col">
                                     <label class="radio radio-outline radio-success">
                                         <input type="radio" name="ans<?= $id ?>" value="D">
                                         <span></span>
-                                        <?php echo $Option_D; ?>
+                                        <?= $Option_D; ?>
                                     </label>
                                 </div>
                             </div>
@@ -377,9 +374,9 @@ $(document).ready(function() {
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?php echo " ".$i ?> : Subjective</button>
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill" id="objective">Question <?= " ".$i ?> : Subjective</button>
                         <div class="row mx-0 mt-1">
-                            <label class="col-lg-12 col-form-label" align="justify"><h5><?php echo $Question; ?></h5></label>
+                            <label class="col-lg-12 col-form-label" align="justify"><h5><?= $Question; ?></h5></label>
                         </div>
                         <div class="separator separator-solid"></div>
                         <textarea class="quiz" name="ans<?= $id ?>" ></textarea>

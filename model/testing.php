@@ -226,7 +226,7 @@ if (isset($_POST['AddStudent']))
 //Edit Staff
 if (isset($_POST['EditStaff']))
 {
-      $varschool_id =  strval($_SESSION["loggeduser_schoolID"]);
+      $varschool_id =  strval($_SESSION["loggeduser_school_id"]);
       $varobject = intval($_POST['txtobject']);
       $varconsumer_id = $_POST['txtconsumer_id'];
       $varconsumerfname = $_POST['txtconsumerfname'];
@@ -282,7 +282,7 @@ if (isset($_POST['EditStaff']))
 //Edit Parent
 if (isset($_POST['EditParent']))
 {
-      $varschool_id =  strval($_SESSION["loggeduser_schoolID"]);
+      $varschool_id =  strval($_SESSION["loggeduser_school_id"]);
       $varobject = $_POST['txtobject'];
       $varconsumer_id = $_POST['txtconsumer_id'];
       $varconsumerfname = $_POST['txtconsumerfname'];
@@ -338,7 +338,7 @@ if (isset($_POST['EditParent']))
 //Edit Student
 if (isset($_POST['EditStudent']))
 {
-      $varschool_id =  strval($_SESSION["loggeduser_schoolID"]);
+      $varschool_id =  strval($_SESSION["loggeduser_school_id"]);
       $varobject = $_POST['txtobject'];
       $varconsumer_id = $_POST['txtconsumer_id'];
       $varconsumerfname = $_POST['txtconsumerfname'];

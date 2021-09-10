@@ -2,7 +2,7 @@
 //Add Quiz
 if (isset($_POST['addurl']))
 {
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Subject_id = $_POST['Subject_id'];
   $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);

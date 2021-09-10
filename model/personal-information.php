@@ -1,22 +1,22 @@
 <?php 
 if (isset($_POST['EditPersonalInformation'])){
 
-    $varConsumerEmail = $_POST['txtConsumerEmail'];
-    $varConsumerPhone = $_POST['txtConsumerPhone'];
-    $varConsumerAddress = $_POST['txtConsumerAddress'];
-    $varConsumerPostcode = $_POST['txtConsumerPostcode'];
-    $varConsumercity = $_POST['txtConsumerCity'];
-    $varConsumerstate = $_POST['txtConsumerState'];
-    $varconsumerid = $_SESSION["loggeduser_id"];
+    $email = $_POST['txtConsumerEmail'];
+    $no_phone = $_POST['txtConsumerPhone'];
+    $address = $_POST['txtConsumerAddress'];
+    $poscode = $_POST['txtConsumerPostcode'];
+    $city = $_POST['txtConsumerCity'];
+    $state = $_POST['txtConsumerState'];
+    $consumer_id = $_SESSION["loggeduser_id"];
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($varconsumerid)],
+    $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($consumer_id)],
                   ['$set' => [
-                  'ConsumerEmail'=>$varConsumerEmail,
-                  'ConsumerPhone'=>$varConsumerPhone,
-                  'ConsumerAddress'=>$varConsumerAddress,
-                  'ConsumerPostcode'=>$varConsumerPostcode,
-                  'Consumercity'=>$varConsumercity,
-                  'Consumerstate'=>$varConsumerstate
+                  'ConsumerEmail'=>$email,
+                  'ConsumerPhone'=>$no_phone,
+                  'ConsumerAddress'=>$address,
+                  'ConsumerPostcode'=>$poscode,
+                  'Consumercity'=>$city,
+                  'Consumerstate'=>$state
                   ]],
                   ['upsert' => TRUE]
                  );

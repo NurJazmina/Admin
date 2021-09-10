@@ -1,12 +1,19 @@
 <?php
-include ('model/announcement.php');
-$Subject_id = $_GET['Subject'];
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$Notes_id = strval($_GET['Notes']);
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
-    $SubjectName = $document->SubjectName;
+    $Subject_id = strval($document->Subject_id);
+    $Note_sort = strval($document->Note_sort);
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+    foreach ($cursor as $document1)
+    {
+        $SubjectName = $document1->SubjectName;
+    }
 }
 ?>
 <style>
@@ -93,7 +100,7 @@ html {
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addannouncement" name="addannouncement" action="#" method="post">
+                <form class="form" name="add_announcement_return_notes" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>" method="post">
                     <div class="card-body">
                         <div class="checkbox-inline mb-10">
                             <h2>Adding a New Announcement</h2>
@@ -126,12 +133,12 @@ html {
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo "2"; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" class="btn btn-success mr-2" name="addannouncement">Save and return to the subject</button>
-                                <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button>
+                                <button type="submit" class="btn btn-success mr-2" name="add_announcement_return_notes">Save and return to the notes</button>
+                                <!-- <button type="submit" class="btn btn-success mr-2" onclick="myFunction()">Save and display</button> -->
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
@@ -151,71 +158,4 @@ tinymce.init({
   toolbar: false,
   height:50,
 });
-
-//invalid input
-(function(win, undefined) {
- $(function() {
-    var rules = {
-      email: function(node) {
-        var inputText = node.value,
-		inputRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-		return inputRegex.test(inputText);
-      },
-      title: function(node) {
-        var inputText = node.value,
-		inputRegex = /^\s*[a-zA-Z0-9,\s]+\s*$/;
-		return inputRegex.test(inputText);
-      }
-    };
-    
-    function onFocusOut() {
-      validate(this);
-    }
-    
-    function validate(node) { 
-     var valid = isValid(node),
-         $error = $(node).next('.error'); 
-      
-      if (valid) 
-      {
-        $(node).attr('aria-invalid', false);
-        $error
-          .attr('aria-hidden', true)
-          .hide();
-        $(node).attr('aria-describedby', '');
-      } 
-      else 
-      {
-        $(node).attr('aria-invalid', true);
-        $error
-          .attr('aria-hidden', false)
-          .show();
-        $(node).attr('aria-describedby', $error.attr('id'));
-      }
-    }
-    
-    function isValid(node) {
-      return rules[node.dataset.rule](node);
-    }
-    
-    $('[aria-invalid]').on('focusout', onFocusOut);
-  });
-}(window));
-
-//popover
-$(function () {
-  $('[data-bs-toggle="popover"]').popover()
-})
-
-//groupclass
-function Selectgroupmode() {
-    var group = document.getElementById("groupmode").value;
-    var box = document.getElementById("groupbox");
-    if(group == "SEPARATE" || group == "HIDE")
-    box.style.display = "block";
-    else
-    box.style.display = "none";
-}
-Selectgroupmode();
-
 </script>

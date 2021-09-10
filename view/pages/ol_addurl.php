@@ -1,12 +1,19 @@
 <?php
-include ('model/url.php');
-$Subject_id = $_GET['Subject'];
-$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+$Notes_id = strval($_GET['Notes']);
+$filter = ['_id'=>new \MongoDB\BSON\ObjectId($Notes_id)];
 $query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Notes',$query);
 foreach ($cursor as $document)
 {
-    $SubjectName = $document->SubjectName;
+    $Subject_id = strval($document->Subject_id);
+    $Note_sort = strval($document->Note_sort);
+    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+    foreach ($cursor as $document1)
+    {
+        $SubjectName = $document1->SubjectName;
+    }
 }
 ?>
 <style>
@@ -89,7 +96,7 @@ input[aria-invalid='true'] {
     <div class="container">
         <div class="col-lg-12">
             <div class="card card-custom gutter-b example example-compact">
-                <form class="form" id="addurl" name="addurl" action="#" method="post">
+                <form class="form" id="addurl" name="addurl" action="index.php?page=ol_notes&id=<?= $Notes_id; ?>&slot=<?= $Note_sort; ?>" method="post">
                     <div class="card-body">
                     <p id="demo"></p>
                         <div class="checkbox-inline">
@@ -484,12 +491,11 @@ input[aria-invalid='true'] {
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo "3"; ?>">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo "2"; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" href="" class="btn btn-success mr-2" name="addurl" onclick="myFunction()">Save and return to the subject</button>
-                                <button type="submit" class="btn btn-success mr-2" name="addurl" onclick="myFunction()">Save and display</button>
+                                <button type="submit" href="" class="btn btn-success mr-2" name="addurl" onclick="myFunction()">Save and return to the notes</button>
                                 <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>

@@ -1,9 +1,10 @@
 <?php
 //Add Quiz
-if (isset($_POST['addquiz']))
+if (isset($_POST['add_quiz_return_notes']))
 {
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Subject_id = $_POST['Subject_id'];
+  $Notes_id = $_POST['Notes_id'];
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
   $Edit_by = strval($_SESSION["loggeduser_id"]);
@@ -18,20 +19,11 @@ if (isset($_POST['addquiz']))
   $idnumber = '';
   $group = '';
 
-  $Type1 = '';
-  $Question1 = '';
-  $Option_A1 = '';
-  $Option_B1 = '';
-  $Option_C1 = '';
-  $Option_D1 = '';
-  $Answer1 = '';
-  $Mark1 = '';
-
   $title = $_POST['title'];
   $Description = $_POST['description'];
 
-  $DateOpen = $_POST['DateOpen'];
-  $DateClose = $_POST['DateClose'];
+  $DateOpen = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['DateOpen']))->getTimestamp()*1000);
+  $DateClose = new MongoDB\BSON\UTCDateTime((new DateTime($_POST['DateClose']))->getTimestamp()*1000);
 
   $timeunit = $_POST['timeunit'];
   $timelimit = $_POST['timelimit'];
@@ -47,10 +39,16 @@ if (isset($_POST['addquiz']))
   $group = $_POST['group'];
   $array = [];
   $totalquiz = $_POST['totalquiz'];
+
   for ($i=1; $i<=$totalquiz; $i++)
   {
+    if($_POST['Mark'.$i] == '')
+    {
+      $_POST['Mark'.$i] = '1';
+    }
     $arraycount =
     [
+      'id'=> $i-1,
       'Type'=>$_POST['Type'.$i],
       'Question'=>$_POST['Question'.$i],
       'Option_A'=>$_POST['Option_A'.$i],
@@ -65,7 +63,8 @@ if (isset($_POST['addquiz']))
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
                   'School_id'=>$School_id,
-                  'Notes_id' => $Notes_id,
+                  'Notes_id' =>$Notes_id,
+                  'Subject_id' =>$Subject_id,
                   'Created_by'=>$Created_by,
                   'Created_date'=>$Created_date,
                   'Edit_by'=>$Edit_by,
@@ -130,7 +129,7 @@ if (isset($_POST['answer']))
 {
   $Quiz_id = $_POST['id'];
   $Total_Question = $_POST['Total_Question'];
-  $School_id = strval($_SESSION["loggeduser_schoolID"]);
+  $School_id = strval($_SESSION["loggeduser_school_id"]);
   $Created_by = strval($_SESSION["loggeduser_id"]);
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 

@@ -4,7 +4,8 @@ if (isset($_POST['addtopic']))
     $Title = $_POST['Title'];
     $Detail = $_POST['Detail'];
     $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-
+    $Note_sort = 0;
+    
     $filter = ['Subject_id'=>$Subject_id];
     $option = ['sort' => ['_id' => 1]];
     $query = new MongoDB\Driver\Query($filter,$option);
@@ -12,11 +13,11 @@ if (isset($_POST['addtopic']))
     foreach ($cursor as $document)
     {
         $Note_sort = $document->Note_sort;
+        $Note_sort = $Note_sort + 1;
     }
-    $Note_sort = $Note_sort + 1;
     $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
     $bulk->insert([
-                    'School_id'=>$_SESSION["loggeduser_schoolID"],
+                    'School_id'=>$_SESSION["loggeduser_school_id"],
                     'Subject_id'=> $Subject_id,
                     'Created_by'=> $_SESSION["loggeduser_id"],
                     'Created_date'=>$Created_date,
