@@ -252,12 +252,12 @@ include 'model/covid.php';
         <div class="card card-custom gutter-b card-stretch card-shadowless">
             <div class="card-body p-0 d-flex">
                 <div class="d-flex align-items-start justify-content-start flex-grow-1 p-8 card-rounded flex-grow-1 position-relative">
-                    <div class="d-flex flex-column align-items-start flex-grow-1 h-100">
+                    <div class="d-flex flex-column align-items-start">
                         <div class="p-1 flex-grow-1">
                             <h4 class="text-warning font-weight-bolder">Population in Malaysia, 2020</h4>
                             <p class="text-dark-50 font-weight-bold mt-3">Population by age group</p>
                         </div>
-                        <div class="p-1 flex-grow-1">
+                        <div class="p-1 flex-grow-1 mt-8">
                             <h4 class="text-dark-50 font-weight-bolder">POP : <?= number_format($pop,2,",","."); ?> people</h4><br>
                             <h4 class="text-dark-50 font-weight-bolder">POP 18 : <?= number_format($pop_18,2,",","."); ?> people</h4><br>
                             <h4 class="text-dark-50 font-weight-bolder">POP 60 : <?= number_format($pop_60,2,",","."); ?> people</h4><br>
