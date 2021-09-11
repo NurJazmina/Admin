@@ -258,9 +258,9 @@ include 'model/covid.php';
                             <p class="text-dark-50 font-weight-bold mt-3">Population by age group</p>
                         </div>
                         <div class="p-1 flex-grow-1">
-                            <h4 class="text-dark-50 font-weight-bolder">POP : <?= $pop; ?></h4><br>
-                            <h4 class="text-dark-50 font-weight-bolder">POP 18 : <?= $pop_18; ?></h4><br>
-                            <h4 class="text-dark-50 font-weight-bolder">POP 60 : <?= $pop_60; ?></h4><br>
+                            <h4 class="text-dark-50 font-weight-bolder">POP : <?= number_format($pop,2,",","."); ?> people</h4><br>
+                            <h4 class="text-dark-50 font-weight-bolder">POP 18 : <?= number_format($pop_18,2,",","."); ?> people</h4><br>
+                            <h4 class="text-dark-50 font-weight-bolder">POP 60 : <?= number_format($pop_60,2,",","."); ?> people</h4><br>
                         </div>
                     </div>
                     <div class="position-absolute right-0 bottom-0 mr-5 overflow-hidden">

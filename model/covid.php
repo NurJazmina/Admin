@@ -58,7 +58,7 @@ if (($h = fopen("{$cases_malaysia}", "r")) !== FALSE)
 		}
 		elseif($row[0] == $Date1) //1 days ago
 		{
-            $date_display = date_format($Date_time1,"F d,Y H:i");
+            $date_display = date_format($Date_time1,"F d,Y");
 			$date1 = $row[0];
 			$cases_new1 = $row[1];
 			$cases_import1 = $row[2];
