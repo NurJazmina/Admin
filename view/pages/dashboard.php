@@ -475,7 +475,7 @@ section, .main {
 			</div>
 			<!--end::Body-->
 			<div class="text-center mx-5 mb-5">
-				<button class="btn btn-light btn-hover-success btn-sm btn-block">Contact School</button>
+				<button class="btn btn-success btn-hover-light btn-sm btn-block">Contact School</button>
 			</div>
 		</div>
 		<!--end::Mixed Widget 1-->
