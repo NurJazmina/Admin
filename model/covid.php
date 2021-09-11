@@ -4,56 +4,61 @@ $cases_state = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/ma
 $deaths_malaysia = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/deaths_malaysia.csv';
 $aefi = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/vaccination/aefi.csv';
 $population = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/static/population.csv';
+$tests_malaysia = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/tests_malaysia.csv';
+$tests_state = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/tests_state.csv';
+$icu = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/icu.csv';
 
 // Open the file for reading
 if (($h = fopen("{$cases_malaysia}", "r")) !== FALSE) 
 {
+    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+	$Date_time = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date = date_format($Date_time,"Y-m-d");
+
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date1 = $year.'-'.$month.'-'.$day;
+	$Date_time1 = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date1 = date_format($Date_time1,"Y-m-d");
 
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -2 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date2 = $year.'-'.$month.'-'.$day;
+	$Date_time2 = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date2 = date_format($Date_time2,"Y-m-d");
 
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -3 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date3 = $year.'-'.$month.'-'.$day;
+	$Date_time3 = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date3 = date_format($Date_time3,"Y-m-d");
 
     $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -4 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date4 = $year.'-'.$month.'-'.$day;
+	$Date_time4 = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date4 = date_format($Date_time4,"Y-m-d");
 
     $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -5 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date5 = $year.'-'.$month.'-'.$day;
+	$Date_time5 = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date5 = date_format($Date_time5,"Y-m-d");
 
     $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -6 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date6 = $year.'-'.$month.'-'.$day;
+	$Date_time6 = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+	$Date6 = date_format($Date_time6,"Y-m-d");
 	
 	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
 		//Print out my column data.
-		if($row[0] == $Date1) //1 days ago
+        if($row[0] == $Date) //today
+		{  
+            $date_display = date_format($Date_time,"F d,Y H:i");
+			$date1 = $row[0];
+			$cases_new1 = $row[1];
+			$cases_import1 = $row[2];
+			$cases_recovered1 = $row[3];
+			$cluster_import1 = $row[4];
+			$cluster_religious1 = $row[5];
+			$cluster_community1 = $row[6];
+			$cluster_highRisk1 = $row[7];
+			$cluster_education1 = $row[8];
+			$cluster_detentionCentre1 = $row[9];
+			$cluster_workplace1 = $row[10];
+		}
+		elseif($row[0] == $Date1) //1 days ago
 		{
+            $date_display = date_format($Date_time1,"F d,Y H:i");
 			$date1 = $row[0];
 			$cases_new1 = $row[1];
 			$cases_import1 = $row[2];
@@ -144,19 +149,11 @@ if (($h = fopen("{$cases_state}", "r")) !== FALSE)
 {
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display = date_format($Date,"F d,Y H:i");
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date = $year.'-'.$month.'-'.$day;
+	$Date = date_format($Date,"Y-m-d");
 
 	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
 	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display1 = date_format($Date1,"F d,Y H:i");
-	$year1 = date_format($Date1,"Y");
-	$month1 = date_format($Date1,"m");
-	$day1 = date_format($Date1,"d");
-	$Date1 = $year1.'-'.$month1.'-'.$day1;
+	$Date1 = date_format($Date1,"Y-m-d");
 	
 	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
 		//Print out my column data.
@@ -202,11 +199,6 @@ if (($h = fopen("{$cases_state}", "r")) !== FALSE)
             {
                 $cases_new_Perlis = $row[3];
                 $cases_recovered_Perlis = $row[4];
-            }
-            elseif($row[1] == 'Johor')
-            {
-                $cases_new_Johor = $row[3];
-                $cases_recovered_Johor = $row[4];
             }
             elseif($row[1] == 'Pulau Pinang')
             {
@@ -291,11 +283,6 @@ if (($h = fopen("{$cases_state}", "r")) !== FALSE)
             {
                 $cases_new_Perlis = $row[3];
                 $cases_recovered_Perlis = $row[4];
-            }
-            elseif($row[1] == 'Johor')
-            {
-                $cases_new_Johor = $row[3];
-                $cases_recovered_Johor = $row[4];
             }
             elseif($row[1] == 'Pulau Pinang')
             {
@@ -347,31 +334,23 @@ if (($h = fopen("{$deaths_malaysia}", "r")) !== FALSE)
 {
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display = date_format($Date,"F d,Y H:i");
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date = $year.'-'.$month.'-'.$day;
+	$Date = date_format($Date,"Y-m-d");
 
 	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
 	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display1 = date_format($Date1,"F d,Y H:i");
-	$year1 = date_format($Date1,"Y");
-	$month1 = date_format($Date1,"m");
-	$day1 = date_format($Date1,"d");
-	$Date1 = $year1.'-'.$month1.'-'.$day1;
+	$Date1 = date_format($Date1,"Y-m-d");
 	
 	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
 		//Print out my column data.
 		if($row[0] == $Date)//today
 		{
-			$date = $row[0];
+			$deaths_malaysia_date = $row[0];
 			$deaths_new = $row[1];
 			$deaths_bid = $row[2];
 		}
 		elseif($row[0] == $Date1)//yesterday
 		{
-			$date = $row[0];
+			$deaths_malaysia_date = $row[0];
 			$deaths_new = $row[1];
 			$deaths_bid = $row[2];
 		}
@@ -384,25 +363,17 @@ if (($h = fopen("{$aefi}", "r")) !== FALSE)
 {
 	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display = date_format($Date,"F d,Y H:i");
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date = $year.'-'.$month.'-'.$day;
+	$Date = date_format($Date,"Y-m-d");
 
 	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
 	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display1 = date_format($Date1,"F d,Y H:i");
-	$year1 = date_format($Date1,"Y");
-	$month1 = date_format($Date1,"m");
-	$day1 = date_format($Date1,"d");
-	$Date1 = $year1.'-'.$month1.'-'.$day1;
+	$Date1 = date_format($Date1,"Y-m-d");
 	
 	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
 		//Print out my column data.
 		if($row[0] == $Date)//today
 		{
-			$date = $row[0];
+			$aefi_date = $row[0];
             if($row[1] == 'pfizer')
             {
                 $doses_pfizer = $row[2];
@@ -440,9 +411,9 @@ if (($h = fopen("{$aefi}", "r")) !== FALSE)
                 $myo_pericarditis_astrazeneca = $row[10];
             }
 		}
-		else//yesterday
+		else
 		{
-			$date = $row[0];
+			$aefi_date = $row[0];
             if($row[1] == 'pfizer')
             {
                 $doses_pfizer = $row[2];
@@ -495,6 +466,724 @@ if (($h = fopen("{$population}", "r")) !== FALSE)
 			$pop_18 = $row[3];
 			$pop_60 = $row[4];
 		}
+	}
+	// Close the file
+	fclose($h);
+}
+
+if (($h = fopen("{$tests_malaysia}", "r")) !== FALSE) 
+{
+    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date = date_format($Date,"Y-m-d");
+
+	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -3 day'))->getTimestamp()*1000);
+	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date1 = date_format($Date1,"Y-m-d");
+
+	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
+		//Print out my column data.
+		if($row[0] == $Date)//today
+		{
+            $tests_malaysia_date = $row[0];
+			$rtk_ag = $row[1];
+			$pcr = $row[2];
+		}
+        elseif($row[0] == $Date1)
+        {
+            $tests_malaysia_date = $row[0];
+            $rtk_ag = $row[1];
+			$pcr = $row[2];
+        }
+        else
+        {
+            $tests_malaysia_date = 'out-of-date';
+            $rtk_ag = 'out-of-date';
+			$pcr = 'out-of-date';
+        }
+	}
+	// Close the file
+	fclose($h);
+}
+
+if (($h = fopen("{$tests_state}", "r")) !== FALSE) 
+{
+    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date = date_format($Date,"Y-m-d");
+
+	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -3 day'))->getTimestamp()*1000);
+	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date1 = date_format($Date1,"Y-m-d");
+
+	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
+		//Print out my column data.
+		if($row[0] == $Date)//today
+		{
+            $tests_state_date = $row[0];
+            if($row[1] == 'Johor')
+            {
+                $state_rtk_ag_Johor = $row[2];
+                $state_pcr_Johor = $row[3];
+            }
+            elseif($row[1] == 'Kedah')
+            {
+                $state_rtk_ag_Kedah = $row[2];
+                $state_pcr_Kedah = $row[3];
+            }
+            elseif($row[1] == 'Kelantan')
+            {
+                $state_rtk_ag_Kelantan = $row[2];
+                $state_pcr_Kelantan = $row[3];
+            }
+            elseif($row[1] == 'Melaka')
+            {
+                $state_rtk_ag_Melaka = $row[2];
+                $state_pcr_Melaka = $row[3];
+            }
+            elseif($row[1] == 'Negeri Sembilan')
+            {
+                $state_rtk_ag_n9 = $row[2];
+                $state_pcr_n9 = $row[3];
+            }
+            elseif($row[1] == 'Pahang')
+            {
+                $state_rtk_ag_Pahang = $row[2];
+                $state_pcr_Pahang = $row[3];
+            }
+            elseif($row[1] == 'Perak')
+            {
+                $state_rtk_ag_Perak = $row[2];
+                $state_pcr_Perak = $row[3];
+            }
+            elseif($row[1] == 'Perlis')
+            {
+                $state_rtk_ag_Perlis = $row[2];
+                $state_pcr_Perlis = $row[3];
+            }
+            elseif($row[1] == 'Pulau Pinang')
+            {
+                $state_rtk_ag_ppinang = $row[2];
+                $state_pcr_ppinang = $row[3];
+            }
+            elseif($row[1] == 'Sabah')
+            {
+                $state_rtk_ag_Sabah = $row[2];
+                $state_pcr_Sabah = $row[3];
+            }
+            elseif($row[1] == 'Sarawak')
+            {
+                $state_rtk_ag_Sarawak = $row[2];
+                $state_pcr_Sarawak = $row[3];
+            }
+            elseif($row[1] == 'Selangor')
+            {
+                $state_rtk_ag_Selangor = $row[2];
+                $state_pcr_Selangor = $row[3];
+            }
+            elseif($row[1] == 'Terengganu')
+            {
+                $state_rtk_ag_Terengganu = $row[2];
+                $state_pcr_Terengganu = $row[3];
+            }
+            elseif($row[1] == 'W.P. Kuala Lumpur')
+            {
+                $state_rtk_ag_kl = $row[2];
+                $state_pcr_kl = $row[3];
+            }
+            elseif($row[1] == 'W.P. Labuan')
+            {
+                $state_rtk_ag_labuan = $row[2];
+                $state_pcr_labuan = $row[3];
+            }
+            elseif($row[1] == 'W.P. Putrajaya')
+            {
+                $state_rtk_ag_putrajaya = $row[2];
+                $state_pcr_putrajaya = $row[3];
+            }
+		}
+        elseif($row[0] == $Date1)
+        {
+            $tests_state_date = $row[0];
+            if($row[1] == 'Johor')
+            {
+                $state_rtk_ag_Johor = $row[2];
+                $state_pcr_Johor = $row[3];
+            }
+            elseif($row[1] == 'Kedah')
+            {
+                $state_rtk_ag_Kedah = $row[2];
+                $state_pcr_Kedah = $row[3];
+            }
+            elseif($row[1] == 'Kelantan')
+            {
+                $state_rtk_ag_Kelantan = $row[2];
+                $state_pcr_Kelantan = $row[3];
+            }
+            elseif($row[1] == 'Melaka')
+            {
+                $state_rtk_ag_Melaka = $row[2];
+                $state_pcr_Melaka = $row[3];
+            }
+            elseif($row[1] == 'Negeri Sembilan')
+            {
+                $state_rtk_ag_n9 = $row[2];
+                $state_pcr_n9 = $row[3];
+            }
+            elseif($row[1] == 'Pahang')
+            {
+                $state_rtk_ag_Pahang = $row[2];
+                $state_pcr_Pahang = $row[3];
+            }
+            elseif($row[1] == 'Perak')
+            {
+                $state_rtk_ag_Perak = $row[2];
+                $state_pcr_Perak = $row[3];
+            }
+            elseif($row[1] == 'Perlis')
+            {
+                $state_rtk_ag_Perlis = $row[2];
+                $state_pcr_Perlis = $row[3];
+            }
+            elseif($row[1] == 'Pulau Pinang')
+            {
+                $state_rtk_ag_ppinang = $row[2];
+                $state_pcr_ppinang = $row[3];
+            }
+            elseif($row[1] == 'Sabah')
+            {
+                $state_rtk_ag_Sabah = $row[2];
+                $state_pcr_Sabah = $row[3];
+            }
+            elseif($row[1] == 'Sarawak')
+            {
+                $state_rtk_ag_Sarawak = $row[2];
+                $state_pcr_Sarawak = $row[3];
+            }
+            elseif($row[1] == 'Selangor')
+            {
+                $state_rtk_ag_Selangor = $row[2];
+                $state_pcr_Selangor = $row[3];
+            }
+            elseif($row[1] == 'Terengganu')
+            {
+                $state_rtk_ag_Terengganu = $row[2];
+                $state_pcr_Terengganu = $row[3];
+            }
+            elseif($row[1] == 'W.P. Kuala Lumpur')
+            {
+                $state_rtk_ag_kl = $row[2];
+                $state_pcr_kl = $row[3];
+            }
+            elseif($row[1] == 'W.P. Labuan')
+            {
+                $state_rtk_ag_labuan = $row[2];
+                $state_pcr_labuan = $row[3];
+            }
+            elseif($row[1] == 'W.P. Putrajaya')
+            {
+                $state_rtk_ag_putrajaya = $row[2];
+                $state_pcr_putrajaya = $row[3];
+            }
+        }
+        else
+        {
+            $tests_state_date = 'out-of-date';
+            if($row[1] == 'Johor')
+            {
+                $state_rtk_ag_Johor = 'out-of-date';
+                $state_pcr_Johor = 'out-of-date';
+            }
+            elseif($row[1] == 'Kedah')
+            {
+                $state_rtk_ag_Kedah = 'out-of-date';
+                $state_pcr_Kedah = 'out-of-date';
+            }
+            elseif($row[1] == 'Kelantan')
+            {
+                $state_rtk_ag_Kelantan = 'out-of-date';
+                $state_pcr_Kelantan = 'out-of-date';;
+            }
+            elseif($row[1] == 'Melaka')
+            {
+                $state_rtk_ag_Melaka = 'out-of-date';
+                $state_pcr_Melaka = 'out-of-date';
+            }
+            elseif($row[1] == 'Negeri Sembilan')
+            {
+                $state_rtk_ag_n9 = 'out-of-date';
+                $state_pcr_n9 = 'out-of-date';
+            }
+            elseif($row[1] == 'Pahang')
+            {
+                $state_rtk_ag_Pahang = 'out-of-date';
+                $state_pcr_Pahang = 'out-of-date';
+            }
+            elseif($row[1] == 'Perak')
+            {
+                $state_rtk_ag_Perak = 'out-of-date';
+                $state_pcr_Perak = 'out-of-date';
+            }
+            elseif($row[1] == 'Perlis')
+            {
+                $state_rtk_ag_Perlis = 'out-of-date';
+                $state_pcr_Perlis = 'out-of-date';
+            }
+            elseif($row[1] == 'Pulau Pinang')
+            {
+                $state_rtk_ag_ppinang = 'out-of-date';
+                $state_pcr_ppinang = 'out-of-date';
+            }
+            elseif($row[1] == 'Sabah')
+            {
+                $state_rtk_ag_Johor = 'out-of-date';
+                $state_pcr_Johor = 'out-of-date';
+            }
+            elseif($row[1] == 'Sarawak')
+            {
+                $state_rtk_ag_Sarawak = 'out-of-date';
+                $state_pcr_Sarawak = 'out-of-date';
+            }
+            elseif($row[1] == 'Selangor')
+            {
+                $state_rtk_ag_Selangor = 'out-of-date';
+                $state_pcr_Selangor = 'out-of-date';
+            }
+            elseif($row[1] == 'Terengganu')
+            {
+                $state_rtk_ag_Terengganu = 'out-of-date';
+                $state_pcr_Terengganu = 'out-of-date';
+            }
+            elseif($row[1] == 'W.P. Kuala Lumpur')
+            {
+                $state_rtk_ag_kl = 'out-of-date';
+                $state_pcr_kl = 'out-of-date';
+            }
+            elseif($row[1] == 'W.P. Labuan')
+            {
+                $state_rtk_ag_labuan = 'out-of-date';
+                $state_pcr_labuan = 'out-of-date';
+            }
+            elseif($row[1] == 'W.P. Putrajaya')
+            {
+                $state_rtk_ag_putrajaya = 'out-of-date';
+                $state_pcr_putrajaya = 'out-of-date';
+            }
+        }
+	}
+	// Close the file
+	fclose($h);
+}
+
+
+if (($h = fopen("{$icu}", "r")) !== FALSE) 
+{
+    $from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date = date_format($Date,"Y-m-d");
+
+	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
+	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date1 = date_format($Date1,"Y-m-d");
+
+	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
+		//Print out my column data.
+		if($row[0] == $Date)//today
+		{
+            $icu_date = $row[0];
+            if($row[1] == 'Johor')
+            {
+                $beds_icu_Johor = $row[2];
+                $beds_icu_rep_Johor	= $row[3];
+                $beds_icu_total_Johor = $row[4];
+                $beds_icu_covid_Johor = $row[5];
+                $vent_Johor = $row[6];
+            }
+            elseif($row[1] == 'Kedah')
+            {
+                $beds_icu_Kedah = $row[2];
+                $beds_icu_rep_Kedah	= $row[3];
+                $beds_icu_total_Kedah = $row[4];
+                $beds_icu_covid_Kedah = $row[5];
+                $vent_Kedah = $row[6];
+            }
+            elseif($row[1] == 'Kelantan')
+            {
+                $beds_icu_Kelantan = $row[2];
+                $beds_icu_rep_Kelantan	= $row[3];
+                $beds_icu_total_Kelantan = $row[4];
+                $beds_icu_covid_Kelantan = $row[5];
+                $vent_Kelantan = $row[6];
+            }
+            elseif($row[1] == 'Melaka')
+            {
+                $beds_icu_Melaka = $row[2];
+                $beds_icu_rep_Melaka = $row[3];
+                $beds_icu_total_Melaka = $row[4];
+                $beds_icu_covid_Melaka = $row[5];
+                $vent_Melaka = $row[6];
+            }
+            elseif($row[1] == 'Negeri Sembilan')
+            {
+                $beds_icu_n9 = $row[2];
+                $beds_icu_rep_n9	= $row[3];
+                $beds_icu_total_n9 = $row[4];
+                $beds_icu_covid_n9 = $row[5];
+                $vent_n9 = $row[6];
+            }
+            elseif($row[1] == 'Pahang')
+            {
+                $beds_icu_Pahang = $row[2];
+                $beds_icu_rep_Pahang	= $row[3];
+                $beds_icu_total_Pahang = $row[4];
+                $beds_icu_covid_Pahang = $row[5];
+                $vent_Pahang = $row[6];
+            }
+            elseif($row[1] == 'Perak')
+            {
+                $beds_icu_Perak = $row[2];
+                $beds_icu_rep_Perak	= $row[3];
+                $beds_icu_total_Perak = $row[4];
+                $beds_icu_covid_Perak = $row[5];
+                $vent_Perak = $row[6];
+            }
+            elseif($row[1] == 'Perlis')
+            {
+                $beds_icu_Perlis = $row[2];
+                $beds_icu_rep_Perlis	= $row[3];
+                $beds_icu_total_Perlis = $row[4];
+                $beds_icu_covid_Perlis = $row[5];
+                $vent_Perlis= $row[6];
+            }
+            elseif($row[1] == 'Pulau Pinang')
+            {
+                $beds_icu_ppinang = $row[2];
+                $beds_icu_rep_ppinang	= $row[3];
+                $beds_icu_total_ppinang = $row[4];
+                $beds_icu_covid_ppinang = $row[5];
+                $vent_ppinang = $row[6];
+            }
+            elseif($row[1] == 'Sabah')
+            {
+                $beds_icu_Sabah = $row[2];
+                $beds_icu_rep_Sabah	= $row[3];
+                $beds_icu_total_Sabah = $row[4];
+                $beds_icu_covid_Sabah = $row[5];
+                $vent_Sabah = $row[6];
+            }
+            elseif($row[1] == 'Sarawak')
+            {
+                $beds_icu_Sarawak = $row[2];
+                $beds_icu_rep_Sarawak= $row[3];
+                $beds_icu_total_Sarawak = $row[4];
+                $beds_icu_covid_Sarawak = $row[5];
+                $vent_Sarawak = $row[6];
+            }
+            elseif($row[1] == 'Selangor')
+            {
+                $beds_icu_Selangor = $row[2];
+                $beds_icu_rep_Selangor	= $row[3];
+                $beds_icu_total_Selangor = $row[4];
+                $beds_icu_covid_Selangor = $row[5];
+                $vent_Selangor = $row[6];
+            }
+            elseif($row[1] == 'Terengganu')
+            {
+                $beds_icu_Terengganu = $row[2];
+                $beds_icu_rep_Terengganu	= $row[3];
+                $beds_icu_total_Terengganu = $row[4];
+                $beds_icu_covid_Terengganu = $row[5];
+                $vent_Terengganu = $row[6];
+            }
+            elseif($row[1] == 'W.P. Kuala Lumpur')
+            {
+                $beds_icu_kl = $row[2];
+                $beds_icu_rep_kl = $row[3];
+                $beds_icu_total_kl = $row[4];
+                $beds_icu_covid_kl = $row[5];
+                $vent_kl = $row[6];
+            }
+            elseif($row[1] == 'W.P. Labuan')
+            {
+                $beds_icu_labuan = $row[2];
+                $beds_icu_rep_labuan	= $row[3];
+                $beds_icu_total_labuan = $row[4];
+                $beds_icu_covid_labuan = $row[5];
+                $vent_labuan = $row[6];
+            }
+            elseif($row[1] == 'W.P. Putrajaya')
+            {
+                $beds_icu_Putrajaya = $row[2];
+                $beds_icu_rep_Putrajaya	= $row[3];
+                $beds_icu_total_Putrajaya = $row[4];
+                $beds_icu_covid_Putrajaya = $row[5];
+                $vent_Putrajaya = $row[6];
+            }
+		}
+        elseif($row[0] == $Date1)
+        {
+            $icu_date = $row[0];
+            if($row[1] == 'Johor')
+            {
+                $beds_icu_Johor = $row[2];
+                $beds_icu_rep_Johor	= $row[3];
+                $beds_icu_total_Johor = $row[4];
+                $beds_icu_covid_Johor = $row[5];
+                $vent_Johor = $row[6];
+            }
+            elseif($row[1] == 'Kedah')
+            {
+                $beds_icu_Kedah = $row[2];
+                $beds_icu_rep_Kedah	= $row[3];
+                $beds_icu_total_Kedah = $row[4];
+                $beds_icu_covid_Kedah = $row[5];
+                $vent_Kedah = $row[6];
+            }
+            elseif($row[1] == 'Kelantan')
+            {
+                $beds_icu_Kelantan = $row[2];
+                $beds_icu_rep_Kelantan	= $row[3];
+                $beds_icu_total_Kelantan = $row[4];
+                $beds_icu_covid_Kelantan = $row[5];
+                $vent_Kelantan = $row[6];
+            }
+            elseif($row[1] == 'Melaka')
+            {
+                $beds_icu_Melaka = $row[2];
+                $beds_icu_rep_Melaka = $row[3];
+                $beds_icu_total_Melaka = $row[4];
+                $beds_icu_covid_Melaka = $row[5];
+                $vent_Melaka = $row[6];
+            }
+            elseif($row[1] == 'Negeri Sembilan')
+            {
+                $beds_icu_n9 = $row[2];
+                $beds_icu_rep_n9	= $row[3];
+                $beds_icu_total_n9 = $row[4];
+                $beds_icu_covid_n9 = $row[5];
+                $vent_n9 = $row[6];
+            }
+            elseif($row[1] == 'Pahang')
+            {
+                $beds_icu_Pahang = $row[2];
+                $beds_icu_rep_Pahang	= $row[3];
+                $beds_icu_total_Pahang = $row[4];
+                $beds_icu_covid_Pahang = $row[5];
+                $vent_Pahang = $row[6];
+            }
+            elseif($row[1] == 'Perak')
+            {
+                $beds_icu_Perak = $row[2];
+                $beds_icu_rep_Perak	= $row[3];
+                $beds_icu_total_Perak = $row[4];
+                $beds_icu_covid_Perak = $row[5];
+                $vent_Perak = $row[6];
+            }
+            elseif($row[1] == 'Perlis')
+            {
+                $beds_icu_Perlis = $row[2];
+                $beds_icu_rep_Perlis	= $row[3];
+                $beds_icu_total_Perlis = $row[4];
+                $beds_icu_covid_Perlis = $row[5];
+                $vent_Perlis= $row[6];
+            }
+            elseif($row[1] == 'Pulau Pinang')
+            {
+                $beds_icu_ppinang = $row[2];
+                $beds_icu_rep_ppinang	= $row[3];
+                $beds_icu_total_ppinang = $row[4];
+                $beds_icu_covid_ppinang = $row[5];
+                $vent_ppinang = $row[6];
+            }
+            elseif($row[1] == 'Sabah')
+            {
+                $beds_icu_Sabah = $row[2];
+                $beds_icu_rep_Sabah	= $row[3];
+                $beds_icu_total_Sabah = $row[4];
+                $beds_icu_covid_Sabah = $row[5];
+                $vent_Sabah = $row[6];
+            }
+            elseif($row[1] == 'Sarawak')
+            {
+                $beds_icu_Sarawak = $row[2];
+                $beds_icu_rep_Sarawak= $row[3];
+                $beds_icu_total_Sarawak = $row[4];
+                $beds_icu_covid_Sarawak = $row[5];
+                $vent_Sarawak = $row[6];
+            }
+            elseif($row[1] == 'Selangor')
+            {
+                $beds_icu_Selangor = $row[2];
+                $beds_icu_rep_Selangor	= $row[3];
+                $beds_icu_total_Selangor = $row[4];
+                $beds_icu_covid_Selangor = $row[5];
+                $vent_Selangor = $row[6];
+            }
+            elseif($row[1] == 'Terengganu')
+            {
+                $beds_icu_Terengganu = $row[2];
+                $beds_icu_rep_Terengganu	= $row[3];
+                $beds_icu_total_Terengganu = $row[4];
+                $beds_icu_covid_Terengganu = $row[5];
+                $vent_Terengganu = $row[6];
+            }
+            elseif($row[1] == 'W.P. Kuala Lumpur')
+            {
+                $beds_icu_kl = $row[2];
+                $beds_icu_rep_kl = $row[3];
+                $beds_icu_total_kl = $row[4];
+                $beds_icu_covid_kl = $row[5];
+                $vent_kl = $row[6];
+            }
+            elseif($row[1] == 'W.P. Labuan')
+            {
+                $beds_icu_labuan = $row[2];
+                $beds_icu_rep_labuan	= $row[3];
+                $beds_icu_total_labuan = $row[4];
+                $beds_icu_covid_labuan = $row[5];
+                $vent_labuan = $row[6];
+            }
+            elseif($row[1] == 'W.P. Putrajaya')
+            {
+                $beds_icu_Putrajaya = $row[2];
+                $beds_icu_rep_Putrajaya	= $row[3];
+                $beds_icu_total_Putrajaya = $row[4];
+                $beds_icu_covid_Putrajaya = $row[5];
+                $vent_Putrajaya = $row[6];
+            }
+        }
+        else
+        {
+            $icu_date = 'out-of-date';
+            if($row[1] == 'Johor')
+            {
+                $beds_icu_Johor = 'out-of-date';
+                $beds_icu_rep_Johor	= 'out-of-date';
+                $beds_icu_total_Johor = 'out-of-date';
+                $beds_icu_covid_Johor = 'out-of-date';
+                $vent_Johor = 'out-of-date';
+            }
+            elseif($row[1] == 'Kedah')
+            {
+                $beds_icu_Kedah = 'out-of-date';
+                $beds_icu_rep_Kedah	= 'out-of-date';
+                $beds_icu_total_Kedah = 'out-of-date';
+                $beds_icu_covid_Kedah = 'out-of-date';
+                $vent_Kedah = 'out-of-date';
+            }
+            elseif($row[1] == 'Kelantan')
+            {
+                $beds_icu_Kelantan = 'out-of-date';
+                $beds_icu_rep_Kelantan = 'out-of-date';
+                $beds_icu_total_Kelantan = 'out-of-date';
+                $beds_icu_covid_Kelantan = 'out-of-date';
+                $vent_Kelantan = 'out-of-date';
+            }
+            elseif($row[1] == 'Melaka')
+            {
+                $beds_icu_Melaka = 'out-of-date';
+                $beds_icu_rep_Melaka = 'out-of-date';
+                $beds_icu_total_Melaka = 'out-of-date';
+                $beds_icu_covid_Melaka = 'out-of-date';
+                $vent_Melaka = 'out-of-date';
+            }
+            elseif($row[1] == 'Negeri Sembilan')
+            {
+                $beds_icu_n9 = 'out-of-date';
+                $beds_icu_rep_n9	= 'out-of-date';
+                $beds_icu_total_n9 = 'out-of-date';
+                $beds_icu_covid_n9 = 'out-of-date';
+                $vent_n9 = 'out-of-date';
+            }
+            elseif($row[1] == 'Pahang')
+            {
+                $beds_icu_Pahang = 'out-of-date';
+                $beds_icu_rep_Pahang	= 'out-of-date';
+                $beds_icu_total_Pahang = 'out-of-date';
+                $beds_icu_covid_Pahang = 'out-of-date';
+                $vent_Pahang = 'out-of-date';
+            }
+            elseif($row[1] == 'Perak')
+            {
+                $beds_icu_Perak = 'out-of-date';
+                $beds_icu_rep_Perak	= 'out-of-date';
+                $beds_icu_total_Perak = 'out-of-date';
+                $beds_icu_covid_Perak = 'out-of-date';
+                $vent_Perak = 'out-of-date';
+            }
+            elseif($row[1] == 'Perlis')
+            {
+                $beds_icu_Perlis = 'out-of-date';
+                $beds_icu_rep_Perlis	= 'out-of-date';
+                $beds_icu_total_Perlis = 'out-of-date';
+                $beds_icu_covid_Perlis = 'out-of-date';
+                $vent_Perlis= 'out-of-date';
+            }
+            elseif($row[1] == 'Pulau Pinang')
+            {
+                $beds_icu_ppinang = 'out-of-date';
+                $beds_icu_rep_ppinang	= 'out-of-date';
+                $beds_icu_total_ppinang = 'out-of-date';
+                $beds_icu_covid_ppinang = 'out-of-date';
+                $vent_ppinang = 'out-of-date';
+            }
+            elseif($row[1] == 'Sabah')
+            {
+                $beds_icu_Sabah = 'out-of-date';
+                $beds_icu_rep_Sabah	= 'out-of-date';
+                $beds_icu_total_Sabah = 'out-of-date';
+                $beds_icu_covid_Sabah = 'out-of-date';
+                $vent_Sabah = 'out-of-date';
+            }
+            elseif($row[1] == 'Sarawak')
+            {
+                $beds_icu_Sarawak = 'out-of-date';
+                $beds_icu_rep_Sarawak= 'out-of-date';
+                $beds_icu_total_Sarawak = 'out-of-date';
+                $beds_icu_covid_Sarawak = 'out-of-date';
+                $vent_Sarawak = 'out-of-date';
+            }
+            elseif($row[1] == 'Selangor')
+            {
+                $beds_icu_Selangor = 'out-of-date';
+                $beds_icu_rep_Selangor	= 'out-of-date';
+                $beds_icu_total_Selangor = 'out-of-date';
+                $beds_icu_covid_Selangor = 'out-of-date';
+                $vent_Selangor = 'out-of-date';
+            }
+            elseif($row[1] == 'Terengganu')
+            {
+                $beds_icu_Terengganu = 'out-of-date';
+                $beds_icu_rep_Terengganu	= 'out-of-date';
+                $beds_icu_total_Terengganu = 'out-of-date';
+                $beds_icu_covid_Terengganu = 'out-of-date';
+                $vent_Terengganu = 'out-of-date';
+            }
+            elseif($row[1] == 'W.P. Kuala Lumpur')
+            {
+                $beds_icu_kl = 'out-of-date';
+                $beds_icu_rep_kl = 'out-of-date';
+                $beds_icu_total_kl = 'out-of-date';
+                $beds_icu_covid_kl = 'out-of-date';
+                $vent_kl = 'out-of-date';
+            }
+            elseif($row[1] == 'W.P. Labuan')
+            {
+                $beds_icu_labuan = 'out-of-date';
+                $beds_icu_rep_labuan	= 'out-of-date';
+                $beds_icu_total_labuan = 'out-of-date';
+                $beds_icu_covid_labuan = 'out-of-date';
+                $vent_labuan = 'out-of-date';
+            }
+            elseif($row[1] == 'W.P. Putrajaya')
+            {
+                $beds_icu_Putrajaya = 'out-of-date';
+                $beds_icu_rep_Putrajaya	= 'out-of-date';
+                $beds_icu_total_Putrajaya = 'out-of-date';
+                $beds_icu_covid_Putrajaya = 'out-of-date';
+                $vent_Putrajaya = 'out-of-date';
+            }
+        }
 	}
 	// Close the file
 	fclose($h);

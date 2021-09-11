@@ -1,5 +1,5 @@
 <?php
-$_SESSION["title"] = "Covid19 Live Update";
+$_SESSION["title"] = "Covid19 Live Update : Epidemic";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include 'model/covid.php'; 
 ?>
@@ -15,6 +15,7 @@ include 'model/covid.php';
                 <div class="card-title py-5">
                     <h3 class="card-label">
                         <span class="d-block text-dark font-weight-bolder">Cases State</span>
+                        <span class="d-block text-dark-50 mt-2 font-size-sm">Last updated: <?= $cases_state_date; ?></span>
                         <span class="d-block text-dark-50 mt-2 font-size-sm">Daily recorded COVID-19 cases at state level</span>
                     </h3>
                 </div>
@@ -283,6 +284,7 @@ include 'model/covid.php';
                 <div class="card-title py-5">
                     <h3 class="card-label">
                         <span class="d-block text-dark font-weight-bolder">Vaccination</span>
+                        <span class="d-block text-dark-50 mt-2 font-size-sm">Last updated: <?= $aefi_date; ?></span>
                         <span class="d-block text-dark-50 mt-2 font-size-sm">MoH collaborates with MoSTI and the COVID-19 Immunisation Task Force (CITF) to publish open data on Malaysia's vaccination rollout.</span>
                     </h3>
                 </div>
@@ -359,46 +361,6 @@ include 'model/covid.php';
                 <!--end::table-->
             </div>
             <!--end::Body-->
-        </div>
-        <!--end::Charts Widget 2-->
-    </div>
-    <div class="col-xl-4">
-        <!--begin::List Widget 2-->
-        <div class="card card-custom gutter-b card-stretch card-shadowless">
-            <!--begin::Body-->
-            <div class="card-body pt-2">
-                <!--begin::Item-->
-				<div class="text-center text-dark-50">
-					<div class="row">
-						<a class="text-muted mt-3">Last updated: <?= $date_display; ?></a>
-						<div class="col-sm"></div>
-						<div class="col-sm">
-							<img src="assets/media/client-logos/malaysia.png" class="img-fluid" alt="...">
-						</div>
-						<div class="col-sm"></div>
-						<h1>Coronavirus Cases :</h1>
-						<a class="h1 font-weight-boldest text-warning"><?= $cases_new1; ?></a>
-
-						<h1 class="mt-5">Death :</h1>
-						<a class="h1 font-weight-boldest text-dark-50"><?= $deaths_new; ?></a>
-
-						<h1 class="mt-5">Recovered :</h1>
-						<a class="h1 font-weight-boldest" style="color:#8ACA2B"><?= $cases_recovered2; ?></a>
-					</div>
-				</div>
-                <!--end::Item-->
-            </div>
-            <!--end::Body-->
-        </div>
-        <!--end::List Widget 2-->
-    </div>
-</div>
-<!--end::Row-->
-<!--begin::Row-->
-<div class="row">
-    <div class="col-xl-8">
-        <!--begin::Advance Table Widget 2-->
-        <div class="card card-custom gutter-b card-stretch card-shadowless">
             <!--begin::Header-->
             <div class="card-header h-auto border-0">
                 <!--begin::Title-->
@@ -411,8 +373,8 @@ include 'model/covid.php';
                 <!--end::Title-->
             </div>
             <!--end::Header-->
-            <!--begin::Body-->
-            <div class="card-body pt-2">
+                        <!--begin::Body-->
+                        <div class="card-body pt-2">
                 <!--begin::table-->
                 <table class="table table-bordered table-sm">
                     <tbody class="text-center">
@@ -494,20 +456,317 @@ include 'model/covid.php';
             </div>
             <!--end::Body-->
         </div>
+        <!--end::Charts Widget 2-->
+    </div>
+    <div class="col-xl-4">
+        <!--begin::List Widget 2-->
+        <div class="card card-custom gutter-b card-stretch card-shadowless">
+            <!--begin::Body-->
+            <div class="card-body pt-2">
+                <!--begin::Item-->
+				<div class="text-center text-dark-50">
+					<div class="row">
+						<a class="text-muted mt-3">Last updated: <?= $date_display; ?></a>
+						<div class="col-sm"></div>
+						<div class="col-sm">
+							<img src="assets/media/client-logos/malaysia.png" class="img-fluid" alt="...">
+						</div>
+						<div class="col-sm"></div>
+						<h1 class="mt-10">Coronavirus Cases :</h1>
+						<a class="h1 font-weight-boldest text-primary"><?= $cases_new1; ?></a>
+
+						<h1 class="mt-10">Death :</h1>
+						<a class="h1 font-weight-boldest text-danger"><?= $deaths_new; ?></a>
+
+						<h1 class="mt-10">Recovered :</h1>
+						<a class="h1 font-weight-boldest text-warning"><?= $cases_recovered1; ?></a>
+					</div>
+				</div>
+                <!--end::Item-->
+                <img src="assets/media/svg/illustrations/data-points.svg" class="img-fluid" alt="...">
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::List Widget 2-->
+    </div>
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="row">
+    <div class="col-xl-8">
+        <!--begin::Advance Table Widget 2-->
+        <div class="card card-custom gutter-b card-stretch card-shadowless">
+            <!--begin::Header-->
+            <div class="card-header h-auto border-0">
+                <!--begin::Title-->
+                <div class="card-title py-5">
+                    <h3 class="card-label">
+                        <span class="d-block text-dark font-weight-bolder">ICU</span>
+                        <span class="d-block text-dark-50 mt-2 font-size-sm">Last updated: <?= $icu_date; ?></span>
+                        <span class="d-block text-dark-50 mt-2 font-size-sm">Number of individuals within the cluster currently under intensive care.</span>
+                    </h3>
+                </div>
+                <!--end::Title-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-2">
+                <!--begin::table-->
+                <table class="table table-bordered table-sm">
+                    <tbody class="text-center">
+                        <tr class="bg-success text-white">
+                            <td class="text-left">State</td>
+                            <td>Beds icu</td>
+                            <td>Bed icu rep</td>
+                            <td>Beds icu total</td>
+                            <td>Beds icu covid</td>
+                            <td>Ventilator</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Johor</td>
+                            <td><?= $beds_icu_Johor; ?></td>
+                            <td><?= $beds_icu_rep_Johor; ?></td>
+                            <td><?= $beds_icu_total_Johor; ?></td>
+                            <td><?= $beds_icu_covid_Johor; ?></td>
+                            <td><?= $vent_Johor; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Kedah</td>
+                            <td><?= $beds_icu_Kedah; ?></td>
+                            <td><?= $beds_icu_rep_Kedah; ?></td>
+                            <td><?= $beds_icu_total_Kedah; ?></td>
+                            <td><?= $beds_icu_covid_Kedah; ?></td>
+                            <td><?= $vent_Kedah; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Kelantan</td>
+                            <td><?= $beds_icu_Kelantan; ?></td>
+                            <td><?= $beds_icu_rep_Kelantan; ?></td>
+                            <td><?= $beds_icu_total_Kelantan; ?></td>
+                            <td><?= $beds_icu_covid_Kelantan; ?></td>
+                            <td><?= $vent_Kelantan; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Melaka</td>
+                            <td><?= $beds_icu_Melaka; ?></td>
+                            <td><?= $beds_icu_rep_Melaka; ?></td>
+                            <td><?= $beds_icu_total_Melaka; ?></td>
+                            <td><?= $beds_icu_covid_Melaka; ?></td>
+                            <td><?= $vent_Melaka; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Negeri Sembilan</td>
+                            <td><?= $beds_icu_n9; ?></td>
+                            <td><?= $beds_icu_rep_n9; ?></td>
+                            <td><?= $beds_icu_total_n9; ?></td>
+                            <td><?= $beds_icu_covid_n9; ?></td>
+                            <td><?= $vent_n9; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Pahang</td>
+                            <td><?= $beds_icu_Pahang; ?></td>
+                            <td><?= $beds_icu_rep_Pahang; ?></td>
+                            <td><?= $beds_icu_total_Pahang; ?></td>
+                            <td><?= $beds_icu_covid_Pahang; ?></td>
+                            <td><?= $vent_Pahang; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Perak</td>
+                            <td><?= $beds_icu_Perak; ?></td>
+                            <td><?= $beds_icu_rep_Perak; ?></td>
+                            <td><?= $beds_icu_total_Perak; ?></td>
+                            <td><?= $beds_icu_covid_Perak; ?></td>
+                            <td><?= $vent_Perak; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Perlis</td>
+                            <td><?= $beds_icu_Perlis; ?></td>
+                            <td><?= $beds_icu_rep_Perlis; ?></td>
+                            <td><?= $beds_icu_total_Perlis; ?></td>
+                            <td><?= $beds_icu_covid_Perlis; ?></td>
+                            <td><?= $vent_Perlis; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Pulau Pinang</td>
+                            <td><?= $beds_icu_ppinang; ?></td>
+                            <td><?= $beds_icu_rep_ppinang; ?></td>
+                            <td><?= $beds_icu_total_ppinang; ?></td>
+                            <td><?= $beds_icu_covid_ppinang; ?></td>
+                            <td><?= $vent_ppinang; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Sabah</td>
+                            <td><?= $beds_icu_Sabah; ?></td>
+                            <td><?= $beds_icu_rep_Sabah; ?></td>
+                            <td><?= $beds_icu_total_Sabah; ?></td>
+                            <td><?= $beds_icu_covid_Sabah; ?></td>
+                            <td><?= $vent_Sabah; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Sarawak</td>
+                            <td><?= $beds_icu_Sarawak; ?></td>
+                            <td><?= $beds_icu_rep_Sarawak; ?></td>
+                            <td><?= $beds_icu_total_Sarawak; ?></td>
+                            <td><?= $beds_icu_covid_Sarawak; ?></td>
+                            <td><?= $vent_Sarawak; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Selangor</td>
+                            <td><?= $beds_icu_Selangor; ?></td>
+                            <td><?= $beds_icu_rep_Selangor; ?></td>
+                            <td><?= $beds_icu_total_Selangor; ?></td>
+                            <td><?= $beds_icu_covid_Selangor; ?></td>
+                            <td><?= $vent_Selangor; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Terengganu</td>
+                            <td><?= $beds_icu_Terengganu; ?></td>
+                            <td><?= $beds_icu_rep_Terengganu; ?></td>
+                            <td><?= $beds_icu_total_Terengganu; ?></td>
+                            <td><?= $beds_icu_covid_Terengganu; ?></td>
+                            <td><?= $vent_Terengganu; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">W.P. Kuala Lumpur</td>
+                            <td><?= $beds_icu_kl; ?></td>
+                            <td><?= $beds_icu_rep_kl; ?></td>
+                            <td><?= $beds_icu_total_kl; ?></td>
+                            <td><?= $beds_icu_covid_kl; ?></td>
+                            <td><?= $vent_kl; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">W.P. Labuan</td>
+                            <td><?= $beds_icu_labuan; ?></td>
+                            <td><?= $beds_icu_rep_labuan; ?></td>
+                            <td><?= $beds_icu_total_labuan; ?></td>
+                            <td><?= $beds_icu_covid_labuan; ?></td>
+                            <td><?= $vent_labuan; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">W.P. Putrajaya</td>
+                            <td><?= $beds_icu_Putrajaya; ?></td>
+                            <td><?= $beds_icu_rep_Putrajaya; ?></td>
+                            <td><?= $beds_icu_total_Putrajaya; ?></td>
+                            <td><?= $beds_icu_covid_Putrajaya; ?></td>
+                            <td><?= $vent_Putrajaya; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--end::table-->
+            </div>
+            <!--end::Body-->
+        </div>
         <!--end::Advance Table Widget 2-->
     </div>
     <div class="col-xl-4">
         <!--begin::List Widget 5-->
         <div class="card card-custom gutter-b card-stretch">
-            <!--begin::header-->
-            <div class="card-header border-0">
-                <h3 class="card-title font-weight-bolder"></h3>
+            <!--begin::Header-->
+            <div class="card-header h-auto border-0">
+                <!--begin::Title-->
+                <div class="card-title py-5">
+                    <h3 class="card-label">
+                        <span class="d-block text-dark font-weight-bolder">Test</span>
+                        <span class="d-block text-dark-50 mt-2 font-size-sm">Last updated: <?= $tests_state_date; ?></span>
+                        <span class="d-block text-dark-50 mt-2 font-size-sm">Number of tests carried out on individuals within the cluster. Denominator for computing a cluster's current positivity rate.</span>
+                    </h3>
+                </div>
+                <!--end::Title-->
             </div>
-            <!--end::header-->
+            <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body pt-0">
-                <!--begin::Item-->
-                <!--end::Item-->
+                <!--begin::table-->
+                <table class="table table-bordered table-sm">
+                    <tbody class="text-center">
+                        <tr class="bg-success text-white">
+                            <td class="text-left">State</td>
+                            <td>Rtk_ag</td>
+                            <td>Pcr</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Johor</td>
+                            <td><?= $state_rtk_ag_Johor; ?></td>
+                            <td><?= $state_pcr_Johor; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Kedah</td>
+                            <td><?= $state_rtk_ag_Kedah; ?></td>
+                            <td><?= $state_pcr_Kedah; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Kelantan</td>
+                            <td><?= $state_rtk_ag_Kelantan; ?></td>
+                            <td><?= $state_pcr_Kelantan; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Melaka</td>
+                            <td><?= $state_rtk_ag_Melaka; ?></td>
+                            <td><?= $state_pcr_Melaka; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Negeri Sembilan</td>
+                            <td><?= $state_rtk_ag_n9; ?></td>
+                            <td><?= $state_pcr_n9; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Pahang</td>
+                            <td><?= $state_rtk_ag_Pahang; ?></td>
+                            <td><?= $state_pcr_Pahang; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Perak</td>
+                            <td><?= $state_rtk_ag_Perak; ?></td>
+                            <td><?= $state_pcr_Perak; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Perlis</td>
+                            <td><?= $state_rtk_ag_Perlis; ?></td>
+                            <td><?= $state_pcr_Perlis; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Pulau Pinang</td>
+                            <td><?= $state_rtk_ag_ppinang; ?></td>
+                            <td><?= $state_pcr_ppinang; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Sabah</td>
+                            <td><?= $state_rtk_ag_Sabah; ?></td>
+                            <td><?= $state_pcr_Sabah; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Sarawak</td>
+                            <td><?= $state_rtk_ag_Sarawak; ?></td>
+                            <td><?= $state_pcr_Sarawak; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Selangor</td>
+                            <td><?= $state_rtk_ag_Selangor; ?></td>
+                            <td><?= $state_pcr_Selangor; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">Terengganu</td>
+                            <td><?= $state_rtk_ag_Terengganu; ?></td>
+                            <td><?= $state_pcr_Terengganu; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">W.P. Kuala Lumpur</td>
+                            <td><?= $state_rtk_ag_kl; ?></td>
+                            <td><?= $state_pcr_kl; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">W.P. Labuan</td>
+                            <td><?= $state_rtk_ag_labuan; ?></td>
+                            <td><?= $state_pcr_labuan; ?></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="text-left">W.P. Putrajaya</td>
+                            <td><?= $state_rtk_ag_putrajaya; ?></td>
+                            <td><?= $state_pcr_putrajaya; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--end::table-->
             </div>
             <!--end::Body-->
         </div>
