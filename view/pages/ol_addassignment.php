@@ -76,7 +76,7 @@ html {
                 <!--end::Separator-->
                 <!--begin::Detail-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?php echo $SubjectName; ?></span>
+                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"><?= $SubjectName; ?></span>
                 </div>
                 <!--end::Detail-->
 				<!--end::Page Heading-->
@@ -267,7 +267,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="Submitfrom" placeholder="Select date" id="kt_datepicker" value="<?php echo $Submitfrom; ?>">
+                                                <input type="datetime-local" class="form-control" name="Submitfrom" placeholder="Select date" id="kt_datepicker" value="<?= $Submitfrom; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="Duedate" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
+                                                <input type="datetime-local" class="form-control" name="Duedate" placeholder="Select date" id="kt_datepicker" value="<?= $Due; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -297,7 +297,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="Cutoffdate" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
+                                                <input type="datetime-local" class="form-control" name="Cutoffdate" placeholder="Select date" id="kt_datepicker" value="<?= $Due; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -312,7 +312,7 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                         </div>
                                         <div class="col-md-6">
                                             <div class='input-group' id='kt_daterangepicker_4'>
-                                                <input type="datetime-local" class="form-control" name="reminder" placeholder="Select date" id="kt_datepicker" value="<?php echo $Due; ?>">
+                                                <input type="datetime-local" class="form-control" name="reminder" placeholder="Select date" id="kt_datepicker" value="<?= $Due; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -592,8 +592,8 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?php echo $Notes_id; ?>">
-                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Notes_id" value="<?= $Notes_id; ?>">
+                                <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?= $Subject_id; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
                                 <button type="reset" class="btn btn-light btn-hover-success btn-sm">Reset</button>

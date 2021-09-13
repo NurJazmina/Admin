@@ -272,8 +272,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
     {
       ?>
       <script>
-      var recheckedittimetable = document.getElementById('recheckedittimetable')
-      recheckedittimetable.addEventListener('show.bs.modal', function (event) {
+      var edit_timetable = document.getElementById('edit_timetable')
+      edit_timetable.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -282,14 +282,14 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = recheckedittimetable.querySelector('.modal-title')
+      var modalTitle = edit_timetable.querySelector('.modal-title')
 
-      var modalBodyInput = recheckedittimetable.querySelector('.modal-body input')
+      var modalBodyInput = edit_timetable.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
 
-      var StatusTimetableModal = document.getElementById('StatusTimetableModal')
-      StatusTimetableModal.addEventListener('show.bs.modal', function (event) {
+      var delete_timetable = document.getElementById('delete_timetable')
+      delete_timetable.addEventListener('show.bs.modal', function (event) {
       // Button that triggered the modal
       var button = event.relatedTarget
       // Extract info from data-bs-* attributes
@@ -298,8 +298,23 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       // and then do the updating in a callback.
       //
       // Update the modal's content.
-      var modalTitle = StatusTimetableModal.querySelector('.modal-title')
-      var modalBodyInput = StatusTimetableModal.querySelector('.modal-body input')
+      var modalTitle = delete_timetable.querySelector('.modal-title')
+      var modalBodyInput = delete_timetable.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+
+      var status_timetable = document.getElementById('status_timetable')
+      status_timetable.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = status_timetable.querySelector('.modal-title')
+      var modalBodyInput = status_timetable.querySelector('.modal-body input')
       modalBodyInput.value = recipient
       })
       </script>
