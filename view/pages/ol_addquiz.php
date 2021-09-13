@@ -566,9 +566,9 @@ $Due = date_format($Due,"Y-m-d\TH:i:s");
                                 <input class="form-control" type="hidden" name="totalquiz" value="<?php echo $total; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" class="btn btn-success mr-2" name="add_quiz_return_notes">Save and return to the notes</button>
+                                <button type="reset"  class="btn btn-light btn-hover-success btn-sm">Reset</button>
+                                <button type="submit" class="btn btn-success btn-hover-light" name="add_quiz_return_notes">Save and return to the notes</button>
                                 <!-- <button type="submit" class="btn btn-success mr-2" name="add_quiz_display">Save and display</button> -->
-                                <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
                     </div>

@@ -314,9 +314,9 @@ input[aria-invalid='true'] {
                                 <input type="hidden" class="col-sm-12 col-form-label text-sm-right" name="Subject_id" value="<?php echo $Subject_id; ?>">
                             </div>
                             <div class="col-lg-6 text-lg-right">
-                                <button type="submit" href="" class="btn btn-success mr-2" name="add_survey_return_notes">Save and return to the notes</button>
+                                <button type="reset"  class="btn btn-light btn-hover-success btn-sm">Reset</button>
+                                <button type="submit" class="btn btn-success btn-hover-light" name="add_survey_return_notes">Save and return to the notes</button>
                                 <!-- <button type="submit" class="btn btn-success mr-2" name="addsurvey">Save and display</button> -->
-                                <button type="reset"  class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
                     </div>
