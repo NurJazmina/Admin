@@ -200,7 +200,7 @@ border-color:#ffff;
                             </div>
                             <div class="col-sm-5"></div>
                             <div class="col-sm-3">
-                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</button>
+                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
                             </div>
                         </div>
                     </form>

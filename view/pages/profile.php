@@ -17,6 +17,13 @@ foreach ($cursor as $document)
     $ConsumerAddress = $document->ConsumerAddress;
     $ConsumerStatus = $document->ConsumerStatus;
 }
+$date = date("Y-m-d");
+$today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+
+if (isset($_POST['submit_date']))
+{
+    $date = $_POST['date'];
+}
 ?>
 <style>
 .highlight td.default 
@@ -64,7 +71,21 @@ foreach ($cursor as $document)
                                     <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                                     <i class="flaticon2-new-email mr-2 font-size-lg"></i><?= $_SESSION["loggeduser_consumerEmail"]; ?></a>
                                     <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2 text-lowercase">
-                                    <i class="flaticon2-calendar-3 mr-2 font-size-lg"></i><?= $_SESSION["loggeduser_DepartmentName"]; ?></a>
+                                    <i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
+                                    <?php
+                                    if ($_SESSION["loggeduser_ACCESS"] == 'STAFF')
+                                    {
+                                        echo $_SESSION["loggeduser_DepartmentName"]; 
+                                    }
+                                    elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT')
+                                    {
+                                        echo $_SESSION["loggeduser_ClassCategory"]." ".$_SESSION["loggeduser_ClassName"];
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+                                    ?></a>
                                     <a href="#" class="text-dark-50 text-hover-primary font-weight-bold text-lowercase">
                                     <i class="flaticon2-placeholder mr-2 font-size-lg"></i><?= $_SESSION["loggeduser_consumerState"]; ?></a>
                                 </div>
@@ -88,7 +109,7 @@ foreach ($cursor as $document)
                         <div id="kt_charts_widget_4_chart">
                             <table class="table table-bordered">
                                 <tbody>
-                                    <tr class="bg-light text-dark-50">
+                                    <tr class="bg-success text-white">
                                         <td>Name</td>
                                         <td><?= $ConsumerFName." ".$ConsumerLName; ?> </td>
                                     </tr>
@@ -119,11 +140,11 @@ foreach ($cursor as $document)
                                 </tbody>
                             </table>
                             <?php
-                        if($_SESSION["loggeduser_ConsumerGroupName"] == 'SCHOOL' && $_SESSION["loggeduser_ConsumerGroupName"] !== 'GONGETZ')
+                        if($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
                         {
                             ?>
                             <table class="table table-bordered">
-                                <tr class="bg-light text-dark-50">
+                                <tr class="bg-success text-white">
                                     <td>Class</td>
                                     <td>Subject</td>
                                 </tr>
@@ -142,7 +163,7 @@ foreach ($cursor as $document)
                                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                                     foreach ($cursor as $document)
                                     {
-                                    $ClassName = $document->ClassName;
+                                        $ClassName = $document->ClassName;
                                     }
 
                                     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
@@ -150,7 +171,7 @@ foreach ($cursor as $document)
                                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
                                     foreach ($cursor as $document)
                                     {
-                                    $SubjectName = $document->SubjectName;
+                                        $SubjectName = $document->SubjectName;
                                     }
                                     ?>
                                     <tr>
@@ -164,11 +185,11 @@ foreach ($cursor as $document)
                             </table>
                             <?php
                         }
-                        elseif($_SESSION["loggeduser_ConsumerGroupName"] == 'STUDENT')
+                        elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT')
                         {
                             ?>
                             <table class="table table-bordered">
-                                <tr class="bg-light text-dark-50">
+                                <tr class="bg-success text-white">
                                     <td>Class</td>
                                     <td>Subject</td>
                                 </tr>
@@ -223,7 +244,7 @@ foreach ($cursor as $document)
                     <div class="card-body">
                         <div id="kt_charts_widget_4_chart">
                             <div class="card">
-                                <div class="card-header bg-light text-dark-50">
+                                <div class="card-header bg-success text-white">
                                     <a>Remarks</a>
                                 </div>
                                 <div class="card-body">
@@ -280,7 +301,7 @@ foreach ($cursor as $document)
                                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
                                                 foreach ($cursor as $document)
                                                 {
-                                                $ConsumerFName = $document->ConsumerFName;
+                                                    $ConsumerFName = $document->ConsumerFName;
                                                 }
                                                 ?>
                                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -318,7 +339,7 @@ foreach ($cursor as $document)
                                                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
                                                         foreach ($cursor as $document)
                                                         {
-                                                        $ConsumerFName = $document->ConsumerFName;
+                                                            $ConsumerFName = $document->ConsumerFName;
                                                         }
                                                         ?>
                                                         <div class="accordion-body">
@@ -333,7 +354,7 @@ foreach ($cursor as $document)
                                                         </table>
                                                         </div>
                                                         <?php
-                                                        }
+                                                    }
                                                         ?>
                                                         <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                                             <div class="m-3">
@@ -382,7 +403,7 @@ foreach ($cursor as $document)
                                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
                                                 foreach ($cursor as $document)
                                                 {
-                                                $ConsumerFName = $document->ConsumerFName;
+                                                    $ConsumerFName = $document->ConsumerFName;
                                                 }
                                                 ?>
                                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -408,33 +429,33 @@ foreach ($cursor as $document)
                                                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
                                                         foreach ($cursor as $document2)
                                                         {
-                                                        $remark_id2 = strval($document2->_id);
-                                                        $Details2 = ($document2->Details);
-                                                        $Staff_id2 = ($document2->Staff_id);
-                                                        $Date2 = strval($document2->Date);
-                                                        $Date2 = new MongoDB\BSON\UTCDateTime($Date2);
-                                                        $Date2 = $Date2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                                                            $remark_id2 = strval($document2->_id);
+                                                            $Details2 = ($document2->Details);
+                                                            $Staff_id2 = ($document2->Staff_id);
+                                                            $Date2 = strval($document2->Date);
+                                                            $Date2 = new MongoDB\BSON\UTCDateTime($Date2);
+                                                            $Date2 = $Date2->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
-                                                        $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id2)];
-                                                        $query = new MongoDB\Driver\Query($filter);
-                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-                                                        foreach ($cursor as $document)
-                                                        {
-                                                            $ConsumerFName = $document->ConsumerFName;
-                                                        }
-                                                        ?>
-                                                        <div class="accordion-body">
-                                                            <table class="table table-borderless text-left">
-                                                            <tbody>
-                                                                <tr class="row">
-                                                                <td class="col-2"><?= date_format($Date2,"D,d M Y H:i") ?></td>
-                                                                <td class="col-2"><?= $ConsumerFName; ?></td>
-                                                                <td class="col"><a align="justify"><?= $Details2;?></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <?php
+                                                            $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id2)];
+                                                            $query = new MongoDB\Driver\Query($filter);
+                                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+                                                            foreach ($cursor as $document)
+                                                            {
+                                                                $ConsumerFName = $document->ConsumerFName;
+                                                            }
+                                                            ?>
+                                                            <div class="accordion-body">
+                                                                <table class="table table-borderless text-left">
+                                                                <tbody>
+                                                                    <tr class="row">
+                                                                    <td class="col-2"><?= date_format($Date2,"D,d M Y H:i") ?></td>
+                                                                    <td class="col-2"><?= $ConsumerFName; ?></td>
+                                                                    <td class="col"><a align="justify"><?= $Details2;?></a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <?php
                                                         }
                                                         ?>
                                                         <form name="add_remark_child" action="model/staff_remark.php" method="POST">
@@ -484,7 +505,7 @@ foreach ($cursor as $document)
                                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                                                 foreach ($cursor as $document)
                                                 {
-                                                $ConsumerFName = $document->ConsumerFName;
+                                                    $ConsumerFName = $document->ConsumerFName;
                                                 }
                                                 ?>
                                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -537,7 +558,7 @@ foreach ($cursor as $document)
                                                             </table>
                                                         </div>
                                                         <?php
-                                                        }
+                                                    }
                                                         ?>
                                                         <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                                             <div class="m-3">
@@ -580,12 +601,25 @@ foreach ($cursor as $document)
                     <div class="card-body">
                         <!-- begin::attendance -->
                         <div class="text-right p-3">
-                            <a href="index.php?page=profile&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3">EXPORT ATTENDANCE TO XLS</a>
+                            <form name="submit_date" action="index.php?page=profile" method="post">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+                                    </div>
+                                    <div class="col-sm-5"></div>
+                                    <div class="col-sm-3">
+                                        <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
+                                    </div>
+                                </div>
+                            </form>
                             <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-                            <thead class="text-dark-50">
+                            <thead class="bg-white text-success">
                                 <tr>
-                                    <th>Staff ID</th>
-                                    <th>Staff Name</th>
+                                    <th>Consumer ID</th>
+                                    <th>Consumer Name</th>
                                     <th>Date</th>
                                     <th>IN</th>
                                     <th>OUT</th>
@@ -594,25 +628,24 @@ foreach ($cursor as $document)
                             <tbody>
                                 <?php
                                 $Cards_id ='';
-                                $date_now = date("d-m-Y");
-                                $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
-                                $to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
+                                //$from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
+                                //$to_date = new MongoDB\BSON\UTCDateTime((new DateTime('now +1 month'))->getTimestamp()*1000);
 
                                 $filter = ['Consumer_id'=>$consumer_id];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
                                 foreach ($cursor as $document)
                                 {
-                                $Cards_id = strval($document->Cards_id);
+                                    $Cards_id = strval($document->Cards_id);
                                 }
                                 ?>
                                 <tr>
                                 <td class="default"><?= $ConsumerIDNo; ?></td>
                                 <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                                <td class="default"><?= $date_now."<br>"; ?></td>
+                                <td class="default"><?= $date."<br>"; ?></td>
                                 <td class="default"><?php
                                 $count = 0;
-                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
                                 $option = ['sort' => ['_id' => 1]];
                                 $query = new MongoDB\Driver\Query($filter,$option);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -629,7 +662,7 @@ foreach ($cursor as $document)
                                 ?></td>
                                 <td class="default"><?php
                                 $count = 0;
-                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
                                 $option = ['sort' => ['_id' => 1]];
                                 $query = new MongoDB\Driver\Query($filter,$option);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -649,21 +682,17 @@ foreach ($cursor as $document)
                                 </tr>
                             </tbody>
                             </table>
-                            <?php
-                            if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-                            {
-                                $attendance = ($_GET['attendance']);
-                                ?>
-                                <script>
-                                $(document).ready(function () {
+                            <script>
+                            $(document).ready(function() {
+
+                                $("#submitted").click(function() {
                                     $("#attendance").table2excel({
-                                        filename: "attendancestaff.xls"
-                                    });
+                                    filename: "attendance.xls"
                                 });
-                                
-                                </script>
-                                <?php
-                            }?>
+                                });
+
+                            });
+                            </script>
                             <script type="text/javascript">
                             var rows = document.querySelectorAll('tr');
 
