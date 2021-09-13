@@ -125,6 +125,14 @@ foreach ($cursor as $document)
 {
   $totalstudent = $totalstudent + 1;
 }
+
+$date = date("Y-m-d");
+$today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+
+if (isset($_POST['submit_date']))
+{
+    $date = $_POST['date'];
+}
 ?>
 <div class="text-dark-50 text-center m-5"><h1>Class Info</h1></div>
 <div class="row">
@@ -591,7 +599,20 @@ foreach ($cursor as $document)
   <div class="col-10">
     <div class="card">
       <div class="card-body text-right">
-        <a href="index.php?page=classdetail&id=<?= $class_id; ?>&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+        <form name="submit_date" action="" method="post">
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+                </div>
+                <div class="col-sm-1">
+                    <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+                </div>
+                <div class="col-sm-5"></div>
+                <div class="col-sm-3">
+                    <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
+                </div>
+            </div>
+        </form>
         <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
           <thead class="bg-white text-dark-50">
               <tr>
@@ -605,9 +626,6 @@ foreach ($cursor as $document)
           <tbody>
           <?php
           $Cards_id ='';
-          $date_now = date("d-m-Y");
-          $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
-
           if (isset($_GET['id']) && !empty($_GET['id']))
           {
             $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
@@ -656,10 +674,10 @@ foreach ($cursor as $document)
               <tr>
                 <td class="default"><?= $ConsumerIDNo; ?></td>
                 <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                <td class="default"><?= $date_now."<br>"; ?></td>
+                <td class="default"><?= $date."<br>"; ?></td>
                 <td class="default"><?php
                 $count = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
                 $option = ['sort' => ['_id' => 1]];
                 $query = new MongoDB\Driver\Query($filter,$option);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -676,7 +694,7 @@ foreach ($cursor as $document)
                 ?></td>
                 <td class="default"><?php
                 $count = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
                 $option = ['sort' => ['_id' => 1]];
                 $query = new MongoDB\Driver\Query($filter,$option);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -700,21 +718,16 @@ foreach ($cursor as $document)
           ?>
           </tbody>
         </table>
-          <?php
-          if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-          {
-            $attendance = ($_GET['attendance']);
-            ?>
-            <script>
-              $(document).ready(function () {
-                $("#attendance").table2excel({
-                    filename: "attendanceclass.xls"
+          <script>
+            $(document).ready(function() {
+                $("#submitted").click(function() {
+                    $("#attendance").table2excel({
+                    filename: "attendance_class.xls"
                 });
-              });
-              
-            </script>
-            <?php
-          }?>
+                });
+
+            });
+          </script>
           <script type="text/javascript">
           var rows = document.querySelectorAll('tr');
 

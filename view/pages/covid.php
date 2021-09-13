@@ -31,7 +31,7 @@ include 'model/covid.php';
                         <li data-target="#carouselIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselIndicators" data-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner bg-white">
+                    <div class="carousel-inner">
                         <div class="carousel-item active">
                             <!--begin::Nav Tabs-->
                             <ul class="dashboard-tabs nav nav-pills nav-light row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
