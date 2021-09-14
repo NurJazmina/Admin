@@ -27,7 +27,7 @@
         <div class="card-toolbar text-right">
           <!--begin::Dropdown-->
           <div class="dropdown dropdown-inline mr-2">
-            <button type="button" class="btn btn-light btn-hover-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-success btn-hover-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="svg-icon svg-icon-md">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -245,7 +245,7 @@ if (isset($_POST['submit_date']))
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light text-dark-50">
+              <div class="modal-header bg-light text-dark-50">
                 <a>Remarks</a>
               </div>
               <div class="card-body">
@@ -256,7 +256,7 @@ if (isset($_POST['submit_date']))
                         <textarea class="class" name="remark"></textarea>
                         <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $class_id; ?>" name="class_id">
-                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -365,7 +365,7 @@ if (isset($_POST['submit_date']))
                                     <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                     <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                     <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                    <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                    <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                   </div>
                                 </form>
                               </div>
@@ -467,7 +467,7 @@ if (isset($_POST['submit_date']))
                                       <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -569,7 +569,7 @@ if (isset($_POST['submit_date']))
                                       <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -600,18 +600,17 @@ if (isset($_POST['submit_date']))
     <div class="card">
       <div class="card-body text-right">
         <form name="submit_date" action="" method="post">
-            <div class="form-group row">
-                <div class="col-sm-3">
-                    <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
-                </div>
-                <div class="col-sm-1">
-                    <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
-                </div>
-                <div class="col-sm-5"></div>
-                <div class="col-sm-3">
-                    <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
-                </div>
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
             </div>
+            <div class="col-sm-1">
+              <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+            </div>
+            <div class="col-sm-8">
+              <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
+            </div>
+          </div>
         </form>
         <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
           <thead class="bg-white text-dark-50">
