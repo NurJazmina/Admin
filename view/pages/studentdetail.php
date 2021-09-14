@@ -608,7 +608,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
             </div>
           </form>
           <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-            <thead class="bg-white text-dark-50">
+            <thead class="bg-white text-success">
                 <tr>
                   <th>Student ID</th>
                   <th>Student Name</th>

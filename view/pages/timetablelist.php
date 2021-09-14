@@ -80,9 +80,9 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                 $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
                 foreach ($cursor as $document)
                 {
-                  $timetable_id = $document->_id;
-                  $Classroom_id = $document->Classroom_id;
-                  $Teachers_id = $document->Teachers_id;
+                  $timetable_id = strval($document->_id);
+                  $Class_id = $document->Class_id;
+                  $Teacher_id = $document->Teacher_id;
                   $Subject_id = $document->Subject_id;
                   $Status = $document->Status;
 
@@ -99,7 +99,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                   $End_day = date_format($End,"d-m-Y");
                   $End_hour = date_format($End,"H:i");
 
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Classroom_id)];
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                   foreach ($cursor as $document)
@@ -108,7 +108,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     $ClassName = $document->ClassName;
                   }
 
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teachers_id)];
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                   foreach ($cursor as $document)
@@ -131,36 +131,34 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
                   foreach ($cursor as $document)
                   {
-                    $subject_id = strval($document->_id);
                     $SubjectName = $document->SubjectName;
-                    $Class_category = $document->Class_category;
                   }
-                  
+
                   $totalstudent = 0;
-                  $filter = ['Class_id'=>'5f9bffb4f88e385efc635816'];
+                  $filter = ['Class_id'=>$Class_id];
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                   foreach ($cursor as $document)
                   {
                     $totalstudent = $totalstudent + 1;
                   }
-                  echo $totalstudent;
+                 
                   ?>
                   <tr>
                     <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                    <td class="text-left"><?= $ClassCategory." ".$ClassName;?></td>
+                    <td class="text-left"><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                     <td><?= $totalstudent; ?></td>
-                    <td><?= $SubjectName; ?></td>
+                    <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $SubjectName; ?></a></td>
                     <td><?= $Start_day; ?></td>
                     <td><?= $Start_hour; ?></td>
                     <td><?= $End_day; ?></td>
                     <td><?= $End_hour; ?></td>
                     <td><?= $Status; ?></td>
                     <td>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable">
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $timetable_id; ?>">
                         <i class="flaticon2-edit icon-md text-hover-success"></i>
                       </button>
-                      <button id="submit" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
                         <i class="flaticon2-trash icon-md text-hover-success"></i>
                       </button>
                     </td>
@@ -212,14 +210,14 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                   </thead>
                   <tbody>
                     <?php
-                    $filter = ['Teachers_id'=>$_SESSION["loggeduser_teacherid"]];
+                    $filter = ['Teacher_id'=>$_SESSION["loggeduser_teacherid"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
                     foreach ($cursor as $document)
                     {
-                      $timetable_id = $document->_id;
-                      $Classroom_id = $document->Classroom_id;
-                      $Teachers_id = $document->Teachers_id;
+                      $timetable_id = strval($document->_id);
+                      $Class_id = $document->Class_id;
+                      $Teacher_id = $document->Teacher_id;
                       $Subject_id = $document->Subject_id;
                       $Status = $document->Status;
 
@@ -236,7 +234,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       $End_day = date_format($End,"d-m-Y");
                       $End_hour = date_format($End,"H:i");
 
-                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Classroom_id)];
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                       foreach ($cursor as $document)
@@ -245,7 +243,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                         $ClassName = $document->ClassName;
                       }
 
-                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teachers_id)];
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                       foreach ($cursor as $document)
@@ -274,7 +272,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       }
 
                       $totalstudent = 0;
-                      $filter = ['Class_id'=>$Classroom_id];
+                      $filter = ['Class_id'=>$Class_id];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                       foreach ($cursor as $document)
@@ -293,10 +291,10 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                         <td><?= $End_hour; ?></td>
                         <td><?= $Status; ?></td>
                         <td>
-                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable">
+                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $timetable_id; ?>">
                             <i class="flaticon2-edit icon-md text-hover-success"></i>
                           </button>
-                          <button id="submit" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
+                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
                             <i class="flaticon2-trash icon-md text-hover-success"></i>
                           </button>
                         </td>
@@ -325,14 +323,14 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                   </thead>
                   <tbody>
                     <?php
-                    $filter = ['Classroom_id'=>$_SESSION["loggeduser_class_id"]];
+                    $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
                     foreach ($cursor as $document)
                     {
-                      $timetable_id = $document->_id;
-                      $Classroom_id = $document->Classroom_id;
-                      $Teachers_id = $document->Teachers_id;
+                      $timetable_id = strval($document->_id);
+                      $Class_id = $document->Class_id;
+                      $Teacher_id = $document->Teacher_id;
                       $Subject_id = $document->Subject_id;
                       $Status = $document->Status;
 
@@ -349,7 +347,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       $End_day = date_format($End,"d-m-Y");
                       $End_hour = date_format($End,"H:i");
 
-                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Classroom_id)];
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
                       foreach ($cursor as $document)
@@ -358,7 +356,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                         $ClassName = $document->ClassName;
                       }
 
-                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teachers_id)];
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                       foreach ($cursor as $document)
@@ -387,7 +385,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       }
 
                       $totalstudent = 0;
-                      $filter = ['Class_id'=>$Classroom_id];
+                      $filter = ['Class_id'=>$Class_id];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                       foreach ($cursor as $document)
@@ -406,10 +404,10 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                         <td><?= $End_hour; ?></td>
                         <td><?= $Status; ?></td>
                         <td>
-                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable">
+                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $timetable_id; ?>">
                             <i class="flaticon2-edit icon-md text-hover-success"></i>
                           </button>
-                          <button id="submit" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
+                          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
                             <i class="flaticon2-trash icon-md text-hover-success"></i>
                           </button>
                         </td>

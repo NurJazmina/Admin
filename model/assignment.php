@@ -2,12 +2,12 @@
 //Add Quiz
 if (isset($_POST['add_assignment_return_notes']))
 {
-  $School_id = strval($_SESSION[""]);
+  $School_id = $_SESSION["loggeduser_school_id"];
   $Subject_id = $_POST['Subject_id'];
   $Notes_id = $_POST['Notes_id'];
-  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $Created_by = $_SESSION["loggeduser_id"];
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-  $Edit_by = strval($_SESSION["loggeduser_id"]);
+  $Edit_by = $_SESSION["loggeduser_id"];
   $Edit_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $Description = '';
@@ -115,8 +115,8 @@ if (isset($_POST['assignment_answer']))
 {
   $Assignment_id = $_POST['id'];
   $Answer = $_POST['answer'];
-  $School_id = strval($_SESSION[""]);
-  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $School_id = $_SESSION["loggeduser_school_id"];
+  $Created_by = $_SESSION["loggeduser_id"];
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);

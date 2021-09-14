@@ -462,33 +462,6 @@
 							</ul>
 						</div>
 					</li>
-					<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-						<a href="javascript:;" class="menu-link menu-toggle">
-							<span class="svg-icon menu-icon">
-								<i class="flaticon2-writing icon-md"></i>
-							</span>
-							<span class="menu-text">Timetable</span>
-							<i class="menu-arrow"></i>
-						</a>
-						<div class="menu-submenu">
-							<i class="menu-arrow"></i>
-							<ul class="menu-subnav">
-								<li class="menu-item menu-item-parent" aria-haspopup="true">
-									<span class="menu-link">
-										<span class="menu-text">timetable</span>
-									</span>
-								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=timetablelist" class="menu-link menu-toggle">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Timetable List</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</li>
 					<?php
 				}
 				?>
@@ -502,6 +475,14 @@
 							<i class="flaticon2-layers-1 icon-md"></i>
 						</span>
 						<span class="menu-text">Dashboard</span>
+					</a>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true" >
+					<a href="index.php?page=timetablelist" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-writing icon-md"></i>
+						</span>
+						<span class="menu-text">Timetable</span>
 					</a>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true" >

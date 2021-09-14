@@ -1,4 +1,10 @@
 <?php  
+$_SESSION["title"] = "Re-checking";
+include 'view/partials/_subheader/subheader-v1.php';
+$start = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$start = $start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$start = date_format($start,"Y-m-d\TH:i:s");
+
 if (isset($_POST['recheck_add_class'])) 
 {
   $school_id = $_SESSION["loggeduser_school_id"];
@@ -224,6 +230,27 @@ if (isset($_POST['recheck_edit_class']))
                 }
                 ?>
                 </select>
+              </div>
+
+              <label class="col-sm-2 col-form-label">Timetable Start</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" name="date_start<?= $x; ?>" value="<?= $start; ?>">
+              </div>
+
+              <label class="col-sm-2 col-form-label">Timetable End</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" name="date_end<?= $x; ?>" value="<?= $start; ?>">
+              </div>
+
+              <input type="hidden" name="repeat<?= $x; ?>" value="NO">
+              <label class="col-sm-2 col-form-label">Weekly Repeat</label>
+              <div class="col-sm-10">
+                <div class="checkbox-inline mt-3">
+                    <label class="checkbox checkbox-success">
+                      <input type="checkbox" name="repeat<?= $x; ?>" value="YES">
+                    <span> </span> 
+                    Repeated </label>
+                </div>
               </div>
             </div>
             <?php
