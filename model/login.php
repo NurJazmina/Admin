@@ -33,10 +33,10 @@ if (isset($_POST['LoginFormSubmit'])) //(isset($_GET['api_session']))
 
         $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"])];
         $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup',$query);
         foreach ($cursor as $document)
         {
-          $_SESSION["loggeduser_ConsumerGroupName"] = strval($document->ConsumerGroupName);
+          $_SESSION["loggeduser_ConsumerGroupName"] = $document->ConsumerGroupName;
         }
 
         $filter = ['ConsumerID'=>$_SESSION["loggeduser_id"]];

@@ -30,7 +30,7 @@ if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
 
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_SESSION["loggeduser_ConsumerGroup_id"])];
     $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.ConsumerGroup',$query);
     foreach ($cursor as $document)
     {
         $_SESSION["loggeduser_ConsumerGroupName"] = strval($document->ConsumerGroupName);
