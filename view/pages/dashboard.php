@@ -504,46 +504,38 @@ section, .main {
 					</div>
 				</div>
 				<div class="text-dark-50 text-center m-1 mt-10"><h3>Cluster Covid19</h3></div>
-				<table class="table table-bordered table-sm">
+				<table class="table table-bordered table-sm text-center">
 					<tbody>
 						<tr class="bg-success text-white">
-							<td>Date</td>
-							<td><?= $date2; ?></td>
+							<td class="text-left">Date</td>
 							<td><?= $date1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster import</td>
-							<td><?= $cluster_import2; ?></td>
+							<td class="text-left">Cluster import</td>
 							<td><?= $cluster_import1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster religious</td>
-							<td><?= $cluster_religious2; ?></td>
+							<td class="text-left">Cluster religious</td>
 							<td><?= $cluster_religious1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster community</td>
-							<td><?= $cluster_community2; ?></td>
+							<td class="text-left">Cluster community</td>
 							<td><?= $cluster_community1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster high risk</td>
-							<td><?= $cluster_highRisk2; ?></td>
+							<td class="text-left">Cluster high risk</td>
 							<td><?= $cluster_highRisk1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster education</td>
-							<td><?= $cluster_education2; ?></td>
+							<td class="text-left">Cluster education</td>
 							<td><?= $cluster_education1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster detention centre</td>
-							<td><?= $cluster_detentionCentre2; ?></td>
+							<td class="text-left">Cluster detention centre</td>
 							<td><?= $cluster_detentionCentre1; ?></td>
 						</tr>
 						<tr class="bg-white">
-							<td>Cluster workplace</td>
-							<td><?= $cluster_workplace2; ?></td>
+							<td class="text-left">Cluster workplace</td>
 							<td><?= $cluster_workplace1; ?></td>
 						</tr>
 					</tbody>
