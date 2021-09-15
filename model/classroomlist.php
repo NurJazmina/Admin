@@ -44,6 +44,7 @@ if (isset($_POST['add_class']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
+
   //call back class id
   $filter = ['SchoolID' => $school_id, 'ClassCategory'=>$class_category,'ClassName'=> $class_name];
   $query = new MongoDB\Driver\Query($filter);
@@ -52,6 +53,7 @@ if (isset($_POST['add_class']))
   {
     $class_id = strval($document->_id);
   }
+
   //insert class id into our staff database
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['ConsumerID'=> $consumer_id],
@@ -93,6 +95,8 @@ if (isset($_POST['add_class']))
 
 if (isset($_POST['edit_class']))
 {
+  $consumer_class_id = $_POST['consumer_class_id'];
+  $consumer_id = $_POST['consumer_id'];
   $class_id = $_POST['class_id'];
   $class_name = $_POST['class_name'];
   $class_category = $_POST['class_category'];
@@ -110,6 +114,25 @@ if (isset($_POST['edit_class']))
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
 
+  if($consumer_class_id !== $consumer_id)
+  {
+    //database staff
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['ConsumerID' => $consumer_class_id],
+                  ['$set' => ['ClassID'=>'']]
+                  );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+  }
+  //database staff
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->update(['ConsumerID' => $consumer_id],
+                ['$set' => ['ClassID'=>$class_id]]
+                );
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+
+
   $number = $_POST['number'];
   for ($x = 1; $x <= $number; $x++)
   { 
@@ -119,39 +142,51 @@ if (isset($_POST['edit_class']))
     $date_end[$x] = $_POST['date_end'.$x];
     $repeat[$x] = $_POST['repeat'.$x];
 
-    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert
-    ([
-      'School_id'=>$school_id,
-      'Class_id'=>$class_id,
-      'Teacher_id'=>$teacher[$x],
-      'Subject_id'=>$subject[$x],
-      'Start'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_start[$x])),
-      'End'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_end[$x])),
-      'Repeat'=>$repeat[$x],
-      'Status'=>'ACTIVE'
-    ]);
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
-
+    $check = 0;
     $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher[$x],'Subject_id'=> $subject[$x]];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
     foreach ($cursor as $document)
     {
-      $timetable_id = strval($document->_id);
+      $check = 1;
     }
 
-    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->insert([
-      'School_id'=>$school_id,
-      'Timetable_id'=>$timetable_id,
-      'Class_id'=>$class_id,
-      'Subject_id'=>$subject[$x],
-      'Teacher_id'=>$teacher[$x] 
+    if($check == 0)
+    {
+      $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+      $bulk->insert
+      ([
+        'School_id'=>$school_id,
+        'Class_id'=>$class_id,
+        'Teacher_id'=>$teacher[$x],
+        'Subject_id'=>$subject[$x],
+        'Start'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_start[$x])),
+        'End'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_end[$x])),
+        'Repeat'=>$repeat[$x],
+        'Status'=>'ACTIVE'
       ]);
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+      $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
+  
+      $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher[$x],'Subject_id'=> $subject[$x]];
+      $query = new MongoDB\Driver\Query($filter);
+      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+      foreach ($cursor as $document)
+      {
+        $timetable_id = strval($document->_id);
+      }
+  
+      $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+      $bulk->insert([
+        'School_id'=>$school_id,
+        'Timetable_id'=>$timetable_id,
+        'Class_id'=>$class_id,
+        'Subject_id'=>$subject[$x],
+        'Teacher_id'=>$teacher[$x] 
+        ]);
+      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+      $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+    }
   }
 }
 

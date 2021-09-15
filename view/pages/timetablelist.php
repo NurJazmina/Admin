@@ -11,33 +11,29 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
       <!--begin::Page Heading-->
       <div class="d-flex align-items-baseline flex-wrap mr-5">
         <!--begin::Page Title-->
-        <h5 class="text-dark font-weight-bold my-1 mr-5">Timetable List</h5>
+        <h5 class="text-dark font-weight-bold my-1 mr-5">Timetable</h5>
         <!--end::Page Title-->
       </div>
-      <!--begin::Separator-->
-      <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-      <!--end::Separator-->
-      <!--begin::Detail-->
-      <div class="d-flex align-items-center" id="kt_subheader_search">
-      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"></span>
-      </div>
-      <!--end::Detail-->
       <!--end::Page Heading-->
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
     <div class="d-flex align-items-center">
-      <div class="text-right">
-        <?php 
-        if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-        {
+      <form name="search_staff" class="form-inline" action="index.php?page=timetablelist" method="post">
+        <div class="text-right">
+          <?php 
+          if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+          {
+            ?>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=classattendance" target="_blank">ATTENDANCE</a></button>
+            <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_timetable">Add</button>
+            <input  type="text" class="form-control form-control-sm" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by first name">
+            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_staff">Search</button>
+            <?php
+          }
           ?>
-          <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=classattendance" target="_blank">ATTENDANCE</a></button>
-          <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_timetable">Add</button>
-          <?php
-        }
-        ?>
-      </div>
+        </div>
+      </form>
     </div>
     <!--end::Toolbar-->
   </div>
@@ -75,96 +71,122 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
               </thead>
               <tbody>
                 <?php
-                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
-                foreach ($cursor as $document)
-                {
-                  $timetable_id = strval($document->_id);
-                  $Class_id = $document->Class_id;
-                  $Teacher_id = $document->Teacher_id;
-                  $Subject_id = $document->Subject_id;
-                  $Status = $document->Status;
-
-                  $Start = strval($document->Start);
-                  $End = strval($document->End);
-
-                  $Start = new MongoDB\BSON\UTCDateTime($Start);
-                  $Start = $Start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $Start_day = date_format($Start,"d-m-Y");
-                  $Start_hour = date_format($Start,"H:i");
-
-                  $End = new MongoDB\BSON\UTCDateTime($End);
-                  $End = $End->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-                  $End_day = date_format($End,"d-m-Y");
-                  $End_hour = date_format($End,"H:i");
-
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-                  foreach ($cursor as $document)
+                  if (!isset($_POST['search_staff']) && empty($_POST['search_staff']))
                   {
-                    $ClassCategory = $document->ClassCategory;
-                    $ClassName = $document->ClassName;
-                  }
-
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                  foreach ($cursor as $document)
-                  {
-                    $ConsumerID = $document->ConsumerID;
-
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                    $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
                     $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+                  }
+                  else
+                  {
+                    $consumer = $_POST['consumer'];
+                    $filter = ['ConsumerFName'=>$consumer];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                     foreach ($cursor as $document)
                     {
                       $consumer_id = strval($document->_id);
-                      $ConsumerFName = $document->ConsumerFName;
-                      $ConsumerLName = $document->ConsumerLName;
+
+                      $filter = ['ConsumerID'=>$consumer_id];
+                      $query = new MongoDB\Driver\Query($filter);
+                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                      foreach ($cursor as $document)
+                      {
+                        $teacher_id = strval($document->_id);
+
+                        $filter = ['Teacher_id'=>$teacher_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+                      }
                     }
                   }
-
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
                   foreach ($cursor as $document)
                   {
-                    $SubjectName = $document->SubjectName;
-                  }
+                    $timetable_id = strval($document->_id);
+                    $Class_id = $document->Class_id;
+                    $Teacher_id = $document->Teacher_id;
+                    $Subject_id = $document->Subject_id;
+                    $Status = $document->Status;
 
-                  $totalstudent = 0;
-                  $filter = ['Class_id'=>$Class_id];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                  foreach ($cursor as $document)
-                  {
-                    $totalstudent = $totalstudent + 1;
+                    $Start = strval($document->Start);
+                    $End = strval($document->End);
+
+                    $Start = new MongoDB\BSON\UTCDateTime($Start);
+                    $Start = $Start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                    $Start_day = date_format($Start,"d-m-Y");
+                    $Start_hour = date_format($Start,"H:i");
+
+                    $End = new MongoDB\BSON\UTCDateTime($End);
+                    $End = $End->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                    $End_day = date_format($End,"d-m-Y");
+                    $End_hour = date_format($End,"H:i");
+
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $ClassCategory = $document->ClassCategory;
+                      $ClassName = $document->ClassName;
+                    }
+
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $ConsumerID = $document->ConsumerID;
+
+                      $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                      $query = new MongoDB\Driver\Query($filter);
+                      $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                      foreach ($cursor as $document)
+                      {
+                        $consumer_id = strval($document->_id);
+                        $ConsumerFName = $document->ConsumerFName;
+                        $ConsumerLName = $document->ConsumerLName;
+                      }
+                    }
+
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $SubjectName = $document->SubjectName;
+                    }
+
+                    $totalstudent = 0;
+                    $filter = ['Class_id'=>$Class_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $totalstudent = $totalstudent + 1;
+                    }
+                  
+                    ?>
+                    <tr>
+                      <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                      <td class="text-left"><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
+                      <td><?= $totalstudent; ?></td>
+                      <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $SubjectName; ?></a></td>
+                      <td><?= $Start_day; ?></td>
+                      <td><?= $Start_hour; ?></td>
+                      <td><?= $End_day; ?></td>
+                      <td><?= $End_hour; ?></td>
+                      <td><?= $Status; ?></td>
+                      <td>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $timetable_id; ?>">
+                          <i class="flaticon2-edit icon-md text-hover-success"></i>
+                        </button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
+                          <i class="flaticon2-trash icon-md text-hover-success"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <?php
                   }
-                 
-                  ?>
-                  <tr>
-                    <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                    <td class="text-left"><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
-                    <td><?= $totalstudent; ?></td>
-                    <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $SubjectName; ?></a></td>
-                    <td><?= $Start_day; ?></td>
-                    <td><?= $Start_hour; ?></td>
-                    <td><?= $End_day; ?></td>
-                    <td><?= $End_hour; ?></td>
-                    <td><?= $Status; ?></td>
-                    <td>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $timetable_id; ?>">
-                        <i class="flaticon2-edit icon-md text-hover-success"></i>
-                      </button>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $timetable_id; ?>">
-                        <i class="flaticon2-trash icon-md text-hover-success"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <?php
-                }
                 ?>
               </tbody>
             </table>
