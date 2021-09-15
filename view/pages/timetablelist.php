@@ -71,35 +71,33 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
               </thead>
               <tbody>
                 <?php
-                  if (!isset($_POST['search_staff']) && empty($_POST['search_staff']))
+                if (!isset($_POST['search_staff']) && empty($_POST['search_staff']))
+                {
+                  $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                }
+                else
+                {
+                  $consumer = $_POST['consumer'];
+                  $filter = ['ConsumerFName'=>$consumer];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                  foreach ($cursor as $document)
                   {
-                    $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                  }
-                  else
-                  {
-                    $consumer = $_POST['consumer'];
-                    $filter = ['ConsumerFName'=>$consumer];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                    foreach ($cursor as $document)
-                    {
-                      $consumer_id = strval($document->_id);
+                    $consumer_id = strval($document->_id);
 
-                      $filter = ['ConsumerID'=>$consumer_id];
-                      $query = new MongoDB\Driver\Query($filter);
-                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                      foreach ($cursor as $document)
-                      {
-                        $teacher_id = strval($document->_id);
-
-                        $filter = ['Teacher_id'=>$teacher_id];
-                        $query = new MongoDB\Driver\Query($filter);
-                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
-                      }
-                    }
+                    $filter = ['ConsumerID'=>$consumer_id];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                   }
+                }
+                foreach ($cursor as $document)
+                {
+                  $teacher_id = strval($document->_id);
+                  $filter = ['Teacher_id'=>$teacher_id];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
                   foreach ($cursor as $document)
                   {
                     $timetable_id = strval($document->_id);
@@ -136,8 +134,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     foreach ($cursor as $document)
                     {
                       $ConsumerID = $document->ConsumerID;
-
-                     
+                    
                       $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -187,6 +184,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     </tr>
                     <?php
                   }
+                }
                 ?>
               </tbody>
             </table>

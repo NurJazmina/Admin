@@ -13,7 +13,7 @@ if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
 {
     $_SESSION['is_mobile'] = true;
     
-    $filter = ['ConsumerSession' => $apiSession];
+    $filter = ['ConsumerSession'=>$apiSession];
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
