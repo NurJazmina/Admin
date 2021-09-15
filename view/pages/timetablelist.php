@@ -167,7 +167,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
                       <td class="text-left"><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                       <td><?= $totalstudent; ?></td>
-                      <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $SubjectName; ?></a></td>
+                      <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                       <td><?= $Start_day; ?></td>
                       <td><?= $Start_hour; ?></td>
                       <td><?= $End_day; ?></td>
