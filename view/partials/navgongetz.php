@@ -1,5 +1,5 @@
 <?php
-if($_SESSION["loggeduser_ConsumerGroupName"] =="GONGETZ")
+if($_SESSION["loggeduser_ConsumerGroupName"] == "GONGETZ")
 {
     ?>
     <div class="row">
