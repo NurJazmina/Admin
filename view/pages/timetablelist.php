@@ -76,14 +76,6 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                    foreach ($cursor as $document)
-                    {
-                      $ConsumerID = $document->ConsumerID;
-
-                      $filter = ['School_id'=>$ConsumerID];
-                      $query = new MongoDB\Driver\Query($filter);
-                      $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
-                    }
                   }
                   else
                   {
