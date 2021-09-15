@@ -196,7 +196,7 @@ if (isset($_POST['recheck_edit_class']))
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Class Name</label>
             <div class="col-sm-10">
-              <select class="form-control" name="class_name">
+              <select class="form-control" name="class_id">
               <?php
               $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassCategory'=>$class_category];
               $query = new MongoDB\Driver\Query($filter);
@@ -292,8 +292,6 @@ if (isset($_POST['recheck_edit_class']))
         <div class="modal-footer">
           <input type="hidden" name="consumer_class_id" value="<?= $consumer_class_id; ?>">
           <input type="hidden" name="number" value="<?= $number; ?>">
-          <input type="hidden" name="class_category" value="<?= $class_category; ?>">
-          <input type="hidden" name="class_id" value="<?= $class_id; ?>">
           <button onclick="index.php?page=classroomlist" class="btn btn-light btn-sm">Close</button>
           <button type="submit" class="btn btn-success btn-sm" name="edit_class">Confirm</button>
         </div>

@@ -341,10 +341,10 @@
                                 <th>Total</th>
                                 <td>
                                 <?php
+                                $totalstudent = 0;
                                 $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                $totalstudent = 0;
                                 foreach ($cursor as $document)
                                 {
                                   $totalstudent = $totalstudent+ 1;
@@ -357,10 +357,10 @@
                                 <th>Active</th>
                                 <td>
                                   <?php
+                                  $totalstudent = 0;
                                   $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id, 'StudentsStatus'=>'ACTIVE'];
                                   $query = new MongoDB\Driver\Query($filter);
                                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                  $totalstudent = 0;
                                   foreach ($cursor as $document)
                                   {
                                     $totalstudent = $totalstudent+ 1;
@@ -373,10 +373,10 @@
                                 <th>Inactive</th>
                                 <td>
                                   <?php
+                                  $totalstudent = 0;
                                   $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id, 'StudentsStatus'=>'INACTIVE'];
                                   $query = new MongoDB\Driver\Query($filter);
                                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                  $totalstudent = 0;
                                   foreach ($cursor as $document)
                                   {
                                     $totalstudent = $totalstudent+ 1;
