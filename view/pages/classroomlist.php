@@ -178,12 +178,30 @@
                     </button>
                   </td>
                   <td>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_class" data-bs-whatever="<?= $class_id; ?>">
-                    <i class="flaticon2-edit icon-md text-hover-success"></i>
-                  </button>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_class" data-bs-whatever="<?= $class_id; ?>">
-                    <i class="flaticon2-trash icon-md text-hover-success"></i>
-                  </button>
+                  <?php 
+                  if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+                  {
+                    ?>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_class" data-bs-whatever="<?= $class_id; ?>">
+                      <i class="flaticon2-edit icon-md text-hover-success"></i>
+                    </button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_class" data-bs-whatever="<?= $class_id; ?>">
+                      <i class="flaticon2-trash icon-md text-hover-success"></i>
+                    </button>
+                    <?php
+                  }
+                  else
+                  {
+                  ?>
+                    <button type="button" class="btn" disabled>
+                      <i class="flaticon2-edit icon-md text-hover-success"></i>
+                    </button>
+                    <button type="button" class="btn" disabled>
+                      <i class="flaticon2-trash icon-md text-hover-success"></i>
+                    </button>
+                    <?php
+                  }
+                  ?>
                 </td>
               </tr>
               <?php
@@ -341,10 +359,10 @@
                                 <th>Total</th>
                                 <td>
                                 <?php
+                                $totalstudent = 0;
                                 $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                $totalstudent = 0;
                                 foreach ($cursor as $document)
                                 {
                                   $totalstudent = $totalstudent+ 1;
@@ -357,10 +375,10 @@
                                 <th>Active</th>
                                 <td>
                                   <?php
+                                  $totalstudent = 0;
                                   $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id, 'StudentsStatus'=>'ACTIVE'];
                                   $query = new MongoDB\Driver\Query($filter);
                                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                  $totalstudent = 0;
                                   foreach ($cursor as $document)
                                   {
                                     $totalstudent = $totalstudent+ 1;
@@ -373,10 +391,10 @@
                                 <th>Inactive</th>
                                 <td>
                                   <?php
+                                  $totalstudent = 0;
                                   $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'Class_id'=>$class_id, 'StudentsStatus'=>'INACTIVE'];
                                   $query = new MongoDB\Driver\Query($filter);
                                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                                  $totalstudent = 0;
                                   foreach ($cursor as $document)
                                   {
                                     $totalstudent = $totalstudent+ 1;

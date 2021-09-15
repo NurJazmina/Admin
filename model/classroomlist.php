@@ -98,8 +98,6 @@ if (isset($_POST['edit_class']))
   $consumer_class_id = $_POST['consumer_class_id'];
   $consumer_id = $_POST['consumer_id'];
   $class_id = $_POST['class_id'];
-  $class_name = $_POST['class_name'];
-  $class_category = $_POST['class_category'];
   $school_id = $_SESSION["loggeduser_school_id"];
 
   //database class and subject relation
@@ -114,16 +112,14 @@ if (isset($_POST['edit_class']))
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
 
-  if($consumer_class_id !== $consumer_id)
-  {
-    //database staff
-    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->update(['ConsumerID' => $consumer_class_id],
-                  ['$set' => ['ClassID'=>'']]
-                  );
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
-  }
+  //database staff
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->update(['ConsumerID' => $consumer_class_id],
+                ['$set' => ['ClassID'=>'']]
+                );
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Staff', $bulk, $writeConcern);
+
   //database staff
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->update(['ConsumerID' => $consumer_id],
@@ -167,7 +163,7 @@ if (isset($_POST['edit_class']))
       ]);
       $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
       $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
-  
+
       $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher[$x],'Subject_id'=> $subject[$x]];
       $query = new MongoDB\Driver\Query($filter);
       $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);

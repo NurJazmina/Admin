@@ -121,13 +121,13 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     $End_day = date_format($End,"d-m-Y");
                     $End_hour = date_format($End,"H:i");
 
-                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                    $totalstudent = 0;
+                    $filter = ['Class_id'=>$Class_id];
                     $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
                     foreach ($cursor as $document)
                     {
-                      $ClassCategory = $document->ClassCategory;
-                      $ClassName = $document->ClassName;
+                      $totalstudent = $totalstudent + 1;
                     }
 
                     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
@@ -137,6 +137,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     {
                       $ConsumerID = $document->ConsumerID;
 
+                     
                       $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
                       $query = new MongoDB\Driver\Query($filter);
                       $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -148,6 +149,15 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       }
                     }
 
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $ClassCategory = $document->ClassCategory;
+                      $ClassName = $document->ClassName;
+                    }
+
                     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
@@ -155,16 +165,6 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     {
                       $SubjectName = $document->SubjectName;
                     }
-
-                    $totalstudent = 0;
-                    $filter = ['Class_id'=>$Class_id];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                    foreach ($cursor as $document)
-                    {
-                      $totalstudent = $totalstudent + 1;
-                    }
-                  
                     ?>
                     <tr>
                       <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
