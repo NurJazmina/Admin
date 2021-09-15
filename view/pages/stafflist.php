@@ -101,14 +101,14 @@ $("#Date").click(function() {
             ?>
             <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=attendance_staff" target="_blank">ATTENDANCE</a></button>
             <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_staff">Add</button>
-            <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+            <input  type="text" class="form-control form-control-sm" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
             <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_staff">Search</button>
             <?php
           } 
           else
           {
             ?>
-            <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+            <input  type="text" class="form-control form-control-sm" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
             <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_staff">Search</button>
             <?php
           }
@@ -394,11 +394,10 @@ $("#Date").click(function() {
                               <th>Total</th>
                               <td>
                               <?php
+                              $totalstaff = 0;
                               $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                              $totalstaff = 0;
-
                               foreach ($cursor as $document)
                               {
                                 $totalstaff = $totalstaff+ 1;
@@ -411,11 +410,10 @@ $("#Date").click(function() {
                               <th>Active</th>
                               <td>
                               <?php
+                              $totalstaff = 0;
                               $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffStatus'=>'ACTIVE'];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                              $totalstaff = 0;
-
                               foreach ($cursor as $document)
                               {
                                 $totalstaff = $totalstaff + 1;
@@ -428,11 +426,10 @@ $("#Date").click(function() {
                               <th>Inactive</th>
                               <td>
                               <?php
+                              $totalstaff = 0;
                               $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffStatus'=>'INACTIVE'];
                               $query = new MongoDB\Driver\Query($filter);
                               $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                              $totalstaff = 0;
-
                               foreach ($cursor as $document)
                               {
                                 $totalstaff = $totalstaff + 1;
@@ -477,7 +474,7 @@ $("#Date").click(function() {
                     foreach ($cursor as $document)
                     {
                       $departmentid = strval($document->_id);
-                      $DepartmentName = strval($document->DepartmentName);
+                      $DepartmentName = $document->DepartmentName;
                       ?>
                       <div class="tab-pane fade" id="v-pills-<?= $departmentid;?>" role="tabpanel" aria-labelledby="v-pills-department<?= $departmentid;?>-tab">
                         <div class="box" >
@@ -488,10 +485,10 @@ $("#Date").click(function() {
                                 <th>Total</th>
                                 <td>
                                 <?php
+                                $totalstaff = 0;
                                 $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                $totalstaff = 0;
                                 foreach ($cursor as $document)
                                 {
                                   $totalstaff = $totalstaff+ 1;
@@ -504,11 +501,10 @@ $("#Date").click(function() {
                                 <th>Active</th>
                                 <td>
                                 <?php
+                                $totalstaff = 0;
                                 $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'ACTIVE'];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                $totalstaff = 0;
-
                                 foreach ($cursor as $document)
                                 {
                                   $totalstaff = $totalstaff + 1;
@@ -521,11 +517,10 @@ $("#Date").click(function() {
                                 <th>Inactive</th>
                                 <td>
                                 <?php
+                                $totalstaff = 0;
                                 $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'INACTIVE'];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                $totalstaff = 0;
-
                                 foreach ($cursor as $document)
                                 {
                                   $totalstaff = $totalstaff + 1;

@@ -64,7 +64,7 @@ include ('model/news.php');
                 <label><?= $Title; ?></label>
               </div>
             </div>
-            <div class="card p-5">
+            <div class="card p-5" style="height: 8rem;">
               <a class="text-primary mb-1">Detail</a>
               <?= mb_strimwidth($Details, 0,80, "..."); ?>
             </div>
@@ -146,7 +146,7 @@ include ('model/news.php');
                   <label><?= $Title; ?></label>
                 </div>
               </div>
-              <div class="card p-5">
+              <div class="card p-5" style="height: 8rem;">
                 <a class="text-primary mb-1">Detail</a>
                 <?= mb_strimwidth($Details, 0,80, "..."); ?>
               </div>

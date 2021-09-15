@@ -120,7 +120,7 @@ else
                 <th scope="col">ID No</th>
                 <th scope="col">Relation</th>
                 <th scope="col">Son/Daughter</th>
-                <th scope="col">Total Child</th>
+                <th scope="col">Child</th>
                 <th scope="col">Status</th>
                 <th scope="col">Update</th>
               </tr>

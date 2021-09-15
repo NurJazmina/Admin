@@ -6,10 +6,11 @@ if (isset($_POST['add_subject']))
   $class_category = $_POST['class_category'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert(['School_id'=>$school_id,
-                'SubjectName'=> $subject_name,
-                'Class_category'=>$class_category
-                ]);
+  $bulk->insert([
+      'School_id'=>$school_id,
+      'SubjectName'=> $subject_name,
+      'Class_category'=>$class_category
+    ]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   try
   {

@@ -27,7 +27,7 @@
         <div class="card-toolbar text-right">
           <!--begin::Dropdown-->
           <div class="dropdown dropdown-inline mr-2">
-            <button type="button" class="btn btn-light btn-hover-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-success btn-hover-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="svg-icon svg-icon-md">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -124,6 +124,14 @@ $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
 foreach ($cursor as $document)
 {
   $totalstudent = $totalstudent + 1;
+}
+
+$date = date("Y-m-d");
+$today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+
+if (isset($_POST['submit_date']))
+{
+    $date = $_POST['date'];
 }
 ?>
 <div class="text-dark-50 text-center m-5"><h1>Class Info</h1></div>
@@ -237,7 +245,7 @@ foreach ($cursor as $document)
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light text-dark-50">
+              <div class="modal-header bg-light text-dark-50">
                 <a>Remarks</a>
               </div>
               <div class="card-body">
@@ -248,7 +256,7 @@ foreach ($cursor as $document)
                         <textarea class="class" name="remark"></textarea>
                         <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $class_id; ?>" name="class_id">
-                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -357,7 +365,7 @@ foreach ($cursor as $document)
                                     <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                     <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                     <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                    <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                    <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                   </div>
                                 </form>
                               </div>
@@ -459,7 +467,7 @@ foreach ($cursor as $document)
                                       <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -561,7 +569,7 @@ foreach ($cursor as $document)
                                       <input type="hidden" value="<?= $class_id; ?>" name="class_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_class_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                   </form>
                                 </div>
@@ -591,9 +599,21 @@ foreach ($cursor as $document)
   <div class="col-10">
     <div class="card">
       <div class="card-body text-right">
-        <a href="index.php?page=classdetail&id=<?= $class_id; ?>&attendance=xls" class="btn btn-light btn-hover-success btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</a>
+        <form name="submit_date" action="" method="post">
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
+            </div>
+            <div class="col-sm-1">
+              <button type="submit" name="submit_date" class="btn btn-sm btn-success btn-hover-light">submit</button>
+            </div>
+            <div class="col-sm-8">
+              <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
+            </div>
+          </div>
+        </form>
         <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-          <thead class="bg-white text-dark-50">
+          <thead class="bg-white text-success">
               <tr>
                 <th>Staff ID</th>
                 <th>Staff Name</th>
@@ -605,9 +625,6 @@ foreach ($cursor as $document)
           <tbody>
           <?php
           $Cards_id ='';
-          $date_now = date("d-m-Y");
-          $from_date = new MongoDB\BSON\UTCDateTime((new DateTime($date_now))->getTimestamp()*1000);
-
           if (isset($_GET['id']) && !empty($_GET['id']))
           {
             $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
@@ -656,10 +673,10 @@ foreach ($cursor as $document)
               <tr>
                 <td class="default"><?= $ConsumerIDNo; ?></td>
                 <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                <td class="default"><?= $date_now."<br>"; ?></td>
+                <td class="default"><?= $date."<br>"; ?></td>
                 <td class="default"><?php
                 $count = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
                 $option = ['sort' => ['_id' => 1]];
                 $query = new MongoDB\Driver\Query($filter,$option);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -676,7 +693,7 @@ foreach ($cursor as $document)
                 ?></td>
                 <td class="default"><?php
                 $count = 0;
-                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $from_date]];
+                $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
                 $option = ['sort' => ['_id' => 1]];
                 $query = new MongoDB\Driver\Query($filter,$option);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
@@ -700,21 +717,16 @@ foreach ($cursor as $document)
           ?>
           </tbody>
         </table>
-          <?php
-          if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-          {
-            $attendance = ($_GET['attendance']);
-            ?>
-            <script>
-              $(document).ready(function () {
-                $("#attendance").table2excel({
-                    filename: "attendanceclass.xls"
+          <script>
+            $(document).ready(function() {
+                $("#submitted").click(function() {
+                    $("#attendance").table2excel({
+                    filename: "attendance_class.xls"
                 });
-              });
-              
-            </script>
-            <?php
-          }?>
+                });
+
+            });
+          </script>
           <script type="text/javascript">
           var rows = document.querySelectorAll('tr');
 

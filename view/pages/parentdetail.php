@@ -54,6 +54,13 @@ if (isset($_GET['id']) && !empty($_GET['id']))
     }
   }
 }
+$date = date("Y-m-d");
+$today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+
+if (isset($_POST['submit_date']))
+{
+    $date = $_POST['date'];
+}
 ?>
 <div class="text-dark-50 text-center m-5">
   <h1>Parent Info</h1>
@@ -155,7 +162,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
           <!-- begin::Remark -->
           <div class="col-sm">
             <div class="card">
-              <div class="card-header bg-light text-dark-50">
+              <div class="modal-header bg-light text-dark-50">
                 <a>Remarks</a>
               </div>
               <div class="card-body">
@@ -166,7 +173,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                         <textarea class="staff" name="remark"></textarea>
                         <div class="mt-3 text-right">
                           <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
-                          <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
+                          <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_remark">Add remark</button>
                         </div>
                       </form>
                     </div>
@@ -275,7 +282,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                           <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                           <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                           <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_parent_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                          <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_parent_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -377,7 +384,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                         <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                         <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                         <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                        <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_parent_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                        <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_parent_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                       </div>
                                     </form>
                                   </div>
@@ -479,7 +486,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                                           <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                           <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                           <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                          <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_parent_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                          <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_parent_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                         </div>
                                       </form>
                                   </div>

@@ -40,8 +40,8 @@ $time_now = time();
                     <!-- begin :: school -->
                     <div class="card-body">
                         <!-- begin :: general -->
-                        <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=1&topic=General">GENERAL</a>
-                        <div class="card m-4 p-4">
+                        <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=1&topic=General">1. GENERAL</a>
+                        <div class="mt-5 mb-5">
                             <?php
                             $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'1'];
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
@@ -78,7 +78,7 @@ $time_now = time();
                                 ?>
                                 <a href="index.php?page=forumdetail&forum=1&topic=General&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                                 <!--listbox-->
-                                <div class="mt-3 mb-3 text-muted">
+                                <div class="text-muted">
                                     <small><?= $ConsumerFName; ?></small>
                                     <span>|</span>
                                     <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
@@ -91,8 +91,8 @@ $time_now = time();
                         </div>
                         <!-- end :: general-->
                         <!-- begin :: proposal -->
-                        <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=2&topic=Proposal">PROPOSAL</a>
-                        <div class="card m-4 p-4">
+                        <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=2&topic=Proposal">2. PROPOSAL</a>
+                        <div class="mt-5 mb-5">
                             <?php
                             $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'2'];
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
@@ -132,7 +132,7 @@ $time_now = time();
                                 ?>
                                 <a href="index.php?page=forumdetail&forum=1&topic=Proposal&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                                 <!--listbox-->
-                                <div class="mt-3 mb-3 text-muted">
+                                <div class="text-muted">
                                     <small><?= $ConsumerFName; ?></small>
                                     <span>|</span>
                                     <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
@@ -145,8 +145,8 @@ $time_now = time();
                         </div>
                         <!-- end :: proposal -->
                         <!-- begin :: short news -->
-                        <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=3&topic=Short News / Info">SHORT NEWS / INFO</a>
-                        <div class="card m-4 p-4">
+                        <a class="h6 text-dark-50" href="index.php?page=schoolforum&forum=3&topic=Short News / Info">3. SHORT NEWS / INFO</a>
+                        <div class="mt-5 mb-5">
                             <?php
                             $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'3'];
                             $option = ['limit'=>5,'sort' => ['_id' => -1]];
@@ -183,7 +183,7 @@ $time_now = time();
                                 ?>
                                 <a href="index.php?page=forumdetail&forum=1&topic=Short News / Info&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                                 <!--listbox-->
-                                <div class="mt-3 mb-3 text-muted">
+                                <div class="text-muted">
                                     <small><?= $ConsumerFName; ?></small>
                                     <span>|</span>
                                     <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
@@ -207,8 +207,8 @@ $time_now = time();
                 </div>
                 <div class="card-body">
                     <!-- begin :: general -->
-                    <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=4&topic=General">GENERAL</a>
-                    <div class="card m-4 p-4">
+                    <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=4&topic=General">1. GENERAL</a>
+                    <div class="mt-5 mb-5">
                         <?php
                         $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'4'];
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
@@ -249,7 +249,7 @@ $time_now = time();
                             ?>
                             <a href="index.php?page=forumdetail&forum=1&topic=General&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                             <!--listbox-->
-                            <div class="mt-3 mb-3 text-muted">
+                            <div class="text-muted">
                                 <small><?= $ConsumerFName; ?></small>
                                 <span>|</span>
                                 <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
@@ -262,8 +262,8 @@ $time_now = time();
                     </div>
                     <!-- end :: general -->
                     <!-- begin :: proposal -->
-                    <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=5&topic=Proposal">PROPOSAL</a>
-                    <div class="card m-4 p-4">
+                    <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=5&topic=Proposal">2. PROPOSAL</a>
+                    <div class="mt-5 mb-5">
                         <?php
                         $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'5'];
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
@@ -304,7 +304,7 @@ $time_now = time();
                             ?>
                             <a href="index.php?page=forumdetail&forum=1&topic=Proposal&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                             <!--listbox-->
-                            <div class="mt-3 mb-3 text-muted">
+                            <div class="text-muted">
                                 <small><?= $ConsumerFName; ?></small>
                                 <span>|</span>
                                 <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>
@@ -317,8 +317,8 @@ $time_now = time();
                     </div>
                     <!-- end :: proposal -->
                     <!-- begin :: short news -->
-                    <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=6&topic=Short News / Info">SHORT NEWS / INFO</a>
-                    <div class="card m-4 p-4">
+                    <a class="h6 text-dark-50" href="index.php?page=publicforum&forum=6&topic=Short News / Info">3. SHORT NEWS / INFO</a>
+                    <div class="mt-5 mb-5">
                         <?php
                         $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>'6'];
                         $option = ['limit'=>5,'sort' => ['_id' => -1]];
@@ -359,7 +359,7 @@ $time_now = time();
                             ?>
                             <a href="index.php?page=forumdetail&forum=1&topic=Short News / Info&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                             <!--listbox-->
-                            <div class="mt-3 mb-3 text-muted">
+                            <div class="text-muted">
                                 <small><?= $ConsumerFName; ?></small>
                                 <span>|</span>
                                 <small><?= date_format($Date_time,"d/m/y"); echo " ( ".time_elapsed($time_now-$Date)." ) \n"; ?></small>

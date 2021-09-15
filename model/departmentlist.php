@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['add_department']))
 {
-  $school_id = strval($_SESSION[""]);
+  $school_id = $_SESSION["loggeduser_school_id"];
   $department_name = $_POST['department_name'];
 
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);

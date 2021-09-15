@@ -1,150 +1,126 @@
 <?php
 //Add timetablelist
-if (isset($_POST['submitaddtimetable']))
+if (isset($_POST['add_timetable']))
 {
-  $varschoolid =  strval($_SESSION["loggeduser_school_id"]);
-  $varclassid = $_POST['txtclassid'];
-  $varteacherid = $_POST['txtteacherid'];
-  $varsubject = $_POST['txtsubject'];
-  $varTimetableStart= $_POST['txtTimetableStart'];
-  $varTimetableEnd= $_POST['txtTimetableEnd'];
-  $varTimetableWeeklyRepeat= $_POST['txtTimetableWeeklyRepeat'];
-  $varTimetableStatus= $_POST['txtTimetableStatus'];
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered'=>true]);
-  $bulk->insert([
-    'School_id'=>$varschoolid,
-    'Classroom_id'=>$varclassid,
-    'Teachers_id'=>$varteacherid,
-    'TimetableSubject'=>$varsubject,
-    'TimetableStart'=>new MongoDB\BSON\UTCDateTime(new DateTime($varTimetableStart)),
-    'TimetableEnd'=>new MongoDB\BSON\UTCDateTime(new DateTime($varTimetableEnd)),
-    'TimetableWeeklyRepeat'=>$varTimetableWeeklyRepeat,
-    'TimetableStatus'=>$varTimetableStatus,]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try {
+  $school_id = $_SESSION["loggeduser_school_id"];
+  $class_id = $_POST['class_id'];
+  $teacher_id = $_POST['teacher_id'];
+  $subject_id = $_POST['subject_id'];
+  $date_start = $_POST['date_start'];
+  $date_end = $_POST['date_end'];
+  $repeat = $_POST['repeat'];
+
+  $check = 0;
+  $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher_id,'Subject_id'=> $subject_id];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+  foreach ($cursor as $document)
+  {
+    $check = 1;
+  }
+  if($check == 0)
+  {
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->insert([
+      'School_id'=>$school_id,
+      'Class_id'=>$class_id,
+      'Teacher_id'=>$teacher_id,
+      'Subject_id'=>$subject_id,
+      'Start'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
+      'End'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_end)),
+      'Repeat'=>$repeat,
+      'Status'=>'ACTIVE'
+    ]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e) {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError()) {
-    printf("%s (%d): %s\n",
-        $writeConcernError->getMessage(),
-        $writeConcernError->getCode(),
-        var_export($writeConcernError->getInfo(), true)
-    );
+  
+    $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher_id,'Subject_id'=> $subject_id];
+    $query = new MongoDB\Driver\Query($filter);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+    foreach ($cursor as $document)
+    {
+      $timetable_id = strval($document->_id);
     }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError) {
-    printf("Operation#%d: %s (%d)\n",
-        $writeError->getIndex(),
-        $writeError->getMessage(),
-        $writeError->getCode()
-    );
-    }
+  
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->insert([
+      'School_id'=>$school_id,
+      'Timetable_id'=>$timetable_id,
+      'Class_id'=>$class_id,
+      'Subject_id'=>$subject_id,
+      'Teacher_id'=>$teacher_id 
+      ]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
   }
-  catch (MongoDB\Driver\Exception\Exception $e) {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  printf("Inserted %d document(s)\n", $result->getInsertedCount());
-  printf("Updated  %d document(s)\n", $result->getModifiedCount());
 }
 
 //Edit timetable
-if (isset($_POST['submitedittimetable']))
+if (isset($_POST['edit_timetable']))
 {
-  $varschoolid =  strval($_SESSION["loggeduser_school_id"]);
-  $vartimetableid = $_POST['txttimetableid'];
-  $varclassid = $_POST['txtclassid'];
-  $varteacherid = $_POST['txtteacherid'];
-  $varsubject = $_POST['txtsubject'];
-  $varTimetableStart= $_POST['txtTimetableStart'];
-  $varTimetableEnd= $_POST['txtTimetableEnd'];
-  $varTimetableWeeklyRepeat= $_POST['txtTimetableWeeklyRepeat'];
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->update( ['_id' => new \MongoDB\BSON\ObjectID($vartimetableid)],
-                ['$set' => ['School_id'=>$varschoolid,
-                'Classroom_id'=>$varclassid,
-                'Teachers_id'=>$varteacherid,
-                'TimetableSubject'=>$varsubject,
-                'TimetableStart'=>new MongoDB\BSON\UTCDateTime(new DateTime($varTimetableStart)),
-                'TimetableEnd'=>new MongoDB\BSON\UTCDateTime(new DateTime($varTimetableEnd)),
-                'TimetableWeeklyRepeat'=>$varTimetableWeeklyRepeat,
-                'TimetableStatus'=>'ACTIVE']],
-                ['upsert' => TRUE]
-               );
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
+  $timetable_id = $_POST['timetable_id'];
+  $class_id = $_POST['class_id'];
+  $teacher_id = $_POST['teacher_id'];
+  $subject_id = $_POST['subject_id'];
+  $date_start = $_POST['date_start'];
+  $date_end = $_POST['date_end'];
+  $repeat = $_POST['repeat'];
+  $status = $_POST['status'];
+
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($timetable_id)],
+    ['$set' => 
+      [
+        'Class_id'=>$class_id,
+        'Teacher_id'=>$teacher_id,
+        'Subject_id'=>$subject_id,
+        'Start'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
+        'End'=>new MongoDB\BSON\UTCDateTime(new DateTime($date_end)),
+        'Repeat'=>$repeat,
+        'Status'=>$status
+      ]
+    ],
+    ['multi'=> TRUE]
+    );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
+  
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['Timetable_id' => $timetable_id],
+    ['$set' => 
+      [
+        'Class_id'=>$class_id,
+        'Subject_id'=>$subject_id,
+        'Teacher_id'=>$teacher_id 
+      ]
+    ],
+    ['multi'=> TRUE]
+    );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+
 }
 
 //Delete timetable
-if (isset($_POST['DeleteTimetableFormSubmit']))
+if (isset($_POST['delete_timetable']))
 {
-  $vartimetableid = $_POST['txttimetableid'];
-  $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($vartimetableid)], ['limit' => 1]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
+  $timetable_id = $_POST['timetable_id'];
+  $password = $_POST['password'];
+  $password_hash = $_SESSION["loggeduser_ConsumerPassword"];
+
+  if (password_verify($password, $password_hash))
   {
+    //database timetable
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['timetable_id' => $timetable_id],['$set' => ['Timetable_id'=>'']],['multi'=> TRUE]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
+
+    //database timetable
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($timetable_id)], ['limit' => 1]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
   }
 }
 ?>

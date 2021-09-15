@@ -1,8 +1,7 @@
 <?php
-$cases_malaysia = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv';
-$deaths_malaysia = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/deaths_malaysia.csv';
 $_SESSION["title"] = "Dashboard";
 include 'view/partials/_subheader/subheader-v1.php';
+include 'model/covid.php'; 
 include 'model/home.php'; 
 
 function time_elapsed($date){
@@ -23,125 +22,15 @@ function time_elapsed($date){
 
 	return join(' ', $ret);
 }
-
-// Open the file for reading
-if (($h = fopen("{$cases_malaysia}", "r")) !== FALSE) 
-{
-	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date1 = $year.'-'.$month.'-'.$day;
-
-	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -2 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date2 = $year.'-'.$month.'-'.$day;
-
-	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now -3 day'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date3 = $year.'-'.$month.'-'.$day;
-	
-	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
-		//Print out my column data.
-		if($row[0] == $Date1) //1 days ago
-		{
-			$date1 = $row[0];
-			$cases_new1 = $row[1];
-			$cases_import1 = $row[2];
-			$cases_recovered1 = $row[3];
-			$cluster_import1 = $row[4];
-			$cluster_religious1 = $row[5];
-			$cluster_community1 = $row[6];
-			$cluster_highRisk1 = $row[7];
-			$cluster_education1 = $row[8];
-			$cluster_detentionCentre1 = $row[9];
-			$cluster_workplace1 = $row[10];
-		}
-		elseif($row[0] == $Date2) //2 days ago
-		{
-			$date2 = $row[0];
-			$cases_new2 = $row[1];
-			$cases_import2 = $row[2];
-			$cases_recovered2 = $row[3];
-			$cluster_import2 = $row[4];
-			$cluster_religious2 = $row[5];
-			$cluster_community2 = $row[6];
-			$cluster_highRisk2 = $row[7];
-			$cluster_education2 = $row[8];
-			$cluster_detentionCentre2 = $row[9];
-			$cluster_workplace2 = $row[10];
-		}
-		elseif($row[0] == $Date3) //3 days ago
-		{
-			$date3 = $row[0];
-			$cases_new3 = $row[1];
-			$cases_import3 = $row[2];
-			$cases_recovered3 = $row[3];
-			$cluster_import3 = $row[4];
-			$cluster_religious3 = $row[5];
-			$cluster_community3 = $row[6];
-			$cluster_highRisk3 = $row[7];
-			$cluster_education3 = $row[8];
-			$cluster_detentionCentre3 = $row[9];
-			$cluster_workplace3 = $row[10];
-		}
-	}
-	// Close the file
-	fclose($h);
-}
-if (($h = fopen("{$deaths_malaysia}", "r")) !== FALSE) 
-{
-	$from_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display = date_format($Date,"F d,Y H:i");
-	$year = date_format($Date,"Y");
-	$month = date_format($Date,"m");
-	$day = date_format($Date,"d");
-	$Date = $year.'-'.$month.'-'.$day;
-
-	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -1 day'))->getTimestamp()*1000);
-	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-	$date_display1 = date_format($Date1,"F d,Y H:i");
-	$year1 = date_format($Date1,"Y");
-	$month1 = date_format($Date1,"m");
-	$day1 = date_format($Date1,"d");
-	$Date1 = $year1.'-'.$month1.'-'.$day1;
-	
-	while (($row = fgetcsv($h, 0, ",")) !== FALSE) {
-		//Print out my column data.
-		if($row[0] == $Date)//today
-		{
-			$date = $row[0];
-			$deaths_new = $row[1];
-			$deaths_bid = $row[2];
-		}
-		elseif($row[0] == $Date1)//yesterday
-		{
-			$date = $row[0];
-			$deaths_new = $row[1];
-			$deaths_bid = $row[2];
-		}
-	}
-	// Close the file
-	fclose($h);
-}
 ?>
-
-
 <style src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"></style>
 <style>
 
 .colornude{
 	color:#BDB76B;
 }
-  @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 .clearfix:before,.clearfix:after {
     content: " "; /* 1 */
@@ -483,7 +372,7 @@ section, .main {
 					</div>
 					<!--end::Header-->
 					<!--begin::Body-->
-					<div class="pt-1">
+					<div class="pt-15">
 						<!--begin::Item-->
 						<div class="d-flex align-items-center pb-9">
 							<!--begin::Symbol-->
@@ -586,7 +475,7 @@ section, .main {
 			</div>
 			<!--end::Body-->
 			<div class="text-center mx-5 mb-5">
-				<button class="btn btn-light btn-hover-success btn-sm btn-block">Contact School</button>
+				<button class="btn btn-success btn-hover-light btn-sm btn-block">Contact School</button>
 			</div>
 		</div>
 		<!--end::Mixed Widget 1-->
@@ -605,13 +494,13 @@ section, .main {
 						</div>
 						<div class="col-sm"></div>
 						<h1 class="mt-5">Coronavirus Cases :</h1>
-						<a class="h1 font-weight-boldest text-dark-50"><?= $cases_new1; ?></a>
+						<a class="h1 font-weight-boldest text-primary"><?= $cases_new1; ?></a>
 
 						<h1 class="mt-10">Death :</h1>
-						<a class="h1 font-weight-boldest" style="color:#999 "><?= $deaths_new; ?></a>
+						<a class="h1 font-weight-boldest text-danger"><?= $deaths_new; ?></a>
 
 						<h1 class="mt-10">Recovered :</h1>
-						<a class="h1 font-weight-boldest" style="color:#8ACA2B"><?= $cases_recovered2; ?></a>
+						<a class="h1 font-weight-boldest text-warning"><?= $cases_recovered1; ?></a>
 					</div>
 				</div>
 				<div class="text-dark-50 text-center m-1 mt-10"><h3>Cluster Covid19</h3></div>

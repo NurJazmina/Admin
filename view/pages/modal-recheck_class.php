@@ -1,4 +1,10 @@
 <?php  
+$_SESSION["title"] = "Re-checking";
+include 'view/partials/_subheader/subheader-v1.php';
+$start = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$start = $start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$start = date_format($start,"Y-m-d\TH:i:s");
+
 if (isset($_POST['recheck_add_class'])) 
 {
   $school_id = $_SESSION["loggeduser_school_id"];
@@ -21,10 +27,10 @@ if (isset($_POST['recheck_add_class']))
     $filter = ['SchoolID'=>$school_id, 'ConsumerID'=> $consumer_id, 'StaffLevel'=>'0'];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-    foreach ($cursor as $document2) 
+    foreach ($cursor as $document) 
     {
       $count++;
-      $StaffLevel = $document2->StaffLevel;
+      $StaffLevel = $document->StaffLevel;
       ?>
       <div class="text-dark-50 text-center m-10">
         <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
@@ -117,6 +123,7 @@ if (isset($_POST['recheck_edit_class']))
   $number = $_POST['number'];
   $class_category = $_POST['class_category'];
 
+  $consumer_class_id = '';
   $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'ClassID'=>$class_id];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
@@ -127,9 +134,11 @@ if (isset($_POST['recheck_edit_class']))
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-    foreach ($cursor as $document1)
+    foreach ($cursor as $document)
     {
-      $ConsumerFName = $document1->ConsumerFName;
+      $consumer_class_id = strval($document->_id);
+      $consumerF_name = $document->ConsumerFName;
+      $consumerL_name = $document->ConsumerLName;
     }
   }
   ?>
@@ -144,9 +153,38 @@ if (isset($_POST['recheck_edit_class']))
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Teacher Name</label>
+            <label class="col-sm-2 col-form-label">Teacher</label>
             <div class="col-sm-10">
-              <input class="form-control" value="<?= $ConsumerFName; ?>" disabled>
+              <select class="form-control" name="consumer_id">
+                <?php
+                if($consumer_class_id !== '')
+                {
+                  ?>
+                  <option value="<?= $consumer_class_id; ?>"><?= $consumerF_name." ".$consumerL_name; ?></option>
+                  <?php
+                }
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0', 'ClassID'=>''];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                foreach ($cursor as $document)
+                {
+                  $staff_id = strval($document->_id); 
+                  $ConsumerID = $document->ConsumerID;
+
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                  $query = new MongoDB\Driver\Query($filter);   
+                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
+                    ?>
+                    <option value="<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName; ?></option>
+                    <?php
+                  }
+                }
+                ?>
+              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -187,20 +225,20 @@ if (isset($_POST['recheck_edit_class']))
                 $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffLevel'=>'0'];
                 $query = new MongoDB\Driver\Query($filter);
                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                foreach ($cursor as $document1)
+                foreach ($cursor as $document)
                 {
-                  $staff_id = strval($document1->_id); 
-                  $ConsumerID = $document1->ConsumerID; 
+                  $staff_id = strval($document->_id); 
+                  $ConsumerID = $document->ConsumerID; 
 
                   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
                   $query = new MongoDB\Driver\Query($filter);   
                   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                  foreach ($cursor as $document2)
+                  foreach ($cursor as $document)
                   {
-                    $ConsumerFName = $document2->ConsumerFName;
-                    $ConsumerLName = $document2->ConsumerLName;
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
                     ?>
-                    <option value="<?= $staff_id; ?>"><?php echo $ConsumerFName." ".$ConsumerLName; ?></option>
+                    <option value="<?= $staff_id; ?>"><?= $ConsumerFName." ".$ConsumerLName; ?></option>
                     <?php
                   }
                 }
@@ -225,12 +263,34 @@ if (isset($_POST['recheck_edit_class']))
                 ?>
                 </select>
               </div>
+
+              <label class="col-sm-2 col-form-label">Timetable Start</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" name="date_start<?= $x; ?>" value="<?= $start; ?>">
+              </div>
+
+              <label class="col-sm-2 col-form-label">Timetable End</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" name="date_end<?= $x; ?>" value="<?= $start; ?>">
+              </div>
+
+              <input type="hidden" name="repeat<?= $x; ?>" value="NO">
+              <label class="col-sm-2 col-form-label">Weekly Repeat</label>
+              <div class="col-sm-10">
+                <div class="checkbox-inline mt-3">
+                    <label class="checkbox checkbox-success">
+                      <input type="checkbox" name="repeat<?= $x; ?>" value="YES">
+                    <span> </span> 
+                    Repeated </label>
+                </div>
+              </div>
             </div>
             <?php
           }
           ?>
         </div>
         <div class="modal-footer">
+          <input type="hidden" name="consumer_class_id" value="<?= $consumer_class_id; ?>">
           <input type="hidden" name="number" value="<?= $number; ?>">
           <input type="hidden" name="class_category" value="<?= $class_category; ?>">
           <input type="hidden" name="class_id" value="<?= $class_id; ?>">

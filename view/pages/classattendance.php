@@ -109,12 +109,11 @@ border-color:#ffff;
                             </div>
                             <div class="col-sm-5"></div>
                             <div class="col-sm-3">
-                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</button>
+                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
                             </div>
                         </div>
                     </form>
                     <?php
-
                     $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"]];
                     $query = new MongoDB\Driver\Query($filter);
                     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
@@ -200,7 +199,7 @@ border-color:#ffff;
                             </div>
                             <div class="col-sm-5"></div>
                             <div class="col-sm-3">
-                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mb-3 mx-3">EXPORT ATTENDANCE TO XLS</button>
+                                <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm mx-3">EXPORT ATTENDANCE TO XLS</button>
                             </div>
                         </div>
                     </form>
@@ -223,7 +222,7 @@ border-color:#ffff;
                             $ConsumerIDNo = $document->ConsumerIDNo;
                             ?>
                                 <tr>
-                                    <td class="default"><?= $ConsumerIDNo; ?></td>
+                                    <td class="default"><?//= $ConsumerIDNo; ?></td>
                                     <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
                                     <?php
                                     $Cards_id ='';
@@ -282,10 +281,9 @@ border-color:#ffff;
             </table>
             <script>
             $(document).ready(function() {
-
                 $("#submitted").click(function() {
                     $("#attendance").table2excel({
-                    filename: "attendance_department.xls"
+                    filename: "attendance_class.xls"
                 });
                 });
 
