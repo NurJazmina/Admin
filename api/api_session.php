@@ -12,7 +12,6 @@ $apiSession = $_GET['api_session'];
 
 if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
 {
-    $_SESSION['api_session'] = $apiSession;
     $_SESSION['is_mobile'] = true;
     
     $filter = ['ConsumerToken'=>$apiSession];
@@ -21,6 +20,7 @@ if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
     foreach ($cursor as $document)
     {
+        $_SESSION['api_session'] = $apiSession;
         $_SESSION["loggeduser_id"] = strval($document->_id);
         $_SESSION["loggeduser_consumerFName"] = $document->ConsumerFName;
         $_SESSION["loggeduser_consumerLName"] = $document->ConsumerLName;
