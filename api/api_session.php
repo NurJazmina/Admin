@@ -13,16 +13,12 @@ if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
 {
     $_SESSION['is_mobile'] = true;
     
-    $filter = ['ConsumerIDNo' => $_POST['txtID']];
+    $filter = ['ConsumerToken'=>$apiSession];
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
     foreach ($cursor as $document)
     {
-      $password_hash = ($document->ConsumerPassword);
-      if (password_verify($_POST['txtPassword'], $password_hash))
-      {
-        //$_SESSION["api_session"] = $_GET['api_session'];
         $_SESSION["loggeduser_id"] = strval($document->_id);
         $_SESSION["loggeduser_consumerFName"] = $document->ConsumerFName;
         $_SESSION["loggeduser_consumerLName"] = $document->ConsumerLName;
@@ -154,6 +150,5 @@ if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
             $_SESSION["loggeduser_ACCESS"] = "STUDENT";
         }
         header ('location: index.php?page=dashboard&action=loginsuccesful');
-    }
     }
 }
