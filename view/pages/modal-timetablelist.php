@@ -40,7 +40,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <input type="hidden" name="timetable_id">
+            <input type="hidden" name="class_rel_id">
             <label class="col-sm-3 col-form-label">Class Category</label>
             <div class="col-sm-9">
               <select class="form-control" name="class_category" >
@@ -73,7 +73,7 @@
         </div>
         <div class="modal-body">
           <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>Timetable</b> type your <b>password</b>.</a><br>
-          <input type="hidden" class="form-control" name="timetable_id">
+          <input type="hidden" class="form-control" name="class_rel_id">
           <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div class="modal-footer">
