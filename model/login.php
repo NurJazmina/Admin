@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['LoginFormSubmit'])) //(isset($_GET['api_session']))
+if (isset($_POST['LoginFormSubmit']))
 {
   $filter = ['ConsumerIDNo' => $_POST['txtID']];
   $option = ['limit' => 1];
