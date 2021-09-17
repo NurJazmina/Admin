@@ -35,7 +35,7 @@ if (isset($_GET['ERROR']) && !empty($_GET['ERROR']))
     <?php  
 }
 ?>
-<div class="text-dark-50 text-center m-5">
+<div class="text-dark-50 text-center">
   <h1>Departments</h1>
 </div>
 <div class="modal-dialog modal-lg modal-dialog-centered">

@@ -78,7 +78,7 @@ if (isset($_POST['recheck_add_student']))
             {
               ?>
               <!-- redundant data -->
-              <div class="text-dark-50 text-center m-5">
+              <div class="text-dark-50 text-center">
                 <h1>PARENT ALREADY EXIST</h1>
               </div>
               <form name="add_relation_student" action="index.php?page=duplicateforstudentlist" method="post">
@@ -110,7 +110,7 @@ if (isset($_POST['recheck_add_student']))
             {
               ?>
               <!-- redundant data -->
-              <div class="text-dark-50 text-center m-5">
+              <div class="text-dark-50 text-center">
                 <h1>PARENT AND STUDENT ALREADY EXIST</h1>
               </div>
               <form name="duplicate_add_relation" action="index.php?page=duplicateforstudentlist" method="post">
@@ -146,7 +146,7 @@ if (isset($_POST['recheck_add_student']))
             {
               ?>
               <!-- redundant data -->
-              <div class="text-dark-50 text-center m-5">
+              <div class="text-dark-50 text-center">
                 <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
               </div>
               <form name="add_student" action="index.php?page=studentlist" method="post">
@@ -245,7 +245,7 @@ if (isset($_POST['recheck_add_student']))
             {
               ?>
               <!-- redundant data -->
-              <div class="text-dark-50 text-center m-5">
+              <div class="text-dark-50 text-center">
                 <h1>STUDENT ALREADY EXIST</h1>
               </div>
               <form name="add_relation_parent" action="index.php?page=duplicateforstudentlist" method="post">
@@ -293,7 +293,7 @@ if (isset($_POST['recheck_add_student']))
           }
           ?>
           <!-- group : staff/student/gongetz -->
-          <div class="text-dark-50 text-center m-5">
+          <div class="text-dark-50 text-center">
             <h1>AUTHORIZED PERSONNEL ONLY</h1>
           </div>
           <form action="index.php?page=studentlist" method="post">
@@ -352,7 +352,7 @@ if (isset($_POST['recheck_add_student']))
       }
       ?>
       <!-- group : staff/vip/gongetz -->
-      <div class="text-dark-50 text-center m-5">
+      <div class="text-dark-50 text-center">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
       <form action="index.php?page=<?= $detail; ?>&id=<?= $consumer_student_id; ?>" method="post">
@@ -415,7 +415,7 @@ if (isset($_POST['recheck_edit_student']))
       $ConsumerLName = $document->ConsumerLName;
       $ConsumerIDNo = $document->ConsumerIDNo;
       ?>
-      <div class="text-dark-50 text-center m-5">
+      <div class="text-dark-50 text-center">
         <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
       </div>
       <form name="edit_student" action="index.php?page=studentlist" method="post">

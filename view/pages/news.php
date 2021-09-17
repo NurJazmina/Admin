@@ -3,7 +3,7 @@ $_SESSION["title"] = "News";
 include 'view/partials/_subheader/subheader-v1.php';
 include ('model/news.php'); 
 ?>
-<div class="text-dark-50 text-center m-5">
+<div class="text-dark-50 text-center">
   <h1>News</h1>
 </div>
 <div class="row">
@@ -54,7 +54,7 @@ include ('model/news.php');
       }
     }
     ?>
-    <div class="col-lg-4 mb-8">
+    <div class="col-lg-4 mb-3">
       <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
         <div class="card">
           <button type="submit" class="btn btn-hover-light text-left">
@@ -136,7 +136,7 @@ include ('model/news.php');
         }
       }
       ?>
-      <div class="col-lg-4 mb-8">
+      <div class="col-lg-4 mb-3">
         <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
           <div class="card">
             <button type="submit" class="btn btn-hover-light text-left">

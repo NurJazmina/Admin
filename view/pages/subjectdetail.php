@@ -91,7 +91,7 @@ else
   }
 }
 ?>
-<div class="text-dark-50 text-center m-5"><h1>Subject Info</h1></div>
+<div class="text-dark-50 text-center"><h1>Subject Info</h1></div>
 <div class="card">
   <div class="card-body">
     <div class="row">

@@ -80,7 +80,7 @@ if (isset($_POST['submit_date']))
     $date = $_POST['date'];
 }
 ?>
-<div class="text-dark-50 text-center m-5"><h1>Staff - Attendance</h1></div>
+<div class="text-dark-50 text-center"><h1>Staff - Attendance</h1></div>
 <div class="row">
     <div class="col-1"></div>
     <div class="col-10">

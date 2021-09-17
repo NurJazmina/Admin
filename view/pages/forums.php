@@ -23,7 +23,7 @@ function time_elapsed($Date){
 }
 $time_now = time();
 ?>
-<div class="text-dark-50 text-center m-5 mt-10">
+<div class="text-dark-50 text-center mt-10">
   <h1>Forums</h1>
 </div>
 <div class="modal-dialog modal-lg modal-dialog-centered">

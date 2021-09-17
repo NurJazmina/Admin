@@ -75,7 +75,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
       $date = $_POST['date'];
   }
   ?>
-  <div class="text-dark-50 text-center m-5"><h1>Student Info</h1></div>
+  <div class="text-dark-50 text-center"><h1>Student Info</h1></div>
   <div class="card">
     <div class="card-body table-responsive">
       <div class="row">

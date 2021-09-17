@@ -60,7 +60,7 @@ if (isset($_POST['submit_date']))
     $date = $_POST['date'];
 }
 ?>
-<div class="text-dark-50 text-center m-5">
+<div class="text-dark-50 text-center">
   <h1>Parent Info</h1>
 </div>
 <div class="card">
