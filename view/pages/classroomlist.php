@@ -100,7 +100,7 @@
                   }
                   ?>
                   </td>
-                  <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
+                  <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory."&nbsp".$ClassName;?></a></td>
                   <?php
                   $totalstudent = 0;
                   $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"], 'Class_id'=>$class_id];
@@ -252,7 +252,7 @@
             <div class="card-header">
               <strong>Latest Summary</strong>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <div class="row">
                 <div class="col-8">
                   <div class="tab-content" id="v-pills-tabContent">
@@ -260,81 +260,77 @@
                     <div class="tab-pane fade show active" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
                       <div class="box">
                         <strong>Total</strong>
-                        <div class="table-responsive">
-                          <table class="table table-sm">
-                            <tr>
-                              <th>Total</th>
-                              <td>
-                              <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                              $totalstudent = 0;
-                              foreach ($cursor as $document)
-                              {
-                                $totalstudent = $totalstudent+ 1;
-                              }
-                              echo $totalstudent;
-                              ?>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>Active</th>
-                              <td>
-                              <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'StudentsStatus'=>'ACTIVE'];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                              $totalstudent = 0;
-                              foreach ($cursor as $document)
-                              {
-                                $totalstudent = $totalstudent+ 1;
-                              }
-                              echo $totalstudent;
-                              ?>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>Inactive</th>
-                              <td>
-                              <?php
-                              $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'StudentsStatus'=>'INACTIVE'];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-                              $totalstudent = 0;
-                              foreach ($cursor as $document)
-                              {
-                                $totalstudent = $totalstudent+ 1;
-                              }
-                              echo $totalstudent;
-                              ?>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
+                        <table class="table table-sm">
+                          <tr>
+                            <th>Total</th>
+                            <td>
+                            <?php
+                            $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"]];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                            $totalstudent = 0;
+                            foreach ($cursor as $document)
+                            {
+                              $totalstudent = $totalstudent+ 1;
+                            }
+                            echo $totalstudent;
+                            ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Active</th>
+                            <td>
+                            <?php
+                            $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'StudentsStatus'=>'ACTIVE'];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                            $totalstudent = 0;
+                            foreach ($cursor as $document)
+                            {
+                              $totalstudent = $totalstudent+ 1;
+                            }
+                            echo $totalstudent;
+                            ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Inactive</th>
+                            <td>
+                            <?php
+                            $filter = ['Schools_id'=>$_SESSION["loggeduser_school_id"],'StudentsStatus'=>'INACTIVE'];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                            $totalstudent = 0;
+                            foreach ($cursor as $document)
+                            {
+                              $totalstudent = $totalstudent+ 1;
+                            }
+                            echo $totalstudent;
+                            ?>
+                            </td>
+                          </tr>
+                        </table>
                       </div>
                       <div class="box">
                         <strong>Remarks</strong>
-                        <div class="table-responsive">
-                          <table class="table table-sm">
-                            <thead>
-                              <tr>
-                                <th>School</th>
-                                <th>Subject</th>
-                                <th>Staff</th>
-                                <th>Status</th>
-                              </tr>
-                            </thead>
-                            <tbody class="bg-light">
-                              <tr>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                        <table class="table table-sm">
+                          <thead>
+                            <tr>
+                              <th>School</th>
+                              <th>Subject</th>
+                              <th>Staff</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody class="bg-light">
+                            <tr>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                     <!-- End tab -->
@@ -350,10 +346,10 @@
                       $ClassCategory = $document->ClassCategory;
                       $ClassName = $document->ClassName;
                       ?>
-                      <div class="tab-pane fade" id="v-pills-<?= $class_id;?>" role="tabpanel" aria-labelledby="v-pills-<?= $ClassName; echo $ClassCategory;?>-tab">
+                      <div class="tab-pane fade" id="v-pills-<?= $class_id;?>" role="tabpanel" aria-labelledby="v-pills-<?= $ClassName.$ClassCategory; ?>-tab">
                         <div class="box" >
                           <strong>Total</strong>
-                          <div class="table-responsive">
+                          <div>
                             <table class="table table-sm">
                               <tr>
                                 <th>Total</th>

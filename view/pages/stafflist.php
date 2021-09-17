@@ -362,7 +362,7 @@ $("#Date").click(function() {
                     </div>
                   </div>
                   <div id='loader' style='display: none;' class="center"></div>
-                  <a id="test"></a>
+                  <a id="test" class="table-responsive"></a>
               </div>
             </div>
           </div>
@@ -380,7 +380,7 @@ $("#Date").click(function() {
             <div class="card-header">
               <strong>Latest Summary</strong>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
               <div class="row">
                 <div class="col-8">
                   <div class="tab-content" id="v-pills-tabContent">
@@ -388,81 +388,77 @@ $("#Date").click(function() {
                     <div class="tab-pane fade show active" id="v-pills-class" role="tabpanel" aria-labelledby="v-pills-class-tab">
                       <div class="box">
                         <strong>Total</strong>
-                        <div class="table-responsive">
-                          <table class="table table-sm">
-                            <tr>
-                              <th>Total</th>
-                              <td>
-                              <?php
-                              $totalstaff = 0;
-                              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                              foreach ($cursor as $document)
-                              {
-                                $totalstaff = $totalstaff+ 1;
-                              }
-                              echo $totalstaff;
-                              ?>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>Active</th>
-                              <td>
-                              <?php
-                              $totalstaff = 0;
-                              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffStatus'=>'ACTIVE'];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                              foreach ($cursor as $document)
-                              {
-                                $totalstaff = $totalstaff + 1;
-                              }
-                              echo $totalstaff;
-                              ?>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>Inactive</th>
-                              <td>
-                              <?php
-                              $totalstaff = 0;
-                              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffStatus'=>'INACTIVE'];
-                              $query = new MongoDB\Driver\Query($filter);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                              foreach ($cursor as $document)
-                              {
-                                $totalstaff = $totalstaff + 1;
-                              }
-                              echo $totalstaff;
-                              ?>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
+                        <table class="table table-sm">
+                          <tr>
+                            <th>Total</th>
+                            <td>
+                            <?php
+                            $totalstaff = 0;
+                            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                            foreach ($cursor as $document)
+                            {
+                              $totalstaff = $totalstaff+ 1;
+                            }
+                            echo $totalstaff;
+                            ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Active</th>
+                            <td>
+                            <?php
+                            $totalstaff = 0;
+                            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffStatus'=>'ACTIVE'];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                            foreach ($cursor as $document)
+                            {
+                              $totalstaff = $totalstaff + 1;
+                            }
+                            echo $totalstaff;
+                            ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Inactive</th>
+                            <td>
+                            <?php
+                            $totalstaff = 0;
+                            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"], 'StaffStatus'=>'INACTIVE'];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                            foreach ($cursor as $document)
+                            {
+                              $totalstaff = $totalstaff + 1;
+                            }
+                            echo $totalstaff;
+                            ?>
+                            </td>
+                          </tr>
+                        </table>
                       </div>
                       <div class="box">
                         <strong>Remarks</strong>
-                        <div class="table-responsive">
-                          <table class="table table-sm">
-                            <thead>
-                              <tr>
-                                <th>School</th>
-                                <th>Subject</th>
-                                <th>Staff</th>
-                                <th>Status</th>
-                              </tr>
-                            </thead>
-                            <tbody class="bg-light">
-                              <tr>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                        <table class="table table-sm">
+                          <thead>
+                            <tr>
+                              <th>School</th>
+                              <th>Subject</th>
+                              <th>Staff</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody class="bg-light">
+                            <tr>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                     <!-- End tab -->
@@ -479,81 +475,77 @@ $("#Date").click(function() {
                       <div class="tab-pane fade" id="v-pills-<?= $departmentid;?>" role="tabpanel" aria-labelledby="v-pills-department<?= $departmentid;?>-tab">
                         <div class="box" >
                           <strong>Total</strong>
-                          <div class="table-responsive">
-                            <table class="table table-sm">
-                              <tr>
-                                <th>Total</th>
-                                <td>
-                                <?php
-                                $totalstaff = 0;
-                                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                foreach ($cursor as $document)
-                                {
-                                  $totalstaff = $totalstaff+ 1;
-                                }
-                                echo $totalstaff;
-                                ?>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th>Active</th>
-                                <td>
-                                <?php
-                                $totalstaff = 0;
-                                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'ACTIVE'];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                foreach ($cursor as $document)
-                                {
-                                  $totalstaff = $totalstaff + 1;
-                                }
-                                echo $totalstaff;
-                                ?>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th>Inactive</th>
-                                <td>
-                                <?php
-                                $totalstaff = 0;
-                                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'INACTIVE'];
-                                $query = new MongoDB\Driver\Query($filter);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                                foreach ($cursor as $document)
-                                {
-                                  $totalstaff = $totalstaff + 1;
-                                }
-                                echo $totalstaff;
-                                ?>
-                                </td>
-                              </tr>
-                            </table>
-                          </div>
+                          <table class="table table-sm">
+                            <tr>
+                              <th>Total</th>
+                              <td>
+                              <?php
+                              $totalstaff = 0;
+                              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $totalstaff = $totalstaff+ 1;
+                              }
+                              echo $totalstaff;
+                              ?>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Active</th>
+                              <td>
+                              <?php
+                              $totalstaff = 0;
+                              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'ACTIVE'];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $totalstaff = $totalstaff + 1;
+                              }
+                              echo $totalstaff;
+                              ?>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Inactive</th>
+                              <td>
+                              <?php
+                              $totalstaff = 0;
+                              $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$departmentid,'StaffStatus'=>'INACTIVE'];
+                              $query = new MongoDB\Driver\Query($filter);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                              foreach ($cursor as $document)
+                              {
+                                $totalstaff = $totalstaff + 1;
+                              }
+                              echo $totalstaff;
+                              ?>
+                              </td>
+                            </tr>
+                          </table>
                         </div>
                         <div class="box">
                           <strong>Remarks</strong>
-                          <div class="table-responsive">
-                            <table class="table table-sm">
-                              <thead>
-                                <tr>
-                                  <th>Category</th>
-                                  <th>Subject</th>
-                                  <th>Parent</th>
-                                  <th>Status</th>
-                                </tr>
-                              </thead>
-                              <tbody class="bg-light">
-                                <tr>
-                                  <td>No data</td>
-                                  <td>No data</td>
-                                  <td>No data</td>
-                                  <td>No data</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                          <table class="table table-sm">
+                            <thead>
+                              <tr>
+                                <th>Category</th>
+                                <th>Subject</th>
+                                <th>Parent</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody class="bg-light">
+                              <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                       <?php

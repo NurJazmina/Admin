@@ -245,7 +245,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		include 'resources/default.php';
 		if (isset($_GET['attendance']) && !empty($_GET['attendance']))
 		{
-			$attendance = ($_GET['attendance']);
+			$attendance = $_GET['attendance'];
 			?>
 			<script>
   				$(document).ready(function () {
@@ -258,7 +258,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		}
 		if (isset($_GET['list_submission']) && !empty($_GET['list_submission']))
 		{
-			$list = ($_GET['list_submission']);
+			$list = $_GET['list_submission'];
 			?>
 			<script>
 				$(document).ready(function () {
