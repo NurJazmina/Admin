@@ -15,7 +15,6 @@ if (isset($_POST['LoginFormSubmit']))
     {
       if ($document->ConsumerStatus=='ACTIVE')
       {
-        //$_SESSION["api_session"] = $_GET['api_session'];
         $_SESSION["loggeduser_id"] = strval($document->_id);
         $_SESSION["loggeduser_consumerFName"] = $document->ConsumerFName;
         $_SESSION["loggeduser_consumerLName"] = $document->ConsumerLName;
@@ -155,7 +154,7 @@ if (isset($_POST['LoginFormSubmit']))
       }
       else
       {
-      header ('location: index.php?action=invalidlogin');
+        header ('location: index.php?action=invalidlogin');
       }
     }
   }

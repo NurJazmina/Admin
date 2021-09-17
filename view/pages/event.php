@@ -3,7 +3,7 @@ $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/event.php'); 
 ?>
-<div class="text-dark-50 text-center m-5">
+<div class="text-dark-50 text-center">
   <h1>Upcoming Event</h1>
 </div>
 <div class="row">

@@ -25,7 +25,6 @@ function time_elapsed($date){
 ?>
 <style src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"></style>
 <style>
-
 .colornude{
 	color:#BDB76B;
 }
@@ -285,7 +284,7 @@ section, .main {
 
 /* Modifications */
 .fc-calendar1-container {
-	height: 230px;
+	height: 319px;
 	width: auto;
 	padding: 30px;
 	background: #f6f6f6;
@@ -364,7 +363,7 @@ section, .main {
 						<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1"><?= $_SESSION["loggeduser_schoolName"]; ?></a>
 						<!--end::Title-->
 						<!--begin::Text-->
-						<div class= text-dark-50 font-size-sm pb-7"><?= $_SESSION["loggeduser_schoolsAddress"]; ?></div>
+						<div class="text-dark-50 font-size-sm pb-7"><?= $_SESSION["loggeduser_schoolsAddress"]; ?></div>
 						<!--end::Text-->
 					</div>
 					<!--end::Header-->
@@ -553,25 +552,19 @@ section, .main {
 		</div>
 		<!--end::Stats Widget 11-->
 		<!--begin::Stats Widget 12-->
-		<div class="card card-custom card-stretch card-stretch-half gutter-b">
+		<div class="card card-custom card-stretch card-stretch-half gutter-b d-flex align-items-center">
 			<!--begin::Body-->
-				<section>
-					<div class="main p-8">
-						<div class="custom-calendar1-wrap">
-							<div id="custom-inner" class="custom-inner">
-								<div class="custom-header clearfix">
-									<nav>
-										<span id="custom-prev" class="custom-prev"></span>
-										<span id="custom-next" class="custom-next"></span>
-									</nav>
-									<h2 id="custom-month" class="custom-month"></h2>
-									<h3 id="custom-year" class="custom-year"></h3>
-								</div>
-								<div id="calendar1" class="fc-calendar1-container"></div>
-							</div>
-						</div>
-					</div>
-				</section>
+			<div id="custom-inner" class="custom-inner">
+				<div class="custom-header clearfix">
+					<nav>
+						<span id="custom-prev" class="custom-prev"></span>
+						<span id="custom-next" class="custom-next"></span>
+					</nav>
+					<h2 id="custom-month" class="custom-month"></h2>
+					<h3 id="custom-year" class="custom-year"></h3>
+				</div>
+				<div id="calendar1" class="fc-calendar1-container"></div>
+			</div>
 			<!--end::Body-->
 		</div>
 		<!--end::Stats Widget 12-->
@@ -1218,17 +1211,6 @@ section, .main {
 		</div>
 		<!--end::List Widget 8-->
 	</div>
-	<!-- <div class="col-lg-6 col-xxl-4 order-1 order-xxl-2">
-		<div class="card card-custom card-stretch gutter-b">
-			<div class="card-body pt-8"></div>
-		</div>
-	</div>
-	<div class="col-xxl-8 order-2 order-xxl-2">
-		<div class="card card-custom card-stretch gutter-b">
-			<div class="card-body pt-8">
-			</div>
-		</div>
-	</div> -->
 </div>
 <!--end::Row-->
 <!--begin::Row-->

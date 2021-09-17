@@ -287,7 +287,7 @@ if (isset($_POST['recheck_add_staff']))
   {
     ?>
     <!-- redundant data -->
-    <div class="text-dark-50 text-center m-5">
+    <div class="text-dark-50 text-center">
       <h1>STAFF ALREADY EXIST</h1>
     </div>
     <form action="index.php?page=staffdetail&id=<?= $consumer_id; ?>" method="post">
@@ -337,7 +337,7 @@ if (isset($_POST['recheck_add_staff']))
     {
       ?>
       <!-- group : school -->
-      <div class="text-dark-50 text-center m-5">
+      <div class="text-dark-50 text-center">
         <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
       </div>
       <form name="add_staff" action="index.php?page=stafflist" method="post">
@@ -455,7 +455,7 @@ if (isset($_POST['recheck_add_staff']))
       }
       ?>
       <!-- group : vip/student/gongetz -->
-      <div class="text-dark-50 text-center m-5">
+      <div class="text-dark-50 text-center">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
       <form action="index.php?page=<?= $detail; ?>&id=<?= $consumer_id; ?>" method="post">
@@ -512,7 +512,7 @@ if (isset($_POST['recheck_edit_staff']))
     $ConsumerIDNo = $document->ConsumerIDNo;
   }
   ?>
-    <div class="text-dark-50 text-center m-5">
+    <div class="text-dark-50 text-center">
       <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
     </div>
     <form name="edit_staff" action="index.php?page=stafflist" method="post">

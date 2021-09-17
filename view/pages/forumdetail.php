@@ -31,7 +31,6 @@ foreach ($cursor as $document)
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-
     var toggleText = $("#ip").val();
     var name = $("#loguser-id").val();
     var url_likes = $("#url-likes").val();
@@ -138,9 +137,9 @@ $(document).ready(function() {
                 $ConsumerFName = $document1->ConsumerFName;
                 $ConsumerLName = $document1->ConsumerLName;
                 ?>
-                <div class="bg-white mt-2 p-8 mb-3 ribbon ribbon-right">
-                    <div class="ribbon-target bg-warning" style="top: 10px; right: -2px;">Views : <?= $count; ?></div>
-                        <a class="h5"><?= $Title; ?></a>
+                <div class="bg-white mt-5 mb-3 ribbon ribbon-right">
+                    <div class="ribbon-target bg-warning" style="right: -2px;">Views : <?= $count; ?></div>
+                        <a class="h5 mt-5"><?= $Title; ?></a>
                         <div class="mt-5">
                             <span align="justify"><?= $Details; ?></span>
                         </div>

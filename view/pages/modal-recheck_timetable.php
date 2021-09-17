@@ -129,7 +129,7 @@ if (isset($_POST['recheck_edit_timetable']))
   $class_category = $_POST['class_category'];
   $class_rel_id = $_POST['class_rel_id'];   
   ?>
-  <div class="text-dark-50 text-center m-5"><h1>PLEASE CONFIRM BEFORE PROCEED</h1></div>
+  <div class="text-dark-50 text-center"><h1>PLEASE CONFIRM BEFORE PROCEED</h1></div>
   <form name="edit_timetable" action="index.php?page=timetablelist" method="post">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

@@ -1,5 +1,5 @@
 <?php
-$_SESSION["title"] = "Profile";
+$_SESSION["title"] = "Change Password";
 include 'view/partials/_subheader/subheader-v1.php'; 
 ?>
 <form class="form" name="change_password" action="model/change-password.php" method="post">
@@ -123,8 +123,8 @@ include 'view/partials/_subheader/subheader-v1.php';
         </div>
         <div class="modal-footer">
             <input type="hidden" name="id" value="<?= $_SESSION["loggeduser_id"]; ?>">
-            <button type="reset" class="btn btn-light btn-sm">Cancel</button>
-            <button type="submit" class="btn btn-success btn-sm" name="change_password">Save Changes</button>
+            <button type="reset" class="btn btn-light btn-hover-success btn-sm">Cancel</button>
+            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="change_password">Save Changes</button>
         </div>
       </div>
     </div>			

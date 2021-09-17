@@ -58,7 +58,7 @@ foreach ($cursor as $document)
 if (isset($_POST['duplicate_add_relation']))
 {
   ?>
-  <div class="text-dark-50 text-center m-5">
+  <div class="text-dark-50 text-center">
     <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
   </div>
   <form name="add_relation" action="index.php?page=studentlist" method="post">
@@ -103,7 +103,7 @@ if (isset($_POST['duplicate_add_relation']))
 if (isset($_POST['add_relation_student']))
 {
   ?>
-  <div class="text-dark-50 text-center m-5">
+  <div class="text-dark-50 text-center">
     <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
   </div>
   <form name="add_relation_student" action="index.php?page=studentlist" method="post">
@@ -166,7 +166,7 @@ if (isset($_POST['add_relation_student']))
 if (isset($_POST['add_relation_parent']))
 {
   ?>
-  <div class="text-dark-50 text-center m-5">
+  <div class="text-dark-50 text-center">
     <h1>PLEASE CONFIRM BEFORE PROCEED</h1>
   </div>
   <form name="add_relation_parent" action="index.php?page=studentlist" method="post">
