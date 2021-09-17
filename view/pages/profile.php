@@ -567,7 +567,7 @@ if (isset($_POST['submit_date']))
 <div class="row">
     <div class="col-lg-12">
         <div class="card card-custom card-stretch gutter-b">
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <form name="submit_date" action="index.php?page=profile" method="post">
                     <div class="row mb-3">
                         <div class="col text-right">
