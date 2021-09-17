@@ -1211,17 +1211,6 @@ section, .main {
 		</div>
 		<!--end::List Widget 8-->
 	</div>
-	<!-- <div class="col-lg-6 col-xxl-4 order-1 order-xxl-2">
-		<div class="card card-custom card-stretch gutter-b">
-			<div class="card-body pt-8"></div>
-		</div>
-	</div>
-	<div class="col-xxl-8 order-2 order-xxl-2">
-		<div class="card card-custom card-stretch gutter-b">
-			<div class="card-body pt-8">
-			</div>
-		</div>
-	</div> -->
 </div>
 <!--end::Row-->
 <!--begin::Row-->
