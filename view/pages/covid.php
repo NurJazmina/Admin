@@ -292,7 +292,7 @@ include 'model/covid.php';
             </div>
             <!--end::Header-->
             <!--begin::Body-->
-            <div class="card-body pt-2">
+            <div class="card-body pt-2 table-responsive">
                 <!--begin::table-->
                 <table class="table table-bordered table-sm">
                     <tbody class="text-center">
@@ -373,8 +373,8 @@ include 'model/covid.php';
                 <!--end::Title-->
             </div>
             <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body pt-2">
+            <!--begin::Body-->
+            <div class="card-body pt-2 table-responsive">
                 <!--begin::table-->
                 <table class="table table-bordered table-sm">
                     <tbody class="text-center">
@@ -510,7 +510,7 @@ include 'model/covid.php';
             </div>
             <!--end::Header-->
             <!--begin::Body-->
-            <div class="card-body pt-2">
+            <div class="card-body pt-2 table-responsive">
                 <!--begin::table-->
                 <table class="table table-bordered table-sm">
                     <tbody class="text-center">

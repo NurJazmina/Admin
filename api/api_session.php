@@ -6,11 +6,13 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+$GoNGetzConnectionString="mongodb://admin:TempPassword@51.79.173.45:27017/gngoffice?authSource=admin";
+$GoNGetzDatabase = new MongoDB\Driver\Manager($GoNGetzConnectionString);
 $apiSession = $_GET['api_session'];
-$_SESSION['api_session'] = $apiSession;
 
 if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
 {
+    $_SESSION['api_session'] = $apiSession;
     $_SESSION['is_mobile'] = true;
     
     $filter = ['ConsumerToken'=>$apiSession];

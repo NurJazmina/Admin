@@ -78,7 +78,7 @@ section, .main {
 .fc-calendar1 .fc-body {
 	position: relative;
 	width: 100%;
-	height: 80%;
+	height: 100%;
 	height: -moz-calc(100% - 30px);
 	height: -webkit-calc(100% - 30px);
 	height: calc(100% - 30px);
@@ -163,8 +163,6 @@ section, .main {
 }
 .custom-inner:before,.custom-inner:after  {
 	content: '';
-	width: 99%;
-	height: 50%;
 	position: absolute;
 	background: #f6f6f6;
 	bottom: -4px;
@@ -174,7 +172,6 @@ section, .main {
 }
 .custom-inner:after {
 	content: '';
-	width: 98%;
 	bottom: -7px;
 	left: 1%;
 	z-index: -2;
@@ -288,7 +285,7 @@ section, .main {
 
 /* Modifications */
 .fc-calendar1-container {
-	height: 250px;
+	height: 230px;
 	width: auto;
 	padding: 30px;
 	background: #f6f6f6;
@@ -345,7 +342,7 @@ section, .main {
 	font-size: 22px;
 }
 @media screen and (max-width: 400px) {
-	.fc-calendar1-container {		height: 100px;	}
+	.fc-calendar1-container {	}
 	.fc-calendar1 .fc-row > div > span.fc-date {		font-size: 15px;	}
 }
 </style>
@@ -558,7 +555,6 @@ section, .main {
 		<!--begin::Stats Widget 12-->
 		<div class="card card-custom card-stretch card-stretch-half gutter-b">
 			<!--begin::Body-->
-			<div class="card-body">
 				<section>
 					<div class="main">
 						<div class="custom-calendar1-wrap">
@@ -576,7 +572,6 @@ section, .main {
 						</div>
 					</div>
 				</section>
-			</div>
 			<!--end::Body-->
 		</div>
 		<!--end::Stats Widget 12-->
