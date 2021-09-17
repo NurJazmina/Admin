@@ -15,8 +15,9 @@ $_SESSION['api_session'] = $apiSession;
 if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
 {
     $_SESSION['is_mobile'] = true;
-    
-    $filter = ['ConsumerToken'=>$apiSession];
+    $apiSession = substr($apiSession,7);
+
+    $filter = ['ConsumerToken'=>$apiSession] ;
     $option = ['limit' => 1];
     $query = new MongoDB\Driver\Query($filter,$option);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -152,6 +153,6 @@ if(isset($_GET['is_mobile']) && !is_null($_GET['is_mobile']))
         {
             $_SESSION["loggeduser_ACCESS"] = "STUDENT";
         }
-        header ('location: index.php?page=dashboard&action=loginsuccesful');
+        header ('location: ../index.php?page=dashboard&action=loginsuccesful');
     }
 }
