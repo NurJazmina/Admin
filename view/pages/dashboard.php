@@ -556,7 +556,7 @@ section, .main {
 		<div class="card card-custom card-stretch card-stretch-half gutter-b">
 			<!--begin::Body-->
 				<section>
-					<div class="main">
+					<div class="main p-8">
 						<div class="custom-calendar1-wrap">
 							<div id="custom-inner" class="custom-inner">
 								<div class="custom-header clearfix">
