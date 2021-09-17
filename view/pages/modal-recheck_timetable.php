@@ -127,7 +127,7 @@ if (isset($_POST['recheck_add_timetable']))
 if (isset($_POST['recheck_edit_timetable']))
 {
   $class_category = $_POST['class_category'];
-  $timetable_id = $_POST['timetable_id'];   
+  $class_rel_id = $_POST['class_rel_id'];   
   ?>
   <div class="text-dark-50 text-center m-5"><h1>PLEASE CONFIRM BEFORE PROCEED</h1></div>
   <form name="edit_timetable" action="index.php?page=timetablelist" method="post">
@@ -242,7 +242,7 @@ if (isset($_POST['recheck_edit_timetable']))
           </div>
         </div>
         <div class="modal-footer">
-          <input type="hidden" name="timetable_id" value="<?= $timetable_id; ?>">
+          <input type="hidden" name="class_rel_id" value="<?= $class_rel_id; ?>">
           <button  onclick="index.php?page=timetablelist" class="btn btn-light btn-hover-success btn-sm">Timetable List</button>
           <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="edit_timetable">Confirm</button>
         </div>

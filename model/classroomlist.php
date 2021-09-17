@@ -71,19 +71,19 @@ if (isset($_POST['add_class']))
     // Check if the write concern could not be fulfilled
     if ($writeConcernError = $result->getWriteConcernError())
     {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
+      printf("%s (%d): %s\n",
+          $writeConcernError->getMessage(),
+          $writeConcernError->getCode(),
+          var_export($writeConcernError->getInfo(), true)
+      );
     }
     foreach ($result->getWriteErrors() as $writeError)
     {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
+      printf("Operation#%d: %s (%d)\n",
+          $writeError->getIndex(),
+          $writeError->getMessage(),
+          $writeError->getCode()
+      );
     }
   }
   catch (MongoDB\Driver\Exception\Exception $e)
@@ -105,12 +105,6 @@ if (isset($_POST['edit_class']))
   $bulk->delete(['Class_id'=> $class_id]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
-
-  //database timetable
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->delete(['Class_id'=> $class_id]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
 
   //database staff
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
@@ -141,7 +135,7 @@ if (isset($_POST['edit_class']))
     $check = 0;
     $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher[$x],'Subject_id'=> $subject[$x]];
     $query = new MongoDB\Driver\Query($filter);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
     foreach ($cursor as $document)
     {
       $check = 1;
@@ -162,25 +156,6 @@ if (isset($_POST['edit_class']))
         'Status'=>'ACTIVE'
       ]);
       $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-      $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
-
-      $filter = ['Class_id' => $class_id, 'Teacher_id'=>$teacher[$x],'Subject_id'=> $subject[$x]];
-      $query = new MongoDB\Driver\Query($filter);
-      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
-      foreach ($cursor as $document)
-      {
-        $timetable_id = strval($document->_id);
-      }
-  
-      $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-      $bulk->insert([
-        'School_id'=>$school_id,
-        'Timetable_id'=>$timetable_id,
-        'Class_id'=>$class_id,
-        'Subject_id'=>$subject[$x],
-        'Teacher_id'=>$teacher[$x] 
-        ]);
-      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
       $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ClassroomSubjectRel', $bulk, $writeConcern);
     }
   }
@@ -199,12 +174,6 @@ if (isset($_POST['delete_class']))
     $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($class_id)], ['limit' => 1]);
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Classrooms', $bulk, $writeConcern);
-
-    //database timetable
-    $bulk = new MongoDB\Driver\BulkWrite;
-    $bulk->delete(['Class_id'=>$class_id]);
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.TimeTable', $bulk, $writeConcern);
 
     //database class and subject relation
     $bulk = new MongoDB\Driver\BulkWrite;
