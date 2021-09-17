@@ -43,8 +43,9 @@
                                 "add_student",
                                 "add_parent",
                                 
-                                "departmentattendance",
-                                "classattendance",
+                                "department_attendance",
+                                "class_attendance",
+                                "staff_attendance",
                                 "mail",
                                 "covid",
 
@@ -54,7 +55,6 @@
                                 "addrelationforparent",
                                 "duplicateforparentlist",
                                 "duplicateforstudentlist",
-                                "attendance_staff",
                                 'test_loader',
                                 'a',
                                );
@@ -104,8 +104,8 @@
                                 //"add_parent",
                                 
                                 
-                                //"departmentattendance",
-                                "classattendance",
+                                //"department_attendance",
+                                "class_attendance",
                                 "mail",
                                 "covid",
 
@@ -183,8 +183,8 @@
                                 //"add_parent",
                                 
                                 
-                                //"departmentattendance",
-                                //"classattendance",
+                                //"department_attendance",
+                                //"class_attendance",
                                 //"mail",
                                 "covid",
 

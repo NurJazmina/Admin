@@ -341,7 +341,7 @@
 								{
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=departmentattendance" class="menu-link menu-toggle">
+									<a href="index.php?page=department_attendance" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -452,7 +452,7 @@
 									</a>
 								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=classattendance" class="menu-link menu-toggle">
+									<a href="index.php?page=class_attendance" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
