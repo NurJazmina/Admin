@@ -218,8 +218,8 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                 <table class="table table-sm text-center table-bordered">
                   <thead class="bg-success text-white"> 
                     <tr>
-                      <th class="text-left">Name</th>
-                      <th class="text-left">Class</th>
+                      <th>Name</th>
+                      <th>Class</th>
                       <th>Student</th>
                       <th>Subject</th>
                       <th colspan="2">Start</th>
@@ -302,9 +302,9 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       ?>
                       <tr>
                         <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                        <td class="text-left"><?= $ClassCategory." ".$ClassName;?></td>
+                        <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                         <td><?= $totalstudent; ?></td>
-                        <td><?= $SubjectName; ?></td>
+                        <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                         <td><?= $Start_day; ?></td>
                         <td><?= $Start_hour; ?></td>
                         <td><?= $End_day; ?></td>
@@ -345,7 +345,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                     <?php
                     $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                     $query = new MongoDB\Driver\Query($filter);
-                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.TimeTable',$query);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
                     foreach ($cursor as $document)
                     {
                       $class_rel_id = strval($document->_id);
@@ -415,9 +415,9 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                       ?>
                       <tr>
                         <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                        <td class="text-left"><?= $ClassCategory." ".$ClassName;?></td>
+                        <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                         <td><?= $totalstudent; ?></td>
-                        <td><?= $SubjectName; ?></td>
+                        <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                         <td><?= $Start_day; ?></td>
                         <td><?= $Start_hour; ?></td>
                         <td><?= $End_day; ?></td>

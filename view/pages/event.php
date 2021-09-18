@@ -3,9 +3,42 @@ $_SESSION["title"] = "Event";
 include 'view/partials/_subheader/subheader-v1.php'; 
 include ('model/event.php'); 
 ?>
-<div class="text-dark-50 text-center">
-  <h1>Upcoming Event</h1>
-</div>
+<style>
+.view {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.view .mask,
+.view .content {
+  overflow: hidden;
+  bottom: 0;
+}
+
+.view.opacity {
+    opacity: 1;
+}
+
+.view-first .popup {
+  transform: translateY(-100px);
+  opacity: 0;
+  font-family: Raleway, serif;
+  transition: all 0.6s ease-in-out;
+}
+
+.view-first:hover .opacity {
+  opacity: 0.2;
+}
+
+.view-first:hover .popup,
+.view-first:hover div.info {
+  opacity: 1;
+  transform: translateY(0px);
+}
+</style>
+<div class="text-dark-50 text-center"><h1>Upcoming Event</h1></div>
 <div class="row">
   <!-- begin::staff -->
   <?php
@@ -57,7 +90,7 @@ include ('model/event.php');
       }
     }
     ?>
-    <div class="col-lg-4 mb-8">
+    <div class="col-lg-4 mb-8 view view-first">
       <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post">
         <div class="card">
           <button type="submit" class="btn btn-hover-light text-left">
@@ -90,6 +123,9 @@ include ('model/event.php');
             </div>
             <!-- end :: display -->
           </button>
+          <div class="mask bg-light">
+              <div class="text-center m-5"><button class="btn btn-success btn-hover-light btn-sm btn-block popup" type="submit">More Info</button></div>
+          </div>
         </div>
       </form>
     </div>
@@ -146,7 +182,7 @@ include ('model/event.php');
       }
     }
     ?>
-    <div class="col-lg-4 mb-8">
+    <div class="col-lg-4 mb-8 view view-first">
       <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post"> 
         <div class="card">
           <button type="submit" class="btn btn-hover-light text-left">
@@ -179,6 +215,9 @@ include ('model/event.php');
             </div>
             <!-- end :: display -->
           </button>
+          <div class="mask bg-light">
+              <div class="text-center m-5"><button class="btn btn-success btn-hover-light btn-sm btn-block popup" type="submit">More Info</button></div>
+          </div>
         </div>
       </form>
     </div>

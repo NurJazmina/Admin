@@ -25,6 +25,17 @@ function time_elapsed($date){
 ?>
 <style src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"></style>
 <style>
+.gradientbutton {
+  /* fallback for old browsers */
+  background: #db0b00;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to top, rgba(219, 11, 0, 0.5), rgba(1, 30, 249, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top, rgba(219, 11, 0, 0.5), rgba(1, 30, 249, 0.5))
+}
+
 .colornude{
 	color:#BDB76B;
 }
@@ -284,7 +295,7 @@ section, .main {
 
 /* Modifications */
 .fc-calendar1-container {
-	height: 319px;
+	height: 253px;
 	width: auto;
 	padding: 30px;
 	background: #f6f6f6;
@@ -344,6 +355,81 @@ section, .main {
 	.fc-calendar1-container {	}
 	.fc-calendar1 .fc-row > div > span.fc-date {		font-size: 15px;	}
 }
+
+/* generic css */
+.view {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.view .mask,
+.view .content {
+  overflow: hidden;
+  bottom: 0;
+}
+
+.view img {
+  display: block;
+  position: relative
+}
+
+/*1*/
+
+.view-first img {
+  /*1*/
+  transition: all 0.2s linear;
+}
+
+.view-first .mask {
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.view-first h2 {
+  transform: translateY(-100px);
+  opacity: 0;
+  font-family: Raleway, serif;
+  transition: all 0.2s ease-in-out;
+}
+
+.view-first p {
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+
+.view-first div.info {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+
+/* */
+
+.view-first:hover img {
+  transform: scale(1.1);
+}
+
+.view-first:hover .mask {
+  opacity: 1;
+}
+
+.view-first:hover h2,
+.view-first:hover p,
+.view-first:hover div.info {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.view-first:hover p {
+  transition-delay: 0.1s;
+}
+
+.view-first:hover div.info {
+  transition-delay: 0.2s;
+}
 </style>
 <!--begin::Dashboard-->
 <!--begin::Row-->
@@ -368,104 +454,102 @@ section, .main {
 					</div>
 					<!--end::Header-->
 					<!--begin::Body-->
-					<div class="pt-15">
-						<!--begin::Item-->
-						<div class="d-flex align-items-center pb-9">
-							<!--begin::Symbol-->
-							<div class="symbol symbol-45 symbol-light mr-4 ">
-								<span class="symbol-label bg-white">
-									<span class="svg-icon svg-icon-2x">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
-										<i class="fas fa-user-tie fa-2x text-dark-50"></i>
-										<!--end::Svg Icon-->
-									</span>
+					<!--begin::Item-->
+					<div class="d-flex align-items-center pb-9">
+						<!--begin::Symbol-->
+						<div class="symbol symbol-45 symbol-light mr-4 ">
+							<span class="symbol-label bg-white">
+								<span class="svg-icon svg-icon-2x">
+									<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
+									<i class="fas fa-user-tie fa-2x text-dark-50"></i>
+									<!--end::Svg Icon-->
 								</span>
-							</div>
-							<!--end::Symbol-->
-							<!--begin::Text-->
-							<div class="d-flex flex-column flex-grow-1">
-								<a href="index.php?page=stafflist&level=1" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Staff</a>
-								<span class="text-muted">Good Fellas</span>
-							</div>
-							<!--end::Text-->
-							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalstaff"] ?></span>
-							<!--end::label-->
+							</span>
 						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="d-flex align-items-center pb-9">
-							<!--begin::Symbol-->
-							<div class="symbol symbol-45 symbol-light mr-4">
-								<span class="symbol-label bg-white">
-									<span class="svg-icon svg-icon-2x">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
-										<i class="fas fa-chalkboard-teacher fa-2x text-dark-50"></i>
-										<!--end::Svg Icon-->
-									</span>
-								</span>
-							</div>
-							<!--end::Symbol-->
-							<!--begin::Text-->
-							<div class="d-flex flex-column flex-grow-1">
-								<a href="index.php?page=stafflist&level=0" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Teacher</a>
-								<span class="text-muted">Successful Fellas</span>
-							</div>
-							<!--end::Text-->
-							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalteacher"] ?></span>
-							<!--end::label-->
+						<!--end::Symbol-->
+						<!--begin::Text-->
+						<div class="d-flex flex-column flex-grow-1">
+							<a href="index.php?page=stafflist&level=1" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Staff</a>
+							<span class="text-muted">Good Fellas</span>
 						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="d-flex align-items-center pb-9">
-							<!--begin::Symbol-->
-							<div class="symbol symbol-45 symbol-light mr-4">
-								<span class="symbol-label bg-white">
-									<span class="svg-icon svg-icon-2x">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
-										<i class="fas fa-user-graduate fa-2x text-dark-50"></i>
-										<!--end::Svg Icon-->
-									</span>
-								</span>
-							</div>
-							<!--end::Symbol-->
-							<!--begin::Text-->
-							<div class="d-flex flex-column flex-grow-1">
-								<a href="index.php?page=studentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Students</a>
-								<span class="text-muted">Creative Fellas</span>
-							</div>
-							<!--end::Text-->
-							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light label-inline py-5 min-w-45px"><?= $_SESSION["totalstudent"] ?></span>
-							<!--end::label-->
-						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="d-flex align-items-center pb-9">
-							<!--begin::Symbol-->
-							<div class="symbol symbol-45 symbol-light mr-4">
-								<span class="symbol-label bg-white">
-									<span class="svg-icon svg-icon-2x">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-										<i class="fas fa-user-friends fa-2x text-dark-50"></i>
-										<!--end::Svg Icon-->
-									</span>
-								</span>
-							</div>
-							<!--end::Symbol-->
-							<!--begin::Text-->
-							<div class="d-flex flex-column flex-grow-1">
-								<a href="index.php?page=parentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Parent</a>
-								<span class="text-muted">Productive Fellas</span>
-							</div>
-							<!--end::Text-->
-							<!--begin::label-->
-							<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalparent"] ?></span>
-							<!--end::label-->
-						</div>
-						<!--end::Item-->
+						<!--end::Text-->
+						<!--begin::label-->
+						<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalstaff"] ?></span>
+						<!--end::label-->
 					</div>
+					<!--end::Item-->
+					<!--begin::Item-->
+					<div class="d-flex align-items-center pb-9">
+						<!--begin::Symbol-->
+						<div class="symbol symbol-45 symbol-light mr-4">
+							<span class="symbol-label bg-white">
+								<span class="svg-icon svg-icon-2x">
+									<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+									<i class="fas fa-chalkboard-teacher fa-2x text-dark-50"></i>
+									<!--end::Svg Icon-->
+								</span>
+							</span>
+						</div>
+						<!--end::Symbol-->
+						<!--begin::Text-->
+						<div class="d-flex flex-column flex-grow-1">
+							<a href="index.php?page=stafflist&level=0" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Teacher</a>
+							<span class="text-muted">Successful Fellas</span>
+						</div>
+						<!--end::Text-->
+						<!--begin::label-->
+						<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalteacher"] ?></span>
+						<!--end::label-->
+					</div>
+					<!--end::Item-->
+					<!--begin::Item-->
+					<div class="d-flex align-items-center pb-9">
+						<!--begin::Symbol-->
+						<div class="symbol symbol-45 symbol-light mr-4">
+							<span class="symbol-label bg-white">
+								<span class="svg-icon svg-icon-2x">
+									<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
+									<i class="fas fa-user-graduate fa-2x text-dark-50"></i>
+									<!--end::Svg Icon-->
+								</span>
+							</span>
+						</div>
+						<!--end::Symbol-->
+						<!--begin::Text-->
+						<div class="d-flex flex-column flex-grow-1">
+							<a href="index.php?page=studentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Students</a>
+							<span class="text-muted">Creative Fellas</span>
+						</div>
+						<!--end::Text-->
+						<!--begin::label-->
+						<span class="font-weight-bolder label label-xl label-light label-inline py-5 min-w-45px"><?= $_SESSION["totalstudent"] ?></span>
+						<!--end::label-->
+					</div>
+					<!--end::Item-->
+					<!--begin::Item-->
+					<div class="d-flex align-items-center pb-9">
+						<!--begin::Symbol-->
+						<div class="symbol symbol-45 symbol-light mr-4">
+							<span class="symbol-label bg-white">
+								<span class="svg-icon svg-icon-2x">
+									<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+									<i class="fas fa-user-friends fa-2x text-dark-50"></i>
+									<!--end::Svg Icon-->
+								</span>
+							</span>
+						</div>
+						<!--end::Symbol-->
+						<!--begin::Text-->
+						<div class="d-flex flex-column flex-grow-1">
+							<a href="index.php?page=parentlist" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Parent</a>
+							<span class="text-muted">Productive Fellas</span>
+						</div>
+						<!--end::Text-->
+						<!--begin::label-->
+						<span class="font-weight-bolder label label-xl label-light label-inline px-3 py-5 min-w-45px"><?= $_SESSION["totalparent"] ?></span>
+						<!--end::label-->
+					</div>
+					<!--end::Item-->
 					<!--end::Body-->
 				<!--end::Wrapper-->
 			</div>
@@ -476,9 +560,9 @@ section, .main {
 		</div>
 		<!--end::Mixed Widget 1-->
 	</div>
-	<div class="col-lg-6 col-xxl-4">
+	<div class="col-lg-6 col-xxl-4 all">
 		<!--begin::List Widget 9-->
-		<div class="card card-custom card-stretch gutter-b">
+		<div class="card card-custom card-stretch gutter-b view view-first">
 			<!--begin::Body-->
 			<div class="card-body d-flex flex-column">
 				<div class="text-center text-dark-50">
@@ -490,7 +574,7 @@ section, .main {
 						</div>
 						<div class="col-sm"></div>
 						<h1 class="mt-5">Coronavirus Cases :</h1>
-						<a class="h1 font-weight-boldest text-primary"><?= $cases_new1; ?></a>
+						<a class=" h1 font-weight-boldest text-primary"><?= $cases_new1; ?></a>
 
 						<h1 class="mt-10">Death :</h1>
 						<a class="h1 font-weight-boldest text-danger"><?= $deaths_new; ?></a>
@@ -499,44 +583,13 @@ section, .main {
 						<a class="h1 font-weight-boldest text-warning"><?= $cases_recovered1; ?></a>
 					</div>
 				</div>
-				<div class="text-dark-50 text-center m-1 mt-10"><h3>Cluster Covid19</h3></div>
-				<table class="table table-bordered table-sm text-center">
-					<tbody>
-						<tr class="bg-success text-white">
-							<td class="text-left">Date</td>
-							<td><?= $date1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster import</td>
-							<td><?= $cluster_import1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster religious</td>
-							<td><?= $cluster_religious1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster community</td>
-							<td><?= $cluster_community1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster high risk</td>
-							<td><?= $cluster_highRisk1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster education</td>
-							<td><?= $cluster_education1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster detention centre</td>
-							<td><?= $cluster_detentionCentre1; ?></td>
-						</tr>
-						<tr class="bg-white">
-							<td class="text-left">Cluster workplace</td>
-							<td><?= $cluster_workplace1; ?></td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
+			<form name="covid" action="index.php?page=covid" method="post">
+				<div class="mask bg-light">
+					<h2 class="text-dark-50 mt-5">Open data on COVID-19 in Malaysia</h2>
+					<div class="text-center m-5"><button class="btn btn-success btn-hover-light btn-sm btn-block" type="submit" name="covid">More Info</button></div>
+				</div>
+			</form>
 			<!--end::Body-->
 		</div>
 		<!--end: List Widget 9-->
