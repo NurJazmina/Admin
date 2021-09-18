@@ -233,7 +233,7 @@ if (isset($_POST['submit_date']))
                                 <textarea class="staff" name="remark"></textarea>
                                 <div class="mt-3 text-right">
                                     <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
-                                    <button type="submit" class="btn btn-light btn-hover-success btn-sm" name="add_remark">Add remark</button>
+                                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_remark">Add remark</button>
                                 </div>
                             </form>
                         </div>
@@ -342,7 +342,7 @@ if (isset($_POST['submit_date']))
                                                             <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                                             <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                                             <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                                            <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                                            <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -444,7 +444,7 @@ if (isset($_POST['submit_date']))
                                                     <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                                     <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                                     <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                                    <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                                    <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                                 </div>
                                                 </form>
                                             </div>
@@ -546,7 +546,7 @@ if (isset($_POST['submit_date']))
                                                         <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                                         <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                                         <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                                        <button type="button" class="btn btn-light btn-hover-success btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                                        <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                                         </div>
                                                     </form>
                                                 </div>
