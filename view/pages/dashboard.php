@@ -391,7 +391,7 @@ section, .main {
   transform: translateY(-100px);
   opacity: 0;
   font-family: Raleway, serif;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.8s ease-in-out;
 }
 
 .view-first p {
