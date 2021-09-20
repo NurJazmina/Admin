@@ -125,7 +125,7 @@ foreach ($cursor as $document)
                     ?>
                     <form name="detail" action="index.php?page=personal_calendar" method="post" class="m-2">
                         <input type="hidden" name="calendar_id" value="<?= $calendar_id; ?>">
-                        <button type="submit" class="btn btn-warning btn-hover-light btn-sm" name="detail"><?= $Title ?></button>
+                        <button type="submit" class="btn btn-outline-warning btn-sm btn-pill" name="detail"><?= $Title ?></button>
                     </form>
                     <?php
                 }
