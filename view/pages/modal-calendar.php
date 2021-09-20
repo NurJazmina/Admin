@@ -62,7 +62,7 @@
   </div>
 </form>
 
-<form name="delete_calendar" action="index.php?page=classroomlist" method="post">
+<form name="delete_calendar" action="index.php?page=personal_calendar" method="post">
   <div class="modal fade" id="delete_calendar">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">

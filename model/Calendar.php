@@ -1,4 +1,81 @@
 <?php
+if (isset($_POST['edit_calendar']))
+{
+    $consumer_id = $_SESSION["loggeduser_id"];
+    $calendar_id = $_POST['calendar_id'];
+    $title = $_POST['title'];
+    $detail = $_POST['detail'];
+    $venue = $_POST['venue'];
+    $color = $_POST['color'];
+    $date_start = $_POST['date_start'];
+    $date_end = $_POST['date_end'];
+
+    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+    $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($calendar_id)],
+                    ['$set' => 
+                    [
+                        'Title'=>$title,
+                        'Detail'=>$detail,
+                        'Venue'=>$venue,
+                        'Color'=>$color,
+                        'Date_start'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
+                        'Date_end'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_end))
+                    ]
+                    ]
+                );
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    try
+    {
+        $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Calendar', $bulk, $writeConcern);
+    }
+    catch (MongoDB\Driver\Exception\BulkWriteException $e)
+    {
+        $result = $e->getWriteResult();
+        // Check if the write concern could not be fulfilled
+        if ($writeConcernError = $result->getWriteConcernError())
+        {
+            printf("%s (%d): %s\n",
+                $writeConcernError->getMessage(),
+                $writeConcernError->getCode(),
+                var_export($writeConcernError->getInfo(), true)
+            );
+        }
+        // Check if any write operations did not complete at all
+        foreach ($result->getWriteErrors() as $writeError)
+        {
+            printf("Operation#%d: %s (%d)\n",
+                $writeError->getIndex(),
+                $writeError->getMessage(),
+                $writeError->getCode()
+            );
+        }
+    }
+    catch (MongoDB\Driver\Exception\Exception $e)
+    {
+        printf("Other error: %s\n", $e->getMessage());
+        exit;
+    }
+    printf("Matched: %d\n", $result->getMatchedCount());
+    printf("Updated  %d document(s)\n", $result->getModifiedCount());
+}
+
+
+if (isset($_POST['delete_calendar']))
+{
+    $calendar_id = $_POST['calendar_id'];
+    $password = $_POST['password'];
+    $password_hash = $_SESSION["loggeduser_ConsumerPassword"];
+
+    if (password_verify($password, $password_hash))
+    {
+        //database calendar
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($calendar_id)],['limit' => 1]);
+        $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+        $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Calendar', $bulk, $writeConcern);
+    }
+}
+
 class Calendar {
 
     private $active_year, $active_month, $active_day;
@@ -121,82 +198,4 @@ if (isset($_POST['add_calendar']))
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
 }
-
-if (isset($_POST['edit_calendar']))
-{
-    $consumer_id = $_SESSION["loggeduser_id"];
-    $calendar_id = $_POST['calendar_id'];
-    $title = $_POST['title'];
-    $detail = $_POST['detail'];
-    $venue = $_POST['venue'];
-    $color = $_POST['color'];
-    $date_start = $_POST['date_start'];
-    $date_end = $_POST['date_end'];
-
-    $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-    $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($calendar_id)],
-                    ['$set' => 
-                    [
-                        'Title'=>$title,
-                        'Detail'=>$detail,
-                        'Venue'=>$venue,
-                        'Color'=>$color,
-                        'Date_start'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
-                        'Date_end'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_end))
-                    ]
-                    ]
-                );
-    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-    try
-    {
-        $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Calendar', $bulk, $writeConcern);
-    }
-    catch (MongoDB\Driver\Exception\BulkWriteException $e)
-    {
-        $result = $e->getWriteResult();
-        // Check if the write concern could not be fulfilled
-        if ($writeConcernError = $result->getWriteConcernError())
-        {
-            printf("%s (%d): %s\n",
-                $writeConcernError->getMessage(),
-                $writeConcernError->getCode(),
-                var_export($writeConcernError->getInfo(), true)
-            );
-        }
-        // Check if any write operations did not complete at all
-        foreach ($result->getWriteErrors() as $writeError)
-        {
-            printf("Operation#%d: %s (%d)\n",
-                $writeError->getIndex(),
-                $writeError->getMessage(),
-                $writeError->getCode()
-            );
-        }
-    }
-    catch (MongoDB\Driver\Exception\Exception $e)
-    {
-        printf("Other error: %s\n", $e->getMessage());
-        exit;
-    }
-    printf("Matched: %d\n", $result->getMatchedCount());
-    printf("Updated  %d document(s)\n", $result->getModifiedCount());
-}
-
-
-if (isset($_POST['delete_calendar']))
-{
-    $calendar_id = $_POST['calendar_id'];
-    $password = $_POST['password'];
-    $password_hash = $_SESSION["loggeduser_ConsumerPassword"];
-
-    if (password_verify($password, $password_hash))
-    {
-        //database calendar
-        $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->delete(['_id'=>new \MongoDB\BSON\ObjectID($calendar_id)],['limit' => 1]);
-        $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-        $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Calendar', $bulk, $writeConcern);
-    }
-}
-
 ?>
