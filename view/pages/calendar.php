@@ -1,7 +1,6 @@
-
 <style src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"></style>
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 html { height: 100%; }
 *,*:after,*:before {
@@ -17,6 +16,7 @@ html { height: 100%; }
 }
 .clearfix:after { clear: both;}
 .clearfix {    *zoom: 1;}
+
 body {
   font-family: 'Lato', Calibri, Arial, sans-serif;
   background-image: url(https://goo.gl/XZ7Kr7);
@@ -328,18 +328,18 @@ section, .main {
 	.fc-calendar1 .fc-row > div > span.fc-date {		font-size: 15px;	}
 }
 </style>
-	<div class="main">
-		<div class="custom-calendar1-wrap">
-			<div id="custom-inner" class="custom-inner">
-				<div class="custom-header clearfix">
-					<nav>
-						<span id="custom-prev" class="custom-prev"></span>
-						<span id="custom-next" class="custom-next"></span>
-					</nav>
-					<h2 id="custom-month" class="custom-month"></h2>
-					<h3 id="custom-year" class="custom-year"></h3>
-				</div>
-				<div id="calendar1" class="fc-calendar1-container"></div>
+<div class="main">
+	<div class="custom-calendar1-wrap">
+		<div id="custom-inner" class="custom-inner">
+			<div class="custom-header clearfix">
+				<nav>
+					<span id="custom-prev" class="custom-prev"></span>
+					<span id="custom-next" class="custom-next"></span>
+				</nav>
+				<h2 id="custom-month" class="custom-month"></h2>
+				<h3 id="custom-year" class="custom-year"></h3>
 			</div>
+			<div id="calendar1" class="fc-calendar1-container"></div>
 		</div>
 	</div>
+</div>

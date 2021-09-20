@@ -1,0 +1,90 @@
+.calendar2 {
+    display: flex;
+    flex-flow: column;
+}
+.calendar2 .days {
+    display: flex;
+    flex-flow: wrap;
+}
+.calendar2 .days .day_name {
+    width: calc(100% / 7);
+    border-top: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    border-left: 1px solid #e6e9ea;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    color: #b4b4b4;
+    background-color: #ffff;
+
+}
+.calendar2 .days {
+    border-right: 1px solid #e6e9ea;
+}
+.calendar2 .days .day_num {
+    display: flex;
+    flex-flow: column;
+    width: calc(100% / 7);
+    border-left: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    padding: 15px;
+    color: #3699ff;
+    cursor: pointer;
+    min-height: 100px;
+}
+.calendar2 .days .day_num span {
+    display: inline-flex;
+    width: 30px;
+    font-size: 12px;
+}
+
+.calendar2 .days .day_num .event {
+    margin-top: 5px;
+    padding: 3px;
+    text-align: center;
+    border-radius: 2rem;
+    background-color: #eec319;
+    color: #fff;
+    word-wrap: break-word;
+}
+
+.calendar2 .days .day_num .event.green {
+    background-color: #09a04d;
+}
+.calendar2 .days .day_num .event.blue {
+    background-color: #2380dd;
+}
+.calendar2 .days .day_num .event.red {
+    background-color: #e23323;
+}
+.calendar2 .days .day_num .event.mint {
+    background-color: #3c8d7d;
+}
+.calendar2 .days .day_num .event.indigo {
+    background-color: #943bbb;
+}
+.calendar2 .days .day_num .event.frozen {
+    /* fallback for old browsers */
+    background: #9b2d81;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(201, 78, 172, 0.5), rgba(230, 222, 233, 0.5));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(187, 70, 160, 0.5), rgba(230, 222, 233, 0.5))
+}
+
+.calendar2 .days .day_num:hover {
+    background-color: #fdfdfd;
+}
+.calendar2 .days .day_num.ignore {
+    background-color: #fdfdfd;
+    color: #b4b4b4;
+    font-size: 12px;
+    cursor: inherit;
+}
+.calendar2 .days .day_num.selected {
+    background-color: #f1f2f3;
+    cursor: inherit;
+}

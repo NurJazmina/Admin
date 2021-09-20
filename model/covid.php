@@ -512,7 +512,7 @@ if (($h = fopen("{$tests_state}", "r")) !== FALSE)
 	$Date = $from_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     $Date = date_format($Date,"Y-m-d");
 
-	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -3 day'))->getTimestamp()*1000);
+	$from_date1 = new MongoDB\BSON\UTCDateTime((new DateTime('now -4 day'))->getTimestamp()*1000);
 	$Date1 = $from_date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     $Date1 = date_format($Date1,"Y-m-d");
 
@@ -736,8 +736,8 @@ if (($h = fopen("{$tests_state}", "r")) !== FALSE)
             }
             elseif($row[1] == 'Sabah')
             {
-                $state_rtk_ag_Johor = 'out-of-date';
-                $state_pcr_Johor = 'out-of-date';
+                $state_rtk_ag_Sabah = 'out-of-date';
+                $state_pcr_Sabah = 'out-of-date';
             }
             elseif($row[1] == 'Sarawak')
             {

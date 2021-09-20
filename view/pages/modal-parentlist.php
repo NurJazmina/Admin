@@ -1,4 +1,4 @@
-<form id="AddParentFormSubmit" name="AddParentFormSubmit" action="index.php?page=modal-recheckparentlist" method="post">
+<form name="AddParentFormSubmit" action="index.php?page=modal-recheckparentlist" method="post">
   <div class="modal fade" id="recheckaddparent" tabindex="-1" aria-labelledby="AddParentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -42,7 +42,7 @@
   </div>
 </form>
 
-<form id="EditParentFormSubmit" name="EditParentFormSubmit" action="index.php?page=parentlist" method="post">
+<form name="EditParentFormSubmit" action="index.php?page=parentlist" method="post">
   <div class="modal fade" id="RecheckEditParent" tabindex="-1" aria-labelledby="EditParentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -73,7 +73,7 @@
 </div>
 </form>
 
-<br><br><form name="StatusParentFormSubmit" action="index.php?page=parentlist" method="post">
+<form action="index.php?page=parentlist" method="post">
   <div class="modal fade" id="StatusParentModal" tabindex="-1" aria-labelledby="StatusParentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">

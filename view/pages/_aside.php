@@ -5,7 +5,6 @@
 		<!--begin::Logo-->
 		<a href="index.php?page=dashboard" class="brand-logo">
 			<img alt="Logo" src="assets/media/logos/gongetz2.png" width="150" height="150"/>
-
 		</a>
 		<!--end::Logo-->
 		<!--begin::Toggle-->
@@ -486,7 +485,7 @@
 					</a>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true" >
-					<a href="index.php?page=ol_calendar" class="menu-link">
+					<a href="index.php?page=personal_calendar" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<i class="flaticon2-calendar-4 icon-md"></i>
 						</span>

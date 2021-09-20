@@ -149,9 +149,9 @@ include ('model/quiz.php');
             $Description = $document->Description;
             ?>
             <!--begin::Heading-->
-            <h2 class="text-dark font-weight-bolder mb-8"><?php echo $Title;?></h2>
+            <h2 class="text-dark font-weight-bolder mb-8"><?= $Title;?></h2>
             <!--end::Heading-->
-            <div class="input-group shadow-sm py-5 px-5"><a align="justify"><?php echo $Description;?></a></div>
+            <div class="input-group shadow-sm py-5 px-5"><a align="justify"><?= $Description;?></a></div>
             <?php
         }
         ?>

@@ -547,6 +547,42 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
+    if ($_GET['page']=="personal_calendar") 
+    {
+      ?>
+      <script>
+      var edit_calendar = document.getElementById('edit_calendar')
+      edit_calendar.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = edit_calendar.querySelector('.modal-title')
+      var modalBodyInput = edit_calendar.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+
+      var delete_calendar = document.getElementById('delete_calendar')
+      delete_calendar.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      var recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      var modalTitle = delete_calendar.querySelector('.modal-title')
+      var modalBodyInput = delete_calendar.querySelector('.modal-body input')
+      modalBodyInput.value = recipient
+      })
+      </script>
+      <?php
+    }
     if ($_GET['page']=="change-password") 
     {
       ?>
@@ -651,45 +687,45 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       }
       if ($_GET['page']=="ol_submit_assignment") 
       {
-      ?>
-      <script>
-      var EditGrade = document.getElementById('EditGrade')
-      EditGrade.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = EditGrade.querySelector('.modal-title')
-      var modalBodyInput = EditGrade.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      })
-      </script>
-      <?php
+        ?>
+        <script>
+        var EditGrade = document.getElementById('EditGrade')
+        EditGrade.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var recipient = button.getAttribute('data-bs-whatever')
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        var modalTitle = EditGrade.querySelector('.modal-title')
+        var modalBodyInput = EditGrade.querySelector('.modal-body input')
+        modalBodyInput.value = recipient
+        })
+        </script>
+        <?php
       }
       if ($_GET['page']=="ol_submit_quiz") 
       {
-      ?>
-      <script>
-      var EditCommentQuiz = document.getElementById('EditCommentQuiz')
-      EditCommentQuiz.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
-      var button = event.relatedTarget
-      // Extract info from data-bs-* attributes
-      var recipient = button.getAttribute('data-bs-whatever')
-      // If necessary, you could initiate an AJAX request here
-      // and then do the updating in a callback.
-      //
-      // Update the modal's content.
-      var modalTitle = EditCommentQuiz.querySelector('.modal-title')
-      var modalBodyInput = EditCommentQuiz.querySelector('.modal-body input')
-      modalBodyInput.value = recipient
-      })
-      </script>
-      <?php
+        ?>
+        <script>
+        var EditCommentQuiz = document.getElementById('EditCommentQuiz')
+        EditCommentQuiz.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var recipient = button.getAttribute('data-bs-whatever')
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        var modalTitle = EditCommentQuiz.querySelector('.modal-title')
+        var modalBodyInput = EditCommentQuiz.querySelector('.modal-body input')
+        modalBodyInput.value = recipient
+        })
+        </script>
+        <?php
       }
 }
 ?>

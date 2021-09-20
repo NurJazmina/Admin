@@ -48,6 +48,8 @@
                                 "staff_attendance",
                                 "mail",
                                 "covid",
+                                "personal_calendar",
+                                "calendar",
 
                                 "addrelationstudentforstudent",
                                 "addrelationforstudent",
@@ -106,12 +108,12 @@
                                 
                                 //"department_attendance",
                                 "class_attendance",
+                                "personal_calendar",
                                 "mail",
                                 "covid",
 
                                 //online learning//
                                 "ol_dashboard",
-                                "ol_calendar",
                                 "ol_modal-recheckquiz",
                                 "ol_addannouncement",
                                 "ol_addglossary",
@@ -187,10 +189,10 @@
                                 //"class_attendance",
                                 //"mail",
                                 "covid",
+                                "personal_calendar",
 
                                 //online learning//
                                 "ol_dashboard",
-                                "ol_calendar",
                                 "ol_modal-recheckquiz",
                                 "ol_addannouncement",
                                 "ol_addglossary",
