@@ -49,6 +49,7 @@
                                 "mail",
                                 "covid",
                                 "personal_calendar",
+                                "calendar",
 
                                 "addrelationstudentforstudent",
                                 "addrelationforstudent",

@@ -1,7 +1,6 @@
-
 <style src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"></style>
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 html { height: 100%; }
 *,*:after,*:before {
@@ -17,6 +16,7 @@ html { height: 100%; }
 }
 .clearfix:after { clear: both;}
 .clearfix {    *zoom: 1;}
+
 body {
   font-family: 'Lato', Calibri, Arial, sans-serif;
   background-image: url(https://goo.gl/XZ7Kr7);

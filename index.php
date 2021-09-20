@@ -237,6 +237,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
+		<script src='assets/js/main.js'></script>
+		<script src="assets/js/todo.js" defer></script>
+		<script src="assets/js/calendar.js" defer></script>
+
 		<?php
 		include 'resources/default.php';
 		if (isset($_GET['attendance']) && !empty($_GET['attendance']))
