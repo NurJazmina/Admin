@@ -3,7 +3,6 @@ include ('model/testing.php');
 $filter = ['school_id'=>$_SESSION["loggeduser_school_id"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.testing',$query);
-
 foreach ($cursor as $document)
 {
     $varid = $document->_id;

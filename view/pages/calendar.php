@@ -328,18 +328,18 @@ section, .main {
 	.fc-calendar1 .fc-row > div > span.fc-date {		font-size: 15px;	}
 }
 </style>
-	<div class="main">
-		<div class="custom-calendar1-wrap">
-			<div id="custom-inner" class="custom-inner">
-				<div class="custom-header clearfix">
-					<nav>
-						<span id="custom-prev" class="custom-prev"></span>
-						<span id="custom-next" class="custom-next"></span>
-					</nav>
-					<h2 id="custom-month" class="custom-month"></h2>
-					<h3 id="custom-year" class="custom-year"></h3>
-				</div>
-				<div id="calendar1" class="fc-calendar1-container"></div>
+<div class="main">
+	<div class="custom-calendar1-wrap">
+		<div id="custom-inner" class="custom-inner">
+			<div class="custom-header clearfix">
+				<nav>
+					<span id="custom-prev" class="custom-prev"></span>
+					<span id="custom-next" class="custom-next"></span>
+				</nav>
+				<h2 id="custom-month" class="custom-month"></h2>
+				<h3 id="custom-year" class="custom-year"></h3>
 			</div>
+			<div id="calendar1" class="fc-calendar1-container"></div>
 		</div>
 	</div>
+</div>

@@ -172,7 +172,7 @@
                   <td><?= $totalstudent; ?></td>
                   <td>
                     <button class="btn">
-                      <a class="text-dark-50 text-hover-success font-weight-bold" href="index.php?page=classattendance&id=<?= $class_id; ?>">
+                      <a class="text-dark-50 text-hover-success font-weight-bold" href="index.php?page=class_attendance&id=<?= $class_id; ?>">
                         <i class="flaticon2-list-2 icon-md text-hover-success"></i>
                       </a>
                     </button>
