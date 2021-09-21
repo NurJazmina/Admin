@@ -184,7 +184,7 @@ foreach ($cursor as $document)
     $diff = date_diff($date1,$date2);
     $diff = $diff->format("%a");
 
-    $calendar->add_event(mb_strimwidth($Title, 0,9, ".."), $Date_start,$diff + 1,'success', $calendar_id);
+    $calendar->add_event(mb_strimwidth($Title, 0,9, ".."), $Date_start,$diff + 1, $calendar_id);
 }
 
 class Calendar {
@@ -198,9 +198,9 @@ class Calendar {
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
     }
 
-    public function add_event($txt, $date, $days = 1, $color = '', $id) {
-        $color = $color ? ' ' . $color : $color;
-        $this->events[] = [$txt, $date, $days,$color,$id];
+    public function add_event($txt, $date, $days = 1, $id) {
+        //$color = $color ? ' ' . $color : $color;
+        $this->events[] = [$txt, $date, $days, $id];
     }
 
     public function __toString() {
@@ -236,7 +236,7 @@ class Calendar {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
                         $html .= '<div>';
                         $html .= '<form name="detail" action="index.php?page=personal_calendar&paging=0" method="post">';
-                        $html .= '<input type="hidden" name="calendar_id" value="' . $event[4] . '">';
+                        $html .= '<input type="hidden" name="calendar_id" value="' . $event[3] . '">';
                         $html .= '<button type="submit" class="btn btn-success btn-hover-light btn-sm btn-pill" name="detail">';
                         $html .= $event[0];
                         $html .= '</button></form></div>';
