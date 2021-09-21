@@ -153,8 +153,8 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       })
       
       $(document).ready(function () {
-          $("#staffattendance").table2excel({
-              filename: "Staffattendance.xls"
+          $("#staff_attendance").table2excel({
+              filename: "staff_attendance.xls"
           });
       });
       </script>

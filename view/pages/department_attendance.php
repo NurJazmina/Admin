@@ -55,7 +55,7 @@ border-color:#ffff;
                                 $DepartmentName = ($document->DepartmentName);
                                 ?>
                                 <li class="dropdown-item">
-                                    <a href="index.php?page=departmentattendance&id=<?= $Departmentid; ?>" class="navi-link"><?= $DepartmentName; ?></a>
+                                    <a href="index.php?page=department_attendance&id=<?= $Departmentid; ?>" class="navi-link"><?= $DepartmentName; ?></a>
                                 </li>
                                 <?php 
                             } 
@@ -107,7 +107,7 @@ if (isset($_POST['submit_date']))
 <div class="text-dark-50 text-center"><h1>Department - Attendance</h1></div>
 <div class="card">
     <div class="card-body table-responsive">
-        <form name="submit_date" action="index.php?page=departmentattendance&id=<?= $department_id; ?>" method="post">
+        <form name="submit_date" action="index.php?page=department_attendance&id=<?= $department_id; ?>" method="post">
             <div class="row mb-3">
                 <div class="col text-right">
                     <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 

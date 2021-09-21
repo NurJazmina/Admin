@@ -156,17 +156,17 @@ $(document).ready(function() {
       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
       {
         ?>
-        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1"><a class="text-white" href="index.php?page=class_attendance" target="_blank">ATTENDANCE</a></button>
-        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
+        <button type="button" class="btn btn-success btn-sm mr-1"><a class="text-white" href="index.php?page=class_attendance" target="_blank">ATTENDANCE</a></button>
+        <button type="button" class="btn btn-success btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
         <input  type="text" class="form-control form-control-sm mr-1" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-        <button type="submit" class="btn btn-success btn-hover-light btn-sm mr-1" name="search_student">Search</button>
+        <button type="submit" class="btn btn-success btn-sm mr-1" name="search_student">Search</button>
         <?php
       } 
       else
       {
         ?>
         <input  type="text" class="form-control form-control-sm mr-1" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-        <button type="submit" class="btn btn-success btn-hover-light btn-sm mr-1" name="search_student">Search</button>
+        <button type="submit" class="btn btn-success btn-sm mr-1" name="search_student">Search</button>
         <?php
       }
         ?>

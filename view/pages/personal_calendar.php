@@ -59,9 +59,9 @@ include 'model/Calendar.php';
             <div class="modal-header text-dark-50">
                 <h3>Calendar</h3>
                 <div>
-                <a href="index.php?page=personal_calendar&paging=<?= $previous;?>" class="btn btn-light btn-hover-success btn-sm"><i class="flaticon2-left-arrow icon-md"></i></a>
-                    <a href="index.php?page=personal_calendar&paging=<?= $next;?>" class="btn btn-light btn-hover-success btn-sm"><i class="flaticon2-right-arrow icon-md"></i></a>
-                    <a href="index.php?page=personal_calendar&paging=0" class="btn btn-light btn-hover-success btn-sm">Today</a>
+                <a href="index.php?page=personal_calendar&paging=<?= $previous;?>" class="btn btn-success btn-hover-light btn-sm"><i class="flaticon2-left-arrow icon-md"></i></a>
+                    <a href="index.php?page=personal_calendar&paging=<?= $next;?>" class="btn btn-success btn-hover-light btn-sm"><i class="flaticon2-right-arrow icon-md"></i></a>
+                    <a href="index.php?page=personal_calendar&paging=0" class="btn btn-success btn-hover-light btn-sm">Today</a>
                 </div>
             </div>
             <div class="card-body">
@@ -91,7 +91,7 @@ include 'model/Calendar.php';
                     ?>
                     <form name="detail" action="index.php?page=personal_calendar&paging=0" method="post" class="m-2">
                         <input type="hidden" name="calendar_id" value="<?= $calendar_id; ?>">
-                        <button type="submit" class="btn btn-outline-warning btn-sm btn-pill" name="detail"><?= $Title ?></button>
+                        <button type="submit" class="btn btn-outline-success btn-sm btn-pill" name="detail"><?= $Title ?></button>
                     </form>
                     <?php
                 }

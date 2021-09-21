@@ -53,7 +53,7 @@ border-color:#ffff;
                             $ClassCategory = $document->ClassCategory;
                             ?>
                             <li class="dropdown-item">
-                                <a href="index.php?page=classattendance&id=<?= $classid; ?>" class="navi-link">
+                                <a href="index.php?page=class_attendance&id=<?= $classid; ?>" class="navi-link">
                                     <?= $ClassCategory." ".$ClassName; ?>
                                 </a>
                             </li>
@@ -96,7 +96,7 @@ border-color:#ffff;
             if (!isset($_GET['id']) && empty($_GET['id']))
             {
                 ?>
-                <form name="submit_date" action="index.php?page=classattendance" method="post">
+                <form name="submit_date" action="index.php?page=class_attendance" method="post">
                     <div class="row mb-3">
                         <div class="col text-right">
                             <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
@@ -183,7 +183,7 @@ border-color:#ffff;
             else
             {
                 ?>
-                <form name="submit_date" action="index.php?page=classattendance&id=<?= $_GET['id']; ?>" method="post">
+                <form name="submit_date" action="index.php?page=class_attendance&id=<?= $_GET['id']; ?>" method="post">
                     <div class="row mb-3">
                         <div class="col text-right">
                             <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
