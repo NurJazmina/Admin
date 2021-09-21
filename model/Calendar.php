@@ -5,7 +5,6 @@ if (isset($_POST['add_calendar']))
   $title = $_POST['title'];
   $detail = $_POST['detail'];
   $venue = $_POST['venue'];
-  $color = $_POST['color'];
   $date_start = $_POST['date_start'];
   $date_end = $_POST['date_end'];
 
@@ -15,7 +14,6 @@ if (isset($_POST['add_calendar']))
                 'Title'=> $title,
                 'Detail'=>$detail,
                 'Venue'=> $venue,
-                'Color'=>$color,
                 'Date_start'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
                 'Date_end'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_end)),
                 ]);
@@ -61,7 +59,6 @@ if (isset($_POST['edit_calendar']))
     $title = $_POST['title'];
     $detail = $_POST['detail'];
     $venue = $_POST['venue'];
-    $color = $_POST['color'];
     $date_start = $_POST['date_start'];
     $date_end = $_POST['date_end'];
 
@@ -72,7 +69,6 @@ if (isset($_POST['edit_calendar']))
                         'Title'=>$title,
                         'Detail'=>$detail,
                         'Venue'=>$venue,
-                        'Color'=>$color,
                         'Date_start'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
                         'Date_end'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_end))
                     ]
@@ -131,74 +127,6 @@ if (isset($_POST['delete_calendar']))
     }
 }
 
-class Calendar {
-
-    private $active_year, $active_month, $active_day;
-    private $events = [];
-
-    public function __construct($date = null) {
-        $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
-        $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
-        $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
-    }
-
-    public function add_event($txt, $date, $days = 1, $color = '') {
-        $color = $color ? ' ' . $color : $color;
-        $this->events[] = [$txt, $date, $days, $color];
-    }
-
-    public function __toString() {
-        $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
-        $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
-        $days = [0 => 'Sun', 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu', 5 => 'Fri', 6 => 'Sat'];
-        $first_day_of_week = array_search(date('D', strtotime($this->active_year . '-' . $this->active_month . '-1')), $days);
-        $html = '<div class="calendar2">';
-        $html .= '<div class="days">';
-        foreach ($days as $day) {
-            $html .= '
-                <div class="day_name">
-                    ' . $day . '
-                </div>
-            ';
-        }
-        for ($i = $first_day_of_week; $i > 0; $i--) {
-            $html .= '
-                <div class="day_num ignore">
-                    ' . ($num_days_last_month-$i+1) . '
-                </div>
-            ';
-        }
-        for ($i = 1; $i <= $num_days; $i++) {
-            $selected = '';
-            if ($i == $this->active_day) {
-                $selected = ' selected';
-            }
-            $html .= '<div class="day_num' . $selected . '">';
-            $html .= '<span>' . $i . '</span>';
-            foreach ($this->events as $event) {
-                for ($d = 0; $d <= ($event[2]-1); $d++) {
-                    if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
-                        $html .= '<div class="event' . $event[3] . '">';
-                        $html .= $event[0];
-                        $html .= '</div>';
-                    }
-                }
-            }
-            $html .= '</div>';
-        }
-        for ($i = 1; $i <= (42-$num_days-max($first_day_of_week, 0)); $i++) {
-            $html .= '
-                <div class="day_num ignore">
-                    ' . $i . '
-                </div>
-            ';
-        }
-        $html .= '</div>';
-        $html .= '</div>';
-        return $html;
-    }
-}
-
 if (isset($_GET['paging']) && !empty($_GET['paging']))
 {
     $next = $_GET['paging']+1;
@@ -237,7 +165,6 @@ foreach ($cursor as $document)
 {
     $calendar_id = strval($document->_id);
     $Title = $document->Title;
-    $Color = $document->Color;
     $Date_start = strval($document->Date_start);
     $Date_end = strval($document->Date_end);
 
@@ -257,6 +184,84 @@ foreach ($cursor as $document)
     $diff = date_diff($date1,$date2);
     $diff = $diff->format("%a");
 
-    $calendar->add_event(mb_strimwidth($Title, 0,9, ".."), $Date_start,$diff + 1, $Color);
+    $calendar->add_event(mb_strimwidth($Title, 0,9, ".."), $Date_start,$diff + 1, $calendar_id);
+}
+
+class Calendar {
+
+    private $active_year, $active_month, $active_day;
+    private $events = [];
+
+    public function __construct($date = null) {
+        $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
+        $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
+        $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
+    }
+
+    public function add_event($txt, $date, $days = 1, $id) {
+        // $color = $color ? ' ' . $color : $color;
+        $this->events[] = [$txt, $date, $days, $id];
+    }
+
+    public function __toString() {
+        $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
+        $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
+        $days = [0 => 'Sun', 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu', 5 => 'Fri', 6 => 'Sat'];
+        $first_day_of_week = array_search(date('D', strtotime($this->active_year . '-' . $this->active_month . '-1')), $days);
+        $html = '<div class="calendar2">';
+        $html .= '<div class="days">';
+        foreach ($days as $day) {
+            $html .= '
+                <div class="day_name">
+                    ' . $day . '
+                </div>
+            ';
+        }
+        for ($i = $first_day_of_week; $i > 0; $i--) {
+            $html .= '
+                <div class="day_num ignore">
+                    ' . ($num_days_last_month-$i+1) . '
+                </div>
+            ';
+        } 
+        ?>
+        <!-- <form name="detail" action="index.php?page=personal_calendar&paging=0" method="post">
+            <input type="hidden" name="calendar_id" value="<?= $calendar_id; ?>">
+            <button type="submit" class="btn btn-outline-success btn-sm btn-pill" name="detail"><?= $Title ?></button>
+        </form> 
+        $html .= '<div class="event' . $event[3] . '">';-->
+        <?php
+        for ($i = 1; $i <= $num_days; $i++) {
+            $selected = '';
+            if ($i == $this->active_day) {
+                $selected = ' selected';
+            }
+            $html .= '<div class="day_num' . $selected . '">';
+            $html .= '<span>' . $i . '</span>';
+            foreach ($this->events as $event) {
+                for ($d = 0; $d <= ($event[2]-1); $d++) {
+                    if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
+                        $html .= '<div>';
+                        $html .= '<form name="detail" action="index.php?page=personal_calendar&paging=0" method="post">';
+                        $html .= '<input type="hidden" name="calendar_id" value="' . $event[3] . '">';
+                        $html .= '<button type="submit" class="btn btn-success btn-hover-light btn-sm btn-pill" name="detail">';
+                        $html .= $event[0];
+                        $html .= '</button></form></div>';
+                    }
+                }
+            }
+            $html .= '</div>';
+        }
+        for ($i = 1; $i <= (42-$num_days-max($first_day_of_week, 0)); $i++) {
+            $html .= '
+                <div class="day_num ignore">
+                    ' . $i . '
+                </div>
+            ';
+        }
+        $html .= '</div>';
+        $html .= '</div>';
+        return $html;
+    }
 }
 ?>

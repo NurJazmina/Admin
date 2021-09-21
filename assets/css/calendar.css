@@ -52,16 +52,19 @@
 .calendar2 .days .day_num .event.green {
     background-color: #28a745;
 }
-.calendar2 .days .day_num .event.blue {
+.calendar2 .days .day_num .event.dark {
+    background-color: #7E8299;
+}
+.calendar2 .days .day_num .event.primary {
     background-color: #007bff;
 }
-.calendar2 .days .day_num .event.red {
+.calendar2 .days .day_num .event.danger {
     background-color: #dc3545;
 }
-.calendar2 .days .day_num .event.mint {
-    background-color: #20c997;
+.calendar2 .days .day_num .event.success {
+    background-color: #1BC5BD;
 }
-.calendar2 .days .day_num .event.indigo {
+.calendar2 .days .day_num .event.info {
     background-color: #8950FC;
 }
 .calendar2 .days .day_num .event.frozen {

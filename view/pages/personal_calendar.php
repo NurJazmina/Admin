@@ -24,18 +24,18 @@ include 'model/Calendar.php';
                         <label>Venue <span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-sm" name="venue" placeholder="Location" required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Color</label>
                         <select class="form-control form-control-sm" name="color" required>
-                            <option value="yellow" selected>Yellow</option>
+                            <option value="warning" selected>Yellow</option>
                             <option value="green">Green</option>
-                            <option value="blue">Blue</option>
-                            <option value="red">Red</option>
-                            <option value="red">Mint</option>
-                            <option value="indigo">Indigo</option>
+                            <option value="primary">Blue</option>
+                            <option value="danger">Red</option>
+                            <option value="success">Mint</option>
+                            <option value="info">Indigo</option>
                             <option value="frozen">Frozen</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label>Start</label>
                         <input type="datetime-local" class="form-control form-control-sm" name="date_start" placeholder="Select date" value="<?= $default_date; ?>" required>
@@ -111,7 +111,6 @@ include 'model/Calendar.php';
                         $Title = $document->Title;
                         $Detail = $document->Detail;
                         $Venue = $document->Venue;
-                        $Color = $document->Color;
                         $Date_start = strval($document->Date_start);
                         $Date_end = strval($document->Date_end);
     
