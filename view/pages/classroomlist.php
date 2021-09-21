@@ -1,38 +1,35 @@
 <?php include ('model/classroomlist.php'); ?>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-  <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-    <!--begin::Info-->
-    <div class="d-flex align-items-center flex-wrap mr-1">
-      <!--begin::Page Heading-->
-      <div class="d-flex align-items-baseline flex-wrap mr-5">
-        <!--begin::Page Title-->
-        <h5 class="text-dark font-weight-bold my-1 mr-5">Classroom</h5>
-        <!--end::Page Title-->
-      </div>
-      <!--end::Page Heading-->
-    </div>
-    <!--end::Info-->
+	<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+		<!--begin::Info-->
+		<div class="d-flex align-items-center flex-wrap mr-2">
+			<!--begin::Page Title-->
+			<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Classroom</h5>
+			<!--end::Page Title-->
+			<!--begin::Action-->
+			<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+			<span class="text-muted font-weight-bold mr-4"></span>
+			<!-- <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Add New</a> -->
+			<!--end::Action-->
+		</div>
+		<!--end::Info-->
     <!--begin::Toolbar-->
-    <div class="d-flex align-items-center">
-      <form name="searchclass" class="form-inline" action="index.php?page=classroomlist" method="post">
-        <div class="text-right">
-          <?php 
-          if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-          {
-            ?>
-            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=classattendance" target="_blank">ATTENDANCE</a></button>
-            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_class">Add</button>
-            <input  type="text" class="form-control form-control-sm" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
-            <button type="submit" class="btn btn-success btn-sm" name="searchclass">Search</button>
-            <?php
-          }
-          ?>
-        </div>
-      </form>
-    </div>
+    <form class="d-flex" name="searchclass" action="index.php?page=classroomlist" method="post">
+      <?php 
+      if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+      {
+        ?>
+        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1"><a class="text-white" href="index.php?page=classattendance" target="_blank">ATTENDANCE</a></button>
+        <button type="button" class="btn btn-success btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#add_class">Add</button>
+        <input  type="text" class="form-control form-control-sm mr-1" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
+        <button type="submit" class="btn btn-success btn-sm mr-1" name="searchclass">Search</button>
+        <?php
+      }
+      ?>
+    </form>
     <!--end::Toolbar-->
-  </div>
+	</div>
 </div>
 <!--end::Subheader-->
 <div class="row">

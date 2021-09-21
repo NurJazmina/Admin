@@ -92,30 +92,26 @@ $("#Date").click(function() {
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
-    <div class="d-flex align-items-center">
-      <form name="search_staff" class="form-inline" action="index.php?page=stafflist" method="post">
-        <div class="text-right">
-          <?php 
-          if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-          {
-            ?>
-            <button type="button" class="btn btn-success btn-hover-light btn-sm"><a class="text-white" href="index.php?page=staff_attendance" target="_blank">ATTENDANCE</a></button>
-            <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_staff">Add</button>
-            <input  type="text" class="form-control form-control-sm" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_staff">Search</button>
-            <?php
-          } 
-          else
-          {
-            ?>
-            <input  type="text" class="form-control form-control-sm" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_staff">Search</button>
-            <?php
-          }
-          ?>
-        </div>
-      </form>
-    </div>
+    <form class="d-flex"name="search_staff" action="index.php?page=stafflist" method="post">
+      <?php 
+      if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+      {
+        ?>
+        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1"><a class="text-white" href="index.php?page=staff_attendance" target="_blank">ATTENDANCE</a></button>
+        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#add_staff">Add</button>
+        <input  type="text" class="form-control form-control-sm mr-1" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+        <button type="submit" class="btn btn-success btn-hover-light btn-sm mr-1" name="search_staff">Search</button>
+        <?php
+      } 
+      else
+      {
+        ?>
+        <input  type="text" class="form-control form-control-sm mr-1" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+        <button type="submit" class="btn btn-success btn-hover-light btn-sm mr-1" name="search_staff">Search</button>
+        <?php
+      }
+      ?>
+    </form>
     <!--end::Toolbar-->
   </div>
 </div>

@@ -63,29 +63,25 @@ else
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
-    <div class="d-flex align-items-center">
-      <form name="search_parent" class="form-inline" action="index.php?page=parentlist" method="post">
-        <div class="text-right">
-          <?php 
-          if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
-          {
-            ?>
-            <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
-            <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_parent">Search</button>
-            <?php
-          } 
-          else
-          {
-            ?>
-            <input  type="text" class="form-control" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
-            <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="search_parent">Search</button>
-            <?php
-          }
-          ?>
-        </div>
-      </form>
-    </div>
+    <form class="d-flex" name="search_parent" action="index.php?page=parentlist" method="post">
+      <?php 
+      if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
+      {
+        ?>
+        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#add_student">Add</button>
+        <input  type="text" class="form-control form-control-sm mr-1" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+        <button type="submit" class="btn btn-success btn-hover-light btn-sm mr-1" name="search_parent">Search</button>
+        <?php
+      } 
+      else
+      {
+        ?>
+        <input  type="text" class="form-control form-control-sm mr-1" name="consumer" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by ID/Name">
+        <button type="submit" class="btn btn-success btn-hover-light btn-sm mr-1" name="search_parent">Search</button>
+        <?php
+      }
+      ?>
+    </form>
     <!--end::Toolbar-->
   </div>
 </div>
