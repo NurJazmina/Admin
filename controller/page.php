@@ -59,6 +59,7 @@
                                 "duplicateforstudentlist",
                                 'test_loader',
                                 'a',
+                                'aa',
                                );
 
     $teacherallowedaccess = array("dashboard",

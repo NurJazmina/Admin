@@ -1,4 +1,4 @@
-<form  name="edit_calendar" action="index.php?page=personal_calendar" method="post">
+<form  name="edit_calendar" action="index.php?page=personal_calendar&paging=0" method="post">
   <div class="modal fade" id="edit_calendar">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
@@ -62,16 +62,16 @@
   </div>
 </form>
 
-<form name="delete_calendar" action="index.php?page=classroomlist" method="post">
+<form name="delete_calendar" action="index.php?page=personal_calendar&paging=0" method="post">
   <div class="modal fade" id="delete_calendar">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Delete Account</h5>
+          <h5>Delete Todo list</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>Calendar</b> type your <b>password</b>.</a><br>
+          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>Todo</b> type your <b>password</b>.</a><br>
           <input type="hidden" name="calendar_id">
           <input type="password" class="form-control" name="password" placeholder="Password">
         </div>

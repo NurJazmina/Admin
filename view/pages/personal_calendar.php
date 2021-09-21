@@ -2,45 +2,6 @@
 $_SESSION["title"] = "Personal Calendar";
 include 'view/partials/_subheader/subheader-v1.php';
 include 'model/Calendar.php';
-
-$date = date("Y-m-d");
-$calendar = new Calendar($date);
-//$calendar->add_event('Birthday', '2021-09-03', 1);
-
-// default date start $ date end
-$default_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
-$default_date = $default_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-$default_date = date_format($default_date,"Y-m-d\TH:i:s");
-
-$filter = ['Created_by'=>$_SESSION["loggeduser_id"]];
-$query = new MongoDB\Driver\Query($filter);
-$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Calendar',$query);
-foreach ($cursor as $document)
-{
-    $calendar_id = strval($document->_id);
-    $Title = $document->Title;
-    $Color = $document->Color;
-    $Date_start = strval($document->Date_start);
-    $Date_end = strval($document->Date_end);
-
-    $Date_start = new MongoDB\BSON\UTCDateTime($Date_start);
-    $Datetime_Start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-    $Date_start = date_format($Datetime_Start,"Y-m-d");
-
-    $Date_end = new MongoDB\BSON\UTCDateTime($Date_end);
-    $Datetime_End = $Date_end->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-    $Date_end = date_format($Datetime_End,"Y-m-d");
-
-    $date1 = date_create($Date_start);
-    
-    $date2 = date_create($Date_end);
-
-    //difference between two dates
-    $diff = date_diff($date1,$date2);
-    $diff = $diff->format("%a");
-
-    $calendar->add_event(mb_strimwidth($Title, 0,9, ".."), $Date_start,$diff + 1, $Color);
-}
 ?>
 <link href="assets/css/calendar.css" rel="stylesheet" type="text/css">
 <div class="row">
@@ -50,7 +11,7 @@ foreach ($cursor as $document)
                 <h3>To do List</h3>
             </div>
             <div class="card-body">
-                <form name="add_calendar" action="index.php?page=personal_calendar" method="post">
+                <form name="add_calendar" action="index.php?page=personal_calendar&paging=0" method="post">
                     <div class="form-group">
                         <label>Title <span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-sm" name="title" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Enter new to do" required>
@@ -97,10 +58,15 @@ foreach ($cursor as $document)
         <div class="card card-custom card-stretch">
             <div class="modal-header text-dark-50">
                 <h3>Calendar</h3>
+                <div>
+                <a href="index.php?page=personal_calendar&paging=<?= $previous;?>" class="btn btn-light btn-hover-success btn-sm"><i class="flaticon2-left-arrow icon-md"></i></a>
+                    <a href="index.php?page=personal_calendar&paging=<?= $next;?>" class="btn btn-light btn-hover-success btn-sm"><i class="flaticon2-right-arrow icon-md"></i></a>
+                    <a href="index.php?page=personal_calendar&paging=0" class="btn btn-light btn-hover-success btn-sm">Today</a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <h3 class="text-dark-50 text-center"><?= date("F Y"); ?></h3>
+                    <h3 class="text-dark-50 text-center"><?= $date_paging_header; ?></h3>
                     <div>
                         <?=$calendar?>
                     </div>
@@ -123,7 +89,7 @@ foreach ($cursor as $document)
                     $calendar_id = strval($document->_id);
                     $Title = $document->Title;
                     ?>
-                    <form name="detail" action="index.php?page=personal_calendar" method="post" class="m-2">
+                    <form name="detail" action="index.php?page=personal_calendar&paging=0" method="post" class="m-2">
                         <input type="hidden" name="calendar_id" value="<?= $calendar_id; ?>">
                         <button type="submit" class="btn btn-outline-warning btn-sm btn-pill" name="detail"><?= $Title ?></button>
                     </form>
