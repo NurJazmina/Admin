@@ -1,4 +1,59 @@
 <?php
+if (isset($_POST['add_calendar']))
+{
+  $consumer_id = $_SESSION["loggeduser_id"];
+  $title = $_POST['title'];
+  $detail = $_POST['detail'];
+  $venue = $_POST['venue'];
+  $color = $_POST['color'];
+  $date_start = $_POST['date_start'];
+  $date_end = $_POST['date_end'];
+
+  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
+  $bulk->insert([
+                'Created_by'=>$consumer_id,
+                'Title'=> $title,
+                'Detail'=>$detail,
+                'Venue'=> $venue,
+                'Color'=>$color,
+                'Date_start'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
+                'Date_end'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_end)),
+                ]);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  try
+  {
+    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Calendar', $bulk, $writeConcern);
+  }
+  catch (MongoDB\Driver\Exception\BulkWriteException $e)
+  {
+    $result = $e->getWriteResult();
+    // Check if the write concern could not be fulfilled
+    if ($writeConcernError = $result->getWriteConcernError())
+    {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+    // Check if any write operations did not complete at all
+    foreach ($result->getWriteErrors() as $writeError)
+    {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+  }
+  catch (MongoDB\Driver\Exception\Exception $e)
+  {
+    printf("Other error: %s\n", $e->getMessage());
+    exit;
+  }
+  printf("Inserted %d document(s)\n", $result->getInsertedCount());
+}
+
 if (isset($_POST['edit_calendar']))
 {
     $consumer_id = $_SESSION["loggeduser_id"];
@@ -144,58 +199,64 @@ class Calendar {
     }
 }
 
-if (isset($_POST['add_calendar']))
+if (isset($_GET['paging']) && !empty($_GET['paging']))
 {
-  $consumer_id = $_SESSION["loggeduser_id"];
-  $title = $_POST['title'];
-  $detail = $_POST['detail'];
-  $venue = $_POST['venue'];
-  $color = $_POST['color'];
-  $date_start = $_POST['date_start'];
-  $date_end = $_POST['date_end'];
+    $next = $_GET['paging']+1;
+    $previous = $_GET['paging']-1;
+}
+else
+{
+    $next = + 1;
+    $previous = - 1;
+}
+if (isset($_GET['paging']) && !empty($_GET['paging']))
+{
+    $date_paging = new MongoDB\BSON\UTCDateTime((new DateTime('first day of '.$_GET['paging'].' month'))->getTimestamp()*1000);
+    $date_paging_datetime = $date_paging->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $date_paging = date_format($date_paging_datetime,"Y-m-d");
+    $date_paging_header = date_format($date_paging_datetime,"F Y");
+}
+elseif ($_GET['paging'] == 0)
+{
+    $date_paging = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+    $date_paging_datetime = $date_paging->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $date_paging = date_format($date_paging_datetime,"Y-m-d");
+    $date_paging_header = date_format($date_paging_datetime,"F Y");
+}
+$calendar = new Calendar($date_paging);
 
-  $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
-  $bulk->insert([
-                'Created_by'=>$consumer_id,
-                'Title'=> $title,
-                'Detail'=>$detail,
-                'Venue'=> $venue,
-                'Color'=>$color,
-                'Date_start'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_start)),
-                'Date_end'=> new MongoDB\BSON\UTCDateTime(new DateTime($date_end)),
-                ]);
-  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-  try
-  {
-    $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.Calendar', $bulk, $writeConcern);
-  }
-  catch (MongoDB\Driver\Exception\BulkWriteException $e)
-  {
-    $result = $e->getWriteResult();
-    // Check if the write concern could not be fulfilled
-    if ($writeConcernError = $result->getWriteConcernError())
-    {
-        printf("%s (%d): %s\n",
-            $writeConcernError->getMessage(),
-            $writeConcernError->getCode(),
-            var_export($writeConcernError->getInfo(), true)
-        );
-    }
-    // Check if any write operations did not complete at all
-    foreach ($result->getWriteErrors() as $writeError)
-    {
-        printf("Operation#%d: %s (%d)\n",
-            $writeError->getIndex(),
-            $writeError->getMessage(),
-            $writeError->getCode()
-        );
-    }
-  }
-  catch (MongoDB\Driver\Exception\Exception $e)
-  {
-    printf("Other error: %s\n", $e->getMessage());
-    exit;
-  }
-  printf("Inserted %d document(s)\n", $result->getInsertedCount());
+// default date start $ date end
+$default_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
+$default_date = $default_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+$default_date = date_format($default_date,"Y-m-d\TH:i:s");
+
+$filter = ['Created_by'=>$_SESSION["loggeduser_id"]];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Calendar',$query);
+foreach ($cursor as $document)
+{
+    $calendar_id = strval($document->_id);
+    $Title = $document->Title;
+    $Color = $document->Color;
+    $Date_start = strval($document->Date_start);
+    $Date_end = strval($document->Date_end);
+
+    $Date_start = new MongoDB\BSON\UTCDateTime($Date_start);
+    $Datetime_Start = $Date_start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date_start = date_format($Datetime_Start,"Y-m-d");
+
+    $Date_end = new MongoDB\BSON\UTCDateTime($Date_end);
+    $Datetime_End = $Date_end->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+    $Date_end = date_format($Datetime_End,"Y-m-d");
+
+    $date1 = date_create($Date_start);
+    
+    $date2 = date_create($Date_end);
+
+    //difference between two dates
+    $diff = date_diff($date1,$date2);
+    $diff = $diff->format("%a");
+
+    $calendar->add_event(mb_strimwidth($Title, 0,9, ".."), $Date_start,$diff + 1, $Color);
 }
 ?>
