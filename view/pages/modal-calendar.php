@@ -67,11 +67,11 @@
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Delete Todo list</h5>
+          <h5>Delete list</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>Todo</b> type your <b>password</b>.</a><br>
+          <a>To delete the&nbsp;&nbsp;<i class="flaticon-warning-sign icon-md text-danger"></i>&nbsp;&nbsp;<b>List</b> type your <b>password</b>.</a><br>
           <input type="hidden" name="calendar_id">
           <input type="password" class="form-control" name="password" placeholder="Password">
         </div>

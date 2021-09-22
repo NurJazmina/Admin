@@ -26,3 +26,5 @@ else if (!isset($_GET['paging']) && empty($_GET['paging']))
 ?>
 <a href="index.php?page=a&paging=<?= $previous;?>" class="btn btn-light btn-hover-success btn-sm">Previous</a>
 <a href="index.php?page=a&paging=<?= $next;?>" class="btn btn-success btn-hover-light btn-sm">Next</a>
+
+<?php

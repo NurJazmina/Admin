@@ -28,6 +28,8 @@ if (isset($_POST['recheck_add_staff']))
   $SchoolPhone = $_SESSION["loggeduser_schoolsPhoneNo"];
   $SchoolAddress = $_SESSION["loggeduser_schoolsAddress"];
 
+  $consumer_id = '';
+  $ConsumerGroup_id = '';
   $filter = ['ConsumerIDNo'=>$consumer_idno];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
@@ -264,7 +266,6 @@ if (isset($_POST['recheck_add_staff']))
       catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
     }
   }
-  // end : email blaster
   $staff_id = '';
   $filter = ['ConsumerID'=>$consumer_id];
   $query = new MongoDB\Driver\Query($filter);
@@ -333,7 +334,7 @@ if (isset($_POST['recheck_add_staff']))
   }
   elseif ($staff_id == '')
   {
-    if($ConsumerGroup_id == '601b4cfd97728c027c01f187')
+    if($ConsumerGroup_id == '601b4cfd97728c027c01f187' || $ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c') //school && parent
     {
       ?>
       <!-- group : school -->
@@ -436,29 +437,14 @@ if (isset($_POST['recheck_add_staff']))
       <!-- group : school -->
       <?php
     }
-    else 
+    elseif($ConsumerGroup_id == '6018c32b10184a751c102eb6')//student && gongetz
     {
-      if($ConsumerGroup_id == '6018c2ebc8c7c7b2e8a4140c')
-      {
-        //vip
-        $detail = 'parentdetail';
-      }
-      elseif ($ConsumerGroup_id == '6018c32b10184a751c102eb6')
-      {
-        //student
-        $detail = 'studentdetail';
-      }
-      else
-      {
-        //student
-        $detail = 'stafflist';
-      }
       ?>
-      <!-- group : vip/student/gongetz -->
+      <!-- group : staff/student/gongetz -->
       <div class="text-dark-50 text-center">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
-      <form action="index.php?page=<?= $detail; ?>&id=<?= $consumer_id; ?>" method="post">
+      <form action="index.php?page=studentdetail&id=<?= $consumer_id; ?>" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -466,7 +452,7 @@ if (isset($_POST['recheck_add_staff']))
             </div>
             <div class="modal-body">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Staff Name</label>
+                <label class="col-sm-2 col-form-label">Consumer Name</label>
                 <div class="col-sm-10">
                   <input class="form-control" value="<?= $ConsumerFName." ".$ConsumerLName; ?>" disabled>
                 </div>
@@ -485,7 +471,43 @@ if (isset($_POST['recheck_add_staff']))
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-success btn-hover-light btn-sm">Resume Consumer Detail</button>
+              <button class="btn btn-success btn-hover-light btn-hover-light btn-sm">Resume Consumer Detail</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- group : vip -->
+      <?php
+    }
+    else 
+    {
+      ?>
+      <!-- group : vip/student/gongetz -->
+      <div class="text-dark-50 text-center">
+        <h1>AUTHORIZED PERSONNEL ONLY</h1>
+      </div>
+      <form action="index.php?page=stafflist" method="post">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Staff</h5>
+            </div>
+            <div class="modal-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">ID Number</label>
+                <div class="col-sm-10">
+                  <input class="form-control" value="<?= $consumer_idno; ?>" disabled>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Group</label>
+                <div class="col-sm-10">
+                  <input class="form-control" value="UNAUTHORIZED" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success btn-hover-light btn-sm">Return</button>
             </div>
           </div>
         </div>

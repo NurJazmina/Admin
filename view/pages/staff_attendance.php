@@ -55,7 +55,7 @@ border-color:#ffff;
                                 $DepartmentName = ($document->DepartmentName);
                                 ?>
                                 <li class="dropdown-item">
-                                    <a href="index.php?page=departmentattendance&id=<?= $Departmentid; ?>" class="navi-link"><?= $DepartmentName; ?></a>
+                                    <a href="index.php?page=department_attendance&id=<?= $Departmentid; ?>" class="navi-link"><?= $DepartmentName; ?></a>
                                 </li>
                                 <?php 
                             } 

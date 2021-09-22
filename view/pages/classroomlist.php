@@ -20,7 +20,7 @@
       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
       {
         ?>
-        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1"><a class="text-white" href="index.php?page=classattendance" target="_blank">ATTENDANCE</a></button>
+        <button type="button" class="btn btn-success btn-hover-light btn-sm mr-1"><a class="text-white" href="index.php?page=class_attendance" target="_blank">ATTENDANCE</a></button>
         <button type="button" class="btn btn-success btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#add_class">Add</button>
         <input  type="text" class="form-control form-control-sm mr-1" name="classname" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="search by classroom name">
         <button type="submit" class="btn btn-success btn-sm mr-1" name="searchclass">Search</button>

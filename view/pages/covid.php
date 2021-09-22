@@ -26,15 +26,15 @@ include 'model/covid.php';
             <div class="card-body p-0">
                 <!--begin::Nav Tabs-->
                 <div id="carouselIndicators" class="carousel slide" data-interval="false">
-                    <ol class="carousel-indicators">
+                    <!-- <ol class="carousel-indicators">
                         <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselIndicators" data-slide-to="2"></li>
-                    </ol>
+                    </ol> -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <!--begin::Nav Tabs-->
-                            <ul class="dashboard-tabs nav nav-pills nav-light row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
+                            <ul class="dashboard-tabs nav nav-pills nav-light-success row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
                                 <!--begin::Item-->
                                 <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 m-3">
                                     <a class="nav-link border d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" href="#tab_forms_widget_1">
@@ -100,7 +100,7 @@ include 'model/covid.php';
                         </div>
                         <div class="carousel-item">
                             <!--begin::Nav Tabs-->
-                            <ul class="dashboard-tabs nav nav-pills nav-light row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
+                            <ul class="dashboard-tabs nav nav-pills nav-light-success row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
                                 <!--begin::Item-->
                                 <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-0 m-3">
                                     <a class="nav-link border d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" href="#tab_forms_widget_5">
@@ -166,7 +166,7 @@ include 'model/covid.php';
                         </div>
                         <div class="carousel-item">
                             <!--begin::Nav Tabs-->
-                            <ul class="dashboard-tabs nav nav-pills nav-light row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
+                            <ul class="dashboard-tabs nav nav-pills nav-light-success row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
                                 <!--begin::Item-->
                                 <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 m-3">
                                     <a class="nav-link border d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" href="#tab_forms_widget_5">
@@ -224,11 +224,11 @@ include 'model/covid.php';
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-                        <span><i class="fas fa-chevron-left icon-3x text-dark" aria-hidden="true"></i></span>
+                        <span><i class="fas fa-chevron-left icon-3x text-success" aria-hidden="true"></i></span>
                         <span class="sr-only">Previous</span>
                     </a>
                     <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-                        <span><i class="fas fa-chevron-right icon-3x text-dark" aria-hidden="true"></i></span>
+                        <span><i class="fas fa-chevron-right icon-3x text-success" aria-hidden="true"></i></span>
                         <span class="sr-only">Next</span>
                     </a>
                 </div>

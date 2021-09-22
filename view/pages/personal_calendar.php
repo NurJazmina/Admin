@@ -24,18 +24,18 @@ include 'model/Calendar.php';
                         <label>Venue <span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-sm" name="venue" placeholder="Location" required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Color</label>
                         <select class="form-control form-control-sm" name="color" required>
-                            <option value="yellow" selected>Yellow</option>
+                            <option value="warning" selected>Yellow</option>
                             <option value="green">Green</option>
-                            <option value="blue">Blue</option>
-                            <option value="red">Red</option>
-                            <option value="red">Mint</option>
-                            <option value="indigo">Indigo</option>
+                            <option value="primary">Blue</option>
+                            <option value="danger">Red</option>
+                            <option value="success">Mint</option>
+                            <option value="info">Indigo</option>
                             <option value="frozen">Frozen</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label>Start</label>
                         <input type="datetime-local" class="form-control form-control-sm" name="date_start" placeholder="Select date" value="<?= $default_date; ?>" required>
@@ -59,9 +59,9 @@ include 'model/Calendar.php';
             <div class="modal-header text-dark-50">
                 <h3>Calendar</h3>
                 <div>
-                <a href="index.php?page=personal_calendar&paging=<?= $previous;?>" class="btn btn-light btn-hover-success btn-sm"><i class="flaticon2-left-arrow icon-md"></i></a>
-                    <a href="index.php?page=personal_calendar&paging=<?= $next;?>" class="btn btn-light btn-hover-success btn-sm"><i class="flaticon2-right-arrow icon-md"></i></a>
-                    <a href="index.php?page=personal_calendar&paging=0" class="btn btn-light btn-hover-success btn-sm">Today</a>
+                <a href="index.php?page=personal_calendar&paging=<?= $previous;?>" class="btn btn-success btn-hover-light btn-sm"><i class="flaticon2-left-arrow icon-md"></i></a>
+                    <a href="index.php?page=personal_calendar&paging=<?= $next;?>" class="btn btn-success btn-hover-light btn-sm"><i class="flaticon2-right-arrow icon-md"></i></a>
+                    <a href="index.php?page=personal_calendar&paging=0" class="btn btn-success btn-hover-light btn-sm">Today</a>
                 </div>
             </div>
             <div class="card-body">
@@ -91,7 +91,7 @@ include 'model/Calendar.php';
                     ?>
                     <form name="detail" action="index.php?page=personal_calendar&paging=0" method="post" class="m-2">
                         <input type="hidden" name="calendar_id" value="<?= $calendar_id; ?>">
-                        <button type="submit" class="btn btn-outline-warning btn-sm btn-pill" name="detail"><?= $Title ?></button>
+                        <button type="submit" class="btn btn-outline-success btn-sm btn-pill" name="detail"><?= $Title ?></button>
                     </form>
                     <?php
                 }
@@ -111,7 +111,6 @@ include 'model/Calendar.php';
                         $Title = $document->Title;
                         $Detail = $document->Detail;
                         $Venue = $document->Venue;
-                        $Color = $document->Color;
                         $Date_start = strval($document->Date_start);
                         $Date_end = strval($document->Date_end);
     
