@@ -444,6 +444,19 @@ if (isset($_POST['add_relation']))
     }
   }
 
+  $filter = ['ParentID'=>$parent_id, 'StudentID'=>$student_id];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ParentStudentRel',$query);
+  foreach ($cursor as $document)
+  {
+    $rel_id = strval($document->_id);
+    
+    //database relation
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->delete(['_id'=> new \MongoDB\BSON\ObjectID($rel_id)]);
+    $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+    $result = $GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.ParentStudentRel', $bulk, $writeConcern);  
+  }
   //add relation
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
@@ -1789,7 +1802,7 @@ if (isset($_POST['status_student']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
-
+  
   $staff_id = $_SESSION["loggeduser_id"];
   $school_id = $_SESSION["loggeduser_school_id"];
 
