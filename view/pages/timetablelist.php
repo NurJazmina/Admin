@@ -36,7 +36,7 @@ foreach ($cursor as $document)
       <!--end::Separator-->
       <!--begin::Detail-->
       <div class="d-flex" id="kt_subheader_search">
-        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $count; ?> Total Data</span>
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $count; ?> Total Timetable</span>
       </div>
       <!--end::Detail-->
       <!--end::Page Heading-->
