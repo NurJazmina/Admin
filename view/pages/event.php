@@ -94,7 +94,7 @@ include ('model/event.php');
         <div class="card mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->
-            <div class="p-5">
+            <div class="mt-5 mx-5">
               <div class="modal-title">
                 <label><?= $Title; ?></label>
               </div>
@@ -184,7 +184,7 @@ include ('model/event.php');
         <div class="card mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->
-            <div class="p-5">
+            <div class="mt-5 mx-5">
               <div class="modal-title">
                 <label><?= $Title; ?></label>
               </div>
