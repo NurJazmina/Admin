@@ -16,7 +16,7 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Department Detail</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Staff Detail</h5>
 					<!--end::Page Title-->
 				</div>
 				<!--end::Page Heading-->
@@ -40,22 +40,30 @@
               </span>Sort By
             </button>
             <!--begin::Dropdown Menu-->
-            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <!--begin::Navigation-->
               <ul class="navi flex-column navi-hover">
                 <li class="dropdown-item">Choose an option :</li>
                 <?php 
-                $filter = ['School_id'=>$_SESSION["loggeduser_school_id"]];
+                $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
                 $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
                 foreach ($cursor as $document)
                 {
-                  $department_id = strval($document->_id);
-                  $Department_name = $document->DepartmentName;
+                  $ConsumerID = $document->ConsumerID;
+                
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
+                  }
                   ?>
                   <li class="dropdown-item">
-                    <a href="index.php?page=departmentdetail&id=<?= $department_id; ?>">
-                      <?= $Department_name; ?>
+                    <a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>">
+                      <?= $ConsumerFName." ".$ConsumerLName ; ?>
                     </a>
                   </li>
                   <?php 
@@ -76,89 +84,148 @@
 <?php
 if (isset($_GET['id']) && !empty($_GET['id']))
 {
+  // group : school
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
   {
-    $_SESSION["department_id"] = strval($document->_id);
-    $department_id = strval($document->_id);
-    $DepartmentName = $document->DepartmentName;
+    $_SESSION["consumer_id"] = strval($document->_id);
+    $consumer_id = strval($document->_id);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $ConsumerEmail = $document->ConsumerEmail;
+    $ConsumerPhone = $document->ConsumerPhone;
+    $ConsumerAddress = $document->ConsumerAddress;
+    $ConsumerStatus = $document->ConsumerStatus;
   }
 }
 else
 {
-  $filter = [null];
+  // group : school
+  $filter = ['ConsumerGroup_id'=>'601b4cfd97728c027c01f187'];
   $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
   foreach ($cursor as $document)
   {
-    $_SESSION["department_id"] = strval($document->_id);
-    $department_id = strval($document->_id);
-    $DepartmentName = $document->DepartmentName;
+    $_SESSION["consumer_id"] = strval($document->_id);
+    $consumer_id = strval($document->_id);
+    $ConsumerFName = $document->ConsumerFName;
+    $ConsumerLName = $document->ConsumerLName;
+    $ConsumerIDType = $document->ConsumerIDType;
+    $ConsumerIDNo = $document->ConsumerIDNo;
+    $ConsumerEmail = $document->ConsumerEmail;
+    $ConsumerPhone = $document->ConsumerPhone;
+    $ConsumerAddress = $document->ConsumerAddress;
+    $ConsumerStatus = $document->ConsumerStatus;
   }
+}
+$filter = ['ConsumerID'=>$consumer_id];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+foreach ($cursor as $document)
+{
+  $staff_id = strval($document->_id);
+  $ClassID = $document->ClassID;
+  $StaffLevel = $document->StaffLevel;
 }
 $date = date("Y-m-d");
 $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+
 if (isset($_POST['submit_date']))
 {
     $date = $_POST['date'];
 }
 ?>
 <div class="text-dark-50 text-center">
-  <h1>Department Info</h1>
+  <h1>Staff Info</h1>
 </div>
 <div class="card">
   <div class="card-body">
     <div class="row">
-      <!-- begin::department detail -->
+      <!-- begin::staff detail -->
       <div class="col-sm">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tbody>
+        <table class="table table-bordered">
+          <tbody>
+            <tr class="bg-light text-dark-50">
+              <td>Name</td>
+              <td><?= $ConsumerFName." ".$ConsumerLName; ?> </td>
+            </tr>
+            <tr>
+              <td>ID Type</td>
+              <td><?= $ConsumerIDType; ?></td>
+            </tr>
+            <tr>
+              <td>ID Number</td>
+              <td><?= $ConsumerIDNo; ?></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><?= $ConsumerEmail; ?></td>
+            </tr>
+            <tr>
+              <td>Phone Number</td>
+              <td><?= $ConsumerPhone; ?></td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td><?= $ConsumerAddress; ?></td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td><?= $ConsumerStatus; ?></td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- teacher -->
+        <?php
+        if($StaffLevel == '0' && $ClassID !== '')
+        {
+          $filter = ['Teacher_id'=>$staff_id];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+          foreach ($cursor as $document)
+          {
+            $Class_id = $document->Class_id;
+            $Subject_id = $document->Subject_id;
+          
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+            foreach ($cursor as $document)
+            {
+              $ClassName = $document->ClassName;
+            }
+
+            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+            $query = new MongoDB\Driver\Query($filter);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+            foreach ($cursor as $document)
+            {
+              $SubjectName = $document->SubjectName;
+            }
+            ?>
+            <table class="table table-bordered">
               <tr class="bg-light text-dark-50">
-                <td>Department</td>
-                <td><?= $DepartmentName; ?></td>
+                <td>Class</td>
+                <td>Subject</td>
               </tr>
-              <tr>
-                <td>Staff List</td>
-                <td>
-                <?php
-                $ConsumerFName = '';
-                $ConsumerLName = '';
-                $totalstaff = 0;
-                $filter = ['Staffdepartment'=>$department_id];
-                $query = new MongoDB\Driver\Query($filter);
-                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-                foreach ($cursor as $document)
-                {
-                  $ConsumerID = $document->ConsumerID;
-                  $totalstaff = $totalstaff + 1;
-                  
-                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
-                  $query = new MongoDB\Driver\Query($filter);
-                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-                  foreach ($cursor as $document)
-                  {
-                    $ConsumerFName = $document->ConsumerFName;
-                    $ConsumerLName = $document->ConsumerLName;
-                    ?>
-                      <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a><br>
-                    <?php
-                  }
-                }
-                ?>
-                </td>
-              </tr>
-              <tr>
-                <td>Number of Staff</td>
-                <td><?= $totalstaff; ?></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              <tbody>
+                <tr>
+                  <td><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
+                  <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <?php
+          }
+        }
+        ?>
+        <!-- teacher -->
       </div>
-      <!-- end::department detail -->
+      <!-- end::staff detail -->
       <!-- begin::Remark -->
       <div class="col-sm">
         <div class="card">
@@ -169,10 +236,10 @@ if (isset($_POST['submit_date']))
             <div class="tab-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <div class="box">
-                  <form name="add_remark" action="model/department_remark.php" method="POST">
-                    <textarea class="department" name="remark"></textarea>
+                  <form name="add_remark" action="model/staff_remark.php" method="POST">
+                    <textarea class="staff" name="remark"></textarea>
                     <div class="mt-3 text-right">
-                      <input type="hidden" value="<?= $department_id; ?>" name="department_id">
+                      <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                       <button type="submit" class="btn btn-success btn-hover-light btn-sm" name="add_remark">Add remark</button>
                     </div>
                   </form>
@@ -201,25 +268,25 @@ if (isset($_POST['submit_date']))
                         </thead>
                       </table>
                       <?php
-                      $filter = ['Department_id'=>$department_id,'SubRemarks'=>'0','Status'=>'ACTIVE'];
+                      $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>'0','Status'=>'ACTIVE'];
                       $option = ['sort' => ['_id' => -1],'limit'=>10];
                       $query = new MongoDB\Driver\Query($filter, $option);
-                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Department_Remarks',$query);
-                      foreach ($cursor as $document1)
+                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                      foreach ($cursor as $document)
                       {
-                        $remark_id1 = strval($document1->_id);
-                        $Details1 = $document1->Details;
-                        $Staff_id1 = $document1->Staff_id;
-                        $Date1 = strval($document1->Date);
+                        $remark_id1 = strval($document->_id);
+                        $Details1 = $document->Details;
+                        $Staff_id1 = $document->Staff_id;
+                        $Date1 = strval($document->Date);
                         $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
                         $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
                         $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id1)];
                         $query = new MongoDB\Driver\Query($filter);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-                        foreach ($cursor as $document1)
+                        foreach ($cursor as $document)
                         {
-                          $ConsumerFName = $document1->ConsumerFName;
+                          $ConsumerFName = $document->ConsumerFName;
                         }
                         ?>
                         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -239,10 +306,10 @@ if (isset($_POST['submit_date']))
                             </h6>
                             <div  id="flush-collapse<?= $remark_id1; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?= $remark_id1; ?>" data-bs-parent="#accordionFlushExample">
                               <?php 
-                              $filter = ['Department_id'=>$department_id,'SubRemarks'=>$remark_id1];
+                              $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>$remark_id1];
                               $option = ['sort' => ['_id' => -1],'limit'=>10];
                               $query = new MongoDB\Driver\Query($filter, $option);
-                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Department_Remarks',$query);
+                              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
                               foreach ($cursor as $document2)
                               {
                                 $remark_id2 = strval($document2->_id);
@@ -274,15 +341,15 @@ if (isset($_POST['submit_date']))
                                 <?php
                                 }
                                 ?>
-                                <form name="add_remark_child" action="model/department_remark.php" method="POST">
+                                <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                     <div class="m-3">
-                                      <textarea class="department" name="remark"></textarea>
+                                      <textarea class="staff" name="remark"></textarea>
                                     </div>
                                     <div class="m-3 text-right">
-                                      <input type="hidden" value="<?= $department_id; ?>" name="department_id">
+                                      <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
+                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">Update</button>
                                     </div>
                                 </form>
                             </div>
@@ -303,25 +370,25 @@ if (isset($_POST['submit_date']))
                         </thead>
                       </table>
                       <?php
-                      $filter = ['Department_id'=>$department_id,'SubRemarks'=>'0','Status'=>'PENDING'];
+                      $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>'0','Status'=>'PENDING'];
                       $option = ['sort' => ['_id' => -1],'limit'=>10];
                       $query = new MongoDB\Driver\Query($filter, $option);
-                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Department_Remarks',$query);
-                      foreach ($cursor as $document1)
+                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                      foreach ($cursor as $document)
                       {
-                        $remark_id1 = strval($document1->_id);
-                        $Details1 = $document1->Details;
-                        $Staff_id1 = $document1->Staff_id;
-                        $Date1 = strval($document1->Date);
+                        $remark_id1 = strval($document->_id);
+                        $Details1 = $document->Details;
+                        $Staff_id1 = $document->Staff_id;
+                        $Date1 = strval($document->Date);
                         $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
                         $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
                         $filter = ['_id' => new \MongoDB\BSON\ObjectId($Staff_id1)];
                         $query = new MongoDB\Driver\Query($filter);
                         $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer', $query);
-                        foreach ($cursor as $document1)
+                        foreach ($cursor as $document)
                         {
-                          $ConsumerFName = ($document1->ConsumerFName);
+                          $ConsumerFName = $document->ConsumerFName;
                         }
                         ?>
                           <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -341,10 +408,10 @@ if (isset($_POST['submit_date']))
                               </h6>
                               <div  id="flush-collapseOne" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <?php 
-                                $filter = ['Department_id'=>$department_id,'SubRemarks'=>$remark_id1];
+                                $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>$remark_id1];
                                 $option = ['sort' => ['_id' => -1],'limit'=>10];
                                 $query = new MongoDB\Driver\Query($filter, $option);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Department_Remarks',$query);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
                                 foreach ($cursor as $document2)
                                 {
                                   $remark_id2 = strval($document2->_id);
@@ -376,15 +443,15 @@ if (isset($_POST['submit_date']))
                                   <?php
                                 }
                                 ?>
-                                <form name="add_remark_child" action="model/department_remark.php" method="POST">
+                                <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                   <div class="m-3">
-                                    <textarea class="department" name="remark"></textarea>
+                                    <textarea class="staff" name="remark"></textarea>
                                   </div>
                                   <div class="m-3 text-right">
-                                    <input type="hidden" value="<?= $department_id; ?>" name="department_id">
+                                    <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                     <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                     <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                    <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                    <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                   </div>
                                 </form>
                               </div>
@@ -405,16 +472,16 @@ if (isset($_POST['submit_date']))
                         </thead>
                       </table>
                       <?php
-                      $filter = ['Department_id'=>$department_id,'SubRemarks'=>'0','Status'=>'COMPLETED'];
+                      $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>'0','Status'=>'COMPLETED'];
                       $option = ['sort' => ['_id' => -1],'limit'=>10];
                       $query = new MongoDB\Driver\Query($filter, $option);
-                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Department_Remarks',$query);
-                      foreach ($cursor as $document1)
+                      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
+                      foreach ($cursor as $document)
                       {
-                        $remark_id1 = strval($document1->_id);
-                        $Staff_id1 = $document1->Staff_id;
-                        $Details1 = $document1->Details;
-                        $Date1 = strval($document1->Date);
+                        $remark_id1 = strval($document->_id);
+                        $Staff_id1 = $document->Staff_id;
+                        $Details1 = $document->Details;
+                        $Date1 = strval($document->Date);
                         $Date1 = new MongoDB\BSON\UTCDateTime(strval($Date1));
                         $Date1 = $Date1->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
                         
@@ -443,10 +510,10 @@ if (isset($_POST['submit_date']))
                               </h6>
                               <div  id="flush-collapseOne" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <?php 
-                                $filter = ['Department_id'=>$department_id,'SubRemarks'=>$remark_id1];
+                                $filter = ['Consumer_id'=>$consumer_id,'SubRemarks'=>$remark_id1];
                                 $option = ['sort' => ['_id' => -1],'limit'=>10];
                                 $query = new MongoDB\Driver\Query($filter,$option);
-                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Department_Remarks',$query);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff_Remarks',$query);
                                 foreach ($cursor as $document2)
                                 {
                                   $remark_id2 = strval($document2->_id);
@@ -478,15 +545,15 @@ if (isset($_POST['submit_date']))
                                   <?php
                                   }
                                   ?>
-                                  <form name="add_remark_child" action="model/department_remark.php" method="POST">
+                                  <form name="add_remark_child" action="model/staff_remark.php" method="POST">
                                     <div class="m-3">
-                                      <textarea class="department" name="remark"></textarea>
+                                      <textarea class="staff" name="remark"></textarea>
                                     </div>
                                     <div class="m-3 text-right">
-                                      <input type="hidden" value="<?= $department_id; ?>" name="department_id">
+                                      <input type="hidden" value="<?= $consumer_id; ?>" name="consumer_id">
                                       <input type="hidden" value="<?= $remark_id1; ?>" name="remark_id">
                                       <button type="submit" class="btn btn-light btn-sm" name="add_remark_child">Add remark</button>
-                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_department_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
+                                      <button type="button" class="btn btn-success btn-hover-light btn-sm" data-bs-toggle="modal" data-bs-target="#update_staff_remark" data-bs-whatever="<?= $remark_id1; ?>">update</button>
                                     </div>
                                   </form>
                               </div>
@@ -517,7 +584,7 @@ if (isset($_POST['submit_date']))
         </div>
         <div class="col text-right">
         <button type="submit" name="submit_date" class="btn btn-success btn-hover-light btn-sm">Submit</button>
-          <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm">Export Attendance To XLS</button>
+          <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm">Export Attendance To XLS<</button>
         </div>
       </div>
     </form>
@@ -532,79 +599,83 @@ if (isset($_POST['submit_date']))
           </tr>
       </thead>
       <tbody>
-      <?php
-      $Cards_id ='';
-      $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$department_id];
-      $query = new MongoDB\Driver\Query($filter);
-      $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-      foreach ($cursor as $document)
-      {
-        $ConsumerID = $document->ConsumerID;
-
-        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+        <?php
+        $Cards_id ='';
+        if (isset($_GET['id']) && !empty($_GET['id']))
+        {
+          $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+          foreach ($cursor as $document)
+          {
+            $consumer_id = strval($document->_id);
+            $ConsumerFName = $document->ConsumerFName;
+            $ConsumerLName = $document->ConsumerLName;
+            $ConsumerIDNo = $document->ConsumerIDNo;
+          }
+        }
+        else
+        {
+          $filter = ['ConsumerGroup_id'=>'601b4cfd97728c027c01f187'];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+          foreach ($cursor as $document)
+          {
+            $consumer_id = strval($document->_id);
+            $ConsumerFName = $document->ConsumerFName;
+            $ConsumerLName = $document->ConsumerLName;
+            $ConsumerIDNo = $document->ConsumerIDNo;
+          }
+        }
+        $filter = ['Consumer_id'=>$consumer_id];
         $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
         foreach ($cursor as $document)
         {
-          $consumer_id = strval($document->_id);
-          $ConsumerFName = $document->ConsumerFName;
-          $ConsumerLName = $document->ConsumerLName;
-          $ConsumerIDNo = $document->ConsumerIDNo;
-
-          $Cards_id ='';
-          $filter = ['Consumer_id'=>$consumer_id];
-          $query = new MongoDB\Driver\Query($filter);
-          $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
-          foreach ($cursor as $document1)
-          {
-            $Cards_id = strval($document1->Cards_id);
-          }
-          ?>
-          <tr>
-            <td class="default"><?= $ConsumerIDNo; ?></td>
-            <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-            <td class="default"><?= $date."<br>"; ?></td>
-            <td class="default"><?php
-            $count = 0;
-            $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-            $option = ['sort' => ['_id' => 1]];
-            $query = new MongoDB\Driver\Query($filter,$option);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-            foreach ($cursor as $document)
-            {
-              $date = strval($document->AttendanceDate);
-              $date = new MongoDB\BSON\UTCDateTime($date);
-              $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-
-              $count = $count +1;
-              if ($count % 2){
-                echo date_format($date,"H:i:s")."<br>";}
-            }
-            ?></td>
-            <td class="default"><?php
-            $count = 0;
-            $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-            $option = ['sort' => ['_id' => 1]];
-            $query = new MongoDB\Driver\Query($filter,$option);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-            foreach ($cursor as $document)
-            {
-              $date = strval($document->AttendanceDate);
-              $date = new MongoDB\BSON\UTCDateTime($date);
-              $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-
-              $count = $count +1;
-              if ($count % 2){
-              }
-              else{
-                echo date_format($date,"H:i:s")."<br>";}
-            }
-            ?></td>
-          </tr>
-          <?php
+          $Cards_id = strval($document->Cards_id);
         }
-      }
-      ?>
+        ?>
+        <tr>
+          <td class="default"><?= $ConsumerIDNo; ?></td>
+          <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
+          <td class="default"><?= $date."<br>"; ?></td>
+          <td class="default"><?php
+          $count = 0;
+          $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+          $option = ['sort' => ['_id' => 1]];
+          $query = new MongoDB\Driver\Query($filter,$option);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+          foreach ($cursor as $document)
+          {
+            $date = strval($document->AttendanceDate);
+            $date = new MongoDB\BSON\UTCDateTime($date);
+            $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+            $count = $count +1;
+            if ($count % 2){
+              echo date_format($date,"H:i:s")."<br>";}
+          }
+          ?></td>
+          <td class="default"><?php
+          $count = 0;
+          $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+          $option = ['sort' => ['_id' => 1]];
+          $query = new MongoDB\Driver\Query($filter,$option);
+          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+          foreach ($cursor as $document)
+          {
+            $date = strval($document->AttendanceDate);
+            $date = new MongoDB\BSON\UTCDateTime($date);
+            $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            
+            $count = $count +1;
+            if ($count % 2){
+            }
+            else{
+              echo date_format($date,"H:i:s")."<br>";}
+          }
+          ?></td>
+        </tr>
       </tbody>
     </table>
       <script>
@@ -632,7 +703,7 @@ if (isset($_POST['submit_date']))
 <script type="text/javascript" src='https://cdn.tiny.cloud/1/ctl5tdxtaqli3dvaw5f3zolgpcusntlmonfxnq4673uy1x7d/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
 <script>
 tinymce.init({
-  selector: '.department',
+  selector: '.staff',
   menubar:false,
   statusbar: false,
   toolbar: false,

@@ -84,6 +84,6 @@ if (isset($_POST['UpdateParentRemark']))
      printf("Other error: %s\n", $e->getMessage());
      exit;
    }
-   header ('location: ../index.php?page=parentdetail&id=' . $id);
+   header ('location: ../index.php?page=parent_detail&id=' . $id);
 }
 ?>

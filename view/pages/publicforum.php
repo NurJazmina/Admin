@@ -62,7 +62,7 @@ include ('model/forums.php');
 
         $ConsumerFName3=" ";
         $ConsumerLName3=" ";
-        $ForumDetails2=" ";
+        $forum_details2=" ";
         $filter = ['School_id'=>$_SESSION["loggeduser_school_id"],'Forum'=>$category];
         $option = ['sort' => ['_id' => -1]];
         $query = new MongoDB\Driver\Query($filter,$option);
@@ -103,7 +103,7 @@ include ('model/forums.php');
                     </div>
                     <div class="separator separator-solid"></div>
                     <div class="mt-3">
-                        <h6><a class="font-weight-bold" href="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $Forumid;?>" style="text-transform:uppercase"><?= $Title; ?></a></h6>
+                        <h6><a class="font-weight-bold" href="index.php?page=forum_detail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $Forumid;?>" style="text-transform:uppercase"><?= $Title; ?></a></h6>
                     </div>
                     <div class="mt-3">
                         <a class="text-dark-50"><?= $Details; ?></a>

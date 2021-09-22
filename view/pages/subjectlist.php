@@ -49,7 +49,7 @@ include ('model/subjectlist.php');
           ?>
           <tr class="bg-white">
           <td><?= $calc; ?></td>
-          <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $Subject_name; ?></a></td>
+          <td><a href="index.php?page=subject_detail&id=<?= $subject_id; ?>"><?= $Subject_name; ?></a></td>
           <td>
             <button class="btn" data-bs-toggle="modal" data-bs-target="#edit_subject" data-bs-whatever="<?= $subject_id; ?>">
               <i class="flaticon2-edit icon-md text-hover-success"></i>

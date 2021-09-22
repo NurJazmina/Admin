@@ -90,14 +90,14 @@
                       $ConsumerFName = $document2->ConsumerFName;
                       $ConsumerPhone = $document2->ConsumerPhone;
                       ?>
-                      <a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>">
+                      <a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>">
                       <?= $ConsumerFName."<br>"; ?></a>
                       <?php
                     }
                   }
                   ?>
                   </td>
-                  <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory."&nbsp".$ClassName;?></a></td>
+                  <td class="text-left"><a href="index.php?page=class_detail&id=<?= $class_id; ?>"><?= $ClassCategory."&nbsp".$ClassName;?></a></td>
                   <?php
                   $totalstudent = 0;
                   $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"], 'Class_id'=>$class_id];
@@ -126,7 +126,7 @@
                       $subject_id = $document->_id;
                       $SubjectName = $document->SubjectName;
                       ?>
-                      <a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>">
+                      <a href="index.php?page=subject_detail&id=<?= $subject_id; ?>">
                       <?= $SubjectName."<br>"; ?></a>
                       <?php
                     }
@@ -158,7 +158,7 @@
                       {
                         $ConsumerFName = $document->ConsumerFName;
                         ?>
-                        <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>">
+                        <a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>">
                         <?= $ConsumerFName."<br>"; ?></a>
                         <?php
                       }

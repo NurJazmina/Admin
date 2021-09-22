@@ -153,7 +153,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                   <tr>
                     <td>Teacher</td>
                     <td>
-                      <a href="index.php?page=staffdetail&id=<?= $teacher_id; ?>"><?= $teacherF_name." ".$teacherL_name;?></a>
+                      <a href="index.php?page=staff_detail&id=<?= $teacher_id; ?>"><?= $teacherF_name." ".$teacherL_name;?></a>
                     </td>
                   </tr>
                   <?php
@@ -178,7 +178,7 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                   {
                     $subject_name = $document->SubjectName;
                     ?>
-                    <a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>">
+                    <a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>">
                     <?= $subject_name."<br>";
                   }
                 }
@@ -236,8 +236,8 @@ if (isset($_GET['id']) && !empty($_GET['id']))
                   <td>Subject</td>
                 </tr>
                 <tr>
-                  <td><a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></th></td>
-                  <td><a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>"><?= $subject_name;?></td>
+                  <td><a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></th></td>
+                  <td><a href="index.php?page=subject_detail&id=<?= $subject_id; ?>"><?= $subject_name;?></td>
                 </tr>
               </tbody>
             </table>

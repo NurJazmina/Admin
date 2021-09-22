@@ -184,10 +184,10 @@ $(document).ready(function() {
                         ?>
                         <div class="text-right">
                             <div class="btn-group" role="group">
-                                <form name="add_comment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                <form name="add_comment" action="index.php?page=forum_detail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                     <button type="submit" class="btn btn-light btn-hover-warning btn-sm">Newest</button>&nbsp;
                                 </form>
-                                <form name="add_comment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                <form name="add_comment" action="index.php?page=forum_detail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                     <input type="hidden" value="sort" name="sort">
                                     <button type="submit" class="btn btn-light btn-hover-warning btn-sm">Oldest</button>
                                 </form>
@@ -245,7 +245,7 @@ $(document).ready(function() {
                         <div class="mb-1">
                             <a class="text-dark-50"><?= "Comments &nbsp;&nbsp;".$total; ?></a>
                         </div>
-                        <form name="add_comment" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                        <form name="add_comment" action="index.php?page=forum_detail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                             <textarea class="forum" name="detail"></textarea>
                             <div class="text-right">
                                 <input type="hidden"  name="forum_id" value="<?= $Forum_id; ?>">
@@ -295,7 +295,7 @@ $(document).ready(function() {
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $_id4; ?>" aria-expanded="false" aria-controls="flush-collapse<?= $_id4; ?>">
                                                 <div class="text-left">
                                                     <img class="img-round-xsm" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
-                                                    <a href="index.php?page=staffdetail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName5." ".$ConsumerLName5;?></a>
+                                                    <a href="index.php?page=staff_detail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName5." ".$ConsumerLName5;?></a>
                                                     <small class="text-muted"><?= date_format($datetime4,"d/m/y"); echo " ( ".time_elapsed($time_now-$time4_strval)." ) \n"; ?></small>
                                                     <div style="border-left: 1px solid #eee; color:#687a86; padding-left:10px; text-align:left;"><?= $Details4; ?></div>
                                                 </div> 
@@ -331,7 +331,7 @@ $(document).ready(function() {
                                                         ?>
                                                         <div class="text-left">
                                                             <img class="img-round-xsm" src="assets/media/svg/avatars/029-boy-11.svg" alt="avatar">
-                                                            <a href="index.php?page=staffdetail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName7." ".$ConsumerLName7;?></a>
+                                                            <a href="index.php?page=staff_detail&id=<?= $Consumer_id; ?>"><?= $ConsumerFName7." ".$ConsumerLName7;?></a>
                                                             <small class="text-muted"><?= date_format($datetime6,"d/m/y"); echo " ( ".time_elapsed($time_now-$time6_strval)." ) \n"; ?></small>
                                                             <div style="border-left: 1px solid #eee; padding-left:10px; margin-left: 10px;"><?= $Details6; ?></div>
                                                         </div> 
@@ -339,7 +339,7 @@ $(document).ready(function() {
                                                     }
                                                 }
                                                 ?>
-                                                <form name="add_comment_child" action="index.php?page=forumdetail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
+                                                <form name="add_comment_child" action="index.php?page=forum_detail&forum=<?= $_GET['forum']; ?>&topic=<?= $_GET['topic'];?>&id=<?= $id;?>" method="post">
                                                     <div class="col-12">
                                                         <textarea class="forum" name="detail"></textarea>
                                                         <div class="text-right">

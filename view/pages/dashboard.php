@@ -707,7 +707,7 @@ section, .main {
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<a href="index.php?page=event_detail&id=<?= $event_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
@@ -716,7 +716,7 @@ section, .main {
 												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank">
+												<a href="index.php?page=event_detail&id=<?= $event_id; ?>" target="_blank">
 													<span class="svg-icon svg-icon-md">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -805,7 +805,7 @@ section, .main {
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<a href="index.php?page=event_detail&id=<?= $event_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
@@ -814,7 +814,7 @@ section, .main {
 												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=eventdetail&id=<?= $event_id; ?>" target="_blank">
+												<a href="index.php?page=event_detail&id=<?= $event_id; ?>" target="_blank">
 													<span class="svg-icon svg-icon-md">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -928,7 +928,7 @@ section, .main {
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<a href="index.php?page=news_detail&id=<?= $news_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
@@ -937,7 +937,7 @@ section, .main {
 												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>">
+												<a href="index.php?page=news_detail&id=<?= $news_id; ?>">
 													<span class="svg-icon svg-icon-md svg-icon-dark-50">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -1024,7 +1024,7 @@ section, .main {
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<a href="index.php?page=news_detail&id=<?= $news_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
@@ -1033,7 +1033,7 @@ section, .main {
 												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=newsdetail&id=<?= $news_id; ?>">
+												<a href="index.php?page=news_detail&id=<?= $news_id; ?>">
 													<span class="svg-icon svg-icon-md svg-icon-dark-50">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -1138,7 +1138,7 @@ section, .main {
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<a href="index.php?page=forum_detail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
@@ -1147,7 +1147,7 @@ section, .main {
 												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>">
+												<a href="index.php?page=forum_detail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>">
 													<span class="svg-icon svg-icon-md svg-icon-primary">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -1224,7 +1224,7 @@ section, .main {
 									<tbody>
 										<tr>
 											<td class="pl-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
+												<a href="index.php?page=forum_detail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>" class="text-dark-50 mb-1 font-size-lg"><?= mb_strimwidth($Title, 0,20, "..."); ?></a>
 												<span class="text-muted d-block"><?= " By ".$ConsumerFName;?></span>
 											</td>
 											<td></td>
@@ -1233,7 +1233,7 @@ section, .main {
 												<span class="text-muted d-block font-size-sm">Time</span>
 											</td>
 											<td class="text-right pr-0">
-												<a href="index.php?page=forumdetail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>">
+												<a href="index.php?page=forum_detail&forum=<?= $Forum; ?>&topic=<?= $topic; ?>&id=<?= $forum_id; ?>">
 													<span class="svg-icon svg-icon-md">
 														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
 														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

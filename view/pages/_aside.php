@@ -328,7 +328,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=departmentdetail" class="menu-link menu-toggle">
+									<a href="index.php?page=department_detail" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -393,7 +393,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=subjectdetail" class="menu-link menu-toggle">
+									<a href="index.php?page=subject_detail" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -443,7 +443,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=classdetail" class="menu-link menu-toggle">
+									<a href="index.php?page=class_detail" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>

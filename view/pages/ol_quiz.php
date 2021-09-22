@@ -217,7 +217,7 @@ $(document).ready(function() {
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-6 checkbox-inline">
-                            <a href="index.php?page=staffdetail&id=<?= $Created_by; ?>" class="d-flex align-items-center">
+                            <a href="index.php?page=staff_detail&id=<?= $Created_by; ?>" class="d-flex align-items-center">
                                 <?php
                                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
                                 $query = new MongoDB\Driver\Query($filter);

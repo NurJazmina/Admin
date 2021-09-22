@@ -90,7 +90,7 @@ include ('model/event.php');
     }
     ?>
     <div class="col-lg-4 mb-3 view view-first">
-      <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post">
+      <form action="index.php?page=event_detail&id=<?= $event_id ?>" method="post">
         <div class="card mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->
@@ -180,7 +180,7 @@ include ('model/event.php');
     }
     ?>
     <div class="col-lg-4 mb-3 view view-first">
-      <form action="index.php?page=eventdetail&id=<?= $event_id ?>" method="post"> 
+      <form action="index.php?page=event_detail&id=<?= $event_id ?>" method="post"> 
         <div class="card mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->

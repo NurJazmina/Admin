@@ -262,7 +262,7 @@ $(document).ready(function() {
                     }
                     ?>
                     <tr>
-                      <td><a href="index.php?page=studentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
+                      <td><a href="index.php?page=student_detail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
                       <td><?= $ConsumerIDType; ?></td>
                       <td><?= $ConsumerIDNo; ?></td>
                       <td>
@@ -308,12 +308,12 @@ $(document).ready(function() {
                             }
                           }
                           ?>
-                          <a href="index.php?page=parentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                          <a href="index.php?page=parent_detail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
                           <?php
                         }
                         ?>
                       </td>
-                      <td><a href="index.php?page=classdetail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
+                      <td><a href="index.php?page=class_detail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
                       <td>
                         <?php
                         if($_SESSION["loggeduser_ACCESS"] =='STAFF') 

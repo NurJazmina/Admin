@@ -218,10 +218,10 @@ $("#Date").click(function() {
                     }
                     ?>
                     <tr>
-                      <td><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                      <td><a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
                       <td><?= $ConsumerIDNo; ?></td>
                       <td><?= $ConsumerPhone; ?></td>
-                      <td><a href="index.php?page=departmentdetail&id=<?= $department_id; ?>"><?= $DepartmentName; ?></a></td>
+                      <td><a href="index.php?page=department_detail&id=<?= $department_id; ?>"><?= $DepartmentName; ?></a></td>
                       <td>
                         <?php
                         if($ClassID == '') 
@@ -242,7 +242,7 @@ $("#Date").click(function() {
                               $class_id = strval($document->_id);
                               $ClassName = $document->ClassName;
                               ?>
-                              <a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassName; ?></a>
+                              <a href="index.php?page=class_detail&id=<?= $class_id; ?>"><?= $ClassName; ?></a>
                               <?php
                             }
                           }

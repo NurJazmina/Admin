@@ -185,10 +185,10 @@ foreach ($cursor as $document)
                     }
                     ?>
                     <tr>
-                      <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                      <td class="text-left"><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
+                      <td class="text-left"><a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                      <td class="text-left"><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                       <td><?= $totalstudent; ?></td>
-                      <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                      <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                       <td><?= $Start_day; ?></td>
                       <td><?= $Start_hour; ?></td>
                       <td><?= $End_day; ?></td>
@@ -322,10 +322,10 @@ foreach ($cursor as $document)
                       }
                       ?>
                       <tr>
-                        <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                        <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
+                        <td class="text-left"><a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                        <td><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                         <td><?= $totalstudent; ?></td>
-                        <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                        <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                         <td><?= $Start_day; ?></td>
                         <td><?= $Start_hour; ?></td>
                         <td><?= $End_day; ?></td>
@@ -435,10 +435,10 @@ foreach ($cursor as $document)
                       }
                       ?>
                       <tr>
-                        <td class="text-left"><a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
-                        <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
+                        <td class="text-left"><a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                        <td><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
                         <td><?= $totalstudent; ?></td>
-                        <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                        <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                         <td><?= $Start_day; ?></td>
                         <td><?= $Start_hour; ?></td>
                         <td><?= $End_day; ?></td>
