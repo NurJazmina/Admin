@@ -2,6 +2,23 @@
 include 'model/timetablelist.php'; 
 $date = date("Y-m-d");
 $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
+
+$count = 0;
+$filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
+$query = new MongoDB\Driver\Query($filter);
+$cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+foreach ($cursor as $document)
+{
+  $teacher_id = strval($document->_id);
+
+  $filter = ['Teacher_id'=>$teacher_id];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+  foreach ($cursor as $document)
+  { 
+    $count = $count + 1;
+  }
+}
 ?>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
@@ -14,11 +31,19 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
         <h5 class="text-dark font-weight-bold my-1 mr-5">Timetable</h5>
         <!--end::Page Title-->
       </div>
+      <!--begin::Separator-->
+      <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+      <!--end::Separator-->
+      <!--begin::Detail-->
+      <div class="d-flex" id="kt_subheader_search">
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $count; ?> Total Data</span>
+      </div>
+      <!--end::Detail-->
       <!--end::Page Heading-->
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
-    <form class="d-flex" name="search_staff" action="index.php?page=timetablelist" method="post">
+    <form class="d-flex mb-2" name="search_staff" action="index.php?page=timetablelist" method="post">
       <?php 
       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
       {
@@ -95,7 +120,7 @@ $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000
                   $query = new MongoDB\Driver\Query($filter);
                   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
                   foreach ($cursor as $document)
-                  {
+                  { 
                     $class_rel_id = strval($document->_id);
                     $Class_id = $document->Class_id;
                     $Teacher_id = $document->Teacher_id;

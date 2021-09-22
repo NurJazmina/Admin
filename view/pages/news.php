@@ -24,7 +24,6 @@ include ('model/news.php');
 .view-first .popup {
   transform: translateY(-100px);
   opacity: 0;
-  font-family: Raleway, serif;
   transition: all 0.6s ease-in-out;
 }
 
@@ -89,7 +88,7 @@ include ('model/news.php');
     ?>
     <div class="col-lg-4 mb-3 view view-first">
       <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
-        <div class="card">
+        <div class="card mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->
             <div class="mt-5 mx-5">
@@ -112,9 +111,7 @@ include ('model/news.php');
             </div>
             <!-- end :: display -->
           </button>
-          <div class="mask bg-light">
-              <div class="text-center m-5"><button class="btn btn-success btn-hover-light btn-sm btn-block popup" type="submit">More Info</button></div>
-          </div>
+          <button class="btn btn-success btn-sm popup m-3" type="submit">More Info</button>
         </div>
       </form>
     </div>
@@ -174,7 +171,7 @@ include ('model/news.php');
       ?>
       <div class="col-lg-4 mb-3 view view-first">
         <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
-          <div class="card">
+          <div class="card mask">
             <button type="submit" class="btn btn-hover-light text-left">
              <!-- begin :: display -->
               <div class="p-5">
@@ -197,9 +194,7 @@ include ('model/news.php');
               </div>
                <!-- end :: display -->
             </button>
-            <div class="mask bg-light">
-                <div class="text-center m-5"><button class="btn btn-success btn-hover-light btn-sm btn-block popup" type="submit">More Info</button></div>
-            </div>
+            <button class="btn btn-success btn-sm popup m-3" type="submit">More Info</button>
           </div>
         </form>
       </div>

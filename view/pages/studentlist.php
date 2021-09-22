@@ -144,14 +144,14 @@ $(document).ready(function() {
       <!--end::Separator-->
       <!--begin::Detail-->
       <div class="d-flex align-items-center" id="kt_subheader_search">
-      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $school = $_SESSION["totalstudent"]; ?> Total Student</span>
+      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $_SESSION["totalstudent"]; ?> Total Student</span>
       </div>
       <!--end::Detail-->
       <!--end::Page Heading-->
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
-    <form class="d-flex" name="search_student" action="index.php?page=studentlist" method="post">
+    <form class="d-flex mb-2" name="search_student" action="index.php?page=studentlist" method="post">
       <?php 
       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
       {

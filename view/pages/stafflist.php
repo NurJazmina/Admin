@@ -84,7 +84,7 @@ $("#Date").click(function() {
       <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
       <!--end::Separator-->
       <!--begin::Detail-->
-      <div class="d-flex align-items-center" id="kt_subheader_search">
+      <div class="d-flex" id="kt_subheader_search">
       <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $school = $_SESSION["totalstaff"] + $_SESSION["totalteacher"]; ?> Total Staff</span>
       </div>
       <!--end::Detail-->
@@ -92,7 +92,7 @@ $("#Date").click(function() {
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
-    <form class="d-flex"name="search_staff" action="index.php?page=stafflist" method="post">
+    <form class="d-flex mb-2" name="search_staff" action="index.php?page=stafflist" method="post">
       <?php 
       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
       {

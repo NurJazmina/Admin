@@ -468,14 +468,21 @@
 					<h4 class="menu-text">Online Learning</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
-				<li class="menu-item menu-item" aria-haspopup="true" >
-					<a href="index.php?page=ol_dashboard" class="menu-link">
-						<span class="svg-icon menu-icon">
-							<i class="flaticon2-layers-1 icon-md"></i>
-						</span>
-						<span class="menu-text">Dashboard</span>
-					</a>
-				</li>
+				<?php
+				if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+				{
+					?> 
+					<li class="menu-item menu-item" aria-haspopup="true" >
+						<a href="index.php?page=ol_dashboard" class="menu-link">
+							<span class="svg-icon menu-icon">
+								<i class="flaticon2-layers-1 icon-md"></i>
+							</span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</li>
+					<?php
+				}
+				?>
 				<li class="menu-item menu-item" aria-haspopup="true" >
 					<a href="index.php?page=timetablelist" class="menu-link">
 						<span class="svg-icon menu-icon">

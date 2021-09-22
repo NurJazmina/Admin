@@ -266,7 +266,6 @@ if (isset($_POST['recheck_add_staff']))
       catch (Exception $e) { echo "Mailer Error: " . $mail->ErrorInfo;}
     }
   }
-  // end : email blaster
   $staff_id = '';
   $filter = ['ConsumerID'=>$consumer_id];
   $query = new MongoDB\Driver\Query($filter);

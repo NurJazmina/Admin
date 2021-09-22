@@ -56,14 +56,14 @@ else
       <!--end::Separator-->
       <!--begin::Detail-->
       <div class="d-flex align-items-center" id="kt_subheader_search">
-      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $school = $_SESSION["totalparent"]; ?> Total Student</span>
+      <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $_SESSION["totalparent"]; ?> Total Parent</span>
       </div>
       <!--end::Detail-->
       <!--end::Page Heading-->
     </div>
     <!--end::Info-->
     <!--begin::Toolbar-->
-    <form class="d-flex" name="search_parent" action="index.php?page=parentlist" method="post">
+    <form class="d-flex mb-2" name="search_parent" action="index.php?page=parentlist" method="post">
       <?php 
       if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
       {
