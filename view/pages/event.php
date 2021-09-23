@@ -89,9 +89,9 @@ include ('model/event.php');
       }
     }
     ?>
-    <div class="col-lg-4 mb-3 view view-first">
+    <div class="col-lg-6 col-xxl-4 order-1 order-xxl-1 view view-first">
       <form action="index.php?page=event_detail&id=<?= $event_id ?>" method="post">
-        <div class="card mask">
+        <div class="card card-custom card-stretch gutter-b mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->
             <div class="mt-5 mx-5">
@@ -107,7 +107,7 @@ include ('model/event.php');
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Address</a>
-                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= mb_strimwidth($Address, 0,30, "..."); ?></p>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= mb_strimwidth($Address, 0,15, "..."); ?></p>
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Venue</a>
@@ -197,7 +197,7 @@ include ('model/event.php');
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Address</a>
-                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= mb_strimwidth($Address, 0,30, "..."); ?></p>
+                  <p><i class="fas fa-map-marker-alt text-primary"></i>&nbsp;&nbsp;<?= mb_strimwidth($Address, 0,15, "..."); ?></p>
                 </div>
                 <div class="col-sm-4">
                   <a class="text-primary mb-1">Venue</a>
