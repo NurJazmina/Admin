@@ -38,6 +38,14 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true">
+					<a href="index.php?page=a" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-protected icon-md"></i>
+						</span>
+						<span class="menu-text">TEST EXPORT XLS</span>
+					</a>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true">
 					<a href="index.php?page=covid" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<i class="flaticon2-protected icon-md"></i>

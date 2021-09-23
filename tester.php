@@ -166,7 +166,10 @@ class Excel_XML
 }
 $xls = new Excel_XML('UTF-8', false, 'title text');
 
-$data = array(include 'view/pages/a.php');
+$_GET['id'] = '60370086cc81cb1aa07eaf84';
+$_GET['page'] = 'department_attendance';
+$_GET['date'] = '2021-09-23';
+$data = include 'view/pages/a.php';
 
 $xls -> addArray($data);
 $xls -> generateXML('file Name');  // its print code to browser use requred header to download

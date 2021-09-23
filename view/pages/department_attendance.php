@@ -88,7 +88,6 @@ else
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-
     foreach ($cursor as $document)
     {
       $department_id = strval($document->_id);
@@ -98,22 +97,24 @@ else
 $date = date("Y-m-d");
 $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
 
-if (isset($_POST['submit_date']))
+if (isset($_GET['date']))
 {
-    $date = $_POST['date'];
+    $date = $_GET['date'];
 }
 
 ?>
 <div class="text-dark-50 text-center"><h1>Department - Attendance</h1></div>
 <div class="card">
     <div class="card-body table-responsive">
-        <form name="submit_date" action="index.php?page=department_attendance&id=<?= $department_id; ?>" method="post">
+        <form name="date" action="index.php?" method="get">
             <div class="row mb-3">
                 <div class="col text-right">
                     <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
                 </div>
                 <div class="col text-right">
-                    <button type="submit" name="submit_date" class="btn btn-success btn-hover-light btn-sm">Submit</button>
+                    <input type="hidden" name="page" value="department_attendance">
+                    <input type="hidden" name="id" value="<?= $department_id; ?>">
+                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" >Submit</button>
                     <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm">Export Attendance To XLS</button>
                 </div>
             </div>
