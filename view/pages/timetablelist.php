@@ -3,7 +3,7 @@ include 'model/timetablelist.php';
 $date = date("Y-m-d");
 $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
 
-$count = 0;
+$count_for_staff = 0;
 $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
 $query = new MongoDB\Driver\Query($filter);
 $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
@@ -16,7 +16,7 @@ foreach ($cursor as $document)
   $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
   foreach ($cursor as $document)
   { 
-    $count = $count + 1;
+    $count_for_staff = $count_for_staff + 1;
   }
 }
 ?>
@@ -36,7 +36,39 @@ foreach ($cursor as $document)
       <!--end::Separator-->
       <!--begin::Detail-->
       <div class="d-flex" id="kt_subheader_search">
-        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $count; ?> Total Timetable</span>
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">
+        <?php  
+        if($_SESSION["loggeduser_ACCESS"] =='STAFF')
+        { 
+          echo $count_for_staff; 
+        } 
+        elseif($_SESSION["loggeduser_ACCESS"] =='TEACHER') 
+        { 
+          $count_for_class = 0;
+          $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+          foreach ($cursor as $document)
+          { 
+            $count_for_class = $count_for_class + 1;
+          }
+          echo $count_for_class; 
+        } 
+        elseif($_SESSION["loggeduser_ACCESS"] =='STUDENT')
+        {
+          $count_for_class = 0;
+          $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
+          $query = new MongoDB\Driver\Query($filter);
+          $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+          foreach ($cursor as $document)
+          { 
+            $count_for_class = $count_for_class + 1;
+          }
+          echo $count_for_class; 
+        }
+        ?> 
+        Total Timetable
+        </span>
       </div>
       <!--end::Detail-->
       <!--end::Page Heading-->
@@ -460,6 +492,132 @@ foreach ($cursor as $document)
                 </table>
               </div>
             </div>
+          </div>
+          <?php
+        }
+        elseif($_SESSION["loggeduser_ACCESS"] == "STUDENT")
+        {
+          ?>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="timetable_personal-tab" data-toggle="tab" href="#timetable_personal">
+                <span class="nav-icon">
+                  <i class="flaticon2-list-3"></i>
+                </span>
+                <span class="nav-text">Timetable Personal</span>
+              </a>
+            </li>
+          </ul>
+          <div class="table-responsive">
+            <table class="table table-sm text-center table-bordered">
+              <thead class="bg-success text-white"> 
+                <tr>
+                  <th>Name</th>
+                  <th>Class</th>
+                  <th>Student</th>
+                  <th>Subject</th>
+                  <th colspan="2">Start</th>
+                  <th colspan="2">End</th>
+                  <th>Status</th>
+                  <th>Update</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+                foreach ($cursor as $document)
+                {
+                  $class_rel_id = strval($document->_id);
+                  $Class_id = $document->Class_id;
+                  $Teacher_id = $document->Teacher_id;
+                  $Subject_id = $document->Subject_id;
+                  $Status = $document->Status;
+
+                  $Start = strval($document->Start);
+                  $End = strval($document->End);
+
+                  $Start = new MongoDB\BSON\UTCDateTime($Start);
+                  $Start = $Start->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                  $Start_day = date_format($Start,"d-m-Y");
+                  $Start_hour = date_format($Start,"H:i");
+
+                  $End = new MongoDB\BSON\UTCDateTime($End);
+                  $End = $End->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+                  $End_day = date_format($End,"d-m-Y");
+                  $End_hour = date_format($End,"H:i");
+
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Class_id)];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $ClassCategory = $document->ClassCategory;
+                    $ClassName = $document->ClassName;
+                  }
+
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $ConsumerID = $document->ConsumerID;
+
+                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                    $query = new MongoDB\Driver\Query($filter);
+                    $cursor =$GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                    foreach ($cursor as $document)
+                    {
+                      $consumer_id = strval($document->_id);
+                      $ConsumerFName = $document->ConsumerFName;
+                      $ConsumerLName = $document->ConsumerLName;
+                    }
+                  }
+
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $subject_id = strval($document->_id);
+                    $SubjectName = $document->SubjectName;
+                    $Class_category = $document->Class_category;
+                  }
+
+                  $totalstudent = 0;
+                  $filter = ['Class_id'=>$Class_id];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $totalstudent = $totalstudent + 1;
+                  }
+                  ?>
+                  <tr>
+                    <td class="text-left"><a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a></td>
+                    <td><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassCategory." ".$ClassName;?></a></td>
+                    <td><?= $totalstudent; ?></td>
+                    <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                    <td><?= $Start_day; ?></td>
+                    <td><?= $Start_hour; ?></td>
+                    <td><?= $End_day; ?></td>
+                    <td><?= $End_hour; ?></td>
+                    <td><?= $Status; ?></td>
+                    <td>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $class_rel_id; ?>">
+                        <i class="flaticon2-edit icon-md text-hover-success"></i>
+                      </button>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $class_rel_id; ?>">
+                        <i class="flaticon2-trash icon-md text-hover-success"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <?php
+                }
+                ?>
+              </tbody>
+            </table>
           </div>
           <?php
         }

@@ -188,55 +188,57 @@ if (isset($_POST['submit_date']))
             </tr>
           </tbody>
         </table>
-        <?php
-        $filter = ['Class_id'=>$class_id];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
-        foreach ($cursor as $document)
-        {
-          $Teacher_id = $document->Teacher_id;
-          $Subject_id = $document->Subject_id;
+        <table class="table table-bordered">
+          <tbody>
+            <tr class="bg-light text-dark-50">
+              <td>Teacher</td>
+              <td>Subject</td>
+            </tr>
+              <?php
+              $filter = ['Class_id'=>$class_id];
+              $query = new MongoDB\Driver\Query($filter);
+              $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.ClassroomSubjectRel',$query);
+              foreach ($cursor as $document)
+              {
+                $Teacher_id = $document->Teacher_id;
+                $Subject_id = $document->Subject_id;
 
-          $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
-          $query = new MongoDB\Driver\Query($filter);
-          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-          foreach ($cursor as $document)
-          {
-            $ConsumerID = $document->ConsumerID;
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Teacher_id)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
+                foreach ($cursor as $document)
+                {
+                  $ConsumerID = $document->ConsumerID;
 
-            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
-            $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
-            foreach ($cursor as $document)
-            {
-              $ConsumerFName = $document->ConsumerFName;
-              $ConsumerLName = $document->ConsumerLName;
-            }
-          }
-          $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
-          $query = new MongoDB\Driver\Query($filter);
-          $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
-          foreach ($cursor as $document)
-          {
-            $subject_id = $document->_id;
-            $subject_name = $document->SubjectName;
-          }
-          ?>
-          <table class="table table-bordered">
-            <tbody>
-              <tr class="bg-light text-dark-50">
-                <td>Teacher</td>
-                <td>Subject</td>
-              </tr>
-              <tr>
-                <td><a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></th></td>
-                <td><a href="index.php?page=subject_detail&id=<?= $subject_id; ?>"><?= $subject_name;?></td>
-              </tr>
-            </tbody>
-          </table>
-          <?php
-        }
-        ?>
+                  $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                  $query = new MongoDB\Driver\Query($filter);
+                  $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                  foreach ($cursor as $document)
+                  {
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
+                  }
+                  ?>
+                  <tr>
+                  <td><a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></th></td>
+                  <?php
+                }
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Subject_id)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsSubject',$query);
+                foreach ($cursor as $document)
+                {
+                  $subject_id = $document->_id;
+                  $subject_name = $document->SubjectName;
+                  ?>
+                  <td><a href="index.php?page=subject_detail&id=<?= $subject_id; ?>"><?= $subject_name;?></td>
+                  </tr>
+                  <?php
+                }
+              }
+              ?>
+          </tbody>
+        </table>
       </div>
       <!-- end::Subject/class detail -->
       <!-- begin::Remark -->

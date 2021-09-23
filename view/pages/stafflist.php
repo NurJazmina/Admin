@@ -342,6 +342,10 @@ $("#Date").click(function() {
             </div>
           </div>
           <div class="tab-pane fade" id="Attendance" role="tabpanel" aria-labelledby="Attendance-tab">
+          <?php
+          if($_SESSION["loggeduser_ACCESS"] =='STAFF' || $_SESSION["loggeduser_ACCESS"] =='TEACHER')
+          {
+            ?>
             <div class="card">
               <div class="card-body text-right">
                   <div class="form-group row">
@@ -361,6 +365,9 @@ $("#Date").click(function() {
                   <a id="test" class="table-responsive"></a>
               </div>
             </div>
+            <?php
+          }
+          ?>
           </div>
         </div>
       </div>
