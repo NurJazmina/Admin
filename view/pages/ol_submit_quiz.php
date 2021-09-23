@@ -141,16 +141,16 @@ function time_elapsed($date){
                     }
                 }
                 ?>
-                <h3 class="text-dark-600 mb-8"> QUIZ : <?php echo $Title; ?></h3>
+                <h3 class="text-dark-600 mb-8"> QUIZ : <?= $Title; ?></h3>
 
                 <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white py-2 px-4 mb-10">
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Opened </h6></div>
-                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$DateOpen; ?></h6></div>
+                        <div class="col-sm-10 text-left"><h6><?= ": ".$DateOpen; ?></h6></div>
                     </div>
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Closed </h6></div>
-                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$DateClosedate; ?></h6></div>
+                        <div class="col-sm-10 text-left"><h6><?= ": ".$DateClosedate; ?></h6></div>
                     </div>
                 </div>
 
@@ -168,21 +168,21 @@ function time_elapsed($date){
                     { 
                         $Consumer_id = $document->Consumer_id;
                         $total = $total + 1;
-                        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                        $query1 = new MongoDB\Driver\Query($filter1);
-                        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                        foreach ($cursor1 as $document1)
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                        foreach ($cursor as $document)
                         {
-                            $consumer_id = strval($document1->_id);
+                            $consumer_id = strval($document->_id);
 
-                            $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
-                            $query2 = new MongoDB\Driver\Query($filter2);
-                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
-                            foreach ($cursor2 as $document2)
+                            $filter = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query);
+                            foreach ($cursor as $document)
                             {
                                 $total_submission = $total_submission + 1;
 
-                                $Quiz_Answer = $document2->Quiz;
+                                $Quiz_Answer = $document->Quiz;
                                 $Total_Answer = count((array)$Quiz_Answer);
                                 $sub_mark = 0;
 
@@ -235,19 +235,19 @@ function time_elapsed($date){
                             </tr>
                             <tr class="text-dark-50">
                                 <th class="col-6">Shuffle</th>
-                                <td><?php echo $Shuffle; ?></td>
+                                <td><?= $Shuffle; ?></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
                                 <th class="col-6">Participants</th>
-                                <td><?php echo $total; ?></td>
+                                <td><?= $total; ?></td>
                             </tr>
                             <tr class="text-dark-50">
                                 <th class="col-6">Submitted</th>
-                                <td><?php echo $total_submission; ?></td>
+                                <td><?= $total_submission; ?></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
                                 <th class="col-6">Needs grading</th>
-                                <td><?php echo $not_graded; ?></td>
+                                <td><?= $not_graded; ?></td>
                             </tr>
                             <tr class="text-dark-50">
                                 <th class="col-6">Time remaining</th>
@@ -255,17 +255,18 @@ function time_elapsed($date){
                                 <?php
                                 $due = date_format($DateClosezone,"Y-m-d\TH:i:s");
                                 $due = new MongoDB\BSON\UTCDateTime((new DateTime($due))->getTimestamp());
-
                                 $now = time();
                                 $due = strval($due);
 
                                 if ($due >= $now)
                                 {
-                                    echo " ".time_elapsed($due-$now)." \n";  
+                                    $time_remaining = time_elapsed($due-$now);  
+                                    echo $time_remaining;   
                                 }
                                 else
                                 {
-                                    ?> Quiz is due <?php
+                                    $time_remaining = 'Quiz is due';
+                                    echo $time_remaining;
                                 }
                                 ?>
                                 </td>
@@ -315,7 +316,7 @@ function time_elapsed($date){
                                                             </a>
                                                         </li>
                                                         <li class="navi-item">
-                                                            <a href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
+                                                            <a href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id ?>&action=grading&list_submission=<?= "xls"; ?>" class="navi-link">
                                                                 <span class="navi-icon">
                                                                     <i class="la la-file-excel-o"></i>
                                                                 </span>
@@ -351,24 +352,21 @@ function time_elapsed($date){
                                                 {
                                                     $Consumer_id = $document->Consumer_id;
                                                     
-                                                    $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                                    $query1 = new MongoDB\Driver\Query($filter1);
-                                                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                                                        
-                                                    foreach ($cursor1 as $document1)
+                                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                                    $query = new MongoDB\Driver\Query($filter);
+                                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                                    foreach ($cursor as $document)
                                                     {
-                                                        $consumer_id = strval($document1->_id);
+                                                        $consumer_id = strval($document->_id);
                             
-                                                        $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
-                                                        $query2 = new MongoDB\Driver\Query($filter2);
-                                                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
-                            
-                                                        
-                                                        foreach ($cursor2 as $document2)
+                                                        $filter = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
+                                                        $query = new MongoDB\Driver\Query($filter);
+                                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query);
+                                                        foreach ($cursor as $document)
                                                         {
                                                             $total = $total + 1;
 
-                                                            $Quiz_Answer = $document2->Quiz;
+                                                            $Quiz_Answer = $document->Quiz;
                                                             $Total_Answer = count((array)$Quiz_Answer);
                                                             $sub_mark = 0;
 
@@ -409,22 +407,20 @@ function time_elapsed($date){
                                 $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
                                 foreach ($cursor as $document)
                                 {
                                     $Consumer_id = $document->Consumer_id;
-                                    $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                    $query1 = new MongoDB\Driver\Query($filter1);
-                                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                                        
-                                    foreach ($cursor1 as $document1)
+                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                    foreach ($cursor as $document)
                                     {
-                                        $consumer_id = strval($document1->_id);
-                                        $Consumer_FName = $document1->ConsumerFName;
-                                        $Consumer_LName = $document1->ConsumerLName;
+                                        $consumer_id = strval($document->_id);
+                                        $Consumer_FName = $document->ConsumerFName;
+                                        $Consumer_LName = $document->ConsumerLName;
                                         ?>
                                         <tr bgcolor="white" class="text-center">
-                                        <td><?php echo $Consumer_FName; ?></td>
+                                        <td><?= $Consumer_FName; ?></td>
                                         <?php
 
                                         $Answer_Created_by = '';
@@ -438,15 +434,14 @@ function time_elapsed($date){
                                         $due = strval($due);
                                         $time_elapsed = 0;
 
-                                        $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
-                                        $query2 = new MongoDB\Driver\Query($filter2);
-                                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
-
-                                        foreach ($cursor2 as $document2)
+                                        $filter = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
+                                        $query = new MongoDB\Driver\Query($filter);
+                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query);
+                                        foreach ($cursor as $document)
                                         {
-                                            $Answer_id = strval($document2->_id);
-                                            $Answer_Created_by = $document2->Created_by;
-                                            $Created_date = $document2->Created_date;
+                                            $Answer_id = strval($document->_id);
+                                            $Answer_Created_by = $document->Created_by;
+                                            $Created_date = $document->Created_date;
 
                                             $Submit = new MongoDB\BSON\UTCDateTime(strval($Created_date));
                                             $Submit = $Submit->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -457,7 +452,7 @@ function time_elapsed($date){
                                             $now = time();
                                             $due = strval($due);
 
-                                            $Quiz_Answer = $document2->Quiz;
+                                            $Quiz_Answer = $document->Quiz;
                                             $Total_Answer = count((array)$Quiz_Answer);
                                             $total_mark = 0;
 
@@ -475,10 +470,10 @@ function time_elapsed($date){
                                                 <div class="row">
                                                     <div class="col-sm-1"></div>
                                                     <div class="col-sm-3">
-                                                        <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
+                                                        <div class="bg-warning text-white text-center"><?= "submitted for grading"; ?></div>
                                                     </div>
                                                     <div class="col-sm text-left">
-                                                        <a style="color:green;"><?php echo "Quiz was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
+                                                        <a style="color:green;"><?= "Quiz was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
                                                     </div>
                                                 </div>
                                                 </td>
@@ -488,7 +483,7 @@ function time_elapsed($date){
                                                     </button>
                                                 </td>
                                                 <td>
-                                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditCommentQuiz" data-bs-whatever="<?php echo $Answer_id; ?>">
+                                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditCommentQuiz" data-bs-whatever="<?= $Answer_id; ?>">
                                                     <i  class="fa fa-edit"></i>
                                                 </button>
                                                 </td>
@@ -505,10 +500,10 @@ function time_elapsed($date){
                                                     <div class="row">
                                                         <div class="col-sm-1"></div>
                                                         <div class="col-sm-3">
-                                                            <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
+                                                            <div class="bg-warning text-white text-center"><?= "submitted for grading"; ?></div>
                                                         </div>
                                                         <div class="col-sm text-left">
-                                                            <a style="color:red;"><?php echo "Quiz was submitted : ".time_elapsed($Submit-$due)." late \n"; ?></a>
+                                                            <a style="color:red;"><?= "Quiz was submitted : ".time_elapsed($Submit-$due)." late \n"; ?></a>
                                                         </div>
                                                     </div>
                                                     </td>
@@ -518,7 +513,7 @@ function time_elapsed($date){
                                                         </button>
                                                     </td>
                                                     <td>
-                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditCommentQuiz" data-bs-whatever="<?php echo $Answer_id; ?>">
+                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditCommentQuiz" data-bs-whatever="<?= $Answer_id; ?>">
                                                         <i  class="fa fa-edit"></i>
                                                     </button>
                                                     </td>
@@ -531,10 +526,10 @@ function time_elapsed($date){
                                                     <div class="row">
                                                         <div class="col-sm-1"></div>
                                                         <div class="col-sm-3">
-                                                            <div class="bg-warning text-white text-center"><?php echo "submitted for grading"; ?></div>
+                                                            <div class="bg-warning text-white text-center"><?= "submitted for grading"; ?></div>
                                                         </div>
                                                         <div class="col-sm text-left">
-                                                        <a style="color:green;"><?php echo "Quiz was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
+                                                        <a style="color:green;"><?= "Quiz was submitted :".time_elapsed($due-$Submit)." before due \n"; ?></a>
                                                         </div>
                                                     </div>
                                                     </td>
@@ -544,7 +539,7 @@ function time_elapsed($date){
                                                         </button>
                                                     </td>
                                                     <td>
-                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditCommentQuiz" data-bs-whatever="<?php echo $Answer_id; ?>">
+                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditCommentQuiz" data-bs-whatever="<?= $Answer_id; ?>">
                                                         <i  class="fa fa-edit"></i>
                                                     </button>
                                                     </td>
@@ -562,10 +557,10 @@ function time_elapsed($date){
                                                 <div class="row">
                                                     <div class="col-sm-1"></div>
                                                     <div class="col-sm-3">
-                                                        <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
+                                                        <div class="bg-danger text-white text-center"><?= "No submission"; ?></div>
                                                     </div>
                                                     <div class="col-sm text-left">
-                                                        <a style="color:green;"><?php echo "Quiz not due yet :";  echo " ".time_elapsed($due-$now)." left \n"; ?></a>
+                                                        <a style="color:green;"><?= "Quiz not due yet :";  echo " ".time_elapsed($due-$now)." left \n"; ?></a>
                                                     </div>
                                                 </div>
                                                 </td>
@@ -589,10 +584,10 @@ function time_elapsed($date){
                                                 <div class="row">
                                                     <div class="col-sm-1"></div>
                                                     <div class="col-sm-3">
-                                                        <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
+                                                        <div class="bg-danger text-white text-center"><?= "No submission"; ?></div>
                                                     </div>
                                                     <div class="col-sm text-left">
-                                                        <a style="color:red;"><?php echo "Quiz is overdue :";  echo " ".time_elapsed($now-$due)." ago \n"; ?></a>
+                                                        <a style="color:red;"><?= "Quiz is overdue :";  echo " ".time_elapsed($now-$due)." ago \n"; ?></a>
                                                     </div>
                                                 </div>
                                                 </td>
@@ -657,17 +652,17 @@ function time_elapsed($date){
                                         {
                                             $Consumer_id = $document->Consumer_id;
 
-                                            $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                            $query1 = new MongoDB\Driver\Query($filter1);
-                                            $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                                            foreach ($cursor1 as $document1)
+                                            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                            $query = new MongoDB\Driver\Query($filter);
+                                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                            foreach ($cursor as $document)
                                             {
-                                                $consumer_id = strval($document1->_id);
-                                                $Consumer_FName = $document1->ConsumerFName;
-                                                $Consumer_LName = $document1->ConsumerLName;
+                                                $consumer_id = strval($document->_id);
+                                                $Consumer_FName = $document->ConsumerFName;
+                                                $Consumer_LName = $document->ConsumerLName;
                                             }
                                             ?>
-                                            <li class="dropdown-item"><a class="text-secondary text-hover-primary" href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>&action=grader&user=<?php echo $Consumer_id; ?>"><?php echo $Consumer_FName." ".$Consumer_LName; ?></a></li>
+                                            <li class="dropdown-item"><a class="text-secondary text-hover-primary" href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id; ?>&action=grader&user=<?= $Consumer_id; ?>"><?= $Consumer_FName." ".$Consumer_LName; ?></a></li>
                                             <?php
                                         }
                                         ?>
@@ -675,33 +670,30 @@ function time_elapsed($date){
                                 </div>
                             </div>
                             <?php
-
                             if (!isset($_GET['user']) && empty($_GET['user']))
                             {
-                                $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                $query1 = new MongoDB\Driver\Query($filter1);
-                                $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                             }
                             else
                             {
                                 $Consumer_id = ($_GET['user']);
-                                $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                $query1 = new MongoDB\Driver\Query($filter1);
-                                $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                $query = new MongoDB\Driver\Query($filter);
+                                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                             }
-                                
-                            foreach ($cursor1 as $document1)
+                            foreach ($cursor as $document)
                             {
-                                $consumer_id = strval($document1->_id);
-                                $Consumer_FName = $document1->ConsumerFName;
-                                $Consumer_LName = $document1->ConsumerLName;
-                                $ConsumerIDNo = $document1->ConsumerIDNo;
-                                $ConsumerAddress = $document1->ConsumerAddress;
-                                $ConsumerPhone = $document1->ConsumerPhone;
-                               
+                                $consumer_id = strval($document->_id);
+                                $Consumer_FName = $document->ConsumerFName;
+                                $Consumer_LName = $document->ConsumerLName;
+                                $ConsumerIDNo = $document->ConsumerIDNo;
+                                $ConsumerAddress = $document->ConsumerAddress;
+                                $ConsumerPhone = $document->ConsumerPhone;
                                 ?>
                                     <div class="mx-10 mb-3">
-                                        <h5><b><?php echo $Consumer_FName." ".$Consumer_LName."<br>"; ?></b></h5>
+                                        <h5><b><?= $Consumer_FName." ".$Consumer_LName."<br>"; ?></b></h5>
                                         <?php
                                         echo $ConsumerIDNo."<br>";
                                         echo $ConsumerPhone."<br>";
@@ -720,16 +712,16 @@ function time_elapsed($date){
                                     $due = strval($due);
                                     $time_elapsed = 0;
 
-                                    $filter2 = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
-                                    $query2 = new MongoDB\Driver\Query($filter2);
-                                    $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query2);
+                                    $filter = ['Created_by'=>$consumer_id,'Quiz_id'=>$Quiz_id];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz_Answer',$query);
 
-                                    foreach ($cursor2 as $document2)
+                                    foreach ($cursor as $document)
                                     {
-                                        $Answer_id = strval($document2->_id);
-                                        $Answer_Created_by = $document2->Created_by;
-                                        $Created_date = $document2->Created_date;
-                                        $Comment = $document2->Comment;
+                                        $Answer_id = strval($document->_id);
+                                        $Answer_Created_by = $document->Created_by;
+                                        $Created_date = $document->Created_date;
+                                        $Comment = $document->Comment;
 
                                         $Created_date = new MongoDB\BSON\UTCDateTime(strval($Created_date));
                                         $Created_date = $Created_date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
@@ -744,7 +736,7 @@ function time_elapsed($date){
                                         $Created_date = strval($Created_date);
                                         $now = time();
                                         $due = strval($due);
-                                        $Quiz_Answer = $document2->Quiz;
+                                        $Quiz_Answer = $document->Quiz;
                                         $Total_Answer = count((array)$Quiz_Answer);
                                         $objective_ans_mark = 0;
                                         $subjective_ans_mark = 0;
@@ -782,7 +774,7 @@ function time_elapsed($date){
                                                         <!--begin::Item-->
                                                         <div class="timeline-item align-items-start">
                                                             <!--begin::Label-->
-                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submitfrom; ?></b></div>
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?= $Submitfrom; ?></b></div>
                                                             <!--end::Label-->
                                                             <!--begin::Badge-->
                                                             <div class="timeline-badge">
@@ -803,7 +795,7 @@ function time_elapsed($date){
                                                         <!--begin::Item-->
                                                         <div class="timeline-item align-items-start">
                                                             <!--begin::Label-->
-                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?= $Submit_dateformat; ?></b></div>
                                                             <!--end::Label-->
                                                             <!--begin::Badge-->
                                                             <div class="timeline-badge">
@@ -822,7 +814,7 @@ function time_elapsed($date){
                                                         <!--begin::Item-->
                                                         <div class="timeline-item align-items-start">
                                                             <!--begin::Label-->
-                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Duedate; ?></b></div>
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?= $Duedate; ?></b></div>
                                                             <!--end::Label-->
                                                             <!--begin::Badge-->
                                                             <div class="timeline-badge">
@@ -841,7 +833,7 @@ function time_elapsed($date){
                                                         <!--begin::Item-->
                                                         <div class="timeline-item align-items-start">
                                                             <!--begin::Label-->
-                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?php echo $Submit_dateformat; ?></b></div>
+                                                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"><b><?= $Submit_dateformat; ?></b></div>
                                                             <!--end::Label-->
                                                             <!--begin::Badge-->
                                                             <div class="timeline-badge">
@@ -869,7 +861,7 @@ function time_elapsed($date){
                                                     </div>
                                                     <div class="col-sm">
                                                         <b>:</b>
-                                                        <b><?php echo $Total_ans_mark; ?> / <?=  $totalmark ?></b>
+                                                        <b><?= $Total_ans_mark; ?> / <?=  $totalmark ?></b>
                                                     </div>
                                                 </div>
                                                 <div class="row mx-0 mt-3">
@@ -879,7 +871,7 @@ function time_elapsed($date){
                                                     <div class="col-sm">
                                                         <div class="checkbox-inline">
                                                             <b>:</b>&nbsp;
-                                                            <b><?php echo $objective_ans_mark; ?> / <?=  $objective_mark ?></b>&nbsp; &nbsp;
+                                                            <b><?= $objective_ans_mark; ?> / <?=  $objective_mark ?></b>&nbsp; &nbsp;
                                                             <span class="label label-md font-weight-bold label-pill label-inline label-primary">
                                                            graded   
                                                             </span>
@@ -897,7 +889,7 @@ function time_elapsed($date){
                                                         <div class="col-sm">
                                                             <div class="checkbox-inline">
                                                                 <b>:</b>&nbsp;
-                                                                <b><?php echo $subjective_ans_mark; ?> / <?=  $subjective_mark ?></b>&nbsp; &nbsp;
+                                                                <b><?= $subjective_ans_mark; ?> / <?=  $subjective_mark ?></b>&nbsp; &nbsp;
                                                                 <span class="label label-md font-weight-bold label-pill label-inline label-primary">
                                                                 <?php
                                                                 if ($subjective_ans_mark == 0)
@@ -923,7 +915,7 @@ function time_elapsed($date){
                                                     <div class="col-sm">
                                                         <div class="checkbox-inline">
                                                             <b>:</b>&nbsp;
-                                                            <b><?php echo $Comment; ?></b>
+                                                            <b><?= $Comment; ?></b>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -933,7 +925,7 @@ function time_elapsed($date){
                                         <div class="mx-6 mb-3">
                                             <form name="GradeSubjective" action="" method="post">
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="answer_id" value="<?php echo $Answer_id; ?>">
+                                                    <input type="hidden" name="answer_id" value="<?= $Answer_id; ?>">
                                                     <?php
                                                     for ($i = 0; $i < $Total_Question; $i++)
                                                     {
@@ -953,10 +945,10 @@ function time_elapsed($date){
                                                                 <div class="col-sm">
                                                                     <div class="row">
                                                                         <div class="col-2">
-                                                                            <label class="align-items-baseline">Question <?php echo $id; ?></label>
+                                                                            <label class="align-items-baseline">Question <?= $id; ?></label>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label align="justify"><?php echo $Question; ?></label>
+                                                                            <label align="justify"><?= $Question; ?></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
@@ -964,7 +956,7 @@ function time_elapsed($date){
                                                                             <label>Answer Key</label>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label align="justify"><?php echo $Answer; ?></label>
+                                                                            <label align="justify"><?= $Answer; ?></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
@@ -972,7 +964,7 @@ function time_elapsed($date){
                                                                             <label class="text-primary"><b>Answer</b></label>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label class="text-primary" align="justify"><b><?php echo $Answer2; ?></b></label>
+                                                                            <label class="text-primary" align="justify"><b><?= $Answer2; ?></b></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
@@ -980,7 +972,7 @@ function time_elapsed($date){
                                                                             <label>Mark</label>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <input class="form-control" type="number" name="ans<?= $id  ?>" min="0" max="<?=  $Mark_subjective ?>" placeholder="  Mark out of <?php echo $Mark_subjective; ?>">
+                                                                            <input class="form-control" type="number" name="ans<?= $id  ?>" min="0" max="<?=  $Mark_subjective ?>" placeholder="  Mark out of <?= $Mark_subjective; ?>">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -999,7 +991,7 @@ function time_elapsed($date){
                                                     </div>
                                                     <div class="row mb-5">
                                                         <div class="col-sm ">
-                                                            <input type="hidden" name="quiz_id" value="<?php echo $Quiz_id; ?>">
+                                                            <input type="hidden" name="quiz_id" value="<?= $Quiz_id; ?>">
                                                             <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
                                                             <button type="submit" name="GradeSubjective" class="btn btn-success btn-sm">Submit</button>
                                                         </div>  
@@ -1027,21 +1019,33 @@ function time_elapsed($date){
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_quiz&id=<?php echo $Quiz_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview quiz now</a>
-                                <a href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
-                                <a href="index.php?page=ol_submit_quiz&id=<?php echo $Quiz_id; ?>&action=grader"><button type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Grade</button></a>
+                                <a href="index.php?page=ol_quiz&id=<?= $Quiz_id; ?>" type="button" class="btn btn-sm btn-secondary btn-hover-light">Preview quiz now</a>
+                                <a href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary btn-hover-light">View all submission</button></a>
+                                <a href="index.php?page=ol_submit_quiz&id=<?= $Quiz_id; ?>&action=grader"><button type="button" class="btn btn-sm btn-secondary btn-hover-light">Grade</button></a>
                             </div>
                         </div>
                     </div>
                     <?php
                 } 
-                elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT')
+                elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT' && $time_remaining !== 'Quiz is due')
                 {
                     ?>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_quiz&id=<?php echo $Quiz_id; ?>" type="button" class="btn btn-sm text-white">Quiz Attempts</a>
+                                <a href="index.php?page=ol_quiz&id=<?= $Quiz_id; ?>" type="button" class="btn btn-sm btn-secondary btn-hover-light">Quiz Attempts</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                elseif($_SESSION["loggeduser_ACCESS"] == 'STUDENT' && $time_remaining == 'Quiz is due')
+                {
+                    ?>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <button class="btn btn-sm btn-secondary btn-hover-light" disabled>Quiz overdue</button>
                             </div>
                         </div>
                     </div>

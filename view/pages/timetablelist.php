@@ -519,7 +519,6 @@ foreach ($cursor as $document)
                   <th colspan="2">Start</th>
                   <th colspan="2">End</th>
                   <th>Status</th>
-                  <th>Update</th>
                 </tr>
               </thead>
               <tbody>
@@ -604,14 +603,6 @@ foreach ($cursor as $document)
                     <td><?= $End_day; ?></td>
                     <td><?= $End_hour; ?></td>
                     <td><?= $Status; ?></td>
-                    <td>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_timetable" data-bs-whatever="<?= $class_rel_id; ?>">
-                        <i class="flaticon2-edit icon-md text-hover-success"></i>
-                      </button>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#delete_timetable" data-bs-whatever="<?= $class_rel_id; ?>">
-                        <i class="flaticon2-trash icon-md text-hover-success"></i>
-                      </button>
-                    </td>
                   </tr>
                   <?php
                 }

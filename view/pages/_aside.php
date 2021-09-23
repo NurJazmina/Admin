@@ -469,7 +469,7 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<?php
-				if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+				if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER' || $_SESSION["loggeduser_ACCESS"] == 'STUDENT')
 				{
 					?> 
 					<li class="menu-item menu-item" aria-haspopup="true" >

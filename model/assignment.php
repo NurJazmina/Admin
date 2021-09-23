@@ -119,6 +119,12 @@ if (isset($_POST['assignment_answer']))
   $Created_by = $_SESSION["loggeduser_id"];
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
+  //database answer
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $bulk->delete(['Assignment_id'=>$Assignment_id]);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Assignment_Answer', $bulk, $writeConcern);
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
                   'School_id'=>$School_id,

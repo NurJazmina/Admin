@@ -129,8 +129,8 @@ if (isset($_POST['answer']))
 {
   $Quiz_id = $_POST['id'];
   $Total_Question = $_POST['Total_Question'];
-  $School_id = strval($_SESSION["loggeduser_school_id"]);
-  $Created_by = strval($_SESSION["loggeduser_id"]);
+  $School_id = $_SESSION["loggeduser_school_id"];
+  $Created_by = $_SESSION["loggeduser_id"];
   $Created_date = new MongoDB\BSON\UTCDateTime((new DateTime('now'))->getTimestamp()*1000);
 
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Quiz_id)];
@@ -163,6 +163,13 @@ if (isset($_POST['answer']))
     ];
     array_push($array, $arraycount);
   }
+
+  //database answer
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $bulk->delete(['Quiz_id'=>$Quiz_id]);
+  $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+  $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
+
   $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
   $bulk->insert([
                   'School_id'=>$School_id,
@@ -172,7 +179,6 @@ if (isset($_POST['answer']))
                   'Comment'=>'null',
                   'Quiz'=>$array
                 ]);
-
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
 }
@@ -229,7 +235,6 @@ if (isset($_POST['GradeSubjective']))
   $filter = ['_id'=>new \MongoDB\BSON\ObjectId($quiz_id)];
   $query = new MongoDB\Driver\Query($filter);
   $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Quiz',$query);
-
   foreach ($cursor as $document)
   {
     $Quiz = $document->Quiz;
@@ -242,7 +247,6 @@ if (isset($_POST['GradeSubjective']))
     if($Type == 'SUBJECTIVE')
     {
       $id = $Quiz[$i]->id;
-      
       $bulk = new MongoDB\Driver\BulkWrite(['ordered' => TRUE]);
       $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($answer_id)],
                     ['$set' => 
