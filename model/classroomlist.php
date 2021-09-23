@@ -211,32 +211,4 @@ else
   $pagingnext = 1;
   $pagingprevious = 0;
 }
-
-if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
-{
-  if (!isset($_GET['level']) && empty($_GET['level']))
-  {
-    $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"]];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-  }
-  else
-  {
-    $sort = ($_GET['level']);
-    $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],
-              'ClassCategory'=>$sort
-              ];
-    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
-    $query = new MongoDB\Driver\Query($filter,$option);
-    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-  }
-}
-else
-{
-  $classname = ($_POST['classname']);
-  $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],'ClassName'=>$classname];
-  $query = new MongoDB\Driver\Query($filter);
-  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
-}
 ?>

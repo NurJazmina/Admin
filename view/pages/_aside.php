@@ -38,6 +38,14 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true">
+					<a href="index.php?page=a" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-protected icon-md"></i>
+						</span>
+						<span class="menu-text">TEST EXPORT XLS</span>
+					</a>
+				</li>
+				<li class="menu-item menu-item" aria-haspopup="true">
 					<a href="index.php?page=covid" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<i class="flaticon2-protected icon-md"></i>
@@ -328,7 +336,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=departmentdetail" class="menu-link menu-toggle">
+									<a href="index.php?page=department_detail" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -393,7 +401,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=subjectdetail" class="menu-link menu-toggle">
+									<a href="index.php?page=subject_detail" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -443,7 +451,7 @@
 								}
 								?>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="index.php?page=classdetail" class="menu-link menu-toggle">
+									<a href="index.php?page=class_detail" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
@@ -469,7 +477,7 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				<?php
-				if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER')
+				if ($_SESSION["loggeduser_ACCESS"] == 'TEACHER' || $_SESSION["loggeduser_ACCESS"] == 'STUDENT')
 				{
 					?> 
 					<li class="menu-item menu-item" aria-haspopup="true" >

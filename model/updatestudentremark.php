@@ -82,6 +82,6 @@ if (isset($_POST['UpdateStudentRemark'])) {
      printf("Other error: %s\n", $e->getMessage());
      exit;
    }
-  header ('location: ../index.php?page=studentdetail&id=' . $id);
+  header ('location: ../index.php?page=student_detail&id=' . $id);
 }
 ?>

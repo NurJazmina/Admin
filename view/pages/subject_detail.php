@@ -46,7 +46,7 @@
                   $subject_name = $document->SubjectName;
                   ?>
                   <li class="dropdown-item">
-                    <a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>" class="navi-link">
+                    <a href="index.php?page=subject_detail&id=<?= $subject_id; ?>" class="navi-link">
                       <?= $subject_name; ?>
                     </a>
                   </li>
@@ -124,7 +124,7 @@ else
                   $totalclass = $totalclass + 1;
                   $ClassName = $document->ClassName;
                   ?>
-                  <a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName;?></a><br>
+                  <a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassName;?></a><br>
                   <?php
                 }
               }
@@ -180,10 +180,10 @@ else
               </tr>
               <tr>
                 <td>
-                  <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a>
+                  <a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>"><?= $ConsumerFName." ".$ConsumerLName;?></a>
                 </td>
                 <td>
-                  <a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName;?></a>
+                  <a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassName;?></a>
                 </td>
               </tr>
             </tbody>

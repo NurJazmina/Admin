@@ -58,7 +58,7 @@ if (isset($_GET['ERROR']) && !empty($_GET['ERROR']))
           ?>
           <tr class="bg-white">
             <td><?= $calc; ?></td>
-            <td><a href="index.php?page=departmentdetail&id=<?= $Department_id; ?>"><?= $DepartmentName; ?></a></td>
+            <td><a href="index.php?page=department_detail&id=<?= $Department_id; ?>"><?= $DepartmentName; ?></a></td>
             <td>
               <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edit_department" data-bs-whatever="<?= $Department_id; ?>">
                 <i class="flaticon2-edit icon-md text-hover-success"></i>

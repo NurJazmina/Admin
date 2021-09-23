@@ -320,7 +320,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="forumdetail") 
+    if ($_GET['page']=="forum_detail") 
     {
       ?>
       <script>
@@ -391,7 +391,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="staffdetail") 
+    if ($_GET['page']=="staff_detail") 
     {
       ?>
       <script>
@@ -412,7 +412,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="studentdetail") 
+    if ($_GET['page']=="student_detail") 
     {
       ?>
       <script>
@@ -433,7 +433,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="parentdetail") 
+    if ($_GET['page']=="parent_detail") 
     {
       ?>
       <script>
@@ -454,7 +454,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="departmentdetail") 
+    if ($_GET['page']=="department_detail") 
     {
       ?>
       <script>
@@ -475,7 +475,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="classdetail") 
+    if ($_GET['page']=="class_detail") 
     {
       ?>
       <script>
@@ -496,7 +496,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
     }
-    if ($_GET['page']=="subjectdetail") 
+    if ($_GET['page']=="subject_detail") 
     {
       ?>
       <script>
@@ -600,7 +600,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
       </script>
       <?php
       }
-      if ($_GET['page']=="schoolforumdetail") 
+      if ($_GET['page']=="schoolforum_detail") 
       {
         ?>
         <script>
@@ -615,7 +615,7 @@ if (isset($_GET['page']) && !empty($_GET['page']))
         </script>
         <?php
       }
-      if ($_GET['page']=="publicforumdetail") 
+      if ($_GET['page']=="publicforum_detail") 
       {
         ?>
         <script>

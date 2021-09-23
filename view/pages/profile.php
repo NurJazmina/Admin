@@ -163,8 +163,8 @@ if (isset($_POST['submit_date']))
                         }
                         ?>
                         <tr>
-                        <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
-                        <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                        <td><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
+                        <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                         </tr>
                         <?php
                     }
@@ -208,8 +208,8 @@ if (isset($_POST['submit_date']))
                         }
                         ?>
                         <tr>
-                        <td><a href="index.php?page=classdetail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
-                        <td><a href="index.php?page=subjectdetail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
+                        <td><a href="index.php?page=class_detail&id=<?= $Class_id; ?>"><?= $ClassName; ?></a></td>
+                        <td><a href="index.php?page=subject_detail&id=<?= $Subject_id; ?>"><?= $SubjectName; ?></a></td>
                         </tr>
                         <?php
                     }

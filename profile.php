@@ -462,7 +462,7 @@
                                                                                     </span>
                                                                                 </td>
                                                                                 <td class="pl-0">
-                                                                                    <a href="index.php?page=newsdetail&id=<?= $new_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
+                                                                                    <a href="index.php?page=news_detail&id=<?= $new_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
                                                                                     <span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
                                                                                     <span class="text-muted font-weight-bold d-block"><?= date_format($Date,"d M, H:i")." "; ?></span>
                                                                                 </td>
@@ -564,7 +564,7 @@
                                                                                 </svg><!--end::Svg Icon--></span>
                                                                             </td>
                                                                             <td class="pl-0">
-                                                                                <a href="index.php?page=newsdetail&id=<?= $new_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
+                                                                                <a href="index.php?page=news_detail&id=<?= $new_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
                                                                                 <span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
                                                                                 <span class="text-muted font-weight-bold d-block"><?= date_format($Date,"d M, H:i")." "; ?></span>
                                                                             </td>
@@ -705,7 +705,7 @@
                                                                                     </svg><!--end::Svg Icon--></span>
                                                                                 </td>
                                                                                 <td class="pl-0">
-                                                                                    <a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
+                                                                                    <a href="index.php?page=event_detail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
                                                                                     <span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
                                                                                     <span class="text-muted font-weight-bold d-block"><?= date_format($datetimeStart,"d M, H:i")." "; ?></span>
                                                                                 </td>
@@ -811,7 +811,7 @@
                                                                                     </svg><!--end::Svg Icon--></span>
                                                                                 </td>
                                                                                 <td class="pl-0">
-                                                                                    <a href="index.php?page=eventdetail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
+                                                                                    <a href="index.php?page=event_detail&id=<?= $event_id; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= $Title; ?></a>
                                                                                     <span class="text-muted font-weight-bold d-block"><?= " By ".$ConsumerFName;?></span>
                                                                                     <span class="text-muted font-weight-bold d-block"><?= date_format($datetimeStart,"d M, H:i")." "; ?></span>
                                                                                 </td>

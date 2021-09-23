@@ -88,7 +88,6 @@ else
     $filter = ['_id'=>new \MongoDB\BSON\ObjectId($_GET['id'])];
     $query = new MongoDB\Driver\Query($filter);
     $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.SchoolsDepartment',$query);
-
     foreach ($cursor as $document)
     {
       $department_id = strval($document->_id);
@@ -98,121 +97,121 @@ else
 $date = date("Y-m-d");
 $today = new MongoDB\BSON\UTCDateTime((new DateTime($date))->getTimestamp()*1000);
 
-if (isset($_POST['submit_date']))
+if (isset($_GET['date']))
 {
-    $date = $_POST['date'];
+    $date = $_GET['date'];
 }
 
 ?>
 <div class="text-dark-50 text-center"><h1>Department - Attendance</h1></div>
 <div class="card">
     <div class="card-body table-responsive">
-        <form name="submit_date" action="index.php?page=department_attendance&id=<?= $department_id; ?>" method="post">
+        <form name="date" action="index.php?" method="get">
             <div class="row mb-3">
                 <div class="col text-right">
                     <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
                 </div>
                 <div class="col text-right">
-                    <button type="submit" name="submit_date" class="btn btn-success btn-hover-light btn-sm">Submit</button>
+                    <input type="hidden" name="page" value="department_attendance">
+                    <input type="hidden" name="id" value="<?= $department_id; ?>">
+                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" >Submit</button>
                     <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm">Export Attendance To XLS</button>
                 </div>
             </div>
         </form>
         <table id="attendance" class="table table-bordered text-left shadow p-3 mb-5 rounded">
-        <thead class="bg-white text-success">
-            <tr>
-                <th>Staff ID</th>
-                <th>Staff Name</th>
-                <th>Date</th>
-                <th>IN</th>
-                <th>OUT</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$department_id];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
-        foreach ($cursor as $document)
-        {
-            $ConsumerID = $document->ConsumerID;
-
-            $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+            <thead class="bg-white text-success">
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Staff Name</th>
+                    <th>Date</th>
+                    <th>IN</th>
+                    <th>OUT</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            $filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"],'Staffdepartment'=>$department_id];
             $query = new MongoDB\Driver\Query($filter);
-            $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Staff',$query);
             foreach ($cursor as $document)
             {
-                $consumer_id = strval($document->_id);
-                $ConsumerFName = $document->ConsumerFName;
-                $ConsumerLName = $document->ConsumerLName;
-                $ConsumerIDNo = $document->ConsumerIDNo;
-                ?>
-                <tr>
-                    <td class="default"><?= $ConsumerIDNo; ?></td>
-                    <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
-                    <?php
-                    $Cards_id ='';
-                    $filter = ['Consumer_id'=>$consumer_id];
-                    $query = new MongoDB\Driver\Query($filter);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
-                    foreach ($cursor as $document1)
-                    {
-                        $Cards_id = strval($document1->Cards_id);
-                    }
+                $ConsumerID = $document->ConsumerID;
+
+                $filter = ['_id'=>new \MongoDB\BSON\ObjectId($ConsumerID)];
+                $query = new MongoDB\Driver\Query($filter);
+                $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                foreach ($cursor as $document)
+                {
+                    $consumer_id = strval($document->_id);
+                    $ConsumerFName = $document->ConsumerFName;
+                    $ConsumerLName = $document->ConsumerLName;
+                    $ConsumerIDNo = $document->ConsumerIDNo;
                     ?>
-                    <td class="default"><?= $date."<br>"; ?></td>
-                    <td class="default"><?php
-                    $varcounting = 0;
-                    $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                    $option = ['sort' => ['_id' => 1]];
-                    $query = new MongoDB\Driver\Query($filter,$option);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                    foreach ($cursor as $document)
-                    {
-                        $date = strval($document->AttendanceDate);
-                        $date = new MongoDB\BSON\UTCDateTime($date);
-                        $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-
-                        $varcounting = $varcounting +1;
-                        if ($varcounting % 2){
-                        echo date_format($date,"H:i:s")."<br>";}
-                    }
-                    ?></td>
-                    <td class="default"><?php
-                    $varcounting = 0;
-                    $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
-                    $option = ['sort' => ['_id' => 1]];
-                    $query = new MongoDB\Driver\Query($filter,$option);
-                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
-                    foreach ($cursor as $document)
-                    {
-                        $date = strval($document->AttendanceDate);
-                        $date = new MongoDB\BSON\UTCDateTime($date);
-                        $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
-
-                        $varcounting = $varcounting +1;
-                        if ($varcounting % 2){
+                    <tr>
+                        <td class="default"><?= $ConsumerIDNo; ?></td>
+                        <td class="default"><?= $ConsumerFName." ".$ConsumerLName; ?></td>
+                        <?php
+                        $Cards_id ='';
+                        $filter = ['Consumer_id'=>$consumer_id];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Cards',$query);
+                        foreach ($cursor as $document1)
+                        {
+                            $Cards_id = strval($document1->Cards_id);
                         }
-                        else{
+                        ?>
+                        <td class="default"><?= $date."<br>"; ?></td>
+                        <td class="default"><?php
+                        $varcounting = 0;
+                        $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                        $option = ['sort' => ['_id' => 1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $date = strval($document->AttendanceDate);
+                            $date = new MongoDB\BSON\UTCDateTime($date);
+                            $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                            $varcounting = $varcounting +1;
+                            if ($varcounting % 2){
                             echo date_format($date,"H:i:s")."<br>";}
-                    }
-                    ?></td>
-                </tr>
-                <?php
+                        }
+                        ?></td>
+                        <td class="default"><?php
+                        $varcounting = 0;
+                        $filter = ['CardID'=>$Cards_id ,'AttendanceDate' => ['$gte' => $today]];
+                        $option = ['sort' => ['_id' => 1]];
+                        $query = new MongoDB\Driver\Query($filter,$option);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Attendance',$query);
+                        foreach ($cursor as $document)
+                        {
+                            $date = strval($document->AttendanceDate);
+                            $date = new MongoDB\BSON\UTCDateTime($date);
+                            $date = $date->toDateTime()->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+
+                            $varcounting = $varcounting +1;
+                            if ($varcounting % 2){
+                            }
+                            else{
+                                echo date_format($date,"H:i:s")."<br>";}
+                        }
+                        ?></td>
+                    </tr>
+                    <?php
+                }
             }
-        }
-        ?>
-        </tbody>
+            ?>
+            </tbody>
         </table>
         <script>
         $(document).ready(function() {
-
             $("#submitted").click(function() {
                 $("#attendance").table2excel({
                 filename: "attendance_department.xls"
             });
             });
-
         });
         </script>
         <script type="text/javascript">

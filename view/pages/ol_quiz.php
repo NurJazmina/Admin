@@ -100,40 +100,22 @@ $(document).ready(function() {
 
 });
 </script>
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-	<!--begin::Subheader-->
-	<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
-		<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-			<!--begin::Info-->
-			<div class="d-flex align-items-center flex-wrap mr-1">
-				<!--begin::Page Heading-->
-				<div class="d-flex align-items-baseline flex-wrap mr-5">
-					<!--begin::Page Title-->
-					<h5 class="text-white font-weight-bold my-1 mr-5">Quiz</h5>
-					<!--end::Page Title-->
-				</div>
-                <!--begin::Separator-->
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-                <!--end::Separator-->
-                <!--begin::Detail-->
-                <div class="d-flex align-items-center" id="kt_subheader_search">
-                <span class="text-white-50 font-weight-bold" id="kt_subheader_total"></span>
-                </div>
-                <!--end::Detail-->
-				<!--end::Page Heading-->
-			</div>
-			<!--end::Info-->
-			<!--begin::Toolbar-->
-			<div class="d-flex align-items-center">
-            <div class="col-12 col-sm-12 col-sm-12">
-                <div class="col-12 col-sm-12 col-lg-12 text-right">
-                    <div class="row">
-                    </div>
-                </div>
+<!--begin::Subheader-->
+<div class="subheader py-2 py-lg-6 subheader-solid gradient-custom" id="kt_subheader">
+    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-white font-weight-bold my-1 mr-5">Quiz</h5>
+                <!--end::Page Title-->
             </div>
-		</div>
-		<!--end::Toolbar-->
-	</div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+    </div>
+    <!--end::Toolbar-->
 </div>
 <!--end::Subheader-->
 <div id="AddExerciseModal" aria-labelledby="AddExerciseModalLabel" aria-hidden="true">
@@ -217,7 +199,7 @@ $(document).ready(function() {
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-6 checkbox-inline">
-                            <a href="index.php?page=staffdetail&id=<?= $Created_by; ?>" class="d-flex align-items-center">
+                            <a href="index.php?page=staff_detail&id=<?= $Created_by; ?>" class="d-flex align-items-center">
                                 <?php
                                 $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Created_by)];
                                 $query = new MongoDB\Driver\Query($filter);
@@ -288,7 +270,6 @@ $(document).ready(function() {
                             }
                             ?>
                             <!-- end::like/unlike -->
-
                             <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#share"><i class="flaticon2-reply"></i>share</button>
                         </div>
                     </div>
@@ -298,7 +279,7 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
-    <form name="answer" action="#" method="post">
+    <form name="answer" action="index.php?page=ol_submit_quiz&id=<?= $_GET['id'] ?>" method="post">
         <?php
         if ($Shuffle == "Yes")
         {

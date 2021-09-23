@@ -78,7 +78,7 @@ if (isset($_POST['recheck_add_student']))
           <div class="text-dark-50 text-center">
             <h1>PARENT ALREADY EXIST</h1>
           </div>
-          <form name="add_relation_student" action="index.php?page=duplicateforstudentlist" method="post">
+          <form name="add_relation_student" action="index.php?page=duplicate_student_parent" method="post">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -109,7 +109,7 @@ if (isset($_POST['recheck_add_student']))
           <div class="text-dark-50 text-center">
             <h1>PARENT AND STUDENT ALREADY EXIST</h1>
           </div>
-          <form name="duplicate_add_relation" action="index.php?page=duplicateforstudentlist" method="post">
+          <form name="duplicate_add_relation" action="index.php?page=duplicate_student_parent" method="post">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -243,7 +243,7 @@ if (isset($_POST['recheck_add_student']))
           <div class="text-dark-50 text-center">
             <h1>STUDENT ALREADY EXIST</h1>
           </div>
-          <form name="add_relation_parent" action="index.php?page=duplicateforstudentlist" method="post">
+          <form name="add_relation_parent" action="index.php?page=duplicate_student_parent" method="post">
             <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -276,7 +276,7 @@ if (isset($_POST['recheck_add_student']))
       <div class="text-dark-50 text-center">
         <h1>AUTHORIZED PERSONNEL ONLY</h1>
       </div>
-      <form action="index.php?page=studentdetail&id=<?= $consumer_parent_id; ?>" method="post">
+      <form action="index.php?page=student_detail&id=<?= $consumer_parent_id; ?>" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -352,11 +352,11 @@ if (isset($_POST['recheck_add_student']))
   {
     if($ConsumerGroup_idChild == '6018c2ebc8c7c7b2e8a4140c')
     {
-      $detail = 'parentdetail';
+      $detail = 'parent_detail';
     }
     else
     {
-      $detail = 'staffdetail';
+      $detail = 'staff_detail';
     }
     ?>
     <!-- group : vip | school -->

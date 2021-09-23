@@ -53,7 +53,7 @@ if (isset($_POST['add_remark']))
     printf("Other error: %s\n", $e->getMessage());
     exit;
   }
- header ('location: ../index.php?page=departmentdetail&id='.$department_id);
+ header ('location: ../index.php?page=department_detail&id='.$department_id);
 }
 
 if (isset($_POST['add_remark_child'])) 
@@ -110,7 +110,7 @@ if (isset($_POST['add_remark_child']))
     exit;
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
-  header ('location: ../index.php?page=departmentdetail&id='.$department_id);
+  header ('location: ../index.php?page=department_detail&id='.$department_id);
 }
 
 if (isset($_POST['update_department_remark'])) 
@@ -192,6 +192,6 @@ if (isset($_POST['update_department_remark']))
      printf("Other error: %s\n", $e->getMessage());
      exit;
    }
-   header ('location: ../index.php?page=departmentdetail&id='.$department_id);
+   header ('location: ../index.php?page=department_detail&id='.$department_id);
 }
 ?>

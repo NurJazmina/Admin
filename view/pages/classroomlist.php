@@ -1,4 +1,42 @@
-<?php include ('model/classroomlist.php'); ?>
+<?php 
+include ('model/classroomlist.php'); 
+
+$count = 0;
+$filter = ['SchoolID'=>$_SESSION["loggeduser_school_id"]];
+$query = new MongoDB\Driver\Query($filter);
+$cursor =$GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+foreach ($cursor as $document)
+{ 
+  $count = $count + 1;
+}
+if (!isset($_POST['searchclass']) && empty($_POST['searchclass']))
+{
+  if (!isset($_GET['level']) && empty($_GET['level']))
+  {
+    $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"]];
+    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+    $query = new MongoDB\Driver\Query($filter,$option);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+  }
+  else
+  {
+    $sort = ($_GET['level']);
+    $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],
+              'ClassCategory'=>$sort
+              ];
+    $option = ['limit'=>50,'skip'=>$datapaging,'sort' => ['_id' => -1]];
+    $query = new MongoDB\Driver\Query($filter,$option);
+    $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+  }
+}
+else
+{
+  $classname = ($_POST['classname']);
+  $filter = ['SchoolID' => $_SESSION["loggeduser_school_id"],'ClassName'=>$classname];
+  $query = new MongoDB\Driver\Query($filter);
+  $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Classrooms',$query);
+}
+?>
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
 	<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -9,8 +47,10 @@
 			<!--end::Page Title-->
 			<!--begin::Action-->
 			<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-			<span class="text-muted font-weight-bold mr-4"></span>
-			<!-- <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Add New</a> -->
+      <!--begin::Detail-->
+      <div class="d-flex" id="kt_subheader_search">
+        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= $count; ?> Total Class</span>
+      </div>
 			<!--end::Action-->
 		</div>
 		<!--end::Info-->
@@ -90,14 +130,14 @@
                       $ConsumerFName = $document2->ConsumerFName;
                       $ConsumerPhone = $document2->ConsumerPhone;
                       ?>
-                      <a href="index.php?page=staffdetail&id=<?= $consumer_id; ?>">
+                      <a href="index.php?page=staff_detail&id=<?= $consumer_id; ?>">
                       <?= $ConsumerFName."<br>"; ?></a>
                       <?php
                     }
                   }
                   ?>
                   </td>
-                  <td class="text-left"><a href="index.php?page=classdetail&id=<?= $class_id; ?>"><?= $ClassCategory."&nbsp".$ClassName;?></a></td>
+                  <td class="text-left"><a href="index.php?page=class_detail&id=<?= $class_id; ?>"><?= $ClassCategory."&nbsp".$ClassName;?></a></td>
                   <?php
                   $totalstudent = 0;
                   $filter = ['Schools_id' => $_SESSION["loggeduser_school_id"], 'Class_id'=>$class_id];
@@ -126,7 +166,7 @@
                       $subject_id = $document->_id;
                       $SubjectName = $document->SubjectName;
                       ?>
-                      <a href="index.php?page=subjectdetail&id=<?= $subject_id; ?>">
+                      <a href="index.php?page=subject_detail&id=<?= $subject_id; ?>">
                       <?= $SubjectName."<br>"; ?></a>
                       <?php
                     }
@@ -158,7 +198,7 @@
                       {
                         $ConsumerFName = $document->ConsumerFName;
                         ?>
-                        <a href="index.php?page=staffdetail&id=<?= $ConsumerID; ?>">
+                        <a href="index.php?page=staff_detail&id=<?= $ConsumerID; ?>">
                         <?= $ConsumerFName."<br>"; ?></a>
                         <?php
                       }

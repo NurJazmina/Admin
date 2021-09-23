@@ -145,7 +145,7 @@ else
                 }
                 ?>
                 <tr>
-                  <td><a href="index.php?page=parentdetail&id=<?=$parent_consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
+                  <td><a href="index.php?page=parent_detail&id=<?=$parent_consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
                   <td><?= $ConsumerIDType; ?></td>
                   <td><?= $ConsumerIDNo; ?></td>
                   <td>
@@ -193,7 +193,7 @@ else
                         }
                       }
                       ?>
-                      <a href="index.php?page=studentdetail&id=<?=$student_consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                      <a href="index.php?page=student_detail&id=<?=$student_consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
                       <?php
                     }
                     ?>

@@ -262,7 +262,7 @@ $(document).ready(function() {
                     }
                     ?>
                     <tr>
-                      <td><a href="index.php?page=studentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
+                      <td><a href="index.php?page=student_detail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a></td>
                       <td><?= $ConsumerIDType; ?></td>
                       <td><?= $ConsumerIDNo; ?></td>
                       <td>
@@ -308,12 +308,12 @@ $(document).ready(function() {
                             }
                           }
                           ?>
-                          <a href="index.php?page=parentdetail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
+                          <a href="index.php?page=parent_detail&id=<?=$consumer_id; ?>"><?=$ConsumerFName." ".$ConsumerLName;?></a><br>
                           <?php
                         }
                         ?>
                       </td>
-                      <td><a href="index.php?page=classdetail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
+                      <td><a href="index.php?page=class_detail&id=<?=$Class_id; ?>"><?= $ClassCategory." ".$ClassName; ?></a></td>
                       <td>
                         <?php
                         if($_SESSION["loggeduser_ACCESS"] =='STAFF') 
@@ -391,6 +391,10 @@ $(document).ready(function() {
             </div>
           </div>
           <div class="tab-pane fade" id="Attendance" role="tabpanel" aria-labelledby="Attendance-tab">
+          <?php
+          if($_SESSION["loggeduser_ACCESS"] =='STAFF' || $_SESSION["loggeduser_ACCESS"] =='TEACHER')
+          {
+            ?>
             <div class="card">
               <div class="card-body text-right">
                 <div class="form-group row">
@@ -410,6 +414,9 @@ $(document).ready(function() {
                 <a id="test" class="table-responsive"></a>
               </div>
             </div>
+            <?php
+          }
+          ?>
           </div>
         </div>
       </div>

@@ -87,7 +87,7 @@ include ('model/news.php');
     }
     ?>
     <div class="col-lg-4 mb-3 view view-first">
-      <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
+      <form name="detail" action="index.php?page=news_detail&id=<?= $news_id ?>" method="post">
         <div class="card mask">
           <button type="submit" class="btn btn-hover-light text-left">
             <!-- begin :: display -->
@@ -170,11 +170,11 @@ include ('model/news.php');
       }
       ?>
       <div class="col-lg-4 mb-3 view view-first">
-        <form name="detail" action="index.php?page=newsdetail&id=<?= $news_id ?>" method="post">
+        <form name="detail" action="index.php?page=news_detail&id=<?= $news_id ?>" method="post">
           <div class="card mask">
             <button type="submit" class="btn btn-hover-light text-left">
              <!-- begin :: display -->
-              <div class="p-5">
+              <div class="mt-5 mx-5">
                 <div class="modal-title">
                   <label><?= $Title; ?></label>
                 </div>

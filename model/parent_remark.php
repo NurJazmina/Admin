@@ -58,7 +58,7 @@ if (isset($_POST['add_remark']))
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=parentdetail&id='.$consumer_id);
+  header ('location: ../index.php?page=parent_detail&id='.$consumer_id);
 }
 
 if (isset($_POST['add_remark_child'])) 
@@ -124,7 +124,7 @@ if (isset($_POST['add_remark_child']))
   }
   printf("Inserted %d document(s)\n", $result->getInsertedCount());
   printf("Updated  %d document(s)\n", $result->getModifiedCount());
-  header ('location: ../index.php?page=parentdetail&id='.$consumer_id);
+  header ('location: ../index.php?page=parent_detail&id='.$consumer_id);
 }
 
 
@@ -208,6 +208,6 @@ if (isset($_POST['update_parent_remark']))
      printf("Other error: %s\n", $e->getMessage());
      exit;
    }
-   header ('location: ../index.php?page=parentdetail&id='.$consumer_id);
+   header ('location: ../index.php?page=parent_detail&id='.$consumer_id);
 }
 ?>

@@ -76,7 +76,7 @@ $time_now = time();
                                     $total = $total + 1;
                                 }
                                 ?>
-                                <a href="index.php?page=forumdetail&forum=1&topic=General&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
+                                <a href="index.php?page=forum_detail&forum=1&topic=General&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                                 <!--listbox-->
                                 <div class="text-muted">
                                     <small><?= $ConsumerFName; ?></small>
@@ -130,7 +130,7 @@ $time_now = time();
                                     $total = $total + 1;
                                 }
                                 ?>
-                                <a href="index.php?page=forumdetail&forum=1&topic=Proposal&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
+                                <a href="index.php?page=forum_detail&forum=1&topic=Proposal&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                                 <!--listbox-->
                                 <div class="text-muted">
                                     <small><?= $ConsumerFName; ?></small>
@@ -181,7 +181,7 @@ $time_now = time();
                                     $total = $total + 1;
                                 }
                                 ?>
-                                <a href="index.php?page=forumdetail&forum=1&topic=Short News / Info&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
+                                <a href="index.php?page=forum_detail&forum=1&topic=Short News / Info&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                                 <!--listbox-->
                                 <div class="text-muted">
                                     <small><?= $ConsumerFName; ?></small>
@@ -247,7 +247,7 @@ $time_now = time();
                                 $total = $total + 1;
                             }
                             ?>
-                            <a href="index.php?page=forumdetail&forum=1&topic=General&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
+                            <a href="index.php?page=forum_detail&forum=1&topic=General&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                             <!--listbox-->
                             <div class="text-muted">
                                 <small><?= $ConsumerFName; ?></small>
@@ -302,7 +302,7 @@ $time_now = time();
                                 $total = $total + 1;
                             }
                             ?>
-                            <a href="index.php?page=forumdetail&forum=1&topic=Proposal&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
+                            <a href="index.php?page=forum_detail&forum=1&topic=Proposal&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                             <!--listbox-->
                             <div class="text-muted">
                                 <small><?= $ConsumerFName; ?></small>
@@ -357,7 +357,7 @@ $time_now = time();
                                 $total = $total + 1;
                             }
                             ?>
-                            <a href="index.php?page=forumdetail&forum=1&topic=Short News / Info&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
+                            <a href="index.php?page=forum_detail&forum=1&topic=Short News / Info&id=<?= $Forum_id; ?>" style="text-transform:uppercase"><?= $Title."<br>"; ?></a>
                             <!--listbox-->
                             <div class="text-muted">
                                 <small><?= $ConsumerFName; ?></small>
