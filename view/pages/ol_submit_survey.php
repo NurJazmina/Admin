@@ -108,12 +108,12 @@ function time_elapsed($date){
                 $Created_date = date_format($Created_date_timezone,"l, d F Y, h:i")." PM";
 
                 ?>
-                <h3 class="text-dark-600 mb-8">SURVEY : <?php echo $Title; ?></h3>
+                <h3 class="text-dark-600 mb-8">SURVEY : <?= $Title; ?></h3>
 
                 <div class="bg-diagonal bg-diagonal-gray bg-diagonal-r-lightgray rounded text-white p-8 mb-10">
                     <div class="row">
                         <div class="col-sm-2 text-left"><h6>Created date </h6></div>
-                        <div class="col-sm-10 text-left"><h6><?php echo ": ".$Created_date; ?></h6></div>
+                        <div class="col-sm-10 text-left"><h6><?= ": ".$Created_date; ?></h6></div>
                     </div>
                 </div>
 
@@ -130,19 +130,19 @@ function time_elapsed($date){
                     {
                         $Consumer_id = $document->Consumer_id;
                         $total = $total + 1;
-                        $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                        $query1 = new MongoDB\Driver\Query($filter1);
-                        $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
+                        $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                        $query = new MongoDB\Driver\Query($filter);
+                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
                             
-                        foreach ($cursor1 as $document1)
+                        foreach ($cursor as $document)
                         {
-                            $consumer_id = strval($document1->_id);
+                            $consumer_id = strval($document->_id);
 
-                            $filter2 = ['Created_by'=>$consumer_id,'Survey_id'=>$Survey_id];
-                            $query2 = new MongoDB\Driver\Query($filter2);
-                            $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey_Answer',$query2);
+                            $filter = ['Created_by'=>$consumer_id,'Survey_id'=>$Survey_id];
+                            $query = new MongoDB\Driver\Query($filter);
+                            $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey_Answer',$query);
 
-                            foreach ($cursor2 as $document2)
+                            foreach ($cursor as $document)
                             {
                                 $total_submission = $total_submission + 1;
                             }
@@ -167,11 +167,11 @@ function time_elapsed($date){
                             </tr>
                             <tr class="text-dark-50">
                                 <th class="col-6">Participants</th>
-                                <td><?php echo $total; ?></td>
+                                <td><?= $total; ?></td>
                             </tr>
                             <tr class="bg-gray-300 text-dark-50">
                                 <th class="col-6">Submitted</th>
-                                <td><?php echo $total_submission; ?></td>
+                                <td><?= $total_submission; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -217,7 +217,7 @@ function time_elapsed($date){
                                                         </a>
                                                     </li>
                                                     <li class="navi-item">
-                                                        <a href="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=grading&list_submission=<?php echo "xls"; ?>" class="navi-link">
+                                                        <a href="index.php?page=ol_submit_survey&id=<?= $Survey_id ?>&action=grading&list_submission=<?= "xls"; ?>" class="navi-link">
                                                             <span class="navi-icon">
                                                                 <i class="la la-file-excel-o"></i>
                                                             </span>
@@ -249,39 +249,37 @@ function time_elapsed($date){
                                 $filter = ['Class_id'=>$_SESSION["loggeduser_class_id"]];
                                 $query = new MongoDB\Driver\Query($filter);
                                 $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.Students',$query);
-
                                 foreach ($cursor as $document)
                                 {
                                     $Consumer_id = $document->Consumer_id;
-                                    $filter1 = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
-                                    $query1 = new MongoDB\Driver\Query($filter1);
-                                    $cursor1 = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query1);
-                                        
-                                    foreach ($cursor1 as $document1)
+                                    $filter = ['_id'=>new \MongoDB\BSON\ObjectId($Consumer_id)];
+                                    $query = new MongoDB\Driver\Query($filter);
+                                    $cursor = $GoNGetzDatabase->executeQuery('GoNGetz.Consumer',$query);
+                                    foreach ($cursor as $document)
                                     {
-                                        $consumer_id = strval($document1->_id);
-                                        $Consumer_FName = $document1->ConsumerFName;
-                                        $Consumer_LName = $document1->ConsumerLName;
+                                        $consumer_id = strval($document->_id);
+                                        $Consumer_FName = $document->ConsumerFName;
+                                        $Consumer_LName = $document->ConsumerLName;
                                         ?>
                                         <tr bgcolor="white" class="text-center">
-                                        <td><?php echo $Consumer_FName; ?></td>
+                                        <td><?= $Consumer_FName; ?></td>
                                         <?php
                                         $Answer_Created_by = '';
-                                        $filter2 = ['Created_by'=>$consumer_id,'Survey_id'=>$Survey_id];
-                                        $query2 = new MongoDB\Driver\Query($filter2);
-                                        $cursor2 = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey_Answer',$query2);
-
-                                        foreach ($cursor2 as $document2)
+                                        $filter = ['Created_by'=>$consumer_id,'Survey_id'=>$Survey_id];
+                                        $query = new MongoDB\Driver\Query($filter);
+                                        $cursor = $GoNGetzDatabase->executeQuery('GoNGetzSmartSchool.OL_Survey_Answer',$query);
+                                        foreach ($cursor as $document)
                                         {
                                             $total = $total + 1;
-                                            $Answer_id = strval($document2->_id);
-                                            $Answer_Created_by = $document2->Created_by;
-                                            $Created_date = $document2->Created_date;
-                                            $Survey_ans = $document2->Survey_ans;
+                                            $Answer_id = strval($document->_id);
+                                            $Answer_Created_by = $document->Created_by;
+                                            echo  $Answer_Created_by;
+                                            $Created_date = $document->Created_date;
+                                            $Survey_ans = $document->Survey_ans;
                                             $Total_Answer = count((array)$Survey_ans);
                                             ?>
                                             <td>
-                                                <div class="bg-warning text-white text-center"><?php echo "submitted"; ?></div>   
+                                                <div class="bg-warning text-white text-center"><?= "submitted"; ?></div>   
                                             </td>
                                             <?php
                                             if ($type == '5')
@@ -419,7 +417,7 @@ function time_elapsed($date){
                                     {
                                         ?>
                                         <td>
-                                            <div class="bg-danger text-white text-center"><?php echo "No submission"; ?></div>
+                                            <div class="bg-danger text-white text-center"><?= "No submission"; ?></div>
                                         </td>
                                         <td>
                                             <button type="submit" class="btn btn-sm btn-light flaticon2-list-1" disabled></button>
@@ -596,8 +594,8 @@ function time_elapsed($date){
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview survey now</a>
-                                <a href="index.php?page=ol_submit_survey&id=<?php echo $Survey_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
+                                <a href="index.php?page=ol_survey&id=<?= $Survey_id; ?>" type="button" class="btn btn-sm text-white" style="background-color:#7e8299;">Preview survey now</a>
+                                <a href="index.php?page=ol_submit_survey&id=<?= $Survey_id; ?>&action=grading"><button type="button" class="btn btn-sm btn-secondary">View all submission</button></a>
                             </div>
                         </div>
                     </div>
@@ -609,7 +607,7 @@ function time_elapsed($date){
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <a href="index.php?page=ol_survey&id=<?php echo $Survey_id; ?>" type="button" class="btn btn-sm text-white">Survey Attempts</a>
+                                <a href="index.php?page=ol_survey&id=<?= $Survey_id; ?>" type="button" class="btn btn-sm text-white">Survey Attempts</a>
                             </div>
                         </div>
                     </div>
