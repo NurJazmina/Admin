@@ -23,7 +23,7 @@ include ('model/forums.php');
 </style>
 <div class="row">
     <div class="col-sm-2 mb-5">
-        <div>
+        <div class="bg-white p-5 rounded">
             <h6 class="text-dark-50 font-weight-bold">Channel topics</h6>
         </div>
         <div class="bg-white mt-3 p-5 rounded">
@@ -33,7 +33,7 @@ include ('model/forums.php');
         </div>
     </div>
     <div class="col-sm-8 mb-5">
-        <div class="forum p-4 rounded">
+        <div class="forum mb-3 p-4 rounded">
             <strong>Channel Topic &nbsp;&nbsp;:&nbsp;&nbsp;</strong>
             <span class="btn btn-outline-white btn-sm font-weight-bold btn-pill">Forum</span>
             &nbsp;/&nbsp;
