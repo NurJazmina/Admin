@@ -166,7 +166,7 @@ if (isset($_POST['answer']))
 
   //database answer
   $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['Quiz_id'=>$Quiz_id]);
+  $bulk->delete(['Quiz_id'=>$Quiz_id, 'Created_by'=>$Created_by]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Quiz_Answer', $bulk, $writeConcern);
 

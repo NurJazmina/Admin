@@ -121,7 +121,7 @@ if (isset($_POST['assignment_answer']))
 
   //database answer
   $bulk = new MongoDB\Driver\BulkWrite;
-  $bulk->delete(['Assignment_id'=>$Assignment_id]);
+  $bulk->delete(['Assignment_id'=>$Assignment_id, 'Created_by'=>$Created_by]);
   $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
   $result =$GoNGetzDatabase->executeBulkWrite('GoNGetzSmartSchool.OL_Assignment_Answer', $bulk, $writeConcern);
 
