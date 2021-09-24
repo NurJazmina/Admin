@@ -50,6 +50,12 @@
 						</span>
 						<span class="menu-text">TEST EXPORT B</span>
 					</a>
+					<a href="index.php?page=c" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-protected icon-md"></i>
+						</span>
+						<span class="menu-text">TEST EXPORT C</span>
+					</a>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true">
 					<a href="index.php?page=covid" class="menu-link">
