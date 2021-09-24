@@ -106,15 +106,13 @@ if (isset($_GET['date']))
 <div class="text-dark-50 text-center"><h1>Department - Attendance</h1></div>
 <div class="card">
     <div class="card-body table-responsive">
-        <form name="date" action="index.php?" method="get">
+        <form name="submit_date" action="index.php?page=department_attendance&id=<?= $department_id; ?>" method="post">
             <div class="row mb-3">
                 <div class="col text-right">
                     <input type="date" class="form-control form-control-sm bg-white" name="date" placeholder="Select date" value="<?= $date; ?>"> 
                 </div>
                 <div class="col text-right">
-                    <input type="hidden" name="page" value="department_attendance">
-                    <input type="hidden" name="id" value="<?= $department_id; ?>">
-                    <button type="submit" class="btn btn-success btn-hover-light btn-sm" >Submit</button>
+                    <button type="submit" name="submit_date" class="btn btn-success btn-hover-light btn-sm">Submit</button>
                     <button type="button" id="submitted" class="btn btn-success btn-hover-light btn-sm">Export Attendance To XLS</button>
                 </div>
             </div>

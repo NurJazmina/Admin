@@ -1,27 +1,5 @@
-<a class="btn btn-success btn-sm" href="tester.php">EXPORT XLS</a>
-<table id="attendance" class="table table-border table-white">
-<thead>
-    <tr>
-        <th>Staff ID</th>
-        <th>Staff Name</th>
-        <th>Date</th>
-        <th>IN</th>
-        <th>OUT</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <th>a</th>
-        <th>b</th>
-        <th>c</th>
-        <th>d</th>
-        <th>e</th>
-    </tr>
-</tbody>
-</table>
 
-
-<title>Spread.Sheets ExcelIO</title>
+    <title>Spread.Sheets ExcelIO</title>
     <script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
@@ -117,14 +95,9 @@
         });
     </script>
 <body>
-    <div id="ss" style="height:200px ; width :50%; "></div>
+    <div id="ss" style="height:100px ; width :50%; "></div>
     <input type="text" id="importUrl" value="http://www.testwebsite.com/files/TestExcel.xlsx" style="width:300px" />
     <button id="addRevenue">Add Revenue</button>
     <button id="export">Export File</button>
     <input type="text" id="exportFileName" placeholder="Export file name" value="export.xlsx" />
 </body>
-
-
-<form action="process.php">
-    <button name="submit" type="submit" class="btn btn-success">download</button>
-</form>

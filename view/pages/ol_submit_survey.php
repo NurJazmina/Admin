@@ -273,7 +273,6 @@ function time_elapsed($date){
                                             $total = $total + 1;
                                             $Answer_id = strval($document->_id);
                                             $Answer_Created_by = $document->Created_by;
-                                            echo  $Answer_Created_by;
                                             $Created_date = $document->Created_date;
                                             $Survey_ans = $document->Survey_ans;
                                             $Total_Answer = count((array)$Survey_ans);
