@@ -42,7 +42,13 @@
 						<span class="svg-icon menu-icon">
 							<i class="flaticon2-protected icon-md"></i>
 						</span>
-						<span class="menu-text">TEST EXPORT XLS</span>
+						<span class="menu-text">TEST EXPORT A</span>
+					</a>
+					<a href="index.php?page=b" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<i class="flaticon2-protected icon-md"></i>
+						</span>
+						<span class="menu-text">TEST EXPORT B</span>
 					</a>
 				</li>
 				<li class="menu-item menu-item" aria-haspopup="true">

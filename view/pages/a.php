@@ -1,4 +1,4 @@
-<a class="btn btn-success btn-sm" href="tester1.php">EXPORT XLS</a>
+<a class="btn btn-success btn-sm" href="tester.php">EXPORT XLS</a>
 <table id="attendance" class="table table-border table-white">
 <thead>
     <tr>
@@ -117,9 +117,14 @@
         });
     </script>
 <body>
-    <div id="ss" style="height:100px ; width :50%; "></div>
+    <div id="ss" style="height:200px ; width :50%; "></div>
     <input type="text" id="importUrl" value="http://www.testwebsite.com/files/TestExcel.xlsx" style="width:300px" />
     <button id="addRevenue">Add Revenue</button>
     <button id="export">Export File</button>
     <input type="text" id="exportFileName" placeholder="Export file name" value="export.xlsx" />
 </body>
+
+
+<form action="process.php">
+    <button name="submit" type="submit" class="btn btn-success">download</button>
+</form>
