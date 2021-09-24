@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Spread.Sheets ExcelIO</title>
 
+    <title>Spread.Sheets ExcelIO</title>
     <script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
-
     <link href="http://cdn.grapecity.com/spreadjs/hosted/css/gc.spread.sheets.excel2013white.10.0.0.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://cdn.grapecity.com/spreadjs/hosted/scripts/gc.spread.sheets.all.10.0.0.min.js"></script>
     <script type="text/javascript" src="http://cdn.grapecity.com/spreadjs/hosted/scripts/interop/gc.spread.excelio.10.0.0.min.js"></script>
@@ -98,12 +94,10 @@
             ImportFile();
         });
     </script>
-</head>
 <body>
-    <div id="ss" style="height:700px ; width :100%; "></div>
+    <div id="ss" style="height:100px ; width :50%; "></div>
     <input type="text" id="importUrl" value="http://www.testwebsite.com/files/TestExcel.xlsx" style="width:300px" />
     <button id="addRevenue">Add Revenue</button>
     <button id="export">Export File</button>
     <input type="text" id="exportFileName" placeholder="Export file name" value="export.xlsx" />
 </body>
-</html>
