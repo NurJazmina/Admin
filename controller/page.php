@@ -64,6 +64,7 @@ $staff_allowed_access = array("dashboard",
                             'tester',
                             'a',
                             'b',
+                            'c',
 
                             //not finish yet
                             'modal-acceptedfiles',
