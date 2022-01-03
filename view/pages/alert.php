@@ -5,7 +5,7 @@ if(isset($_GET['action']) && !empty($_GET['action']))
   {
     ?>
     <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-      Welcome back <?= $_SESSION['loggeduser_consumerFName']; ?>
+      Welcome back <?= $_SESSION['loggeduser_username']; ?>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php
