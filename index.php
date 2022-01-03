@@ -8,10 +8,6 @@ include 'connections/db.php';
 require 'vendor/autoload.php'; 
 include 'model/login.php'; 
 ?>
-<!-- live chat start-->
-<!-- <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="688d97be-cab6-4cc7-9458-e78b5df8cba4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script> -->
-<!-- live chat end-->
-
 <!--
 Template Name: Metronic - Bootstrap 4 HTML, React, Angular 11 & VueJS Admin Dashboard Theme
 Author: KeenThemes
@@ -41,58 +37,14 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!-- begin::Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-		
+
 		<!-- end::Bootstrap CSS -->
-
-		<!--begin::Page Vendors Styles(used by this page)-->
-		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-
-		<!--end::Page Vendors Styles-->
-
-		<!--begin::Global Theme Styles(used by all pages)-->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.css">
-		<link rel="stylesheet" href="./fullcalendar/main.min.css">
-		<link href="path/to/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
-
-		<!--end::Global Theme Styles-->
 
 		<!--begin::Layout Themes(used by all pages)-->
 		<link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/brand/light.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/light.css" rel="stylesheet" type="text/css" />
-		<link href="resources/default.css" rel="stylesheet" type="text/css" />
-		<link href="resources/calendar.css" rel="stylesheet" type="text/css" />
-
-		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="assets/media/logos/logogongetz.png" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<!-- <link rel="manifest" href="/site.webmanifest"> -->
-		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-		<!--begin::Calendar-->
-		<link href="style.css" rel="stylesheet" type="text/css">
-		<link href="calendar.css" rel="stylesheet" type="text/css">
-
-		<!--end::Calendar-->
-		<link rel="stylesheet" type="text/css" href="resources/default.css">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
-
-		<!--begin::Chart-->
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-		<script src="//s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
-		<!--end::Chart-->
 		
 	</head>
 	<!--end::Head-->
@@ -108,33 +60,15 @@ License: You must have a valid license purchased only from themeforest(the above
 			{
 				?>
 				<!--begin::Main-->
-				<?php include 'view/partials/_header-mobile.html'; ?>
-				<div class="d-flex flex-column flex-root"> 
-					<!--begin::Page-->
-					<div class="d-flex flex-row flex-column-fluid page">
-						<?php include 'view/pages/_aside.php'; ?>
-						
-						<!--begin::Wrapper-->
-						<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-							<?php include 'view/pages/_header.php'; ?>
-							<!--begin::Content-->
-							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-							<?php //include 'view/partials/navgongetz.php'; ?>
-							<!--Content area here-->
-								<div class="content content-fixed">
-									<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
-										<?php include 'view/pages/alert.php'; ?>
-										<?php include 'controller/page.php'; ?>
-									</div>
-								</div>
+					<!--Content area here-->
+					<div class="content content-fixed">
+							<div class="container-fluid pd-x-0 pd-lg-x-10 pd-xl-x-0">
+								<?php include 'view/pages/alert.php'; ?>
+								<?php include 'controller/page.php'; ?>
 							</div>
-							<!--end::Content-->
-							<?php //include 'view/partials/_footer.html'; ?>
 						</div>
-						<!--end::Wrapper-->
 					</div>
-					<!--end::Page-->
-				</div>
+					<!--end::Content-->
 				<!--end::Main-->
 				<?php
 		    }
@@ -213,82 +147,6 @@ License: You must have a valid license purchased only from themeforest(the above
 			},
 			"font-family": "Poppins"
 		};
-		</script>
-		
-		<!--end::Global Config-->
-
-		<!--begin::Global Theme Bundle(used by all pages)-->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-		<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
-		
-
-		<!--end::Global Theme Bundle-->
-
-		<!--begin::Page Vendors(used by this page)-->
-		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.2.0/dist/alpine.js"></script>
-		<link href="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.css" rel="stylesheet">
-		
-		<!--end::Page Vendors-->
-
-		<!--begin::Page Scripts(used by this page)-->
-		<script src="assets/js/pages/widgets.js"></script>
-		<script src='assets/js/main.js'></script>
-		<script src="assets/js/todo.js" defer></script>
-		<script src="assets/js/calendar.js" defer></script>
-
-		<?php
-		include 'resources/default.php';
-		if (isset($_GET['attendance']) && !empty($_GET['attendance']))
-		{
-			$attendance = $_GET['attendance'];
-			?>
-			<script>
-  				$(document).ready(function () {
-     				$("#attendance").table2excel({
-         			filename: "attendance.xls"
-     				});
-  				});  
- 			</script>
-			<?php
-		}
-		if (isset($_GET['list_submission']) && !empty($_GET['list_submission']))
-		{
-			$list = $_GET['list_submission'];
-			?>
-			<script>
-				$(document).ready(function () {
-					$("#list").table2excel({
-					filename: "listsubmission.xls"
-					});
-				}); 
-			</script>
-			<?php
-		}
-		?>
-		<script type="text/javascript">
-		var rows = document.querySelectorAll('tr');
-
-		[...rows].forEach((r) => {
-			if (r.querySelectorAll('td:empty').length > 0) {
-				r.classList.add('highlight');
-			}
-		})
-		</script>
-		<script>
-		if ( window.history.replaceState ) {
-		window.history.replaceState( null, null, window.location.href );
-		}
-		</script>
-		<script>
-		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-		return new bootstrap.Popover(popoverTriggerEl)
-		})
 		</script>
 		<!--end::Page Scripts-->
 	</body>
